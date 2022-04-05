@@ -1,0 +1,10 @@
+$narrow: 600px !default;
+$medium: 900px !default;
+$wide: 1200px !default;
+$extra-wide: 1700px !default;
+
+@mixin query($device) {
+  @media screen and (min-width: $device) {
+    @content;
+  }
+}
