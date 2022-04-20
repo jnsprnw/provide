@@ -8,11 +8,10 @@
     return {
     	props: {
     		questions: data.data.map((d) => {
-    			const { Question, Answer } = d.attributes;
-    			console.log(Question, Answer)
+    			const { question, answer } = d.attributes;
     			return {
-    				question: Question,
-    				answer: parse(Answer)
+    				question,
+    				answer: parse(answer)
     			}
     		})
     	}
