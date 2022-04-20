@@ -1,5 +1,29 @@
+<script context="module">
+	import { parse } from 'marked';
+
+  export const load = async () => {
+    const res = await fetch('https://provide-cms.herokuapp.com/api/faqs');
+    const data = await res.json();
+
+    return {
+    	props: {
+    		questions: data.data.map((d) => {
+    			const { Question, Answer } = d.attributes;
+    			console.log(Question, Answer)
+    			return {
+    				question: Question,
+    				answer: parse(Answer)
+    			}
+    		})
+    	}
+    };
+  }
+</script>
+
 <script>
 	import Item from '$lib/faq/item.svelte';
+
+	export let questions;
 </script>
 
 <svelte:head>
@@ -9,14 +33,16 @@
 <h1>FAQ</h1>
 
 <dl>
+	{#each questions as { question, answer }}
 	<Item>
 		<span slot="term">
-			Do models include a dietary change, e.g. meat consumption per capita developments?
+			{ question }
 		</span>
 		<p slot="description">
-			The scenarios assume an evolution of dietary change in line with historic trends, so increasing meat consumption with rising affluence. Dedicated lifestyle changes as a mitigation option are not considered in these scenarios.
+			{ @html answer }
 		</p>
 	</Item>
+	{/each}
 </dl>
 
 <style lang="scss">

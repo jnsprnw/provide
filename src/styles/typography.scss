@@ -1,0 +1,7 @@
+dt {
+	font-weight: var(--weight-bold);
+}
+
+dd + dt {
+	margin-top: var(--spacing-2);
+}
