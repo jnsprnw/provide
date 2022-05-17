@@ -3,6 +3,10 @@
 @import "./global";
 @import "./fonts";
 
+@import "./includes/fluid_type";
+@import "./theme/theme_css_vars";
+@import "./sass_vars_and_mixins.scss";
+
 body {
 	min-height: 100vh;
 	margin: 0;

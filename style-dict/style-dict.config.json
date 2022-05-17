@@ -1,0 +1,96 @@
+{
+  "source": ["./transformed/*.json", "./in/manual/*.json"],
+
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "../src/styles/theme/",
+      "transforms": [
+        "attribute/cti",
+        "name/cti/kebab",
+        "time/seconds",
+        "content/icon",
+        "size/rem",
+        "color/css",
+        "unit"
+      ],
+      "files": [
+        {
+          "destination": "theme.scss",
+          "format": "scss/variables",
+          "options": {
+            "showFileHeader": false
+          }
+        }
+      ]
+    },
+
+    "css": {
+      "transforms": [
+        "attribute/cti",
+        "name/cti/kebab",
+        "time/seconds",
+        "content/icon",
+        "size/rem",
+        "color/css",
+        "unit"
+      ],
+      "buildPath": "../src/styles/theme/",
+      "files": [
+        {
+          "destination": "theme.css",
+          "format": "css/variables",
+          "options": {
+            "showFileHeader": false
+          }
+        },
+        {
+          "destination": "_theme_css_vars.scss",
+          "format": "css/variables",
+          "options": {
+            "showFileHeader": false
+          }
+        }
+      ]
+    },
+
+    "js": {
+      "transformGroup": "js",
+      "buildPath": "../src/styles/theme/",
+      "files": [
+        {
+          "destination": "theme.js",
+          "format": "javascript/es6",
+          "options": {
+            "showFileHeader": false
+          }
+        }
+      ]
+    },
+
+    "json": {
+      "transformGroup": "js",
+      "buildPath": "../src/styles/theme/",
+      "files": [
+        {
+          "destination": "theme.json",
+          "format": "json/nested",
+          "options": {
+            "showFileHeader": false
+          }
+        }
+      ]
+    },
+
+    "noop": {
+      "transformGroup": "noop",
+      "buildPath": "../src/styles/theme/",
+      "files": [
+        {
+          "destination": "theme_base.json",
+          "format": "noop"
+        }
+      ]
+    }
+  }
+}

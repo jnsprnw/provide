@@ -1,0 +1,26 @@
+{
+  "size": {
+    "max-content-width-no-unit": { "type": "number", "value": 1440 },
+    "min-content-width-no-unit": { "type": "number", "value": 320 }
+  },
+  "font": {
+    "style": {
+      "base": {
+        "value": "{font.fontWeight.regularNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+        "type": "string"
+      },
+      "caption": {
+        "value": "{font.fontWeight.regularNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+        "type": "string"
+      },
+      "heading": {
+        "value": "{font.fontWeight.boldNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+        "type": "string"
+      },
+      "bold": {
+        "value": "{font.fontWeight.boldNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+        "type": "string"
+      }
+    }
+  }
+}

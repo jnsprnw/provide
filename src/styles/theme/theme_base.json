@@ -1,0 +1,3260 @@
+{
+  "color": {
+    "light": {
+      "background": {
+        "base": {
+          "value": "#ffffff",
+          "type": "color",
+          "description": "The default light background color, used e.g. as a backdrop for charts or cards.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#ffffff",
+            "type": "color",
+            "description": "The default light background color, used e.g. as a backdrop for charts or cards."
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "background",
+            "base"
+          ]
+        },
+        "weaker": {
+          "value": "#f0f0f0",
+          "type": "color",
+          "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#f0f0f0",
+            "type": "color",
+            "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "background",
+            "weaker"
+          ]
+        },
+        "weakest": {
+          "value": "#e0e0e0",
+          "type": "color",
+          "description": "A shaded background color, used e.g. as a backdrop in containers.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#e0e0e0",
+            "type": "color",
+            "description": "A shaded background color, used e.g. as a backdrop in containers."
+          },
+          "name": "weakest",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "background",
+            "weakest"
+          ]
+        },
+        "transparent": {
+          "base": {
+            "90": {
+              "value": "#ffffffe6",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#ffffffe6",
+                "type": "color"
+              },
+              "name": "90",
+              "attributes": {},
+              "path": [
+                "color",
+                "light",
+                "background",
+                "transparent",
+                "base",
+                "90"
+              ]
+            }
+          }
+        }
+      },
+      "foreground": {
+        "base": {
+          "value": "#222222",
+          "type": "color",
+          "description": "Used for elements in the foreground that have a strong contrast to the background.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#222222",
+            "type": "color",
+            "description": "Used for elements in the foreground that have a strong contrast to the background."
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "foreground",
+            "base"
+          ]
+        },
+        "weaker": {
+          "value": "#777777",
+          "type": "color",
+          "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes).",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#777777",
+            "type": "color",
+            "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "foreground",
+            "weaker"
+          ]
+        },
+        "weakest": {
+          "value": "#b7b7b7",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#b7b7b7",
+            "type": "color"
+          },
+          "name": "weakest",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "foreground",
+            "weakest"
+          ]
+        }
+      },
+      "text": {
+        "weaker": {
+          "value": "#777777",
+          "type": "color",
+          "description": "Text color with weaker background contrast.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#777777",
+            "type": "color",
+            "description": "Text color with weaker background contrast."
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "text",
+            "weaker"
+          ]
+        },
+        "base": {
+          "value": "#222222",
+          "type": "color",
+          "description": "Default text color for strong background contrast.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#222222",
+            "type": "color",
+            "description": "Default text color for strong background contrast."
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "text",
+            "base"
+          ]
+        },
+        "model-aspect": {
+          "climate": {
+            "value": "#cea200",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#cea200",
+              "type": "color"
+            },
+            "name": "climate",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "text",
+              "model-aspect",
+              "climate"
+            ]
+          },
+          "scope-conditions": {
+            "value": "#3483a5",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#3483a5",
+              "type": "color"
+            },
+            "name": "scope-conditions",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "text",
+              "model-aspect",
+              "scope-conditions"
+            ]
+          },
+          "conflict": {
+            "value": "#c24050",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#c24050",
+              "type": "color"
+            },
+            "name": "conflict",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "text",
+              "model-aspect",
+              "conflict"
+            ]
+          }
+        }
+      },
+      "brand": {
+        "base": {
+          "value": "#658c97",
+          "type": "color",
+          "description": "Main theme color, usually the brand color.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#658c97",
+            "type": "color",
+            "description": "Main theme color, usually the brand color."
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "brand",
+            "base"
+          ]
+        },
+        "stronger": {
+          "value": "#3a545c",
+          "type": "color",
+          "description": "Stronger version of theme color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#3a545c",
+            "type": "color",
+            "description": "Stronger version of theme color"
+          },
+          "name": "stronger",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "brand",
+            "stronger"
+          ]
+        },
+        "weaker": {
+          "value": "#91aeb6",
+          "type": "color",
+          "description": "Weaker version of theme color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#91aeb6",
+            "type": "color",
+            "description": "Weaker version of theme color"
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "brand",
+            "weaker"
+          ]
+        }
+      },
+      "functional": {
+        "accent": {
+          "value": "#c0e15c",
+          "type": "color",
+          "description": "Used for author-driven accents of parts of charts, texts and other elements.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#c0e15c",
+            "type": "color",
+            "description": "Used for author-driven accents of parts of charts, texts and other elements."
+          },
+          "name": "accent",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "functional",
+            "accent"
+          ]
+        },
+        "filtered-out": {
+          "value": "#e4e1d8",
+          "type": "color",
+          "description": "Used for visual marks in charts that have been filtered out.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#e4e1d8",
+            "type": "color",
+            "description": "Used for visual marks in charts that have been filtered out."
+          },
+          "name": "filtered-out",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "functional",
+            "filtered-out"
+          ]
+        },
+        "not-available": {
+          "value": "#b2b2b2",
+          "type": "color",
+          "description": "Used for visual marks (e.g. countries in maps) where data is missing from the dataset.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#b2b2b2",
+            "type": "color",
+            "description": "Used for visual marks (e.g. countries in maps) where data is missing from the dataset."
+          },
+          "name": "not-available",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "functional",
+            "not-available"
+          ]
+        }
+      },
+      "category": {
+        "0": {
+          "value": "#008dc9",
+          "type": "color",
+          "description": "Used for nominal data of category 0.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#008dc9",
+            "type": "color",
+            "description": "Used for nominal data of category 0."
+          },
+          "name": "0",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "0"
+          ]
+        },
+        "1": {
+          "value": "#f16829",
+          "type": "color",
+          "description": "Used for nominal data of category 1.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#f16829",
+            "type": "color",
+            "description": "Used for nominal data of category 1."
+          },
+          "name": "1",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "#f4a81d",
+          "type": "color",
+          "description": "Used for nominal data of category 2.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#f4a81d",
+            "type": "color",
+            "description": "Used for nominal data of category 2."
+          },
+          "name": "2",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "#80bc00",
+          "type": "color",
+          "description": "Used for nominal data of category 3.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#80bc00",
+            "type": "color",
+            "description": "Used for nominal data of category 3."
+          },
+          "name": "3",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "3"
+          ]
+        },
+        "4": {
+          "value": "#6363c0",
+          "type": "color",
+          "description": "Used for nominal data of category 4.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#6363c0",
+            "type": "color",
+            "description": "Used for nominal data of category 4."
+          },
+          "name": "4",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "4"
+          ]
+        },
+        "5": {
+          "value": "#bd53bd",
+          "type": "color",
+          "description": "Used for nominal data of category 5.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#bd53bd",
+            "type": "color",
+            "description": "Used for nominal data of category 5."
+          },
+          "name": "5",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "category",
+            "5"
+          ]
+        }
+      },
+      "model-aspect": {
+        "climate": {
+          "value": "#eeb900",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#eeb900",
+            "type": "color"
+          },
+          "name": "climate",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "model-aspect",
+            "climate"
+          ]
+        },
+        "scope-conditions": {
+          "value": "#43abd7",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#43abd7",
+            "type": "color"
+          },
+          "name": "scope-conditions",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "model-aspect",
+            "scope-conditions"
+          ]
+        },
+        "conflict": {
+          "value": "#fa5a6d",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#fa5a6d",
+            "type": "color"
+          },
+          "name": "conflict",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "model-aspect",
+            "conflict"
+          ]
+        }
+      },
+      "diverging": {
+        "positive-2": {
+          "value": "#1c4e94",
+          "type": "color",
+          "description": "Fifth step in the base diverging color scale, used for the highest (most positive) value. ",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#1c4e94",
+            "type": "color",
+            "description": "Fifth step in the base diverging color scale, used for the highest (most positive) value. "
+          },
+          "name": "positive-2",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "diverging",
+            "positive-2"
+          ]
+        },
+        "positive-1": {
+          "value": "#6fbedf",
+          "type": "color",
+          "description": "Fourth step in the base diverging color scale, used for values higher than zero (or data median).",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#6fbedf",
+            "type": "color",
+            "description": "Fourth step in the base diverging color scale, used for values higher than zero (or data median)."
+          },
+          "name": "positive-1",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "diverging",
+            "positive-1"
+          ]
+        },
+        "neutral": {
+          "value": "#d6dae5",
+          "type": "color",
+          "description": "Third step in the base diverging color scale, used for zero or data median.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#d6dae5",
+            "type": "color",
+            "description": "Third step in the base diverging color scale, used for zero or data median."
+          },
+          "name": "neutral",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "diverging",
+            "neutral"
+          ]
+        },
+        "negative-1": {
+          "value": "#ebc26f",
+          "type": "color",
+          "description": "Second step in the base diverging color scale, used for values lower than zero (or data median).",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#ebc26f",
+            "type": "color",
+            "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
+          },
+          "name": "negative-1",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "diverging",
+            "negative-1"
+          ]
+        },
+        "negative-2": {
+          "value": "#ee8f00",
+          "type": "color",
+          "description": "First step in the based diverging color scale, used for the lowest (most negative) value. ",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#ee8f00",
+            "type": "color",
+            "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
+          },
+          "name": "negative-2",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "diverging",
+            "negative-2"
+          ]
+        }
+      },
+      "sequential": {
+        "0": {
+          "value": "#d7e6f3",
+          "type": "color",
+          "description": "First step in the base (theme) sequential color scale, used for the lowest value. ",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#d7e6f3",
+            "type": "color",
+            "description": "First step in the base (theme) sequential color scale, used for the lowest value. "
+          },
+          "name": "0",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "sequential",
+            "0"
+          ]
+        },
+        "1": {
+          "value": "#90d3fb",
+          "type": "color",
+          "description": "Second step in the base (theme) sequential color scale.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#90d3fb",
+            "type": "color",
+            "description": "Second step in the base (theme) sequential color scale."
+          },
+          "name": "1",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "sequential",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "#008dc8",
+          "type": "color",
+          "description": "Thirs step in the base (theme) sequential color scale.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#008dc8",
+            "type": "color",
+            "description": "Thirs step in the base (theme) sequential color scale."
+          },
+          "name": "2",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "sequential",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "#0c2d5b",
+          "type": "color",
+          "description": "Third and final step in the base (theme) sequential color scale.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#0c2d5b",
+            "type": "color",
+            "description": "Third and final step in the base (theme) sequential color scale."
+          },
+          "name": "3",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "sequential",
+            "3"
+          ]
+        }
+      }
+    },
+    "dark": {
+      "background": {
+        "base": {
+          "value": "#202931",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#202931",
+            "type": "color"
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "background",
+            "base"
+          ]
+        },
+        "stronger": {
+          "value": "#131b21",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#131b21",
+            "type": "color"
+          },
+          "name": "stronger",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "background",
+            "stronger"
+          ]
+        },
+        "weaker": {
+          "value": "#2d3744",
+          "type": "color",
+          "description": "slightly shaded background",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#2d3744",
+            "type": "color",
+            "description": "slightly shaded background"
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "background",
+            "weaker"
+          ]
+        },
+        "weakest": {
+          "value": "#525865",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#525865",
+            "type": "color"
+          },
+          "name": "weakest",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "background",
+            "weakest"
+          ]
+        },
+        "transparent": {
+          "base": {
+            "10": {
+              "value": "#2029311a",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#2029311a",
+                "type": "color"
+              },
+              "name": "10",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "base",
+                "10"
+              ]
+            },
+            "50": {
+              "value": "#20293180",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#20293180",
+                "type": "color"
+              },
+              "name": "50",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "base",
+                "50"
+              ]
+            },
+            "80": {
+              "value": "#202931cc",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#202931cc",
+                "type": "color"
+              },
+              "name": "80",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "base",
+                "80"
+              ]
+            },
+            "90": {
+              "value": "#202931e6",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#202931e6",
+                "type": "color"
+              },
+              "name": "90",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "base",
+                "90"
+              ]
+            }
+          },
+          "weakest": {
+            "30": {
+              "value": "#5258654d",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#5258654d",
+                "type": "color"
+              },
+              "name": "30",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "weakest",
+                "30"
+              ]
+            },
+            "50": {
+              "value": "#52586580",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#52586580",
+                "type": "color"
+              },
+              "name": "50",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "background",
+                "transparent",
+                "weakest",
+                "50"
+              ]
+            }
+          }
+        }
+      },
+      "foreground": {
+        "base": {
+          "value": "#eaeaea",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#eaeaea",
+            "type": "color"
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "foreground",
+            "base"
+          ]
+        },
+        "weaker": {
+          "value": "#9597ae",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#9597ae",
+            "type": "color"
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "foreground",
+            "weaker"
+          ]
+        },
+        "weakest": {
+          "value": "#696c85",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#696c85",
+            "type": "color"
+          },
+          "name": "weakest",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "foreground",
+            "weakest"
+          ]
+        },
+        "base50": {
+          "value": "#eaeaea80",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#eaeaea80",
+            "type": "color"
+          },
+          "name": "base50",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "foreground",
+            "base50"
+          ]
+        },
+        "base10": {
+          "value": "#eaeaea1a",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#eaeaea1a",
+            "type": "color"
+          },
+          "name": "base10",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "foreground",
+            "base10"
+          ]
+        },
+        "transparent": {
+          "weakest": {
+            "10": {
+              "value": "#696c851a",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#696c851a",
+                "type": "color"
+              },
+              "name": "10",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "foreground",
+                "transparent",
+                "weakest",
+                "10"
+              ]
+            },
+            "30": {
+              "value": "#696c854d",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#696c854d",
+                "type": "color"
+              },
+              "name": "30",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "foreground",
+                "transparent",
+                "weakest",
+                "30"
+              ]
+            },
+            "50": {
+              "value": "#696c8580",
+              "type": "color",
+              "filePath": "./transformed/tokens.json",
+              "isSource": true,
+              "original": {
+                "value": "#696c8580",
+                "type": "color"
+              },
+              "name": "50",
+              "attributes": {},
+              "path": [
+                "color",
+                "dark",
+                "foreground",
+                "transparent",
+                "weakest",
+                "50"
+              ]
+            }
+          }
+        }
+      },
+      "text": {
+        "weaker": {
+          "value": "#a9abbd",
+          "type": "color",
+          "description": "Text weaker",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#a9abbd",
+            "type": "color",
+            "description": "Text weaker"
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "text",
+            "weaker"
+          ]
+        },
+        "base": {
+          "value": "#eaeaea",
+          "type": "color",
+          "description": "Text base",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#eaeaea",
+            "type": "color",
+            "description": "Text base"
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "text",
+            "base"
+          ]
+        },
+        "model-aspect": {
+          "climate": {
+            "value": "#ffcb01",
+            "type": "color",
+            "description": "Climate",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#ffcb01",
+              "type": "color",
+              "description": "Climate"
+            },
+            "name": "climate",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "text",
+              "model-aspect",
+              "climate"
+            ]
+          },
+          "conflict": {
+            "value": "#fa5a6d",
+            "type": "color",
+            "description": "Category color \"conflict\"",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#fa5a6d",
+              "type": "color",
+              "description": "Category color \"conflict\""
+            },
+            "name": "conflict",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "text",
+              "model-aspect",
+              "conflict"
+            ]
+          },
+          "scope-conditions": {
+            "value": "#90d3fb",
+            "type": "color",
+            "description": "Scope conditions",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#90d3fb",
+              "type": "color",
+              "description": "Scope conditions"
+            },
+            "name": "scope-conditions",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "text",
+              "model-aspect",
+              "scope-conditions"
+            ]
+          }
+        }
+      },
+      "brand": {
+        "base": {
+          "value": "#97b1b8",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#97b1b8",
+            "type": "color"
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "brand",
+            "base"
+          ]
+        },
+        "weaker": {
+          "value": "#6d878e",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#6d878e",
+            "type": "color"
+          },
+          "name": "weaker",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "brand",
+            "weaker"
+          ]
+        },
+        "stronger": {
+          "value": "#afd5df",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#afd5df",
+            "type": "color"
+          },
+          "name": "stronger",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "brand",
+            "stronger"
+          ]
+        }
+      },
+      "functional": {
+        "accent": {
+          "value": "#bfc3fe",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#bfc3fe",
+            "type": "color"
+          },
+          "name": "accent",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "functional",
+            "accent"
+          ]
+        },
+        "not-available": {
+          "value": "#cccccc",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#cccccc",
+            "type": "color"
+          },
+          "name": "not-available",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "functional",
+            "not-available"
+          ]
+        },
+        "filtered-out": {
+          "value": "#474b69",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#474b69",
+            "type": "color"
+          },
+          "name": "filtered-out",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "functional",
+            "filtered-out"
+          ]
+        }
+      },
+      "category": {
+        "0": {
+          "value": "#008dc9",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#008dc9",
+            "type": "color"
+          },
+          "name": "0",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "0"
+          ]
+        },
+        "1": {
+          "value": "#f26829",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#f26829",
+            "type": "color"
+          },
+          "name": "1",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "#f4a81d",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#f4a81d",
+            "type": "color"
+          },
+          "name": "2",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "#8fba51",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#8fba51",
+            "type": "color"
+          },
+          "name": "3",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "3"
+          ]
+        },
+        "4": {
+          "value": "#8a91f3",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#8a91f3",
+            "type": "color"
+          },
+          "name": "4",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "4"
+          ]
+        },
+        "5": {
+          "value": "#bd53bd",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#bd53bd",
+            "type": "color"
+          },
+          "name": "5",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "category",
+            "5"
+          ]
+        }
+      },
+      "diverging": {
+        "positive-2": {
+          "value": "#7ed3b9",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#7ed3b9",
+            "type": "color"
+          },
+          "name": "positive-2",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "diverging",
+            "positive-2"
+          ]
+        },
+        "positive-1": {
+          "value": "#6b867e",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#6b867e",
+            "type": "color"
+          },
+          "name": "positive-1",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "diverging",
+            "positive-1"
+          ]
+        },
+        "neutral": {
+          "value": "#3e404f",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#3e404f",
+            "type": "color"
+          },
+          "name": "neutral",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "diverging",
+            "neutral"
+          ]
+        },
+        "negative-1": {
+          "value": "#7b7082",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#7b7082",
+            "type": "color"
+          },
+          "name": "negative-1",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "diverging",
+            "negative-1"
+          ]
+        },
+        "negative-2": {
+          "value": "#d0aae9",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#d0aae9",
+            "type": "color"
+          },
+          "name": "negative-2",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "diverging",
+            "negative-2"
+          ]
+        }
+      },
+      "sequential": {
+        "0": {
+          "value": "#2c3c54",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#2c3c54",
+            "type": "color"
+          },
+          "name": "0",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "sequential",
+            "0"
+          ]
+        },
+        "1": {
+          "value": "#445f7e",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#445f7e",
+            "type": "color"
+          },
+          "name": "1",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "sequential",
+            "1"
+          ]
+        },
+        "2": {
+          "value": "#72a5c9",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#72a5c9",
+            "type": "color"
+          },
+          "name": "2",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "sequential",
+            "2"
+          ]
+        },
+        "3": {
+          "value": "#90d3fb",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#90d3fb",
+            "type": "color"
+          },
+          "name": "3",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "sequential",
+            "3"
+          ]
+        }
+      },
+      "model-aspect": {
+        "climate": {
+          "value": "#ffcb01",
+          "type": "color",
+          "description": "Climate",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#ffcb01",
+            "type": "color",
+            "description": "Climate"
+          },
+          "name": "climate",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "model-aspect",
+            "climate"
+          ]
+        },
+        "conflict": {
+          "value": "#fa5a6d",
+          "type": "color",
+          "description": "Category color \"conflict\"",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#fa5a6d",
+            "type": "color",
+            "description": "Category color \"conflict\""
+          },
+          "name": "conflict",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "model-aspect",
+            "conflict"
+          ]
+        },
+        "scope-conditions": {
+          "value": "#90d3fb",
+          "type": "color",
+          "description": "Scope conditions",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#90d3fb",
+            "type": "color",
+            "description": "Scope conditions"
+          },
+          "name": "scope-conditions",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "model-aspect",
+            "scope-conditions"
+          ]
+        },
+        "climate-alpha": {
+          "0": {
+            "value": "#ffcb0100",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#ffcb0100",
+              "type": "color"
+            },
+            "name": "0",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "climate-alpha",
+              "0"
+            ]
+          },
+          "10": {
+            "value": "#ffcb011a",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#ffcb011a",
+              "type": "color"
+            },
+            "name": "10",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "climate-alpha",
+              "10"
+            ]
+          },
+          "50": {
+            "value": "#ffcb0180",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#ffcb0180",
+              "type": "color"
+            },
+            "name": "50",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "climate-alpha",
+              "50"
+            ]
+          }
+        },
+        "conflict-alpha": {
+          "0": {
+            "value": "#fa5a6d00",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#fa5a6d00",
+              "type": "color"
+            },
+            "name": "0",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "conflict-alpha",
+              "0"
+            ]
+          },
+          "10": {
+            "value": "#fa5a6d1a",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#fa5a6d1a",
+              "type": "color"
+            },
+            "name": "10",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "conflict-alpha",
+              "10"
+            ]
+          },
+          "50": {
+            "value": "#fa5a6d80",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#fa5a6d80",
+              "type": "color"
+            },
+            "name": "50",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "conflict-alpha",
+              "50"
+            ]
+          }
+        },
+        "scope-conditions-alpha": {
+          "0": {
+            "value": "#90d3fb00",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#90d3fb00",
+              "type": "color"
+            },
+            "name": "0",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "scope-conditions-alpha",
+              "0"
+            ]
+          },
+          "10": {
+            "value": "#90d3fb1a",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#90d3fb1a",
+              "type": "color"
+            },
+            "name": "10",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "scope-conditions-alpha",
+              "10"
+            ]
+          },
+          "50": {
+            "value": "#90d3fb80",
+            "type": "color",
+            "filePath": "./transformed/tokens.json",
+            "isSource": true,
+            "original": {
+              "value": "#90d3fb80",
+              "type": "color"
+            },
+            "name": "50",
+            "attributes": {},
+            "path": [
+              "color",
+              "dark",
+              "model-aspect",
+              "scope-conditions-alpha",
+              "50"
+            ]
+          }
+        },
+        "climate-gradient": {
+          "value": "linear-gradient(to right, #ffcb0100, #ffcb0180)",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "linear-gradient(to right, #ffcb0100, #ffcb0180)",
+            "type": "color"
+          },
+          "name": "climate-gradient",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "model-aspect",
+            "climate-gradient"
+          ]
+        }
+      },
+      "thematic": {
+        "cropland": {
+          "value": "#dbbf5c",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#dbbf5c",
+            "type": "color"
+          },
+          "name": "cropland",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "thematic",
+            "cropland"
+          ]
+        },
+        "grassland": {
+          "value": "#abb88b",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#abb88b",
+            "type": "color"
+          },
+          "name": "grassland",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "thematic",
+            "grassland"
+          ]
+        },
+        "agricultural-land": {
+          "value": "#d7e987",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#d7e987",
+            "type": "color"
+          },
+          "name": "agricultural-land",
+          "attributes": {},
+          "path": [
+            "color",
+            "dark",
+            "thematic",
+            "agricultural-land"
+          ]
+        }
+      }
+    }
+  },
+  "effect": {
+    "depth": {
+      "card": {
+        "value": {
+          "color": "#00000033",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0
+        },
+        "type": "boxShadow",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": {
+            "color": "#00000033",
+            "type": "dropShadow",
+            "x": 0,
+            "y": 1,
+            "blur": 4,
+            "spread": 0
+          },
+          "type": "boxShadow"
+        },
+        "name": "card",
+        "attributes": {},
+        "path": [
+          "effect",
+          "depth",
+          "card"
+        ]
+      },
+      "hover": {
+        "value": {
+          "color": "#00000033",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 5,
+          "blur": 6,
+          "spread": 0
+        },
+        "type": "boxShadow",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": {
+            "color": "#00000033",
+            "type": "dropShadow",
+            "x": 0,
+            "y": 5,
+            "blur": 6,
+            "spread": 0
+          },
+          "type": "boxShadow"
+        },
+        "name": "hover",
+        "attributes": {},
+        "path": [
+          "effect",
+          "depth",
+          "hover"
+        ]
+      },
+      "modal": {
+        "value": {
+          "color": "#00000033",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 7,
+          "blur": 10,
+          "spread": 0
+        },
+        "type": "boxShadow",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": {
+            "color": "#00000033",
+            "type": "dropShadow",
+            "x": 0,
+            "y": 7,
+            "blur": 10,
+            "spread": 0
+          },
+          "type": "boxShadow"
+        },
+        "name": "modal",
+        "attributes": {},
+        "path": [
+          "effect",
+          "depth",
+          "modal"
+        ]
+      },
+      "ui": {
+        "value": {
+          "color": "#00000033",
+          "type": "dropShadow",
+          "x": 0,
+          "y": 1,
+          "blur": 4,
+          "spread": 0
+        },
+        "type": "boxShadow",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": {
+            "color": "#00000033",
+            "type": "dropShadow",
+            "x": 0,
+            "y": 1,
+            "blur": 4,
+            "spread": 0
+          },
+          "type": "boxShadow"
+        },
+        "name": "ui",
+        "attributes": {},
+        "path": [
+          "effect",
+          "depth",
+          "ui"
+        ]
+      }
+    }
+  },
+  "font": {
+    "parameter": {
+      "scale": {
+        "large": {
+          "value": 1.414,
+          "type": "other",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 1.414,
+            "type": "other"
+          },
+          "name": "large",
+          "attributes": {},
+          "path": [
+            "font",
+            "parameter",
+            "scale",
+            "large"
+          ]
+        },
+        "small": {
+          "value": 1.2,
+          "type": "other",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 1.2,
+            "type": "other"
+          },
+          "name": "small",
+          "attributes": {},
+          "path": [
+            "font",
+            "parameter",
+            "scale",
+            "small"
+          ]
+        }
+      }
+    },
+    "fontFamily": {
+      "base": {
+        "value": "BundesSans Web",
+        "type": "fontFamilies",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "BundesSans Web",
+          "type": "fontFamilies"
+        },
+        "name": "base",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontFamily",
+          "base"
+        ]
+      },
+      "heading": {
+        "value": "BundesSans Web",
+        "type": "fontFamilies",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "BundesSans Web",
+          "type": "fontFamilies"
+        },
+        "name": "heading",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontFamily",
+          "heading"
+        ]
+      }
+    },
+    "lineHeight": {
+      "base": {
+        "value": "160%",
+        "type": "lineHeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "160%",
+          "type": "lineHeights"
+        },
+        "name": "base",
+        "attributes": {},
+        "path": [
+          "font",
+          "lineHeight",
+          "base"
+        ]
+      },
+      "tighter": {
+        "value": "145%",
+        "type": "lineHeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "145%",
+          "type": "lineHeights"
+        },
+        "name": "tighter",
+        "attributes": {},
+        "path": [
+          "font",
+          "lineHeight",
+          "tighter"
+        ]
+      },
+      "tightest": {
+        "value": "125%",
+        "type": "lineHeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "125%",
+          "type": "lineHeights"
+        },
+        "name": "tightest",
+        "attributes": {},
+        "path": [
+          "font",
+          "lineHeight",
+          "tightest"
+        ]
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "value": "Regular",
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "Regular",
+          "type": "fontWeights"
+        },
+        "name": "regular",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "regular"
+        ]
+      },
+      "italic": {
+        "value": "Italic",
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "Italic",
+          "type": "fontWeights"
+        },
+        "name": "italic",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "italic"
+        ]
+      },
+      "bold": {
+        "value": "Bold",
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "Bold",
+          "type": "fontWeights"
+        },
+        "name": "bold",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "bold"
+        ]
+      },
+      "regularNumber": {
+        "value": 400,
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 400,
+          "type": "fontWeights"
+        },
+        "name": "regularNumber",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "regularNumber"
+        ]
+      },
+      "boldNumber": {
+        "value": 600,
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 600,
+          "type": "fontWeights"
+        },
+        "name": "boldNumber",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "boldNumber"
+        ]
+      }
+    },
+    "letterSpacing": {
+      "base": {
+        "value": "0%",
+        "type": "letterSpacing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "0%",
+          "type": "letterSpacing"
+        },
+        "name": "base",
+        "attributes": {},
+        "path": [
+          "font",
+          "letterSpacing",
+          "base"
+        ]
+      },
+      "looser": {
+        "value": "15%",
+        "type": "letterSpacing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "15%",
+          "type": "letterSpacing"
+        },
+        "name": "looser",
+        "attributes": {},
+        "path": [
+          "font",
+          "letterSpacing",
+          "looser"
+        ]
+      }
+    },
+    "paragraphSpacing": {
+      "none": {
+        "value": 0,
+        "type": "paragraphSpacing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 0,
+          "type": "paragraphSpacing"
+        },
+        "name": "none",
+        "attributes": {},
+        "path": [
+          "font",
+          "paragraphSpacing",
+          "none"
+        ]
+      },
+      "base": {
+        "value": 8,
+        "type": "paragraphSpacing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 8,
+          "type": "paragraphSpacing"
+        },
+        "name": "base",
+        "attributes": {},
+        "path": [
+          "font",
+          "paragraphSpacing",
+          "base"
+        ]
+      }
+    },
+    "textCase": {
+      "none": {
+        "value": "none",
+        "type": "textCase",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "none",
+          "type": "textCase"
+        },
+        "name": "none",
+        "attributes": {},
+        "path": [
+          "font",
+          "textCase",
+          "none"
+        ]
+      },
+      "uppercase": {
+        "value": "uppercase",
+        "type": "textCase",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "uppercase",
+          "type": "textCase"
+        },
+        "name": "uppercase",
+        "attributes": {},
+        "path": [
+          "font",
+          "textCase",
+          "uppercase"
+        ]
+      }
+    },
+    "textDecoration": {
+      "none": {
+        "value": "none",
+        "type": "textDecoration",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "none",
+          "type": "textDecoration"
+        },
+        "name": "none",
+        "attributes": {},
+        "path": [
+          "font",
+          "textDecoration",
+          "none"
+        ]
+      },
+      "underline": {
+        "value": "underline",
+        "type": "textDecoration",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "underline",
+          "type": "textDecoration"
+        },
+        "name": "underline",
+        "attributes": {},
+        "path": [
+          "font",
+          "textDecoration",
+          "underline"
+        ]
+      }
+    },
+    "size": {
+      "small": {
+        "xs": {
+          "value": 9.723,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 9.723,
+            "type": "fontSizes"
+          },
+          "name": "xs",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "xs"
+          ]
+        },
+        "s": {
+          "value": 11.667,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 11.667,
+            "type": "fontSizes"
+          },
+          "name": "s",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "s"
+          ]
+        },
+        "m": {
+          "value": 14,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 14,
+            "type": "fontSizes"
+          },
+          "name": "m",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "m"
+          ]
+        },
+        "l": {
+          "value": 16.8,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 16.8,
+            "type": "fontSizes"
+          },
+          "name": "l",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "l"
+          ]
+        },
+        "xl": {
+          "value": 20.16,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 20.16,
+            "type": "fontSizes"
+          },
+          "name": "xl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "xl"
+          ]
+        },
+        "xxl": {
+          "value": 24.192,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 24.192,
+            "type": "fontSizes"
+          },
+          "name": "xxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "xxl"
+          ]
+        },
+        "xxxl": {
+          "value": 29.03,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 29.03,
+            "type": "fontSizes"
+          },
+          "name": "xxxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "xxxl"
+          ]
+        },
+        "xxxxl": {
+          "value": 34.836,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 34.836,
+            "type": "fontSizes"
+          },
+          "name": "xxxxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "small",
+            "xxxxl"
+          ]
+        }
+      },
+      "large": {
+        "xs": {
+          "value": 8.002,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 8.002,
+            "type": "fontSizes"
+          },
+          "name": "xs",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "xs"
+          ]
+        },
+        "s": {
+          "value": 11.315,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 11.315,
+            "type": "fontSizes"
+          },
+          "name": "s",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "s"
+          ]
+        },
+        "m": {
+          "value": 16,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 16,
+            "type": "fontSizes"
+          },
+          "name": "m",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "m"
+          ]
+        },
+        "l": {
+          "value": 22.624,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 22.624,
+            "type": "fontSizes"
+          },
+          "name": "l",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "l"
+          ]
+        },
+        "xl": {
+          "value": 31.99,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 31.99,
+            "type": "fontSizes"
+          },
+          "name": "xl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "xl"
+          ]
+        },
+        "xxl": {
+          "value": 45.234,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 45.234,
+            "type": "fontSizes"
+          },
+          "name": "xxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "xxl"
+          ]
+        },
+        "xxxl": {
+          "value": 63.961,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 63.961,
+            "type": "fontSizes"
+          },
+          "name": "xxxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "xxxl"
+          ]
+        },
+        "xxxxl": {
+          "value": 90.441,
+          "type": "fontSizes",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 90.441,
+            "type": "fontSizes"
+          },
+          "name": "xxxxl",
+          "attributes": {},
+          "path": [
+            "font",
+            "size",
+            "large",
+            "xxxxl"
+          ]
+        }
+      }
+    },
+    "style": {
+      "base": {
+        "value": 400,
+        "type": "string",
+        "filePath": "./in/manual/manual.json",
+        "isSource": true,
+        "original": {
+          "value": "{font.fontWeight.regularNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+          "type": "string"
+        },
+        "name": "base",
+        "attributes": {},
+        "path": [
+          "font",
+          "style",
+          "base"
+        ]
+      },
+      "caption": {
+        "value": 400,
+        "type": "string",
+        "filePath": "./in/manual/manual.json",
+        "isSource": true,
+        "original": {
+          "value": "{font.fontWeight.regularNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+          "type": "string"
+        },
+        "name": "caption",
+        "attributes": {},
+        "path": [
+          "font",
+          "style",
+          "caption"
+        ]
+      },
+      "heading": {
+        "value": 600,
+        "type": "string",
+        "filePath": "./in/manual/manual.json",
+        "isSource": true,
+        "original": {
+          "value": "{font.fontWeight.boldNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+          "type": "string"
+        },
+        "name": "heading",
+        "attributes": {},
+        "path": [
+          "font",
+          "style",
+          "heading"
+        ]
+      },
+      "bold": {
+        "value": 600,
+        "type": "string",
+        "filePath": "./in/manual/manual.json",
+        "isSource": true,
+        "original": {
+          "value": "{font.fontWeight.boldNumber.value} 16px/{font.lineHeight.base.value} '{font.fontFamily.base.value}'",
+          "type": "string"
+        },
+        "name": "bold",
+        "attributes": {},
+        "path": [
+          "font",
+          "style",
+          "bold"
+        ]
+      }
+    }
+  },
+  "size": {
+    "min-content-width": {
+      "value": 320,
+      "type": "sizing",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 320,
+        "type": "sizing"
+      },
+      "name": "min-content-width",
+      "attributes": {},
+      "path": [
+        "size",
+        "min-content-width"
+      ]
+    },
+    "max-content-width": {
+      "value": 1440,
+      "type": "sizing",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 1440,
+        "type": "sizing"
+      },
+      "name": "max-content-width",
+      "attributes": {},
+      "path": [
+        "size",
+        "max-content-width"
+      ]
+    },
+    "space": {
+      "large": {
+        "xxxs": {
+          "value": 4,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 4,
+            "type": "spacing"
+          },
+          "name": "xxxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xxxs"
+          ]
+        },
+        "xxs": {
+          "value": 8,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 8,
+            "type": "spacing"
+          },
+          "name": "xxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xxs"
+          ]
+        },
+        "xs": {
+          "value": 12,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 12,
+            "type": "spacing"
+          },
+          "name": "xs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xs"
+          ]
+        },
+        "s": {
+          "value": 16,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 16,
+            "type": "spacing"
+          },
+          "name": "s",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "s"
+          ]
+        },
+        "m": {
+          "value": 24,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 24,
+            "type": "spacing"
+          },
+          "name": "m",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "m"
+          ]
+        },
+        "l": {
+          "value": 32,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 32,
+            "type": "spacing"
+          },
+          "name": "l",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "l"
+          ]
+        },
+        "xl": {
+          "value": 48,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 48,
+            "type": "spacing"
+          },
+          "name": "xl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xl"
+          ]
+        },
+        "xxl": {
+          "value": 64,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 64,
+            "type": "spacing"
+          },
+          "name": "xxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xxl"
+          ]
+        },
+        "xxxl": {
+          "value": 96,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 96,
+            "type": "spacing"
+          },
+          "name": "xxxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "large",
+            "xxxl"
+          ]
+        }
+      },
+      "small": {
+        "xxxs": {
+          "value": 3.5,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 3.5,
+            "type": "spacing"
+          },
+          "name": "xxxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xxxs"
+          ]
+        },
+        "xxs": {
+          "value": 7,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 7,
+            "type": "spacing"
+          },
+          "name": "xxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xxs"
+          ]
+        },
+        "xs": {
+          "value": 10.5,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 10.5,
+            "type": "spacing"
+          },
+          "name": "xs",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xs"
+          ]
+        },
+        "s": {
+          "value": 14,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 14,
+            "type": "spacing"
+          },
+          "name": "s",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "s"
+          ]
+        },
+        "m": {
+          "value": 21,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 21,
+            "type": "spacing"
+          },
+          "name": "m",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "m"
+          ]
+        },
+        "l": {
+          "value": 28,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 28,
+            "type": "spacing"
+          },
+          "name": "l",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "l"
+          ]
+        },
+        "xl": {
+          "value": 42,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 42,
+            "type": "spacing"
+          },
+          "name": "xl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xl"
+          ]
+        },
+        "xxl": {
+          "value": 56,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 56,
+            "type": "spacing"
+          },
+          "name": "xxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xxl"
+          ]
+        },
+        "xxxl": {
+          "value": 84,
+          "type": "spacing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 84,
+            "type": "spacing"
+          },
+          "name": "xxxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "space",
+            "small",
+            "xxxl"
+          ]
+        }
+      }
+    },
+    "breakpoint": {
+      "xs": {
+        "value": 480,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 480,
+          "type": "sizing"
+        },
+        "name": "xs",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "xs"
+        ]
+      },
+      "sm": {
+        "value": 640,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 640,
+          "type": "sizing"
+        },
+        "name": "sm",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "sm"
+        ]
+      },
+      "md": {
+        "value": 960,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 960,
+          "type": "sizing"
+        },
+        "name": "md",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "md"
+        ]
+      },
+      "lg": {
+        "value": 1200,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 1200,
+          "type": "sizing"
+        },
+        "name": "lg",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "lg"
+        ]
+      },
+      "xl": {
+        "value": 1440,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 1440,
+          "type": "sizing"
+        },
+        "name": "xl",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "xl"
+        ]
+      }
+    },
+    "border-radius": {
+      "value": 3,
+      "type": "borderRadius",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 3,
+        "type": "borderRadius"
+      },
+      "name": "border-radius",
+      "attributes": {},
+      "path": [
+        "size",
+        "border-radius"
+      ]
+    },
+    "max-content-width-no-unit": {
+      "type": "number",
+      "value": 1440,
+      "filePath": "./in/manual/manual.json",
+      "isSource": true,
+      "original": {
+        "type": "number",
+        "value": 1440
+      },
+      "name": "max-content-width-no-unit",
+      "attributes": {},
+      "path": [
+        "size",
+        "max-content-width-no-unit"
+      ]
+    },
+    "min-content-width-no-unit": {
+      "type": "number",
+      "value": 320,
+      "filePath": "./in/manual/manual.json",
+      "isSource": true,
+      "original": {
+        "type": "number",
+        "value": 320
+      },
+      "name": "min-content-width-no-unit",
+      "attributes": {},
+      "path": [
+        "size",
+        "min-content-width-no-unit"
+      ]
+    }
+  }
+}
