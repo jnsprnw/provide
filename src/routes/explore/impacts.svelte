@@ -8,6 +8,7 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
+	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIO } from '$lib/../stores/store.js';
 </script>
 
 <svelte:head>
@@ -18,7 +19,7 @@
 
 <Tabs>
   <Tab label="Geography selection" />
-  <Tab label="Scenarios selection" />
+  <Tab label="Scenarios selection" disabled={$CURRENT_GEOGRAPHY === null} />
   <svelte:fragment slot="content">
     <TabContent>
     	<GeographySelection />
@@ -29,6 +30,9 @@
   </svelte:fragment>
 </Tabs>
 
+{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null}
+	<p>Please select a geography and a scenario</p>
+{:else}
 <Tabs>
   <Tab label="Impact analysis" />
   <Tab label="Mitigation benefits" />
@@ -48,6 +52,7 @@
     </TabContent>
   </svelte:fragment>
 </Tabs>
+{/if}
 
 <style lang="scss">
 	@import '../../styles/global.scss';

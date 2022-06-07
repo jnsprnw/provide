@@ -63,3 +63,9 @@
     <slot>{label}</slot>
   </a>
 </li>
+
+<style>
+  .bx--tabs__nav-item--disabled a {
+    color: gray;
+  }
+</style>

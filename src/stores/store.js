@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const CURRENT_INDICATOR = writable("");
-export const CURRENT_SECTOR = writable("");
-export const CURRENT_GEOGRAPHY = writable("");
-export const CURRENT_SCENARIO = writable("");
+export const CURRENT_INDICATOR = writable(null);
+export const CURRENT_SECTOR = writable(null);
+export const CURRENT_GEOGRAPHY = writable(null);
+export const CURRENT_SCENARIO = writable(null);
