@@ -7,6 +7,7 @@
 	import MitigationBenefits from "$lib/explore-impacts/mitigation-benefits/index.svelte";
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
+	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
 </script>
 
 <svelte:head>
@@ -23,7 +24,7 @@
     	<GeographySelection />
     </TabContent>
     <TabContent>
-    	Scenarios
+    	<ScenarioSelection />
     </TabContent>
   </svelte:fragment>
 </Tabs>

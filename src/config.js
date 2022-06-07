@@ -1401,3 +1401,120 @@ export const CITIES = [
 	{ label: 'Zagreb' },
 	{ label: 'Zurich' }
 ]
+
+export const SCENARIOS = [{
+  "label": "NDC",
+  "uid": "unique identifier",
+  "scenarioData": {
+    "hasCDR": true,
+    "hasLateNetZero": true,
+    "overshootMagnitude": {
+      "value": 0.15,
+      "hasWarning": false
+    },
+    "overshootLength": {
+      "value": [2050, 2070],
+      "hasWarning": false
+    },
+    "peakWarming": {
+      "value": 1.76,
+      "hasWarning": false
+    },
+    "peakYear": {
+      "value": 2044,
+      "hasWarning": false
+    },
+    "GMT2100": {
+      "value": 1.54,
+      "hasWarning": false
+    },
+    "netZero": {
+      "value": 2046,
+      "hasWarning": false
+    },
+    "netZeroGHG": {
+      "value": 2047,
+      "hasWarning": false
+    },
+    "emissions2030": {
+      "value": 2000,
+      "hasWarning": false
+    },
+    "CDRLevel": {
+      "value": 2044,
+      "hasWarning": false
+    },
+    "noCO2Mitigation": {
+      "value": 50,
+      "hasWarning": false
+    },
+    "temperature": {
+      "startYear": 2000,
+      "yearStep": 5,
+      "data": [1.5, 2.0, 2.0, 2.0]
+    },
+    "emissions": {
+      "startYear": 2000,
+      "yearStep": 5,
+      "data": [1.5, 2.0, 2.0, 2.0]
+    }
+  }
+},
+{
+  "label": "Current policy",
+  "uid": "unique identifier",
+  "scenarioData": {
+    "hasCDR": true,
+    "hasLateNetZero": true,
+    "overshootMagnitude": {
+      "value": 0.15,
+      "hasWarning": false
+    },
+    "overshootLength": {
+      "value": [2050, 2070],
+      "hasWarning": false
+    },
+    "peakWarming": {
+      "value": 1.76,
+      "hasWarning": false
+    },
+    "peakYear": {
+      "value": 2044,
+      "hasWarning": false
+    },
+    "GMT2100": {
+      "value": 1.54,
+      "hasWarning": false
+    },
+    "netZero": {
+      "value": 2046,
+      "hasWarning": false
+    },
+    "netZeroGHG": {
+      "value": 2047,
+      "hasWarning": false
+    },
+    "emissions2030": {
+      "value": 2000,
+      "hasWarning": false
+    },
+    "CDRLevel": {
+      "value": 2044,
+      "hasWarning": false
+    },
+    "noCO2Mitigation": {
+      "value": 50,
+      "hasWarning": false
+    },
+    "temperature": {
+      "startYear": 2000,
+      "yearStep": 5,
+      "data": [1.5, 2.0, 2.0, 2.0]
+    },
+    "emissions": {
+      "startYear": 2000,
+      "yearStep": 5,
+      "data": [1.5, 2.0, 2.0, 2.0]
+    }
+  }
+}]
