@@ -1,11 +1,14 @@
 <script>
   import ThemeProvider from "../styles/ThemeProvider.svelte";
   import "../styles/app.scss";
+  import { getStores, navigating, page, session, updated } from '$app/stores';
+
+  console.log({ page })
 </script>
 
 <ThemeProvider>
   <main>
-    <nav>
+    <nav class="page-menu">
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/explore">Explore</a></li>
@@ -14,6 +17,14 @@
         <li><a href="/methodology">Methodology</a></li>
       </ul>
     </nav>
+    {#if ($page.routeId || '').startsWith('explore')}
+    <nav class="explore-menu">
+      <ul>
+        <li><a href="/explore/impacts">Explore Impacts</a></li>
+        <li><a href="/explore/scenarios">Explore Scenarios</a></li>
+      </ul>
+    </nav>
+    {/if}
     <slot />
   </main>
 </ThemeProvider>
@@ -23,5 +34,9 @@
 
   nav ul {
     list-style: none;
+  }
+
+  .explore-menu {
+    margin-top: 2rem;
   }
 </style>
