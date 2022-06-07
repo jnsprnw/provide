@@ -19,9 +19,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@sveltejs/svelte-virtual-list": "^3.0.1",
     "d3": "^7.4.4",
     "d3-scale": "^4.0.2",
     "lodash": "^4.17.21",
-    "lodash-es": "^4.17.21"
+    "lodash-es": "^4.17.21",
+    "minisearch": "^5.0.0-beta2"
   }
 }

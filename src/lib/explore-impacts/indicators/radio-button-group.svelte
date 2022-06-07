@@ -11,16 +11,6 @@
   /** Set to `true` to visually hide the legend */
   export let hideLegend = false;
   /**
-   * Specify the label position
-   * @type {"right" | "left"}
-   */
-  export let labelPosition = "right";
-  /**
-   * Specify the orientation of the radio buttons
-   * @type {"horizontal" | "vertical"}
-   */
-  export let orientation = "horizontal";
-  /**
    * Set an id for the container div element
    * @type {string}
    */
@@ -69,9 +59,6 @@
 >
   <fieldset
     class:bx--radio-button-group="{true}"
-    class:bx--radio-button-group--vertical="{orientation === 'vertical'}"
-    class:bx--radio-button-group--label-left="{labelPosition === 'left'}"
-    class:bx--radio-button-group--label-right="{labelPosition === 'right'}"
     disabled="{disabled}"
   >
     {#if legendText || $$slots.legendText}

@@ -1,9 +1,9 @@
 <script>
 	import { CURRENT_SECTOR } from '$lib/../stores/store.js';
 	import { SECTORS_LABELS } from '$lib/../config.js';
-	import Tabs from "./tabs.svelte";
-	import Tab from "./tab.svelte";
-	import TabContent from "./tab-content.svelte";
+	import Tabs from "$lib/helper/tabs/tabs.svelte";
+	import Tab from "$lib/helper/tabs/tab.svelte";
+	import TabContent from "$lib/helper/tabs/tab-content.svelte";
 	import Indicators from "../indicators/indicators.svelte";
 
 	export let sectors = [];

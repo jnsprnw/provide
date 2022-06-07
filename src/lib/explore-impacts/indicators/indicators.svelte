@@ -15,8 +15,7 @@
 </script>
 
 <div class="indicator-selection">
-	<span>Indicators:</span>
-	<RadioButtonGroup bind:selected={$CURRENT_INDICATOR}>
+	<RadioButtonGroup bind:selected={$CURRENT_INDICATOR} legendText="Indicators">
 		{#each options as { value, labelText }}
 	  <RadioButton {labelText} {value} />
 	  {/each}
@@ -26,5 +25,6 @@
 <style lang="scss">
 	.indicator-selection {
 		margin-top: 2rem;
+		margin-bottom: 2rem;
 	}
 </style>
