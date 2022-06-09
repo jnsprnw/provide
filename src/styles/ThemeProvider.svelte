@@ -1,6 +1,8 @@
 <script>
   // import { preferredThemeId } from "$state/Responsiveness.js";
-  import { interpolateLab, piecewise, scaleOrdinal, hsl } from "d3";
+  import { interpolateLab, piecewise } from "d3-interpolate";
+  import { hsl } from "d3-color";
+  import { scaleOrdinal } from "d3-scale";
   import { setContext } from "svelte";
   import { writable } from "svelte/store";
   import { get } from "lodash-es";
