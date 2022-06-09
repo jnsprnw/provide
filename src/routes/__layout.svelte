@@ -1,9 +1,7 @@
 <script>
   import ThemeProvider from "../styles/ThemeProvider.svelte";
   import "../styles/app.scss";
-  import { getStores, navigating, page, session, updated } from '$app/stores';
-
-  console.log({ page })
+  import { page } from '$app/stores';
 </script>
 
 <ThemeProvider>
