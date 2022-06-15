@@ -1,0 +1,19 @@
+.container {
+	display: flex;
+	justify-content: center; // Horizontally center items
+}
+
+.wrapper {
+	max-width: 1165px;
+	width: 100vw;
+
+	&.grid {
+		display: grid;
+		grid-template-columns: repeat(12, 1fr);
+		grid-gap: 1rem; // TODO
+	}
+}
+
+.explore-intro {
+	margin: 0 0 1rem;
+}

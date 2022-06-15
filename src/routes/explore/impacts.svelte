@@ -15,7 +15,9 @@
 	<title>Explore Impacts</title>
 </svelte:head>
 
-<h1>Explore Impacts</h1>
+<div class="explore-intro">
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
 
 <Tabs>
   <Tab label="Geography selection" />

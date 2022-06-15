@@ -98,14 +98,14 @@
 </script>
 <div
   role="navigation"
-  class:bx--tabs="{true}"
-  class:bx--tabs--container="{type === 'container'}"
+  class:tabs="{true}"
+  class:tabs--container="{type === 'container'}"
   {...$$restProps}
 >
   <div
     role="listbox"
     tabindex="0"
-    class:bx--tabs-trigger="{true}"
+    class:tabs-trigger="{true}"
     aria-label="{$$props['aria-label'] || 'listbox'}"
     on:click="{() => {
       dropdownHidden = !dropdownHidden;
@@ -117,7 +117,7 @@
   >
     <a
       tabindex="-1"
-      class:bx--tabs-trigger-text="{true}"
+      class:tabs-trigger-text="{true}"
       href="{triggerHref}"
       on:click|preventDefault
       on:click|preventDefault|stopPropagation="{() => {
@@ -131,8 +131,8 @@
   <ul
     bind:this="{refTabList}"
     role="tablist"
-    class:bx--tabs__nav="{true}"
-    class:bx--tabs__nav--hidden="{dropdownHidden}"
+    class:tabs__nav="{true}"
+    class:tabs__nav--hidden="{dropdownHidden}"
   >
     <slot />
   </ul>
@@ -140,7 +140,11 @@
 <slot name="content" />
 
 <style>
-  .bx--tabs-trigger {
+  .tabs-trigger {
     display: none;
+  }
+
+  .tabs {
+    display: flex;
   }
 </style>
