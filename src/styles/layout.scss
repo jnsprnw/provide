@@ -17,3 +17,10 @@
 .explore-intro {
 	margin: 0 0 1rem;
 }
+
+.impact-selection.tabs {
+	.tabs__nav {
+		flex-direction: row !important;
+		gap: 1rem; // TODO
+	}
+}

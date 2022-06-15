@@ -99,52 +99,26 @@
 <div
   role="navigation"
   class:tabs="{true}"
-  class:tabs--container="{type === 'container'}"
   {...$$restProps}
 >
-  <div
-    role="listbox"
-    tabindex="0"
-    class:tabs-trigger="{true}"
-    aria-label="{$$props['aria-label'] || 'listbox'}"
-    on:click="{() => {
-      dropdownHidden = !dropdownHidden;
-    }}"
-    on:keypress
-    on:keypress="{() => {
-      dropdownHidden = !dropdownHidden;
-    }}"
-  >
-    <a
-      tabindex="-1"
-      class:tabs-trigger-text="{true}"
-      href="{triggerHref}"
-      on:click|preventDefault
-      on:click|preventDefault|stopPropagation="{() => {
-        dropdownHidden = !dropdownHidden;
-      }}"
-    >
-      {#if currentTab}{currentTab.label}{/if}
-    </a>
-    <!-- <ChevronDown aria-hidden="true" title="{iconDescription}" /> -->
-  </div>
   <ul
     bind:this="{refTabList}"
     role="tablist"
     class:tabs__nav="{true}"
-    class:tabs__nav--hidden="{dropdownHidden}"
   >
     <slot />
   </ul>
 </div>
 <slot name="content" />
 
-<style>
-  .tabs-trigger {
-    display: none;
-  }
-
+<style lang="scss">
   .tabs {
-    display: flex;
+    .tabs__nav {
+      display: flex;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      flex-direction: column;
+    }
   }
 </style>

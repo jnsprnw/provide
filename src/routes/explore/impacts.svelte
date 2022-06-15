@@ -19,9 +19,9 @@
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 </div>
 
-<Tabs>
-  <Tab label="Geography selection" />
-  <Tab label="Scenarios selection" disabled={$CURRENT_GEOGRAPHY === null} />
+<Tabs class="impact-selection">
+  <Tab label="Geography selection" loc="step" />
+  <Tab label="Scenarios selection" loc="step" disabled={$CURRENT_GEOGRAPHY === null} />
   <svelte:fragment slot="content">
     <TabContent>
     	<GeographySelection />

@@ -1,8 +1,5 @@
 <script>
-  /**
-   * Specify the tab label
-   * Alternatively, use the default slot (e.g., <Tab><span>Label</span></Tab>)
-   */
+  export let loc = "";
   export let label = "";
   /** Specify the href attribute */
   export let href = "#";
@@ -24,9 +21,10 @@
 <li
   tabindex="-1"
   role="presentation"
-  class:bx--tabs__nav-item="{true}"
-  class:bx--tabs__nav-item--disabled="{disabled}"
-  class:bx--tabs__nav-item--selected="{selected}"
+  class:tabs__nav-item="{true}"
+  class:tabs__nav-item--disabled="{disabled}"
+  class:tabs__nav-item--selected="{selected}"
+  aria-current={selected ? loc : 'false'}
   {...$$restProps}
   on:click|preventDefault
   on:click|preventDefault="{() => {
@@ -57,15 +55,32 @@
     aria-disabled="{disabled}"
     id="{id}"
     href="{href}"
-    class:bx--tabs__nav-link="{true}"
+    class:tabs__nav-link="{true}"
     style="{$useAutoWidth ? 'width: auto' : undefined}"
   >
     <slot>{label}</slot>
   </a>
 </li>
 
-<style>
-  .bx--tabs__nav-item--disabled a {
-    color: gray;
+<style lang="scss">
+  .tabs__nav-item {
+    display: flex;
+    padding: 0;
+    cursor: pointer;
+
+    &.tabs__nav-item--disabled,
+    &.tabs__nav-item--disabled:hover {
+      cursor: not-allowed;
+      outline: none;
+      
+      a {
+        color: gray; // TODO
+      }
+    }
+
+    &[aria-current="page"], &[aria-current="location"], &[aria-current="step"] {
+      font-weight: bold; // TODO
+      color: orange; // TODO
+    }
   }
 </style>
