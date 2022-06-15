@@ -28,7 +28,7 @@
           <h2>Explore Impacts</h2>
           <span>Select scenarios and explore impacts</span>
         </ListLink>
-        <ListLink {currentPath} link="explore/scenarios" loc="location">
+        <ListLink {currentPath} link="explore/scenarios" loc="location" disabled={true}>
           <h2>Explore Scenarios</h2>
           <span>Set an impact threshold and explore scenarios</span>
         </ListLink>

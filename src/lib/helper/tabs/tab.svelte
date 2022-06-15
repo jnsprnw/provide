@@ -68,19 +68,17 @@
     padding: 0;
     cursor: pointer;
 
-    &.tabs__nav-item--disabled,
-    &.tabs__nav-item--disabled:hover {
-      cursor: not-allowed;
-      outline: none;
-      
-      a {
-        color: gray; // TODO
-      }
-    }
-
-    &[aria-current="page"], &[aria-current="location"], &[aria-current="step"] {
+    &[aria-current="page"] a, &[aria-current="location"] a, &[aria-current="step"] a {
       font-weight: bold; // TODO
       color: orange; // TODO
+    }
+
+    &.tabs__nav-item--disabled,
+    &.tabs__nav-item--disabled:hover {    
+      &, a {
+        color: gray; // TODO
+        cursor: not-allowed;
+      }
     }
   }
 </style>
