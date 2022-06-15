@@ -20,8 +20,9 @@
 </div>
 
 <Tabs class="impact-selection">
-  <Tab label="Geography selection" loc="step" />
-  <Tab label="Scenarios selection" loc="step" disabled={$CURRENT_GEOGRAPHY === null} />
+  <Tab label="Geography selection" />
+  <Tab label="Scenarios selection" disabled={$CURRENT_GEOGRAPHY === null} />
+  <Tab label="Indicator selection" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null} />
   <svelte:fragment slot="content">
     <TabContent>
     	<GeographySelection />
@@ -29,27 +30,27 @@
     <TabContent>
     	<ScenarioSelection />
     </TabContent>
+    <TabContent>
+    	<Sectors sectors={['terrestrial-climate', 'agriculture']} />
+    </TabContent>
   </svelte:fragment>
 </Tabs>
 
 {#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null}
 	<p>Please select a geography and a scenario</p>
 {:else}
-<Tabs>
+<Tabs class="analysis-selection">
   <Tab label="Impact analysis" />
   <Tab label="Mitigation benefits" />
   <Tab label="Reversibility" />
   <svelte:fragment slot="content">
     <TabContent>
-    	<Sectors sectors={['terrestrial-climate', 'agriculture']} />
     	<ImpactAnalysis />
     </TabContent>
     <TabContent>
-    	<Sectors sectors={['terrestrial-climate', 'marine-climate-and-chemistry', 'agriculture']} />
     	<MitigationBenefits />
     </TabContent>
     <TabContent>
-    	<Sectors sectors={['marine-climate-and-chemistry', 'agriculture', 'freshwater-availability', 'terrestrial-ecosystems', 'marine-ecosystems']} />
     	<Reversibility />
     </TabContent>
   </svelte:fragment>

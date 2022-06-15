@@ -18,7 +18,7 @@
 	margin: 0 0 1rem;
 }
 
-.impact-selection.tabs {
+.impact-selection.tabs, .analysis-selection.tabs {
 	.tabs__nav {
 		flex-direction: row !important;
 		gap: 1rem; // TODO

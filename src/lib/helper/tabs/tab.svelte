@@ -1,5 +1,5 @@
 <script>
-  export let loc = "";
+  export let loc = "step";
   export let label = "";
   /** Specify the href attribute */
   export let href = "#";
