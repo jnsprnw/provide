@@ -24,11 +24,11 @@
   <nav class="explore-menu container">
     <div class="wrapper">
       <ul>
-        <ListLink {currentPath} link="explore/impacts" loc="location">
+        <ListLink {currentPath} link="explore/impacts" loc="location" type="primary">
           <h2>Explore Impacts</h2>
           <span>Select scenarios and explore impacts</span>
         </ListLink>
-        <ListLink {currentPath} link="explore/scenarios" loc="location" disabled={true}>
+        <ListLink {currentPath} link="explore/scenarios" loc="location" disabled={true} type="primary">
           <h2>Explore Scenarios</h2>
           <span>Set an impact threshold and explore scenarios</span>
         </ListLink>
@@ -77,5 +77,11 @@
 
   .page-main {
     margin-top: 2rem; // TODO
+  }
+
+  .explore-menu {
+    .wrapper {
+      border-bottom: 1px solid var(--color-light-blue300); // TODO
+    }
   }
 </style>

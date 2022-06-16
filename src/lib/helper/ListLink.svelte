@@ -4,12 +4,13 @@
 	export let loc = 'page';
 	export let startsWith = false;
 	export let disabled = false;
+	export let type = 'default';
 
-	$: isCurrent = startsWith && currentPath.startsWith(link) || currentPath === link;
-	$: ariaLabel = isCurrent ? loc : 'false';
+	$: isActive = startsWith && currentPath.startsWith(link) || currentPath === link;
+	$: ariaLabel = isActive ? loc : 'false';
 </script>
 
-<li class:list-link--disabled={disabled}>
+<li class:list-link--disabled={disabled} class="list-link--{type}" class:list-link--active={isActive}>
 	<a
 		href={`/${link}`}
 		aria-current={ariaLabel}
@@ -17,16 +18,35 @@
 </li>
 
 <style lang="scss">
-	a[aria-current="page"], a[aria-current="location"], a[aria-current="step"] {
-		font-weight: bold; // TODO
-		color: orange; // TODO
-	}
+	li {
+		&.list-link--active {
+			&.list-link--primary {
+				background-color: var(--color-light-green100);
+				border-bottom-color: var(--color-functional-accent);
 
-	.list-link--disabled,
-  .list-link--disabled:hover {   
-    &, a {
-      color: gray; // TODO
-      cursor: not-allowed;
-    }
-  }
+				a {
+					color: var(--color-functional-accent);
+				}
+			}
+		}
+
+		&.list-link--primary {
+			padding: var(--size-space-large-xs);
+			border-bottom: var(--stroke-active-bold) solid transparent;
+			transition: border-bottom-color 0.3s ease-out; // TODO
+
+			a {
+				color: var(--color-brand-stronger);
+				transition: color 0.3s ease-out; // TODO
+			}
+
+			&.list-link--disabled,
+		  &.list-link--disabled:hover {
+		  	a {
+		  		color: var(--color-light-blue300); // TODO
+		    	cursor: not-allowed;
+		  	}
+		  }
+		}
+	}
 </style>
