@@ -16,6 +16,7 @@ StyleDictionary.registerTransform({
       "fontSizes": "px",
       "letterSpacing": "em",
       "borderWidth": "px",
+      "borderRadius": "px",
     }
 
     if (token.original.type === "letterSpacing") {
