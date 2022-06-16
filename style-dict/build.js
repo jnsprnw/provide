@@ -15,16 +15,14 @@ StyleDictionary.registerTransform({
       "spacing": "px",
       "fontSizes": "",
       "letterSpacing": "em",
+      "borderWidth": "px",
     }
-    console.log(token.original.type)
+
     if (token.original.type === "letterSpacing") {
       return ((+token.original.value.replace("%", ""))/100)+"em";
-    } else if (token.original.type === "borderWidth") {
-      return token.value + 'px';
     } else if (String(token.unit) == "undefined") {
       return (token.original.value + (defaultUnits[token.original.type] || ""));
     } else {
-      // console.log(token.value + { pixel: "px", percent: "%" }[token.unit])
       return token.value + { pixel: "px", percent: "%" }[token.unit];
     }
   },
