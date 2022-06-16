@@ -35,7 +35,11 @@
 
 <style lang="scss">
   .geography-selection {
+    background-color: var(--color-light-blue100); // TODO
     margin-top: 2rem;
     margin-bottom: 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
   }
 </style>

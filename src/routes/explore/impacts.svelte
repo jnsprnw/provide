@@ -1,6 +1,7 @@
 <script>
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
+	import TabPrimary from "$lib/helper/tabs/tabPrimary.svelte";
 	import TabContent from "$lib/helper/tabs/tab-content.svelte";
 	import Sectors from "$lib/explore-impacts/sectors/index.svelte";
 	import ImpactAnalysis from "$lib/explore-impacts/impact-analysis/index.svelte";
@@ -8,7 +9,7 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
-	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIO } from '$lib/../stores/store.js';
+	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIO, CURRENT_INDICATOR } from '$lib/../stores/store.js';
 </script>
 
 <svelte:head>
@@ -20,9 +21,9 @@
 </div>
 
 <Tabs class="impact-selection">
-  <Tab label="Geography selection" />
-  <Tab label="Scenarios selection" disabled={$CURRENT_GEOGRAPHY === null} />
-  <Tab label="Indicator selection" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null} />
+  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
+  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIO} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
+  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null} />
   <svelte:fragment slot="content">
     <TabContent>
     	<GeographySelection />
