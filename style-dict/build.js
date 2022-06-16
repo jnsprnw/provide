@@ -16,13 +16,16 @@ StyleDictionary.registerTransform({
       "fontSizes": "",
       "letterSpacing": "em",
     }
-    if(token.original.type==="letterSpacing"){
+    console.log(token.original.type)
+    if (token.original.type === "letterSpacing") {
       return ((+token.original.value.replace("%", ""))/100)+"em";
-    } else if(String(token.unit) == "undefined"){
+    } else if (token.original.type === "borderWidth") {
+      return token.value + 'px';
+    } else if (String(token.unit) == "undefined") {
       return (token.original.value + (defaultUnits[token.original.type] || ""));
-    } else{
-      return token.value + {pixel: "px",
-      percent: "%"}[token.unit];
+    } else {
+      // console.log(token.value + { pixel: "px", percent: "%" }[token.unit])
+      return token.value + { pixel: "px", percent: "%" }[token.unit];
     }
   },
 });

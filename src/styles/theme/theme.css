@@ -191,7 +191,7 @@
   --radius-information: 2;
   --radius-l: 5;
   --radius-m: 4;
-  --stroke-default: 1;
-  --stroke-active: 2;
-  --stroke-active-bold: 4;
+  --stroke-default: 1px;
+  --stroke-active: 2px;
+  --stroke-active-bold: 4px;
 }
