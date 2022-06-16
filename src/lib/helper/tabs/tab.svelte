@@ -70,7 +70,7 @@
 
     &[aria-current="page"] a, &[aria-current="location"] a, &[aria-current="step"] a {
       font-weight: bold; // TODO
-      color: orange; // TODO
+      color: var(--color-functional-accent); // TODO
     }
 
     &.tabs__nav-item--disabled,
