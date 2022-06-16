@@ -1,4 +1,3 @@
-export const 10 = 0.1;
 export const ColorLightBackgroundBase = "#ffffff";
 export const ColorLightBackgroundWeaker = "#f2f2f2";
 export const ColorLightBackgroundWeakest = "#d6d7d7";

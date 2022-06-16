@@ -1,19 +1,4 @@
 {
-  "10": {
-    "value": 0.1,
-    "type": "opacity",
-    "filePath": "./transformed/tokens.json",
-    "isSource": true,
-    "original": {
-      "value": 0.1,
-      "type": "opacity"
-    },
-    "name": "10",
-    "attributes": {},
-    "path": [
-      "10"
-    ]
-  },
   "color": {
     "light": {
       "background": {
