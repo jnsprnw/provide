@@ -64,12 +64,6 @@
         colors.category["3"],
         colors.category["4"],
       ],
-
-      "model-aspect": [
-        colors["model-aspect"]["climate"],
-        colors["model-aspect"]["scope-conditions"],
-        colors["model-aspect"]["conflict"],
-      ],
     };
 
     $themeStore = {
@@ -86,7 +80,6 @@
           sequential: piecewise(interpolateLab, colorSteps.sequential),
           diverging: piecewise(interpolateLab, colorSteps.diverging),
           categorical: scaleOrdinal().range(colorSteps.categorical),
-          "model-aspect": scaleOrdinal().range(colorSteps["model-aspect"]),
         },
       },
     };
