@@ -1,0 +1,120 @@
+{
+  "geographyTypes": {
+    "breadbaskets": {
+      "availableIndicators": [ "near-surface-temperature", "radiation"]
+    }
+  },
+  "continents": {
+    "europe": {
+      "label": "Europe"
+    }
+  },
+  "admin0": {
+    "world": {
+      "label": "World"
+    },
+    "FIN": {
+      "label": "Finland",
+      "continent": "europe"
+    }
+  },
+  "admin1": {
+    "region id": {
+      "label": "Region name",
+      "country": "country id",
+      "coordinates": [52, 19]
+    }
+  },
+  "cities": {
+    "city id": {
+      "label": "Helsinki",
+      "country": "FIN",
+      "coordinates": [52, 19]
+    }
+  },
+  "iconicRegions": {
+    "region id": {
+      "label": "Bahamas/Nassau",
+      "country": "FIN",
+      "coordinates": [52, 19]
+    }
+  },
+  "scenarios": [
+    {
+      "label": "Current Policies",
+      "uid": "unique identifier",
+      "scenarioData": {
+        "hasCDR": true,
+        "hasLateNetZero": true,
+        "overshootMagnitude": {
+          "value": 0.15,
+          "hasWarning": false
+        },
+        "overshootLength": {
+          "value": [2050, 2070],
+          "hasWarning": false
+        },
+        "peakWarming": {
+          "value": 1.76,
+          "hasWarning": false
+        },
+        "peakYear": {
+          "value": 2044,
+          "hasWarning": false
+        },
+        "GMT2100": {
+          "value": 1.54,
+          "hasWarning": false
+        },
+        "netZero": {
+          "value": 2046,
+          "hasWarning": false
+        },
+        "netZeroGHG": {
+          "value": 2047,
+          "hasWarning": false
+        },
+        "emissions2030": {
+          "value": 2000,
+          "hasWarning": false
+        },
+        "CDRLevel": {
+          "value": 2044,
+          "hasWarning": false
+        },
+        "noCO2Mitigation": {
+          "value": 50,
+          "hasWarning": false
+        },
+        "temperature": {
+          "yearStart": 2000,
+          "yearStep": 5,
+          "data": [1.5, 2.0, 2.0, 2.0]
+        },
+        "emissions": {
+          "yearStart": 2000,
+          "yearStep": 5,
+          "data": [1.5, 2.0, 2.0, 2.0]
+        }
+      }
+    }
+  ],
+  "units": {
+    "unit id": {
+      "label": "g",
+      "labelLong": "gramms"
+    }
+  },
+  "indicators": {
+    "indicator id": {
+      "label": "label",
+      "unit": "unit id",
+      "sector": "sector id"
+    }
+  },
+  "sectors": {
+    "sector id": {
+      "label": "Terrestial Climate"
+    }
+  }
+}
