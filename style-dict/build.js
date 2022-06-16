@@ -13,7 +13,7 @@ StyleDictionary.registerTransform({
     const defaultUnits= {
       "sizing": "px",
       "spacing": "px",
-      "fontSizes": "",
+      "fontSizes": "px",
       "letterSpacing": "em",
       "borderWidth": "px",
     }
