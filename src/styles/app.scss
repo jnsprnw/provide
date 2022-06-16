@@ -11,6 +11,18 @@ body {
 	min-height: 100vh;
 	margin: 0;
 	padding: 0;
+
+	@include color-theme(light);
+}
+
+.theme-light {
+  @include color-theme(light);
+  @include color(text-base);
+}
+
+.theme-dark {
+  @include color-theme(dark);
+  @include color(text-base);
 }
 
 @import "./typography";
