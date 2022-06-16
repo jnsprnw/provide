@@ -1,15 +1,30 @@
 {
+  "10": {
+    "value": 0.1,
+    "type": "opacity",
+    "filePath": "./transformed/tokens.json",
+    "isSource": true,
+    "original": {
+      "value": 0.1,
+      "type": "opacity"
+    },
+    "name": "10",
+    "attributes": {},
+    "path": [
+      "10"
+    ]
+  },
   "color": {
     "light": {
       "background": {
         "base": {
-          "value": "#ffffff",
+          "value": "#fff",
           "type": "color",
           "description": "The default light background color, used e.g. as a backdrop for charts or cards.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#ffffff",
+            "value": "#fff",
             "type": "color",
             "description": "The default light background color, used e.g. as a backdrop for charts or cards."
           },
@@ -23,13 +38,13 @@
           ]
         },
         "weaker": {
-          "value": "#f0f0f0",
+          "value": "#f2f2f2",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#f0f0f0",
+            "value": "#f2f2f2",
             "type": "color",
             "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
           },
@@ -43,13 +58,13 @@
           ]
         },
         "weakest": {
-          "value": "#e0e0e0",
+          "value": "#d6d7d7",
           "type": "color",
           "description": "A shaded background color, used e.g. as a backdrop in containers.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#e0e0e0",
+            "value": "#d6d7d7",
             "type": "color",
             "description": "A shaded background color, used e.g. as a backdrop in containers."
           },
@@ -61,30 +76,6 @@
             "background",
             "weakest"
           ]
-        },
-        "transparent": {
-          "base": {
-            "90": {
-              "value": "#ffffffe6",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#ffffffe6",
-                "type": "color"
-              },
-              "name": "90",
-              "attributes": {},
-              "path": [
-                "color",
-                "light",
-                "background",
-                "transparent",
-                "base",
-                "90"
-              ]
-            }
-          }
         }
       },
       "foreground": {
@@ -109,13 +100,13 @@
           ]
         },
         "weaker": {
-          "value": "#777777",
+          "value": "#727272",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes).",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#777777",
+            "value": "#727272",
             "type": "color",
             "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
           },
@@ -129,12 +120,12 @@
           ]
         },
         "weakest": {
-          "value": "#b7b7b7",
+          "value": "#b2b3b3",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#b7b7b7",
+            "value": "#b2b3b3",
             "type": "color"
           },
           "name": "weakest",
@@ -149,13 +140,13 @@
       },
       "text": {
         "weaker": {
-          "value": "#777777",
+          "value": "#727272",
           "type": "color",
           "description": "Text color with weaker background contrast.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#777777",
+            "value": "#727272",
             "type": "color",
             "description": "Text color with weaker background contrast."
           },
@@ -187,76 +178,17 @@
             "text",
             "base"
           ]
-        },
-        "model-aspect": {
-          "climate": {
-            "value": "#cea200",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#cea200",
-              "type": "color"
-            },
-            "name": "climate",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "text",
-              "model-aspect",
-              "climate"
-            ]
-          },
-          "scope-conditions": {
-            "value": "#3483a5",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#3483a5",
-              "type": "color"
-            },
-            "name": "scope-conditions",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "text",
-              "model-aspect",
-              "scope-conditions"
-            ]
-          },
-          "conflict": {
-            "value": "#c24050",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#c24050",
-              "type": "color"
-            },
-            "name": "conflict",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "text",
-              "model-aspect",
-              "conflict"
-            ]
-          }
         }
       },
       "brand": {
         "base": {
-          "value": "#658c97",
+          "value": "#5d6fb0",
           "type": "color",
           "description": "Main theme color, usually the brand color.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#658c97",
+            "value": "#5d6fb0",
             "type": "color",
             "description": "Main theme color, usually the brand color."
           },
@@ -270,13 +202,13 @@
           ]
         },
         "stronger": {
-          "value": "#3a545c",
+          "value": "#273668",
           "type": "color",
           "description": "Stronger version of theme color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#3a545c",
+            "value": "#273668",
             "type": "color",
             "description": "Stronger version of theme color"
           },
@@ -290,13 +222,13 @@
           ]
         },
         "weaker": {
-          "value": "#91aeb6",
+          "value": "#90c3d5",
           "type": "color",
           "description": "Weaker version of theme color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#91aeb6",
+            "value": "#90c3d5",
             "type": "color",
             "description": "Weaker version of theme color"
           },
@@ -312,13 +244,13 @@
       },
       "functional": {
         "accent": {
-          "value": "#c0e15c",
+          "value": "#20a386",
           "type": "color",
           "description": "Used for author-driven accents of parts of charts, texts and other elements.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#c0e15c",
+            "value": "#20a386",
             "type": "color",
             "description": "Used for author-driven accents of parts of charts, texts and other elements."
           },
@@ -394,13 +326,13 @@
           ]
         },
         "1": {
-          "value": "#f16829",
+          "value": "#f26829",
           "type": "color",
           "description": "Used for nominal data of category 1.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#f16829",
+            "value": "#f26829",
             "type": "color",
             "description": "Used for nominal data of category 1."
           },
@@ -491,62 +423,6 @@
             "light",
             "category",
             "5"
-          ]
-        }
-      },
-      "model-aspect": {
-        "climate": {
-          "value": "#eeb900",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#eeb900",
-            "type": "color"
-          },
-          "name": "climate",
-          "attributes": {},
-          "path": [
-            "color",
-            "light",
-            "model-aspect",
-            "climate"
-          ]
-        },
-        "scope-conditions": {
-          "value": "#43abd7",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#43abd7",
-            "type": "color"
-          },
-          "name": "scope-conditions",
-          "attributes": {},
-          "path": [
-            "color",
-            "light",
-            "model-aspect",
-            "scope-conditions"
-          ]
-        },
-        "conflict": {
-          "value": "#fa5a6d",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#fa5a6d",
-            "type": "color"
-          },
-          "name": "conflict",
-          "attributes": {},
-          "path": [
-            "color",
-            "light",
-            "model-aspect",
-            "conflict"
           ]
         }
       },
@@ -733,17 +609,1081 @@
             "3"
           ]
         }
+      },
+      "gray100": {
+        "value": "#f2f2f2",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#f2f2f2",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "gray100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray100"
+        ]
+      },
+      "gray200": {
+        "value": "#d6d7d7",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#d6d7d7",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "gray200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray200"
+        ]
+      },
+      "gray300": {
+        "value": "#b2b3b3",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#b2b3b3",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "gray300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray300"
+        ]
+      },
+      "gray400": {
+        "value": "#909191",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#909191",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "gray400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray400"
+        ]
+      },
+      "gray500": {
+        "value": "#727272",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#727272",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "gray500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray500"
+        ]
+      },
+      "gray600": {
+        "value": "#555555",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#555555",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "gray600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray600"
+        ]
+      },
+      "gray700": {
+        "value": "#393939",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#393939",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "gray700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray700"
+        ]
+      },
+      "gray800": {
+        "value": "#222222",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#222222",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "gray800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "gray800"
+        ]
+      },
+      "blue100": {
+        "value": "#f1f3f9",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#f1f3f9",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "blue100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue100"
+        ]
+      },
+      "blue200": {
+        "value": "#d0d6ed",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#d0d6ed",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "blue200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue200"
+        ]
+      },
+      "blue300": {
+        "value": "#a6b2dc",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#a6b2dc",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "blue300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue300"
+        ]
+      },
+      "blue400": {
+        "value": "#7e8fc9",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#7e8fc9",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "blue400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue400"
+        ]
+      },
+      "blue500": {
+        "value": "#5d6fb0",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#5d6fb0",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "blue500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue500"
+        ]
+      },
+      "blue600": {
+        "value": "#40518f",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#40518f",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "blue600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue600"
+        ]
+      },
+      "blue700": {
+        "value": "#273668",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#273668",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "blue700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue700"
+        ]
+      },
+      "blue800": {
+        "value": "#151f45",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#151f45",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "blue800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "blue800"
+        ]
+      },
+      "purple100": {
+        "value": "#fdf0f8",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#fdf0f8",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "purple100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple100"
+        ]
+      },
+      "purple200": {
+        "value": "#f8cae7",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#f8cae7",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "purple200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple200"
+        ]
+      },
+      "purple300": {
+        "value": "#eb99cf",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#eb99cf",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "purple300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple300"
+        ]
+      },
+      "purple400": {
+        "value": "#d36eb5",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#d36eb5",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "purple400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple400"
+        ]
+      },
+      "purple500": {
+        "value": "#bb429b",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#bb429b",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "purple500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple500"
+        ]
+      },
+      "purple600": {
+        "value": "#962576",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#962576",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "purple600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple600"
+        ]
+      },
+      "purple700": {
+        "value": "#6a134d",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#6a134d",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "purple700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple700"
+        ]
+      },
+      "purple800": {
+        "value": "#410c2f",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#410c2f",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "purple800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "purple800"
+        ]
+      },
+      "red100": {
+        "value": "#feeeee",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#feeeee",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "red100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red100"
+        ]
+      },
+      "red200": {
+        "value": "#fbcccd",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#fbcccd",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "red200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red200"
+        ]
+      },
+      "red300": {
+        "value": "#f8999b",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#f8999b",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "red300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red300"
+        ]
+      },
+      "red400": {
+        "value": "#eb666d",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#eb666d",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "red400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red400"
+        ]
+      },
+      "red500": {
+        "value": "#db2735",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#db2735",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "red500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red500"
+        ]
+      },
+      "red600": {
+        "value": "#ab0c19",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#ab0c19",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "red600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red600"
+        ]
+      },
+      "red700": {
+        "value": "#770811",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#770811",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "red700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red700"
+        ]
+      },
+      "red800": {
+        "value": "#4a050b",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#4a050b",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "red800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "red800"
+        ]
+      },
+      "orange100": {
+        "value": "#fff1e2",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#fff1e2",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "orange100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange100"
+        ]
+      },
+      "orange200": {
+        "value": "#ffce99",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#ffce99",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "orange200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange200"
+        ]
+      },
+      "orange300": {
+        "value": "#fe9c33",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#fe9c33",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "orange300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange300"
+        ]
+      },
+      "orange400": {
+        "value": "#d47b23",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#d47b23",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "orange400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange400"
+        ]
+      },
+      "orange500": {
+        "value": "#a95f1a",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#a95f1a",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "orange500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange500"
+        ]
+      },
+      "orange600": {
+        "value": "#7e4713",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#7e4713",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "orange600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange600"
+        ]
+      },
+      "orange700": {
+        "value": "#55300d",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#55300d",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "orange700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange700"
+        ]
+      },
+      "orange800": {
+        "value": "#331d08",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#331d08",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "orange800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "orange800"
+        ]
+      },
+      "yellow100": {
+        "value": "#fff4c1",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#fff4c1",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "yellow100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow100"
+        ]
+      },
+      "yellow200": {
+        "value": "#f8d52d",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#f8d52d",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "yellow200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow200"
+        ]
+      },
+      "yellow300": {
+        "value": "#d6af20",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#d6af20",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "yellow300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow300"
+        ]
+      },
+      "yellow400": {
+        "value": "#b58b14",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#b58b14",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "yellow400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow400"
+        ]
+      },
+      "yellow500": {
+        "value": "#966a0b",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#966a0b",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "yellow500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow500"
+        ]
+      },
+      "yellow600": {
+        "value": "#704f08",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#704f08",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "yellow600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow600"
+        ]
+      },
+      "yellow700": {
+        "value": "#4b3505",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#4b3505",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "yellow700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow700"
+        ]
+      },
+      "yellow800": {
+        "value": "#2d2003",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#2d2003",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "yellow800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "yellow800"
+        ]
+      },
+      "green100": {
+        "value": "#dff7f2",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#dff7f2",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.11:1 against background #ffffff"
+        },
+        "name": "green100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green100"
+        ]
+      },
+      "green200": {
+        "value": "#96e5d5",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#96e5d5",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.44:1 against background #ffffff"
+        },
+        "name": "green200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green200"
+        ]
+      },
+      "green300": {
+        "value": "#53c5ad",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#53c5ad",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.1:1 against background #ffffff"
+        },
+        "name": "green300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green300"
+        ]
+      },
+      "green400": {
+        "value": "#20a386",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#20a386",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.15:1 against background #ffffff"
+        },
+        "name": "green400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green400"
+        ]
+      },
+      "green500": {
+        "value": "#19806a",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#19806a",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.81:1 against background #ffffff"
+        },
+        "name": "green500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green500"
+        ]
+      },
+      "green600": {
+        "value": "#13604f",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#13604f",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 7.46:1 against background #ffffff"
+        },
+        "name": "green600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green600"
+        ]
+      },
+      "green700": {
+        "value": "#0d4035",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#0d4035",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 11.55:1 against background #ffffff"
+        },
+        "name": "green700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green700"
+        ]
+      },
+      "green800": {
+        "value": "#082620",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#082620",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 15.91:1 against background #ffffff"
+        },
+        "name": "green800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "green800"
+        ]
       }
     },
     "dark": {
       "background": {
         "base": {
-          "value": "#202931",
+          "value": "#1c1f25",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#202931",
+            "value": "#1c1f25",
             "type": "color"
           },
           "name": "base",
@@ -755,32 +1695,14 @@
             "base"
           ]
         },
-        "stronger": {
-          "value": "#131b21",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#131b21",
-            "type": "color"
-          },
-          "name": "stronger",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "background",
-            "stronger"
-          ]
-        },
         "weaker": {
-          "value": "#2d3744",
+          "value": "#4c5873",
           "type": "color",
           "description": "slightly shaded background",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#2d3744",
+            "value": "#4c5873",
             "type": "color",
             "description": "slightly shaded background"
           },
@@ -794,12 +1716,12 @@
           ]
         },
         "weakest": {
-          "value": "#525865",
+          "value": "#636e86",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#525865",
+            "value": "#636e86",
             "type": "color"
           },
           "name": "weakest",
@@ -810,132 +1732,6 @@
             "background",
             "weakest"
           ]
-        },
-        "transparent": {
-          "base": {
-            "10": {
-              "value": "#2029311a",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#2029311a",
-                "type": "color"
-              },
-              "name": "10",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "base",
-                "10"
-              ]
-            },
-            "50": {
-              "value": "#20293180",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#20293180",
-                "type": "color"
-              },
-              "name": "50",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "base",
-                "50"
-              ]
-            },
-            "80": {
-              "value": "#202931cc",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#202931cc",
-                "type": "color"
-              },
-              "name": "80",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "base",
-                "80"
-              ]
-            },
-            "90": {
-              "value": "#202931e6",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#202931e6",
-                "type": "color"
-              },
-              "name": "90",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "base",
-                "90"
-              ]
-            }
-          },
-          "weakest": {
-            "30": {
-              "value": "#5258654d",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#5258654d",
-                "type": "color"
-              },
-              "name": "30",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "weakest",
-                "30"
-              ]
-            },
-            "50": {
-              "value": "#52586580",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#52586580",
-                "type": "color"
-              },
-              "name": "50",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "background",
-                "transparent",
-                "weakest",
-                "50"
-              ]
-            }
-          }
         }
       },
       "foreground": {
@@ -992,119 +1788,17 @@
             "foreground",
             "weakest"
           ]
-        },
-        "base50": {
-          "value": "#eaeaea80",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#eaeaea80",
-            "type": "color"
-          },
-          "name": "base50",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "foreground",
-            "base50"
-          ]
-        },
-        "base10": {
-          "value": "#eaeaea1a",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#eaeaea1a",
-            "type": "color"
-          },
-          "name": "base10",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "foreground",
-            "base10"
-          ]
-        },
-        "transparent": {
-          "weakest": {
-            "10": {
-              "value": "#696c851a",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#696c851a",
-                "type": "color"
-              },
-              "name": "10",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "foreground",
-                "transparent",
-                "weakest",
-                "10"
-              ]
-            },
-            "30": {
-              "value": "#696c854d",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#696c854d",
-                "type": "color"
-              },
-              "name": "30",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "foreground",
-                "transparent",
-                "weakest",
-                "30"
-              ]
-            },
-            "50": {
-              "value": "#696c8580",
-              "type": "color",
-              "filePath": "./transformed/tokens.json",
-              "isSource": true,
-              "original": {
-                "value": "#696c8580",
-                "type": "color"
-              },
-              "name": "50",
-              "attributes": {},
-              "path": [
-                "color",
-                "dark",
-                "foreground",
-                "transparent",
-                "weakest",
-                "50"
-              ]
-            }
-          }
         }
       },
       "text": {
         "weaker": {
           "value": "#a9abbd",
           "type": "color",
-          "description": "Text weaker",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
             "value": "#a9abbd",
-            "type": "color",
-            "description": "Text weaker"
+            "type": "color"
           },
           "name": "weaker",
           "attributes": {},
@@ -1118,13 +1812,11 @@
         "base": {
           "value": "#eaeaea",
           "type": "color",
-          "description": "Text base",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
             "value": "#eaeaea",
-            "type": "color",
-            "description": "Text base"
+            "type": "color"
           },
           "name": "base",
           "attributes": {},
@@ -1134,81 +1826,16 @@
             "text",
             "base"
           ]
-        },
-        "model-aspect": {
-          "climate": {
-            "value": "#ffcb01",
-            "type": "color",
-            "description": "Climate",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#ffcb01",
-              "type": "color",
-              "description": "Climate"
-            },
-            "name": "climate",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "text",
-              "model-aspect",
-              "climate"
-            ]
-          },
-          "conflict": {
-            "value": "#fa5a6d",
-            "type": "color",
-            "description": "Category color \"conflict\"",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#fa5a6d",
-              "type": "color",
-              "description": "Category color \"conflict\""
-            },
-            "name": "conflict",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "text",
-              "model-aspect",
-              "conflict"
-            ]
-          },
-          "scope-conditions": {
-            "value": "#90d3fb",
-            "type": "color",
-            "description": "Scope conditions",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#90d3fb",
-              "type": "color",
-              "description": "Scope conditions"
-            },
-            "name": "scope-conditions",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "text",
-              "model-aspect",
-              "scope-conditions"
-            ]
-          }
         }
       },
-      "brand": {
+      "theme": {
         "base": {
-          "value": "#97b1b8",
+          "value": "#008dc9",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#97b1b8",
+            "value": "#008dc9",
             "type": "color"
           },
           "name": "base",
@@ -1216,17 +1843,17 @@
           "path": [
             "color",
             "dark",
-            "brand",
+            "theme",
             "base"
           ]
         },
         "weaker": {
-          "value": "#6d878e",
+          "value": "#1f4c7e",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#6d878e",
+            "value": "#1f4c7e",
             "type": "color"
           },
           "name": "weaker",
@@ -1234,17 +1861,17 @@
           "path": [
             "color",
             "dark",
-            "brand",
+            "theme",
             "weaker"
           ]
         },
         "stronger": {
-          "value": "#afd5df",
+          "value": "#90d3fb",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#afd5df",
+            "value": "#90d3fb",
             "type": "color"
           },
           "name": "stronger",
@@ -1252,19 +1879,19 @@
           "path": [
             "color",
             "dark",
-            "brand",
+            "theme",
             "stronger"
           ]
         }
       },
       "functional": {
         "accent": {
-          "value": "#bfc3fe",
+          "value": "#ffcb01",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#bfc3fe",
+            "value": "#ffcb01",
             "type": "color"
           },
           "name": "accent",
@@ -1425,12 +2052,12 @@
       },
       "diverging": {
         "positive-2": {
-          "value": "#7ed3b9",
+          "value": "#a1d0ff",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#7ed3b9",
+            "value": "#a1d0ff",
             "type": "color"
           },
           "name": "positive-2",
@@ -1443,12 +2070,12 @@
           ]
         },
         "positive-1": {
-          "value": "#6b867e",
+          "value": "#6d8ca3",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#6b867e",
+            "value": "#6d8ca3",
             "type": "color"
           },
           "name": "positive-1",
@@ -1479,12 +2106,12 @@
           ]
         },
         "negative-1": {
-          "value": "#7b7082",
+          "value": "#94815b",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#7b7082",
+            "value": "#94815b",
             "type": "color"
           },
           "name": "negative-1",
@@ -1497,12 +2124,12 @@
           ]
         },
         "negative-2": {
-          "value": "#d0aae9",
+          "value": "#f0b847",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#d0aae9",
+            "value": "#f0b847",
             "type": "color"
           },
           "name": "negative-2",
@@ -1586,319 +2213,6 @@
             "dark",
             "sequential",
             "3"
-          ]
-        }
-      },
-      "model-aspect": {
-        "climate": {
-          "value": "#ffcb01",
-          "type": "color",
-          "description": "Climate",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#ffcb01",
-            "type": "color",
-            "description": "Climate"
-          },
-          "name": "climate",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "model-aspect",
-            "climate"
-          ]
-        },
-        "conflict": {
-          "value": "#fa5a6d",
-          "type": "color",
-          "description": "Category color \"conflict\"",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#fa5a6d",
-            "type": "color",
-            "description": "Category color \"conflict\""
-          },
-          "name": "conflict",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "model-aspect",
-            "conflict"
-          ]
-        },
-        "scope-conditions": {
-          "value": "#90d3fb",
-          "type": "color",
-          "description": "Scope conditions",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#90d3fb",
-            "type": "color",
-            "description": "Scope conditions"
-          },
-          "name": "scope-conditions",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "model-aspect",
-            "scope-conditions"
-          ]
-        },
-        "climate-alpha": {
-          "0": {
-            "value": "#ffcb0100",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#ffcb0100",
-              "type": "color"
-            },
-            "name": "0",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "climate-alpha",
-              "0"
-            ]
-          },
-          "10": {
-            "value": "#ffcb011a",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#ffcb011a",
-              "type": "color"
-            },
-            "name": "10",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "climate-alpha",
-              "10"
-            ]
-          },
-          "50": {
-            "value": "#ffcb0180",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#ffcb0180",
-              "type": "color"
-            },
-            "name": "50",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "climate-alpha",
-              "50"
-            ]
-          }
-        },
-        "conflict-alpha": {
-          "0": {
-            "value": "#fa5a6d00",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#fa5a6d00",
-              "type": "color"
-            },
-            "name": "0",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "conflict-alpha",
-              "0"
-            ]
-          },
-          "10": {
-            "value": "#fa5a6d1a",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#fa5a6d1a",
-              "type": "color"
-            },
-            "name": "10",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "conflict-alpha",
-              "10"
-            ]
-          },
-          "50": {
-            "value": "#fa5a6d80",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#fa5a6d80",
-              "type": "color"
-            },
-            "name": "50",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "conflict-alpha",
-              "50"
-            ]
-          }
-        },
-        "scope-conditions-alpha": {
-          "0": {
-            "value": "#90d3fb00",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#90d3fb00",
-              "type": "color"
-            },
-            "name": "0",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "scope-conditions-alpha",
-              "0"
-            ]
-          },
-          "10": {
-            "value": "#90d3fb1a",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#90d3fb1a",
-              "type": "color"
-            },
-            "name": "10",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "scope-conditions-alpha",
-              "10"
-            ]
-          },
-          "50": {
-            "value": "#90d3fb80",
-            "type": "color",
-            "filePath": "./transformed/tokens.json",
-            "isSource": true,
-            "original": {
-              "value": "#90d3fb80",
-              "type": "color"
-            },
-            "name": "50",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "model-aspect",
-              "scope-conditions-alpha",
-              "50"
-            ]
-          }
-        },
-        "climate-gradient": {
-          "value": "linear-gradient(to right, #ffcb0100, #ffcb0180)",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "linear-gradient(to right, #ffcb0100, #ffcb0180)",
-            "type": "color"
-          },
-          "name": "climate-gradient",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "model-aspect",
-            "climate-gradient"
-          ]
-        }
-      },
-      "thematic": {
-        "cropland": {
-          "value": "#dbbf5c",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#dbbf5c",
-            "type": "color"
-          },
-          "name": "cropland",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "thematic",
-            "cropland"
-          ]
-        },
-        "grassland": {
-          "value": "#abb88b",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#abb88b",
-            "type": "color"
-          },
-          "name": "grassland",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "thematic",
-            "grassland"
-          ]
-        },
-        "agricultural-land": {
-          "value": "#d7e987",
-          "type": "color",
-          "filePath": "./transformed/tokens.json",
-          "isSource": true,
-          "original": {
-            "value": "#d7e987",
-            "type": "color"
-          },
-          "name": "agricultural-land",
-          "attributes": {},
-          "path": [
-            "color",
-            "dark",
-            "thematic",
-            "agricultural-land"
           ]
         }
       }
@@ -2036,12 +2350,12 @@
     "parameter": {
       "scale": {
         "large": {
-          "value": 1.414,
+          "value": 1.3,
           "type": "other",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 1.414,
+            "value": 1.3,
             "type": "other"
           },
           "name": "large",
@@ -2075,12 +2389,12 @@
     },
     "fontFamily": {
       "base": {
-        "value": "BundesSans Web",
+        "value": "Barlow",
         "type": "fontFamilies",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "BundesSans Web",
+          "value": "Barlow",
           "type": "fontFamilies"
         },
         "name": "base",
@@ -2092,12 +2406,12 @@
         ]
       },
       "heading": {
-        "value": "BundesSans Web",
+        "value": "Raleway",
         "type": "fontFamilies",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "BundesSans Web",
+          "value": "Raleway",
           "type": "fontFamilies"
         },
         "name": "heading",
@@ -2180,23 +2494,6 @@
           "regular"
         ]
       },
-      "italic": {
-        "value": "Italic",
-        "type": "fontWeights",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": "Italic",
-          "type": "fontWeights"
-        },
-        "name": "italic",
-        "attributes": {},
-        "path": [
-          "font",
-          "fontWeight",
-          "italic"
-        ]
-      },
       "bold": {
         "value": "Bold",
         "type": "fontWeights",
@@ -2246,6 +2543,23 @@
           "font",
           "fontWeight",
           "boldNumber"
+        ]
+      },
+      "regularItalic": {
+        "value": "Italic",
+        "type": "fontWeights",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "Italic",
+          "type": "fontWeights"
+        },
+        "name": "regularItalic",
+        "attributes": {},
+        "path": [
+          "font",
+          "fontWeight",
+          "regularItalic"
         ]
       }
     },
@@ -2373,23 +2687,6 @@
           "font",
           "textDecoration",
           "none"
-        ]
-      },
-      "underline": {
-        "value": "underline",
-        "type": "textDecoration",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": "underline",
-          "type": "textDecoration"
-        },
-        "name": "underline",
-        "attributes": {},
-        "path": [
-          "font",
-          "textDecoration",
-          "underline"
         ]
       }
     },
@@ -2542,12 +2839,12 @@
       },
       "large": {
         "xs": {
-          "value": 8.002,
+          "value": 9.468,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 8.002,
+            "value": 9.468,
             "type": "fontSizes"
           },
           "name": "xs",
@@ -2560,12 +2857,12 @@
           ]
         },
         "s": {
-          "value": 11.315,
+          "value": 12.308,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 11.315,
+            "value": 12.308,
             "type": "fontSizes"
           },
           "name": "s",
@@ -2596,12 +2893,12 @@
           ]
         },
         "l": {
-          "value": 22.624,
+          "value": 20.8,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 22.624,
+            "value": 20.8,
             "type": "fontSizes"
           },
           "name": "l",
@@ -2614,12 +2911,12 @@
           ]
         },
         "xl": {
-          "value": 31.99,
+          "value": 27.04,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 31.99,
+            "value": 27.04,
             "type": "fontSizes"
           },
           "name": "xl",
@@ -2632,12 +2929,12 @@
           ]
         },
         "xxl": {
-          "value": 45.234,
+          "value": 35.152,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 45.234,
+            "value": 35.152,
             "type": "fontSizes"
           },
           "name": "xxl",
@@ -2650,12 +2947,12 @@
           ]
         },
         "xxxl": {
-          "value": 63.961,
+          "value": 45.698,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 63.961,
+            "value": 45.698,
             "type": "fontSizes"
           },
           "name": "xxxl",
@@ -2668,12 +2965,12 @@
           ]
         },
         "xxxxl": {
-          "value": 90.441,
+          "value": 59.407,
           "type": "fontSizes",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": 90.441,
+            "value": 59.407,
             "type": "fontSizes"
           },
           "name": "xxxxl",
@@ -3121,108 +3418,171 @@
         }
       }
     },
-    "breakpoint": {
-      "xs": {
-        "value": 480,
-        "type": "sizing",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": 480,
-          "type": "sizing"
+    "spacer": {
+      "large": {
+        "xxxs": {
+          "value": 4,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 4,
+            "type": "sizing"
+          },
+          "name": "xxxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xxxs"
+          ]
         },
-        "name": "xs",
-        "attributes": {},
-        "path": [
-          "size",
-          "breakpoint",
-          "xs"
-        ]
-      },
-      "sm": {
-        "value": 640,
-        "type": "sizing",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": 640,
-          "type": "sizing"
+        "xxs": {
+          "value": 8,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 8,
+            "type": "sizing"
+          },
+          "name": "xxs",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xxs"
+          ]
         },
-        "name": "sm",
-        "attributes": {},
-        "path": [
-          "size",
-          "breakpoint",
-          "sm"
-        ]
-      },
-      "md": {
-        "value": 960,
-        "type": "sizing",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": 960,
-          "type": "sizing"
+        "xs": {
+          "value": 12,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 12,
+            "type": "sizing"
+          },
+          "name": "xs",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xs"
+          ]
         },
-        "name": "md",
-        "attributes": {},
-        "path": [
-          "size",
-          "breakpoint",
-          "md"
-        ]
-      },
-      "lg": {
-        "value": 1200,
-        "type": "sizing",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": 1200,
-          "type": "sizing"
+        "s": {
+          "value": 16,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 16,
+            "type": "sizing"
+          },
+          "name": "s",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "s"
+          ]
         },
-        "name": "lg",
-        "attributes": {},
-        "path": [
-          "size",
-          "breakpoint",
-          "lg"
-        ]
-      },
-      "xl": {
-        "value": 1440,
-        "type": "sizing",
-        "filePath": "./transformed/tokens.json",
-        "isSource": true,
-        "original": {
-          "value": 1440,
-          "type": "sizing"
+        "m": {
+          "value": 24,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 24,
+            "type": "sizing"
+          },
+          "name": "m",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "m"
+          ]
         },
-        "name": "xl",
-        "attributes": {},
-        "path": [
-          "size",
-          "breakpoint",
-          "xl"
-        ]
+        "l": {
+          "value": 32,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 32,
+            "type": "sizing"
+          },
+          "name": "l",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "l"
+          ]
+        },
+        "xl": {
+          "value": 48,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 48,
+            "type": "sizing"
+          },
+          "name": "xl",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xl"
+          ]
+        },
+        "xxl": {
+          "value": 64,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 64,
+            "type": "sizing"
+          },
+          "name": "xxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xxl"
+          ]
+        },
+        "xxxl": {
+          "value": 96,
+          "type": "sizing",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": 96,
+            "type": "sizing"
+          },
+          "name": "xxxl",
+          "attributes": {},
+          "path": [
+            "size",
+            "spacer",
+            "large",
+            "xxxl"
+          ]
+        }
       }
-    },
-    "border-radius": {
-      "value": 3,
-      "type": "borderRadius",
-      "filePath": "./transformed/tokens.json",
-      "isSource": true,
-      "original": {
-        "value": 3,
-        "type": "borderRadius"
-      },
-      "name": "border-radius",
-      "attributes": {},
-      "path": [
-        "size",
-        "border-radius"
-      ]
     },
     "max-content-width-no-unit": {
       "type": "number",
@@ -3254,6 +3614,138 @@
       "path": [
         "size",
         "min-content-width-no-unit"
+      ]
+    }
+  },
+  "radius": {
+    "interactive": {
+      "value": 5,
+      "type": "borderRadius",
+      "description": "Used for buttons or other interactive elements",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 5,
+        "type": "borderRadius",
+        "description": "Used for buttons or other interactive elements"
+      },
+      "name": "interactive",
+      "attributes": {},
+      "path": [
+        "radius",
+        "interactive"
+      ]
+    },
+    "information": {
+      "value": 2,
+      "type": "borderRadius",
+      "description": "Used for info boxes",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 2,
+        "type": "borderRadius",
+        "description": "Used for info boxes"
+      },
+      "name": "information",
+      "attributes": {},
+      "path": [
+        "radius",
+        "information"
+      ]
+    },
+    "l": {
+      "value": 5,
+      "type": "borderRadius",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 5,
+        "type": "borderRadius"
+      },
+      "name": "l",
+      "attributes": {},
+      "path": [
+        "radius",
+        "l"
+      ]
+    },
+    "m": {
+      "value": 4,
+      "type": "borderRadius",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 4,
+        "type": "borderRadius"
+      },
+      "name": "m",
+      "attributes": {},
+      "path": [
+        "radius",
+        "m"
+      ]
+    }
+  },
+  "stroke": {
+    "default": {
+      "value": 1,
+      "type": "borderWidth",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 1,
+        "type": "borderWidth"
+      },
+      "name": "default",
+      "attributes": {},
+      "path": [
+        "stroke",
+        "default"
+      ]
+    },
+    "active": {
+      "value": 2,
+      "type": "borderWidth",
+      "bold": {
+        "value": "4",
+        "type": "borderWidth",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true
+      },
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 2,
+        "type": "borderWidth",
+        "bold": {
+          "value": "4",
+          "type": "borderWidth",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true
+        }
+      },
+      "name": "active",
+      "attributes": {},
+      "path": [
+        "stroke",
+        "active"
+      ]
+    },
+    "active-bold": {
+      "value": 4,
+      "type": "borderWidth",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": 4,
+        "type": "borderWidth"
+      },
+      "name": "active-bold",
+      "attributes": {},
+      "path": [
+        "stroke",
+        "active-bold"
       ]
     }
   }

@@ -1,52 +1,38 @@
 {
+  "10": 0.1,
   "color": {
     "light": {
       "background": {
         "base": "#ffffff",
-        "weaker": "#f0f0f0",
-        "weakest": "#e0e0e0",
-        "transparent": {
-          "base": {
-            "90": "#ffffff"
-          }
-        }
+        "weaker": "#f2f2f2",
+        "weakest": "#d6d7d7"
       },
       "foreground": {
         "base": "#222222",
-        "weaker": "#777777",
-        "weakest": "#b7b7b7"
+        "weaker": "#727272",
+        "weakest": "#b2b3b3"
       },
       "text": {
-        "weaker": "#777777",
-        "base": "#222222",
-        "model-aspect": {
-          "climate": "#cea200",
-          "scope-conditions": "#3483a5",
-          "conflict": "#c24050"
-        }
+        "weaker": "#727272",
+        "base": "#222222"
       },
       "brand": {
-        "base": "#658c97",
-        "stronger": "#3a545c",
-        "weaker": "#91aeb6"
+        "base": "#5d6fb0",
+        "stronger": "#273668",
+        "weaker": "#90c3d5"
       },
       "functional": {
-        "accent": "#c0e15c",
+        "accent": "#20a386",
         "filtered-out": "#e4e1d8",
         "not-available": "#b2b2b2"
       },
       "category": {
         "0": "#008dc9",
-        "1": "#f16829",
+        "1": "#f26829",
         "2": "#f4a81d",
         "3": "#80bc00",
         "4": "#6363c0",
         "5": "#bd53bd"
-      },
-      "model-aspect": {
-        "climate": "#eeb900",
-        "scope-conditions": "#43abd7",
-        "conflict": "#fa5a6d"
       },
       "diverging": {
         "positive-2": "#1c4e94",
@@ -60,57 +46,86 @@
         "1": "#90d3fb",
         "2": "#008dc8",
         "3": "#0c2d5b"
-      }
+      },
+      "gray100": "#f2f2f2",
+      "gray200": "#d6d7d7",
+      "gray300": "#b2b3b3",
+      "gray400": "#909191",
+      "gray500": "#727272",
+      "gray600": "#555555",
+      "gray700": "#393939",
+      "gray800": "#222222",
+      "blue100": "#f1f3f9",
+      "blue200": "#d0d6ed",
+      "blue300": "#a6b2dc",
+      "blue400": "#7e8fc9",
+      "blue500": "#5d6fb0",
+      "blue600": "#40518f",
+      "blue700": "#273668",
+      "blue800": "#151f45",
+      "purple100": "#fdf0f8",
+      "purple200": "#f8cae7",
+      "purple300": "#eb99cf",
+      "purple400": "#d36eb5",
+      "purple500": "#bb429b",
+      "purple600": "#962576",
+      "purple700": "#6a134d",
+      "purple800": "#410c2f",
+      "red100": "#feeeee",
+      "red200": "#fbcccd",
+      "red300": "#f8999b",
+      "red400": "#eb666d",
+      "red500": "#db2735",
+      "red600": "#ab0c19",
+      "red700": "#770811",
+      "red800": "#4a050b",
+      "orange100": "#fff1e2",
+      "orange200": "#ffce99",
+      "orange300": "#fe9c33",
+      "orange400": "#d47b23",
+      "orange500": "#a95f1a",
+      "orange600": "#7e4713",
+      "orange700": "#55300d",
+      "orange800": "#331d08",
+      "yellow100": "#fff4c1",
+      "yellow200": "#f8d52d",
+      "yellow300": "#d6af20",
+      "yellow400": "#b58b14",
+      "yellow500": "#966a0b",
+      "yellow600": "#704f08",
+      "yellow700": "#4b3505",
+      "yellow800": "#2d2003",
+      "green100": "#dff7f2",
+      "green200": "#96e5d5",
+      "green300": "#53c5ad",
+      "green400": "#20a386",
+      "green500": "#19806a",
+      "green600": "#13604f",
+      "green700": "#0d4035",
+      "green800": "#082620"
     },
     "dark": {
       "background": {
-        "base": "#202931",
-        "stronger": "#131b21",
-        "weaker": "#2d3744",
-        "weakest": "#525865",
-        "transparent": {
-          "base": {
-            "10": "#202931",
-            "50": "#202931",
-            "80": "#202931",
-            "90": "#202931"
-          },
-          "weakest": {
-            "30": "#525865",
-            "50": "#525865"
-          }
-        }
+        "base": "#1c1f25",
+        "weaker": "#4c5873",
+        "weakest": "#636e86"
       },
       "foreground": {
         "base": "#eaeaea",
         "weaker": "#9597ae",
-        "weakest": "#696c85",
-        "base50": "#eaeaea",
-        "base10": "#eaeaea",
-        "transparent": {
-          "weakest": {
-            "10": "#696c85",
-            "30": "#696c85",
-            "50": "#696c85"
-          }
-        }
+        "weakest": "#696c85"
       },
       "text": {
         "weaker": "#a9abbd",
-        "base": "#eaeaea",
-        "model-aspect": {
-          "climate": "#ffcb01",
-          "conflict": "#fa5a6d",
-          "scope-conditions": "#90d3fb"
-        }
+        "base": "#eaeaea"
       },
-      "brand": {
-        "base": "#97b1b8",
-        "weaker": "#6d878e",
-        "stronger": "#afd5df"
+      "theme": {
+        "base": "#008dc9",
+        "weaker": "#1f4c7e",
+        "stronger": "#90d3fb"
       },
       "functional": {
-        "accent": "#bfc3fe",
+        "accent": "#ffcb01",
         "not-available": "#cccccc",
         "filtered-out": "#474b69"
       },
@@ -123,43 +138,17 @@
         "5": "#bd53bd"
       },
       "diverging": {
-        "positive-2": "#7ed3b9",
-        "positive-1": "#6b867e",
+        "positive-2": "#a1d0ff",
+        "positive-1": "#6d8ca3",
         "neutral": "#3e404f",
-        "negative-1": "#7b7082",
-        "negative-2": "#d0aae9"
+        "negative-1": "#94815b",
+        "negative-2": "#f0b847"
       },
       "sequential": {
         "0": "#2c3c54",
         "1": "#445f7e",
         "2": "#72a5c9",
         "3": "#90d3fb"
-      },
-      "model-aspect": {
-        "climate": "#ffcb01",
-        "conflict": "#fa5a6d",
-        "scope-conditions": "#90d3fb",
-        "climate-alpha": {
-          "0": "#ffcb01",
-          "10": "#ffcb01",
-          "50": "#ffcb01"
-        },
-        "conflict-alpha": {
-          "0": "#fa5a6d",
-          "10": "#fa5a6d",
-          "50": "#fa5a6d"
-        },
-        "scope-conditions-alpha": {
-          "0": "#90d3fb",
-          "10": "#90d3fb",
-          "50": "#90d3fb"
-        },
-        "climate-gradient": "#000000"
-      },
-      "thematic": {
-        "cropland": "#dbbf5c",
-        "grassland": "#abb88b",
-        "agricultural-land": "#d7e987"
       }
     }
   },
@@ -202,13 +191,13 @@
   "font": {
     "parameter": {
       "scale": {
-        "large": 1.414,
+        "large": 1.3,
         "small": 1.2
       }
     },
     "fontFamily": {
-      "base": "BundesSans Web",
-      "heading": "BundesSans Web"
+      "base": "Barlow",
+      "heading": "Raleway"
     },
     "lineHeight": {
       "base": "160%",
@@ -217,10 +206,10 @@
     },
     "fontWeight": {
       "regular": "Regular",
-      "italic": "Italic",
       "bold": "Bold",
       "regularNumber": 400,
-      "boldNumber": 600
+      "boldNumber": 600,
+      "regularItalic": "Italic"
     },
     "letterSpacing": {
       "base": "0%",
@@ -235,8 +224,7 @@
       "uppercase": "uppercase"
     },
     "textDecoration": {
-      "none": "none",
-      "underline": "underline"
+      "none": "none"
     },
     "size": {
       "small": {
@@ -250,14 +238,14 @@
         "xxxxl": 34.836
       },
       "large": {
-        "xs": 8.002,
-        "s": 11.315,
+        "xs": 9.468,
+        "s": 12.308,
         "m": 16,
-        "l": 22.624,
-        "xl": 31.99,
-        "xxl": 45.234,
-        "xxxl": 63.961,
-        "xxxxl": 90.441
+        "l": 20.8,
+        "xl": 27.04,
+        "xxl": 35.152,
+        "xxxl": 45.698,
+        "xxxxl": 59.407
       }
     },
     "style": {
@@ -294,15 +282,31 @@
         "xxxl": "84rem"
       }
     },
-    "breakpoint": {
-      "xs": "480rem",
-      "sm": "640rem",
-      "md": "960rem",
-      "lg": "1200rem",
-      "xl": "1440rem"
+    "spacer": {
+      "large": {
+        "xxxs": "4rem",
+        "xxs": "8rem",
+        "xs": "12rem",
+        "s": "16rem",
+        "m": "24rem",
+        "l": "32rem",
+        "xl": "48rem",
+        "xxl": "64rem",
+        "xxxl": "96rem"
+      }
     },
-    "border-radius": "3rem",
     "max-content-width-no-unit": "1440rem",
     "min-content-width-no-unit": "320rem"
+  },
+  "radius": {
+    "interactive": 5,
+    "information": 2,
+    "l": 5,
+    "m": 4
+  },
+  "stroke": {
+    "default": 1,
+    "active": 2,
+    "active-bold": 4
   }
 }
