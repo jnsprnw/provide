@@ -1329,30 +1329,35 @@ export const SCENARIOS = [
     "label": "Shifting Pathways",
     "uid": "SP",
     "isPrimary": true,
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Gradual Strengthening",
     "uid": "GS",
     "isPrimary": true,
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Current Policies",
     "uid": "CP",
     "isPrimary": true,
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Negative Emissions",
     "uid": "NE",
     "isPrimary": false,
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Renewables",
     "uid": "R",
     "isPrimary": false,
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
     "scenarioData": generateScenarioData()
   }
 ]

@@ -28,6 +28,7 @@
   {#if scenarioHover}
   <div>
     <h3>{ scenarioHover.label }</h3>
+    <p>{ scenarioHover.description }</p>
     <dl>
       <ScenarioValue key="ghg-netzero-year" {scenarioHover} />
       <ScenarioValue key="ghg-2030-absolute" {scenarioHover} />
