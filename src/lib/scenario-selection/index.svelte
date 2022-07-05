@@ -41,7 +41,7 @@
 
 <style lang="scss">
   .scenario-selection {
-    background-color: var(--color-light-blue100); // TODO
+    // background-color: var(--color-light-blue100); // TODO
     margin-top: 2rem;
     margin-bottom: 2rem;
     display: grid;

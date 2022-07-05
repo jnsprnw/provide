@@ -1,6 +1,9 @@
 .container {
 	display: flex;
 	justify-content: center; // Horizontally center items
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 }
 
 .wrapper {
@@ -18,7 +21,7 @@
 	margin: 0 0 1rem;
 }
 
-.impact-selection.tabs, .analysis-selection.tabs {
+.impact-tabs.tabs, .analysis-tabs.tabs {
 	.tabs__nav {
 		flex-direction: row !important;
 		gap: 1rem; // TODO

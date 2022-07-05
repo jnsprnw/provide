@@ -21,7 +21,7 @@
 	li {
 		&.list-link--active {
 			&.list-link--primary {
-				background-color: var(--color-light-green100);
+				// background-color: var(--color-light-green100);
 				border-bottom-color: var(--color-functional-accent);
 
 				a {
@@ -31,7 +31,7 @@
 		}
 
 		&.list-link--primary {
-			padding: var(--size-space-large-xs);
+			padding: var(--size-space-large-xs) 0;
 			border-bottom: var(--stroke-active-bold) solid transparent;
 			transition: border-bottom-color 0.3s ease-out; // TODO
 

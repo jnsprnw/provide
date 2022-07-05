@@ -68,6 +68,7 @@
     display: flex;
     padding: 0;
     flex-direction: column;
+    gap: var(--size-spacer-large-xs);
     cursor: pointer;
     min-width: 170px;
     transition: color 0.3s ease-out;
@@ -76,6 +77,7 @@
       font-size: var(--font-size-large-s);
       text-transform: var(--font-text-case-uppercase);
       letter-spacing: var(--font-letter-spacing-looser);
+      color: var(--color-light-blue600);
     }
 
     span {

@@ -46,52 +46,80 @@
 	<title>Explore Impacts</title>
 </svelte:head>
 
-<div class="explore-intro">
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<div class="impacts-header container">
+	<div class="wrapper">
+		<div class="explore-intro">
+			<p class="explore-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+		</div>
+	</div>
 </div>
 
-<Tabs class="impact-selection">
-  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
-  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
-  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []} />
-  <svelte:fragment slot="content">
-    <TabContent>
-    	<GeographySelection />
-    </TabContent>
-    <TabContent>
-    	<ScenarioSelection />
-    </TabContent>
-    <TabContent>
-    	<Sectors />
-    </TabContent>
-  </svelte:fragment>
-</Tabs>
+<div class="impacts-selection container">
+	<div class="wrapper">
+		<Tabs class="impact-tabs">
+		  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
+		  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
+		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []} />
+		  <svelte:fragment slot="content">
+		    <TabContent>
+		    	<GeographySelection />
+		    </TabContent>
+		    <TabContent>
+		    	<ScenarioSelection />
+		    </TabContent>
+		    <TabContent>
+		    	<Sectors />
+		    </TabContent>
+		  </svelte:fragment>
+		</Tabs>
+	</div>
+</div>
 
-{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []}
-	<p>Please select a geography and a scenario</p>
-{:else}
-<Tabs class="analysis-selection">
-  <Tab label="Impact analysis" />
-  <Tab label="Mitigation benefits" />
-  <Tab label="Reversibility" />
-  <svelte:fragment slot="content">
-    <TabContent>
-    	<ImpactAnalysis />
-    </TabContent>
-    <TabContent>
-    	<MitigationBenefits />
-    </TabContent>
-    <TabContent>
-    	<Reversibility />
-    </TabContent>
-  </svelte:fragment>
-</Tabs>
-{/if}
+<div class="impacts-analysis container">
+	<div class="wrapper">
+
+		{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []}
+			<p>Please select a geography and a scenario</p>
+		{:else}
+		<Tabs class="analysis-tabs">
+		  <Tab label="Impact analysis" />
+		  <Tab label="Mitigation benefits" />
+		  <Tab label="Reversibility" />
+		  <svelte:fragment slot="content">
+		    <TabContent>
+		    	<ImpactAnalysis />
+		    </TabContent>
+		    <TabContent>
+		    	<MitigationBenefits />
+		    </TabContent>
+		    <TabContent>
+		    	<Reversibility />
+		    </TabContent>
+		  </svelte:fragment>
+		</Tabs>
+		{/if}
+	</div>
+</div>
 
 <style lang="scss">
 	@import '../../styles/global.scss';
 
 	span {
 		display: block;
+	}
+
+	.impacts-header {
+		background-color: var(--color-light-blue100);
+		padding: 2rem 0; // TODO
+	}
+
+	.impacts-selection {
+		border-bottom: 1px solid var(--color-light-blue200);
+	}
+
+	.explore-description {
+		font-size: var(--font-size-large-l);
+		line-height: var(--font-line-height-base);
+		color: var(--color-light-blue700);
 	}
 </style>

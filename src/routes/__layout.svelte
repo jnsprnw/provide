@@ -23,10 +23,11 @@
   {#if currentPath.startsWith('explore')}
   <nav class="explore-menu container">
     <div class="wrapper">
+      <span class="explore-caption">Explore</span>
       <ul>
         <ListLink {currentPath} link="explore/impacts" loc="location" type="primary">
-          <h2>Explore Impacts</h2>
-          <span>Select scenarios and explore impacts</span>
+          <h2 class="explore-title">Explore Impacts</h2>
+          <span class="explore-subtitle">Select scenarios and explore impacts</span>
         </ListLink>
         <ListLink {currentPath} link="explore/scenarios" loc="location" disabled={true} type="primary">
           <h2>Explore Scenarios</h2>
@@ -37,14 +38,29 @@
   </nav>
   {/if}
   <main class="page-main container">
-    <div class="wrapper">
-      <slot />
-    </div>
+    <slot />
   </main>
 </ThemeProvider>
 
 <style lang="scss">
   @import "../styles/global.scss";
+
+  .explore-caption {
+    font-size: var(--font-size-large-s);
+    text-transform: var(--font-text-case-uppercase);
+    letter-spacing: var(--font-letter-spacing-looser);
+    color: var(--color-light-blue600);
+  }
+
+  .explore-title {
+    font-size: var(--font-size-large-xl);
+    font-weight: var(--font-font-weight-bold);
+  }
+
+  .explore-subtitle {
+    font-size: var(--font-size-large-m);
+    line-height: var(--font-line-height-tightest);
+  }
 
   nav ul {
     list-style: none;
@@ -53,8 +69,9 @@
   }
 
   .page-menu {
-    background-color: blue; // TODO
+    background-color: var(--color-light-blue700);
     width: 100vw;
+    padding: var(--font-size-large-l);
 
     .wrapper {
       align-items: center; // Vertical center the menu
@@ -62,22 +79,23 @@
 
     .menu-main {
       display: flex;
-      gap: 1rem; // TODO
+      gap: var(--font-size-large-l);
     }
   }
 
   .explore-menu {
-    margin-top: 2rem; // TODO
+    padding-top: 2rem; // TODO
+    background-color: var(--color-light-blue100);
 
     ul {
       display: flex;
-      gap: 1rem; // TODO
+      gap: var(--font-size-large-l);
     }
   }
 
-  .page-main {
-    margin-top: 2rem; // TODO
-  }
+  // .page-main {
+  //   padding-top: 2rem; // TODO
+  // }
 
   .explore-menu {
     .wrapper {
