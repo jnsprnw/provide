@@ -2,27 +2,23 @@
   import { getContext } from 'svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import ScenarioValue from '$lib/scenario-selection/scenario-value.svelte';
-  import { CURRENT_SCENARIO } from '$lib/../stores/store.js';
+  import { CURRENT_SCENARIOS } from '$lib/../stores/store.js';
   import { formatValues, getUID } from '$lib/utils.js';
+  import Scenario from "$lib/scenario-selection/scenario.svelte";
 
   const { getScenarios } = getContext('meta');
   const scenarios = getScenarios();
 
   let scenarioHover = null;
-  $: scenarioHoverUID = getUID(scenarioHover);
 
   function hoverScenario (value) {
     scenarioHover = value;
-  }
-
-  function setScenario (value) {
-    CURRENT_SCENARIO.set(getUID(scenarioHover));
   }
 </script>
 
 <div class="scenario-selection">
   <VirtualList items={scenarios} let:item height="200px">
-    <p on:click={() => hoverScenario(item)} class:isActive={$CURRENT_SCENARIO === getUID(item)}>{item.label}</p>
+    <Scenario labelText={item.label} bind:group={$CURRENT_SCENARIOS} value={item.uid} on:mouseover={() => hoverScenario(item)} />
   </VirtualList>
 
   {#if scenarioHover}
@@ -39,7 +35,6 @@
       <ScenarioValue key="warming-overshoot-magnitude" {scenarioHover} />
       <ScenarioValue key="warming-overshoot-length" {scenarioHover} />
     </dl>
-    <button on:click={setScenario}>Explore impacts for this scenario</button>
   </div>
   {/if}
 </div>

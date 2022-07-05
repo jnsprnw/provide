@@ -24,7 +24,7 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
-	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIO, CURRENT_INDICATOR } from '$lib/../stores/store.js';
+	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR } from '$lib/../stores/store.js';
 
 	export let meta;
 
@@ -52,8 +52,8 @@
 
 <Tabs class="impact-selection">
   <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
-  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIO} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
-  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null} />
+  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
+  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []} />
   <svelte:fragment slot="content">
     <TabContent>
     	<GeographySelection />
@@ -67,7 +67,7 @@
   </svelte:fragment>
 </Tabs>
 
-{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIO === null}
+{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []}
 	<p>Please select a geography and a scenario</p>
 {:else}
 <Tabs class="analysis-selection">
