@@ -1,6 +1,5 @@
 <script>
 	import { CURRENT_INDICATOR } from '$lib/../stores/store.js';
-	import { INDICATOR_LABELS } from '$lib/../config.js';
 	import RadioButton from "./radio-button.svelte";
 	import RadioButtonGroup from "./radio-button-group.svelte";
 
