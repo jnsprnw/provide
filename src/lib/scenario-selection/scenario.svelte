@@ -43,6 +43,7 @@
   const dispatch = createEventDispatcher();
   $: useGroup = Array.isArray(group);
   $: checked = useGroup ? group.includes(value) : checked;
+  $: position = group.indexOf(value);
   $: dispatch("check", checked);
   let refLabel = null;
   $: isTruncated = refLabel?.offsetWidth < refLabel?.scrollWidth;
@@ -83,7 +84,7 @@
     on:change
     on:blur
   />
-  <label for="{id}" title="{title}" class:bx--checkbox-label="{true}">
+  <label for="{id}" title="{title}" class:bx--checkbox-label="{true}" class={checked ? `checked-${position}` : ''}>
     <span
       bind:this="{refLabel}"
       class:bx--checkbox-label-text="{true}"
@@ -95,3 +96,17 @@
     </span>
   </label>
 </div>
+
+<style lang="scss">
+  input:checked + label {
+    &.checked-0 {
+      color: var(--color-light-category-0);
+    }
+    &.checked-1 {
+      color: var(--color-light-category-1);
+    }
+    &.checked-2 {
+      color: var(--color-light-category-2);
+    }
+  }
+</style>
