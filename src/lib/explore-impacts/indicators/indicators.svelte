@@ -5,18 +5,11 @@
 	import RadioButtonGroup from "./radio-button-group.svelte";
 
 	export let indicators = [];
-
-	$: options = indicators.map(value => {
-		return {
-			value,
-			labelText: INDICATOR_LABELS[value]?.label || value
-		}
-	})
 </script>
 
 <div class="indicator-selection">
 	<RadioButtonGroup bind:selected={$CURRENT_INDICATOR} legendText="Indicators">
-		{#each options as { value, labelText }}
+		{#each indicators as { value, label: labelText }}
 	  <RadioButton {labelText} {value} />
 	  {/each}
 	</RadioButtonGroup>

@@ -1,8 +1,11 @@
 <script>
+  import { getContext } from 'svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
-  import { SCENARIOS } from '$lib/../config.js';
   import { CURRENT_SCENARIO } from '$lib/../stores/store.js';
-  import { formatValues } from '$lib/utils.js';
+  import { formatValues, getUID } from '$lib/utils.js';
+
+  const { getScenarios } = getContext('meta');
+  const scenarios = getScenarios();
 
   let scenarioHover = null;
 
@@ -11,13 +14,13 @@
   }
 
   function setScenario (value) {
-    CURRENT_SCENARIO.set(scenarioHover.label);
+    CURRENT_SCENARIO.set(getUID(scenarioHover));
   }
 </script>
 
 <div class="scenario-selection">
-  <VirtualList items={SCENARIOS} let:item height="200px">
-    <p on:click={() => hoverScenario(item)} class:isActive={$CURRENT_SCENARIO === item.label}>{item.label}</p>
+  <VirtualList items={scenarios} let:item height="200px">
+    <p on:click={() => hoverScenario(item)} class:isActive={$CURRENT_SCENARIO === getUID(item)}>{item.label}</p>
   </VirtualList>
 
   {#if scenarioHover}

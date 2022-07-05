@@ -1,18 +1,20 @@
 <script>
+	import { getContext } from 'svelte';
 	import { CURRENT_SECTOR } from '$lib/../stores/store.js';
-	import { SECTORS_LABELS } from '$lib/../config.js';
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
 	import TabContent from "$lib/helper/tabs/tab-content.svelte";
 	import Indicators from "../indicators/indicators.svelte";
 
-	export let sectors = [];
+	const { getSectors, getIndicators } = getContext('meta');
+  const sectors = getSectors();
+  const all_indicators = getIndicators();
 
-	$: options = sectors.map(value => {
+	$: options = sectors.map(sector => {
+		const indicators = all_indicators.filter(({ sector: s }) => s === sector.uid); // Move this to impacts.svelte?
 		return {
-			value,
-			label: SECTORS_LABELS[value]?.label || value,
-			indicators: SECTORS_LABELS[value]?.indicators || []
+			...sector,
+			indicators
 		}
 	})
 </script>

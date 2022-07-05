@@ -1,4 +1,19 @@
+<script context="module">
+	export const load = async ({ fetch }) => {
+		const res = await fetch("/api/meta");
+		const data = await res.json();
+		// console.log(data)
+		return {
+			props: {
+				meta: data
+			}
+		}
+	}
+
+</script>
+
 <script>
+	import { setContext } from 'svelte';
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
 	import TabPrimary from "$lib/helper/tabs/tabPrimary.svelte";
@@ -10,6 +25,21 @@
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
 	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIO, CURRENT_INDICATOR } from '$lib/../stores/store.js';
+
+	export let meta;
+
+	setContext('meta', {
+		getGeographyTypes: () => meta.geographyTypes,
+		getContinents: () => meta.continents,
+		getAdmin0: () => meta.admin0,
+		getAdmin1: () => meta.admin1,
+		getCities: () => meta.cities,
+		getIconicRegions: () => meta.iconicRegions,
+		getScenarios: () => meta.scenarios,
+		getUnits: () => meta.units,
+		getSectors: () => meta.sectors,
+		getIndicators: () => meta.indicators
+	});
 </script>
 
 <svelte:head>
@@ -32,7 +62,7 @@
     	<ScenarioSelection />
     </TabContent>
     <TabContent>
-    	<Sectors sectors={['terrestrial-climate', 'agriculture']} />
+    	<Sectors />
     </TabContent>
   </svelte:fragment>
 </Tabs>

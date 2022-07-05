@@ -1,8 +1,11 @@
 <script>
+  import { getContext } from 'svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
-  import { CITIES } from '$lib/../config.js';
   import MiniSearch from 'minisearch';
   import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+
+  const { getCities } = getContext('meta');
+  const cities = getCities();
 
   let miniSearch = new MiniSearch({
     idField: 'label',
@@ -11,12 +14,12 @@
   })
 
   // Index all documents
-  miniSearch.addAll(CITIES)
+  miniSearch.addAll(cities)
 
   let term = '';
 
   // Search with default options
-  $: results = term === '' ? CITIES: miniSearch.search(term);
+  $: results = term === '' ? cities: miniSearch.search(term);
 
   function setGeography (value) {
     CURRENT_GEOGRAPHY.set(value);
