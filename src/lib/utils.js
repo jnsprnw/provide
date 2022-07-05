@@ -19,5 +19,5 @@ export const formatValues = function (value, unit, isRange = false) {
 }
 
 export const getUID = function (obj) {
-	return obj['uid'];
+	return obj?.uid || null;
 }

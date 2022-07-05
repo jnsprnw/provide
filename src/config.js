@@ -1296,7 +1296,8 @@ export const ICONIC_REGIONS = [
 function generateValue () {
 	return {
 		"value": Math.random(),
-		"hasWarning": Math.random() < 0.5
+		"hasWarning": Math.random() < 0.5,
+		"type": "celsius"
 	}
 }
 
@@ -1326,31 +1327,31 @@ function generateScenarioData () {
 export const SCENARIOS = [
   {
     "label": "Shifting Pathways",
-    "uid": "unique identifier",
+    "uid": "SP",
     "isPrimary": true,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Gradual Strengthening",
-    "uid": "unique identifier",
+    "uid": "GS",
     "isPrimary": true,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Current Policies",
-    "uid": "unique identifier",
+    "uid": "CP",
     "isPrimary": true,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Negative Emissions",
-    "uid": "unique identifier",
+    "uid": "NE",
     "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Renewables",
-    "uid": "unique identifier",
+    "uid": "R",
     "isPrimary": false,
     "scenarioData": generateScenarioData()
   }
@@ -1392,7 +1393,55 @@ export const SECTORS = [
 ]
 
 export const INDICATORS = [
+	{ // Indicators for scenario selection
+    "uid": "ghg-netzero-year",
+    "label": "Net zero GHG year",
+    "unit": "year",
+    "sector": ""
+  },
   {
+    "uid": "ghg-2030-absolute",
+    "label": "GHG 2030 ",
+    "unit": "gty",
+    "sector": ""
+  },
+  {
+    "uid": "ghg-2030-relative",
+    "label": "GHG 2030 relative to 2030",
+    "unit": "percent",
+    "sector": ""
+  },
+  {
+    "uid": "warming-2100",
+    "label": "2100 Warming",
+    "unit": "celsius",
+    "sector": ""
+  },
+  {
+    "uid": "warming-peak-value",
+    "label": "Peak warming value",
+    "unit": "celsius",
+    "sector": ""
+  },
+  {
+    "uid": "warming-peak-year",
+    "label": "Peak warming year",
+    "unit": "year",
+    "sector": ""
+  },
+  {
+    "uid": "warming-overshoot-magnitude",
+    "label": "Overshoot magnitude",
+    "unit": "celsius",
+    "sector": ""
+  },
+  {
+    "uid": "warming-overshoot-length",
+    "label": "Overshoot length",
+    "unit": "range-year",
+    "sector": ""
+  },
+  {// Other indicators
     "uid": "indicator id",
     "label": "Near-surface air temperature",
     "unit": "unit id",
