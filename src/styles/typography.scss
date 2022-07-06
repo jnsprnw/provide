@@ -24,3 +24,11 @@ h1, h2, h3, h4, h5, h6 {
 		color: #fff;
 	}
 }
+
+.text-label {
+	@include text-label();
+
+	&.text-label--bold {
+		font-weight: var(--font-font-weight-bold);
+	}
+}

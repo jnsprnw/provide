@@ -47,7 +47,7 @@
     }
   }}
 >
-  {#if label }<label for={id}>{ label }</label>{/if}
+  {#if label }<label class="text-label" for={id}>{ label }</label>{/if}
   <span
     bind:this="{ref}"
     role="tab"
@@ -64,6 +64,8 @@
 </li>
 
 <style lang="scss">
+  @import "../../../styles/global.scss";
+
   .tab {
     display: flex;
     padding: 0;
@@ -72,13 +74,6 @@
     cursor: pointer;
     min-width: 170px;
     transition: color 0.3s ease-out;
-
-    label {
-      font-size: var(--font-size-large-s);
-      text-transform: var(--font-text-case-uppercase);
-      letter-spacing: var(--font-letter-spacing-looser);
-      color: var(--color-light-blue600);
-    }
 
     span {
       padding: var(--size-space-large-m);

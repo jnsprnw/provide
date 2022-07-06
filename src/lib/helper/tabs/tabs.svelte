@@ -119,6 +119,8 @@
       margin: 0;
       list-style: none;
       flex-direction: column;
+      row-gap: var(--size-space-large-xxs); // Vertical spacing
+      column-gap: var(--size-space-large-l); // Horizontal spacing
     }
   }
 </style>

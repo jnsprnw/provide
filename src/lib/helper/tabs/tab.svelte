@@ -1,7 +1,7 @@
 <script>
   import { getContext } from "svelte";
-  import { isArray } from "lodash-es";
 
+  export let icon = '';
   export let loc = "step";
   export let label = "";
   export let disabled = false;
@@ -29,9 +29,9 @@
   }}
   on:keydown={({ key }) => {
     if (!disabled) {
-      if (key === 'ArrowRight') {
+      if (key === 'ArrowRight' || key === 'ArrowBottom') {
         change(1);
-      } else if (key === 'ArrowLeft') {
+      } else if (key === 'ArrowLeft' || key === 'ArrowTop') {
         change(-1);
       } else if (key === ' ' || key === 'Enter') {
         update(id);
@@ -39,7 +39,7 @@
     }
   }}
 >
-  <span
+  <div
     bind:this="{ref}"
     role="tab"
     tabindex="{disabled ? '-1' : tabindex}"
@@ -48,43 +48,24 @@
     id="{id}"
     class:tabs-link="{true}"
   >
-    { label }
-  </span>
+    <i>{ icon }</i>
+    <span>{ label }</span>
+  </div>
 </li>
 
 <style lang="scss">
+  @import "../../../styles/global.scss";
+
   .tab {
-    display: flex;
-    padding: 0;
-    flex-direction: column;
-    cursor: pointer;
-    min-width: 170px;
-    transition: color 0.3s ease-out;
-
-    span {
-      padding: var(--size-space-large-xs);
-      transition: background-color 0.3s ease-out; // TODO
-      font-size: var(--font-size-large-m);
-      font-weight: var(--font-font-weight-regular);
-      border-radius: var(--radius-interactive); // TODO
-
-      &:hover, &:focus {
-        background-color: var(--color-background-base);
-        outline: none;
-      }
-    }
-
-    &[aria-selected="true"] span {
-      color: var(--color-functional-accent);
-      font-weight: var(--font-font-weight-bold);
-    }
-
-    &[aria-disabled="true"],
-    &[aria-disabled="true"]:hover {    
-      &, span {
-        color: var(--color-light-blue300); // TODO
-        cursor: not-allowed;
-      }
+    div {
+      display: flex;
+      padding: 0;
+      flex-direction: row;
+      align-items: center;
+      gap: var(--size-spacer-large-xs);
+      min-width: 170px;
+      
+      @include tab();
     }
   }
 </style>

@@ -8,6 +8,7 @@
 
 <div class="geography-selection">
   <Tabs>
+    <span class="text-label text-label--bold">Geographies</span>
     <Tab label="Countries" />
     <Tab label="Cities" />
     <Tab label="Key regions" />
@@ -40,6 +41,7 @@
     margin-bottom: 2rem;
 
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 3fr;
+    gap: var(--size-spacer-large-xs); // TODO
   }
 </style>

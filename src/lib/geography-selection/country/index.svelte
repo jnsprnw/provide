@@ -3,6 +3,8 @@
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import MiniSearch from 'minisearch';
   import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+  import TileGroup from "$lib/helper/tiles/TileGroup.svelte";
+  import RadioTile from "$lib/helper/tiles/RadioTile.svelte";
 
   const { getAdmin0 } = getContext('meta');
   const countries = getAdmin0();
@@ -26,19 +28,22 @@
   }
 </script>
 
-<input type="text" bind:value={term} placeholder="Search…" />
-<VirtualList items={results} let:item height="200px">
-  <!-- this will be rendered for each currently visible item -->
-  <p on:click={() => setGeography(item.label)} class:isActive={$CURRENT_GEOGRAPHY === item.label}>{item.region}: {item.label}</p>
-</VirtualList>
+<div class="selection-country-wrapper">
+  <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
+    <input type="text" bind:value={term} placeholder="Search…" />
+    <VirtualList items={results} let:item height="200px">
+    {#each results as item}
+      <RadioTile value={item.uid}>{item.label}</RadioTile>
+    {/each}
+    </VirtualList>
+  </TileGroup>
 
-<style>
-  p:hover {
-    cursor: pointer;
-    color: blue;
-  }
+  <h2>Map</h2>
+</div>
 
-  p.isActive {
-    font-weight: bold;
+<style lang="scss">
+  .selection-country-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
   }
 </style>

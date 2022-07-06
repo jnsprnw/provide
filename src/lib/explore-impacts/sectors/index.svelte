@@ -22,8 +22,8 @@
 <div class="sector-selection">
 	<span>Sectors:</span>
 	<Tabs>
-		{#each options as { label }}
-	  <Tab {label} />
+		{#each options as { label, icon }}
+	  <Tab {label} {icon} />
 	  {/each}
 	  <svelte:fragment slot="content">
 	  	{#each options as { indicators }}

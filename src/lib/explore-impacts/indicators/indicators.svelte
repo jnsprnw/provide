@@ -8,7 +8,7 @@
 
 <div class="indicator-selection">
 	<RadioButtonGroup bind:selected={$CURRENT_INDICATOR} legendText="Indicators">
-		{#each indicators as { value, label: labelText }}
+		{#each indicators as { value, label: labelText, icon }}
 	  <RadioButton {labelText} {value} />
 	  {/each}
 	</RadioButtonGroup>
