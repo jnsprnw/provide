@@ -1293,9 +1293,16 @@ export const ICONIC_REGIONS = [
   }
 ]
 
-function generateValue () {
+function generateValue (type) {
+	let value = Math.random();
+	if (type === 'year') {
+		value = Math.round(value * 2000);
+	} else if (type === 'length') {
+		value = Math.round(value * 50);
+	}
+
 	return {
-		"value": Math.random(),
+		"value": value,
 		"hasWarning": Math.random() < 0.5,
 		"type": "celsius"
 	}
@@ -1311,14 +1318,14 @@ function generateTimeSeries () {
 
 function generateScenarioData () {
 	return {
-		"ghg-netzero-year": generateValue(),
-		"ghg-2030-absolute": generateValue(),
-		"ghg-2030-relative": generateValue(),
-		"warming-2100": generateValue(),
-		"warming-peak-value": generateValue(),
-		"warming-peak-year": generateValue(),
-		"warming-overshoot-magnitude": generateValue(),
-		"warming-overshoot-length": generateValue(),
+		"ghg-netzero-year": generateValue('year'),
+		"ghg-2030-absolute": generateValue('celsius'),
+		"ghg-2030-relative": generateValue('percent'),
+		"warming-2100": generateValue('celsius'),
+		"warming-peak-value": generateValue('celsius'),
+		"warming-peak-year": generateValue('year'),
+		"warming-overshoot-magnitude": generateValue('celsius'),
+		"warming-overshoot-length": generateValue('length'),
 		"temperature": generateTimeSeries(),
 		"emissions": generateTimeSeries()
 	}
