@@ -33,7 +33,7 @@
     <input type="text" bind:value={term} placeholder="Search…" />
     <VirtualList items={results} let:item height="200px">
     {#each results as item}
-      <RadioTile value={item.uid}>{item.label}</RadioTile>
+      <RadioTile value={item.uid}>{#if item.emoji}{item.emoji}{/if} {item.label}</RadioTile>
     {/each}
     </VirtualList>
   </TileGroup>

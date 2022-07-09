@@ -19,17 +19,17 @@ export const ADMIN_0 = [
   },
   {
     "label": "Afghanistan",
-    "uid": "AF",
+    "uid": "AFG",
     "region": "AS"
   },
   {
     "label": "Åland Islands",
-    "uid": "AX",
+    "uid": "ALA",
     "region": "EU"
   },
   {
     "label": "Albania",
-    "uid": "AL",
+    "uid": "ALB",
     "region": "EU"
   },
   {
