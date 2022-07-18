@@ -1,7 +1,45 @@
 export const GEOGRAPHY_TYPES = [
   {
+    "uid": "admin0",
+    "label": "Countries",
+    "availableIndicators": [],
+    "isAvailable": true,
+    "emoji": "🗺️"
+  },
+  {
+    "uid": "admin1",
+    "label": "Regions",
+    "availableIndicators": [],
+    "isAvailable": false,
+    "emoji": "🏞️"
+  },
+  {
+    "uid": "cities",
+    "label": "Cities",
+    "availableIndicators": [],
+    "isAvailable": false,
+    "emoji": "🏢"
+  },
+  {
+    "uid": "iconicRegions",
+    "label": "Key regions",
+    "availableIndicators": [],
+    "isAvailable": false,
+    "emoji": "📍"
+  },
+  {
+    "uid": "glaciers",
+    "label": "Glaciers",
+    "availableIndicators": [],
+    "isAvailable": false,
+    "emoji": "🧊"
+  },
+  {
     "uid": "breadbaskets",
-    "availableIndicators": ["near-surface-temperature", "radiation"]
+    "label": "Breadbaskets",
+    "availableIndicators": [],
+    "isAvailable": false,
+    "emoji": "🌾"
   }
 ]
 
