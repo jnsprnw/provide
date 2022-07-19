@@ -61,7 +61,7 @@
 		<Tabs class="impact-tabs">
 		  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
 		  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
-		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []} />
+		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={Boolean($CURRENT_SCENARIOS)} />
 		  <svelte:fragment slot="content">
 		    <TabContent>
 		    	<GeographySelection />
