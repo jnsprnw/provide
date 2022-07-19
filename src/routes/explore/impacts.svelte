@@ -17,6 +17,7 @@
 	import { setContext } from 'svelte';
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
+	import SelectionMessage from "$lib/selection-message.svelte";
 	import TabPrimary from "$lib/helper/tabs/tabPrimary.svelte";
 	import TabContent from "$lib/helper/tabs/tab-content.svelte";
 	import Sectors from "$lib/explore-impacts/sectors/index.svelte";
@@ -82,11 +83,9 @@
 </div>
 
 <div class="impacts-analysis container">
-	Indicator: { $CURRENT_INDICATOR }
 	<div class="wrapper">
-		{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []}
-			<p>Please select a geography and a scenario</p>
-		{:else}
+		<SelectionMessage />
+		{#if $CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS === [] && $CURRENT_INDICATOR !== null}
 		<Tabs class="analysis-tabs">
 		  <Tab label="Impact analysis" />
 		  <Tab label="Mitigation benefits" />
