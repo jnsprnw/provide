@@ -8,15 +8,15 @@
 
 <div class="indicator-selection">
 	<RadioButtonGroup bind:selected={$CURRENT_INDICATOR} legendText="Indicators">
-		{#each indicators as { value, label: labelText, icon }}
-	  <RadioButton {labelText} {value} />
+		{#each indicators as indicator}
+	  <RadioButton labelText={indicator.label} value={indicator} />
 	  {/each}
 	</RadioButtonGroup>
 </div>
 
 <style lang="scss">
 	.indicator-selection {
-		margin-top: 2rem;
-		margin-bottom: 2rem;
+		// margin-top: 2rem;
+		// margin-bottom: 2rem;
 	}
 </style>

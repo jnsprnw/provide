@@ -5,17 +5,18 @@ export const INDICATORS = writable([]);
 export const SECTORS = writable([]);
 
 export const CURRENT_INDICATOR = writable(null);
+export const DICTIONARY_INDICATORS = derived(INDICATORS, $indicators => keyBy($indicators, 'uid'));
+
 export const CURRENT_GEOGRAPHY = writable(null);
 export const CURRENT_SCENARIOS = writable([]);
 
-export const DICTIONARY_INDICATORS = derived(INDICATORS, $indicators => keyBy($indicators, 'uid'));
 export const DICTIONARY_SECTORS = derived(SECTORS, $sectors => keyBy($sectors, 'uid'));
 
 /* GEOGRAPHIES */
-export const CURRENT_GEOGRAPHY_INDEX = writable(0);
+export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
 export const GEOGRAPHY_TYPES = writable({});
 export const CURRENT_GEOGRAPHY_TYPE = derived(
-	[CURRENT_GEOGRAPHY_INDEX, GEOGRAPHY_TYPES],
+	[CURRENT_GEOGRAPHY_TYPE_INDEX, GEOGRAPHY_TYPES],
 	([$index, $types]) => get($types, [$index])
 );
 
@@ -28,7 +29,7 @@ export const AVAILABLE_INDICATORS = derived(
 		return compact(get($type, 'availableIndicators', []).map(indicator => {
 			const item = get($indicators, indicator);
 			if (isUndefined(item)) {
-				if (!isEmpty($indicators)) {
+				if (!isEmpty($indicators)) { // TODO: Check for null?
 					console.warn(`Indicator with id ${indicator} was not found.`);
 				}
 				return null
@@ -43,7 +44,7 @@ export const AVAILABLE_INDICATOR_GROUPS = derived(
 	([$indicators, $sectors]) => compact(map(groupBy($indicators, 'sector'), (indicators, key) => {
 		const sector = get($sectors, key);
 		if (isUndefined(sector)) {
-			if (!isEmpty($sectors)) {
+			if (!isEmpty($sectors)) { // TODO: Check for null?
 				console.warn(`Sector with id ${key} was not found.`);
 			}
 			return null;

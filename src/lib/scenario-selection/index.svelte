@@ -18,7 +18,7 @@
 
 <div class="scenario-selection">
   <VirtualList items={scenarios} let:item height="200px">
-    <Scenario labelText={item.label} bind:group={$CURRENT_SCENARIOS} value={item.uid} on:mouseover={() => hoverScenario(item)} />
+    <Scenario labelText={item.label} bind:group={$CURRENT_SCENARIOS} value={item} on:mouseover={() => hoverScenario(item)} />
   </VirtualList>
 
   {#if scenarioHover}
@@ -40,12 +40,10 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/global.scss";
+
   .scenario-selection {
-    // background-color: var(--color-light-blue100); // TODO
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+    @include selection-panel();
   }
 
   p:hover {

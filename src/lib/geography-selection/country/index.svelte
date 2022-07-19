@@ -63,8 +63,8 @@
 <div class="selection-country-wrapper">
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
     <input type="text" bind:value={term} placeholder="Search…" />
-    <VirtualList items={results} let:item height="200px">
-      <RadioTile value={item.item.uid}>{#if item.item.continent}{ item.item.continent } → {/if}{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i> {/if}<span>{ @html item.label }</span></RadioTile>
+    <VirtualList items={results} let:item height="200px"> <!-- TODO: 200px -->
+      <RadioTile value={item.item}>{#if item.item.continent}{ item.item.continent } → {/if}{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i> {/if}<span>{ @html item.label }</span></RadioTile>
     </VirtualList>
   </TileGroup>
 
@@ -75,6 +75,7 @@
   mark {
     background-color: yellow;
   }
+
   .selection-country-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;

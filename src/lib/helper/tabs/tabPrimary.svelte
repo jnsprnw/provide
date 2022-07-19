@@ -4,7 +4,7 @@
 
   export let loc = "step";
   export let label = "";
-  export let selectedValues = ['World'];
+  export let selectedValues = null;
   export let missingValue = 'Select a value';
   export let href = "#"; // TODO
   export let disabled = false;

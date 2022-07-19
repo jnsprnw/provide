@@ -5,23 +5,11 @@
 	import Tab from "$lib/helper/tabs/tab.svelte";
 	import TabContent from "$lib/helper/tabs/tab-content.svelte";
 	import Indicators from "../indicators/indicators.svelte";
-
-	// const { getSectors, getIndicators } = getContext('meta');
- //  const sectors = getSectors();
- //  const all_indicators = getIndicators();
-
-	// $: options = sectors.map(sector => {
-	// 	const indicators = all_indicators.filter(({ sector: s }) => s === sector.uid); // Move this to impacts.svelte?
-	// 	return {
-	// 		...sector,
-	// 		indicators
-	// 	}
-	// })
 </script>
 
 <div class="sector-selection">
-	<span>Sectors:</span>
 	<Tabs bind:selected={$CURRENT_SECTOR_INDEX}>
+		<span class="text-label text-label--bold">Sectors</span>
 		{#each $AVAILABLE_INDICATOR_GROUPS as { sector }}
 	  <Tab label={sector.label} icon={sector.icon} />
 	  {/each}
@@ -36,7 +24,9 @@
 </div>
 
 <style lang="scss">
+	@import "../../../styles/global.scss";
+
 	.sector-selection {
-		margin-top: 2rem;
+		@include selection-panel();
 	}
 </style>
