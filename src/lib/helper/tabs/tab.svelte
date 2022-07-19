@@ -48,7 +48,7 @@
     id="{id}"
     class:tabs-link="{true}"
   >
-    <i>{ icon }</i>
+    <i class="emoji">{ icon }</i>
     <span>{ label }</span>
   </div>
 </li>

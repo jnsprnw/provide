@@ -45,8 +45,28 @@ export const GEOGRAPHY_TYPES = [
 
 export const CONTINENTS = [
   {
-    "uid": "eu",
+    "uid": "EU",
     "label": "Europe"
+  },
+  {
+    "uid": "AS",
+    "label": "Asia"
+  },
+  {
+    "uid": "AF",
+    "label": "Africa"
+  },
+  {
+    "uid": "OC",
+    "label": "Oceania"
+  },
+  {
+    "uid": "NA",
+    "label": "North America"
+  },
+  {
+    "uid": "SA",
+    "label": "South America"
   }
 ]
 
