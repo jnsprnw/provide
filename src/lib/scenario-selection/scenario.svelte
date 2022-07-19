@@ -98,6 +98,15 @@
 </div>
 
 <style lang="scss">
+  @import "../../styles/global.scss";
+
+  input {
+    @include visually-hidden();
+  }
+
+  .bx--checkbox-label {
+    @include tab();
+  }
   input:checked + label {
     &.checked-0 {
       color: var(--color-light-category-0);

@@ -85,7 +85,7 @@
 <div class="impacts-analysis container">
 	<div class="wrapper">
 		<SelectionMessage />
-		{#if $CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS === [] && $CURRENT_INDICATOR !== null}
+		{#if $CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS !== [] && $CURRENT_INDICATOR !== null}
 		<Tabs class="analysis-tabs">
 		  <Tab label="Impact analysis" />
 		  <Tab label="Mitigation benefits" />

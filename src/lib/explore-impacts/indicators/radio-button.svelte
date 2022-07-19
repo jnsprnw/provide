@@ -60,7 +60,10 @@
       }
     }}"
   />
-  <label class:bx--radio-button__label="{true}" for="{id}">
+  <label
+    class:bx--radio-button__label="{true}"
+    for="{id}"
+    class:radio-button--is-selected={checked}>
     <span class:bx--radio-button__appearance="{true}"></span>
     {#if labelText || $$slots.labelText}
       <span class:bx--visually-hidden="{hideLabel}">
@@ -72,3 +75,15 @@
     {/if}
   </label>
 </div>
+
+<style lang="scss">
+  @import "../../../styles/global.scss";
+
+  input {
+    @include visually-hidden();
+  }
+
+  .bx--radio-button__label {
+    @include tab();
+  }
+</style>

@@ -16,6 +16,8 @@
 
 <style lang="scss">
 	.indicator-selection {
+		// display: grid;
+		// gap: 2rem; // TODO
 		// margin-top: 2rem;
 		// margin-bottom: 2rem;
 	}
