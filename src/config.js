@@ -2,7 +2,7 @@ export const GEOGRAPHY_TYPES = [
   {
     "uid": "admin0",
     "label": "Countries",
-    "availableIndicators": ["near-surface-air-temperature", "wet-bulb-globe-temperature", "outlier-days"],
+    "availableIndicators": ["near-surface-air-temperature", "wet-bulb-globe-temperature", "outlier-days", "precipitation"],
     "isAvailable": true,
     "emoji": "🗺️"
   },
