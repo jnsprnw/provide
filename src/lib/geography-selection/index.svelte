@@ -4,25 +4,23 @@
   import Tab from "$lib/helper/tabs/tab.svelte";
   import TabContent from "$lib/helper/tabs/tab-content.svelte";
   import Country from "./country/index.svelte";
-  import City from "./city/index.svelte";
+  import { CURRENT_GEOGRAPHY_INDEX } from '$lib/../stores/store.js';
 
   const { getGeographyTypes } = getContext('meta');
   const geographyTypes = getGeographyTypes();
 </script>
 
 <div class="geography-selection">
-  <Tabs>
+  <Tabs bind:selected={$CURRENT_GEOGRAPHY_INDEX}>
     <span class="text-label text-label--bold">Geographies</span>
-    {#each geographyTypes as { label, emoji }}
-    <Tab {label} icon={emoji} />
+    {#each geographyTypes as { label, emoji, isAvailable }}
+    <Tab {label} icon={emoji} disabled={!isAvailable} />
     {/each}
     <svelte:fragment slot="content">
       {#each geographyTypes as { uid, label }}
       <TabContent>
         {#if uid === 'admin0'}
         <Country />
-        {:else if uid === 'cities'}
-        <City />
         {:else}
         Other geography: { label }
         {/if}

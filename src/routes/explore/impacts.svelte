@@ -24,9 +24,11 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
-	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR } from '$lib/../stores/store.js';
+	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR, GEOGRAPHY_TYPES } from '$lib/../stores/store.js';
 
 	export let meta;
+
+	GEOGRAPHY_TYPES.set(meta.geographyTypes);
 
 	setContext('meta', {
 		getGeographyTypes: () => meta.geographyTypes,

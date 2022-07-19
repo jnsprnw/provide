@@ -7,15 +7,8 @@
   import RadioTile from "$lib/helper/tiles/RadioTile.svelte";
   import { keyBy, get } from "lodash-es";
 
-  const { getAdmin0, getContinents } = getContext('meta');
-  const continents = keyBy(getContinents(), 'uid');
-  const countries = getAdmin0().map(country => {
-    const continent = get(continents, [country.region, 'label'], country.region);
-    return {
-      ...country,
-      continent
-    }
-  });
+  const { getAdmin0 } = getContext('meta');
+  const countries = getAdmin0();
 
   const options = {
     includeScore: true,
@@ -75,7 +68,7 @@
     </VirtualList>
   </TileGroup>
 
-  <h2>Map</h2>
+  <h2>Map displaying { $CURRENT_GEOGRAPHY }</h2>
 </div>
 
 <style lang="scss">

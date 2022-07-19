@@ -1,6 +1,9 @@
+import { keyBy, get as take } from "lodash-es";
 // Will be loaded externally later
 import { GEOGRAPHY_TYPES, CONTINENTS, ADMIN_0, ADMIN_1, CITIES, ICONIC_REGIONS, SCENARIOS, UNITS, SECTORS, INDICATORS } from '$lib/../config.js';
 import emojisCountries from '$lib/emojis-countries.json';
+
+const continentDictionary = keyBy(CONTINENTS, 'uid');
 
 export function get() {
   return {
@@ -8,10 +11,12 @@ export function get() {
       geographyTypes: GEOGRAPHY_TYPES,
       continents: CONTINENTS,
       admin0: ADMIN_0.map((country) => {
-        const emoji = emojisCountries[country["uid"]]
+        const emoji = take(emojisCountries, country.uid);
+        const continent = take(continentDictionary, [country.region, 'label'], country.region);
         return {
           ...country,
-          emoji
+          emoji,
+          continent
         }
       }),
       admin1: ADMIN_1,
