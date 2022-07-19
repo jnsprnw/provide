@@ -9,7 +9,7 @@
 
   const { getScenarios } = getContext('meta');
   const [primary, secondary] = partition(getScenarios(), 'isPrimary');
-  const scenarios = flatten([primary, { isSpacer: true }, secondary]);
+  const scenarios = flatten([{ isSpacer: true, isPrimary: true }, primary, { isSpacer: true }, secondary]);
 
   let scenarioHover = null;
 
@@ -21,7 +21,7 @@
 <div class="scenario-selection">
   <VirtualList items={scenarios} let:item height="400px"> <!-- TODO: 400px -->
     {#if item.isSpacer}
-    <span class="text-label text-label--bold">additional scenarios</span>
+    <span class="text-label text-label--bold">{#if !item.isPrimary}additional {/if}scenarios</span>
     {:else}
     <Scenario labelText={item.label} bind:group={$CURRENT_SCENARIOS} value={item} on:mouseover={() => hoverScenario(item)} />
     {/if}
