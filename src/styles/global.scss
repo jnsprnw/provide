@@ -50,8 +50,10 @@ $extra-wide: 1700px !default;
   &.tile--disabled,
   &.tile--disabled:hover {
     &, div {
+      // pointer-events: none;
       color: var(--color-light-blue300); // TODO
       cursor: not-allowed;
+      background-color: transparent !important;
     }
   }
 }

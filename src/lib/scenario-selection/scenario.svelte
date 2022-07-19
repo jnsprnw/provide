@@ -13,6 +13,7 @@
    * Specify the bound group
    * @type {ReadonlyArray<any>}
    */
+  const MAX_SELECTABLE_SCENARIOS = 3;
   export let group = undefined;
   /** Specify whether the checkbox is indeterminate */
   export let indeterminate = false;
@@ -23,7 +24,7 @@
   /** Set to `true` for the checkbox to be read-only */
   export let readonly = false;
   /** Set to `true` to disable the checkbox */
-  export let disabled = false;
+  // export let disabled = false;
   /** Specify the label text */
   export let labelText = "";
   /** Set to `true` to visually hide the label text */
@@ -41,6 +42,7 @@
   export let ref = null;
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
+  $: isFull = group.length >= MAX_SELECTABLE_SCENARIOS;
   $: useGroup = Array.isArray(group);
   $: checked = useGroup ? group.includes(value) : checked;
   $: position = group.indexOf(value);
@@ -48,6 +50,7 @@
   let refLabel = null;
   $: isTruncated = refLabel?.offsetWidth < refLabel?.scrollWidth;
   $: title = !title && isTruncated ? refLabel?.innerText : title;
+  $: disabled = isFull && !checked;
 </script>
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 
@@ -74,9 +77,13 @@
     class:bx--checkbox="{true}"
     on:change="{() => {
       if (useGroup) {
-        group = group.includes(value)
-          ? group.filter((_value) => _value !== value)
-          : [...group, value];
+        if (group.includes(value)) {
+          group = group.filter((_value) => _value !== value)
+        } else {
+          if (!isFull) {
+            group = [...group, value];
+          }
+        }
       } else {
         checked = !checked;
       }
@@ -84,7 +91,12 @@
     on:change
     on:blur
   />
-  <label for="{id}" title="{title}" class:bx--checkbox-label="{true}" class={checked ? `checked-${position}` : ''}>
+  <label
+    for="{id}"
+    title="{title}"
+    class:bx--checkbox-label="{true}"
+    aria-disabled={disabled}
+    class={checked ? `checked-${position}` : ''}>
     <span
       bind:this="{refLabel}"
       class:bx--checkbox-label-text="{true}"
