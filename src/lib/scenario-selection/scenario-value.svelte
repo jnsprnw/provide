@@ -1,5 +1,6 @@
 <script>
 	import { formatValues, getUID } from '$lib/utils.js';
+  import { round } from "lodash-es";
 	import { getContext } from 'svelte';
 	export let key = null;
 	export let scenarioHover = null;
@@ -13,7 +14,7 @@
   const unit = indicator?.unit || 'number';
 
   const values = scenarios.map(({ scenarioData }) => {
-  	return scenarioData[key]['value'];
+  	return round(scenarioData[key]['value'], 2);
   });
 
   $: value = scenarioHover['scenarioData'][key]['value'];

@@ -1,4 +1,5 @@
 <script>
+  import { partition, flatten } from "lodash-es";
   import { getContext } from 'svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import ScenarioValue from '$lib/scenario-selection/scenario-value.svelte';
@@ -7,7 +8,8 @@
   import Scenario from "$lib/scenario-selection/scenario.svelte";
 
   const { getScenarios } = getContext('meta');
-  const scenarios = getScenarios();
+  const [primary, secondary] = partition(getScenarios(), 'isPrimary');
+  const scenarios = flatten([primary, { isSpacer: true }, secondary]);
 
   let scenarioHover = null;
 
@@ -17,8 +19,12 @@
 </script>
 
 <div class="scenario-selection">
-  <VirtualList items={scenarios} let:item height="200px">
+  <VirtualList items={scenarios} let:item height="400px"> <!-- TODO: 400px -->
+    {#if item.isSpacer}
+    <span class="text-label text-label--bold">additional scenarios</span>
+    {:else}
     <Scenario labelText={item.label} bind:group={$CURRENT_SCENARIOS} value={item} on:mouseover={() => hoverScenario(item)} />
+    {/if}
   </VirtualList>
 
   {#if scenarioHover}
