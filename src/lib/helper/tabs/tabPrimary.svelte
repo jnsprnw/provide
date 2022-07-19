@@ -18,7 +18,8 @@
   $: valuesHasMultiple = isArray(selectedValues);
   $: valueMissing = valuesHasMultiple ? selectedValues.length === 0 : !Boolean(selectedValues);
   $: displayedValue = (valuesHasMultiple ? selectedValues[0] : selectedValues) || missingValue;
-  $: valuesCounter = valuesHasMultiple ? selectedValues.length - 1 : 0;
+  $: valuesCounter = valuesHasMultiple && !valueMissing ? selectedValues.length - 1 : 0;
+  $: otherValues = valuesCounter > 0 ? selectedValues.slice(1) : [];
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
@@ -59,7 +60,7 @@
     class:tabs--missing={valueMissing}
   >
     <strong>{ displayedValue }</strong>
-    {#if valuesCounter}<small>+{ valuesCounter } more</small>{/if}
+    {#if valuesCounter}<small title={otherValues.join(' and ')}>+{ valuesCounter } more</small>{/if}
   </span>
 </li>
 
