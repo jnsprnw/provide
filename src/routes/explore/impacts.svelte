@@ -13,6 +13,7 @@
 </script>
 
 <script>
+	import { keyBy } from "lodash-es";
 	import { setContext } from 'svelte';
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
@@ -24,11 +25,14 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
-	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR, GEOGRAPHY_TYPES } from '$lib/../stores/store.js';
+	import { SECTORS, INDICATORS, AVAILABLE_INDICATOR_GROUPS, AVAILABLE_INDICATORS, CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR, GEOGRAPHY_TYPES, DICTIONARY_INDICATORS } from '$lib/../stores/store.js';
 
 	export let meta;
 
 	GEOGRAPHY_TYPES.set(meta.geographyTypes);
+	// DICTIONARY_INDICATORS.set(keyBy(meta.indicators, 'uid'));
+	INDICATORS.set(meta.indicators);
+	SECTORS.set(meta.sectors);
 
 	setContext('meta', {
 		getGeographyTypes: () => meta.geographyTypes,
@@ -61,7 +65,7 @@
 		<Tabs class="impact-tabs">
 		  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY} missingValue="Select a geography" />
 		  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
-		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={Boolean($CURRENT_SCENARIOS)} />
+		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR} missingValue="Select an indicator" disabled={$CURRENT_SCENARIOS.length === 0} />
 		  <svelte:fragment slot="content">
 		    <TabContent>
 		    	<GeographySelection />
@@ -79,7 +83,6 @@
 
 <div class="impacts-analysis container">
 	<div class="wrapper">
-
 		{#if $CURRENT_GEOGRAPHY === null || $CURRENT_SCENARIOS === []}
 			<p>Please select a geography and a scenario</p>
 		{:else}

@@ -5,13 +5,12 @@
   const { selectedContent, addContent, tabs, contentById } = getContext("Tabs");
   addContent({ id });
   $: selected = $selectedContent === id;
-  $: index = $contentById[id].index;
-  $: tabId = $tabs[index].id;
+  // $: index = $contentById[id].index;
+  // $: tabId = $tabs[index].id;
 </script>
 
 <div
   role="tabpanel"
-  aria-labelledby="{tabId}"
   aria-hidden="{!selected}"
   hidden="{selected ? undefined : ''}"
   id="{id}"
