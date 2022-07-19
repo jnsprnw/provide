@@ -65,19 +65,13 @@
       matches
     }
   });
-
-  function setGeography (value) {
-    CURRENT_GEOGRAPHY.set(value);
-  }
 </script>
 
 <div class="selection-country-wrapper">
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
     <input type="text" bind:value={term} placeholder="Search…" />
-    <VirtualList items={results} let:country height="200px">
-    {#each results as { item, label }}
-      <RadioTile value={item.uid}>{#if item.continent}{ item.continent } → {/if}{#if item.emoji}<i class="emoji">{item.emoji}</i> {/if}<span>{ @html label }</span></RadioTile>
-    {/each}
+    <VirtualList items={results} let:item height="200px">
+      <RadioTile value={item.item.uid}>{#if item.item.continent}{ item.item.continent } → {/if}{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i> {/if}<span>{ @html item.label }</span></RadioTile>
     </VirtualList>
   </TileGroup>
 
