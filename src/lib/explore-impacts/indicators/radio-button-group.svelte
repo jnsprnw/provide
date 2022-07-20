@@ -50,22 +50,30 @@
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
   id="{id}"
-  class:bx--form-item="{true}"
+  class:form-item="{true}"
   {...$$restProps}
   on:click
   on:mouseover
   on:mouseenter
   on:mouseleave
 >
-  <fieldset
-    class:bx--radio-button-group="{true}"
-    disabled="{disabled}"
-  >
-    {#if legendText || $$slots.legendText}
-      <legend class:bx--label="{true}" class:bx--visually-hidden="{hideLegend}">
-        <slot name="legendText">{legendText}</slot>
-      </legend>
-    {/if}
+  <fieldset class="radio-button-group">
+    <legend class="label text-label text-label--bold">
+      { legendText }
+    </legend>
     <slot />
   </fieldset>
 </div>
+
+<style lang="scss">
+  .radio-button-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem; // TODO
+
+    .label {
+      grid-column-start: 0;
+      grid-column-end: 3;
+    }
+  }
+</style>

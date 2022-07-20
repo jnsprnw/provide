@@ -39,8 +39,8 @@
 </script>
 
 <div
-  class:bx--radio-button-wrapper="{true}"
-  class:bx--radio-button-wrapper--label-left="{labelPosition === 'left'}"
+  class:radio-button-wrapper="{true}"
+  class:radio-button-wrapper--label-left="{labelPosition === 'left'}"
   {...$$restProps}
 >
   <input
@@ -52,7 +52,7 @@
     disabled="{disabled}"
     required="{required}"
     value="{value}"
-    class:bx--radio-button="{true}"
+    class:radio-button="{true}"
     on:change
     on:change="{() => {
       if (ctx) {
@@ -61,18 +61,11 @@
     }}"
   />
   <label
-    class:bx--radio-button__label="{true}"
-    for="{id}"
-    class:radio-button--is-selected={checked}>
-    <span class:bx--radio-button__appearance="{true}"></span>
-    {#if labelText || $$slots.labelText}
-      <span class:bx--visually-hidden="{hideLabel}">
-        <slot name="labelText">
-          <span>{labelText}</span>
-          <PreviewChart indicator={value} />
-        </slot>
-      </span>
-    {/if}
+    class:radio-button__label="{true}"
+    class:radio-button--is-selected={checked}
+    for="{id}">
+    <span>{labelText}</span>
+    <PreviewChart indicator={value} />
   </label>
 </div>
 
@@ -83,7 +76,11 @@
     @include visually-hidden();
   }
 
-  .bx--radio-button__label {
+  .radio-button__label {
     @include tab();
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0.5rem; // TODO
   }
 </style>
