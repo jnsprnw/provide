@@ -6,7 +6,6 @@
   export let label = "";
   export let selectedValues = null;
   export let missingValue = 'Select a value';
-  export let href = "#"; // TODO
   export let disabled = false;
   export let tabindex = "0";
   export let id = "ccs-" + Math.random().toString(36);
@@ -58,9 +57,15 @@
     id="{id}"
     class:tabs-link="{true}"
     class:tabs--missing={valueMissing}
+    class:hasMoreItems={valuesCounter}
   >
     <strong>{ displayedValue }</strong>
     {#if valuesCounter}<small title={otherValues.join(' and ')}>+{ valuesCounter } more</small>{/if}
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-direction" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+       <path d="M9 10l3 -3l3 3" transform={`translate(0 ${selected ? -3 : 0})`}></path>
+       <path d="M9 14l3 3l3 -3" transform={`translate(0 ${selected ? 3 : 0})`}></path>
+    </svg>
   </span>
 </li>
 
@@ -83,6 +88,23 @@
       font-weight: var(--font-font-weight-bold);
       border-radius: var(--radius-interactive); // TODO
       box-shadow: inset 0px 0px 0px var(--stroke-default) var(--color-light-blue300); // We use box-shadow to not resize the button on border-size.
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      grid-gap: 1rem; // TODO
+      align-items: end;
+      justify-content: space-between;
+
+      &.hasMoreItems {
+        grid-template-columns: repeat(3, auto);
+      }
+
+      svg {
+        align-self: center;
+
+        path {
+          transition: transform 0.3s ease-out, color 0.3s ease-out;
+        }
+      }
 
       &.tabs--missing {
         * {
@@ -92,8 +114,14 @@
       }
     }
 
-    &[aria-selected="true"] span {
-      box-shadow: inset 0px 0px 0px var(--stroke-active) var(--color-functional-accent);
+    &[aria-selected="true"] {
+      span {
+        box-shadow: inset 0px 0px 0px var(--stroke-active) var(--color-functional-accent);
+      }
+
+      svg {
+        color: var(--color-functional-accent);
+      }
     }
 
     &[aria-disabled="true"],
