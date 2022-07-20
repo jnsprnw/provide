@@ -102,7 +102,7 @@
         align-self: center;
 
         path {
-          transition: transform 0.3s ease-out, color 0.3s ease-out;
+          transition: transform 0.3s ease-out, color 0.3s ease-out; // TODO: Not working in Firefox
         }
       }
 

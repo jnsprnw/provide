@@ -17,8 +17,6 @@
   export let group = undefined;
   /** Specify whether the checkbox is indeterminate */
   export let indeterminate = false;
-  /** Set to `true` to display the skeleton state */
-  export let skeleton = false;
   /** Set to `true` to mark the field as required */
   export let required = false;
   /** Set to `true` for the checkbox to be read-only */
@@ -27,8 +25,6 @@
   // export let disabled = false;
   /** Specify the label text */
   export let labelText = "";
-  /** Set to `true` to visually hide the label text */
-  export let hideLabel = false;
   /** Set a name for the input element */
   export let name = "";
   /**
@@ -55,8 +51,8 @@
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 
 <div
-  class:bx--form-item="{true}"
-  class:bx--checkbox-wrapper="{true}"
+  class:form-item="{true}"
+  class:checkbox-wrapper="{true}"
   {...$$restProps}
   on:click
   on:mouseover
@@ -74,7 +70,7 @@
     name="{name}"
     required="{required}"
     readonly="{readonly}"
-    class:bx--checkbox="{true}"
+    class:checkbox="{true}"
     on:change="{() => {
       if (useGroup) {
         if (group.includes(value)) {
@@ -94,18 +90,24 @@
   <label
     for="{id}"
     title="{title}"
-    class:bx--checkbox-label="{true}"
+    class:checkbox-label="{true}"
     aria-disabled={disabled}
     class={checked ? `checked-${position}` : ''}>
-    <span
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon checkbox" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="4" width="16" height="16" rx="2" class="box" stroke="currentColor" fill={checked ? 'currentColor' : 'none'} stroke-width="1"></rect>
+      {#if checked}
+      <path d="M9 12l2 2l4 -4" class="mark" stroke="currentColor" fill="none" stroke-width="2"></path>
+      {/if}
+    </svg>
+    <div
       bind:this="{refLabel}"
-      class:bx--checkbox-label-text="{true}"
-      class:bx--visually-hidden="{hideLabel}"
+      class:checkbox-label-text="{true}"
     >
-      <slot name="labelText">
-        {labelText}
-      </slot>
-    </span>
+      {labelText}
+    </div>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon color-indicator" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="none" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5" />
+    </svg>
   </label>
 </div>
 
@@ -116,17 +118,42 @@
     @include visually-hidden();
   }
 
-  .bx--checkbox-label {
+  .checkbox-label {
     @include tab();
+ 
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    grid-gap: 1rem; // TODO
+    align-items: end;
+    justify-content: space-between;
+    transition: color 0.3s ease-out;
+
+    .color-indicator {
+      color: transparent;
+      transition: color 0.3s ease-out;
+    }
+
+    .mark {
+      color: #fff; // TODO
+      transition: color 0.3s ease-out;
+    }
+
+    .box {
+      color: var(--color-light-blue300); // TODO
+      transition: color 0.3s ease-out;
+    }
   }
   input:checked + label {
-    &.checked-0 {
+    .box {
+      color: var(--color-functional-accent);
+    }
+    &.checked-0 .color-indicator {
       color: var(--color-light-category-0);
     }
-    &.checked-1 {
+    &.checked-1 .color-indicator {
       color: var(--color-light-category-1);
     }
-    &.checked-2 {
+    &.checked-2 .color-indicator {
       color: var(--color-light-category-2);
     }
   }
