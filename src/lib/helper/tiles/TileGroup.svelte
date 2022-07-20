@@ -29,9 +29,7 @@
 </script>
 
 <fieldset disabled="{disabled}" class:tile-group="{true}" {...$$restProps}>
-  {#if legend}
-    <legend class:text-label="{true}" class:text-label--bold={true}>{legend}</legend>
-  {/if}
+  <legend class:text-label="{true}" class:text-label--bold={true}>{legend}</legend>
   <div>
     <slot />
   </div>
@@ -41,8 +39,6 @@
   @import "../../../styles/global.scss";
 
   .tile-group {
-    border: none;
-    padding: 0;
-    margin: 0;
+    @include unstyle-fieldset();
   }
 </style>

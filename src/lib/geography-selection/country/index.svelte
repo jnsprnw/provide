@@ -5,7 +5,7 @@
   import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
   import TileGroup from "$lib/helper/tiles/TileGroup.svelte";
   import RadioTile from "$lib/helper/tiles/RadioTile.svelte";
-  import { keyBy, get } from "lodash-es";
+  import { keyBy, get, sortBy } from "lodash-es";
 
   const { getAdmin0 } = getContext('meta');
   const countries = getAdmin0();
@@ -20,7 +20,7 @@
 
   let term = '';
 
-  const defaultResults = countries.map((d) => ({ item: d }))
+  const defaultResults = sortBy(countries.map((d) => ({ item: d })), ['item.continent', 'item.label'])
 
   // Search with default options
   $: results = (term === '' ? defaultResults: fuse.search(term)).map(({ item, matches }) => {
@@ -64,7 +64,11 @@
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
     <input type="text" bind:value={term} placeholder="Search…" />
     <VirtualList items={results} let:item height="200px"> <!-- TODO: 200px -->
-      <RadioTile value={item.item}>{#if item.item.continent}{ item.item.continent } → {/if}{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i> {/if}<span>{ @html item.label }</span></RadioTile>
+      <RadioTile value={item.item}>
+        <span>{#if item.item.continent}{ item.item.continent }{/if}</span>
+        <span>{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i>{/if}</span>
+        <span>{ @html item.label }</span>
+      </RadioTile>
     </VirtualList>
   </TileGroup>
 

@@ -72,7 +72,7 @@ export const CONTINENTS = [
 
 export const ADMIN_0 = [
   {
-    "uid": "world",
+    "uid": "unknown",
     "label": "World"
   },
   {
@@ -92,1234 +92,1234 @@ export const ADMIN_0 = [
   },
   {
     "label": "Algeria",
-    "uid": "DZ",
+    "uid": "DZA",
     "region": "AF"
   },
   {
     "label": "American Samoa",
-    "uid": "AS",
+    "uid": "ASM",
     "region": "OC"
   },
   {
     "label": "Andorra",
-    "uid": "AD",
+    "uid": "AND",
     "region": "EU"
   },
   {
     "label": "Angola",
-    "uid": "AO",
+    "uid": "AGO",
     "region": "AF"
   },
   {
     "label": "Anguilla",
-    "uid": "AI",
+    "uid": "AIA",
     "region": "NA"
   },
   {
     "label": "Antigua and Barbuda",
-    "uid": "AG",
+    "uid": "ATG",
     "region": "NA"
   },
   {
     "label": "Argentina",
-    "uid": "AR",
+    "uid": "ARG",
     "region": "SA"
   },
   {
     "label": "Armenia",
-    "uid": "AM",
+    "uid": "ARM",
     "region": "AS"
   },
   {
     "label": "Aruba",
-    "uid": "AW",
+    "uid": "ABW",
     "region": "SA"
   },
   {
     "label": "Australia",
-    "uid": "AU",
+    "uid": "AUS",
     "region": "OC"
   },
   {
     "label": "Austria",
-    "uid": "AT",
+    "uid": "AUT",
     "region": "EU"
   },
   {
     "label": "Azerbaijan",
-    "uid": "AZ",
+    "uid": "AZE",
     "region": "AS"
   },
   {
     "label": "Bahamas",
-    "uid": "BS",
+    "uid": "BHS",
     "region": "NA"
   },
   {
     "label": "Bahrain",
-    "uid": "BH",
+    "uid": "BHR",
     "region": "AS"
   },
   {
     "label": "Bangladesh",
-    "uid": "BD",
+    "uid": "BGD",
     "region": "AS"
   },
   {
     "label": "Barbados",
-    "uid": "BB",
+    "uid": "BRB",
     "region": "NA"
   },
   {
     "label": "Belarus",
-    "uid": "BY",
+    "uid": "BLR",
     "region": "EU"
   },
   {
     "label": "Belgium",
-    "uid": "BE",
+    "uid": "BEL",
     "region": "EU"
   },
   {
     "label": "Belize",
-    "uid": "BZ",
+    "uid": "BLZ",
     "region": "NA"
   },
   {
     "label": "Benin",
-    "uid": "BJ",
+    "uid": "BEN",
     "region": "AF"
   },
   {
     "label": "Bermuda",
-    "uid": "BM",
+    "uid": "BMU",
     "region": "NA"
   },
   {
     "label": "Bhutan",
-    "uid": "BT",
+    "uid": "BTN",
     "region": "AS"
   },
   {
     "label": "Bolivia (Plurinational State of)",
-    "uid": "BO",
+    "uid": "BOL",
     "region": "SA"
   },
   {
     "label": "Bonaire, Sint Eustatius and Saba",
-    "uid": "BQ",
+    "uid": "BES",
     "region": "SA"
   },
   {
     "label": "Bosnia and Herzegovina",
-    "uid": "BA",
+    "uid": "BIH",
     "region": "EU"
   },
   {
     "label": "Botswana",
-    "uid": "BW",
+    "uid": "BWA",
     "region": "AF"
   },
   {
     "label": "Bouvet Island",
-    "uid": "BV",
-    "region": "AN"
+    "uid": "BVT",
+    "region": "NA"
   },
   {
     "label": "Brazil",
-    "uid": "BR",
+    "uid": "BRA",
     "region": "SA"
   },
   {
     "label": "British Indian Ocean Territory",
-    "uid": "IO",
+    "uid": "IOT",
     "region": "AF"
   },
   {
     "label": "United States Minor Outlying Islands",
-    "uid": "UM",
+    "uid": "UMI",
     "region": "NA"
   },
   {
     "label": "Virgin Islands (British)",
-    "uid": "VG",
+    "uid": "VGB",
     "region": "NA"
   },
   {
     "label": "Virgin Islands (U.S.)",
-    "uid": "VI",
+    "uid": "VIR",
     "region": "NA"
   },
   {
     "label": "Brunei Darussalam",
-    "uid": "BN",
+    "uid": "BRN",
     "region": "AS"
   },
   {
     "label": "Bulgaria",
-    "uid": "BG",
+    "uid": "BGR",
     "region": "EU"
   },
   {
     "label": "Burkina Faso",
-    "uid": "BF",
+    "uid": "BFA",
     "region": "AF"
   },
   {
     "label": "Burundi",
-    "uid": "BI",
+    "uid": "BDI",
     "region": "AF"
   },
   {
     "label": "Cambodia",
-    "uid": "KH",
+    "uid": "KHM",
     "region": "AS"
   },
   {
     "label": "Cameroon",
-    "uid": "CM",
+    "uid": "CMR",
     "region": "AF"
   },
   {
     "label": "Canada",
-    "uid": "CA",
+    "uid": "CAN",
     "region": "NA"
   },
   {
     "label": "Cabo Verde",
-    "uid": "CV",
+    "uid": "CPV",
     "region": "AF"
   },
   {
     "label": "Cayman Islands",
-    "uid": "KY",
+    "uid": "CYM",
     "region": "NA",
     "demonym": "Caymanian"
   },
   {
     "label": "Central African Republic",
-    "uid": "CF",
+    "uid": "CAF",
     "region": "AF"
   },
   {
     "label": "Chad",
-    "uid": "TD",
+    "uid": "TCD",
     "region": "AF"
   },
   {
     "label": "Chile",
-    "uid": "CL",
+    "uid": "CHL",
     "region": "SA"
   },
   {
     "label": "China",
-    "uid": "CN",
+    "uid": "CHN",
     "region": "AS"
   },
   {
     "label": "Christmas Island",
-    "uid": "CX",
+    "uid": "ISL",
     "region": "OC"
   },
   {
     "label": "Cocos (Keeling) Islands",
-    "uid": "CC",
+    "uid": "CCK",
     "region": "OC"
   },
   {
     "label": "Colombia",
-    "uid": "CO",
+    "uid": "COL",
     "region": "SA"
   },
   {
     "label": "Comoros",
-    "uid": "KM",
+    "uid": "COM",
     "region": "AF"
   },
   {
     "label": "Congo",
-    "uid": "CG",
+    "uid": "COG",
     "region": "AF"
   },
   {
     "label": "Congo (Democratic Republic of the)",
-    "uid": "CD",
+    "uid": "COD",
     "region": "AF"
   },
   {
     "label": "Cook Islands",
-    "uid": "CK",
+    "uid": "COK",
     "region": "OC"
   },
   {
     "label": "Costa Rica",
-    "uid": "CR",
+    "uid": "CRI",
     "region": "NA"
   },
   {
     "label": "Croatia",
-    "uid": "HR",
+    "uid": "HRV",
     "region": "EU"
   },
   {
     "label": "Cuba",
-    "uid": "CU",
+    "uid": "CUB",
     "region": "NA"
   },
   {
     "label": "Curaçao",
-    "uid": "CW",
+    "uid": "CUW",
     "region": "SA"
   },
   {
     "label": "Cyprus",
-    "uid": "CY",
+    "uid": "CYP",
     "region": "EU"
   },
   {
     "label": "Czech Republic",
-    "uid": "CZ",
+    "uid": "CZE",
     "region": "EU"
   },
   {
     "label": "Denmark",
-    "uid": "DK",
+    "uid": "DNK",
     "region": "EU"
   },
   {
     "label": "Djibouti",
-    "uid": "DJ",
+    "uid": "DJI",
     "region": "AF"
   },
   {
     "label": "Dominica",
-    "uid": "DM",
+    "uid": "DMA",
     "region": "NA"
   },
   {
     "label": "Dominican Republic",
-    "uid": "DO",
+    "uid": "DOM",
     "region": "NA"
   },
   {
     "label": "Ecuador",
-    "uid": "EC",
+    "uid": "ECU",
     "region": "SA"
   },
   {
     "label": "Egypt",
-    "uid": "EG",
+    "uid": "EGY",
     "region": "AF"
   },
   {
     "label": "El Salvador",
-    "uid": "SV",
+    "uid": "SLV",
     "region": "NA"
   },
   {
     "label": "Equatorial Guinea",
-    "uid": "GQ",
+    "uid": "GNQ",
     "region": "AF"
   },
   {
     "label": "Eritrea",
-    "uid": "ER",
+    "uid": "ERI",
     "region": "AF"
   },
   {
     "label": "Estonia",
-    "uid": "EE",
+    "uid": "EST",
     "region": "EU"
   },
   {
     "label": "Ethiopia",
-    "uid": "ET",
+    "uid": "ETH",
     "region": "AF"
   },
   {
     "label": "Falkland Islands (Malvinas)",
-    "uid": "FK",
+    "uid": "FLK",
     "region": "SA"
   },
   {
     "label": "Faroe Islands",
-    "uid": "FO",
+    "uid": "FRO",
     "region": "EU"
   },
   {
     "label": "Fiji",
-    "uid": "FJ",
+    "uid": "FJI",
     "region": "OC"
   },
   {
     "label": "Finland",
-    "uid": "FI",
+    "uid": "FIN",
     "region": "EU"
   },
   {
     "label": "France",
-    "uid": "FR",
+    "uid": "FRA",
     "region": "EU",
     "demonym": "French"
   },
   {
     "label": "French Guiana",
-    "uid": "GF",
+    "uid": "GUF",
     "region": "SA"
   },
   {
     "label": "French Polynesia",
-    "uid": "PF",
+    "uid": "PYF",
     "region": "OC"
   },
   {
     "label": "French Southern Territories",
-    "uid": "TF",
+    "uid": "ATF",
     "region": "AF"
   },
   {
     "label": "Gabon",
-    "uid": "GA",
+    "uid": "GAB",
     "region": "AF"
   },
   {
     "label": "Gambia",
-    "uid": "GM",
+    "uid": "GMB",
     "region": "AF"
   },
   {
     "label": "Georgia",
-    "uid": "GE",
+    "uid": "GEO",
     "region": "AS"
   },
   {
     "label": "Germany",
-    "uid": "DE",
+    "uid": "DEU",
     "region": "EU"
   },
   {
     "label": "Ghana",
-    "uid": "GH",
+    "uid": "GHA",
     "region": "AF"
   },
   {
     "label": "Gibraltar",
-    "uid": "GI",
+    "uid": "GIB",
     "region": "EU"
   },
   {
     "label": "Greece",
-    "uid": "GR",
+    "uid": "GRC",
     "region": "EU"
   },
   {
     "label": "Greenland",
-    "uid": "GL",
+    "uid": "GRL",
     "region": "NA"
   },
   {
     "label": "Grenada",
-    "uid": "GD",
+    "uid": "GRD",
     "region": "NA"
   },
   {
     "label": "Guadeloupe",
-    "uid": "GP",
+    "uid": "GLP",
     "region": "NA"
   },
   {
     "label": "Guam",
-    "uid": "GU",
+    "uid": "GUM",
     "region": "OC"
   },
   {
     "label": "Guatemala",
-    "uid": "GT",
+    "uid": "GTM",
     "region": "NA"
   },
   {
     "label": "Guernsey",
-    "uid": "GG",
+    "uid": "GGY",
     "region": "EU"
   },
   {
     "label": "Guinea",
-    "uid": "GN",
+    "uid": "GIN",
     "region": "AF"
   },
   {
     "label": "Guinea-Bissau",
-      "uid": "GW",
+      "uid": "GNB",
       "region": "AF"
   },
   {
       "label": "Guyana",
-      "uid": "GY",
+      "uid": "GUY",
       "region": "SA"
   },
   {
       "label": "Haiti",
-      "uid": "HT",
+      "uid": "HTI",
       "region": "Americas"
   },
   {
       "label": "Heard Island and McDonald Islands",
-      "uid": "HM",
-      "region": ""
+      "uid": "HMD",
+      "region": "OC"
   },
   {
       "label": "Holy See",
-      "uid": "VA",
+      "uid": "VAT",
     "region": "EU"
   },
   {
       "label": "Honduras",
-      "uid": "HN",
+      "uid": "HND",
       "region": "NA"
   },
   {
     "label": "Hong Kong",
-      "uid": "HK",
+      "uid": "HKG",
       "region": "AS"
   },
   {
       "label": "Hungary",
-      "uid": "HU",
+      "uid": "HUN",
       "region": "EU"
   },
   {
       "label": "Iceland",
-      "uid": "IS",
+      "uid": "ISL",
       "region": "EU"
   },
   {
       "label": "India",
-      "uid": "IN",
+      "uid": "IND",
       "region": "AS"
   },
   {
       "label": "Indonesia",
-      "uid": "ID",
+      "uid": "IDN",
       "region": "AS"
   },
   {
       "label": "Côte d'Ivoire",
-      "uid": "CI",
+      "uid": "CIV",
       "region": "AF"
   },
   {
       "label": "Iran (Islamic Republic of)",
-      "uid": "IR",
+      "uid": "IRN",
       "region": "AS"
   },
   {
       "label": "Iraq",
-      "uid": "IQ",
+      "uid": "IRQ",
       "region": "AS"
   },
   {
       "label": "Ireland",
-      "uid": "IE",
+      "uid": "IRL",
       "region": "EU"
   },
   {
       "label": "Isle of Man",
-      "uid": "IM",
+      "uid": "IMN",
       "region": "EU"
   },
   {
       "label": "Israel",
-      "uid": "IL",
+      "uid": "ISR",
       "region": "AS"
   },
   {
       "label": "Italy",
-      "uid": "IT",
+      "uid": "ITA",
       "region": "EU"
  },
  {
       "label": "Jamaica",
-      "uid": "JM",
+      "uid": "JAM",
       "region": "NA"
   },
   {
       "label": "Japan",
-      "uid": "JP",
+      "uid": "JPN",
       "region": "AS"
   },
   {
       "label": "Jersey",
-      "uid": "JE",
+      "uid": "JEY",
       "region": "EU"
   },
   {
       "label": "Jordan",
-      "uid": "JO",
+      "uid": "JOR",
       "region": "AS"
   },
   {
       "label": "Kazakhstan",
-      "uid": "KZ",
+      "uid": "KAZ",
       "region": "AS"
   },
   {
       "label": "Kenya",
-      "uid": "KE",
+      "uid": "KEN",
       "region": "AF"
   },
   {
       "label": "Kiribati",
-      "uid": "KI",
+      "uid": "KIR",
       "region": "OC"
   },
   {
       "label": "Kuwait",
-      "uid": "KW",
+      "uid": "KWT",
       "region": "AS"
   },
 {
       "label": "Kyrgyzstan",
-      "uid": "KG",
+      "uid": "KGZ",
       "region": "AS"
   },
   {
       "label": "Lao People's Democratic Republic",
-      "uid": "LA",
+      "uid": "LAO",
       "region": "AS"
   },
   {
       "label": "Latvia",
-      "uid": "LV",
+      "uid": "LVA",
       "region": "EU"
   },
   {
       "label": "Lebanon",
-      "uid": "LB",
+      "uid": "LBN",
       "region": "AS"
   },
   {
       "label": "Lesotho",
-      "uid": "LS",
+      "uid": "LSO",
       "region": "AF"
   },
   {
       "label": "Liberia",
-      "uid": "LR",
+      "uid": "LBR",
       "region": "AF"
   },
   {
       "label": "Libya",
-      "uid": "LY",
+      "uid": "LBY",
       "region": "AF"
   },
   {
       "label": "Liechtenstein",
-      "uid": "LI",
+      "uid": "LIE",
       "region": "EU"
   },
   {
       "label": "Lithuania",
-      "uid": "LT",
+      "uid": "LTU",
       "region": "EU"
   },
   {
       "label": "Luxembourg",
-      "uid": "LU",
+      "uid": "LUX",
       "region": "EU"
   },
   {
       "label": "Macao",
-      "uid": "MO",
+      "uid": "MAC",
       "region": "AS"
   },
   {
       "label": "Macedonia (the former Yugoslav Republic of)",
-      "uid": "MK",
+      "uid": "MKD",
       "region": "EU"
   },
   {
       "label": "Madagascar",
-      "uid": "MG",
+      "uid": "MDG",
       "region": "AF"
   },
   {
       "label": "Malawi",
-      "uid": "MW",
+      "uid": "MWI",
       "region": "AF"
   },
   {
       "label": "Malaysia",
-      "uid": "MY",
+      "uid": "MYS",
       "region": "AS"
   },
   {
       "label": "Maldives",
-      "uid": "MV",
+      "uid": "MDV",
       "region": "AS"
   },
   {
       "label": "Mali",
-      "uid": "ML",
+      "uid": "MLI",
       "region": "AF"
   },
   {
       "label": "Malta",
-      "uid": "MT",
+      "uid": "MLT",
       "region": "EU"
   },
   {
       "label": "Marshall Islands",
-      "uid": "MH",
+      "uid": "MHL",
       "region": "OC"
   },
   {
       "label": "Martinique",
-      "uid": "MQ",
+      "uid": "MTQ",
       "region": "Americas"
   },
   {
       "label": "Mauritania",
-      "uid": "MR",
+      "uid": "MRT",
       "region": "AF"
   },
   {
       "label": "Mauritius",
-      "uid": "MU",
+      "uid": "MUS",
       "region": "AF"
   },
   {
       "label": "Mayotte",
-      "uid": "YT",
+      "uid": "MYT",
       "region": "AF"
   },
   {
       "label": "Mexico",
-      "uid": "MX",
+      "uid": "MEX",
       "region": "NA"
   },
   {
       "label": "Micronesia (Federated States of)",
-      "uid": "FM",
+      "uid": "FSM",
       "region": "OC"
   },
   {
       "label": "Moldova (Republic of)",
-      "uid": "MD",
+      "uid": "MDA",
       "region": "EU"
   },
   {
       "label": "Monaco",
-      "uid": "MC",
+      "uid": "MCO",
       "region": "EU"
   },
   {
       "label": "Mongolia",
-      "uid": "MN",
+      "uid": "MNG",
       "region": "AS"
   },
   {
       "label": "Montenegro",
-      "uid": "ME",
+      "uid": "MNE",
       "region": "EU"
   },
   {
       "label": "Montserrat",
-      "uid": "MS",
+      "uid": "MSR",
       "region": "NA"
   },
   {
       "label": "Morocco",
-      "uid": "MA",
+      "uid": "MAR",
       "region": "AF"
   },
   {
       "label": "Mozambique",
-      "uid": "MZ",
+      "uid": "MOZ",
       "region": "AF"
   },
   {
       "label": "Myanmar",
-      "uid": "MM",
+      "uid": "MMR",
       "region": "AS"
   },
   {
       "label": "Namibia",
-      "uid": "NA",
+      "uid": "NAM",
       "region": "AF"
   },
   {
       "label": "Nauru",
-      "uid": "NR",
+      "uid": "NRU",
       "region": "OC"
   },
   {
       "label": "Nepal",
-      "uid": "NP",
+      "uid": "NPL",
       "region": "AS"
   },
   {
       "label": "Netherlands",
-      "uid": "NL",
+      "uid": "NLD",
       "region": "EU"
   },
   {
       "label": "New Caledonia",
-      "uid": "NC",
+      "uid": "NCL",
       "region": "OC"
   },
   {
       "label": "New Zealand",
-      "uid": "NZ",
+      "uid": "NZL",
       "region": "OC"
  },
  {
       "label": "Nicaragua",
-      "uid": "NI",
+      "uid": "NIC",
       "region": "NA"
 },
   {
       "label": "Niger",
-      "uid": "NE",
+      "uid": "NER",
       "region": "AF"
   },
   {
       "label": "Nigeria",
-      "uid": "NG",
+      "uid": "NGA",
       "region": "AF"
   },
   {
       "label": "Niue",
-      "uid": "NU",
+      "uid": "NIU",
       "region": "OC"
   },
   {
       "label": "Norfolk Island",
-      "uid": "NF",
+      "uid": "NFK",
       "region": "OC"
   },
   {
       "label": "Korea (Democratic People's Republic of)",
-      "uid": "KP",
+      "uid": "PRK",
       "region": "AS"
   },
   {
       "label": "Northern Mariana Islands",
-      "uid": "MP",
+      "uid": "MNP",
       "region": "OC"
   },
   {
       "label": "Norway",
-      "uid": "NO",
+      "uid": "NOR",
       "region": "EU"
   },
   {
       "label": "Oman",
-      "uid": "OM",
+      "uid": "OMN",
       "region": "AS"
   },
   {
       "label": "Pakistan",
-      "uid": "PK",
+      "uid": "PAK",
       "region": "AS"
   },
   {
     "label": "Palau",
-    "uid": "PW",
+    "uid": "PLW",
     "region": "OC"
   },
   {
       "label": "Palestine, State of",
-      "uid": "PS",
+      "uid": "PSE",
       "region": "AS"
   },
   {
       "label": "Panama",
-    "uid": "PA",
+    "uid": "PAN",
       "region": "NA"
   },
   {
       "label": "Papua New Guinea",
-      "uid": "PG",
+      "uid": "PNG",
       "region": "OC"
   },
   {
       "label": "Paraguay",
-      "uid": "PY",
+      "uid": "PRY",
       "region": "SA"
   },
   {
       "label": "Peru",
-      "uid": "PE",
+      "uid": "PER",
       "region": "SA"
   },
   {
       "label": "Philippines",
-      "uid": "PH",
+      "uid": "PHL",
       "region": "AS"
   },
   {
       "label": "Pitcairn",
-      "uid": "PN",
+      "uid": "PCN",
       "region": "OC"
   },
   {
       "label": "Poland",
-      "uid": "PL",
+      "uid": "POL",
       "region": "EU"
   },
   {
       "label": "Portugal",
-      "uid": "PT",
+      "uid": "PRT",
       "region": "EU"
   },
   {
       "label": "Puerto Rico",
-      "uid": "PR",
+      "uid": "PRI",
       "region": "NA"
   },
   {
       "label": "Qatar",
-      "uid": "QA",
+      "uid": "QAT",
       "region": "AS"
   },
   {
       "label": "Republic of Kosovo",
-      "uid": "XK",
+      "uid": "UNK",
       "region": "EU"
   },
   {
       "label": "Réunion",
-      "uid": "RE",
+      "uid": "REU",
       "region": "AF"
   },
   {
       "label": "Romania",
-      "uid": "RO",
+      "uid": "ROU",
       "region": "EU"
   },
   {
       "label": "Russian Federation",
-      "uid": "RU",
+      "uid": "RUS",
       "region": "EU"
   },
   {
       "label": "Rwanda",
-      "uid": "RW",
+      "uid": "RWA",
       "region": "AF"
   },
   {
       "label": "Saint Barthélemy",
-      "uid": "BL",
+      "uid": "BLM",
       "region": "NA"
   },
   {
       "label": "Saint Helena, Ascension and Tristan da Cunha",
-      "uid": "SH",
+      "uid": "SHN",
       "region": "AF"
   },
   {
       "label": "Saint Kitts and Nevis",
-      "uid": "KN",
+      "uid": "KNA",
       "region": "NA"
   },
   {
       "label": "Saint Lucia",
-      "uid": "LC",
+      "uid": "LCA",
       "region": "NA"
   },
   {
       "label": "Saint Martin (French part)",
-      "uid": "MF",
+      "uid": "MAF",
       "region": "NA"
   },
   {
       "label": "Saint Pierre and Miquelon",
-      "uid": "PM",
+      "uid": "SPM",
       "region": "NA"
   },
   {
       "label": "Saint Vincent and the Grenadines",
-      "uid": "VC",
+      "uid": "VCT",
       "region": "NA"
   },
   {
       "label": "Samoa",
-      "uid": "WS",
+      "uid": "WSM",
       "region": "OC"
   },
   {
       "label": "San Marino",
-      "uid": "SM",
+      "uid": "SMR",
       "region": "EU"
   },
   {
       "label": "Sao Tome and Principe",
-      "uid": "ST",
+      "uid": "STP",
       "region": "AF"
   },
   {
       "label": "Saudi Arabia",
-      "uid": "SA",
+      "uid": "SAU",
       "region": "AS"
   },
   {
       "label": "Senegal",
-      "uid": "SN",
+      "uid": "SEN",
       "region": "AF"
   },
   {
       "label": "Serbia",
-      "uid": "RS",
+      "uid": "SRB",
       "region": "EU"
   },
   {
       "label": "Seychelles",
-      "uid": "SC",
+      "uid": "SYC",
       "region": "AF"
   },
   {
       "label": "Sierra Leone",
-      "uid": "SL",
+      "uid": "SLE",
       "region": "AF"
   },
   {
       "label": "Singapore",
-      "uid": "SG",
+      "uid": "SGP",
       "region": "AS"
   },
   {
       "label": "Sint Maarten (Dutch part)",
-      "uid": "SX",
+      "uid": "SXM",
       "region": "Americas"
   },
   {
       "label": "Slovakia",
-      "uid": "SK",
+      "uid": "SVK",
       "region": "EU"
   },
   {
       "label": "Slovenia",
-      "uid": "SI",
+      "uid": "SVN",
       "region": "EU"
   },
   {
       "label": "Solomon Islands",
-      "uid": "SB",
+      "uid": "SLB",
       "region": "OC"
   },
   {
       "label": "Somalia",
-      "uid": "SO",
+      "uid": "SOM",
       "region": "AF"
   },
   {
       "label": "South Africa",
-      "uid": "ZA",
+      "uid": "ZAF",
       "region": "AF"
   },
   {
       "label": "South Georgia and the South Sandwich Islands",
-      "uid": "GS",
+      "uid": "SGS",
       "region": "NA"
   },
   {
       "label": "Korea (Republic of)",
-      "uid": "KR",
+      "uid": "KOR",
       "region": "AS"
   },
   {
       "label": "South Sudan",
-      "uid": "SS",
+      "uid": "SSD",
       "region": "AF"
   },
   {
       "label": "Spain",
-      "uid": "ES",
+      "uid": "ESP",
       "region": "EU"
   },
   {
       "label": "Sri Lanka",
-      "uid": "LK",
+      "uid": "LKA",
       "region": "AS"
   },
   {
       "label": "Sudan",
-      "uid": "SD",
+      "uid": "SDN",
       "region": "AF"
   },
   {
       "label": "Surilabel",
-      "uid": "SR",
+      "uid": "unknown",
       "region": "SA"
   },
   {
       "label": "Svalbard and Jan Mayen",
-      "uid": "SJ",
+      "uid": "SJM",
       "region": "EU"
   },
   {
       "label": "Swaziland",
-      "uid": "SZ",
+      "uid": "SWZ",
       "region": "AF"
   },
   {
       "label": "Sweden",
-      "uid": "SE",
+      "uid": "SWE",
       "region": "EU"
   },
   {
       "label": "Switzerland",
-      "uid": "CH",
+      "uid": "CHE",
       "region": "EU"
   },
   {
       "label": "Syrian Arab Republic",
-      "uid": "SY",
+      "uid": "SYR",
       "region": "AS"
   },
   {
       "label": "Taiwan",
-      "uid": "TW",
+      "uid": "TWN",
       "region": "AS"
   },
   {
       "label": "Tajikistan",
-      "uid": "TJ",
+      "uid": "TJK",
       "region": "AS"
   },
   {
       "label": "Tanzania, United Republic of",
-      "uid": "TZ",
+      "uid": "TZA",
       "region": "AF"
   },
   {
       "label": "Thailand",
-      "uid": "TH",
+      "uid": "THA",
       "region": "AS"
   },
   {
       "label": "Timor-Leste",
-      "uid": "TL",
+      "uid": "TLS",
       "region": "AS"
   },
   {
       "label": "Togo",
-      "uid": "TG",
+      "uid": "TGO",
       "region": "AF"
   },
   {
       "label": "Tokelau",
-      "uid": "TK",
+      "uid": "TKL",
       "region": "OC"
   },
   {
       "label": "Tonga",
-      "uid": "TO",
+      "uid": "TON",
       "region": "OC"
   },
   {
       "label": "Trinidad and Tobago",
-      "uid": "TT",
+      "uid": "TTO",
       "region": "SA"
   },
   {
       "label": "Tunisia",
-      "uid": "TN",
+      "uid": "TUN",
       "region": "AF"
   },
   {
       "label": "Turkey",
-      "uid": "TR",
+      "uid": "TUR",
       "region": "AS"
   },
   {
       "label": "Turkmenistan",
-      "uid": "TM",
+      "uid": "TKM",
       "region": "AS"
   },
   {
       "label": "Turks and Caicos Islands",
-      "uid": "TC",
+      "uid": "TCA",
       "region": "NA"
   },
   {
       "label": "Tuvalu",
-      "uid": "TV",
+      "uid": "TUV",
       "region": "OC"
   },
   {
       "label": "Uganda",
-      "uid": "UG",
+      "uid": "UGA",
       "region": "AF"
   },
   {
       "label": "Ukraine",
-      "uid": "UA",
+      "uid": "UKR",
       "region": "EU"
   },
   {
       "label": "United Arab Emirates",
-      "uid": "AE",
+      "uid": "ARE",
       "region": "AS"
   },
   {
       "label": "United Kingdom of Great Britain and Northern Ireland",
-      "uid": "GB",
+      "uid": "GBR",
       "region": "EU"
   },
   {
       "label": "United States of America",
-      "uid": "US",
+      "uid": "USA",
       "region": "NA"
   },
   {
       "label": "Uruguay",
-      "uid": "UY",
+      "uid": "URY",
       "region": "SA"
   },
   {
       "label": "Uzbekistan",
-      "uid": "UZ",
+      "uid": "UZB",
       "region": "AS"
   },
   {
       "label": "Vanuatu",
-      "uid": "VU",
+      "uid": "VUT",
       "region": "OC"
   },
   {
       "label": "Venezuela (Bolivarian Republic of)",
-      "uid": "VE",
+      "uid": "VEN",
       "region": "SA"
   },
   {
       "label": "Viet Nam",
-      "uid": "VN",
+      "uid": "VNM",
       "region": "AS"
   },
   {
       "label": "Wallis and Futuna",
-      "uid": "WF",
+      "uid": "WLF",
       "region": "OC"
   },
   {
       "label": "Western Sahara",
-      "uid": "EH",
+      "uid": "ESH",
       "region": "AF"
   },
   {
       "label": "Yemen",
-      "uid": "YE",
+      "uid": "YEM",
       "region": "AS"
   },
   {
       "label": "Zambia",
-      "uid": "ZM",
+      "uid": "ZMB",
       "region": "AF"
   },
   {
       "label": "Zimbabwe",
-      "uid": "ZW",
+      "uid": "ZWE",
       "region": "AF"
   }
 ]
@@ -1727,7 +1727,7 @@ export const COUNTRIES = [
   {
     "label": "Bouvet Island",
     "uid": "BV",
-    "region": "AN"
+    "region": "NA"
   },
   {
     "label": "Brazil",
@@ -2064,12 +2064,12 @@ export const COUNTRIES = [
   {
       "label": "Haiti",
       "uid": "HT",
-      "region": "Americas"
+      "region": "SA"
   },
   {
       "label": "Heard Island and McDonald Islands",
       "uid": "HM",
-      "region": ""
+      "region": "OC"
   },
   {
       "label": "Holy See",

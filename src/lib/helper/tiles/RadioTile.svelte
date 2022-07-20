@@ -59,9 +59,6 @@
   on:mouseenter
   on:mouseleave
 >
-  <span class:tile__checkmark="{true}">
-    {#if checked}Y{:else}N{/if}
-  </span>
   <span class:tile-content="{true}">
     <slot />
   </span>
@@ -76,6 +73,14 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: var(--size-spacer-large-xs);
+    margin: 1px 0; // TODO
+
+    .tile-content {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      gap: var(--size-spacer-large-xxs); // TODO
+      line-height: 1.2; // TODO
+    }
   }
 
   .tile-input {

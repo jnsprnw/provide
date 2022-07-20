@@ -71,6 +71,12 @@ $extra-wide: 1700px !default;
   white-space: nowrap;
 }
 
+@mixin unstyle-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 @mixin text-label {
   font-size: var(--font-size-large-s);
   text-transform: var(--font-text-case-uppercase);
