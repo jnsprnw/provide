@@ -1,20 +1,4 @@
-<script context="module">
-	export const load = async ({ fetch }) => {
-		const res = await fetch("/api/meta");
-		const data = await res.json();
-		// console.log(data)
-		return {
-			props: {
-				meta: data
-			}
-		}
-	}
-
-</script>
-
 <script>
-	import { keyBy } from "lodash-es";
-	import { setContext } from 'svelte';
 	import Tabs from "$lib/helper/tabs/tabs.svelte";
 	import Tab from "$lib/helper/tabs/tab.svelte";
 	import SelectionMessage from "$lib/selection-message.svelte";
@@ -26,27 +10,7 @@
 	import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
 	import GeographySelection from "$lib/geography-selection/index.svelte";
 	import ScenarioSelection from "$lib/scenario-selection/index.svelte";
-	import { SECTORS, INDICATORS, CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR, GEOGRAPHY_TYPES } from '$lib/../stores/store.js';
-
-	export let meta;
-
-	GEOGRAPHY_TYPES.set(meta.geographyTypes);
-	// DICTIONARY_INDICATORS.set(keyBy(meta.indicators, 'uid'));
-	INDICATORS.set(meta.indicators);
-	SECTORS.set(meta.sectors);
-
-	setContext('meta', {
-		getGeographyTypes: () => meta.geographyTypes,
-		getContinents: () => meta.continents,
-		getAdmin0: () => meta.admin0,
-		getAdmin1: () => meta.admin1,
-		getCities: () => meta.cities,
-		getIconicRegions: () => meta.iconicRegions,
-		getScenarios: () => meta.scenarios,
-		getUnits: () => meta.units,
-		getSectors: () => meta.sectors,
-		getIndicators: () => meta.indicators
-	});
+	import { CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR } from '$lib/../stores/store.js';
 </script>
 
 <svelte:head>
