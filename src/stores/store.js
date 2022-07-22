@@ -40,18 +40,29 @@ export const AVAILABLE_INDICATORS = derived(
 );
 
 export const AVAILABLE_INDICATOR_GROUPS = derived(
-	[AVAILABLE_INDICATORS, DICTIONARY_SECTORS],
-	([$indicators, $sectors]) => compact(map(groupBy($indicators, 'sector'), (indicators, key) => {
-		const sector = get($sectors, key);
-		if (isUndefined(sector)) {
-			if (!isEmpty($sectors)) { // TODO: Check for null?
-				console.warn(`Sector with id ${key} was not found.`);
+	[AVAILABLE_INDICATORS, SECTORS],
+	([$indicators, $sectors]) => {
+		const groups = groupBy($indicators, 'sector');
+		return $sectors.map(sector => {
+			const { uid } = sector;
+			const indicators = get(groups, uid);
+			return {
+				sector,
+				indicators,
+				isAvailable: Boolean(indicators)
 			}
-			return null;
-		}
-		return {
-			sector,
-			indicators
-		}
-	}))
-);
+		})
+		// return compact(map(, (indicators, key) => {
+		// const sector = get($sectors, key);
+		// if (isUndefined(sector)) {
+		// 	if (!isEmpty($sectors)) { // TODO: Check for null?
+		// 		console.warn(`Sector with id ${key} was not found.`);
+		// 	}
+		// 	return null;
+		// }
+		// return {
+		// 	sector,
+		// 	indicators
+		// }
+	// }))
+});

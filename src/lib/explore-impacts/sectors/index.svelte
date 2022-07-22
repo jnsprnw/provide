@@ -10,8 +10,8 @@
 <div class="sector-selection">
 	<Tabs bind:selected={$CURRENT_SECTOR_INDEX}>
 		<span class="text-label text-label--bold">Sectors</span>
-		{#each $AVAILABLE_INDICATOR_GROUPS as { sector }}
-	  <Tab label={sector.label} icon={sector.icon} />
+		{#each $AVAILABLE_INDICATOR_GROUPS as { sector, isAvailable }}
+	  <Tab label={sector.label} icon={sector.icon} disabled={!isAvailable} />
 	  {/each}
 	  <svelte:fragment slot="content">
 	  	{#each $AVAILABLE_INDICATOR_GROUPS as { indicators }}
