@@ -27,7 +27,7 @@
 
 <div class="impacts-selection container">
 	<div class="wrapper">
-		<Tabs class="impact-tabs">
+		<Tabs type="menu">
 		  <TabPrimary label="Geography" selectedValues={$CURRENT_GEOGRAPHY?.label || null} missingValue="Select a geography" />
 		  <TabPrimary label="Scenarios" selectedValues={$CURRENT_SCENARIOS.map(d => d.label)} missingValue="Select at least one scenario" disabled={$CURRENT_GEOGRAPHY === null} />
 		  <TabPrimary label="Indicator" selectedValues={$CURRENT_INDICATOR?.label || null} missingValue="Select an indicator" disabled={$CURRENT_SCENARIOS.length === 0} />
@@ -50,7 +50,7 @@
 	<div class="wrapper">
 		<SelectionMessage />
 		{#if $CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS !== [] && $CURRENT_INDICATOR !== null}
-		<Tabs class="analysis-tabs">
+		<Tabs type="nav">
 		  <Tab label="Impact analysis" />
 		  <Tab label="Mitigation benefits" />
 		  <Tab label="Reversibility" />
@@ -78,8 +78,10 @@
 	}
 
 	.impacts-header {
-		background-color: var(--color-light-blue100);
-		padding: 2rem 0; // TODO
+		background-color: var(--color-light-blue100); // TODO
+		border-bottom: 1px solid var(--color-light-blue200); // TODO
+		padding: 2rem 0 6rem; // TODO
+		margin-bottom: -4rem;
 	}
 
 	.impacts-selection {

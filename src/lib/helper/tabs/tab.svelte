@@ -8,7 +8,7 @@
   export let tabindex = "0";
   export let id = "ccs-" + Math.random().toString(36);
   export let ref = null;
-  const { selectedTab, useAutoWidth, add, update, change } = getContext("Tabs");
+  const { selectedTab, add, update, change, type } = getContext("Tabs");
   add({ id, label, disabled });
   $: selected = $selectedTab === id;
 </script>
@@ -18,9 +18,11 @@
   tabindex="-1"
   role="presentation"
   class:tab={ true }
+  class={`tab-type-${type}`}
   aria-selected={selected}
   aria-disabled={disabled}
   aria-current={ selected ? loc : 'false' }
+  class:active={selected}
   {...$$restProps}
   on:click|preventDefault={() => {
     if (!disabled) {
@@ -46,9 +48,9 @@
     aria-selected="{selected}"
     aria-disabled="{disabled}"
     id="{id}"
-    class:tabs-link="{true}"
+    class:link="{true}"
   >
-    <i class="emoji">{ icon }</i>
+    {#if icon}<i class="emoji">{ icon }</i>{/if}
     <span>{ label }</span>
   </div>
 </li>
@@ -57,15 +59,21 @@
   @import "../../../styles/global.scss";
 
   .tab {
-    div {
-      display: flex;
-      padding: 0;
-      flex-direction: row;
-      align-items: center;
-      gap: var(--size-spacer-large-xs);
-      min-width: 170px;
-      
-      @include tab();
+    &.tab-type-list {
+      .link {
+        display: flex;
+        padding: 0;
+        flex-direction: row;
+        align-items: center;
+        gap: var(--size-spacer-large-xs);
+        min-width: 170px;
+        
+        @include tab();
+      }
+    }
+
+    &.tab-type-nav {
+      @include tab-nav-tab();
     }
   }
 </style>

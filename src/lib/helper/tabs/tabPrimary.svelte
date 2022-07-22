@@ -93,6 +93,7 @@
       grid-gap: 1rem; // TODO
       align-items: end;
       justify-content: space-between;
+      background-color: #fff;
 
       &.hasMoreItems {
         grid-template-columns: repeat(3, auto);

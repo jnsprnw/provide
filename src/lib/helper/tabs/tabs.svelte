@@ -1,29 +1,13 @@
 <script>
-  /** Specify the selected tab index */
+  export let type = 'list';
   export let selected = 0;
-  /**
-   * Specify the type of tabs
-   * @type {"default" | "container"}
-   */
-  export let type = "default";
-  /** Set to `true` for tabs to have an auto-width */
-  export let autoWidth = false;
-  /**
-   * Specify the ARIA label for the chevron icon
-   * @type {string}
-   */
-  // export let iconDescription = "Show menu options";
-  /** Specify the tab trigger href attribute */
-  export let triggerHref = "#";
   import { createEventDispatcher, afterUpdate, setContext, tick } from "svelte";
   import { writable, derived } from "svelte/store";
-  // import ChevronDown from "../icons/ChevronDown.svelte";
   const dispatch = createEventDispatcher();
   const tabs = writable([]);
   const tabsById = derived(tabs, (_) =>
     _.reduce((a, c) => ({ ...a, [c.id]: c }), {})
   );
-  const useAutoWidth = writable(autoWidth);
   const selectedTab = writable(undefined);
   const content = writable([]);
   const contentById = derived(content, (_) =>
@@ -32,11 +16,11 @@
   const selectedContent = writable(undefined);
   let refTabList = null;
   setContext("Tabs", {
+    type,
     tabs,
     contentById,
     selectedTab,
     selectedContent,
-    useAutoWidth,
     add: (data) => {
       tabs.update((_) => [..._, { ...data, index: _.length }]);
     },
@@ -77,7 +61,6 @@
     }
     prevIndex = currentIndex;
   });
-  let dropdownHidden = true;
   let currentIndex = selected;
   let prevIndex = -1;
   $: currentIndex = selected;
@@ -91,15 +74,12 @@
       selectedContent.set(currentContent.id);
     }
   }
-  $: if ($selectedTab) {
-    dropdownHidden = true;
-  }
-  $: useAutoWidth.set(autoWidth);
 </script>
 <div
+  {...$$restProps}
   role="navigation"
   class:tabs="{true}"
-  {...$$restProps}
+  class={`tabs-type-${type}`}
 >
   <ul
     bind:this="{refTabList}"
@@ -112,15 +92,35 @@
 <slot name="content" />
 
 <style lang="scss">
+  @import '../../../styles/global.scss';
+
   .tabs {
     .tabs__nav {
-      display: flex;
       padding: 0;
       margin: 0;
       list-style: none;
-      flex-direction: column;
-      row-gap: var(--size-space-large-xxs); // Vertical spacing
-      column-gap: var(--size-space-large-l); // Horizontal spacing
+      display: flex;
+    }
+
+    &.tabs-type-nav {
+      // Explore Navigation und Impacts Navigation
+      @include tab-nav-wrapper();
+    }
+
+    &.tabs-type-list {
+      // Geography-, Scenario-, und Sector-Liste
+      .tabs__nav {
+        flex-direction: column; // Vertical
+        row-gap: var(--size-space-large-xxs); // Vertical spacing
+      }
+    }
+
+    &.tabs-type-menu {
+      // Geography-, Scenario- und Indicator-Selection
+      .tabs__nav {
+        flex-direction: row; // Horizontal
+        column-gap: var(--size-space-large-l); // Horizontal spacing
+      }
     }
   }
 </style>

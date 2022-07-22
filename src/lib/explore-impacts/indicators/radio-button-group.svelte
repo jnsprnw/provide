@@ -70,10 +70,10 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem; // TODO
+    justify-items: stretch;
 
     .label {
-      grid-column-start: 0;
-      grid-column-end: 3;
+      grid-column: 1 / span 3;
     }
   }
 </style>

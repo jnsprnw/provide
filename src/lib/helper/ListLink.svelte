@@ -10,43 +10,20 @@
 	$: ariaLabel = isActive ? loc : 'false';
 </script>
 
-<li class:list-link--disabled={disabled} class="list-link--{type}" class:list-link--active={isActive}>
+<li class="list-link--{type}" class:disabled={disabled} class:active={isActive}>
 	<a
+		class="link"
 		href={`/${link}`}
 		aria-current={ariaLabel}
 		aria-disabled={disabled}><slot /></a>
 </li>
 
 <style lang="scss">
+	@import '../../styles/global.scss';
+
 	li {
-		&.list-link--active {
-			&.list-link--primary {
-				// background-color: var(--color-light-green100);
-				border-bottom-color: var(--color-functional-accent);
-
-				a {
-					color: var(--color-functional-accent);
-				}
-			}
-		}
-
-		&.list-link--primary {
-			padding: var(--size-space-large-xs) 0;
-			border-bottom: var(--stroke-active-bold) solid transparent;
-			transition: border-bottom-color 0.3s ease-out; // TODO
-
-			a {
-				color: var(--color-brand-stronger);
-				transition: color 0.3s ease-out; // TODO
-			}
-
-			&.list-link--disabled,
-		  &.list-link--disabled:hover {
-		  	a {
-		  		color: var(--color-light-blue300); // TODO
-		    	cursor: not-allowed;
-		  	}
-		  }
-		}
-	}
+	  &.list-link--tab {
+	  	@include tab-nav-tab();
+  	}
+  }
 </style>

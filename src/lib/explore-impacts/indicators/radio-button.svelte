@@ -82,5 +82,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 0.5rem; // TODO
+    height: 100%;
+    line-height: 1.2; // TODO
+    align-items: center;
   }
 </style>
