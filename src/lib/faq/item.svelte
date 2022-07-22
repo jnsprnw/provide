@@ -1,4 +1,5 @@
 <script>
+  import Accordion from "$lib/helper/icons/Accordion.svelte";
   // Adapted from by https://github.com/carbon-design-system/carbon-components-svelte/blob/master/src/Accordion/AccordionItem.svelte
   /** Set to `true` to open the first accordion item */
   export let open = false;
@@ -62,6 +63,7 @@
       <div class:accordion__title="{true}">
         <slot name="term" />
       </div>
+      <Accordion isOpen={open} />
     </button>
   <div
     itemscope

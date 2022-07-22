@@ -85,7 +85,7 @@
 	}
 
 	.impacts-selection {
-		border-bottom: 1px solid var(--color-light-blue200);
+		// border-bottom: 1px solid var(--color-light-blue200); // I think no border is better
 	}
 
 	.explore-description {

@@ -13,7 +13,7 @@
       <h1>Provide</h1>
       <ul class="menu-main">
         <ListLink {currentPath} link="">Home</ListLink>
-        <ListLink {currentPath} link="explore" startsWith={true}>Explore</ListLink>
+        <ListLink {currentPath} link="explore/impacts" startsWith={true}>Explore</ListLink>
         <ListLink {currentPath} link="about">About</ListLink>
         <ListLink {currentPath} link="faq">FAQ</ListLink>
         <ListLink {currentPath} link="methodology">Methodology</ListLink>

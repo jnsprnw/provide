@@ -1,6 +1,7 @@
 <script>
   import { getContext } from "svelte";
   import { isArray } from "lodash-es";
+  import Accordion from "$lib/helper/icons/Accordion.svelte";
 
   export let loc = "step";
   export let label = "";
@@ -61,11 +62,7 @@
   >
     <strong>{ displayedValue }</strong>
     {#if valuesCounter}<small title={otherValues.join(' and ')}>+{ valuesCounter } more</small>{/if}
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-direction" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-       <path d="M9 10l3 -3l3 3" transform={`translate(0 ${selected ? -3 : 0})`}></path>
-       <path d="M9 14l3 3l3 -3" transform={`translate(0 ${selected ? 3 : 0})`}></path>
-    </svg>
+    <Accordion isOpen={selected} />
   </span>
 </li>
 
@@ -99,14 +96,6 @@
         grid-template-columns: repeat(3, auto);
       }
 
-      svg {
-        align-self: center;
-
-        path {
-          transition: transform 0.3s ease-out, color 0.3s ease-out; // TODO: Not working in Firefox
-        }
-      }
-
       &.tabs--missing {
         * {
           font-style: var(--font-font-weight-regular-italic); // TODO
@@ -118,10 +107,6 @@
     &[aria-selected="true"] {
       span {
         box-shadow: inset 0px 0px 0px var(--stroke-active) var(--color-functional-accent);
-      }
-
-      svg {
-        color: var(--color-functional-accent);
       }
     }
 

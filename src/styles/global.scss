@@ -155,7 +155,7 @@ $extra-wide: 1700px !default;
       color: var(--color-functional-accent);
 
       .title {
-        font-weight: var(--font-font-weight-bold);
+        font-weight: var(--font-font-weight-bold) !important;
       }
     }
   }

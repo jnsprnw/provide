@@ -51,7 +51,7 @@
     class:link="{true}"
   >
     {#if icon}<i class="emoji">{ icon }</i>{/if}
-    <span>{ label }</span>
+    <span class="title">{ label }</span>
   </div>
 </li>
 

@@ -111,7 +111,7 @@
       // Geography-, Scenario-, und Sector-Liste
       .tabs__nav {
         flex-direction: column; // Vertical
-        row-gap: var(--size-space-large-xxs); // Vertical spacing
+        row-gap: var(--size-space-large-xxxs); // Vertical spacing
       }
     }
 
