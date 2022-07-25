@@ -1,6 +1,6 @@
 <script>
 	import qs from 'qs';
-	import { set, has, forEach } from "lodash-es";
+	import { set, has, forEach, get } from "lodash-es";
 	import { buildDataImpactTime } from '$lib/utils.js';
 	import { CURRENT_INDICATOR, IMPACT_TIME_DATA, CURRENT_INDICATOR_UID, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID } from '$lib/../stores/store.js';
 
@@ -143,7 +143,7 @@
 		  		forEach(_geographies, (_indicators, _geography) => {
 		  			forEach(_indicators, (_data, _indicator) => {
 		  				console.log(`Adding ${_scenario}, ${_geography}, ${_indicator}`, data)
-		  				set(obj, [_scenario, _geography, _indicator], buildDataImpactTime(_data, datum.yearStart, datum.yearStep));
+		  				set(obj, [_scenario, _geography, _indicator], { status: 'success', data: buildDataImpactTime(_data, datum.yearStart, datum.yearStep) });
 		  			})
 		  		})
 		  	})
@@ -159,4 +159,10 @@
 </script>
 
 <h2>{ $CURRENT_INDICATOR?.label }</h2>
-<h3>{ JSON.stringify($IMPACT_TIME_DATA) }</h3>
+{#each scenarios as scenario}
+	{#if get($IMPACT_TIME_DATA, [scenario, geography, indicator, 'status']) === 'success' }
+	<h3>Data sample: { JSON.stringify(get($IMPACT_TIME_DATA, [scenario, geography, indicator, 'data', 0, 0])) }</h3>
+	{:else}
+	<h3>Loading {scenario} {geography} {indicator}</h3>
+	{/if}
+{/each}
