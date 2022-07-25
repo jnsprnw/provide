@@ -1,6 +1,7 @@
 <script>
 	import qs from 'qs';
 	import { set, has, forEach } from "lodash-es";
+	import { buildDataImpactTime } from '$lib/utils.js';
 	import { CURRENT_INDICATOR, IMPACT_TIME_DATA, CURRENT_INDICATOR_UID, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID } from '$lib/../stores/store.js';
 
 	let indicator = null;
@@ -142,7 +143,7 @@
 		  		forEach(_geographies, (_indicators, _geography) => {
 		  			forEach(_indicators, (_data, _indicator) => {
 		  				console.log(`Adding ${_scenario}, ${_geography}, ${_indicator}`, data)
-		  				set(obj, [_scenario, _geography, _indicator], _data);
+		  				set(obj, [_scenario, _geography, _indicator], buildDataImpactTime(_data, datum.yearStart, datum.yearStep));
 		  			})
 		  		})
 		  	})
