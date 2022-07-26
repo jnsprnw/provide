@@ -4,7 +4,10 @@
 	import { geoPath, geoEqualEarth } from 'd3-geo';
 	import { feature } from 'topojson-client';
 	import * as world from './ne_110m_admin_0_countries.json';
-	import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+	import { CURRENT_GEOGRAPHY, HOVER_GEOGRAPHY_UID } from '$lib/../stores/store.js';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
 
 	const MAP_KEY = 'ne_110m_admin_0_countries';
 
@@ -53,14 +56,8 @@
     }
   })
 
-  $: activeCountries = countries.filter(({ code }) => code === $CURRENT_GEOGRAPHY.uid)
-
-  // $: ([validCountries, invalidCountries] = partition(countries, d => !d[KEY_DISABLED]))
-
-  // Get the list of active countries
-  // $: activeElements = map(activeCountries, country => {
-  //   return get(countries, country)
-  // })
+  $: selectedCountries = countries.filter(({ code }) => code === $CURRENT_GEOGRAPHY?.uid);
+  $: hoveredCountries = countries.filter(({ code }) => code === $HOVER_GEOGRAPHY_UID);
 
   // Fetch the map data on mount
   onMount(async () => {
@@ -70,6 +67,13 @@
   const resizeSVG = () => {
     ({ width, height } = svg.getBoundingClientRect());
   };
+
+  function handleOver (item) {
+    $HOVER_GEOGRAPHY_UID = item;
+    dispatch('over', {
+			item
+		});
+  }
 </script>
 
 <figure class="page-map" role="main">
@@ -77,11 +81,16 @@
     <g>
       <g role="list">
         {#each countries as country}
-          <path d={country.d} />
+          <path d={country.d} on:mouseover={() => handleOver(country.code)} />
         {/each}
       </g>
       <g role="list">
-        {#each activeCountries as country}
+        {#each hoveredCountries as country}
+          <path d={country.d} class="hover" />
+        {/each}
+      </g>
+      <g role="list">
+        {#each selectedCountries as country}
           <path d={country.d} class="active" />
         {/each}
       </g>
@@ -93,6 +102,10 @@
 <style lang="scss">
 	path {
 		fill: var(--color-light-blue200);
+
+		&.hover {
+			fill: var(--color-light-blue400);
+		}
 
 		&.active {
 			fill: var(--color-functional-accent);

@@ -8,6 +8,7 @@ export const CURRENT_INDICATOR = writable(null);
 export const DICTIONARY_INDICATORS = derived(INDICATORS, $indicators => keyBy($indicators, 'uid'));
 
 export const CURRENT_GEOGRAPHY = writable(null);
+export const HOVER_GEOGRAPHY_UID = writable(null);
 export const CURRENT_SCENARIOS = writable([]);
 
 export const DICTIONARY_SECTORS = derived(SECTORS, $sectors => keyBy($sectors, 'uid'));
