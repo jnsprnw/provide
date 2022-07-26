@@ -28,6 +28,14 @@ export const formatValues = function (value, unit, isRange = false) {
 	}
 }
 
+export const loadFromAPI = function (url, fetch) {
+	return new Promise(async (resolve) => {
+		const res = await fetch(`https://provide-cms.herokuapp.com/api/${url}`);
+	  const data = await res.json();
+	  resolve(data.data);
+	});
+}
+
 export const getUID = function (obj) {
 	return obj?.uid || null;
 }

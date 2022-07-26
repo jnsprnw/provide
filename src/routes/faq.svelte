@@ -1,11 +1,11 @@
 <script context="module">
 	import { parse } from 'marked';
 	import { groupBy } from "lodash-es";
+	import { loadFromAPI } from '$lib/utils.js';
 
-  export const load = async () => {
-    const res = await fetch('https://provide-cms.herokuapp.com/api/faqs');
-    const data = await res.json();
-    const questions = data.data.map((d) => {
+  export const load = async ({ fetch }) => {
+  	const data = await loadFromAPI('faqs', fetch);
+    const questions = data.map((d) => {
 			const { question, answer } = d.attributes;
 			return {
 				question,
@@ -15,7 +15,6 @@
 		});
 
 		const groups = Object.entries(groupBy(questions, 'topic'));
-		console.log({ groups })
 
     return {
     	props: {
