@@ -1,59 +1,70 @@
 <script>
 	import { line, area, curveCardinal } from 'd3-shape';
-	import { min, max } from 'd3-array';
+	import { extent } from 'd3-array';
 	import { scaleLinear } from 'd3-scale';
-	import { range } from "lodash-es";
+	import { flatten } from "lodash-es";
+	import { get } from "lodash-es";
+	import { IMPACT_TIME_DATA, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
 
-	import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
 	export let indicator = '';
 
-	let value = 0;
-	const data = range(20).map(d => {
-		value += Math.random() * 10;
-		const min = value - Math.random() * 50;
-		const max = value + Math.random() * 50;
-		return {
-			date: 2000 + d,
-			value,
-			min,
-			max
-		}
-	})
+	function buildDatum(data, scenarios, geography, indicator) {
+		return scenarios.map(scenario => {
+			const datum = get(data, [scenario, geography, indicator?.uid, 'data']);
+			if (datum) {
+				return datum;
+			} else {
+				return [[null, null, null, null]]
+			}
+		})
+	}
+
+	$: data = buildDatum($IMPACT_TIME_DATA, $CURRENT_SCENARIOS_UID, $CURRENT_GEOGRAPHY_UID, indicator)
+
+	$: years = flatten(data.map(year => year.map(d => d[0])))
+
+	$: values = flatten(flatten(data.map(year => year.map(([, v1, v2, v3]) => [v1, v2, v3]))))
 
 	let width = 10;
 	let height = 10;
 
   $: x = scaleLinear()
-	    .domain([2000, 2020])
+	    .domain(extent(years))
 	    .range([0, width]);
 
   $: y = scaleLinear()
-    .domain([min(data.map(({ min }) => min)), max(data.map(({ max }) => max))])
+    .domain(extent(values))
     .range([height, 0]);
 
   $: lineGenerator = line()
   	.curve(curveCardinal) // TODO: Probably without
-    .x(d => x(d.date))
-    .y(d => y(d.value));
+    .x(d => x(d[0]))
+    .y(d => y(d[1]));
 
   $: areaGenerator = area()
   	.curve(curveCardinal) // TODO: Probably without
-    .x(d => x(d.date))
-    .y0(d => y(d.min))
-    .y1(d => y(d.max));
+    .x(d => x(d[0]))
+    .y0(d => y(d[2]))
+    .y1(d => y(d[3]));
 
-	$: dLine = lineGenerator(data);
-	$: dArea = areaGenerator(data);
+	$: lines = data.map(scenario => lineGenerator(scenario));
+	$: areas = data.map(scenario => areaGenerator(scenario));
 
 	$: title = `This chart displays ${indicator?.label} in ${$CURRENT_GEOGRAPHY?.label} starting in year TODO until TODO`
 </script>
 
 <div class="line-chart--preview" bind:clientWidth={width} bind:clientHeight={height} {title}>
 	<svg style={`width: ${width}px; height: ${height}px`}>
-		<path d={dArea} class="chart-area" />
-		<path d={dLine} class="chart-line" />
+		{#if data.length === 1}
+		{#each areas as area}
+		<path d={area} class="chart-area" />
+		{/each}
+		{/if}
+		{#each lines as line, i}
+		<path d={line} class={`chart-line color-line-${i}`} />
+		{/each}
 		<desc>
-			{ title }
+			{ JSON.stringify(indicator) } { $CURRENT_GEOGRAPHY_UID } { $CURRENT_SCENARIOS_UID }
 		</desc>
 	</svg>
 </div>
@@ -65,7 +76,17 @@
 
 		.chart-line {
 			fill: none;
-			stroke: var(--color-light-blue700); // TODO
+			// stroke: var(--color-light-blue700); // TODO
+
+			&.color-line-0 {
+	      stroke: var(--color-light-category-0);
+	    }
+	    &.color-line-1 {
+	      stroke: var(--color-light-category-1);
+	    }
+	    &.color-line-2 {
+	      stroke: var(--color-light-category-2);
+	    }
 		}
 
 		.chart-area {

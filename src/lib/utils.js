@@ -44,7 +44,7 @@ export const buildDataImpactTime = function (data, year, step) {
 	const datum = [];
 	const length = data['median'].length;
 	for (let i = 0; i < length; i++) {
-		datum.push([year + i * step, data['median'][i], data['p10'], data['p90']])
+		datum.push([year + i * step, data['median'][i], data['p10'][i], data['p90'][i]])
 	}
 	return datum;
 }
