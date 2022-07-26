@@ -5,6 +5,7 @@
   import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
   import TileGroup from "$lib/helper/tiles/TileGroup.svelte";
   import RadioTile from "$lib/helper/tiles/RadioTile.svelte";
+  import Map from "./Map.svelte";
   import { keyBy, get, sortBy } from "lodash-es";
 
   const { getAdmin0 } = getContext('meta');
@@ -72,7 +73,7 @@
     </VirtualList>
   </TileGroup>
 
-  <h2>Map displaying { $CURRENT_GEOGRAPHY }</h2>
+  <Map />
 </div>
 
 <style lang="scss">
