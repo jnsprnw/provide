@@ -12,7 +12,21 @@ export const impactTimeDistribution = derived(
   async (stores, set) => {
     if (!browser) return;
     const response = await fetch("/api/impact-time-distribution");
-    const data = await response.json();
-    set(data);
+    const body = await response.json();
+    const mean = body.data.mean.map((value, xIndex) => ({
+      value,
+      year: new Date(body.yearStart + xIndex, 0, 1),
+    }));
+
+    const distribution = body.data.distribution.map(
+      (yearDistribution, xIndex) =>
+        yearDistribution.map((dist, yIndex) => ({
+          value: body.valueStart + yIndex * body.valueStep,
+          year: body.yearStart + xIndex * body.yearStep,
+          z: dist,
+        }))
+    );
+
+    set({ mean, distribution });
   }
 );

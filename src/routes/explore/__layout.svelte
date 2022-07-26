@@ -19,9 +19,6 @@
     INDICATORS,
     GEOGRAPHY_TYPES,
   } from "$lib/../stores/store.js";
-  import { impactTimeDistribution } from "$lib/api/index.js";
-
-  $: console.log($impactTimeDistribution);
 
   export let meta;
 
