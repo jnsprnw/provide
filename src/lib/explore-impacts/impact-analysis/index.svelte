@@ -10,7 +10,7 @@
   } from "$lib/../stores/store.js";
   import {
     IMPACT_TIME_DISTRIBUTION_DATA,
-    IMPACT_TIME_DATA_2,
+    IMPACT_TIME_DATA_TEST,
   } from "$lib/api/endpoints.js";
   import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
 
@@ -53,7 +53,7 @@
   {/if}
 {/each}
 
-{#if $IMPACT_TIME_DISTRIBUTION_DATA.status === "success"}
+{#if $IMPACT_TIME_DISTRIBUTION_DATA?.status === "success"}
   <div class="distribution-chart">
     <LineDistributionChart
       mean={$IMPACT_TIME_DISTRIBUTION_DATA.mean}

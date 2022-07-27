@@ -88,7 +88,7 @@ export const IMPACT_TIME_DISTRIBUTION_DATA = derived(
   }
 );
 
-export const IMPACT_TIME_DATA_2 = derived(
+export const IMPACT_TIME_DATA_TEST = derived(
   [CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, AVAILABLE_INDICATORS_UID],
   async (stores, set) => {
     if (stores.some((d) => !d || !d.length)) {
