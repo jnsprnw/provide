@@ -8,12 +8,33 @@ IMPACT_TIME_DATA.subscribe(value => {
   data = value;
 });
 
-function timeout (ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function checkDataInCache (cache, indicators, geography, scenario) {
+  console.group(`Checking for ${indicators.length} requests in Cache.`);
+  const requests = indicators.filter(indicator => {
+    const hasRequestInCache = has(cache, [scenario, geography, indicator]);
+    if (hasRequestInCache) {
+      console.info(`Indicator ${indicator} for ${geography} and ${scenario} is in Cache.`);
+      return false;
+    } else {
+      console.info(`Indicator ${indicator} for ${geography} and ${scenario} is NOT in Cache.`);
+      return true;
+    }
+  });
+  if (requests.length) {
+    console.log(`${requests.length} requests are not in cache.`);
+  } else {
+    console.log(`All requests are in cache.`);
+  }
+  console.groupEnd();
+  return requests;
+}
+
+function timeout () {
+  return new Promise(resolve => setTimeout(resolve, 3000));
 }
 
 const fetchImpactTime = async (indicators, geography, scenario, query) => {
-	await timeout(3000);
+	await timeout();
   let obj = {};
 	indicators.forEach(indicator => {
 		set(obj, [scenario, geography, indicator], {
@@ -89,18 +110,7 @@ const fetchImpactTime = async (indicators, geography, scenario, query) => {
 export const requestData = async (indicators, geography, scenario) => {
   console.group('Requesting Impact Time');
   console.info({ indicators, geography, scenario })
-  console.group('Checking for data in Cache.');
-  const requests = indicators.filter(indicator => {
-    const hasRequestInCache = has(data, [scenario, geography, indicator])
-    if (hasRequestInCache) {
-      console.info(`Indicator ${indicator} for ${geography} and ${scenario} is in Cache.`);
-      return false;
-    } else {
-      console.info(`Indicator ${indicator} for ${geography} and ${scenario} is NOT in Cache.`);
-      return true;
-    }
-  })
-  console.groupEnd();
+  const requests = checkDataInCache(data, indicators, geography, scenario)
   
   if (requests.length) {
     console.log(`Building request with ${requests.length} scenarios`);
@@ -132,8 +142,6 @@ export const requestData = async (indicators, geography, scenario) => {
       })
       return obj;
     });
-  } else {
-    console.log(`All requests are in cache.`);
   }
   console.groupEnd();
 }
