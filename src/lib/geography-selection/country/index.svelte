@@ -1,11 +1,12 @@
 <script>
   import { getContext } from 'svelte';
-  import VirtualList from '@sveltejs/svelte-virtual-list';
+  import VirtualList from 'svelte-virtual-list-ce';
   import Fuse from 'fuse.js';
-  import { CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+  import { CURRENT_GEOGRAPHY, HOVER_GEOGRAPHY_UID } from '$lib/../stores/store.js';
   import TileGroup from "$lib/helper/tiles/TileGroup.svelte";
   import RadioTile from "$lib/helper/tiles/RadioTile.svelte";
-  import { keyBy, get, sortBy } from "lodash-es";
+  import Map from "./Map.svelte";
+  import { keyBy, get, sortBy, findIndex } from "lodash-es";
 
   const { getAdmin0 } = getContext('meta');
   const countries = getAdmin0();
@@ -58,21 +59,36 @@
       matches
     }
   });
+
+  function handleOver (item) {
+    $HOVER_GEOGRAPHY_UID = item?.item?.uid;
+  }
+
+  function handleOverMap ({ detail }) {
+    if (detail?.item) {
+      const index = findIndex(results, ({ item }) => item.uid === detail?.item);
+
+      if (index >= 0) {
+        scrollToIndex(index);
+      }
+    }
+  }
+
+  let scrollToIndex;
 </script>
 
 <div class="selection-country-wrapper">
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
     <input type="text" bind:value={term} placeholder="Search…" />
-    <VirtualList items={results} let:item height="200px"> <!-- TODO: 200px -->
-      <RadioTile value={item.item}>
+    <VirtualList items={results} let:item height="200px" bind:scrollToIndex> <!-- TODO: 200px -->
+      <RadioTile value={item.item} on:mouseover={() => handleOver(item)}>
         <span>{#if item.item.continent}{ item.item.continent }{/if}</span>
         <span>{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i>{/if}</span>
         <span>{ @html item.label }</span>
       </RadioTile>
     </VirtualList>
   </TileGroup>
-
-  <h2>Map displaying { $CURRENT_GEOGRAPHY }</h2>
+  <Map on:over={handleOverMap} />
 </div>
 
 <style lang="scss">

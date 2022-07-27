@@ -1,4 +1,5 @@
 <script>
+  import { requestData } from "$lib/api/impact-time.js";
   import Tabs from "$lib/helper/tabs/tabs.svelte";
   import Tab from "$lib/helper/tabs/tab.svelte";
   import SelectionMessage from "$lib/selection-message.svelte";
@@ -14,7 +15,22 @@
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
     CURRENT_INDICATOR,
+    AVAILABLE_INDICATORS,
   } from "$lib/../stores/store.js";
+
+  function buildRequests(indicators, geography, scenarios) {
+    const indicatorList = indicators.map(({ uid }) => uid);
+    const scenarioList = scenarios.map(({ uid }) => uid);
+    scenarioList.forEach((scenario) => {
+      requestData(indicatorList, geography.uid, scenario);
+    });
+  }
+
+  $: buildRequests(
+    $AVAILABLE_INDICATORS,
+    $CURRENT_GEOGRAPHY,
+    $CURRENT_SCENARIOS
+  );
 </script>
 
 <svelte:head>

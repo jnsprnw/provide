@@ -15,8 +15,8 @@
         <ListLink {currentPath} link="">Home</ListLink>
         <ListLink {currentPath} link="explore/impacts" startsWith={true}>Explore</ListLink>
         <ListLink {currentPath} link="about">About</ListLink>
-        <ListLink {currentPath} link="faq">FAQ</ListLink>
-        <ListLink {currentPath} link="methodology">Methodology</ListLink>
+        <ListLink {currentPath} link="technical-documentation">Technical Documentation</ListLink>
+        <ListLink {currentPath} link="contact-imprint">Contact and Imprint</ListLink>
       </ul>
     </div>
   </nav>
@@ -57,6 +57,8 @@
     .menu-main {
       display: flex;
       gap: var(--font-size-large-l);
+
+      white-space: nowrap
     }
   }
 

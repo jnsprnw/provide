@@ -54,7 +54,7 @@
 
   p:hover {
     cursor: pointer;
-    color: blue;
+    color: blue; // TODO
   }
 
   p.isActive {
