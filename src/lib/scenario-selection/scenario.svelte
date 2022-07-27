@@ -48,11 +48,12 @@
   $: title = !title && isTruncated ? refLabel?.innerText : title;
   $: disabled = isFull && !checked;
 </script>
+
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 
 <div
-  class:form-item="{true}"
-  class:checkbox-wrapper="{true}"
+  class:form-item={true}
+  class:checkbox-wrapper={true}
   {...$$restProps}
   on:click
   on:mouseover
@@ -60,21 +61,21 @@
   on:mouseleave
 >
   <input
-    bind:this="{ref}"
+    bind:this={ref}
     type="checkbox"
-    value="{value}"
-    checked="{checked}"
-    disabled="{disabled}"
-    id="{id}"
-    indeterminate="{indeterminate}"
-    name="{name}"
-    required="{required}"
-    readonly="{readonly}"
-    class:checkbox="{true}"
-    on:change="{() => {
+    {value}
+    {checked}
+    {disabled}
+    {id}
+    {indeterminate}
+    {name}
+    {required}
+    {readonly}
+    class:checkbox={true}
+    on:change={() => {
       if (useGroup) {
         if (group.includes(value)) {
-          group = group.filter((_value) => _value !== value)
+          group = group.filter((_value) => _value !== value);
         } else {
           if (!isFull) {
             group = [...group, value];
@@ -83,29 +84,62 @@
       } else {
         checked = !checked;
       }
-    }}"
+    }}
     on:change
     on:blur
   />
   <label
-    for="{id}"
-    title="{title}"
-    class:checkbox-label="{true}"
+    for={id}
+    {title}
+    class:checkbox-label={true}
     aria-disabled={disabled}
-    class={checked ? `checked-${position}` : ''}>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon checkbox" width="24" height="24" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="4" y="4" width="16" height="16" rx="2" class="box" stroke="currentColor" fill={checked ? 'currentColor' : 'none'} stroke-width="1"></rect>
+    class={checked ? `checked-${position}` : ""}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon checkbox"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect
+        x="4"
+        y="4"
+        width="16"
+        height="16"
+        rx="2"
+        class="box"
+        stroke="currentColor"
+        fill={checked ? "currentColor" : "none"}
+        stroke-width="1"
+      />
       {#if checked}
-      <path d="M9 12l2 2l4 -4" class="mark" stroke="currentColor" fill="none" stroke-width="2"></path>
+        <path
+          d="M9 12l2 2l4 -4"
+          class="mark"
+          stroke="currentColor"
+          fill="none"
+          stroke-width="2"
+        />
       {/if}
     </svg>
-    <div
-      bind:this="{refLabel}"
-      class:checkbox-label-text="{true}"
-    >
+    <div bind:this={refLabel} class:checkbox-label-text={true}>
       {labelText}
     </div>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon color-indicator" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="none" fill="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="icon color-indicator"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="none"
+      fill="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <circle cx="12" cy="12" r="5" />
     </svg>
   </label>
@@ -120,7 +154,7 @@
 
   .checkbox-label {
     @include tab();
- 
+
     display: grid;
     grid-template-columns: auto 1fr auto;
     grid-gap: 1rem; // TODO

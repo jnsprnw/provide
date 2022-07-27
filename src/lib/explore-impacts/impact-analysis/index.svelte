@@ -8,10 +8,13 @@
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
   } from "$lib/../stores/store.js";
-  // import { impactTimeDistribution } from "$lib/api/index.js";
-  // import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
+  import {
+    IMPACT_TIME_DISTRIBUTION_DATA,
+    IMPACT_TIME_DATA_2,
+  } from "$lib/api/endpoints.js";
+  import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
 
-  // $: console.log($impactTimeDistribution);
+  $: console.log($IMPACT_TIME_DISTRIBUTION_DATA);
 
   let indicator = null;
   CURRENT_INDICATOR_UID.subscribe((value) => {
@@ -50,14 +53,15 @@
   {/if}
 {/each}
 
-<!-- {#if $impactTimeDistribution}
+{#if $IMPACT_TIME_DISTRIBUTION_DATA.status === "success"}
   <div class="distribution-chart">
     <LineDistributionChart
-      mean={$impactTimeDistribution.mean}
-      distribution={$impactTimeDistribution.distribution}
+      mean={$IMPACT_TIME_DISTRIBUTION_DATA.mean}
+      distribution={$IMPACT_TIME_DISTRIBUTION_DATA.distribution}
     />
   </div>
-{/if} -->
+{/if}
+
 <style lang="scss">
   .distribution-chart {
     height: 400px;
