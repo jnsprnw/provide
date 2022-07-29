@@ -11,6 +11,10 @@
   import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
   import GeographySelection from "$lib/geography-selection/index.svelte";
   import ScenarioSelection from "$lib/scenario-selection/index.svelte";
+
+  import Current from "$lib/explore-impacts/Test/Current.svelte";
+  import Custom from "$lib/explore-impacts/Test/Custom.svelte";
+
   import {
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
@@ -45,6 +49,8 @@
         tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
         sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
         ut labore et dolore magna aliqua.
+        <Current /><br />
+        <Custom />
       </p>
     </div>
   </div>

@@ -1,35 +1,22 @@
-import qs from "qs";
-import { derived } from "svelte/store";
-import { fetchOrRetrieve } from "./utils";
+import { writable, derived } from "svelte/store";
+import { END_IMPACT_TIME, END_DISTRIBUTION } from "$lib/../config.js";
+import { handle } from "$lib/api/api.js";
 import {
-  CURRENT_SCENARIOS_UID,
   CURRENT_GEOGRAPHY_UID,
-  AVAILABLE_INDICATORS_UID,
-} from "$lib/../stores/store.js";
+  CURRENT_SCENARIOS_UID,
+  CURRENT_INDICATOR_UID,
+} from "./store.js";
 
-export default derived(
-  [CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, AVAILABLE_INDICATORS_UID],
-  async (stores, set) => {
-    if (stores.some((d) => !d || !d.length)) {
-      set(null);
-      return;
-    }
+export const IMPACT_TIME_CACHE = writable({});
 
-    const [geography, scenarios, indicators] = stores;
-    const urls = scenarios.map((scenario) => {
-      const query = qs.stringify(
-        {
-          scenario,
-          geography,
-          indicators,
-        },
-        {
-          encodeValuesOnly: true,
-        }
-      );
-      return `/api/impact-time?${query}`;
-    });
-
-    fetchOrRetrieve(urls, set);
+export const IMPACT_TIME_DATA = derived(
+  [
+    IMPACT_TIME_CACHE,
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_INDICATOR_UID,
+    CURRENT_SCENARIOS_UID,
+  ],
+  async ([cache, $geo, $indicator, $scenarios], set) => {
+    set(handle(END_IMPACT_TIME, "get"));
   }
 );
