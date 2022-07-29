@@ -1,3 +1,6 @@
+export const END_IMPACT_TIME = "impact-time"
+export const END_DISTRIBUTION = "dist";
+
 export const GEOGRAPHY_TYPES = [
   {
     "uid": "admin0",
