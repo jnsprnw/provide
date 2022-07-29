@@ -3,6 +3,8 @@ import has from 'lodash/has';
 import set from "lodash/set";
 import compact from "lodash/compact";
 import { handle } from "$lib/api/api.js";
+import qs from "qs";
+import { browser } from "$app/env";
 
 const formatCelius = format(".1f");
 const formatPercent = format(".0%");
@@ -57,10 +59,20 @@ function timeout() {
 	return new Promise((resolve) => setTimeout(resolve, 3000));
 }
 
-async function fetch (params) {
-	console.log("loading:", { params });
-	await timeout();
-	return 10;
+async function request (params, url) {
+	if (!browser) return undefined;
+	const query = qs.stringify(
+    params,
+    {
+      encodeValuesOnly: true,
+    }
+  );
+	console.log("loading:", { params, url, query }, `${url}?${query}`);
+	const response = await fetch(`${url}?${query}`);
+  const body = await response.json();
+  console.log({ body })
+	// await timeout();
+	return body;
 }
 
 export function hasInObject (data, addr, param) {
@@ -75,19 +87,19 @@ function updateDate (old, addr, newData) {
 	return obj;
 }
 
-async function load (cache, endpoint, params) {
+async function load (cache, endpoint, params, url) {
 	// addr will always returns an array of scenarios, but it is only one element long given the params
 	const addr = handle(endpoint, "addr", params)[0];
 	cache.update((old) => updateDate(old, addr, "Loading"))
-	const newData = await fetch(params);
+	const newData = await request(params, url);
 	cache.update((old) => updateDate(old, addr, newData))
 }
 
-export function check (endpoint, store, missing) {
+export function check (endpoint, store, missing, url) {
 	// "has" returns an array with all the missing data.
 	// const missing = handle(endpoint, "has", params);
 	missing.forEach(request => {
 		// We load each missing data point. In our case, a list of scenarios with other parameters
-		load(store, endpoint, request);
+		load(store, endpoint, request, url);
 	})
 }
