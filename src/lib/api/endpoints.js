@@ -40,77 +40,18 @@ const fetchOrRetrieve = async (urls, set, process) => {
  *  ENDPOINTS
  */
 
-export const IMPACT_TIME_DISTRIBUTION_DATA = derived(
-  [CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID],
-  async (stores, set) => {
-    if (stores.some((d) => !d || !d.length)) {
-      set(null);
-      return;
-    }
+// {
+//   scenarioId: {
+//     geoId: {
+//       indicatorId: {
+//         data
+//       }
+//     }
+//   }
+// }
 
-    const [geography, scenarios, indicator] = stores;
-    const urls = scenarios.map((scenario) => {
-      const query = qs.stringify(
-        {
-          scenario,
-          geography,
-          indicator,
-        },
-        {
-          encodeValuesOnly: true,
-        }
-      );
-      return `/api/impact-time-distribution?${query}`;
-    });
-
-    const processData = (responses) => {
-      const data = responses.map((body) => {
-        const mean = body.data.mean.map((value, xIndex) => ({
-          value,
-          year: new Date(body.yearStart + xIndex, 0, 1),
-        }));
-
-        const distribution = body.data.distribution.map(
-          (yearDistribution, xIndex) =>
-            yearDistribution.map((dist, yIndex) => ({
-              value: body.valueStart + yIndex * body.valueStep,
-              year: body.yearStart + xIndex * body.yearStep,
-              z: dist,
-            }))
-        );
-
-        return { mean, distribution };
-      });
-      return { ...data[0] };
-    };
-
-    fetchOrRetrieve(urls, set, processData);
-  }
-);
-
-export const IMPACT_TIME_DATA_TEST = derived(
-  [CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, AVAILABLE_INDICATORS_UID],
-  async (stores, set) => {
-    if (stores.some((d) => !d || !d.length)) {
-      set(null);
-      return;
-    }
-
-    const [geography, scenarios, indicators] = stores;
-    const urls = scenarios.map((scenario) => {
-      const query = qs.stringify(
-        {
-          scenario,
-          geography,
-          indicators,
-        },
-        {
-          encodeValuesOnly: true,
-        }
-      );
-      return `/api/impact-time?${query}`;
-    });
-
-    fetchOrRetrieve(urls, set);
-  }
-);
+// {
+//   "url?scenario=fdjsak&geo=fdsa": {
+//     data
+//   }
+// }

@@ -7,14 +7,10 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
-  } from "$lib/../stores/store.js";
-  import {
-    IMPACT_TIME_DISTRIBUTION_DATA,
-    IMPACT_TIME_DATA_TEST,
-  } from "$lib/api/endpoints.js";
+  } from "$stores/store.js";
+  import IMPACT_TIME_DISTRIBUTION_DATA from "$stores/impact-time-distribution.js";
+  import IMPACT_TIME_DATA_TEST from "$stores/impact-time.js";
   import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
-
-  $: console.log($IMPACT_TIME_DISTRIBUTION_DATA);
 
   let indicator = null;
   CURRENT_INDICATOR_UID.subscribe((value) => {
