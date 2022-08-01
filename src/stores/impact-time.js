@@ -1,5 +1,5 @@
-import { writable, derived } from "svelte/store";
-import { END_IMPACT_TIME, END_DISTRIBUTION } from "$lib/../config.js";
+import { writable, derived } from 'svelte/store';
+import { END_IMPACT_TIME } from "$lib/../config.js";
 import { handle } from "$lib/api/api.js";
 import {
   CURRENT_GEOGRAPHY_UID,

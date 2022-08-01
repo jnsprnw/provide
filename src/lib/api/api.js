@@ -5,6 +5,7 @@ import { check, hasInObject } from "$lib/utils.js";
 import isArray from "lodash/isArray";
 import { END_IMPACT_TIME, END_DISTRIBUTION } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from "$lib/../stores/impact-time.js";
+import { IMPACT_TIME_DISTRIBUTION_CACHE } from "$lib/../stores/impact-time-distribution.js";
 import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
 
 function returnDefault (callback) {
@@ -46,10 +47,15 @@ export function handle(
       store = IMPACT_TIME_CACHE;
       url = "/api/impact-time";
       break;
-  //     case END_DISTRIBUTION:
-  //     …
-  //       break;
-  // }
+    case END_DISTRIBUTION:
+      const scenario = scenarios[0];
+      addr = [[geography, scenario, indicator]];
+      param = [{ geography, indicator, scenarios: [scenario] }] // We need this for the load function
+      data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
+      store = IMPACT_TIME_DISTRIBUTION_CACHE;
+      url = "/api/impact-time-distribution";
+      break;
+  }
   if (addr && data && store && url) {
     let missing;
     if (callback === "get" || callback === "has") {
@@ -59,7 +65,6 @@ export function handle(
       // We always check if the data is available to trigger a load.
       // We could probably make this faster by not letting check call handle again, but instead call the load function from here directly with the list of missing data points.
       if (missing.length) {
-        // console.log(`Some data points are missing. Request data for them.`)
         check(endpoint, store, missing, url);
       }
       // We could also just return the array and let the component extract the first (and only) value
