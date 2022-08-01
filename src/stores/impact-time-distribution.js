@@ -6,5 +6,5 @@ import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } f
 export const IMPACT_TIME_DISTRIBUTION_CACHE = writable({});
 
 export const IMPACT_TIME_DISTRIBUTION_DATA = derived([IMPACT_TIME_DISTRIBUTION_CACHE, CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_UID, CURRENT_SCENARIOS_UID], async ([cache, $geo, $indicator, $scenarios], set) => {
-	set(handle(END_DISTRIBUTION, "get")[0]);
+	set(handle(END_DISTRIBUTION, "get")[0]); // This endpoint only has one dimension.
 });
