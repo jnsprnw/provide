@@ -3,9 +3,10 @@ import { get as take } from 'svelte/store';
 import get from 'lodash/get';
 import { check, hasInObject } from "$lib/utils.js";
 import isArray from "lodash/isArray";
-import { END_IMPACT_TIME, END_DISTRIBUTION, END_UN_AVOIDABLE_RISK } from '$lib/../config.js';
+import { END_IMPACT_TIME, END_DISTRIBUTION, END_UN_AVOIDABLE_RISK, END_IMPACT_GEO } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from "$lib/../stores/impact-time.js";
 import { IMPACT_TIME_DISTRIBUTION_CACHE } from "$lib/../stores/impact-time-distribution.js";
+import { IMPACT_GEO_CACHE } from "$lib/../stores/impact-geo.js";
 import { UN_AVOIDABLE_RISK_CACHE } from "$lib/../stores/un-avoidable-risk.js";
 import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
 
@@ -56,6 +57,14 @@ export function handle(
       data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
       store = IMPACT_TIME_DISTRIBUTION_CACHE;
       url = "/api/impact-time-distribution";
+      break;
+    case END_IMPACT_GEO:
+      scenario = scenarios[0];
+      addr = [[geography, scenario, indicator]];
+      param = [{ geography, scenario, indicator }] // We need this for the load function
+      data = take(IMPACT_GEO_CACHE);
+      store = IMPACT_GEO_CACHE;
+      url = "/api/impact-geo";
       break;
     case END_UN_AVOIDABLE_RISK:
       addr = [[geography, indicator]];
