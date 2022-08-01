@@ -66,7 +66,6 @@ async function request (params, url) {
 	console.log("loading:", { params, url, query }, `${url}?${query}`);
 	const response = await fetch(`${url}?${query}`);
   const body = await response.json();
-  console.log({ body })
 	return body;
 }
 
