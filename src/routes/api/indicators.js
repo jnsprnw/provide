@@ -1,3 +1,4 @@
+// This file loads the list of indicators and merges it with a list of indicator descriptions.
 import { parse } from 'marked';
 import { loadFromAPI } from './utils.js';
 import { INDICATORS } from '$lib/../config.js';

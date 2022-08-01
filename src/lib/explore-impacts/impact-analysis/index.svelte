@@ -1,55 +1,25 @@
 <script>
   import { get } from "lodash-es";
-  import { requestData } from "$lib/api/impact-time.js";
-  import {
-    CURRENT_INDICATOR,
-    IMPACT_TIME_DATA,
-    CURRENT_INDICATOR_UID,
-    CURRENT_GEOGRAPHY_UID,
-    CURRENT_SCENARIOS_UID,
-  } from "$lib/../stores/store.js";
-  // import {
-  //   IMPACT_TIME_DISTRIBUTION_DATA,
-  //   IMPACT_TIME_DATA_TEST,
-  // } from "$lib/api/endpoints.js";
+  import { IMPACT_TIME_DATA } from "$lib/../stores/impact-time.js";
+  import { CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
   import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
 
-  // $: console.log($IMPACT_TIME_DISTRIBUTION_DATA);
-
-  let indicator = null;
-  CURRENT_INDICATOR_UID.subscribe((value) => {
-    indicator = value;
+  let data = null;
+  IMPACT_TIME_DATA.subscribe((value) => {
+    data = value;
   });
 
-  let geography = null;
-  CURRENT_GEOGRAPHY_UID.subscribe((value) => {
-    geography = value;
-  });
-
-  let scenarios = null;
-  CURRENT_SCENARIOS_UID.subscribe((value) => {
-    scenarios = value;
-  });
-
-  function buildRequests(indicator, geography, scenarios) {
-    scenarios.forEach((scenario) => {
-      requestData([indicator], geography, scenario);
-    });
-  }
-
-  $: buildRequests(indicator, geography, scenarios);
 </script>
+<h3>{ $CURRENT_INDICATOR_UID }</h3>
 
-<h2>{$CURRENT_INDICATOR?.label}</h2>
-{#each scenarios as scenario}
-  {#if get( $IMPACT_TIME_DATA, [scenario, geography, indicator, "status"] ) === "success"}
+{#each data as scenario}
+  {#if get(scenario, "status") === "success"}
     <h3>
-      Data sample: {JSON.stringify(
-        get($IMPACT_TIME_DATA, [scenario, geography, indicator, "data", 0, 0])
-      )}
+    	Status: { get(scenario, "status") }<br />
+      Data sample: { JSON.stringify(get(scenario, ["data", "data", $CURRENT_INDICATOR_UID, 0])) }
     </h3>
   {:else}
-    <h3>Loading {scenario} {geography} {indicator}</h3>
+    <h3>Status: {get(scenario, "status")}</h3>
   {/if}
 {/each}
 

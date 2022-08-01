@@ -3,27 +3,27 @@
 	import { extent } from 'd3-array';
 	import { scaleLinear } from 'd3-scale';
 	import { flatten } from "lodash-es";
-	import { get } from "lodash-es";
-	import { IMPACT_TIME_DATA, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+	import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_GEOGRAPHY } from '$lib/../stores/store.js';
+	import { IMPACT_TIME_CACHE } from "$lib/../stores/impact-time.js";
+	import { handle } from "$lib/api/api.js";
+	import { END_IMPACT_TIME } from "$lib/../config.js";
 
 	export let indicator = '';
 
-	function buildDatum(data, scenarios, geography, indicator) {
-		return scenarios.map(scenario => {
-			const datum = get(data, [scenario, geography, indicator?.uid, 'data']);
-			if (datum) {
-				return datum;
-			} else {
-				return [[null, null, null, null]]
-			}
-		})
-	}
+	$: uid = indicator.uid;
 
-	$: data = buildDatum($IMPACT_TIME_DATA, $CURRENT_SCENARIOS_UID, $CURRENT_GEOGRAPHY_UID, indicator)
+	$: datum = handle(END_IMPACT_TIME, "get", { geography: $CURRENT_GEOGRAPHY_UID, scenarios: $CURRENT_SCENARIOS_UID, indicator: uid }, $IMPACT_TIME_CACHE).map(response => {
+		const { data, status } = response;
+		if (status === 'success' && data) {
+			return data.data[uid] || [];
+		} else {
+			return [];
+		}
+	})
 
-	$: years = flatten(data.map(year => year.map(d => d[0])))
+	$: years = flatten(datum.map(scenario => scenario.map(([year]) => year)))
 
-	$: values = flatten(flatten(data.map(year => year.map(([, v1, v2, v3]) => [v1, v2, v3]))))
+	$: values = flatten(flatten(datum.map(scenario => scenario.map(([, v1, v2, v3]) => [v1, v2, v3]))))
 
 	let width = 10;
 	let height = 10;
@@ -47,24 +47,37 @@
     .y0(d => y(d[2]))
     .y1(d => y(d[3]));
 
-	$: lines = data.map(scenario => lineGenerator(scenario));
-	$: areas = data.map(scenario => areaGenerator(scenario));
+	$: lines = datum.map(scenario => lineGenerator(scenario));
+	$: areas = datum.map(scenario => areaGenerator(scenario));
 
 	$: title = `This chart displays ${indicator?.label} in ${$CURRENT_GEOGRAPHY?.label} starting in year TODO until TODO`
 </script>
 
 <div class="line-chart--preview" bind:clientWidth={width} bind:clientHeight={height} {title}>
 	<svg style={`width: ${width}px; height: ${height}px`}>
-		{#if data.length === 1}
-		{#each areas as area}
-		<path d={area} class="chart-area" />
-		{/each}
+		{#if datum.length === 1}
+		<g>
+			{#each areas as area}
+			<path d={area} class="chart-area" />
+			{/each}
+		</g>
 		{/if}
-		{#each lines as line, i}
-		<path d={line} class={`chart-line color-line-${i}`} />
-		{/each}
+		<g>
+			{#each lines as line, i}
+			<path d={line} class={`chart-line color-line-${i}`} />
+			{/each}
+		</g>
 		<desc>
-			{ JSON.stringify(indicator) } { $CURRENT_GEOGRAPHY_UID } { $CURRENT_SCENARIOS_UID }
+			{ JSON.stringify(indicator) }
+			{ $CURRENT_GEOGRAPHY_UID }
+			{ $CURRENT_SCENARIOS_UID }
+			{ years }
+			{ values }
+			{ extent(years) }
+			{ extent(values) }
+			{ x.range() }
+			{ y.range() }
+			{ JSON.stringify(datum) }
 		</desc>
 	</svg>
 </div>
