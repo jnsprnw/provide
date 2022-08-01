@@ -77,6 +77,7 @@
     cursor: pointer;
     min-width: 170px;
     transition: color 0.3s ease-out;
+    line-height: 1.2; // TODO: Test with Congo (Democratic Republic), Gradual Strengthening and Near-surface air temperature
 
     span {
       padding: var(--size-space-large-m);

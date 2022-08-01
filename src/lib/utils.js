@@ -55,10 +55,6 @@ export const buildDataImpactTime = function (data, year, step) {
 	return datum;
 }
 
-function timeout() {
-	return new Promise((resolve) => setTimeout(resolve, 3000));
-}
-
 async function request (params, url) {
 	if (!browser) return undefined;
 	const query = qs.stringify(
@@ -67,11 +63,9 @@ async function request (params, url) {
       encodeValuesOnly: true,
     }
   );
-	console.log("loading:", { params, url, query }, `${url}?${query}`);
+	// console.log("loading:", { params, url, query }, `${url}?${query}`);
 	const response = await fetch(`${url}?${query}`);
   const body = await response.json();
-  console.log({ body })
-	// await timeout();
 	return body;
 }
 
@@ -90,9 +84,9 @@ function updateDate (old, addr, newData) {
 async function load (cache, endpoint, params, url) {
 	// addr will always returns an array of scenarios, but it is only one element long given the params
 	const addr = handle(endpoint, "addr", params)[0];
-	cache.update((old) => updateDate(old, addr, "Loading"))
+	cache.update((old) => updateDate(old, addr, { status: "loading", data: {} }))
 	const newData = await request(params, url);
-	cache.update((old) => updateDate(old, addr, newData))
+	cache.update((old) => updateDate(old, addr, { status: "success", data: newData }))
 }
 
 export function check (endpoint, store, missing, url) {

@@ -1,3 +1,4 @@
+// This file requests data from the impact time endpoint. Currently, it only randomly generates the data.
 import data from "$lib/../data/global_h-ssp119.json";
 
 export function get(query) {
@@ -5,10 +6,13 @@ export function get(query) {
     .filter(([key, value]) => key.includes("indicator"))
     .map(([key, value]) => value);
 
+  const yearStart = 2000;
+  const yearStep = 5;
+
   return {
     body: {
-      yearStart: 2000,
-      yearStep: 5,
+      yearStart,
+      yearStep,
       data: indicators.reduce(
         (acc, indicator) => ({
           ...acc,
@@ -30,7 +34,7 @@ export function get(query) {
             [3.5876774368800746, 2.189463750936992, 5.928472755371228],
             [3.6852841214743064, 2.247275285811243, 6.081519846461259],
             [3.991280702755384, 2.482281533124103, 6.498672006585426],
-          ].map((d) => d.map((w) => w + Math.random() - 0.5)),
+          ].map((d) => d.map((w) => w + Math.random() - 0.5)).map((d, i) => [yearStart + yearStep * i, ...d]),
         }),
         {}
       ),

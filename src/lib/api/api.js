@@ -1,3 +1,4 @@
+// This file holds the handle function, which all endpoints use to interact with the API.
 import { get as take } from 'svelte/store';
 import get from 'lodash/get';
 import { check, hasInObject } from "$lib/utils.js";
@@ -5,6 +6,16 @@ import isArray from "lodash/isArray";
 import { END_IMPACT_TIME, END_DISTRIBUTION } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from "$lib/../stores/impact-time.js";
 import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
+
+function returnDefault (callback) {
+	if (callback === "get") {
+		return []
+	} else if (callback === has) {
+		return [false]
+	} else {
+		return undefined;
+	}
+}
 
 export function handle(
 	endpoint,
@@ -24,7 +35,7 @@ export function handle(
 	scenarios = isArray(scenarios) ? scenarios : [scenarios];
 
 	if (!geography || !indicator || scenarios.length === 0) {
-		return undefined;
+		return returnDefault(callback);
 	}
 	
 	switch (endpoint) {
@@ -48,12 +59,13 @@ export function handle(
 			// We always check if the data is available to trigger a load.
 			// We could probably make this faster by not letting check call handle again, but instead call the load function from here directly with the list of missing data points.
 			if (missing.length) {
+				// console.log(`Some data points are missing. Request data for them.`)
 				check(endpoint, store, missing, url);
 			}
 			// We could also just return the array and let the component extract the first (and only) value
-			// return addr.map(a => get(data, a));
-			const values = addr.map(a => get(data, a));
-			return values.length > 1 ? values : values[0];
+			return addr.map(a => get(data, a));
+			// const values = addr.map(a => get(data, a));
+			// return values.length > 1 ? values : values[0];
 		} else if (callback === "has") {
 			// We return a list of missing data points
 			return missing;
@@ -61,5 +73,5 @@ export function handle(
 			return addr;
 		}
 	}
-	return undefined;
+	return returnDefault(callback);
 }
