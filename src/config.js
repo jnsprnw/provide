@@ -3,6 +3,48 @@ export const END_DISTRIBUTION = "dist";
 export const END_UN_AVOIDABLE_RISK = "un-avoidable-risk";
 export const END_IMPACT_GEO = "impact-geo";
 
+export const OPTIONS = {
+  "time": {
+    "options": [{
+      "value": "annual",
+      "label": "Annual"
+    }]
+  },
+  "reference": {
+    "options": [{
+      "value": "2020",
+      "label": "2020"
+    }, {
+      "value:": "pre",
+      "label": "1850–1900"
+    }]
+  },
+  "frequency": {
+    "options": [{
+      "value": "0-1",
+      "label": "1-in-10"
+    }, {
+      "value": "0-05",
+      "label": "1-in-20"
+    }, {
+      "value": "0-02",
+      "label": "1-in-50"
+    }]
+  },
+  "spatial": {
+    "options": [{
+      "value": "area",
+      "label": "area-weighted average"
+    }, {
+      "value": "gdp",
+      "label": "GDP-weighted average"
+    }, {
+      "value": "population",
+      "label": "population-weighted average"
+    }]
+  }
+}
+
 export const GEOGRAPHY_TYPES = [
   {
     "uid": "admin0",
