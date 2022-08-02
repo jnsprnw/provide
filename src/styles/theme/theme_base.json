@@ -23,13 +23,13 @@
           ]
         },
         "weaker": {
-          "value": "#f2f2f2",
+          "value": "#eef3f7",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#f2f2f2",
+            "value": "#eef3f7",
             "type": "color",
             "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
           },
@@ -43,13 +43,13 @@
           ]
         },
         "weakest": {
-          "value": "#d6d7d7",
+          "value": "#cfd8dd",
           "type": "color",
           "description": "A shaded background color, used e.g. as a backdrop in containers.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#d6d7d7",
+            "value": "#cfd8dd",
             "type": "color",
             "description": "A shaded background color, used e.g. as a backdrop in containers."
           },
@@ -125,13 +125,13 @@
       },
       "text": {
         "weaker": {
-          "value": "#727272",
+          "value": "#59788A",
           "type": "color",
           "description": "Text color with weaker background contrast.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#727272",
+            "value": "#59788A",
             "type": "color",
             "description": "Text color with weaker background contrast."
           },
@@ -145,13 +145,13 @@
           ]
         },
         "base": {
-          "value": "#222222",
+          "value": "#122936",
           "type": "color",
           "description": "Default text color for strong background contrast.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#222222",
+            "value": "#122936",
             "type": "color",
             "description": "Default text color for strong background contrast."
           },
@@ -167,13 +167,13 @@
       },
       "brand": {
         "base": {
-          "value": "#5d6fb0",
+          "value": "#59788A",
           "type": "color",
           "description": "Main theme color, usually the brand color.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#5d6fb0",
+            "value": "#59788A",
             "type": "color",
             "description": "Main theme color, usually the brand color."
           },
@@ -187,13 +187,13 @@
           ]
         },
         "stronger": {
-          "value": "#273668",
+          "value": "#214B63",
           "type": "color",
           "description": "Stronger version of theme color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#273668",
+            "value": "#214B63",
             "type": "color",
             "description": "Stronger version of theme color"
           },
@@ -207,13 +207,13 @@
           ]
         },
         "weaker": {
-          "value": "#90c3d5",
+          "value": "#90A5B1",
           "type": "color",
           "description": "Weaker version of theme color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#90c3d5",
+            "value": "#90A5B1",
             "type": "color",
             "description": "Weaker version of theme color"
           },
@@ -229,13 +229,13 @@
       },
       "functional": {
         "accent": {
-          "value": "#20a386",
+          "value": "#95AD28",
           "type": "color",
           "description": "Used for author-driven accents of parts of charts, texts and other elements.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#20a386",
+            "value": "#95AD28",
             "type": "color",
             "description": "Used for author-driven accents of parts of charts, texts and other elements."
           },
@@ -291,13 +291,13 @@
       },
       "category": {
         "0": {
-          "value": "#008dc9",
+          "value": "#5ABAC1",
           "type": "color",
           "description": "Used for nominal data of category 0.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#008dc9",
+            "value": "#5ABAC1",
             "type": "color",
             "description": "Used for nominal data of category 0."
           },
@@ -311,13 +311,13 @@
           ]
         },
         "1": {
-          "value": "#f26829",
+          "value": "#3C96E5",
           "type": "color",
           "description": "Used for nominal data of category 1.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#f26829",
+            "value": "#3C96E5",
             "type": "color",
             "description": "Used for nominal data of category 1."
           },
@@ -331,13 +331,13 @@
           ]
         },
         "2": {
-          "value": "#f4a81d",
+          "value": "#F5C54A",
           "type": "color",
           "description": "Used for nominal data of category 2.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#f4a81d",
+            "value": "#F5C54A",
             "type": "color",
             "description": "Used for nominal data of category 2."
           },
@@ -351,15 +351,13 @@
           ]
         },
         "3": {
-          "value": "#80bc00",
+          "value": "#DE54B7",
           "type": "color",
-          "description": "Used for nominal data of category 3.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#80bc00",
-            "type": "color",
-            "description": "Used for nominal data of category 3."
+            "value": "#DE54B7",
+            "type": "color"
           },
           "name": "3",
           "attributes": {},
@@ -391,15 +389,13 @@
           ]
         },
         "5": {
-          "value": "#bd53bd",
+          "value": "#1F5F84",
           "type": "color",
-          "description": "Used for nominal data of category 5.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#bd53bd",
-            "type": "color",
-            "description": "Used for nominal data of category 5."
+            "value": "#1F5F84",
+            "type": "color"
           },
           "name": "5",
           "attributes": {},
@@ -745,6 +741,158 @@
           "color",
           "light",
           "gray800"
+        ]
+      },
+      "petrol100": {
+        "value": "#cfd8dd",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.45:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#cfd8dd",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.45:1 against background #ffffff"
+        },
+        "name": "petrol100",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol100"
+        ]
+      },
+      "petrol200": {
+        "value": "#aebec6",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 1.9:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#aebec6",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 1.9:1 against background #ffffff"
+        },
+        "name": "petrol200",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol200"
+        ]
+      },
+      "petrol300": {
+        "value": "#90A5B1",
+        "type": "color",
+        "description": "Do not use for UI elements or text. Contrast is 2.52:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#90A5B1",
+          "type": "color",
+          "description": "Do not use for UI elements or text. Contrast is 2.52:1 against background #ffffff"
+        },
+        "name": "petrol300",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol300"
+        ]
+      },
+      "petrol400": {
+        "value": "#738e9c",
+        "type": "color",
+        "description": "Color can be used for UI elements or large text. Contrast is 3.45:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#738e9c",
+          "type": "color",
+          "description": "Color can be used for UI elements or large text. Contrast is 3.45:1 against background #ffffff"
+        },
+        "name": "petrol400",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol400"
+        ]
+      },
+      "petrol500": {
+        "value": "#59788A",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 4.74:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#59788A",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 4.74:1 against background #ffffff"
+        },
+        "name": "petrol500",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol500"
+        ]
+      },
+      "petrol600": {
+        "value": "#465f6d",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 6.69:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#465f6d",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 6.69:1 against background #ffffff"
+        },
+        "name": "petrol600",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol600"
+        ]
+      },
+      "petrol700": {
+        "value": "#354853",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 9.44:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#354853",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 9.44:1 against background #ffffff"
+        },
+        "name": "petrol700",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol700"
+        ]
+      },
+      "petrol800": {
+        "value": "#122936",
+        "type": "color",
+        "description": "Color can be used for small text. Contrast is 13.01:1 against background #ffffff",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#122936",
+          "type": "color",
+          "description": "Color can be used for small text. Contrast is 13.01:1 against background #ffffff"
+        },
+        "name": "petrol800",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol800"
         ]
       },
       "blue100": {
@@ -3604,72 +3752,80 @@
   },
   "radius": {
     "interactive": {
-      "value": 5,
-      "type": "borderRadius",
-      "description": "Used for buttons or other interactive elements",
-      "filePath": "./transformed/tokens.json",
-      "isSource": true,
-      "original": {
+      "l": {
         "value": 5,
         "type": "borderRadius",
-        "description": "Used for buttons or other interactive elements"
+        "description": "Used for buttons or other interactive elements",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 5,
+          "type": "borderRadius",
+          "description": "Used for buttons or other interactive elements"
+        },
+        "name": "l",
+        "attributes": {},
+        "path": [
+          "radius",
+          "interactive",
+          "l"
+        ]
       },
-      "name": "interactive",
-      "attributes": {},
-      "path": [
-        "radius",
-        "interactive"
-      ]
+      "s": {
+        "value": 4,
+        "type": "borderRadius",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 4,
+          "type": "borderRadius"
+        },
+        "name": "s",
+        "attributes": {},
+        "path": [
+          "radius",
+          "interactive",
+          "s"
+        ]
+      }
     },
     "information": {
-      "value": 2,
-      "type": "borderRadius",
-      "description": "Used for info boxes",
-      "filePath": "./transformed/tokens.json",
-      "isSource": true,
-      "original": {
+      "l": {
+        "value": 3,
+        "type": "borderRadius",
+        "description": "Used for info boxes",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 3,
+          "type": "borderRadius",
+          "description": "Used for info boxes"
+        },
+        "name": "l",
+        "attributes": {},
+        "path": [
+          "radius",
+          "information",
+          "l"
+        ]
+      },
+      "s": {
         "value": 2,
         "type": "borderRadius",
-        "description": "Used for info boxes"
-      },
-      "name": "information",
-      "attributes": {},
-      "path": [
-        "radius",
-        "information"
-      ]
-    },
-    "l": {
-      "value": 5,
-      "type": "borderRadius",
-      "filePath": "./transformed/tokens.json",
-      "isSource": true,
-      "original": {
-        "value": 5,
-        "type": "borderRadius"
-      },
-      "name": "l",
-      "attributes": {},
-      "path": [
-        "radius",
-        "l"
-      ]
-    },
-    "m": {
-      "value": 4,
-      "type": "borderRadius",
-      "filePath": "./transformed/tokens.json",
-      "isSource": true,
-      "original": {
-        "value": 4,
-        "type": "borderRadius"
-      },
-      "name": "m",
-      "attributes": {},
-      "path": [
-        "radius",
-        "m"
-      ]
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 2,
+          "type": "borderRadius"
+        },
+        "name": "s",
+        "attributes": {},
+        "path": [
+          "radius",
+          "information",
+          "s"
+        ]
+      }
     }
   },
   "stroke": {

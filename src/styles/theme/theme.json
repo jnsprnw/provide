@@ -3,8 +3,8 @@
     "light": {
       "background": {
         "base": "#ffffff",
-        "weaker": "#f2f2f2",
-        "weakest": "#d6d7d7"
+        "weaker": "#eef3f7",
+        "weakest": "#cfd8dd"
       },
       "foreground": {
         "base": "#222222",
@@ -12,26 +12,26 @@
         "weakest": "#b2b3b3"
       },
       "text": {
-        "weaker": "#727272",
-        "base": "#222222"
+        "weaker": "#59788a",
+        "base": "#122936"
       },
       "brand": {
-        "base": "#5d6fb0",
-        "stronger": "#273668",
-        "weaker": "#90c3d5"
+        "base": "#59788a",
+        "stronger": "#214b63",
+        "weaker": "#90a5b1"
       },
       "functional": {
-        "accent": "#20a386",
+        "accent": "#95ad28",
         "filtered-out": "#e4e1d8",
         "not-available": "#b2b2b2"
       },
       "category": {
-        "0": "#008dc9",
-        "1": "#f26829",
-        "2": "#f4a81d",
-        "3": "#80bc00",
+        "0": "#5abac1",
+        "1": "#3c96e5",
+        "2": "#f5c54a",
+        "3": "#de54b7",
         "4": "#6363c0",
-        "5": "#bd53bd"
+        "5": "#1f5f84"
       },
       "diverging": {
         "positive-2": "#1c4e94",
@@ -54,6 +54,14 @@
       "gray600": "#555555",
       "gray700": "#393939",
       "gray800": "#222222",
+      "petrol100": "#cfd8dd",
+      "petrol200": "#aebec6",
+      "petrol300": "#90a5b1",
+      "petrol400": "#738e9c",
+      "petrol500": "#59788a",
+      "petrol600": "#465f6d",
+      "petrol700": "#354853",
+      "petrol800": "#122936",
       "blue100": "#f1f3f9",
       "blue200": "#d0d6ed",
       "blue300": "#a6b2dc",
@@ -298,10 +306,14 @@
     "min-content-width-no-unit": "320rem"
   },
   "radius": {
-    "interactive": 5,
-    "information": 2,
-    "l": 5,
-    "m": 4
+    "interactive": {
+      "l": 5,
+      "s": 4
+    },
+    "information": {
+      "l": 3,
+      "s": 2
+    }
   },
   "stroke": {
     "default": 1,

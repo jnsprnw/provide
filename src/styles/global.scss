@@ -48,9 +48,9 @@ $extra-wide: 1700px !default;
   display: block;
   border: 1px solid transparent;
   background-color: transparent;
-  border-radius: var(--radius-interactive);
+  border-radius: var(--radius-interactive-l);
   transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
-  border-radius: var(--radius-interactive);
+  border-radius: var(--radius-interactive-l);
   padding: var(--size-space-large-xxs);
   cursor: pointer;
 

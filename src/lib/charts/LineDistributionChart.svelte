@@ -8,6 +8,11 @@
   import AxisY from "./axes/AxisY.svelte";
   import { extent } from "d3-array";
   import ColorMatrix from "./layers/ColorMatrix.svelte";
+  import { getContext } from "svelte";
+
+  const theme = getContext("theme");
+
+  console.log();
 
   export let distribution = [];
   export let mean = [];
@@ -26,7 +31,7 @@
       d.forEach((d) => acc.push(d));
       return acc;
     }, [])
-    .filter((d) => d.distribution > 0.005);
+    .filter((d) => d.distribution > 0.001);
 </script>
 
 <div class="chart-container">
@@ -36,7 +41,7 @@
     x={xKey}
     y={yKey}
     z={zKey}
-    zRange={["rgba(0, 0, 255, 0)", "rgba(0, 0, 255, .5)"]}
+    zRange={["white", $theme.color.category[0]]}
     data={mean}
     {flatData}
   >
@@ -50,7 +55,8 @@
         padding={{ top: 10, left: 0, right: 0 }}
       />
       <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
-      <LineLayer />
+      <LineLayer stroke={$theme.color.background.base} strokeWidth={6} />
+      <LineLayer stroke={$theme.color.category[0]} />
     </Svg>
   </LayerCake>
 </div>
