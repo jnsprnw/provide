@@ -13,20 +13,18 @@
     const { yearStart, valueStart, yearStep, valueStep, data } = distData || {};
 
     const mean = data?.mean.map((value, i) => {
-      const year = new Date(yearStart + yearStep * i, 0, 1);
-      return { year, value };
+      return { year: yearStart + yearStep * i, value };
     });
 
     const distribution = data?.distribution.map((yearValues, i) => {
-      const year = new Date(yearStart + yearStep * i, 0, 1);
       return yearValues.map((distribution, j) => ({
-        year,
+        year: yearStart + yearStep * i,
         value: valueStart + valueStep * j,
         distribution,
       }));
     });
 
-    return { mean, distribution };
+    return { mean, distribution, yearStep, valueStep };
   }
 
   $: processedDistData = processDistData(distData);
