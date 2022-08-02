@@ -15,7 +15,7 @@ export const OPTIONS = {
       "value": "2020",
       "label": "2020"
     }, {
-      "value:": "pre",
+      "value": "pre",
       "label": "1850–1900"
     }]
   },
@@ -1603,25 +1603,29 @@ export const INDICATORS = [
     "uid": "near-surface-air-temperature",
     "label": "Near-surface air temperature",
     "unit": "unit id",
-    "sector": "terrestrial-climate"
+    "sector": "terrestrial-climate",
+    "options": [["time", "annual"], ["frequency", "0-1"], ["reference", "pre"]] // DUMMY
   },
   {
     "uid": "wet-bulb-globe-temperature",
     "label": "Wet-bulb globe temperature",
     "unit": "unit id",
-    "sector": "terrestrial-climate"
+    "sector": "terrestrial-climate",
+    "options": [["time", "annual"], ["reference", "2020"]] // DUMMY
   },
   {
     "uid": "outlier-days",
     "label": "Outlier days",
     "unit": "unit id",
-    "sector": "terrestrial-climate"
+    "sector": "terrestrial-climate",
+    "options": [["frequency", "0-02"], ["spatial", "gdp"]] // DUMMY
   },
   {
     "uid": "precipitation",
     "label": "Precipitation",
     "unit": "unit id",
-    "sector": "cryosphere"
+    "sector": "cryosphere",
+    "options": [["frequency", "0-05"], ["reference", "pre"], ["spatial", "gdp"]] // DUMMY
   }
 ]
 
