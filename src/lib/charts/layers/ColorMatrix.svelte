@@ -20,8 +20,6 @@
 
   $: data = $flatData.filter((d) => d.distribution !== undefined);
 
-  $: console.log($ctx);
-
   $: if ($ctx) {
     scaleCanvas($ctx, $width, $height);
     $ctx.clearRect(0, 0, $width, $height);
@@ -39,7 +37,6 @@
       //$ctx.rect(x1, y1 - (y2 - y1) / 2, x2 - x1, y2 - y1);
       $ctx.fill();
       $ctx.closePath();
-      i < 20 && console.log(d, x1);
     });
   }
 </script>
