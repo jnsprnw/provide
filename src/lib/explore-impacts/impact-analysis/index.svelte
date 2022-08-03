@@ -3,13 +3,13 @@
   import { IMPACT_TIME_DATA } from "$lib/../stores/impact-time.js";
   import { IMPACT_TIME_DISTRIBUTION_DATA } from "$lib/../stores/impact-time-distribution.js";
   import { IMPACT_GEO_DATA } from "$lib/../stores/impact-geo.js";
-  import { CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
+  import { CURRENT_INDICATOR_UID, CURRENT_INDICATOR_UNIT } from "$lib/../stores/store.js";
   import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
 
   $: distDataStatus = get($IMPACT_TIME_DISTRIBUTION_DATA, ["status"]);
   $: distData = get($IMPACT_TIME_DISTRIBUTION_DATA, ["data"]);
 
-  function processDistData() {
+  function processDistData(distData, unit) {
     const { yearStart, valueStart, yearStep, valueStep, data } = distData || {};
 
     const mean = data?.mean.map((value, i) => {
@@ -24,10 +24,10 @@
       }));
     });
 
-    return { mean, distribution, yearStep, valueStep };
+    return { mean, distribution, yearStep, valueStep, unit };
   }
 
-  $: processedDistData = processDistData(distData);
+  $: processedDistData = processDistData(distData, $CURRENT_INDICATOR_UNIT);
 </script>
 
 <p>{$CURRENT_INDICATOR_UID}</p>

@@ -1,6 +1,6 @@
 import { writable, derived } from 'svelte/store';
 import { get, compact, groupBy, keyBy, map, isUndefined, isEmpty } from "lodash-es";
-import { OPTIONS } from "$lib/../config.js";
+import { OPTIONS, DEFAULT_FORMAT_UID } from "$lib/../config.js";
 
 export const INDICATORS = writable([]);
 export const SECTORS = writable([]);
@@ -35,6 +35,11 @@ export const CURRENT_SCENARIOS_UID = derived(
 export const CURRENT_INDICATOR_UID = derived(
 	CURRENT_INDICATOR,
 	$indicator => get($indicator, 'uid')
+);
+
+export const CURRENT_INDICATOR_UNIT = derived(
+	CURRENT_INDICATOR,
+	$indicator => get($indicator, 'unit', DEFAULT_FORMAT_UID)
 );
 
 export const CURRENT_INDICATOR_OPTIONS_SELECTION = writable({});

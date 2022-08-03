@@ -3,6 +3,8 @@ export const END_DISTRIBUTION = "dist";
 export const END_UN_AVOIDABLE_RISK = "un-avoidable-risk";
 export const END_IMPACT_GEO = "impact-geo";
 
+export const DEFAULT_FORMAT_UID = "float";
+
 export const OPTIONS = {
   "time": {
     "options": [{
@@ -1602,28 +1604,28 @@ export const INDICATORS = [
   {// Other indicators
     "uid": "near-surface-air-temperature",
     "label": "Near-surface air temperature",
-    "unit": "unit id",
+    "unit": "celsius",
     "sector": "terrestrial-climate",
     "options": [["time", "annual"], ["frequency", "0-1"], ["reference", "pre"]] // DUMMY
   },
   {
     "uid": "wet-bulb-globe-temperature",
     "label": "Wet-bulb globe temperature",
-    "unit": "unit id",
+    "unit": "celsius",
     "sector": "terrestrial-climate",
     "options": [["time", "annual"], ["reference", "2020"]] // DUMMY
   },
   {
     "uid": "outlier-days",
     "label": "Outlier days",
-    "unit": "unit id",
+    "unit": "float",
     "sector": "terrestrial-climate",
     "options": [["frequency", "0-02"], ["spatial", "gdp"]] // DUMMY
   },
   {
     "uid": "precipitation",
     "label": "Precipitation",
-    "unit": "unit id",
+    "unit": "float",
     "sector": "cryosphere",
     "options": [["frequency", "0-05"], ["reference", "pre"], ["spatial", "gdp"]] // DUMMY
   }

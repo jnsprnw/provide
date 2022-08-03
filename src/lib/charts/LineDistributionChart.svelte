@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg, Canvas, Html } from "layercake";
-  import { timeFormat } from "d3-time-format";
-  import { format, precisionFixed } from "d3-format";
+  import { formatValue } from "$lib/utils/formatting";
+  import { DEFAULT_FORMAT_UID } from "$lib/../config.js";
 
   import LineLayer from "./layers/LineLayer.svelte";
   import AxisX from "./axes/AxisX.svelte";
@@ -12,8 +12,6 @@
 
   const theme = getContext("theme");
 
-  console.log();
-
   export let distribution = [];
   export let mean = [];
   export let yearStep;
@@ -21,10 +19,11 @@
   export let xKey = "year";
   export let yKey = "value";
   export let zKey = "distribution";
+  export let unit = DEFAULT_FORMAT_UID;
 
   const padding = { top: 0, right: 20, bottom: 20, left: 20 };
 
-  const formatTickY = (d) => format(`.${precisionFixed(d)}f`)(d);
+  $: formatTickY = (d) => formatValue(d, unit);
 
   $: flatData = distribution
     .reduce((acc, d) => {

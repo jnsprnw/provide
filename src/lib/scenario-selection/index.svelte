@@ -4,7 +4,7 @@
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import ScenarioValue from '$lib/scenario-selection/scenario-value.svelte';
   import { CURRENT_SCENARIOS } from '$lib/../stores/store.js';
-  import { formatValues, getUID } from '$lib/utils.js';
+  import { getUID } from '$lib/utils.js';
   import Scenario from "$lib/scenario-selection/scenario.svelte";
 
   const { getScenarios } = getContext('meta');
