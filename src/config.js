@@ -1455,58 +1455,58 @@ export const SCENARIOS = [
   },
   {
     "label": "Shifting Pathways",
-            "uid": "SP",
-            "description": "This pathway explores how a broader shift towards sustainable development can be combined with climate policies consistent with keeping warming to 1.5\u02daC. Energy demand is reduced over time, while renewable energy use grows, squeezing out fossil fuel use.",
-            "isPrimary": true,
+    "uid": "SP",
+    "description": "This pathway explores how a broader shift towards sustainable development can be combined with climate policies consistent with keeping warming to 1.5\u02daC. Energy demand is reduced over time, while renewable energy use grows, squeezing out fossil fuel use.",
+    "isPrimary": true,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Moderate Action",
-            "uid": "ModAct",
-            "description": "This pathway explores the impact of countries sticking to their Nationally Determined Contributions (NDCs) as stated in 2020. These are often more ambitious than currently implemented policies, but for most countries do not ratchet up very rapidly. Similar levels of mitigation effort are expected going forwards.",
-            "isPrimary": false,
+    "uid": "ModAct",
+    "description": "This pathway explores the impact of countries sticking to their Nationally Determined Contributions (NDCs) as stated in 2020. These are often more ambitious than currently implemented policies, but for most countries do not ratchet up very rapidly. Similar levels of mitigation effort are expected going forwards.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Negative Emissions",
-            "uid": "Neg",
-            "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
-            "isPrimary": false,
+    "uid": "Neg",
+    "description": "Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Renewables",
-            "uid": "Ren",
-            "description": "Energy demand is reduced rapidly in the short-term, though grows later. Growth in renewables is very rapid and squeezes out most all other types of energy. Some biofuel is used to balance renewable variability, and the emissions from this are captured and buried.",
-            "isPrimary": false,
+    "uid": "Ren",
+    "description": "Energy demand is reduced rapidly in the short-term, though grows later. Growth in renewables is very rapid and squeezes out most all other types of energy. Some biofuel is used to balance renewable variability, and the emissions from this are captured and buried.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Demand-limiting",
-            "uid": "LD",
-            "description": "Energy demand is massively reduced by implementing energy efficient lifestyles and design, and kept low throughout the century. Renewable energy grows and gradually forces out fossil fuels.",
-            "isPrimary": false,
+    "uid": "LD",
+    "description": "Energy demand is massively reduced by implementing energy efficient lifestyles and design, and kept low throughout the century. Renewable energy grows and gradually forces out fossil fuels.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "SSP1-1.9",
-            "uid": "ssp119",
-            "description": "Renewable energy is deployed rapidly, energy demand is also limited rapidly. There is general focus on sustainability, but also a significant increase in the amount of biofuel use, with the carbon released by this captured and stored (negative emissions). This pathway was used a lot for climate science research conducted as part of the IPCC Sixth Assessment Report.",
-            "isPrimary": false,
+    "uid": "ssp119",
+    "description": "Renewable energy is deployed rapidly, energy demand is also limited rapidly. There is general focus on sustainability, but also a significant increase in the amount of biofuel use, with the carbon released by this captured and stored (negative emissions). This pathway was used a lot for climate science research conducted as part of the IPCC Sixth Assessment Report.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "SSP5-3.4-OS",
-            "uid": "ssp534-over",
-            "description": "Carbon emissions rise at an incredibly fast rate in the short term. Then, around 2040 they decline extremely rapidly through the massive use of negative emissions technologies (for example capturing carbon from biofuel burning or directly from the air, and burying it). This pathway was designed to test the sensitivity of the Earth System to such extreme changes in emissions.",
-            "isPrimary": false,
+    "uid": "ssp534-over",
+    "description": "Carbon emissions rise at an incredibly fast rate in the short term. Then, around 2040 they decline extremely rapidly through the massive use of negative emissions technologies (for example capturing carbon from biofuel burning or directly from the air, and burying it). This pathway was designed to test the sensitivity of the Earth System to such extreme changes in emissions.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   },
   {
     "label": "Stabilisation at 1.5\u00b0C",
-            "uid": "Ref_1p5",
-            "description": "Temperatures rise as in the demand-limiting case (LD) until the global average reaches 1.5\u00b0C. The temperature is then held constant. This scenario is a simple thought-experiment not driven by economic or climatic considerations.",
-            "isPrimary": false,
+    "uid": "Ref_1p5",
+    "description": "Temperatures rise as in the demand-limiting case (LD) until the global average reaches 1.5\u00b0C. The temperature is then held constant. This scenario is a simple thought-experiment not driven by economic or climatic considerations.",
+    "isPrimary": false,
     "scenarioData": generateScenarioData()
   }
 ]
