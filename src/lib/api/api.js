@@ -13,7 +13,7 @@ import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } f
 function returnDefault (callback) {
   if (callback === "get") {
     return []
-  } else if (callback === has) {
+  } else if (callback === "has") {
     return [false]
   } else {
     return undefined;
