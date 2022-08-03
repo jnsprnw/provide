@@ -1,6 +1,5 @@
 <script context="module">
 	import { parse } from 'marked';
-	import { groupBy } from "lodash-es";
 	import { loadFromAPI } from '$lib/utils.js';
 
   export const load = async ({ fetch }) => {
