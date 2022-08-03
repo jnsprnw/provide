@@ -1,7 +1,5 @@
 import { format } from 'd3-format';
-import has from 'lodash/has';
-import set from "lodash/set";
-import compact from "lodash/compact";
+import { has, set, compact } from "lodash-es";
 import { handle } from "$lib/api/api.js";
 import qs from "qs";
 import { browser } from "$app/env";

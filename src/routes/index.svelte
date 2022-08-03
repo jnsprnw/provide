@@ -1,5 +1,5 @@
 <script context="module">
-	import template from 'lodash/template.js'
+	import { template } from "lodash-es";
 
 	const compiled = template('Welcome to <%= project %>!');
 
