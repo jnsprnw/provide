@@ -2,8 +2,9 @@ import { writable, derived } from 'svelte/store';
 import { get, compact, groupBy, keyBy, map, isUndefined, isEmpty } from "lodash-es";
 import { OPTIONS, DEFAULT_FORMAT_UID } from "$lib/../config.js";
 
-export const INDICATORS = writable([]);
-export const SECTORS = writable([]);
+export const INDICATORS = writable([]); // TODO: Should we add AVAILABLE_ here?
+export const SECTORS = writable([]); // TODO: Should we add AVAILABLE_ here?
+export const AVAILABLE_SCENARIOS = writable([]); // TODO: Is prefix AVAILABLE_ good?
 
 export const CURRENT_INDICATOR = writable(null);
 export const DICTIONARY_INDICATORS = derived(INDICATORS, $indicators => keyBy($indicators, 'uid'));

@@ -1419,20 +1419,20 @@ function generateTimeSeries () {
   return {
     "yearStart": 2000,
     "yearStep": 5,
-    "data": (new Array(10)).map(() => Math.random())
+    "data": Array.from({length: 10}, () => Math.random() * 1.5)
   }
 }
 
 function generateScenarioData () {
   return {
-    "ghg-netzero-year": generateValue('year'),
-    "ghg-2030-absolute": generateValue('celsius'),
-    "ghg-2030-relative": generateValue('percent'),
-    "warming-2100": generateValue('celsius'),
-    "warming-peak-value": generateValue('celsius'),
-    "warming-peak-year": generateValue('year'),
-    "warming-overshoot-magnitude": generateValue('celsius'),
-    "warming-overshoot-length": generateValue('length'),
+    // "ghg-netzero-year": generateValue('year'),
+    // "ghg-2030-absolute": generateValue('celsius'),
+    // "ghg-2030-relative": generateValue('percent'),
+    // "warming-2100": generateValue('celsius'),
+    // "warming-peak-value": generateValue('celsius'),
+    // "warming-peak-year": generateValue('year'),
+    // "warming-overshoot-magnitude": generateValue('celsius'),
+    // "warming-overshoot-length": generateValue('length'),
     "temperature": generateTimeSeries(),
     "emissions": generateTimeSeries()
   }
