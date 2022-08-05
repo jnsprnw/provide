@@ -3,7 +3,11 @@
   import Grid from '$lib/helper/Grid.svelte';
   import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
   import { IMPACT_TIME_DISTRIBUTION_DATA } from '$lib/../stores/impact-time-distribution.js';
-  import { CURRENT_INDICATOR_UNIT } from '$lib/../stores/store.js';
+  import {
+    CURRENT_INDICATOR_UNIT,
+    CURRENT_INDICATOR,
+    CURRENT_GEOGRAPHY,
+  } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
 
   $: distributionData = (() => {
@@ -39,7 +43,9 @@
   </Grid>
   <Grid md="4">
     <div>
-      <h2>Near-surface air temperature in Denmark until 2100</h2>
+      <h2>
+        {$CURRENT_INDICATOR.label} in {$CURRENT_GEOGRAPHY.label} until 2100
+      </h2>
     </div>
   </Grid>
 </Grid>

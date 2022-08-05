@@ -17,7 +17,7 @@ import {
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
   CURRENT_INDICATOR_OPTIONS_SELECTION,
-  CURRENT_INDICATOR_OPTIONS_KEYS
+  CURRENT_INDICATOR_OPTIONS_KEYS,
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -53,10 +53,15 @@ export function handle(
   }
 
   const options = take(CURRENT_INDICATOR_OPTIONS_KEYS).reduce((result, key) => {
-    return { ...result, [key]: get(params, ['options', key]) || get(take(CURRENT_INDICATOR_OPTIONS_SELECTION), [key]) };
+    return {
+      ...result,
+      [key]:
+        get(params, ['options', key]) ||
+        get(take(CURRENT_INDICATOR_OPTIONS_SELECTION), [key]),
+    };
   }, {});
 
-  const optionsValues = map(options, value => value);
+  const optionsValues = map(options, (value) => value);
 
   switch (endpoint) {
     case END_IMPACT_TIME:
@@ -67,7 +72,7 @@ export function handle(
         geography,
         indicator,
         scenarios: [scenario],
-        ...options
+        ...options,
       })); // We need this for the load function
       data = take(IMPACT_TIME_CACHE);
       store = IMPACT_TIME_CACHE;

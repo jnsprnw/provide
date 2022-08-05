@@ -3,7 +3,10 @@
   import ImpactGeo from './ImpactGeo.svelte';
   import ImpactTime from './ImpactTime.svelte';
   import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
-  import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
+  import {
+    CURRENT_INDICATOR_UID,
+    ALL_PARAMETERS_SELECTED,
+  } from '$lib/../stores/store.js';
 </script>
 
 <!-- <p>{$CURRENT_INDICATOR_UID}</p> -->
@@ -32,5 +35,7 @@
 {get($IMPACT_GEO_DATA, ['status'])}
 {JSON.stringify(get($IMPACT_GEO_DATA, ['data', 'data', 0]))} -->
 
-<ImpactTime />
-<ImpactGeo />
+{#if $ALL_PARAMETERS_SELECTED}
+  <ImpactTime />
+  <ImpactGeo />
+{/if}
