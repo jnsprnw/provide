@@ -16,7 +16,7 @@
   export let tickSize;
   export let textAnchor = "end";
   export let rightToLeft = false;
-  export let formatTick = (d) => formatValue(d, "two-digits");
+  export let formatTick = (d) => formatValue(d, "default");
 
   $: tickLength = (tickSize ?? $width) - tickPadding;
 

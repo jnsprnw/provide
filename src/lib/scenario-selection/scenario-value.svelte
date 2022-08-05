@@ -1,5 +1,5 @@
 <script>
-	import { formatValues, getUID } from '$lib/utils.js';
+	import { getUID } from '$lib/utils.js';
   import { round } from "lodash-es";
 	import { getContext } from 'svelte';
 	export let key = null;
@@ -23,4 +23,4 @@
 
 <dt>{ label }</dt>
 <aside>{ values }</aside>
-<dd>{ formatValues(value, unit) } <i aria-hidden="true">{#if hasWarning === true }⚠️{/if}</i></dd>
+<dd>{ value } <i aria-hidden="true">{#if hasWarning === true }⚠️{/if}</i></dd>

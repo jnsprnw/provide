@@ -1,38 +1,8 @@
 import { format } from 'd3-format';
-import has from 'lodash/has';
-import set from "lodash/set";
-import compact from "lodash/compact";
+import { has, set, compact } from "lodash-es";
 import { handle } from "$lib/api/api.js";
 import qs from "qs";
 import { browser } from "$app/env";
-
-const formatCelius = format(".1f");
-const formatPercent = format(".0%");
-const formatGt = format(".1f");
-
-function formatValue (value, unit) {
-	if (unit === 'celsius') {
-		return `${formatCelius(value)} °C`;
-	} else if (unit === 'percent') {
-		return formatPercent(value)
-	} else if (unit === 'year') {
-		return value
-	} else if (unit === 'gty') {
-		return `${formatGt(value)} Gt/y`;
-	}
-	return value;
-}
-
-export const formatValues = function (value, unit, isRange = false) {
-	if (typeof value === 'undefined') {
-		return '—'
-	}
-	if (isRange) {
-		return value.map(d => formatValue(d, unit)).join('—');
-	} else {
-		return formatValue(value, unit);
-	}
-}
 
 export const loadFromAPI = function (url, fetch) {
 	return new Promise(async (resolve) => {

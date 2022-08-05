@@ -18,6 +18,7 @@
     SECTORS,
     INDICATORS,
     GEOGRAPHY_TYPES,
+    AVAILABLE_SCENARIOS,
   } from "$lib/../stores/store.js";
 
   export let meta;
@@ -25,6 +26,7 @@
   GEOGRAPHY_TYPES.set(meta.geographyTypes);
   INDICATORS.set(meta.indicators);
   SECTORS.set(meta.sectors);
+  AVAILABLE_SCENARIOS.set(meta.scenarios);
 
   setContext("meta", {
     getGeographyTypes: () => meta.geographyTypes,

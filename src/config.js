@@ -3,6 +3,8 @@ export const END_DISTRIBUTION = 'dist';
 export const END_UN_AVOIDABLE_RISK = 'un-avoidable-risk';
 export const END_IMPACT_GEO = 'impact-geo';
 
+export const DEFAULT_FORMAT_UID = 'float';
+
 export const OPTIONS = {
   time: {
     options: [
@@ -19,7 +21,7 @@ export const OPTIONS = {
         label: '2020',
       },
       {
-        'value:': 'pre',
+        value: 'pre',
         label: '1850–1900',
       },
     ],
@@ -1435,20 +1437,20 @@ function generateTimeSeries() {
   return {
     yearStart: 2000,
     yearStep: 5,
-    data: new Array(10).map(() => Math.random()),
+    data: Array.from({ length: 10 }, () => Math.random() * 1.5),
   };
 }
 
 function generateScenarioData() {
   return {
-    'ghg-netzero-year': generateValue('year'),
-    'ghg-2030-absolute': generateValue('celsius'),
-    'ghg-2030-relative': generateValue('percent'),
-    'warming-2100': generateValue('celsius'),
-    'warming-peak-value': generateValue('celsius'),
-    'warming-peak-year': generateValue('year'),
-    'warming-overshoot-magnitude': generateValue('celsius'),
-    'warming-overshoot-length': generateValue('length'),
+    // "ghg-netzero-year": generateValue('year'),
+    // "ghg-2030-absolute": generateValue('celsius'),
+    // "ghg-2030-relative": generateValue('percent'),
+    // "warming-2100": generateValue('celsius'),
+    // "warming-peak-value": generateValue('celsius'),
+    // "warming-peak-year": generateValue('year'),
+    // "warming-overshoot-magnitude": generateValue('celsius'),
+    // "warming-overshoot-length": generateValue('length'),
     temperature: generateTimeSeries(),
     emissions: generateTimeSeries(),
   };
@@ -1632,26 +1634,44 @@ export const INDICATORS = [
     // Other indicators
     uid: 'tas',
     label: 'Near-surface air temperature',
-    unit: 'unit id',
+    unit: 'celsius',
     sector: 'terrestrial-climate',
+    options: [
+      ['time', 'annual'],
+      ['frequency', '0-1'],
+      ['reference', 'pre'],
+    ], // DUMMY
   },
   {
     uid: 'wet-bulb-globe-temperature',
     label: 'Wet-bulb globe temperature',
-    unit: 'unit id',
+    unit: 'celsius',
     sector: 'terrestrial-climate',
+    options: [
+      ['time', 'annual'],
+      ['reference', '2020'],
+    ], // DUMMY
   },
   {
     uid: 'outlier-days',
     label: 'Outlier days',
-    unit: 'unit id',
+    unit: 'float',
     sector: 'terrestrial-climate',
+    options: [
+      ['frequency', '0-02'],
+      ['spatial', 'gdp'],
+    ], // DUMMY
   },
   {
     uid: 'precipitation',
     label: 'Precipitation',
-    unit: 'unit id',
+    unit: 'float',
     sector: 'cryosphere',
+    options: [
+      ['frequency', '0-05'],
+      ['reference', 'pre'],
+      ['spatial', 'gdp'],
+    ], // DUMMY
   },
 ];
 

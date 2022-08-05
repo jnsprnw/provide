@@ -11,6 +11,7 @@
   import Reversibility from "$lib/explore-impacts/reversibility/index.svelte";
   import GeographySelection from "$lib/geography-selection/index.svelte";
   import ScenarioSelection from "$lib/scenario-selection/index.svelte";
+  import SelectionOptions from "$lib/selection-options/index.svelte";
 
   import {
     CURRENT_GEOGRAPHY,
@@ -75,6 +76,7 @@
 <div class="impacts-analysis container">
   <div class="wrapper">
     <SelectionMessage />
+    <SelectionOptions />
     {#if true || ($CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS !== [] && $CURRENT_INDICATOR !== null)}
       <Tabs type="nav">
         <Tab label="Impact analysis" />

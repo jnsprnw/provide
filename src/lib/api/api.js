@@ -1,8 +1,7 @@
 // This file holds the handle function, which all endpoints use to interact with the API.
 import { get as take } from 'svelte/store';
-import get from 'lodash/get';
 import { check, hasInObject } from "$lib/utils.js";
-import isArray from "lodash/isArray";
+import { isArray, get } from "lodash-es";
 import { END_IMPACT_TIME, END_DISTRIBUTION, END_UN_AVOIDABLE_RISK, END_IMPACT_GEO } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from "$lib/../stores/impact-time.js";
 import { IMPACT_TIME_DISTRIBUTION_CACHE } from "$lib/../stores/impact-time-distribution.js";
@@ -13,7 +12,7 @@ import { CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_UID } f
 function returnDefault (callback) {
   if (callback === "get") {
     return []
-  } else if (callback === has) {
+  } else if (callback === "has") {
     return [false]
   } else {
     return undefined;

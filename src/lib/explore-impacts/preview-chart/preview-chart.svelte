@@ -103,7 +103,8 @@
 		}
 
 		.chart-area {
-			fill: var(--color-light-blue300); // TODO
+			fill: var(--color-light-petrol200); // TODO
+			opacity: 0.3;
 			stroke: none;
 		}
 	}

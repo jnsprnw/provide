@@ -1,10 +1,12 @@
 import { formatDefaultLocale, formatLocale } from "d3-format";
 
 export const NA_STRING = "—";
-export const CURRENCY_FORMAT = "$,.0f";
-export const PERCENT_FORMAT = ".1%";
-export const INTEGER_FORMAT = ",.0f";
-export const FLOAT_FORMAT = ",.1f";
+export const FORMAT_CURRENCY = "$,.0f";
+export const FORMAT_INTEGER = ",.0f";
+export const FORMAT_FLOAT = ",.1f";
+export const FORMAT_YEAR = ".0f";
+export const FORMAT_CELSIUS = ".0f";
+export const FORMAT_PERCENT = ".0%";
 
 // the basic formatting function sued
 const f = formatLocale({
@@ -19,19 +21,25 @@ const f = formatLocale({
 
 // functions based on indicator type
 const indicatorFormats = {
-  integer: f(INTEGER_FORMAT),
-  currency: f(CURRENCY_FORMAT),
-  float: f(FLOAT_FORMAT),
-  roce: f(PERCENT_FORMAT),
-  returnOnSales: f(PERCENT_FORMAT),
-  capitalTurnOver: f(PERCENT_FORMAT),
+  integer: f(FORMAT_INTEGER),
+  currency: f(FORMAT_CURRENCY),
+  float: f(FORMAT_FLOAT),
+  percent: f(FORMAT_PERCENT),
+  year: f(FORMAT_YEAR),
+  celsius: f(FORMAT_CELSIUS),
 
   // format for anything else
-  default: f(INTEGER_FORMAT),
+  default: f(FORMAT_INTEGER),
 };
 
-export const formatValue = (value, indicatorId) => {
-  const formatter =
-    indicatorFormats[indicatorId] || indicatorFormats["default"];
-  return formatter(value);
+const suffixes = {
+  celsius: ' °C',
+  gty: ' Gt/y'
+}
+
+export const formatValue = (d, indicatorId) => {
+  const formatter = indicatorFormats[indicatorId] || indicatorFormats["default"];
+  const value = formatter(d);
+  const suffix = suffixes[indicatorId];
+  return suffix ? value + suffix : value;
 };
