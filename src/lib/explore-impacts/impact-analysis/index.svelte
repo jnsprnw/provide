@@ -55,10 +55,6 @@
   get($IMPACT_TIME_DISTRIBUTION_DATA, ['data', 'data', 'distribution', 0])
 )}
 
-<h2>Impact Geo</h2>
-{get($IMPACT_GEO_DATA, ['status'])}
-{JSON.stringify(get($IMPACT_GEO_DATA, ['data', 'data', 0]))}
-
 {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
   <div class="distribution-chart">
     <LineDistributionChart {...processedDistData} />
