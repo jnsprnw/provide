@@ -66,6 +66,12 @@
       ],
     };
 
+    const scenarioColors = [
+      colors.category[0],
+      colors.category[1],
+      colors.category[2],
+    ];
+
     $themeStore = {
       id: id,
       mapStyle,
@@ -77,6 +83,7 @@
         hasContrastToBackground,
         get: (d) => get(colors, d) || d, // TODO: check if whole lodash is loaded
         steps: colorSteps,
+        scenarios: scenarioColors,
         scales: {
           sequential: piecewise(interpolateLab, colorSteps.sequential),
           diverging: piecewise(interpolateLab, colorSteps.diverging),

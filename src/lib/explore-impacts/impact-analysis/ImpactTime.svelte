@@ -1,12 +1,17 @@
 <script>
   import { get } from 'lodash-es';
   import Grid from '$lib/helper/Grid.svelte';
-  import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
   import { IMPACT_TIME_DISTRIBUTION_DATA } from '$lib/../stores/impact-time-distribution.js';
+  import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
+  import { handle } from '$lib/api/api.js';
+  import { END_IMPACT_TIME } from '$lib/../config.js';
   import {
     CURRENT_INDICATOR_UNIT,
     CURRENT_INDICATOR,
+    CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
 
@@ -28,6 +33,17 @@
 
     return { mean, distribution, yearStep, valueStep };
   })();
+
+  $: datum = handle(
+    END_IMPACT_TIME,
+    'get',
+    {
+      geography: $CURRENT_GEOGRAPHY_UID,
+      scenarios: $CURRENT_SCENARIOS_UID,
+      indicator: $CURRENT_INDICATOR_UID,
+    },
+    $IMPACT_TIME_CACHE
+  );
 </script>
 
 <Grid container>
@@ -41,6 +57,10 @@
       </div>
     {/if}
   </Grid>
+
+  <!-- <Grid md="8">
+    <LineTimeSeries data={$SCENARIOS_TIMESERIES_TEMPERATURE_DATA} unit="celsius" />
+  </Grid> -->
   <Grid md="4">
     <div>
       <h2>

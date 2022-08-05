@@ -6,7 +6,7 @@
    * Specify the value of the checkbox
    * @type {any}
    */
-  export let value = "";
+  export let value = '';
   /** Specify whether the checkbox is checked */
   export let checked = false;
   /**
@@ -24,25 +24,25 @@
   /** Set to `true` to disable the checkbox */
   // export let disabled = false;
   /** Specify the label text */
-  export let labelText = "";
+  export let labelText = '';
   /** Set a name for the input element */
-  export let name = "";
+  export let name = '';
   /**
    * Specify the title attribute for the label element
    * @type {string}
    */
   export let title = undefined;
   /** Set an id for the input label */
-  export let id = "ccs-" + Math.random().toString(36);
+  export let id = 'ccs-' + Math.random().toString(36);
   /** Obtain a reference to the input HTML element */
   export let ref = null;
-  import { createEventDispatcher } from "svelte";
+  import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
   $: isFull = group.length >= MAX_SELECTABLE_SCENARIOS;
   $: useGroup = Array.isArray(group);
   $: checked = useGroup ? group.includes(value) : checked;
   $: position = group.indexOf(value);
-  $: dispatch("check", checked);
+  $: dispatch('check', checked);
   let refLabel = null;
   $: isTruncated = refLabel?.offsetWidth < refLabel?.scrollWidth;
   $: title = !title && isTruncated ? refLabel?.innerText : title;
@@ -93,7 +93,7 @@
     {title}
     class:checkbox-label={true}
     aria-disabled={disabled}
-    class={checked ? `checked-${position}` : ""}
+    class={checked ? `checked-${position}` : ''}
   >
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +112,7 @@
         rx="2"
         class="box"
         stroke="currentColor"
-        fill={checked ? "currentColor" : "none"}
+        fill={checked ? 'currentColor' : 'none'}
         stroke-width="1"
       />
       {#if checked}
@@ -146,7 +146,7 @@
 </div>
 
 <style lang="scss">
-  @import "../../styles/global.scss";
+  @import '../../styles/global.scss';
 
   input {
     @include visually-hidden();
