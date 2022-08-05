@@ -13,14 +13,14 @@
   $: geoJson = {
     type: 'FeatureCollection',
     features:
-      data?.reduce((acc, cells, lngIndex) => {
-        cells.forEach((value, latIndex) => {
-          const lng = coordinatesOrigin[0] + resolution * lngIndex;
-          const lat = coordinatesOrigin[1] + resolution * latIndex;
+      data?.reduce((acc, cells, latIndex) => {
+        cells.forEach((value, lngIndex) => {
+          const lng = coordinatesOrigin[1] + resolution * latIndex;
+          const lat = coordinatesOrigin[0] + resolution * lngIndex;
 
           acc.push({
             type: 'Feature',
-            properties: { value, radius: 1 },
+            properties: { value, radius: 3 },
             geometry: {
               type: 'Point',
               coordinates: [lng, lat],
@@ -56,7 +56,7 @@
 
   onDestroy(() => {
     console.log('destroying layer');
-    $MAP.removeLayer(gridLayerId);
-    $MAP.removeSource(sourceId);
+    $MAP.getLayer(gridLayerId) && $MAP.removeLayer(gridLayerId);
+    $MAP.getSource(sourceId) && $MAP.removeSource(sourceId);
   });
 </script>
