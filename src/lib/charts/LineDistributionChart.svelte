@@ -12,8 +12,6 @@
 
   const theme = getContext("theme");
 
-  console.log();
-
   export let distribution = [];
   export let mean = [];
   export let yearStep;
@@ -31,7 +29,7 @@
       d.forEach((d) => acc.push(d));
       return acc;
     }, [])
-    .filter((d) => d.distribution > 0.001);
+    .filter((d) => d.distribution > 0.001); // TODO: This is only for now since we don't need all the tiny values in the grid
 </script>
 
 <div class="chart-container">

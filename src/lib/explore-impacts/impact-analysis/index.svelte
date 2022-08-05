@@ -1,13 +1,13 @@
 <script>
-  import { get, value } from "lodash-es";
-  import { IMPACT_TIME_DATA } from "$lib/../stores/impact-time.js";
-  import { IMPACT_TIME_DISTRIBUTION_DATA } from "$lib/../stores/impact-time-distribution.js";
-  import { IMPACT_GEO_DATA } from "$lib/../stores/impact-geo.js";
-  import { CURRENT_INDICATOR_UID } from "$lib/../stores/store.js";
-  import LineDistributionChart from "$lib/charts/LineDistributionChart.svelte";
+  import { get } from 'lodash-es';
+  import ImpactGeo from './ImpactGeo.svelte';
+  import { IMPACT_TIME_DATA } from '$stores/impact-time.js';
+  import { IMPACT_TIME_DISTRIBUTION_DATA } from '$stores/impact-time-distribution.js';
+  import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
+  import { CURRENT_INDICATOR_UID } from '$stores/store.js';
+  import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
 
-  $: distDataStatus = get($IMPACT_TIME_DISTRIBUTION_DATA, ["status"]);
-  $: distData = get($IMPACT_TIME_DISTRIBUTION_DATA, ["data"]);
+  $: distData = get($IMPACT_TIME_DISTRIBUTION_DATA, ['data']);
 
   function processDistData() {
     const { yearStart, valueStart, yearStep, valueStep, data } = distData || {};
@@ -34,33 +34,34 @@
 
 <h2>Impact Time</h2>
 {#each $IMPACT_TIME_DATA as scenario}
-  {#if get(scenario, "status") === "success"}
+  {#if get(scenario, 'status') === 'success'}
     <p>
-      Status: {get(scenario, "status")}<br />
+      Status: {get(scenario, 'status')}<br />
       Data sample: {JSON.stringify(
-        get(scenario, ["data", "data", $CURRENT_INDICATOR_UID, 0])
+        get(scenario, ['data', 'data', $CURRENT_INDICATOR_UID, 0])
       )}
     </p>
   {:else}
-    <p>Status: {get(scenario, "status")}</p>
+    <p>Status: {get(scenario, 'status')}</p>
   {/if}
 {/each}
 
 <h2>Impact Time Distribution</h2>
-{get($IMPACT_TIME_DISTRIBUTION_DATA, ["status"])}
+{get($IMPACT_TIME_DISTRIBUTION_DATA, ['status'])}
 {JSON.stringify(
-  get($IMPACT_TIME_DISTRIBUTION_DATA, ["data", "data", "distribution", 0])
+  get($IMPACT_TIME_DISTRIBUTION_DATA, ['data', 'data', 'distribution', 0])
 )}
 
 <h2>Impact Geo</h2>
-{get($IMPACT_GEO_DATA, ["status"])}
-{JSON.stringify(get($IMPACT_GEO_DATA, ["data", "data", 0]))}
+{get($IMPACT_GEO_DATA, ['status'])}
+{JSON.stringify(get($IMPACT_GEO_DATA, ['data', 'data', 0]))}
 
-{#if distDataStatus === "success"}
+{#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
   <div class="distribution-chart">
     <LineDistributionChart {...processedDistData} />
   </div>
 {/if}
+<ImpactGeo />
 
 <style lang="scss">
   .distribution-chart {
