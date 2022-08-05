@@ -35,8 +35,8 @@
     y={yKey}
     z={zKey}
     zScale={scaleOrdinal()}
-    zDomain={['category-disabled', 'category-0', 'category-1', 'category-2']}
-    zRange={[$theme.color.petrol100, $theme.color.category[0], $theme.color.category[1], $theme.color.category[2]]}
+    zDomain={['category-3-disabled', 'category-1-hovered', 'category-2-0', 'category-2-1', 'category-2-2']}
+    zRange={[$theme.color.petrol100, 'red', $theme.color.category[0], $theme.color.category[1], $theme.color.category[2]]}
     data={data}
     flatData={flatten(data)}
   >

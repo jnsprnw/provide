@@ -11,7 +11,7 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, $indicators => keyBy($i
 
 export const CURRENT_GEOGRAPHY = writable(null);
 export const HOVER_GEOGRAPHY_UID = writable(null);
-export const CURRENT_SCENARIOS = writable([]);
+export const CURRENT_SCENARIOS = writable([]); // Currently selected scenarios (not hovered1)
 
 export const DICTIONARY_SECTORS = derived(SECTORS, $sectors => keyBy($sectors, 'uid'));
 
@@ -31,6 +31,13 @@ export const CURRENT_GEOGRAPHY_UID = derived(
 export const CURRENT_SCENARIOS_UID = derived(
 	CURRENT_SCENARIOS,
 	$scenarios => $scenarios.map(({ uid }) => uid)
+);
+
+export const HOVER_SCENARIO = writable(null); // Currently hovered scenario (not selected!)
+
+export const HOVER_SCENARIO_UID = derived(
+	HOVER_SCENARIO,
+	$scenario => get($scenario, 'uid')
 );
 
 export const CURRENT_INDICATOR_UID = derived(
