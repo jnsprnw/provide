@@ -35,7 +35,7 @@
 
 <p>{$CURRENT_INDICATOR_UID}</p>
 
-<!-- <h2>Impact Time</h2>
+<h2>Impact Time</h2>
 {#each $IMPACT_TIME_DATA as scenario}
   {#if get(scenario, 'status') === 'success'}
     <p>
@@ -47,7 +47,7 @@
   {:else}
     <p>Status: {get(scenario, 'status')}</p>
   {/if}
-{/each} -->
+{/each}
 
 <!-- <h2>Impact Time Distribution</h2>
 {get($IMPACT_TIME_DISTRIBUTION_DATA, ['status'])}

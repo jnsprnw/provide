@@ -1,7 +1,7 @@
 // This file holds the handle function, which all endpoints use to interact with the API.
 import { get as take } from 'svelte/store';
 import { check, hasInObject } from '$lib/utils.js';
-import { isArray, get } from 'lodash-es';
+import { isArray, get, map } from 'lodash-es';
 import {
   END_IMPACT_TIME,
   END_DISTRIBUTION,
@@ -16,6 +16,8 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
+  CURRENT_INDICATOR_OPTIONS_SELECTION,
+  CURRENT_INDICATOR_OPTIONS_KEYS
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -50,13 +52,22 @@ export function handle(
     return returnDefault(callback);
   }
 
+  const options = take(CURRENT_INDICATOR_OPTIONS_KEYS).reduce((result, key) => {
+    return { ...result, [key]: get(params, ['options', key]) || get(take(CURRENT_INDICATOR_OPTIONS_SELECTION), [key]) };
+  }, {});
+
+  const optionsValues = map(options, value => value);
+
   switch (endpoint) {
     case END_IMPACT_TIME:
-      addr = scenarios.map((scenario) => [geography, scenario, indicator]);
+      addr = scenarios.map((scenario) => {
+        return [geography, scenario, indicator, ...optionsValues];
+      });
       param = scenarios.map((scenario) => ({
         geography,
         indicator,
         scenarios: [scenario],
+        ...options
       })); // We need this for the load function
       data = take(IMPACT_TIME_CACHE);
       store = IMPACT_TIME_CACHE;
@@ -64,23 +75,23 @@ export function handle(
       break;
     case END_DISTRIBUTION:
       scenario = scenarios[0];
-      addr = [[geography, scenario, indicator]];
-      param = [{ geography, indicator, scenarios: [scenario] }]; // We need this for the load function
+      addr = [[geography, scenario, indicator, ...optionsValues]];
+      param = [{ geography, indicator, scenarios: [scenario], ...options }]; // We need this for the load function
       data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
       store = IMPACT_TIME_DISTRIBUTION_CACHE;
       url = '/api/impact-time-distribution';
       break;
     case END_IMPACT_GEO:
       scenario = scenarios[0];
-      addr = [[geography, scenario, indicator]];
-      param = [{ geography, scenario, indicator }]; // We need this for the load function
+      addr = [[geography, scenario, indicator, ...optionsValues]];
+      param = [{ geography, scenario, indicator, ...options }]; // We need this for the load function
       data = take(IMPACT_GEO_CACHE);
       store = IMPACT_GEO_CACHE;
       url = `${import.meta.env.VITE_DATA_API_URL}/impact-geo`;
       break;
     case END_UN_AVOIDABLE_RISK:
-      addr = [[geography, indicator]];
-      param = [{ geography, indicator }]; // We need this for the load function
+      addr = [[geography, indicator, ...optionsValues]];
+      param = [{ geography, indicator, ...options }]; // We need this for the load function
       data = take(UN_AVOIDABLE_RISK_CACHE);
       store = UN_AVOIDABLE_RISK_CACHE;
       url = '/api/un-avoidable-risk';
