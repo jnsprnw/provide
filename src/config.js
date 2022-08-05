@@ -1459,19 +1459,109 @@ function generateScenarioData() {
 export const SCENARIOS = [
   {
     label: 'Current Policies',
-    uid: 'CurPol',
+    uid: 'cp',
     description:
       'This pathway explores the consequences of continuing along the path of implemented climate policies in 2020 with only mild strengthening after that. The scenario illustrates the outcomes of many scenarios in the literature that project the outcomes of current policies.',
     isPrimary: true,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.26 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.15 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2456, 
+          1.3416, 
+          1.4192, 
+          1.5132, 
+          1.6074, 
+          1.6966, 
+          1.7818, 
+          1.8819, 
+          1.9877, 
+          2.1007, 
+          2.2175, 
+          2.3347, 
+          2.4526, 
+          2.5694, 
+          2.6847, 
+          2.8015, 
+          2.9206
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          57615.53110072017, 
+          62055.39923044584, 
+          64712.28907750579, 
+          66646.13989194669, 
+          69205.41168059764, 
+          70592.27561457043, 
+          70993.30944692672, 
+          69703.14555260717, 
+          68309.02780012568
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
-    label: 'Gradual Strengthening',
-    uid: 'GS',
+    label: 'Delayed Action',
+    uid: 'da',
     description:
       'Energy demand is reduced in the 2030s and the transition to variable renewable energy accelerates then too. Renewable energy never forces out all fossil fuel use \u2013 carbon dioxide is captured from the air and buried instead, along with reforestation.',
     isPrimary: true,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.7 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.7 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2314, 
+          1.3313, 
+          1.4249, 
+          1.5116, 
+          1.5828, 
+          1.6256, 
+          1.6496, 
+          1.6637, 
+          1.6747, 
+          1.6803, 
+          1.6851, 
+          1.6864, 
+          1.6866, 
+          1.6806, 
+          1.6748, 
+          1.6638, 
+          1.6571
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          56397.219277746284, 
+          43316.11053375207, 
+          25793.185379649483, 
+          17279.239743693746, 
+          12673.173725914789, 
+          8242.882235963265, 
+          3095.5259172153674, 
+          953.2173358968384, 
+          -290.09588330653787
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      },
+    }
   },
   {
     label: 'Shifting Pathways',
@@ -1479,39 +1569,264 @@ export const SCENARIOS = [
     description:
       'This pathway explores how a broader shift towards sustainable development can be combined with climate policies consistent with keeping warming to 1.5\u02daC. Energy demand is reduced over time, while renewable energy use grows, squeezing out fossil fuel use.',
     isPrimary: true,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.6 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.6 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2386, 
+          1.3499, 
+          1.4402, 
+          1.4971, 
+          1.5173, 
+          1.5148, 
+          1.4909, 
+          1.4602, 
+          1.4317, 
+          1.4076, 
+          1.3871, 
+          1.3662, 
+          1.3488, 
+          1.3314, 
+          1.3171, 
+          1.3014, 
+          1.2874
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          56111.428375521034, 
+          33339.86719609621, 
+          19151.999428983596, 
+          10193.376100848398, 
+          6165.195159270135, 
+          3081.124799579309, 
+          1326.0128802203708, 
+          423.65101457033506, 
+          -604.0758731657097
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
-    label: 'Moderate Action',
-    uid: 'ModAct',
+    label: 'NDCs Pathway',
+    uid: 'ndc',
     description:
       'This pathway explores the impact of countries sticking to their Nationally Determined Contributions (NDCs) as stated in 2020. These are often more ambitious than currently implemented policies, but for most countries do not ratchet up very rapidly. Similar levels of mitigation effort are expected going forwards.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.1 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.1 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2333, 
+          1.3299, 
+          1.4358, 
+          1.5453, 
+          1.649, 
+          1.7511, 
+          1.8501, 
+          1.9506, 
+          2.0498, 
+          2.1453, 
+          2.231, 
+          2.3138, 
+          2.3852, 
+          2.4428, 
+          2.4933, 
+          2.5288, 
+          2.5577
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          60809.478747147085, 
+          53775.02191839159, 
+          55032.08701233139, 
+          57411.01697895689, 
+          56734.13826377133, 
+          52805.31264527934, 
+          41502.83555833753, 
+          32026.671545838253, 
+          31119.073371116436
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
-    label: 'Negative Emissions',
-    uid: 'Neg',
+    label: 'High Negative Emissions',
+    uid: 'hne',
     description:
       'Pathway with highest negative emissions (carbon-removing technology). Fossil fuel use decreases slowly, replaced about equally by variable renewable energy and biofuels. The carbon from burning the biofuels is captured and buried, offsetting the continued fossil fuel use.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.27 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.7 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.257, 
+          1.3647, 
+          1.4636, 
+          1.5402, 
+          1.5904, 
+          1.6219, 
+          1.6414, 
+          1.6558, 
+          1.6594, 
+          1.6457, 
+          1.6245, 
+          1.5933, 
+          1.5599, 
+          1.5309, 
+          1.5078, 
+          1.4744, 
+          1.4419
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          54194.58148808071, 
+          38055.219165369286, 
+          29161.77541338333, 
+          19919.647408809105, 
+          8107.657897474299, 
+          954.8858372413488, 
+          -938.3943972233901, 
+          -6024.176887516463, 
+          -6066.100180065413
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
-    label: 'Renewables',
-    uid: 'Ren',
+    label: 'High Renewables',
+    uid: 'hr',
     description:
       'Energy demand is reduced rapidly in the short-term, though grows later. Growth in renewables is very rapid and squeezes out most all other types of energy. Some biofuel is used to balance renewable variability, and the emissions from this are captured and buried.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.27 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.7 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2365, 
+          1.3516, 
+          1.4487, 
+          1.5061, 
+          1.5263, 
+          1.5294, 
+          1.5235, 
+          1.5136, 
+          1.501, 
+          1.4913, 
+          1.4819, 
+          1.4774, 
+          1.4715, 
+          1.4664, 
+          1.4622, 
+          1.4577, 
+          1.4556
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          58148.341567720905, 
+          29780.0327577802, 
+          17343.46578719779, 
+          11332.642931053866, 
+          8954.370320990092, 
+          8000.638807192702, 
+          7374.596252917521, 
+          6731.223378821369, 
+          6577.104404481924
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
-    label: 'Demand-limiting',
-    uid: 'LD',
+    label: 'Low Demand',
+    uid: 'ld',
     description:
       'Energy demand is massively reduced by implementing energy efficient lifestyles and design, and kept low throughout the century. Renewable energy grows and gradually forces out fossil fuels.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.6 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.2 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.24, 
+          1.3505, 
+          1.4439, 
+          1.4911, 
+          1.5104, 
+          1.5053, 
+          1.4889, 
+          1.4701, 
+          1.4491, 
+          1.4293, 
+          1.415, 
+          1.3994, 
+          1.3846, 
+          1.371, 
+          1.3612, 
+          1.3513, 
+          1.3441
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          55219.47344759707, 
+          25849.861596248214, 
+          15180.130292531689, 
+          9256.507601396197, 
+          6385.806101692713, 
+          4249.500794677756, 
+          2606.3779827884528, 
+          1887.7104849816878, 
+          1421.0726719011536
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
     label: 'SSP1-1.9',
@@ -1519,23 +1834,158 @@ export const SCENARIOS = [
     description:
       'Renewable energy is deployed rapidly, energy demand is also limited rapidly. There is general focus on sustainability, but also a significant increase in the amount of biofuel use, with the carbon released by this captured and stored (negative emissions). This pathway was used a lot for climate science research conducted as part of the IPCC Sixth Assessment Report.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.1 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.9 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2486, 
+          1.3586, 
+          1.4357, 
+          1.4773, 
+          1.4894, 
+          1.4871, 
+          1.4761, 
+          1.4556, 
+          1.4351, 
+          1.4177, 
+          1.399, 
+          1.3838, 
+          1.3661, 
+          1.3491, 
+          1.3269, 
+          1.3035, 
+          1.2778
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          53788.79199039185, 
+          31513.443405763923, 
+          18359.00793218521, 
+          9253.093252850646, 
+          5300.617314743331, 
+          2065.305036933608, 
+          -1154.5287244513847, 
+          -4678.068893667987, 
+          -8217.809548671317
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
     label: 'SSP5-3.4-OS',
-    uid: 'ssp534-over',
+    uid: 'ssp534',
     description:
       'Carbon emissions rise at an incredibly fast rate in the short term. Then, around 2040 they decline extremely rapidly through the massive use of negative emissions technologies (for example capturing carbon from biofuel burning or directly from the air, and burying it). This pathway was designed to test the sensitivity of the Earth System to such extreme changes in emissions.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.3 // DUMMY
+      },
+      "warming2050-2100": {
+        "data": 0.4 // DUMMY
+      },
+      "temperature": {
+        "data": [
+          1.2637, 
+          1.403, 
+          1.5463, 
+          1.717, 
+          1.9036, 
+          2.0958, 
+          2.2368, 
+          2.3102, 
+          2.3261, 
+          2.2993, 
+          2.2542, 
+          2.197, 
+          2.1369, 
+          2.0743, 
+          2.0152, 
+          1.9598, 
+          1.9039
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          59591.69929557695, 
+          72397.35214490144, 
+          88516.08824959023, 
+          62052.37850541042, 
+          24776.15222105634, 
+          1841.8054163623528, 
+          -7665.976361355216, 
+          -11807.339428643802, 
+          -13925.445898990689
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
   {
     label: 'Stabilisation at 1.5\u00b0C',
-    uid: 'Ref_1p5',
+    uid: 's1p5',
     description:
       'Temperatures rise as in the demand-limiting case (LD) until the global average reaches 1.5\u00b0C. The temperature is then held constant. This scenario is a simple thought-experiment not driven by economic or climatic considerations.',
     isPrimary: false,
-    scenarioData: generateScenarioData(),
+    scenarioData: {
+      "warming2050": {
+        "data": 0.4
+      },
+      "warming2050-2100": {
+        "data": 0.9
+      },
+      "temperature": {
+        "data": [
+          1.24, 
+          1.3505, 
+          1.4439, 
+          1.4911, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006, 
+          1.5006
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 1
+      },
+      "emissions": {
+        "data": [
+          0, 
+          0, 
+          0, 
+          0, 
+          0, 
+          0, 
+          0, 
+          0, 
+          0
+        ], 
+        "yearStart": 2020, 
+        "yearStep": 10
+      }
+    }
   },
 ];
 
