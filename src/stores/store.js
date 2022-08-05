@@ -57,14 +57,19 @@ export const CURRENT_INDICATOR_OPTIONS = derived(
 				return false;
 			}
 			return {
-				...options,
-				key: option // TODO: Maybe we should write that directly into the options so we safe some time here.
+				key: option, // TODO: Maybe we should write that directly into the options so we safe some time here.
+				...options
 			};
 		}))
 		CURRENT_INDICATOR_OPTIONS_SELECTION.update(old => ({ ...old, ...defs })); // Updating the current option selection with the default values.
 		// TODO: Maybe we should overwrite the previously selection options with the new default values.
 		return list;
 	}
+);
+
+export const CURRENT_INDICATOR_OPTIONS_KEYS = derived(
+	CURRENT_INDICATOR_OPTIONS,
+	$options => $options.map(indicator => get(indicator, 'key'))
 );
 
 export const IMPACT_TIME_DATA = writable({});

@@ -1,4 +1,19 @@
 {
+  "weakest": {
+    "value": 0.1,
+    "type": "opacity",
+    "filePath": "./transformed/tokens.json",
+    "isSource": true,
+    "original": {
+      "value": 0.1,
+      "type": "opacity"
+    },
+    "name": "weakest",
+    "attributes": {},
+    "path": [
+      "weakest"
+    ]
+  },
   "color": {
     "light": {
       "background": {
@@ -3715,6 +3730,93 @@
             "xxxl"
           ]
         }
+      }
+    },
+    "breakpoint": {
+      "lg": {
+        "value": 1200,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 1200,
+          "type": "sizing"
+        },
+        "name": "lg",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "lg"
+        ]
+      },
+      "xl": {
+        "value": 1440,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 1440,
+          "type": "sizing"
+        },
+        "name": "xl",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "xl"
+        ]
+      },
+      "md": {
+        "value": 960,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 960,
+          "type": "sizing"
+        },
+        "name": "md",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "md"
+        ]
+      },
+      "sm": {
+        "value": 640,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 640,
+          "type": "sizing"
+        },
+        "name": "sm",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "sm"
+        ]
+      },
+      "xs": {
+        "value": 480,
+        "type": "sizing",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": 480,
+          "type": "sizing"
+        },
+        "name": "xs",
+        "attributes": {},
+        "path": [
+          "size",
+          "breakpoint",
+          "xs"
+        ]
       }
     },
     "max-content-width-no-unit": {

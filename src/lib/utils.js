@@ -33,7 +33,7 @@ async function request (params, url) {
       encodeValuesOnly: true,
     }
   );
-	//console.log("loading:", { params, url, query }, `${url}?${query}`);
+	// console.log("loading:", { params, url, query }, `${url}?${query}`);
 	const response = await fetch(`${url}?${query}`);
   const body = await response.json();
 	return body;

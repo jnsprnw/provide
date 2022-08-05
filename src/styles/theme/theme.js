@@ -1,3 +1,4 @@
+export const Weakest = 0.1;
 export const ColorLightBackgroundBase = "#ffffff";
 export const ColorLightBackgroundWeaker = "#eef3f7";
 export const ColorLightBackgroundWeakest = "#cfd8dd";
@@ -192,6 +193,11 @@ export const SizeSpacerLargeL = "32rem";
 export const SizeSpacerLargeXl = "48rem";
 export const SizeSpacerLargeXxl = "64rem";
 export const SizeSpacerLargeXxxl = "96rem";
+export const SizeBreakpointLg = "1200rem";
+export const SizeBreakpointXl = "1440rem";
+export const SizeBreakpointMd = "960rem";
+export const SizeBreakpointSm = "640rem";
+export const SizeBreakpointXs = "480rem";
 export const SizeMaxContentWidthNoUnit = "1440rem";
 export const SizeMinContentWidthNoUnit = "320rem";
 export const RadiusInteractiveL = 5;

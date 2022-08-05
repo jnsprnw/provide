@@ -1,4 +1,5 @@
 :root {
+  --weakest: 0.1;
   --color-light-background-base: #fff;
   --color-light-background-weaker: #eef3f7;
   --color-light-background-weakest: #cfd8dd;
@@ -193,6 +194,11 @@
   --size-spacer-large-xl: 48px;
   --size-spacer-large-xxl: 64px;
   --size-spacer-large-xxxl: 96px;
+  --size-breakpoint-lg: 1200px;
+  --size-breakpoint-xl: 1440px;
+  --size-breakpoint-md: 960px;
+  --size-breakpoint-sm: 640px;
+  --size-breakpoint-xs: 480px;
   --size-max-content-width-no-unit: 1440;
   --size-min-content-width-no-unit: 320;
   --radius-interactive-l: 5px;

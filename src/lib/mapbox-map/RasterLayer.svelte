@@ -4,6 +4,7 @@
   export let data;
   export let coordinatesOrigin;
   export let resolution;
+  export let colorScale;
 
   const { MAP } = getContext('map');
 
@@ -15,15 +16,24 @@
     features:
       data?.reduce((acc, cells, latIndex) => {
         cells.forEach((value, lngIndex) => {
+          if (value === null) return;
           const lng = coordinatesOrigin[1] + resolution * latIndex;
           const lat = coordinatesOrigin[0] + resolution * lngIndex;
 
           acc.push({
             type: 'Feature',
-            properties: { value, radius: 3 },
+            properties: { value, color: colorScale(value) },
             geometry: {
-              type: 'Point',
-              coordinates: [lng, lat],
+              type: 'Polygon',
+              coordinates: [
+                [
+                  [lng, lat],
+                  [lng + resolution, lat],
+                  [lng + resolution, lat + resolution],
+                  [lng, lat + resolution],
+                  [lng, lat],
+                ],
+              ],
             },
           });
         });
@@ -43,15 +53,15 @@
   $: $MAP.addLayer(
     {
       id: gridLayerId,
-      type: 'circle',
+      type: 'fill',
       source: sourceId,
       paint: {
-        'circle-color': '#000000',
-        'circle-opacity': 1,
-        'circle-radius': ['get', 'radius'],
+        'fill-color': ['get', 'color'],
+        'fill-opacity': 1,
+        'fill-antialias': true,
       },
-    }
-    //'settlement-minor-label'
+    },
+    'water'
   );
 
   onDestroy(() => {

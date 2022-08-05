@@ -1,4 +1,5 @@
 {
+  "weakest": 0.1,
   "color": {
     "light": {
       "background": {
@@ -301,6 +302,13 @@
         "xxl": "64rem",
         "xxxl": "96rem"
       }
+    },
+    "breakpoint": {
+      "lg": "1200rem",
+      "xl": "1440rem",
+      "md": "960rem",
+      "sm": "640rem",
+      "xs": "480rem"
     },
     "max-content-width-no-unit": "1440rem",
     "min-content-width-no-unit": "320rem"

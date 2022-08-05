@@ -4,20 +4,28 @@
   import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
   import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
   import { max, min } from 'd3-array';
+  import { scaleLinear } from 'd3-scale';
+  import { getContext } from 'svelte';
   $: data = get($IMPACT_GEO_DATA, ['data']);
 
-  $: console.log(data);
-  $: scale = (() => {
-    if (!data?.data) return;
-    const minVal = min(data.data, (row) => min(row));
-    const maxVal = max(data.data, (row) => max(row));
-    console.log(minVal, maxVal);
+  const theme = getContext('theme');
+
+  $: colorScale = (() => {
+    let domain = [0, 1];
+    let range = [$theme.color.category[5], $theme.color.category[3]];
+    if (data?.data) {
+      const minVal = min(data.data, (row) => min(row));
+      const maxVal = max(data.data, (row) => max(row));
+      domain = [minVal, maxVal];
+    }
+
+    return scaleLinear().domain(domain).range(range);
   })();
 </script>
 
 <div class="map-wrapper">
   <MapboxMap>
-    <RasterLayer {...data} />
+    <RasterLayer {colorScale} {...data} />
   </MapboxMap>
 </div>
 

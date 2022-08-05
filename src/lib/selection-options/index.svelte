@@ -1,7 +1,7 @@
 <script>
 	import Option from "./option.svelte";
 	import { get, compact, find } from "lodash-es";
-	import { CURRENT_INDICATOR_OPTIONS, CURRENT_INDICATOR_OPTIONS_SELECTION } from "$lib/../stores/store.js";
+	import { CURRENT_INDICATOR_OPTIONS, CURRENT_INDICATOR_OPTIONS_SELECTION, CURRENT_INDICATOR_OPTIONS_KEYS } from "$lib/../stores/store.js";
 
 	let options_list;
 	CURRENT_INDICATOR_OPTIONS.subscribe((value) => {
@@ -38,7 +38,9 @@
   }
 </script>
 
-<h3>{ JSON.stringify($CURRENT_INDICATOR_OPTIONS_SELECTION) }</h3>
+<!-- <h3>{ JSON.stringify($CURRENT_INDICATOR_OPTIONS_SELECTION) }</h3>
+<h3>{ JSON.stringify($CURRENT_INDICATOR_OPTIONS) }</h3>
+<h3>{ JSON.stringify($CURRENT_INDICATOR_OPTIONS_KEYS) }</h3> -->
 
 {#each options_element as { options, key, selected }}
 	<Option {options} {key} {selected} on:change={handleChange} />
