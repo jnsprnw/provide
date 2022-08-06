@@ -9,10 +9,37 @@ import {
   isEmpty,
 } from 'lodash-es';
 import { OPTIONS, DEFAULT_FORMAT_UID } from '$lib/../config.js';
+import THEME from '$styles/theme-store.js';
 
 export const INDICATORS = writable([]); // TODO: Should we add AVAILABLE_ here?
 export const SECTORS = writable([]); // TODO: Should we add AVAILABLE_ here?
-export const AVAILABLE_SCENARIOS = writable([]); // TODO: Is prefix AVAILABLE_ good?
+export const AVAILABLE_SCENARIOS = (() => {
+  const { subscribe, update, set } = writable([]);
+  return {
+    subscribe,
+    update,
+    set: (scenariosRaw) => {
+      // Processing of scenario data so we only have to do this once
+      const scenarios = scenariosRaw.map((scenarioRaw) => {
+        const scenario = { ...scenarioRaw };
+        ['emissions', 'temperature'].map((key) => {
+          const { data, yearStart, yearStep } = scenarioRaw.scenarioData[key];
+          scenario[key] = data.map((value, i) => ({
+            value,
+            year: yearStart + yearStep * i,
+          }));
+        });
+        return scenario;
+      });
+
+      set(scenarios);
+    },
+  };
+})(); // TODO: Is prefix AVAILABLE_ good?
+export const DICTIONARY_AVAILABLE_SCENARIOS = derived(
+  AVAILABLE_SCENARIOS,
+  ($scenarios) => keyBy($scenarios, 'uid')
+);
 
 export const CURRENT_INDICATOR = writable(null);
 export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
@@ -22,6 +49,19 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
 export const CURRENT_GEOGRAPHY = writable(null);
 export const HOVER_GEOGRAPHY_UID = writable(null);
 export const CURRENT_SCENARIOS = writable([]); // Currently selected scenarios (not hovered1)
+
+export const CURRENT_SCENARIOS_UID = derived(CURRENT_SCENARIOS, ($scenarios) =>
+  $scenarios.map(({ uid }) => uid)
+);
+
+export const ALT_CURRENT_SCENARIOS = derived(
+  [CURRENT_SCENARIOS_UID, DICTIONARY_AVAILABLE_SCENARIOS, THEME],
+  ([$theme, $currentScenarios, $scenarios]) => {
+    $currentScenarios.map((uid, i) => {
+      return { ...$scenarios[uid], color: $theme.color.scenarios[i] };
+    });
+  }
+);
 
 export const DICTIONARY_SECTORS = derived(SECTORS, ($sectors) =>
   keyBy($sectors, 'uid')
@@ -37,10 +77,6 @@ export const CURRENT_GEOGRAPHY_TYPE = derived(
 
 export const CURRENT_GEOGRAPHY_UID = derived(CURRENT_GEOGRAPHY, ($geography) =>
   get($geography, 'uid')
-);
-
-export const CURRENT_SCENARIOS_UID = derived(CURRENT_SCENARIOS, ($scenarios) =>
-  $scenarios.map(({ uid }) => uid)
 );
 
 export const HOVER_SCENARIO = writable(null); // Currently hovered scenario (not selected!)

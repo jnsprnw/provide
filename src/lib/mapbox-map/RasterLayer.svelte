@@ -65,7 +65,6 @@
   );
 
   onDestroy(() => {
-    console.log('destroying layer');
     $MAP.getLayer(gridLayerId) && $MAP.removeLayer(gridLayerId);
     $MAP.getSource(sourceId) && $MAP.removeSource(sourceId);
   });

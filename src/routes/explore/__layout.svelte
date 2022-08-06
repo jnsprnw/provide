@@ -1,6 +1,6 @@
 <script context="module">
   export const load = async ({ fetch }) => {
-    const res = await fetch("/api/meta");
+    const res = await fetch('/api/meta');
     const data = await res.json();
     return {
       props: {
@@ -11,15 +11,15 @@
 </script>
 
 <script>
-  import { page } from "$app/stores";
-  import ListLink from "$lib/helper/ListLink.svelte";
-  import { setContext } from "svelte";
+  import { page } from '$app/stores';
+  import ListLink from '$lib/helper/ListLink.svelte';
+  import { setContext } from 'svelte';
   import {
     SECTORS,
     INDICATORS,
     GEOGRAPHY_TYPES,
     AVAILABLE_SCENARIOS,
-  } from "$lib/../stores/store.js";
+  } from '$lib/../stores/store.js';
 
   export let meta;
 
@@ -28,7 +28,7 @@
   SECTORS.set(meta.sectors);
   AVAILABLE_SCENARIOS.set(meta.scenarios);
 
-  setContext("meta", {
+  setContext('meta', {
     getGeographyTypes: () => meta.geographyTypes,
     getContinents: () => meta.continents,
     getAdmin0: () => meta.admin0,
@@ -41,7 +41,7 @@
     getIndicators: () => meta.indicators,
   });
 
-  $: currentPath = $page.routeId || "";
+  $: currentPath = $page.routeId || '';
 </script>
 
 <nav class="explore-menu container">
@@ -71,7 +71,7 @@
 <slot />
 
 <style lang="scss">
-  @import "../../styles/global.scss";
+  @import '../../styles/global.scss';
 
   .explore-menu {
     padding-top: 2rem; // TODO

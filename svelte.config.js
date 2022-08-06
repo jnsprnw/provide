@@ -1,6 +1,6 @@
-import adapter from "@sveltejs/adapter-netlify";
-import sveltePreprocess from "svelte-preprocess";
-import path from "path";
+import adapter from '@sveltejs/adapter-netlify';
+import sveltePreprocess from 'svelte-preprocess';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,8 +10,9 @@ const config = {
     vite: {
       resolve: {
         alias: {
-          $lib: path.resolve("./src/lib"),
-          $stores: path.resolve("./src/stores"),
+          $lib: path.resolve('./src/lib'),
+          $stores: path.resolve('./src/stores'),
+          $styles: path.resolve('./src/styles'),
         },
       },
     },

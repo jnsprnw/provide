@@ -4,16 +4,15 @@
   import { hsl } from 'd3-color';
   import { scaleOrdinal } from 'd3-scale';
   import { setContext } from 'svelte';
-  import { writable } from 'svelte/store';
   import { get } from 'lodash-es';
   import designTokens from './theme/theme.json';
+  import THEME from './theme-store.js';
 
   export let id = 'light';
 
   export let background = true;
 
-  const themeStore = writable();
-  setContext('theme', themeStore);
+  setContext('theme', THEME);
 
   $: makeTextColor = (color, factor = 0.2) => {
     const c = hsl(color);
@@ -72,7 +71,7 @@
       colors.category[2],
     ];
 
-    $themeStore = {
+    $THEME = {
       id: id,
       mapStyle,
       ...designTokens,
