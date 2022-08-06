@@ -14,6 +14,7 @@
     CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
+  import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
   $: distributionData = (() => {
     const { yearStart, valueStart, yearStep, valueStep, data } =
@@ -34,7 +35,7 @@
     return { mean, distribution, yearStep, valueStep };
   })();
 
-  $: datum = handle(
+  $: impactTimeData = handle(
     END_IMPACT_TIME,
     'get',
     {
@@ -43,24 +44,42 @@
       indicator: $CURRENT_INDICATOR_UID,
     },
     $IMPACT_TIME_CACHE
-  );
+  )
+    .filter((d) => d.status === 'success')
+    .map((datum, i) => {
+      const { yearStart, yearStep } = datum.data;
+      const indicatorData = get(datum, [
+        'data',
+        'data',
+        $CURRENT_INDICATOR_UID,
+      ]);
+
+      return {
+        values: indicatorData?.map((values, i) => ({
+          value: values[values.length - 2],
+          year: yearStart + yearStep * i,
+        })),
+      };
+    });
 </script>
 
 <Grid container>
   <Grid md="8">
-    {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
+    {#if $CURRENT_SCENARIOS_UID.length === 1}
+      {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
+        <div class="impact-time-chart">
+          <LineDistributionChart
+            {...distributionData}
+            unit={$CURRENT_INDICATOR_UNIT}
+          />
+        </div>
+      {/if}
+    {:else}
       <div class="impact-time-chart">
-        <LineDistributionChart
-          {...distributionData}
-          unit={$CURRENT_INDICATOR_UNIT}
-        />
+        <LineTimeSeries data={impactTimeData} unit="celsius" />
       </div>
     {/if}
   </Grid>
-
-  <!-- <Grid md="8">
-    <LineTimeSeries data={$SCENARIOS_TIMESERIES_TEMPERATURE_DATA} unit="celsius" />
-  </Grid> -->
   <Grid md="4">
     <div>
       <h2>

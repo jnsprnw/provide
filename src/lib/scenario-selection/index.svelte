@@ -55,14 +55,18 @@
       {/if}
     </div>
     <div class="scenario-charts">
-      <LineTimeSeries
-        data={$SCENARIOS_TIMESERIES_TEMPERATURE_DATA}
-        unit="celsius"
-      />
-      <LineTimeSeries
-        data={$SCENARIOS_TIMESERIES_EMISSIONS_DATA}
-        unit="integer"
-      />
+      <div class="scenario-chart">
+        <LineTimeSeries
+          data={$SCENARIOS_TIMESERIES_TEMPERATURE_DATA}
+          unit="celsius"
+        />
+      </div>
+      <div class="scenario-chart">
+        <LineTimeSeries
+          data={$SCENARIOS_TIMESERIES_EMISSIONS_DATA}
+          unit="integer"
+        />
+      </div>
       <!-- { JSON.stringify($SCENARIOS_TIMESERIES_TEMPERATURE_DATA) } -->
     </div>
   </div>
@@ -85,5 +89,10 @@
         grid-gap: var(--font-size-large-xs); // TODO
       }
     }
+  }
+
+  .scenario-chart {
+    width: 380px;
+    height: 200px;
   }
 </style>
