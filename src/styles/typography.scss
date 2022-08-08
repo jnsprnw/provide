@@ -40,3 +40,57 @@ i.emoji {
 		font-weight: var(--font-font-weight-bold);
 	}
 }
+
+.content-header {
+	.title {
+		color: var(--color-brand-stronger);
+		font-weight: var(--font-font-weight-bold);
+		font-size: var(--font-size-large-xxxl);
+		line-height: var(--font-line-height-tightest);
+	}
+
+	.nav-inpage {
+		&, ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		a {
+			color: var(--color-brand-base);
+			font-size: var(--font-size-large-m);
+			line-height: var(--font-line-height-base);
+			// font-weight: var(--font-font-weight-bold);
+
+			&:hover, &:focus {
+				color: var(--color-brand-stronger);
+			}
+		}
+
+		.nav-headline-section {
+			font-weight: var(--font-font-weight-bold);
+		}
+	}
+}
+
+.content-content {
+	.headline-section {
+		color: var(--color-brand-stronger);
+		font-weight: var(--font-font-weight-bold);
+		font-size: var(--font-size-large-xxl);
+		line-height: var(--font-line-height-tightest);
+	}
+
+	.headline-paragraph {
+		color: var(--color-brand-stronger);
+		font-weight: var(--font-font-weight-bold);
+		font-size: var(--font-size-large-xl);
+		line-height: var(--font-line-height-tightest);
+	}
+
+	p {
+		color: var(--color-brand-stronger);
+		font-size: var(--font-size-large-m);
+		line-height: var(--font-line-height-base);
+	}
+}
