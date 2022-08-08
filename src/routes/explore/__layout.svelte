@@ -1,7 +1,7 @@
 <script context="module">
   export const load = async ({ fetch }) => {
-    //const res = await fetch(`${import.meta.env.VITE_DATA_API_URL}/meta/`);
-    const res = await fetch(`/api/meta/`);
+    const res = await fetch(`${import.meta.env.VITE_DATA_API_URL}/meta/`);
+    //const res = await fetch(`/api/meta/`);
     const data = await res.json();
     return {
       props: {
@@ -19,6 +19,7 @@
     SECTORS,
     INDICATORS,
     GEOGRAPHY_TYPES,
+    GEOGRAPHIES,
     AVAILABLE_SCENARIOS,
   } from '$lib/../stores/store.js';
 
@@ -28,6 +29,7 @@
   INDICATORS.set(meta.indicators);
   SECTORS.set(meta.sectors);
   AVAILABLE_SCENARIOS.set(meta.scenarios);
+  GEOGRAPHIES.set(meta);
 
   setContext('meta', {
     getGeographyTypes: () => meta.geographyTypes,

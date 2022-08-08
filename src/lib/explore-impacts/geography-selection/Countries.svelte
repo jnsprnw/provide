@@ -1,18 +1,14 @@
 <script>
-  import { getContext } from 'svelte';
   import VirtualList from 'svelte-virtual-list';
   import Fuse from 'fuse.js';
   import {
-    CURRENT_GEOGRAPHY,
-    HOVER_GEOGRAPHY_UID,
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_GEOGRAPHIES,
   } from '$lib/../stores/store.js';
   import TileGroup from '$lib/helper/tiles/TileGroup.svelte';
   import RadioTile from '$lib/helper/tiles/RadioTile.svelte';
   import Map from './Map.svelte';
-  import { keyBy, get, sortBy, findIndex } from 'lodash-es';
-
-  const { getAdmin0 } = getContext('meta');
-  const countries = getAdmin0();
+  import { sortBy } from 'lodash-es';
 
   const options = {
     includeScore: true,
@@ -20,12 +16,13 @@
     includeMatches: true,
   };
 
-  const fuse = new Fuse(countries, options);
+  $: fuse = new Fuse($CURRENT_GEOGRAPHIES, options);
 
   let term = '';
+  let hoveredGeography;
 
-  const defaultResults = sortBy(
-    countries.map((d) => ({ item: d })),
+  $: defaultResults = sortBy(
+    $CURRENT_GEOGRAPHIES.map((d) => ({ item: d })),
     ['item.continent', 'item.label']
   );
 
@@ -64,16 +61,12 @@
         }
       }
       return {
+        ...item,
         label,
-        item,
         matches,
       };
     }
   );
-
-  function handleOver(item) {
-    $HOVER_GEOGRAPHY_UID = item?.item?.uid;
-  }
 
   // function handleOverMap ({ detail }) {
   //   if (detail?.item) {
@@ -89,23 +82,21 @@
 </script>
 
 <div class="selection-country-wrapper">
-  <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY}>
+  <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY_UID}>
     <input type="text" bind:value={term} placeholder="Search…" />
     <VirtualList items={results} let:item height="200px">
       <!-- TODO: 200px -->
-      <RadioTile value={item.item} on:mouseover={() => handleOver(item)}>
-        <span
-          >{#if item.item.continent}{item.item.continent}{/if}</span
-        >
-        <span
-          >{#if item.item.emoji}<i class="emoji">{item.item.emoji}</i
-            >{/if}</span
-        >
+      <RadioTile
+        value={item.uid}
+        on:mouseover={() => (hoveredGeography = item?.uid)}
+      >
+        {#if item.continent}<span>{item.continent}</span>{/if}
+        {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
         <span>{@html item.label}</span>
       </RadioTile>
     </VirtualList>
   </TileGroup>
-  <Map />
+  <Map hovered={hoveredGeography} selected={$CURRENT_GEOGRAPHY_UID} />
 </div>
 
 <style lang="scss">

@@ -1,15 +1,17 @@
 <script>
-	import { get, isEmpty, map } from "lodash-es";
-	import { onMount } from 'svelte';
-	import { geoPath, geoEqualEarth } from 'd3-geo';
-	import { feature } from 'topojson-client';
-	import * as world from './ne_110m_admin_0_countries.json';
-	import { CURRENT_GEOGRAPHY, HOVER_GEOGRAPHY_UID } from '$lib/../stores/store.js';
-	import { createEventDispatcher } from 'svelte';
+  import { get, isEmpty, map } from 'lodash-es';
+  import { onMount } from 'svelte';
+  import { geoPath, geoEqualEarth } from 'd3-geo';
+  import { feature } from 'topojson-client';
+  import * as world from './ne_110m_admin_0_countries.json';
+  import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+  export let hovered;
+  export let selected;
 
-	const MAP_KEY = 'ne_110m_admin_0_countries';
+  const dispatch = createEventDispatcher();
+
+  const MAP_KEY = 'ne_110m_admin_0_countries';
 
   // Convert the country shapefiles of the geojson. The object key needs to correspond with the file imported above.
   const objects = get(world, ['objects', MAP_KEY], {});
@@ -36,8 +38,11 @@
   // Centroid from https://dropchop.io/
   // Projection: https://github.com/d3/d3-geo-projection#geoEqualEarth
   // https://en.m.wikipedia.org/wiki/Lambert_azimuthal_equal-area_projection
-  
-  $: projection = geoEqualEarth().rotate([0, 0]).precision(.1).fitSize([width, height], mapFeatures)
+
+  $: projection = geoEqualEarth()
+    .rotate([0, 0])
+    .precision(0.1)
+    .fitSize([width, height], mapFeatures);
 
   // Build map projection function
   $: mapProjection = geoPath().projection(projection);
@@ -52,12 +57,12 @@
 
     return {
       code,
-      d
-    }
-  })
+      d,
+    };
+  });
 
-  $: selectedCountries = countries.filter(({ code }) => code === $CURRENT_GEOGRAPHY?.uid);
-  $: hoveredCountries = countries.filter(({ code }) => code === $HOVER_GEOGRAPHY_UID);
+  $: selectedCountry = countries.find(({ code }) => code === selected);
+  $: hoveredCountry = countries.find(({ code }) => code === hovered);
 
   // Fetch the map data on mount
   onMount(async () => {
@@ -68,16 +73,24 @@
     ({ width, height } = svg.getBoundingClientRect());
   };
 
-  function handleOver (item) {
-    $HOVER_GEOGRAPHY_UID = item;
-    dispatch('over', {
-			item
-		});
+  function handleOver(item) {
+    //   $HOVER_GEOGRAPHY_UID = item;
+    //   dispatch('over', {
+    // 		item
+    // 	});
   }
 </script>
 
 <figure class="page-map" role="main">
-  <svg bind:this={svg} class="vis" {viewBox} preserveAspectRatio="xMinYMin meet" aria-describedby="map-description" role="group" fill="currentColor">
+  <svg
+    bind:this={svg}
+    class="vis"
+    {viewBox}
+    preserveAspectRatio="xMinYMin meet"
+    aria-describedby="map-description"
+    role="group"
+    fill="currentColor"
+  >
     <g>
       <g role="list">
         {#each countries as country}
@@ -85,14 +98,14 @@
         {/each}
       </g>
       <g role="list">
-        {#each hoveredCountries as country}
-          <path d={country.d} class="hover" />
-        {/each}
+        {#if hoveredCountry}
+          <path d={hoveredCountry.d} class="hover" />
+        {/if}
       </g>
       <g role="list">
-        {#each selectedCountries as country}
-          <path d={country.d} class="active" />
-        {/each}
+        {#if selectedCountry}
+          <path d={selectedCountry.d} class="active" />
+        {/if}
       </g>
     </g>
     <desc id="map-description">A map!</desc>
@@ -100,15 +113,15 @@
 </figure>
 
 <style lang="scss">
-	path {
-		fill: var(--color-light-blue200);
+  path {
+    fill: var(--color-light-blue200);
 
-		&.hover {
-			fill: var(--color-light-blue400);
-		}
+    &.hover {
+      fill: var(--color-light-blue400);
+    }
 
-		&.active {
-			fill: var(--color-functional-accent);
-		}
-	}
+    &.active {
+      fill: var(--color-functional-accent);
+    }
+  }
 </style>

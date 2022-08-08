@@ -6,66 +6,66 @@
   /** Set to `true` to disable the tile */
   export let disabled = false;
   /** Specify the value of the radio input */
-  export let value = "";
+  export let value = '';
   /** Specify the tabindex */
-  export let tabindex = "0";
+  export let tabindex = '0';
   /** Specify the ARIA label for the radio tile checkmark icon */
-  export let iconDescription = "Tile checkmark";
+  export let iconDescription = 'Tile checkmark';
   /** Set an id for the input element */
-  export let id = "ccs-" + Math.random().toString(36);
+  export let id = 'ccs-' + Math.random().toString(36);
   /** Specify a name attribute for the input */
-  export let name = "";
-  import { getContext } from "svelte";
-  import CheckmarkFilled from "$lib/helper/icons/CheckmarkFilled.svelte";
-  const { add, update, selectedValue } = getContext("TileGroup");
+  export let name = '';
+  import { getContext } from 'svelte';
+
+  const { add, update, selectedValue } = getContext('TileGroup');
   add({ value, checked });
   $: checked = value === $selectedValue;
 </script>
 
 <input
   type="radio"
-  id="{id}"
-  name="{name}"
-  value="{value}"
-  checked="{checked}"
-  tabindex="{disabled ? undefined : tabindex}"
-  disabled="{disabled}"
-  class:tile-input="{true}"
+  {id}
+  {name}
+  {value}
+  {checked}
+  tabindex={disabled ? undefined : tabindex}
+  {disabled}
+  class:tile-input={true}
   on:change
-  on:change="{() => {
+  on:change={() => {
     if (disabled) return;
     update(value);
-  }}"
+  }}
   on:keydown
-  on:keydown="{(e) => {
+  on:keydown={(e) => {
     if (disabled) return;
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
       update(value);
     }
-  }}"
+  }}
 />
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <label
-  for="{id}"
-  class:tile="{true}"
-  class:tile--selectable="{true}"
-  class:tile--is-selected="{checked}"
-  class:tile--light="{light}"
-  class:tile--disabled="{disabled}"
+  for={id}
+  class:tile={true}
+  class:tile--selectable={true}
+  class:tile--is-selected={checked}
+  class:tile--light={light}
+  class:tile--disabled={disabled}
   {...$$restProps}
   on:click
   on:mouseover
   on:mouseenter
   on:mouseleave
 >
-  <span class:tile-content="{true}">
+  <span class:tile-content={true}>
     <slot />
   </span>
 </label>
 
 <style lang="scss">
-  @import "../../../styles/global.scss";
+  @import '../../../styles/global.scss';
 
   .tile {
     @include tab();

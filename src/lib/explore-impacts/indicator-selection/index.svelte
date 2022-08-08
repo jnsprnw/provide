@@ -5,8 +5,6 @@
   import TabContent from '$lib/helper/tabs/tab-content.svelte';
   import Indicators from './indicators.svelte';
 
-  let sectorIndex = 0;
-
   $: sectors = $SECTORS.map((sector) => {
     const indicators = $AVAILABLE_INDICATORS.filter(
       (indicator) => indicator.sector === sector.uid
@@ -20,7 +18,7 @@
 </script>
 
 <div class="sector-selection">
-  <Tabs bind:selected={sectorIndex}>
+  <Tabs>
     <span class="text-label text-label--bold">Sectors</span>
     {#each sectors as { icon, label, disabled }}
       <Tab {label} {icon} {disabled} />

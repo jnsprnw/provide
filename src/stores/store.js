@@ -1,24 +1,31 @@
 import { writable, derived } from 'svelte/store';
-import {
-  get,
-  compact,
-  groupBy,
-  keyBy,
-  map,
-  isUndefined,
-  isEmpty,
-} from 'lodash-es';
+import { get, compact, keyBy, isUndefined, isEmpty } from 'lodash-es';
 import { OPTIONS, DEFAULT_FORMAT_UID } from '$lib/../config.js';
 import THEME from '$styles/theme-store.js';
 
 // META DATA (This will only be set once on load and won't change again)
 export const GEOGRAPHY_TYPES = writable({});
+export const GEOGRAPHIES = (() => {
+  const store = writable();
+  return {
+    ...store,
+    set: ({ geographyTypes, ...meta }) => {
+      const geographies = geographyTypes.reduce(
+        (acc, type) => ({
+          ...acc,
+          [type.uid]: meta[type.uid],
+        }),
+        {}
+      );
+      store.set(geographies);
+    },
+  };
+})();
 
 export const AVAILABLE_SCENARIOS = (() => {
-  const { subscribe, update, set } = writable([]);
+  const store = writable([]);
   return {
-    subscribe,
-    update,
+    ...store,
     set: (scenariosRaw) => {
       // Processing of scenario data so we only have to do this once
       const scenarios = scenariosRaw.map((scenarioRaw) => {
@@ -33,7 +40,7 @@ export const AVAILABLE_SCENARIOS = (() => {
         return scenario;
       });
 
-      set(scenarios);
+      store.set(scenarios);
     },
   };
 })(); // TODO: Is prefix AVAILABLE_ good?
@@ -51,19 +58,28 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
 );
 
 /* GEOGRAPHY STATE */
-export const CURRENT_GEOGRAPHY = writable(null);
-
-export const CURRENT_GEOGRAPHY_UID = derived(CURRENT_GEOGRAPHY, ($geography) =>
-  get($geography, 'uid')
-);
-
-export const HOVER_GEOGRAPHY_UID = writable(null);
-
 export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
 
 export const CURRENT_GEOGRAPHY_TYPE = derived(
   [CURRENT_GEOGRAPHY_TYPE_INDEX, GEOGRAPHY_TYPES],
   ([$index, $types]) => get($types, [$index])
+);
+
+export const CURRENT_GEOGRAPHIES = derived(
+  [GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE],
+  ([$geographies, $currentGeographyType]) =>
+    $geographies[$currentGeographyType.uid]
+);
+
+export const CURRENT_GEOGRAPHY_UID = writable(null);
+
+export const CURRENT_GEOGRAPHY = derived(
+  [CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY_TYPE, GEOGRAPHIES],
+  ([$uid, $currentGeographyType, $geographies], set) => {
+    const geographies = $geographies[$currentGeographyType.uid] || [];
+    const geography = geographies.find((geography) => geography.uid === $uid);
+    geography && set(geography);
+  }
 );
 
 /* SCENARIO STATE */
