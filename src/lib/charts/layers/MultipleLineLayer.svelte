@@ -1,41 +1,50 @@
 <script>
-  import { getContext } from "svelte";
+  import { getContext } from 'svelte';
 
-  const { data, xGet, yGet, zGet } = getContext("LayerCake");
+  const { data, xGet, yGet } = getContext('LayerCake');
 
-  export let base;
-
-  $: path = values => {
-    return 'M' + values
-      .map(d => {
-        return $xGet(d) + ',' + $yGet(d);
-      })
-      .join('L');
+  $: path = (values) => {
+    return (
+      'M' +
+      values
+        .map((d) => {
+          return $xGet(d) + ',' + $yGet(d);
+        })
+        .join('L')
+    );
   };
-    
 </script>
 
-{#each $data as group}
-  <g>
-    <path
-      class={`path-line ${$zGet(group)} ${group.stroke}`}
-      d='{path(group.values)}'
-      stroke="{base}"
-      style="stroke-width: 6px"
-    />
-    <path
-      class={`path-line ${$zGet(group)} ${group.stroke}`}
-      d='{path(group.values)}'
-      stroke="{$zGet(group)}"
-    />
-  </g>
+{#each $data as line}
+  <path
+    class="path-line background"
+    d={path(line.values)}
+    style="stroke-width: 6px"
+  />
+  <path
+    class={`path-line`}
+    class:highlight={line.highlight}
+    d={path(line.values)}
+    style={`stroke: ${line.color}`}
+  />
 {/each}
 
-<style>
+<style lang="scss">
   .path-line {
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
-    stroke-width: 2px;
+    stroke-width: 2.5px;
+    stroke: var(--color-background-weakest);
+
+    &.highlight {
+      stroke-width: 4px;
+    }
+
+    &.background {
+      stroke-width: 6px;
+      stroke: var(--color-background-base);
+      stroke-opacity: 0.75;
+    }
   }
 </style>

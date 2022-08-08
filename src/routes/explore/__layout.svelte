@@ -1,6 +1,7 @@
 <script context="module">
   export const load = async ({ fetch }) => {
-    const res = await fetch('/api/meta');
+    //const res = await fetch(`${import.meta.env.VITE_DATA_API_URL}/meta/`);
+    const res = await fetch(`/api/meta/`);
     const data = await res.json();
     return {
       props: {

@@ -1,0 +1,31 @@
+<script>
+  import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
+  import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
+  import PreviewChart from './preview-chart.svelte';
+  import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
+
+  export let indicators = [];
+</script>
+
+<div class="indicator-selection">
+  <RadioButtonGroup
+    bind:selected={$CURRENT_INDICATOR_UID}
+    legendText="Indicators"
+  >
+    {#each indicators as indicator}
+      <RadioButton labelText={indicator.label} value={indicator.uid}>
+        <span>{indicator.label}</span>
+        <PreviewChart {indicator} />
+      </RadioButton>
+    {/each}
+  </RadioButtonGroup>
+</div>
+
+<style lang="scss">
+  .indicator-selection {
+    // display: grid;
+    // gap: 2rem; // TODO
+    // margin-top: 2rem;
+    // margin-bottom: 2rem;
+  }
+</style>

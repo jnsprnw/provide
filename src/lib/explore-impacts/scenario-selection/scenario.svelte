@@ -75,7 +75,7 @@
     on:change={() => {
       if (useGroup) {
         if (group.includes(value)) {
-          group = group.filter((_value) => _value !== value);
+          group = group.filter((item) => item !== value);
         } else {
           if (!isFull) {
             group = [...group, value];

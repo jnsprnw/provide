@@ -1,34 +1,36 @@
 <script>
   import { partition, flatten } from 'lodash-es';
-  import { getContext } from 'svelte';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
-    CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
-    HOVER_SCENARIO,
+    DICTIONARY_CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
   } from '$lib/../stores/store.js';
-  import {
-    SCENARIOS_TIMESERIES_TEMPERATURE_DATA,
-    SCENARIOS_TIMESERIES_EMISSIONS_DATA,
-  } from '$lib/../stores/scenarios-timeseries.js';
-  import Scenario from '$lib/scenario-selection/scenario.svelte';
+  import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
-  //const theme = getContext('theme');
+  let hoveredScenario;
 
-  const [primary, secondary] = partition($AVAILABLE_SCENARIOS, 'isPrimary');
-  const scenarios = flatten([
+  $: [primary, secondary] = partition($AVAILABLE_SCENARIOS, 'isPrimary');
+  $: scenarios = flatten([
     { isSpacer: true, label: 'Primary scenarios' },
     primary,
     { isSpacer: true, label: 'Additional scenarios' },
     secondary,
   ]);
 
-  // $: colors = $SCENARIOS.map(item => {
-  //   const index = $CURRENT_SCENARIOS_UID.indexOf(item.uid);
-  //   return $theme
-  // })
+  $: [temperatureData, emissionsData] = ['temperature', 'emissions'].map(
+    (key) => {
+      return $AVAILABLE_SCENARIOS.map((scenario) => {
+        return {
+          ...scenario,
+          highlight: hoveredScenario?.uid === scenario.uid,
+          color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+          values: scenario[key],
+        };
+      });
+    }
+  );
 </script>
 
 <div class="scenario-selection">
@@ -39,33 +41,27 @@
     {:else}
       <Scenario
         labelText={item.label}
-        bind:group={$CURRENT_SCENARIOS}
-        value={item}
-        on:mouseover={() => HOVER_SCENARIO.set(item)}
-        on:mouseleave={() => HOVER_SCENARIO.set(null)}
+        bind:group={$CURRENT_SCENARIOS_UID}
+        value={item.uid}
+        on:mouseover={() => (hoveredScenario = item)}
+        on:mouseleave={() => (hoveredScenario = null)}
       />
     {/if}
   </VirtualList>
 
   <div class="scenario-split">
     <div>
-      {#if $HOVER_SCENARIO}
-        <h3>{$HOVER_SCENARIO.label}</h3>
-        <p>{$HOVER_SCENARIO.description}</p>
+      {#if hoveredScenario}
+        <h3>{hoveredScenario.label}</h3>
+        <p>{hoveredScenario.description || 'Description missing'}</p>
       {/if}
     </div>
     <div class="scenario-charts">
       <div class="scenario-chart">
-        <LineTimeSeries
-          data={$SCENARIOS_TIMESERIES_TEMPERATURE_DATA}
-          unit="celsius"
-        />
+        <LineTimeSeries data={emissionsData} unit="celsius" />
       </div>
       <div class="scenario-chart">
-        <LineTimeSeries
-          data={$SCENARIOS_TIMESERIES_EMISSIONS_DATA}
-          unit="integer"
-        />
+        <LineTimeSeries data={temperatureData} unit="integer" />
       </div>
       <!-- { JSON.stringify($SCENARIOS_TIMESERIES_TEMPERATURE_DATA) } -->
     </div>
