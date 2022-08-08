@@ -6,6 +6,7 @@
   import {
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
+    CURRENT_SCENARIOS,
     CURRENT_GEOGRAPHY,
   } from '$lib/../stores/store.js';
   import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
@@ -25,20 +26,25 @@
       indicator: uid,
     },
     $IMPACT_TIME_CACHE
-  ).map((response) => {
+  ).map((response, i) => {
     const { data, status } = response;
+    const color = $CURRENT_SCENARIOS[i].color;
     if (status === 'success' && data) {
-      return data.data[uid] || [];
+      return { color, values: data.data[uid] || [] };
     } else {
-      return [];
+      return { color, values: [] };
     }
   });
 
-  $: years = flatten(datum.map((scenario) => scenario.map(([year]) => year)));
+  $: years = flatten(
+    datum.map((scenario) => scenario.values.map(([year]) => year))
+  );
 
   $: values = flatten(
     flatten(
-      datum.map((scenario) => scenario.map(([, v1, v2, v3]) => [v1, v2, v3]))
+      datum.map((scenario) =>
+        scenario.values.map(([, v1, v2, v3]) => [v1, v2, v3])
+      )
     )
   );
 
@@ -60,9 +66,6 @@
     .y0((d) => y(d[2]))
     .y1((d) => y(d[3]));
 
-  $: lines = datum.map((scenario) => lineGenerator(scenario));
-  $: areas = datum.map((scenario) => areaGenerator(scenario));
-
   $: title = `This chart displays ${indicator?.label} in ${$CURRENT_GEOGRAPHY?.label} starting in year TODO until TODO`;
 </script>
 
@@ -73,16 +76,20 @@
   {title}
 >
   <svg style={`width: ${width}px; height: ${height}px`}>
-    {#if datum.length === 1}
-      <g>
-        {#each areas as area}
-          <path d={area} class="chart-area" />
-        {/each}
-      </g>
-    {/if}
     <g>
-      {#each lines as line, i}
-        <path d={line} class={`chart-line color-line-${i}`} />
+      {#if datum.length === 1}
+        <path
+          d={areaGenerator(datum[0].values)}
+          style={`fill: ${datum[0].color}`}
+          class="chart-area"
+        />
+      {/if}
+      {#each datum as d, i}
+        <path
+          d={lineGenerator(d.values)}
+          style={`stroke: ${d.color}`}
+          class="chart-line"
+        />
       {/each}
     </g>
     <desc>
@@ -95,7 +102,7 @@
       {extent(values)}
       {x.range()}
       {y.range()}
-      {JSON.stringify(datum)}
+      {JSON.stringify(datum.values)}
     </desc>
   </svg>
 </div>
@@ -104,26 +111,14 @@
   .line-chart--preview {
     width: 100%;
     height: 100%;
+  }
 
-    .chart-line {
-      fill: none;
-      // stroke: var(--color-light-blue700); // TODO
+  .chart-line {
+    fill: none;
+  }
 
-      &.color-line-0 {
-        stroke: var(--color-light-category-0);
-      }
-      &.color-line-1 {
-        stroke: var(--color-light-category-1);
-      }
-      &.color-line-2 {
-        stroke: var(--color-light-category-2);
-      }
-    }
-
-    .chart-area {
-      fill: var(--color-light-petrol200); // TODO
-      opacity: 0.3;
-      stroke: none;
-    }
+  .chart-area {
+    opacity: 0.3;
+    stroke: none;
   }
 </style>

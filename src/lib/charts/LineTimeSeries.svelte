@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg } from 'layercake';
+  import { Html, LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
@@ -22,10 +22,21 @@
     }, []);
 
   $: formatTickY = (d) => formatValue(d, unit);
+
+  $: sortedData = data.slice(0).sort((a, b) =>
+    // First sort by `highlight`, then by `color`
+    a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
+  );
 </script>
 
 <div class="chart-container">
-  <LayerCake {padding} x={xKey} y={yKey} {data} flatData={flatten(data)}>
+  <LayerCake
+    {padding}
+    x={xKey}
+    y={yKey}
+    data={sortedData}
+    flatData={flatten(sortedData)}
+  >
     <Svg>
       <AxisX
         gridlines={false}
@@ -33,7 +44,7 @@
         padding={{ top: 10, left: 0, right: 0 }}
       />
       <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
-      <MultipleLineLayer base={$theme.color.background.base} />
+      <MultipleLineLayer />
     </Svg>
   </LayerCake>
 </div>

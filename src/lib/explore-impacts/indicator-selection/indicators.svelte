@@ -1,7 +1,7 @@
 <script>
-  import { CURRENT_INDICATOR } from "$lib/../stores/store.js";
-  import RadioButton from "./radio-button.svelte";
-  import RadioButtonGroup from "./radio-button-group.svelte";
+  import { CURRENT_INDICATOR } from '$lib/../stores/store.js';
+  import RadioButton from './radio-button.svelte';
+  import RadioButtonGroup from './radio-button-group.svelte';
 
   export let indicators = [];
 </script>

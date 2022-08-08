@@ -1,10 +1,10 @@
 <script>
-  import PreviewChart from "../preview-chart/preview-chart.svelte";
+  import PreviewChart from './preview-chart.svelte';
 
   // https://github.com/carbon-design-system/carbon-components-svelte/blob/master/src/RadioButton/RadioButton.svelte
 
   /** Specify the value of the radio button */
-  export let value = "";
+  export let value = '';
   /** Set to `true` to check the radio button */
   export let checked = false;
   /** Set to `true` to disable the radio button */
@@ -15,20 +15,20 @@
    * Specify the label position
    * @type {"right" | "left"}
    */
-  export let labelPosition = "right";
+  export let labelPosition = 'right';
   /** Specify the label text */
-  export let labelText = "";
+  export let labelText = '';
   /** Set to `true` to visually hide the label text */
   export let hideLabel = false;
   /** Set an id for the input element */
-  export let id = "ccs-" + Math.random().toString(36);
+  export let id = 'ccs-' + Math.random().toString(36);
   /** Specify a name attribute for the radio button input */
-  export let name = "";
+  export let name = '';
   /** Obtain a reference to the input HTML element */
   export let ref = null;
-  import { getContext } from "svelte";
-  import { writable } from "svelte/store";
-  const ctx = getContext("RadioButtonGroup");
+  import { getContext } from 'svelte';
+  import { writable } from 'svelte/store';
+  const ctx = getContext('RadioButtonGroup');
   const selectedValue = ctx
     ? ctx.selectedValue
     : writable(checked ? value : undefined);
@@ -39,38 +39,39 @@
 </script>
 
 <div
-  class:radio-button-wrapper="{true}"
-  class:radio-button-wrapper--label-left="{labelPosition === 'left'}"
+  class:radio-button-wrapper={true}
+  class:radio-button-wrapper--label-left={labelPosition === 'left'}
   {...$$restProps}
 >
   <input
-    bind:this="{ref}"
+    bind:this={ref}
     type="radio"
-    id="{id}"
-    name="{name}"
-    checked="{checked}"
-    disabled="{disabled}"
-    required="{required}"
-    value="{value}"
-    class:radio-button="{true}"
+    {id}
+    {name}
+    {checked}
+    {disabled}
+    {required}
+    {value}
+    class:radio-button={true}
     on:change
-    on:change="{() => {
+    on:change={() => {
       if (ctx) {
         ctx.update(value);
       }
-    }}"
+    }}
   />
   <label
-    class:radio-button__label="{true}"
+    class:radio-button__label={true}
     class:radio-button--is-selected={checked}
-    for="{id}">
+    for={id}
+  >
     <span>{labelText}</span>
     <PreviewChart indicator={value} />
   </label>
 </div>
 
 <style lang="scss">
-  @import "../../../styles/global.scss";
+  @import '../../../styles/global.scss';
 
   input {
     @include visually-hidden();

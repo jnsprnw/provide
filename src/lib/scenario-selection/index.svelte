@@ -2,8 +2,8 @@
   import { partition, flatten } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
-    CURRENT_SCENARIOS,
-    DICTIONARY_ALT_CURRENT_SCENARIOS,
+    CURRENT_SCENARIOS_UID,
+    DICTIONARY_CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
   } from '$lib/../stores/store.js';
   import Scenario from '$lib/scenario-selection/scenario.svelte';
@@ -11,8 +11,8 @@
 
   let hoveredScenario;
 
-  const [primary, secondary] = partition($AVAILABLE_SCENARIOS, 'isPrimary');
-  const scenarios = flatten([
+  $: [primary, secondary] = partition($AVAILABLE_SCENARIOS, 'isPrimary');
+  $: scenarios = flatten([
     { isSpacer: true, label: 'Primary scenarios' },
     primary,
     { isSpacer: true, label: 'Additional scenarios' },
@@ -21,16 +21,14 @@
 
   $: [temperatureData, emissionsData] = ['temperature', 'emissions'].map(
     (key) => {
-      return $AVAILABLE_SCENARIOS
-        .map((scenario) => {
-          return {
-            ...scenario,
-            highlight: hoveredScenario?.uid === scenario.uid,
-            color: $DICTIONARY_ALT_CURRENT_SCENARIOS[scenario.uid]?.color,
-            values: scenario[key],
-          };
-        })
-        .sort((a, b) => (a.color && !b.color ? 1 : -1));
+      return $AVAILABLE_SCENARIOS.map((scenario) => {
+        return {
+          ...scenario,
+          highlight: hoveredScenario?.uid === scenario.uid,
+          color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+          values: scenario[key],
+        };
+      });
     }
   );
 </script>
@@ -43,8 +41,8 @@
     {:else}
       <Scenario
         labelText={item.label}
-        bind:group={$CURRENT_SCENARIOS}
-        value={item}
+        bind:group={$CURRENT_SCENARIOS_UID}
+        value={item.uid}
         on:mouseover={() => (hoveredScenario = item)}
         on:mouseleave={() => (hoveredScenario = null)}
       />
@@ -55,7 +53,7 @@
     <div>
       {#if hoveredScenario}
         <h3>{hoveredScenario.label}</h3>
-        <p>{hoveredScenario.description}</p>
+        <p>{hoveredScenario.description || 'Description missing'}</p>
       {/if}
     </div>
     <div class="scenario-charts">

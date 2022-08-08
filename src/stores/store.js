@@ -11,7 +11,9 @@ import {
 import { OPTIONS, DEFAULT_FORMAT_UID } from '$lib/../config.js';
 import THEME from '$styles/theme-store.js';
 
-export const INDICATORS = writable([]); // TODO: Should we add AVAILABLE_ here?
+// TODO: Should we add AVAILABLE_ here?
+export const INDICATORS = writable([]);
+
 export const SECTORS = writable([]); // TODO: Should we add AVAILABLE_ here?
 export const AVAILABLE_SCENARIOS = (() => {
   const { subscribe, update, set } = writable([]);
@@ -48,23 +50,20 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
 
 export const CURRENT_GEOGRAPHY = writable(null);
 export const HOVER_GEOGRAPHY_UID = writable(null);
-export const CURRENT_SCENARIOS = writable([]); // Currently selected scenarios (not hovered1)
 
-export const CURRENT_SCENARIOS_UID = derived(CURRENT_SCENARIOS, ($scenarios) =>
-  $scenarios.map(({ uid }) => uid)
-);
+export const CURRENT_SCENARIOS_UID = writable([]); // Currently selected scenarios (not hovered1)
 
-export const ALT_CURRENT_SCENARIOS = derived(
+export const CURRENT_SCENARIOS = derived(
   [CURRENT_SCENARIOS_UID, DICTIONARY_AVAILABLE_SCENARIOS, THEME],
-  ([$currentScenarios, $scenarios, $theme]) => {
-    return $currentScenarios.map((uid, i) => {
-      return { ...$scenarios[uid], color: $theme.color.scenarios[i] };
-    });
-  }
+  ([$uids, $scenarios, $theme]) =>
+    $uids.map((uid, i) => ({
+      ...$scenarios[uid],
+      color: $theme.color.scenarios[i],
+    }))
 );
 
-export const DICTIONARY_ALT_CURRENT_SCENARIOS = derived(
-  [ALT_CURRENT_SCENARIOS],
+export const DICTIONARY_CURRENT_SCENARIOS = derived(
+  [CURRENT_SCENARIOS],
   ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
 );
 

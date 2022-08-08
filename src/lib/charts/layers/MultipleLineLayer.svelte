@@ -16,19 +16,17 @@
 </script>
 
 {#each $data as line}
-  <g>
-    <path
-      class="path-line background"
-      d={path(line.values)}
-      style="stroke-width: 6px"
-    />
-    <path
-      class={`path-line`}
-      class:highlight={line.highlight}
-      d={path(line.values)}
-      style="stroke: {line.color};"
-    />
-  </g>
+  <path
+    class="path-line background"
+    d={path(line.values)}
+    style="stroke-width: 6px"
+  />
+  <path
+    class={`path-line`}
+    class:highlight={line.highlight}
+    d={path(line.values)}
+    style={`stroke: ${line.color}`}
+  />
 {/each}
 
 <style lang="scss">
@@ -36,7 +34,7 @@
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
-    stroke-width: 2px;
+    stroke-width: 2.5px;
     stroke: var(--color-background-weakest);
 
     &.highlight {
@@ -46,6 +44,7 @@
     &.background {
       stroke-width: 6px;
       stroke: var(--color-background-base);
+      stroke-opacity: 0.75;
     }
   }
 </style>
