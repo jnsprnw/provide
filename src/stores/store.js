@@ -56,11 +56,16 @@ export const CURRENT_SCENARIOS_UID = derived(CURRENT_SCENARIOS, ($scenarios) =>
 
 export const ALT_CURRENT_SCENARIOS = derived(
   [CURRENT_SCENARIOS_UID, DICTIONARY_AVAILABLE_SCENARIOS, THEME],
-  ([$theme, $currentScenarios, $scenarios]) => {
-    $currentScenarios.map((uid, i) => {
+  ([$currentScenarios, $scenarios, $theme]) => {
+    return $currentScenarios.map((uid, i) => {
       return { ...$scenarios[uid], color: $theme.color.scenarios[i] };
     });
   }
+);
+
+export const DICTIONARY_ALT_CURRENT_SCENARIOS = derived(
+  [ALT_CURRENT_SCENARIOS],
+  ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
 );
 
 export const DICTIONARY_SECTORS = derived(SECTORS, ($sectors) =>
@@ -77,12 +82,6 @@ export const CURRENT_GEOGRAPHY_TYPE = derived(
 
 export const CURRENT_GEOGRAPHY_UID = derived(CURRENT_GEOGRAPHY, ($geography) =>
   get($geography, 'uid')
-);
-
-export const HOVER_SCENARIO = writable(null); // Currently hovered scenario (not selected!)
-
-export const HOVER_SCENARIO_UID = derived(HOVER_SCENARIO, ($scenario) =>
-  get($scenario, 'uid')
 );
 
 export const CURRENT_INDICATOR_UID = derived(CURRENT_INDICATOR, ($indicator) =>

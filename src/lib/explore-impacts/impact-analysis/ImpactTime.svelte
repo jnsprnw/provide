@@ -12,6 +12,7 @@
     CURRENT_GEOGRAPHY,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
+    ALT_CURRENT_SCENARIOS,
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
@@ -55,6 +56,7 @@
       ]);
 
       return {
+        color: $ALT_CURRENT_SCENARIOS[i].color,
         values: indicatorData?.map((values, i) => ({
           value: values[values.length - 2],
           year: yearStart + yearStep * i,
