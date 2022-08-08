@@ -22,15 +22,19 @@
   <title>Contact and Imprint</title>
 </svelte:head>
 
-<div class="faq-header container">
+<div class="contact-header content-header container">
   <div class="wrapper">
-    <h1>Contact and Imprint</h1>
+    <h1 class="title">Contact and Imprint</h1>
   </div>
 </div>
 
-<div class="faq-content container">
-  <div class="wrapper">
-    { @html text }
+<div class="contact-content content-content container">
+  <div class="wrapper content-layout">
+    <section>
+      <div class="text">
+        { @html text }
+      </div>
+    </section>
   </div>
 </div>
 

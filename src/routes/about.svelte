@@ -45,19 +45,19 @@
       <header>
         <h2 id="dashboard" class="headline-section">About the Dashboard</h2>
       </header>
-      <div>
+      <div class="text">
         { @html dashboard }
       </div>
     </section>
     <section>
       <h2 id="provide" class="headline-section">About Provide</h2>
-      <div>
+      <div class="text">
         { @html provide }
       </div>
     </section>
     <section>
       <h2 id="climate-analytics" class="headline-section">About Climate Analytics</h2>
-      <div>
+      <div class="text">
         { @html climateAnalytics }
       </div>
     </section>

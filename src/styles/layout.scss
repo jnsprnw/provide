@@ -25,6 +25,10 @@
 			display: grid;
 			grid-template-columns: 2fr 3fr;
 			grid-gap: var(--size-spacer-large-xl); // TODO
+
+			.text {
+				grid-column: 2 / span 1;
+			}
 		}
 	}
 }
@@ -64,7 +68,7 @@
 }
 
 .content-content {
-	.headline-paragraph {
+	.headline-paragraph, h2 {
 		margin-bottom: var(--size-spacer-large-s);
 	}
 
@@ -79,7 +83,7 @@
 		}
 	}
 
-	p + .headline-paragraph {
+	p + .headline-paragraph, p + h2 {
 		margin-top: var(--size-spacer-large-m);
 	}
 }

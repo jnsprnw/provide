@@ -70,7 +70,7 @@
       <header>
         <h2 id="models" class="headline-section">Models</h2>
       </header>
-      <div>
+      <div class="text">
         {#each models as { title, description, link, slug }}
         <h3 id={slug} class="headline-paragraph">{ title }</h3>
         { @html description }
@@ -82,7 +82,7 @@
       <header>
         <h2 id="scenarios" class="headline-section">Scenarios</h2>
       </header>
-      <div>
+      <div class="text">
         {#each scenarios as { title, description, slug }}
         <h3 id={slug} class="headline-paragraph">{ title }</h3>
         { @html description }

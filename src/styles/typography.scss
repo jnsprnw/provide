@@ -81,7 +81,7 @@ i.emoji {
 		line-height: var(--font-line-height-tightest);
 	}
 
-	.headline-paragraph {
+	.headline-paragraph, h2 {
 		color: var(--color-brand-stronger);
 		font-weight: var(--font-font-weight-bold);
 		font-size: var(--font-size-large-xl);
@@ -92,5 +92,16 @@ i.emoji {
 		color: var(--color-brand-stronger);
 		font-size: var(--font-size-large-m);
 		line-height: var(--font-line-height-base);
+	}
+
+	a {
+		color: var(--color-brand-stronger);
+		text-decoration: underline;
+		text-decoration-color: var(--color-brand-weaker);
+		transition: text-decoration-color 0.3s ease;
+
+		&:hover, &:focus {
+			text-decoration-color: var(--color-brand-stronger);
+		}
 	}
 }
