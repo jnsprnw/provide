@@ -44,10 +44,6 @@ export const DICTIONARY_AVAILABLE_SCENARIOS = derived(
 );
 
 export const SECTORS = writable([]);
-
-export const DICTIONARY_SECTORS = derived(SECTORS, ($sectors) =>
-  keyBy($sectors, 'uid')
-);
 export const INDICATORS = writable([]);
 
 export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
@@ -86,10 +82,8 @@ export const DICTIONARY_CURRENT_SCENARIOS = derived(
   ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
 );
 
-/* INDICATOR/SECTOR STATE */
+/* INDICATOR STATE */
 // We are using Index here because Tabs and TabContent
-export const CURRENT_SECTOR_INDEX = writable(0);
-
 export const CURRENT_INDICATOR_UID = writable(null);
 
 export const CURRENT_INDICATOR = derived(
@@ -150,22 +144,6 @@ export const AVAILABLE_INDICATORS = derived(
         return item;
       })
     );
-  }
-);
-
-export const AVAILABLE_INDICATOR_GROUPS = derived(
-  [AVAILABLE_INDICATORS, SECTORS],
-  ([$indicators, $sectors]) => {
-    const groups = groupBy($indicators, 'sector');
-    return $sectors.map((sector) => {
-      const { uid } = sector;
-      const indicators = get(groups, uid);
-      return {
-        sector,
-        indicators,
-        isAvailable: Boolean(indicators),
-      };
-    });
   }
 );
 
