@@ -1,6 +1,4 @@
 <script>
-  import PreviewChart from './preview-chart.svelte';
-
   // https://github.com/carbon-design-system/carbon-components-svelte/blob/master/src/RadioButton/RadioButton.svelte
 
   /** Specify the value of the radio button */

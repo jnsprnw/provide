@@ -6,7 +6,7 @@
     DICTIONARY_CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
   } from '$lib/../stores/store.js';
-  import Scenario from '$lib/scenario-selection/scenario.svelte';
+  import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
   let hoveredScenario;

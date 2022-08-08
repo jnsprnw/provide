@@ -8,10 +8,10 @@
   import UnAvoidableRisk from '$lib/explore-impacts/un-avoidable-risk/index.svelte';
   import MitigationBenefits from '$lib/explore-impacts/mitigation-benefits/index.svelte';
   import Reversibility from '$lib/explore-impacts/reversibility/index.svelte';
-  import GeographySelection from '$lib/geography-selection/index.svelte';
-  import ScenarioSelection from '$lib/scenario-selection/index.svelte';
+  import GeographySelection from '$lib/explore-impacts/geography-selection/index.svelte';
+  import ScenarioSelection from '$lib/explore-impacts/scenario-selection/index.svelte';
   import IndicatorSelection from '$lib/explore-impacts/indicator-selection/index.svelte';
-  import SelectionOptions from '$lib/selection-options/index.svelte';
+  import SelectionOptions from '$lib/explore-impacts/indicator-parameters/index.svelte';
 
   import {
     CURRENT_GEOGRAPHY,

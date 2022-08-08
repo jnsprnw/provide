@@ -1,8 +1,8 @@
 <script>
   import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
-  import RadioButton from './radio-button.svelte';
+  import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
   import PreviewChart from './preview-chart.svelte';
-  import RadioButtonGroup from './radio-button-group.svelte';
+  import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
 
   export let indicators = [];
 </script>
