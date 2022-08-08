@@ -11,10 +11,9 @@ import {
 import { OPTIONS, DEFAULT_FORMAT_UID } from '$lib/../config.js';
 import THEME from '$styles/theme-store.js';
 
-// TODO: Should we add AVAILABLE_ here?
-export const INDICATORS = writable([]);
+// META DATA (This will only be set once on load and won't change again)
+export const GEOGRAPHY_TYPES = writable({});
 
-export const SECTORS = writable([]); // TODO: Should we add AVAILABLE_ here?
 export const AVAILABLE_SCENARIOS = (() => {
   const { subscribe, update, set } = writable([]);
   return {
@@ -38,19 +37,40 @@ export const AVAILABLE_SCENARIOS = (() => {
     },
   };
 })(); // TODO: Is prefix AVAILABLE_ good?
+
 export const DICTIONARY_AVAILABLE_SCENARIOS = derived(
   AVAILABLE_SCENARIOS,
   ($scenarios) => keyBy($scenarios, 'uid')
 );
 
-export const CURRENT_INDICATOR = writable(null);
+export const SECTORS = writable([]);
+
+export const DICTIONARY_SECTORS = derived(SECTORS, ($sectors) =>
+  keyBy($sectors, 'uid')
+);
+export const INDICATORS = writable([]);
+
 export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
   keyBy($indicators, 'uid')
 );
 
+/* GEOGRAPHY STATE */
 export const CURRENT_GEOGRAPHY = writable(null);
+
+export const CURRENT_GEOGRAPHY_UID = derived(CURRENT_GEOGRAPHY, ($geography) =>
+  get($geography, 'uid')
+);
+
 export const HOVER_GEOGRAPHY_UID = writable(null);
 
+export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
+
+export const CURRENT_GEOGRAPHY_TYPE = derived(
+  [CURRENT_GEOGRAPHY_TYPE_INDEX, GEOGRAPHY_TYPES],
+  ([$index, $types]) => get($types, [$index])
+);
+
+/* SCENARIO STATE */
 export const CURRENT_SCENARIOS_UID = writable([]); // Currently selected scenarios (not hovered1)
 
 export const CURRENT_SCENARIOS = derived(
@@ -61,30 +81,20 @@ export const CURRENT_SCENARIOS = derived(
       color: $theme.color.scenarios[i],
     }))
 );
-
 export const DICTIONARY_CURRENT_SCENARIOS = derived(
   [CURRENT_SCENARIOS],
   ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
 );
 
-export const DICTIONARY_SECTORS = derived(SECTORS, ($sectors) =>
-  keyBy($sectors, 'uid')
-);
+/* INDICATOR/SECTOR STATE */
+// We are using Index here because Tabs and TabContent
+export const CURRENT_SECTOR_INDEX = writable(0);
 
-/* GEOGRAPHIES */
-export const GEOGRAPHY_TYPES = writable({});
-export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
-export const CURRENT_GEOGRAPHY_TYPE = derived(
-  [CURRENT_GEOGRAPHY_TYPE_INDEX, GEOGRAPHY_TYPES],
-  ([$index, $types]) => get($types, [$index])
-);
+export const CURRENT_INDICATOR_UID = writable(null);
 
-export const CURRENT_GEOGRAPHY_UID = derived(CURRENT_GEOGRAPHY, ($geography) =>
-  get($geography, 'uid')
-);
-
-export const CURRENT_INDICATOR_UID = derived(CURRENT_INDICATOR, ($indicator) =>
-  get($indicator, 'uid')
+export const CURRENT_INDICATOR = derived(
+  [CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS],
+  ([$uid, $indicators]) => $indicators[$uid]
 );
 
 export const CURRENT_INDICATOR_UNIT = derived(CURRENT_INDICATOR, ($indicator) =>
@@ -124,12 +134,6 @@ export const CURRENT_INDICATOR_OPTIONS_KEYS = derived(
   ($options) => $options.map((indicator) => get(indicator, 'key'))
 );
 
-export const IMPACT_TIME_DATA = writable({});
-
-/* SECTOR */
-// We are using Index here because Tabs and TabContent
-export const CURRENT_SECTOR_INDEX = writable(0);
-
 export const AVAILABLE_INDICATORS = derived(
   [CURRENT_GEOGRAPHY_TYPE, DICTIONARY_INDICATORS],
   ([$type, $indicators]) => {
@@ -165,6 +169,7 @@ export const AVAILABLE_INDICATOR_GROUPS = derived(
   }
 );
 
+/* UTILITY N STUFF */
 // Utility boolean to see if all the main parameters are selected
 export const ALL_PARAMETERS_SELECTED = derived(
   [CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR],

@@ -65,8 +65,9 @@
     class:radio-button--is-selected={checked}
     for={id}
   >
-    <span>{labelText}</span>
-    <PreviewChart indicator={value} />
+    <slot>
+      <span>{labelText}</span>
+    </slot>
   </label>
 </div>
 
