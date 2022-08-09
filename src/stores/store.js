@@ -158,10 +158,11 @@ export const CURRENT_INDICATOR_PARAMETERS = derived(
       (acc, [def], key) => ({ ...acc, [key]: def }),
       {}
     );
+    // Updating the current option selection with the default values, in case they were not present for the previous indicator
     CURRENT_INDICATOR_OPTIONS.update((old) => ({
-      ...old,
       ...defaultValues,
-    })); // Updating the current option selection with the default values.
+      ...old,
+    }));
     return indicatorParameters;
   }
 );
