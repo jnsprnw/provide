@@ -29,7 +29,13 @@ i.emoji {
 
 .page-menu { // TODO
 	* {
-		color: #fff;
+		color: #fff; // TODO
+	}
+
+	.list-link--default {
+		&.active {
+			font-weight: var(--font-font-weight-bold);
+		}
 	}
 }
 
