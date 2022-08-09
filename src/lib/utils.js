@@ -1,6 +1,7 @@
 import { format } from 'd3-format';
 import { has, set, compact } from "lodash-es";
 import { handle } from "$lib/api/api.js";
+import { loadFromAPI } from "$lib/../routes/api/utils.js";
 import qs from "qs";
 import { browser } from "$app/env";
 
@@ -26,9 +27,7 @@ async function request (params, url) {
     }
   );
 	// console.log("loading:", { params, url, query }, `${url}?${query}`);
-	const response = await fetch(`${url}?${query}`);
-  const body = await response.json();
-	return body;
+	return await loadFromAPI(url, query);
 }
 
 export function hasInObject (data, addr, param) {
