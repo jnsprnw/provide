@@ -9,12 +9,19 @@ export const GEOGRAPHIES = (() => {
   const store = writable();
   return {
     ...store,
-    set: ({ geographyTypes, ...meta }) => {
+    set: ({ geographyTypes, continents, ...meta }) => {
+    	const continentsDict = keyBy(continents, 'uid');
       const geographies = geographyTypes.reduce(
-        (acc, type) => ({
-          ...acc,
-          [type.uid]: meta[type.uid],
-        }),
+        (acc, type) => {
+        	const list = get(meta, type.uid, []).map(geography => ({
+        		...geography,
+        		continent: get(continentsDict, geography.continent)
+					}))
+          return {
+          	...acc,
+          	[type.uid]: list,
+          }
+        },
         {}
       );
       store.set(geographies);
