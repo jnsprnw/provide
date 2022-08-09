@@ -1,10 +1,10 @@
 <script context="module">
   import { parse } from 'marked';
   import { groupBy } from "lodash-es";
-  import { loadFromAPI } from '$lib/utils.js';
+  import { loadFromStrapi } from './api/utils.js';
 
   export const load = async ({ fetch }) => {
-    const data = await loadFromAPI('faqs', fetch);
+    const data = await loadFromStrapi('faqs', fetch);
     const questions = data.map((d) => {
       const { question, answer } = d.attributes;
       return {

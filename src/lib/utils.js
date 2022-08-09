@@ -1,16 +1,9 @@
 import { format } from 'd3-format';
 import { has, set, compact } from "lodash-es";
 import { handle } from "$lib/api/api.js";
+import { loadFromAPI } from "$lib/../routes/api/utils.js";
 import qs from "qs";
 import { browser } from "$app/env";
-
-export const loadFromAPI = function (url, fetch) {
-	return new Promise(async (resolve) => {
-		const res = await fetch(`https://provide-cms.herokuapp.com/api/${url}?populate=*`);
-	  const data = await res.json();
-	  resolve(data.data);
-	});
-}
 
 export const getUID = function (obj) {
 	return obj?.uid || null;
@@ -34,9 +27,7 @@ async function request (params, url) {
     }
   );
 	// console.log("loading:", { params, url, query }, `${url}?${query}`);
-	const response = await fetch(`${url}?${query}`);
-  const body = await response.json();
-	return body;
+	return await loadFromAPI(url, query);
 }
 
 export function hasInObject (data, addr, param) {

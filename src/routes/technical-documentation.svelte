@@ -1,10 +1,10 @@
 <script context="module">
   import { parse } from 'marked';
   import { kebabCase } from "lodash-es";
-  import { loadFromAPI } from '$lib/utils.js';
+  import { loadFromStrapi } from './api/utils.js';
 
   export const load = async ({ fetch }) => {
-    const data = await loadFromAPI('technical-documentation', fetch);
+    const data = await loadFromStrapi('technical-documentation', fetch);
     const { Models, Scenarios } = data.attributes;
 
     return {
