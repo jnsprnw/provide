@@ -48,7 +48,7 @@
   )
     .filter((d) => d.status === 'success')
     .map((datum, i) => {
-      const { yearStart, yearStep } = datum.data;
+      const { yearStart, yearStep } = datum.data || {}; // Why is datum.data undefined on server here?
       const indicatorData = get(datum, [
         'data',
         'data',
@@ -65,7 +65,7 @@
     });
 </script>
 
-<Grid container>
+<!-- <Grid container>
   <Grid md="8">
     {#if $CURRENT_SCENARIOS_UID.length === 1}
       {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
@@ -89,8 +89,7 @@
       </h2>
     </div>
   </Grid>
-</Grid>
-
+</Grid> -->
 <style lang="scss">
   .impact-time-chart {
     height: 400px;

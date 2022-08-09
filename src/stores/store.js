@@ -1,4 +1,4 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived, get as getStore } from 'svelte/store';
 import { get, compact, keyBy, isUndefined, isEmpty } from 'lodash-es';
 import { OPTIONS, DEFAULT_FORMAT_UID } from '$lib/../config.js';
 import THEME from '$styles/theme-store.js';
@@ -10,20 +10,17 @@ export const GEOGRAPHIES = (() => {
   return {
     ...store,
     set: ({ geographyTypes, continents, ...meta }) => {
-    	const continentsDict = keyBy(continents, 'uid');
-      const geographies = geographyTypes.reduce(
-        (acc, type) => {
-        	const list = get(meta, type.uid, []).map(geography => ({
-        		...geography,
-        		continent: get(continentsDict, geography.continent)
-					}))
-          return {
-          	...acc,
-          	[type.uid]: list,
-          }
-        },
-        {}
-      );
+      const continentsDict = keyBy(continents, 'uid');
+      const geographies = geographyTypes.reduce((acc, type) => {
+        const list = get(meta, type.uid, []).map((geography) => ({
+          ...geography,
+          continent: get(continentsDict, geography.continent),
+        }));
+        return {
+          ...acc,
+          [type.uid]: list,
+        };
+      }, {});
       store.set(geographies);
     },
   };
@@ -72,6 +69,7 @@ export const CURRENT_GEOGRAPHY_TYPE = derived(
   ([$index, $types]) => get($types, [$index])
 );
 
+// Geographies of the currently selected geography type tab
 export const CURRENT_GEOGRAPHIES = derived(
   [GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE],
   ([$geographies, $currentGeographyType]) =>
@@ -80,14 +78,14 @@ export const CURRENT_GEOGRAPHIES = derived(
 
 export const CURRENT_GEOGRAPHY_UID = writable('DEU');
 
-export const CURRENT_GEOGRAPHY = derived(
-  [CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY_TYPE, GEOGRAPHIES],
-  ([$uid, $currentGeographyType, $geographies], set) => {
-    const geographies = $geographies[$currentGeographyType.uid] || [];
-    const geography = geographies.find((geography) => geography.uid === $uid);
-    geography && set(geography);
-  }
-);
+export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
+  // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
+  // it's value once CURRENT_GEOGRAPHY_UID changes
+  const geography = getStore(CURRENT_GEOGRAPHIES).find(
+    (geography) => geography.uid === $uid
+  );
+  set(geography);
+});
 
 /* SCENARIO STATE */
 export const CURRENT_SCENARIOS_UID = writable(['sp']); // Currently selected scenarios (not hovered1)
