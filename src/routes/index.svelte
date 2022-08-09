@@ -8,9 +8,8 @@
     const stories = await loadFromStrapi('stories', fetch);
 
     const datum = compact(stories.map(({ attributes }) => {
-      // TODO: Add geography type and change name from country to geography
-      const { indicator: indicatorUID, type, country: geographyUID, scenario: scenarioUID } = attributes;
-      const geography = find(get(meta, ['admin0'], []), { uid: geographyUID });
+      const { indicator: indicatorUID, type, geographyType, geography: geographyUID, scenario: scenarioUID } = attributes;
+      const geography = find(get(meta, [geographyType], []), { uid: geographyUID });
       const indicator = find(get(meta, 'indicators', []), { uid: indicatorUID });
       const scenario = find(get(meta, 'scenarios', []), { uid: scenarioUID });
       if (geography && indicator && scenario) {

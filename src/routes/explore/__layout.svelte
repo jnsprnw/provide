@@ -13,6 +13,7 @@
 
 <script>
   import { page } from '$app/stores';
+  import { parse } from "qs";
   import ListLink from '$lib/helper/ListLink.svelte';
   import {
     SECTORS,
@@ -21,6 +22,9 @@
     GEOGRAPHIES,
     SCENARIOS,
     INDICATOR_PARAMETERS,
+    CURRENT_INDICATOR_UID,
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_SCENARIOS_UID
   } from '$lib/../stores/store.js';
 
   export let meta;
@@ -31,6 +35,21 @@
   SCENARIOS.set(meta.scenarios);
   GEOGRAPHIES.set(meta);
   INDICATOR_PARAMETERS.set(meta.indicatorParameters);
+
+  $: params = parse((new URL($page.url).search).replace(/^\?/, ''));
+
+  $: {
+    const { indicator, geography, scenario } = params;
+    if (indicator) {
+      CURRENT_INDICATOR_UID.set(indicator);
+    }
+    if (geography) {
+      CURRENT_GEOGRAPHY_UID.set(geography);
+    }
+    if (scenario) {
+      CURRENT_SCENARIOS_UID.set([scenario]);
+    }
+  }
 
   $: currentPath = $page.routeId || '';
 </script>
