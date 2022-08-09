@@ -1,7 +1,8 @@
 <script context="module">
+  import { loadFromAPI } from '$lib/../routes/api/utils.js';
+
   export const load = async ({ fetch }) => {
-    const res = await fetch(`/api/meta/`);
-    const data = await res.json();
+    const data = await loadFromAPI(`/api/meta/`, '', fetch);
     return {
       props: {
         meta: data,

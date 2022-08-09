@@ -9,15 +9,6 @@ export const getUID = function (obj) {
 	return obj?.uid || null;
 }
 
-// export const buildDataImpactTime = function (data, year, step) {
-// 	const datum = [];
-// 	const length = data['median'].length;
-// 	for (let i = 0; i < length; i++) {
-// 		datum.push([year + i * step, data['median'][i], data['p10'][i], data['p90'][i]])
-// 	}
-// 	return datum;
-// }
-
 async function request (params, url) {
 	if (!browser) return undefined;
 	const query = qs.stringify(
