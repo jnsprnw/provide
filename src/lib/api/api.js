@@ -16,8 +16,8 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
-  CURRENT_INDICATOR_OPTIONS_SELECTION,
-  CURRENT_INDICATOR_OPTIONS_KEYS,
+  CURRENT_INDICATOR_OPTIONS,
+  CURRENT_INDICATOR_PARAMETERS_KEYS,
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -52,14 +52,17 @@ export function handle(
     return returnDefault(callback);
   }
 
-  const options = take(CURRENT_INDICATOR_OPTIONS_KEYS).reduce((result, key) => {
-    return {
-      ...result,
-      [key]:
-        get(params, ['options', key]) ||
-        get(take(CURRENT_INDICATOR_OPTIONS_SELECTION), [key]),
-    };
-  }, {});
+  const options = take(CURRENT_INDICATOR_PARAMETERS_KEYS).reduce(
+    (result, key) => {
+      return {
+        ...result,
+        [key]:
+          get(params, ['options', key]) ||
+          get(take(CURRENT_INDICATOR_OPTIONS), [key]),
+      };
+    },
+    {}
+  );
 
   const optionsValues = map(options, (value) => value);
 

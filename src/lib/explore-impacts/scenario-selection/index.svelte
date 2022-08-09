@@ -4,14 +4,14 @@
   import {
     CURRENT_SCENARIOS_UID,
     DICTIONARY_CURRENT_SCENARIOS,
-    AVAILABLE_SCENARIOS,
+    SCENARIOS,
   } from '$lib/../stores/store.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
   let hoveredScenario;
 
-  $: [primary, secondary] = partition($AVAILABLE_SCENARIOS, 'isPrimary');
+  $: [primary, secondary] = partition($SCENARIOS, 'isPrimary');
   $: scenarios = flatten([
     { isSpacer: true, label: 'Primary scenarios' },
     primary,
@@ -21,7 +21,7 @@
 
   $: [temperatureData, emissionsData] = ['temperature', 'emissions'].map(
     (key) => {
-      return $AVAILABLE_SCENARIOS.map((scenario) => {
+      return $SCENARIOS.map((scenario) => {
         return {
           ...scenario,
           highlight: hoveredScenario?.uid === scenario.uid,

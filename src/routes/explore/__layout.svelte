@@ -14,13 +14,13 @@
 <script>
   import { page } from '$app/stores';
   import ListLink from '$lib/helper/ListLink.svelte';
-  import { setContext } from 'svelte';
   import {
     SECTORS,
     INDICATORS,
     GEOGRAPHY_TYPES,
     GEOGRAPHIES,
-    AVAILABLE_SCENARIOS,
+    SCENARIOS,
+    INDICATOR_PARAMETERS,
   } from '$lib/../stores/store.js';
 
   export let meta;
@@ -28,21 +28,9 @@
   GEOGRAPHY_TYPES.set(meta.geographyTypes);
   INDICATORS.set(meta.indicators);
   SECTORS.set(meta.sectors);
-  AVAILABLE_SCENARIOS.set(meta.scenarios);
+  SCENARIOS.set(meta.scenarios);
   GEOGRAPHIES.set(meta);
-
-  setContext('meta', {
-    getGeographyTypes: () => meta.geographyTypes,
-    getContinents: () => meta.continents,
-    getAdmin0: () => meta.admin0,
-    getAdmin1: () => meta.admin1,
-    getCities: () => meta.cities,
-    getIconicRegions: () => meta.iconicRegions,
-    getScenarios: () => meta.scenarios,
-    getUnits: () => meta.units,
-    getSectors: () => meta.sectors,
-    getIndicators: () => meta.indicators,
-  });
+  INDICATOR_PARAMETERS.set(meta.indicatorParameters);
 
   $: currentPath = $page.routeId || '';
 </script>
