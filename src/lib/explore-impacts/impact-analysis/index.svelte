@@ -2,11 +2,7 @@
   import { get } from 'lodash-es';
   import ImpactGeo from './ImpactGeo.svelte';
   import ImpactTime from './ImpactTime.svelte';
-  import {
-    ALL_PARAMETERS_SELECTED,
-    CURRENT_GEOGRAPHY,
-    CURRENT_GEOGRAPHY_UID,
-  } from '$lib/../stores/store.js';
+  import { ALL_PARAMETERS_SELECTED } from '$lib/../stores/store.js';
 </script>
 
 <!-- <p>{$CURRENT_INDICATOR_UID}</p> -->
