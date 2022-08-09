@@ -71,7 +71,7 @@ export const CURRENT_GEOGRAPHIES = derived(
     $geographies[$currentGeographyType.uid]
 );
 
-export const CURRENT_GEOGRAPHY_UID = writable(null);
+export const CURRENT_GEOGRAPHY_UID = writable('DEU');
 
 export const CURRENT_GEOGRAPHY = derived(
   [CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY_TYPE, GEOGRAPHIES],
@@ -83,7 +83,7 @@ export const CURRENT_GEOGRAPHY = derived(
 );
 
 /* SCENARIO STATE */
-export const CURRENT_SCENARIOS_UID = writable([]); // Currently selected scenarios (not hovered1)
+export const CURRENT_SCENARIOS_UID = writable(['sp']); // Currently selected scenarios (not hovered1)
 
 export const CURRENT_SCENARIOS = derived(
   [CURRENT_SCENARIOS_UID, DICTIONARY_AVAILABLE_SCENARIOS, THEME],
@@ -100,7 +100,7 @@ export const DICTIONARY_CURRENT_SCENARIOS = derived(
 
 /* INDICATOR STATE */
 // We are using Index here because Tabs and TabContent
-export const CURRENT_INDICATOR_UID = writable(null);
+export const CURRENT_INDICATOR_UID = writable('surface-air-temperature');
 
 export const CURRENT_INDICATOR = derived(
   [CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS],
