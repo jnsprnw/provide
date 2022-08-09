@@ -1,7 +1,17 @@
-export const loadFromAPI = function (url, fetch) {
+// Load data from Strapi
+export const loadFromStrapi = function (url, fetch) {
 	return new Promise(async (resolve) => {
 		const res = await fetch(`https://provide-cms.herokuapp.com/api/${url}?populate=*`);
 	  const data = await res.json();
 	  resolve(data.data);
+	});
+}
+
+// Load data from Climate Analytics API
+export const loadFromAPI = function (url, fetch) {
+	return new Promise(async (resolve) => {
+		const res = await fetch(`${import.meta.env.VITE_DATA_API_URL}/${url}`);
+	  const data = await res.json();
+	  resolve(data);
 	});
 }

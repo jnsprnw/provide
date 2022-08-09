@@ -1,9 +1,9 @@
 <script context="module">
   import { parse } from 'marked';
-  import { loadFromAPI } from '$lib/utils.js';
+  import { loadFromStrapi } from './api/utils.js';
 
   export const load = async ({ fetch }) => {
-    const data = await loadFromAPI('disclaimer', fetch);
+    const data = await loadFromStrapi('disclaimer', fetch);
     const { Text } = data.attributes;
 
     return {

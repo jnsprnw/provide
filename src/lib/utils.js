@@ -4,14 +4,6 @@ import { handle } from "$lib/api/api.js";
 import qs from "qs";
 import { browser } from "$app/env";
 
-export const loadFromAPI = function (url, fetch) {
-	return new Promise(async (resolve) => {
-		const res = await fetch(`https://provide-cms.herokuapp.com/api/${url}?populate=*`);
-	  const data = await res.json();
-	  resolve(data.data);
-	});
-}
-
 export const getUID = function (obj) {
 	return obj?.uid || null;
 }

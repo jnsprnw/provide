@@ -1,12 +1,12 @@
 // This file loads the list of indicators and merges it with a list of indicator descriptions.
 import { parse } from 'marked';
-import { loadFromAPI } from './utils.js';
-import { INDICATORS } from '$lib/../config.js';
+import { loadFromStrapi } from './utils.js';
 import { find, get } from "lodash-es";
 
 export const load = async ({ fetch }) => {
-	const descriptions = await loadFromAPI('indicators', fetch);
-	const indicators = INDICATORS.map(indicator => {
+	const indicators = await fetch(`${import.meta.env.VITE_DATA_API_URL}/meta/`);
+	const descriptions = await loadFromStrapi('indicators', fetch);
+	return indicators.map(indicator => {
 		const description = get(find(descriptions, ['attributes', 'UID']), 'Description', '');
 		return {
 			...indicator,
