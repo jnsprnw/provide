@@ -8,7 +8,7 @@ import {
   isUndefined,
   isEmpty,
 } from 'lodash-es';
-import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+import { DEFAULT_FORMAT_UID, SCENARIO_DATA_KEYS } from '$lib/../config.js';
 import THEME from '$styles/theme-store.js';
 
 // META DATA (This will only be set once on load and won't change again)
@@ -42,12 +42,14 @@ export const SCENARIOS = (() => {
       // Processing of scenario data so we only have to do this once
       const scenarios = scenariosRaw.map((scenarioRaw) => {
         const scenario = { ...scenarioRaw };
-        ['emissions', 'mean-temperature'].map((key) => {
-          const { data, yearStart, yearStep } = scenarioRaw.scenarioData[key];
-          scenario[key] = data.map((value, i) => ({
-            value,
-            year: yearStart + yearStep * i,
-          }));
+        SCENARIO_DATA_KEYS.forEach((key) => {
+          const { data, yearStart, yearStep } = get(scenarioRaw, ['scenarioData', key], {});
+          if (data && yearStart && yearStep) {
+          	scenario[key] = data.map((value, i) => ({
+	            value,
+	            year: yearStart + yearStep * i,
+	          }));
+          }
         });
         return scenario;
       });

@@ -8,6 +8,7 @@
   } from '$lib/../stores/store.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
 
   let hoveredScenario;
 
@@ -19,7 +20,7 @@
     secondary,
   ]);
 
-  $: [temperatureData, emissionsData] = ['mean-temperature', 'emissions'].map(
+  $: [emissionsData, temperatureData] = SCENARIO_DATA_KEYS.map(
     (key) => {
       return $SCENARIOS.map((scenario) => {
         return {

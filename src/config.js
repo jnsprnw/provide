@@ -2,6 +2,7 @@ export const END_IMPACT_TIME = 'impact-time';
 export const END_DISTRIBUTION = 'dist';
 export const END_UN_AVOIDABLE_RISK = 'un-avoidable-risk';
 export const END_IMPACT_GEO = 'impact-geo';
+export const SCENARIO_DATA_KEYS = ['emissions', 'mean-temperature'];
 
 export const DEFAULT_FORMAT_UID = 'float';
 
