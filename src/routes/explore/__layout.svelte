@@ -6,14 +6,14 @@
     return {
       props: {
         meta,
-      }
+      },
     };
   };
 </script>
 
 <script>
   import { page } from '$app/stores';
-  import { parse } from "qs";
+  import { parse } from 'qs';
   import ListLink from '$lib/helper/ListLink.svelte';
   import {
     SECTORS,
@@ -24,7 +24,7 @@
     INDICATOR_PARAMETERS,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY_UID,
-    CURRENT_SCENARIOS_UID
+    CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
 
   export let meta;
@@ -36,7 +36,7 @@
   GEOGRAPHIES.set(meta);
   INDICATOR_PARAMETERS.set(meta.indicatorParameters);
 
-  $: params = parse((new URL($page.url).search).replace(/^\?/, ''));
+  $: params = parse(new URL($page.url).search.replace(/^\?/, ''));
 
   $: {
     const { indicator, geography, scenario } = params;

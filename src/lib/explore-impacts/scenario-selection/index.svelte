@@ -19,7 +19,7 @@
     secondary,
   ]);
 
-  $: [temperatureData, emissionsData] = ['temperature', 'emissions'].map(
+  $: [temperatureData, emissionsData] = ['mean-temperature', 'emissions'].map(
     (key) => {
       return $SCENARIOS.map((scenario) => {
         return {

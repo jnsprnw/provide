@@ -42,7 +42,7 @@ export const SCENARIOS = (() => {
       // Processing of scenario data so we only have to do this once
       const scenarios = scenariosRaw.map((scenarioRaw) => {
         const scenario = { ...scenarioRaw };
-        ['emissions', 'temperature'].map((key) => {
+        ['emissions', 'mean-temperature'].map((key) => {
           const { data, yearStart, yearStep } = scenarioRaw.scenarioData[key];
           scenario[key] = data.map((value, i) => ({
             value,
@@ -64,18 +64,21 @@ export const DICTIONARY_SCENARIOS = derived(SCENARIOS, ($scenarios) =>
 export const SECTORS = writable([]);
 
 export const INDICATORS = (() => {
-	const store = writable([]);
-	return {
+  const store = writable([]);
+  return {
     ...store,
     set: ({ indicators: indicatorsRaw, units }) => {
-    	const indicators = indicatorsRaw.map(indicator => {
-    		return {
-    			...indicator,
-    			unit: units.find(unit => unit.uid === indicator.unit) || { uid: indicator.unit, label: indicator.unit }
-    		}
-    	})
+      const indicators = indicatorsRaw.map((indicator) => {
+        return {
+          ...indicator,
+          unit: units.find((unit) => unit.uid === indicator.unit) || {
+            uid: indicator.unit,
+            label: indicator.unit,
+          },
+        };
+      });
       store.set(indicators);
-    }
+    },
   };
 })();
 
@@ -148,7 +151,7 @@ export const AVAILABLE_INDICATORS = derived(
   }
 );
 
-export const CURRENT_INDICATOR_UID = writable('surface-air-temperature');
+export const CURRENT_INDICATOR_UID = writable('mean-temperature');
 
 export const CURRENT_INDICATOR = derived(
   [CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS],
@@ -159,8 +162,9 @@ export const CURRENT_INDICATOR_UNIT = derived(CURRENT_INDICATOR, ($indicator) =>
   get($indicator, ['unit'])
 );
 
-export const CURRENT_INDICATOR_UNIT_UID = derived(CURRENT_INDICATOR_UNIT, ($unit) =>
-  get($unit, 'uid', DEFAULT_FORMAT_UID)
+export const CURRENT_INDICATOR_UNIT_UID = derived(
+  CURRENT_INDICATOR_UNIT,
+  ($unit) => get($unit, 'uid', DEFAULT_FORMAT_UID)
 );
 
 // Array of available parameters for currently selected indicator
@@ -191,7 +195,9 @@ export const CURRENT_INDICATOR_OPTIONS = writable({});
 // Utility for quicker access to list of indicator parameters
 export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(
   CURRENT_INDICATOR_PARAMETERS,
-  ($options) => $options.map((indicator) => get(indicator, 'key'))
+  ($options) => {
+    return $options.map((indicator) => get(indicator, 'key'));
+  }
 );
 
 /* UTILITY N STUFF */

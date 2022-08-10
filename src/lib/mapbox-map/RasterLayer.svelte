@@ -17,8 +17,10 @@
       data?.reduce((acc, cells, latIndex) => {
         cells.forEach((value, lngIndex) => {
           if (value === null) return;
-          const lng = coordinatesOrigin[1] + resolution * latIndex;
-          const lat = coordinatesOrigin[0] + resolution * lngIndex;
+          const lng =
+            coordinatesOrigin[0] + resolution * lngIndex - resolution / 2;
+          const lat =
+            coordinatesOrigin[1] + resolution * latIndex - resolution / 2;
 
           acc.push({
             type: 'Feature',
