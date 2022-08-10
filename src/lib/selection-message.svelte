@@ -15,7 +15,6 @@
 	Please select an indicator.
 	{:else}
 	You are currently exploring <strong>{ $CURRENT_INDICATOR?.label }</strong> in <strong>{ $CURRENT_GEOGRAPHY?.label }</strong> ({$CURRENT_GEOGRAPHY?.continent?.label}) for {#each listScenarios as { type, value }}{#if type === 'element'}<strong>{value}</strong>{:else}{value}{/if}{/each}.
-	{ JSON.stringify($CURRENT_GEOGRAPHY)}
 	{/if}
 </div>
 
