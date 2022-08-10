@@ -2,7 +2,7 @@
   import { loadFromAPI } from '$lib/../routes/api/utils.js';
 
   export const load = async ({ fetch }) => {
-    const data = await loadFromAPI(`/api/meta/`, '', fetch);
+    const data = await loadFromAPI(`${import.meta.env.VITE_DATA_API_URL}/meta/`, '', fetch);
     return {
       props: {
         meta: data,
