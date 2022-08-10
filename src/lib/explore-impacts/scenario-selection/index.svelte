@@ -2,6 +2,7 @@
   import { partition, flatten } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
+    CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
     DICTIONARY_CURRENT_SCENARIOS,
     SCENARIOS,
@@ -10,6 +11,7 @@
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
   let hoveredScenario;
+  $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
 
   $: [primary, secondary] = partition($SCENARIOS, 'isPrimary');
   $: scenarios = flatten([
@@ -24,7 +26,7 @@
       return $SCENARIOS.map((scenario) => {
         return {
           ...scenario,
-          highlight: hoveredScenario?.uid === scenario.uid,
+          highlight: renderedScenario?.uid === scenario.uid,
           color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
           values: scenario[key],
         };
@@ -51,9 +53,9 @@
 
   <div class="scenario-split">
     <div>
-      {#if hoveredScenario}
-        <h3>{hoveredScenario.label}</h3>
-        <p>{hoveredScenario.description || 'Description missing'}</p>
+      {#if renderedScenario}
+        <h3>{renderedScenario.label}</h3>
+        <p>{renderedScenario.description || 'Description missing'}</p>
       {/if}
     </div>
     <div class="scenario-charts">
@@ -63,7 +65,6 @@
       <div class="scenario-chart">
         <LineTimeSeries data={temperatureData} unit="integer" />
       </div>
-      <!-- { JSON.stringify($SCENARIOS_TIMESERIES_TEMPERATURE_DATA) } -->
     </div>
   </div>
 </div>

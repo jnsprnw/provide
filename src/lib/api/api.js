@@ -18,6 +18,7 @@ import {
   CURRENT_INDICATOR_UID,
   CURRENT_INDICATOR_OPTIONS,
   CURRENT_INDICATOR_PARAMETERS_KEYS,
+  INDICATORS,
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -45,6 +46,7 @@ export function handle(
 
   const geography = params.geography || take(CURRENT_GEOGRAPHY_UID);
   const indicator = params.indicator || take(CURRENT_INDICATOR_UID);
+  const indicators = take(INDICATORS);
   let scenarios = params.scenarios || take(CURRENT_SCENARIOS_UID);
   scenarios = isArray(scenarios) ? scenarios : [scenarios];
 

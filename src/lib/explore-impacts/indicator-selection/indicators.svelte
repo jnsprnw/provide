@@ -1,10 +1,53 @@
 <script>
   import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
   import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
-  import PreviewChart from './preview-chart.svelte';
   import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
+  import {
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_SCENARIOS_UID,
+    CURRENT_SCENARIOS,
+  } from '$lib/../stores/store.js';
+  import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
+  import { handle } from '$lib/api/api.js';
+  import { END_IMPACT_TIME } from '$lib/../config.js';
+  import PreviewTimeSeries from '$lib/charts/PreviewTimeSeries.svelte';
 
   export let indicators = [];
+
+  $: indicatorData = indicators.map((indicator) => {
+    const scenarios = handle(
+      END_IMPACT_TIME,
+      'get',
+      {
+        geography: $CURRENT_GEOGRAPHY_UID,
+        scenarios: $CURRENT_SCENARIOS_UID,
+        indicator: indicator.uid,
+      },
+      $IMPACT_TIME_CACHE
+    ).map((response, i) => {
+      const { data, status } = response;
+      const scenario = $CURRENT_SCENARIOS[i];
+      if (status === 'success' && data) {
+        return {
+          ...scenario,
+          values: data.data[indicator.uid].map((values, i) => {
+            return {
+              year: data.yearStart + data.yearStep * i,
+              min: values[0],
+              value: values[1],
+              max: values[2],
+            };
+          }),
+        };
+      } else {
+        return { ...scenario, values: [] };
+      }
+    });
+    return {
+      ...indicator,
+      scenarios,
+    };
+  });
 </script>
 
 <div class="indicator-selection">
@@ -12,20 +55,20 @@
     bind:selected={$CURRENT_INDICATOR_UID}
     legendText="Indicators"
   >
-    {#each indicators as indicator}
+    {#each indicatorData as indicator}
       <RadioButton labelText={indicator.label} value={indicator.uid}>
         <span>{indicator.label}</span>
-        <PreviewChart {indicator} />
+        <div class="preview-chart">
+          <PreviewTimeSeries data={indicator.scenarios} />
+        </div>
       </RadioButton>
     {/each}
   </RadioButtonGroup>
 </div>
 
 <style lang="scss">
-  .indicator-selection {
-    // display: grid;
-    // gap: 2rem; // TODO
-    // margin-top: 2rem;
-    // margin-bottom: 2rem;
+  .preview-chart {
+    height: 25px;
+    max-width: 100px;
   }
 </style>
