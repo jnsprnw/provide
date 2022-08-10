@@ -34,38 +34,28 @@ async function request(params, url) {
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
   });
-  // console.log("loading:", { params, url, query }, `${url}?${query}`);
+  // console.log("loading:", { params, url, query, url }, `${url}?${query}`);
   return await loadFromAPI(url, query);
 }
 
 export function hasInObject(data, addr, param) {
   return compact(
     addr.map((a, i) => {
-      return has(data, a) ? false : param[i];
+      return has(data, a) ? false : { addr: a, param: param[i] };
     })
   );
-	// console.log("loading:", { params, url, query, url }, `${url}?${query}`);
-	return await loadFromAPI(url, query);
 }
 
-export function hasInObject (data, addr, param) {
-	return compact(addr.map((a, i) => {
-		return has(data, a) ? false : { addr: a, param: param[i] };
-	}))
+function updateDate(old, addr, newData) {
+  const obj = old;
+  set(obj, addr, newData);
+  return obj;
 }
 
-async function load(cache, endpoint, params, url) {
-  // addr will always returns an array of scenarios, but it is only one element long given the params
-  const addr = handle(endpoint, 'addr', params)[0];
+export async function load(cache, endpoint, param, addr, url) {
   cache.update((old) => updateDate(old, addr, { status: 'loading', data: {} }));
-  const newData = await request(params, url);
+  const newData = await request(param, url);
   cache.update((old) =>
     updateDate(old, addr, { status: 'success', data: newData })
   );
-}
-
-export async function load (cache, endpoint, param, addr, url) {
-	cache.update((old) => updateDate(old, addr, { status: "loading", data: {} }))
-	const newData = await request(param, url);
-	cache.update((old) => updateDate(old, addr, { status: "success", data: newData }))
 }
