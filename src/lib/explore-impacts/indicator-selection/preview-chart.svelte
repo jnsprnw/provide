@@ -66,7 +66,7 @@
     .y0((d) => y(d[2]))
     .y1((d) => y(d[3]));
 
-  $: title = `This chart displays ${indicator?.label} in ${$CURRENT_GEOGRAPHY?.label} starting in year TODO until TODO`;
+  $: title = indicator.description; // `This chart displays ${indicator?.label} in ${$CURRENT_GEOGRAPHY?.label} starting in year TODO until TODO`;
 </script>
 
 <div

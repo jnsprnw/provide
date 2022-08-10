@@ -1,27 +1,29 @@
-import { keyBy, get as take } from "lodash-es";
-// Will be loaded externally later
-import { GEOGRAPHY_TYPES, CONTINENTS, ADMIN_0, ADMIN_1, CITIES, ICONIC_REGIONS, SCENARIOS, UNITS, SECTORS, INDICATORS } from '$lib/../config.js';
-import emojisCountries from '$lib/../data/emojis-countries.json';
+import { find, keyBy, get as take } from "lodash-es";
+import { loadFromStrapi, loadFromAPI } from '$lib/../routes/api/utils.js';
 
-export function get() {
+export async function get() {
+  const descriptionIndicators = await loadFromStrapi('indicators', fetch);
+  const descriptionScenarios = await loadFromStrapi('scenarios', fetch);
+  const meta = await loadFromAPI(`${import.meta.env.VITE_DATA_API_URL}/meta/`, '', fetch);
   return {
     body: {
-      geographyTypes: GEOGRAPHY_TYPES,
-      continents: CONTINENTS,
-      admin0: ADMIN_0.map((country) => {
-        const emoji = take(emojisCountries, country.uid);
+      descriptionIndicators,
+      descriptionScenarios,
+      ...meta,
+      indicators: meta.indicators.map((indicator) => {
+        const description = take(descriptionIndicators.find(d => d.attributes.UID === indicator.uid), ['attributes', 'Description'])
         return {
-          ...country,
-          emoji
+          ...indicator,
+          description
         }
       }),
-      admin1: ADMIN_1,
-      cities: CITIES,
-      iconicRegions: ICONIC_REGIONS,
-      scenarios: SCENARIOS,
-      units: UNITS,
-      sectors: SECTORS,
-      indicators: INDICATORS
+      scenarios: meta.scenarios.map((indicator) => {
+        const description = take(descriptionScenarios.find(d => d.attributes.UID === indicator.uid), ['attributes', 'Description'])
+        return {
+          ...indicator,
+          description
+        }
+      })
     }
   }
 }
