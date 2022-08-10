@@ -79,7 +79,7 @@ export function handle(
       })); // We need this for the load function
       data = take(IMPACT_TIME_CACHE);
       store = IMPACT_TIME_CACHE;
-      url = `/api/impact-time`;
+      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time`;
       break;
     case END_DISTRIBUTION:
       scenario = scenarios[0];
@@ -87,7 +87,7 @@ export function handle(
       param = [{ geography, indicator, scenarios: [scenario], ...options }]; // We need this for the load function
       data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
       store = IMPACT_TIME_DISTRIBUTION_CACHE;
-      url = '/api/impact-time-distribution';
+      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time-distribution`;
       break;
     case END_IMPACT_GEO:
       scenario = scenarios[0];

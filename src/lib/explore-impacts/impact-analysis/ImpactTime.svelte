@@ -96,19 +96,23 @@
         geography={$CURRENT_GEOGRAPHY}
         {hasSingleScenario}
         {impactTimeData}
-        {distributionData} />
+        {distributionData}
+      />
       <DescriptionTimeSeries
         indicator={$CURRENT_INDICATOR}
         geography={$CURRENT_GEOGRAPHY}
-        scenarios={$CURRENT_SCENARIOS} />
+        scenarios={$CURRENT_SCENARIOS}
+      />
       <p>
-        The gridded background shows the certainty of our calculations. The darker the color, the more likely it will become true.
+        The gridded background shows the certainty of our calculations. The
+        darker the color, the more likely it will become true.
       </p>
       <dl>
         <ResolutionTime
           {hasSingleScenario}
           {impactTimeData}
-          {distributionData} />
+          {distributionData}
+        />
       </dl>
     </div>
   </Grid>
