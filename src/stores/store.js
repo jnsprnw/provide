@@ -198,7 +198,7 @@ export const CURRENT_INDICATOR_OPTIONS = writable({});
 export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(
   CURRENT_INDICATOR_PARAMETERS,
   ($options) => {
-    return $options.map((indicator) => get(indicator, 'key'));
+    return $options.map((indicator) => get(indicator, 'uid'));
   }
 );
 
