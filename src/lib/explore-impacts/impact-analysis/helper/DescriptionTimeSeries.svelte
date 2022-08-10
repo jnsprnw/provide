@@ -9,7 +9,7 @@
 </script>
 
 <p>
-  This graph shows how absolute changes in {indicator.label} (expressed in {indicator.unit} (TODO)) will play out over time in {geography.label} at different global warming levels compared to the reference period 1986-2006 (TODO), based on the
+  This graph shows how absolute changes in {indicator.label} (expressed in {indicator.unit.label}) will play out over time in {geography.label} at different global warming levels compared to the reference period 1986-2006 (TODO), based on the
   {#each scenarioList as { type, value }}
   	{#if type === 'element'}
   	<em class="text-scenario-label" style={`text-decoration-color: ${value.color}`}>{ value.label }</em>
