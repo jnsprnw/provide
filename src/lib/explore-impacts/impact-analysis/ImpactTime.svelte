@@ -16,6 +16,11 @@
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import ResolutionTime from './helper/ResolutionTime.svelte';
+  import TitleTimeSeries from './helper/TitleTimeSeries.svelte';
+  import DescriptionTimeSeries from './helper/DescriptionTimeSeries.svelte';
+
+  $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;
 
   $: distributionData = (() => {
     const { yearStart, valueStart, yearStep, valueStep, data } =
@@ -57,6 +62,8 @@
 
       return {
         color: $CURRENT_SCENARIOS[i].color,
+        yearStart,
+        yearStep,
         values: indicatorData?.map((values, i) => ({
           value: values[values.length - 2],
           year: yearStart + yearStep * i,
@@ -67,7 +74,7 @@
 
 <Grid container>
   <Grid md="8">
-    {#if $CURRENT_SCENARIOS_UID.length === 1}
+    {#if hasSingleScenario}
       {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
         <div class="impact-time-chart">
           <LineDistributionChart
@@ -84,9 +91,25 @@
   </Grid>
   <Grid md="4">
     <div>
-      <h2>
-        {$CURRENT_INDICATOR.label} in {$CURRENT_GEOGRAPHY.label} until 2100
-      </h2>
+      <TitleTimeSeries
+        indicator={$CURRENT_INDICATOR}
+        geography={$CURRENT_GEOGRAPHY}
+        {hasSingleScenario}
+        {impactTimeData}
+        {distributionData} />
+      <DescriptionTimeSeries
+        indicator={$CURRENT_INDICATOR}
+        geography={$CURRENT_GEOGRAPHY}
+        scenarios={$CURRENT_SCENARIOS} />
+      <p>
+        The gridded background shows the certainty of our calculations. The darker the color, the more likely it will become true.
+      </p>
+      <dl>
+        <ResolutionTime
+          {hasSingleScenario}
+          {impactTimeData}
+          {distributionData} />
+      </dl>
     </div>
   </Grid>
 </Grid>
