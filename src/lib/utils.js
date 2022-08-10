@@ -44,12 +44,14 @@ export function hasInObject(data, addr, param) {
       return has(data, a) ? false : param[i];
     })
   );
+	// console.log("loading:", { params, url, query, url }, `${url}?${query}`);
+	return await loadFromAPI(url, query);
 }
 
-function updateDate(old, addr, newData) {
-  const obj = old;
-  set(obj, addr, newData);
-  return obj;
+export function hasInObject (data, addr, param) {
+	return compact(addr.map((a, i) => {
+		return has(data, a) ? false : { addr: a, param: param[i] };
+	}))
 }
 
 async function load(cache, endpoint, params, url) {
@@ -62,11 +64,8 @@ async function load(cache, endpoint, params, url) {
   );
 }
 
-export function check(endpoint, store, missing, url) {
-  // "has" returns an array with all the missing data.
-  // const missing = handle(endpoint, "has", params);
-  missing.forEach((request) => {
-    // We load each missing data point. In our case, a list of scenarios with other parameters
-    load(store, endpoint, request, url);
-  });
+export async function load (cache, endpoint, param, addr, url) {
+	cache.update((old) => updateDate(old, addr, { status: "loading", data: {} }))
+	const newData = await request(param, url);
+	cache.update((old) => updateDate(old, addr, { status: "success", data: newData }))
 }
