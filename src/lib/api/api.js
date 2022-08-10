@@ -45,8 +45,7 @@ export function handle(
 
   const geography = params.geography || take(CURRENT_GEOGRAPHY_UID);
   const indicator = params.indicator || take(CURRENT_INDICATOR_UID);
-  let scenarios = params.scenarios || take(CURRENT_SCENARIOS_UID);
-  scenarios = isArray(scenarios) ? scenarios : [scenarios];
+  const scenarios = params.scenarios || take(CURRENT_SCENARIOS_UID);
 
   if (!geography || !indicator || scenarios.length === 0) {
     return returnDefault(callback);
@@ -90,9 +89,15 @@ export function handle(
       url = `${import.meta.env.VITE_DATA_API_URL}/impact-time-distribution`;
       break;
     case END_IMPACT_GEO:
-      scenario = scenarios[0];
-      addr = [[geography, scenario, indicator, ...optionsValues]];
-      param = [{ geography, scenario, indicator, ...options }]; // We need this for the load function
+      addr = scenarios.map((scenario) => {
+        return [geography, scenario, indicator, ...optionsValues];
+      });
+      param = scenarios.map((scenario) => ({
+        geography,
+        indicator,
+        scenarios: [scenario],
+        ...options,
+      })); 
       data = take(IMPACT_GEO_CACHE);
       store = IMPACT_GEO_CACHE;
       url = `${import.meta.env.VITE_DATA_API_URL}/impact-geo`;
