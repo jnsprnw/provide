@@ -1,6 +1,6 @@
 // This file holds the handle function, which all endpoints use to interact with the API.
 import { get as take } from 'svelte/store';
-import { check, hasInObject } from '$lib/utils.js';
+import { load, hasInObject } from '$lib/utils.js';
 import { isArray, get, map } from 'lodash-es';
 import {
   END_IMPACT_TIME,
@@ -72,8 +72,8 @@ export function handle(
       });
       param = scenarios.map((scenario) => ({
         geography,
-        indicator,
-        scenarios: [scenario],
+        indicators: [indicator],
+        scenario,
         ...options,
       })); // We need this for the load function
       data = take(IMPACT_TIME_CACHE);
@@ -95,7 +95,7 @@ export function handle(
       param = scenarios.map((scenario) => ({
         geography,
         indicator,
-        scenarios: [scenario],
+        scenario,
         ...options,
       })); 
       data = take(IMPACT_GEO_CACHE);
@@ -118,9 +118,10 @@ export function handle(
     if (callback === 'get') {
       // We always check if the data is available to trigger a load.
       // We could probably make this faster by not letting check call handle again, but instead call the load function from here directly with the list of missing data points.
-      if (missing.length) {
-        check(endpoint, store, missing, url);
-      }
+      missing.forEach(({ addr, param }) => {
+        // We load each missing data point. In our case, a list of scenarios with other parameters
+        load(store, endpoint, param, addr, url);
+      })
       // We could also just return the array and let the component extract the first (and only) value
       return addr.map((a) => get(data, a));
       // const values = addr.map(a => get(data, a));
