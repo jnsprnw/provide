@@ -6,7 +6,7 @@
   import { handle } from '$lib/api/api.js';
   import { END_IMPACT_TIME } from '$lib/../config.js';
   import {
-    CURRENT_INDICATOR_UNIT,
+    CURRENT_INDICATOR_UNIT_UID,
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
@@ -79,13 +79,14 @@
         <div class="impact-time-chart">
           <LineDistributionChart
             {...distributionData}
-            unit={$CURRENT_INDICATOR_UNIT}
-          />
+            unit={$CURRENT_INDICATOR_UNIT_UID} />
         </div>
       {/if}
     {:else}
       <div class="impact-time-chart">
-        <LineTimeSeries data={impactTimeData} unit="celsius" />
+        <LineTimeSeries
+          data={impactTimeData}
+          unit={$CURRENT_INDICATOR_UNIT_UID} />
       </div>
     {/if}
   </Grid>

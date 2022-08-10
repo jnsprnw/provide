@@ -30,7 +30,7 @@
   export let meta;
 
   GEOGRAPHY_TYPES.set(meta.geographyTypes);
-  INDICATORS.set(meta.indicators);
+  INDICATORS.set(meta);
   SECTORS.set(meta.sectors);
   SCENARIOS.set(meta.scenarios);
   GEOGRAPHIES.set(meta);

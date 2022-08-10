@@ -63,7 +63,21 @@ export const DICTIONARY_SCENARIOS = derived(SCENARIOS, ($scenarios) =>
 
 export const SECTORS = writable([]);
 
-export const INDICATORS = writable([]);
+export const INDICATORS = (() => {
+	const store = writable([]);
+	return {
+    ...store,
+    set: ({ indicators: indicatorsRaw, units }) => {
+    	const indicators = indicatorsRaw.map(indicator => {
+    		return {
+    			...indicator,
+    			unit: units.find(unit => unit.uid === indicator.unit) || { uid: indicator.unit, label: indicator.unit }
+    		}
+    	})
+      store.set(indicators);
+    }
+  };
+})();
 
 export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
   keyBy($indicators, 'uid')
@@ -142,7 +156,11 @@ export const CURRENT_INDICATOR = derived(
 );
 
 export const CURRENT_INDICATOR_UNIT = derived(CURRENT_INDICATOR, ($indicator) =>
-  get($indicator, 'unit', DEFAULT_FORMAT_UID)
+  get($indicator, ['unit'])
+);
+
+export const CURRENT_INDICATOR_UNIT_UID = derived(CURRENT_INDICATOR_UNIT, ($unit) =>
+  get($unit, 'uid', DEFAULT_FORMAT_UID)
 );
 
 // Array of available parameters for currently selected indicator
