@@ -59,10 +59,10 @@
     </div>
     <div class="scenario-charts">
       <div class="scenario-chart">
-        <LineTimeSeries data={emissionsData} unit="celsius" />
+        <LineTimeSeries data={emissionsData} unit="integer" title="Global GHG emissions" />
       </div>
       <div class="scenario-chart">
-        <LineTimeSeries data={temperatureData} unit="integer" />
+        <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
       </div>
       <!-- { JSON.stringify($SCENARIOS_TIMESERIES_TEMPERATURE_DATA) } -->
     </div>
