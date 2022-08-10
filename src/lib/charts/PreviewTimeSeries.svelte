@@ -19,20 +19,23 @@
     }, []);
 
   $: isMultiLine = data.length > 1;
-  $: chartData = isMultiLine ? data : data[0];
 </script>
 
 <div class="chart-container">
-  <LayerCake x={xKey} y={yKey} data={chartData.values} flatData={flatten(data)}>
-    <Svg>
-      {#if isMultiLine}
+  {#if isMultiLine}
+    <LayerCake x={xKey} y={yKey} {data} flatData={flatten(data)}>
+      <Svg>
         <MultipleLineLayer />
-      {:else}
-        <AreaLayer color={chartData.color} />
-        <LineLayer color={chartData.color} />
-      {/if}
-    </Svg>
-  </LayerCake>
+      </Svg>
+    </LayerCake>
+  {:else}
+    <LayerCake x={xKey} y={yKey} data={data[0].values} flatData={flatten(data)}>
+      <Svg>
+        <AreaLayer color={data[0].color} />
+        <LineLayer color={data[0].color} />
+      </Svg>
+    </LayerCake>
+  {/if}
 </div>
 
 <style lang="scss">

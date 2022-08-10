@@ -13,6 +13,9 @@
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
+  export let title;
+
+  // TODO: Get unit label
 
   const padding = { top: 0, right: 20, bottom: 20, left: 20 };
 
@@ -29,29 +32,46 @@
   );
 </script>
 
-<div class="chart-container">
-  <LayerCake
-    {padding}
-    x={xKey}
-    y={yKey}
-    data={sortedData}
-    flatData={flatten(sortedData)}
-  >
-    <Svg>
-      <AxisX
-        gridlines={false}
-        ticks={6}
-        padding={{ top: 10, left: 0, right: 0 }}
-      />
-      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
-      <MultipleLineLayer />
-    </Svg>
-  </LayerCake>
+<div class="figure-container">
+  <header>
+    <h5 class="title-chart title-chart--title">{title}</h5> <small class="title-chart title-chart--small">in {unit}</small>
+  </header>
+  <div class="chart-container">
+    <LayerCake
+      {padding}
+      x={xKey}
+      y={yKey}
+      data={sortedData}
+      flatData={flatten(sortedData)}
+    >
+      <Svg>
+        <AxisX
+          gridlines={false}
+          ticks={6}
+          padding={{ top: 10, left: 0, right: 0 }}
+        />
+        <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
+        <MultipleLineLayer />
+      </Svg>
+    </LayerCake>
+  </div>
 </div>
 
 <style lang="scss">
-  .chart-container {
+  .figure-container, .chart-container {
     width: 100%;
     height: 100%;
+  }
+
+  .figure-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: var(--size-spacer-large-s);
+
+    header {
+      & > * {
+        display: inline-block
+      }
+    }
   }
 </style>

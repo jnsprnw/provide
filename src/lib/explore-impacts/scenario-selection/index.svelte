@@ -9,6 +9,7 @@
   } from '$lib/../stores/store.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
 
   let hoveredScenario;
   $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
@@ -21,7 +22,7 @@
     secondary,
   ]);
 
-  $: [temperatureData, emissionsData] = ['mean-temperature', 'emissions'].map(
+  $: [emissionsData, temperatureData] = SCENARIO_DATA_KEYS.map(
     (key) => {
       return $SCENARIOS.map((scenario) => {
         return {
@@ -60,10 +61,10 @@
     </div>
     <div class="scenario-charts">
       <div class="scenario-chart">
-        <LineTimeSeries data={emissionsData} unit="celsius" />
+        <LineTimeSeries data={emissionsData} unit="integer" title="Global GHG emissions" />
       </div>
       <div class="scenario-chart">
-        <LineTimeSeries data={temperatureData} unit="integer" />
+        <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
       </div>
     </div>
   </div>

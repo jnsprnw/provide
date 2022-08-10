@@ -1,24 +1,24 @@
 <script>
-  import { LayerCake, Svg, Canvas, Html } from "layercake";
-  import { formatValue } from "$lib/utils/formatting";
-  import { DEFAULT_FORMAT_UID } from "$lib/../config.js";
+  import { LayerCake, Svg, Canvas, Html } from 'layercake';
+  import { formatValue } from '$lib/utils/formatting';
+  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
 
-  import LineLayer from "./layers/LineLayer.svelte";
-  import AxisX from "./axes/AxisX.svelte";
-  import AxisY from "./axes/AxisY.svelte";
-  import { extent } from "d3-array";
-  import ColorMatrix from "./layers/ColorMatrix.svelte";
-  import { getContext } from "svelte";
+  import LineLayer from './layers/LineLayer.svelte';
+  import AxisX from './axes/AxisX.svelte';
+  import AxisY from './axes/AxisY.svelte';
+  import { extent } from 'd3-array';
+  import ColorMatrix from './layers/ColorMatrix.svelte';
+  import { getContext } from 'svelte';
 
-  const theme = getContext("theme");
+  const theme = getContext('theme');
 
   export let distribution = [];
   export let mean = [];
   export let yearStep;
   export let valueStep;
-  export let xKey = "year";
-  export let yKey = "value";
-  export let zKey = "distribution";
+  export let xKey = 'year';
+  export let yKey = 'value';
+  export let zKey = 'distribution';
   export let unit = DEFAULT_FORMAT_UID;
 
   const padding = { top: 0, right: 20, bottom: 20, left: 20 };
@@ -40,7 +40,7 @@
     x={xKey}
     y={yKey}
     z={zKey}
-    zRange={["white", $theme.color.category[0]]}
+    zRange={['white', $theme.color.category[0]]}
     data={mean}
     {flatData}
   >
@@ -54,8 +54,8 @@
         padding={{ top: 10, left: 0, right: 0 }}
       />
       <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
-      <LineLayer stroke={$theme.color.background.base} strokeWidth={6} />
-      <LineLayer stroke={$theme.color.category[0]} />
+      <LineLayer color={$theme.color.background.base} strokeWidth={5} />
+      <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>
   </LayerCake>
 </div>
