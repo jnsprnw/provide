@@ -39,13 +39,23 @@ i.emoji {
 	}
 }
 
-.text-label {
+// Global text classes
+.text-label { // Uppercase labels like »Scenarios«, »Indicators«, …
 	@include text-label();
 
 	&.text-label--bold {
 		font-weight: var(--font-font-weight-bold);
 	}
 }
+
+.text-scenario-label { // This is used to highlight scenarios in a text
+	font-style: normal;
+	font-weight: var(--font-font-weight-bold);
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	text-underline-offset: 2px;
+}
+
 
 .content-header {
 	.title {
