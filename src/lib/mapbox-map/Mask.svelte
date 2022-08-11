@@ -1,7 +1,3 @@
-<script context="module">
-  let instance = 0;
-</script>
-
 <script>
   import difference from '@turf/difference';
   import { getContext, onDestroy } from 'svelte';
@@ -10,6 +6,8 @@
     type: 'Feature',
     geometry: { coordinates: [], type: 'Polygon' },
   };
+  export let layerId = 'mask-layer';
+  const sourceId = `mask-source`;
 
   const worldRect = {
     type: 'Feature',
@@ -30,9 +28,6 @@
   $: mask = difference(worldRect, feature);
 
   const { MAP } = getContext('map');
-
-  const sourceId = `mask-source-${instance}`;
-  const layerId = `mask-layer-${instance}`;
 
   $: if (!$MAP.getSource(sourceId)) {
     $MAP.addSource(sourceId, {

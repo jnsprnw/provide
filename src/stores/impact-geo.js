@@ -5,6 +5,7 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
+  CURRENT_IMPACT_GEO_YEAR_UID,
 } from './store.js';
 
 export const IMPACT_GEO_CACHE = writable({});
@@ -15,6 +16,7 @@ export const IMPACT_GEO_DATA = derived(
     CURRENT_GEOGRAPHY_UID,
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
+    CURRENT_IMPACT_GEO_YEAR_UID,
   ],
   async ([], set) => {
     // We don’t need any parameter, but instead just the reactivity of the other stores.

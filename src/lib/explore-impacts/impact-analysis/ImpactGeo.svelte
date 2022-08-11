@@ -14,8 +14,6 @@
   $: data = $IMPACT_GEO_DATA;
   $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
 
-  $: console.log(shape);
-
   $: loadedData = data
     .filter((d) => d.status === STATUS_SUCCESS)
     .map((d) => d.data);
@@ -30,6 +28,8 @@
     domain = [minVal, maxVal];
     return scaleLinear().domain(domain).range(range);
   })();
+
+  $: console.log($CURRENT_IMPACT_GEO_YEAR_UID);
 </script>
 
 <Grid class="maps" container>
@@ -43,10 +43,10 @@
   {#each data as d}
     <Grid class="map-wrapper" md={12 / data.length}>
       <MapboxMap fitShape={shape} resize={data.length}>
+        <Mask feature={shape} layerId="mask-layer" />
         {#if d.status === STATUS_SUCCESS}
-          <RasterLayer {colorScale} {...d.data} />
+          <RasterLayer {colorScale} {...d.data} before="mask-layer" />
         {/if}
-        <Mask feature={shape} />
       </MapboxMap>
     </Grid>
   {/each}

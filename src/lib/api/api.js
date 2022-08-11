@@ -20,6 +20,7 @@ import {
   CURRENT_INDICATOR_UID,
   CURRENT_INDICATOR_OPTIONS,
   CURRENT_INDICATOR_PARAMETERS_KEYS,
+  CURRENT_IMPACT_GEO_YEAR_UID,
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -48,6 +49,8 @@ export function handle(
   const geography = params.geography || take(CURRENT_GEOGRAPHY_UID);
   const indicator = params.indicator || take(CURRENT_INDICATOR_UID);
   const scenarios = params.scenarios || take(CURRENT_SCENARIOS_UID);
+  const impactGeoYear =
+    params.impactGeoYear || take(CURRENT_IMPACT_GEO_YEAR_UID);
 
   if (!geography || !indicator || scenarios.length === 0) {
     return returnDefault(callback);
@@ -92,13 +95,20 @@ export function handle(
       break;
     case END_IMPACT_GEO:
       addr = scenarios.map((scenario) => {
-        return [geography, scenario, indicator, ...optionsValues];
+        return [
+          geography,
+          scenario,
+          indicator,
+          ...optionsValues,
+          impactGeoYear,
+        ];
       });
       param = scenarios.map((scenario) => ({
         geography,
         indicator,
         scenario,
         ...options,
+        year: impactGeoYear,
       }));
       data = take(IMPACT_GEO_CACHE);
       store = IMPACT_GEO_CACHE;

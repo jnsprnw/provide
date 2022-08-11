@@ -5,11 +5,12 @@
   export let coordinatesOrigin;
   export let resolution;
   export let colorScale;
+  export let before;
 
   const { MAP } = getContext('map');
 
   const sourceId = `data-source`;
-  const gridLayerId = `grid-layer`;
+  const layerId = `grid-layer`;
 
   $: geoJson = {
     type: 'FeatureCollection',
@@ -54,7 +55,7 @@
 
   $: $MAP.addLayer(
     {
-      id: gridLayerId,
+      id: layerId,
       type: 'fill',
       source: sourceId,
       paint: {
@@ -63,11 +64,11 @@
         'fill-antialias': true,
       },
     },
-    'water'
+    before
   );
 
   onDestroy(() => {
-    $MAP.getLayer(gridLayerId) && $MAP.removeLayer(gridLayerId);
+    $MAP.getLayer(layerId) && $MAP.removeLayer(layerId);
     $MAP.getSource(sourceId) && $MAP.removeSource(sourceId);
   });
 </script>
