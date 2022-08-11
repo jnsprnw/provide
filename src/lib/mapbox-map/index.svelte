@@ -7,8 +7,9 @@
   import 'mapbox-gl/dist/mapbox-gl.css';
   import { getContext, setContext, onMount } from 'svelte';
   import { writable } from 'svelte/store';
+  import bbox from '@turf/bbox';
 
-  export let bounds;
+  export let fitShape;
   export let resize;
 
   const MAP = writable(null);
@@ -22,7 +23,6 @@
       accessToken: import.meta.env.VITE_MAPBOX_ACCESS_TOKEN,
       container: mapId,
       style: $theme.mapStyle,
-      bounds: bounds,
       attributionControl: false,
     });
 
@@ -38,11 +38,12 @@
   // Whenever the resize parameter changes, the map should be resized
   $: (resize || !resize) && $MAP && $MAP.resize();
 
-  // $: if (bounds) {
-  //   map?.fitBounds(bounds, {
-  //     padding: { left: 10, top: 100, right: 10, bottom: 10 },
-  //   });
-  // }
+  $: if (fitShape) {
+    const bounds = bbox(fitShape);
+    $MAP?.fitBounds(bounds, {
+      padding: { left: 10, top: 10, right: 10, bottom: 10 },
+    });
+  }
   instance++;
 </script>
 

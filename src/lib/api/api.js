@@ -7,10 +7,12 @@ import {
   END_DISTRIBUTION,
   END_UN_AVOIDABLE_RISK,
   END_IMPACT_GEO,
+  END_GEO_SHAPE,
 } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
 import { IMPACT_TIME_DISTRIBUTION_CACHE } from '$lib/../stores/impact-time-distribution.js';
 import { IMPACT_GEO_CACHE } from '$lib/../stores/impact-geo.js';
+import { GEO_SHAPE_CACHE } from '$lib/../stores/geo-shape.js';
 import { UN_AVOIDABLE_RISK_CACHE } from '$lib/../stores/un-avoidable-risk.js';
 import {
   CURRENT_GEOGRAPHY_UID,
@@ -101,6 +103,13 @@ export function handle(
       data = take(IMPACT_GEO_CACHE);
       store = IMPACT_GEO_CACHE;
       url = `${import.meta.env.VITE_DATA_API_URL}/impact-geo`;
+      break;
+    case END_GEO_SHAPE:
+      addr = [[geography]];
+      param = [{ geography }];
+      data = take(GEO_SHAPE_CACHE);
+      store = GEO_SHAPE_CACHE;
+      url = `${import.meta.env.VITE_DATA_API_URL}/geo-shape`;
       break;
     case END_UN_AVOIDABLE_RISK:
       addr = [[geography, indicator, ...optionsValues]];

@@ -2,6 +2,7 @@
   import MapboxMap from '$lib/mapbox-map/index.svelte';
   import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
   import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
+  import { GEO_SHAPE_DATA } from '$stores/geo-shape.js';
   import { max, min } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
@@ -9,7 +10,11 @@
   import Select from '$lib/helper/select/index.svelte';
   import Grid from '$lib/helper/Grid.svelte';
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
+  import Mask from '$lib/mapbox-map/Mask.svelte';
   $: data = $IMPACT_GEO_DATA;
+  $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
+
+  $: console.log(shape);
 
   $: loadedData = data
     .filter((d) => d.status === STATUS_SUCCESS)
@@ -25,8 +30,6 @@
     domain = [minVal, maxVal];
     return scaleLinear().domain(domain).range(range);
   })();
-
-  $: console.log($CURRENT_IMPACT_GEO_YEAR_UID);
 </script>
 
 <Grid class="maps" container>
@@ -39,10 +42,11 @@
 <Grid class="maps" container>
   {#each data as d}
     <Grid class="map-wrapper" md={12 / data.length}>
-      <MapboxMap resize={data.length}>
+      <MapboxMap fitShape={shape} resize={data.length}>
         {#if d.status === STATUS_SUCCESS}
           <RasterLayer {colorScale} {...d.data} />
         {/if}
+        <Mask feature={shape} />
       </MapboxMap>
     </Grid>
   {/each}
