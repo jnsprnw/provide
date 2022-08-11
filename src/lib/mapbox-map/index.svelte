@@ -35,15 +35,22 @@
     });
   });
 
-  // Whenever the resize parameter changes, the map should be resized
-  $: (resize || !resize) && $MAP && $MAP.resize();
-
-  $: if (fitShape) {
-    const bounds = bbox(fitShape);
-    $MAP?.fitBounds(bounds, {
-      padding: { left: 10, top: 10, right: 10, bottom: 10 },
-    });
+  function fitMap(fitShape) {
+    if (fitShape) {
+      const bounds = bbox(fitShape);
+      $MAP?.fitBounds(bounds, {
+        padding: { left: 10, top: 10, right: 10, bottom: 10 },
+      });
+    }
   }
+
+  // Whenever the resize parameter changes, the map should be resized
+  $: if ((resize || !resize) && $MAP) {
+    $MAP.resize();
+    fitMap(fitShape);
+  }
+
+  $: fitMap(fitShape);
   instance++;
 </script>
 
@@ -56,6 +63,6 @@
   .container {
     display: block;
     width: 100%;
-    height: 600px;
+    height: 100%;
   }
 </style>

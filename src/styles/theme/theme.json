@@ -8,9 +8,9 @@
         "weakest": "#cfd8dd"
       },
       "foreground": {
-        "base": "#222222",
-        "weaker": "#727272",
-        "weakest": "#b2b3b3"
+        "base": "#465f6d",
+        "weaker": "#aebec6",
+        "weakest": "#cfd8dd"
       },
       "text": {
         "weaker": "#59788a",

@@ -28,8 +28,6 @@
     domain = [minVal, maxVal];
     return scaleLinear().domain(domain).range(range);
   })();
-
-  $: console.log($CURRENT_IMPACT_GEO_YEAR_UID);
 </script>
 
 <Grid class="maps" container>
@@ -39,20 +37,42 @@
     label="Year"
   />
 </Grid>
-<Grid class="maps" container>
+<div class={`maps cols-${data.length}`}>
   {#each data as d}
-    <Grid class="map-wrapper" md={12 / data.length}>
+    <div class="map-wrapper" md={12 / data.length}>
       <MapboxMap fitShape={shape} resize={data.length}>
         <Mask feature={shape} layerId="mask-layer" />
         {#if d.status === STATUS_SUCCESS}
           <RasterLayer {colorScale} {...d.data} before="mask-layer" />
         {/if}
       </MapboxMap>
-    </Grid>
+    </div>
   {/each}
-</Grid>
+</div>
 
 <style lang="scss">
   .maps {
+    display: flex;
+
+    &.cols-1 .map-wrapper {
+      width: 100%;
+    }
+
+    &.cols-2 .map-wrapper {
+      width: 50%;
+    }
+
+    &.cols-3 .map-wrapper {
+      width: 33.333%;
+    }
+  }
+
+  .map-wrapper {
+    height: 600px;
+    border: 1px solid var(--color-foreground-weakest);
+
+    &:not(:last-child) {
+      border-right: none;
+    }
   }
 </style>

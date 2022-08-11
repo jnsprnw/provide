@@ -80,13 +80,13 @@
       },
       "foreground": {
         "base": {
-          "value": "#222222",
+          "value": "#465f6d",
           "type": "color",
           "description": "Used for elements in the foreground that have a strong contrast to the background.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#222222",
+            "value": "#465f6d",
             "type": "color",
             "description": "Used for elements in the foreground that have a strong contrast to the background."
           },
@@ -100,13 +100,13 @@
           ]
         },
         "weaker": {
-          "value": "#727272",
+          "value": "#aebec6",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes).",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#727272",
+            "value": "#aebec6",
             "type": "color",
             "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
           },
@@ -120,12 +120,12 @@
           ]
         },
         "weakest": {
-          "value": "#b2b3b3",
+          "value": "#cfd8dd",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#b2b3b3",
+            "value": "#cfd8dd",
             "type": "color"
           },
           "name": "weakest",
