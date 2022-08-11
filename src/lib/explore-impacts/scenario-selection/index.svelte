@@ -61,7 +61,7 @@
     </div>
     <div class="scenario-charts">
       <div class="scenario-chart">
-        <LineTimeSeries data={emissionsData} unit="integer" title="Global GHG emissions" />
+        <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
       </div>
       <div class="scenario-chart">
         <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
