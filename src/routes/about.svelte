@@ -1,25 +1,26 @@
 <script context="module">
   import { parse } from 'marked';
   import { loadFromStrapi } from './api/utils.js';
+  import { kebabCase } from "lodash-es";
 
   export const load = async ({ fetch }) => {
     const data = await loadFromStrapi('about', fetch);
-    const { Dashboard, Provide, ClimateAnalytics } = data.attributes;
+    const { Section } = data.attributes;
 
     return {
       props: {
-        dashboard: parse(Dashboard),
-        provide: parse(Provide),
-        climateAnalytics: parse(ClimateAnalytics),
+        sections: Section.map(section => ({
+          title: section.Title,
+          text: parse(section.Text || ''),
+          slug: kebabCase(section.Title)
+        }))
       }
     };
   }
 </script>
 
 <script>
-  export let dashboard;
-  export let provide;
-  export let climateAnalytics;
+  export let sections;
 </script>
 
 <svelte:head>
@@ -31,9 +32,9 @@
     <h1 class="title">About</h1>
     <nav>
       <ul class="nav-inpage">
-        <li><a href="#dashboard">About the dashboard</a></li>
-        <li><a href="#provide">About provide</a></li>
-        <li><a href="#climate-analytics">About Climate Analytics</a></li>
+        {#each sections as { slug, title }}
+        <li><a href={`#${slug}`}>{ title }</a></li>
+        {/each}
       </ul>
     </nav>
   </div>
@@ -41,26 +42,16 @@
 
 <div class="about-content content-content container">
   <div class="wrapper content-layout">
+    {#each sections as { slug, title, text }}
     <section>
       <header>
-        <h2 id="dashboard" class="headline-section">About the Dashboard</h2>
+        <h2 id={slug} class="headline-section">{ title }</h2>
       </header>
       <div class="text">
-        { @html dashboard }
+        { @html text }
       </div>
     </section>
-    <section>
-      <h2 id="provide" class="headline-section">About Provide</h2>
-      <div class="text">
-        { @html provide }
-      </div>
-    </section>
-    <section>
-      <h2 id="climate-analytics" class="headline-section">About Climate Analytics</h2>
-      <div class="text">
-        { @html climateAnalytics }
-      </div>
-    </section>
+    {/each}
   </div>
 </div>
 
