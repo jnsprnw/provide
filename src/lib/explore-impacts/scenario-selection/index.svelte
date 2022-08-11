@@ -1,4 +1,7 @@
 <script>
+  import Tabs from '$lib/helper/tabs/tabs.svelte';
+  import Tab from '$lib/helper/tabs/tab.svelte';
+  import TabContent from '$lib/helper/tabs/tab-content.svelte';
   import { partition, flatten } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
@@ -29,11 +32,21 @@
           ...scenario,
           highlight: renderedScenario?.uid === scenario.uid,
           color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
-          values: scenario[key],
+          values: scenario[key], // TODO: How is this working? should be child of scenarioData
         };
       });
     }
   );
+
+  $: warmingData = $SCENARIOS.map((scenario) => {
+      return {
+        label: scenario['label'],
+        highlight: renderedScenario?.uid === scenario.uid,
+        color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+        x: scenario.scenarioData['warming2050'].data,
+        y: scenario.scenarioData['warming2050-2100'].data
+      };
+    });
 </script>
 
 <div class="scenario-selection">
@@ -59,14 +72,25 @@
         <p>{renderedScenario.description || 'Description missing'}</p>
       {/if}
     </div>
-    <div class="scenario-charts">
-      <div class="scenario-chart">
-        <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
-      </div>
-      <div class="scenario-chart">
-        <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
-      </div>
-    </div>
+    <Tabs type="nav">
+      <Tab label="Overshoot vs warming" />
+      <Tab label="Trajectories" />
+      <svelte:fragment slot="content">
+        <TabContent>
+          <span>{ JSON.stringify(warmingData)}</span>
+        </TabContent>
+        <TabContent>
+          <div class="scenario-charts">
+            <div class="scenario-chart">
+              <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
+            </div>
+            <div class="scenario-chart">
+              <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
+            </div>
+          </div>
+        </TabContent>
+      </svelte:fragment>
+    </Tabs>
   </div>
 </div>
 
@@ -78,7 +102,7 @@
 
     .scenario-split {
       display: grid;
-      grid-template-rows: minmax(200px, auto) 1fr;
+      grid-template-rows: minmax(150px, auto) auto 1fr;
       grid-gap: var(--font-size-large-xs); // TODO
 
       .scenario-charts {
