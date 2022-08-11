@@ -86,6 +86,7 @@
         dx={dxTick}
         dy={dyTick}
         text-anchor={textAnchor(i)}
+        class="chart-tick"
       >
         {formatTick(tick)}
       </text>
@@ -98,10 +99,6 @@
 </g>
 
 <style lang="scss">
-  .tick {
-    font-size: var(--font-size-s);
-  }
-
   line,
   .tick line {
     //@include gridline();
@@ -111,13 +108,6 @@
     fill: none;
     stroke: var(--color-foreground-weaker);
     stroke-width: 1;
-  }
-
-  .tick text {
-    // text-anchor: middle;
-    alignment-baseline: middle;
-    font-size: var(--font-size-s);
-    fill: var(--color-text-weaker);
   }
 
   // .bg {
