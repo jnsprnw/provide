@@ -4,6 +4,7 @@ import { handle } from '$lib/api/api.js';
 import { loadFromAPI } from '$lib/../routes/api/utils.js';
 import qs from 'qs';
 import { browser } from '$app/env';
+import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from '$lib/../config.js';
 
 export const getUID = function (obj) {
   return obj?.uid || null;
@@ -53,9 +54,9 @@ function updateDate(old, addr, newData) {
 }
 
 export async function load(cache, endpoint, param, addr, url) {
-  cache.update((old) => updateDate(old, addr, { status: 'loading', data: {} }));
+  cache.update((old) => updateDate(old, addr, { status: STATUS_LOADING, data: {} }));
   const newData = await request(param, url);
   cache.update((old) =>
-    updateDate(old, addr, { status: 'success', data: newData })
+    updateDate(old, addr, { status: newData ? STATUS_SUCCESS : STATUS_FAILED, data: newData })
   );
 }

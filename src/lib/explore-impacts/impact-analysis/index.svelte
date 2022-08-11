@@ -3,13 +3,14 @@
   import ImpactGeo from './ImpactGeo.svelte';
   import ImpactTime from './ImpactTime.svelte';
   import { ALL_PARAMETERS_SELECTED } from '$lib/../stores/store.js';
+  import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from "$lib/../config.js";
 </script>
 
 <!-- <p>{$CURRENT_INDICATOR_UID}</p> -->
 
 <!-- <h2>Impact Time</h2>
 {#each $IMPACT_TIME_DATA as scenario}
-  {#if get(scenario, 'status') === 'success'}
+  {#if get(scenario, 'status') === STATUS_SUCCESS}
     <p>
       Status: {get(scenario, 'status')}<br />
       Data sample: {JSON.stringify(

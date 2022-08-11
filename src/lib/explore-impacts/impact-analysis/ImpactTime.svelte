@@ -16,6 +16,7 @@
   import ResolutionTime from './helper/ResolutionTime.svelte';
   import TitleTimeSeries from './helper/TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './helper/DescriptionTimeSeries.svelte';
+  import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from "$lib/../config.js";
 
   $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;
 
@@ -39,7 +40,7 @@
   })();
 
   $: impactTimeData = $IMPACT_TIME_DATA
-    .filter((d) => d.status === 'success')
+    .filter((d) => d.status === STATUS_SUCCESS)
     .map((datum, i) => {
       const { yearStart, yearStep, data } = datum.data || {}; // Why is datum.data undefined on server here?
       const indicatorData = data ? data[$CURRENT_INDICATOR_UID] : [];
@@ -59,7 +60,7 @@
 <Grid container>
   <Grid md="8">
     {#if hasSingleScenario}
-      {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === 'success'}
+      {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === STATUS_SUCCESS}
         <div class="impact-time-chart">
           <LineDistributionChart
             {...distributionData}
