@@ -9,45 +9,47 @@
   } from '$lib/../stores/store.js';
   import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
   import { handle } from '$lib/api/api.js';
-  import { END_IMPACT_TIME } from '$lib/../config.js';
+  import { END_IMPACT_TIME, STATUS_SUCCESS } from '$lib/../config.js';
   import PreviewTimeSeries from '$lib/charts/PreviewTimeSeries.svelte';
 
   export let indicators = [];
 
-  $: indicatorData = indicators.map((indicator) => {
-    const scenarios = handle(
-      END_IMPACT_TIME,
-      'get',
-      {
-        geography: $CURRENT_GEOGRAPHY_UID,
-        scenarios: $CURRENT_SCENARIOS_UID,
-        indicator: indicator.uid,
-      },
-      $IMPACT_TIME_CACHE
-    ).map((response, i) => {
-      const { data, status } = response;
-      const scenario = $CURRENT_SCENARIOS[i];
-      if (status === 'success' && data) {
-        return {
-          ...scenario,
-          values: data.data[indicator.uid].map((values, i) => {
-            return {
-              year: data.yearStart + data.yearStep * i,
-              min: values[0],
-              value: values[1],
-              max: values[2],
-            };
-          }),
-        };
-      } else {
-        return { ...scenario, values: [] };
-      }
-    });
-    return {
-      ...indicator,
-      scenarios,
-    };
-  });
+  $: indicatorData = indicators
+    .map((indicator) => {
+      const scenarios = handle(
+        END_IMPACT_TIME,
+        'get',
+        {
+          geography: $CURRENT_GEOGRAPHY_UID,
+          scenarios: $CURRENT_SCENARIOS_UID,
+          indicator: indicator.uid,
+        },
+        $IMPACT_TIME_CACHE
+      )
+        .filter(({ status }) => status === STATUS_SUCCESS)
+        .map((response, i) => {
+          const { data } = response;
+          const scenario = $CURRENT_SCENARIOS[i];
+
+          return {
+            ...scenario,
+            values: data.data[indicator.uid].map((values, i) => {
+              return {
+                year: data.yearStart + data.yearStep * i,
+                min: values[0],
+                value: values[1],
+                max: values[2],
+              };
+            }),
+          };
+        });
+
+      return {
+        ...indicator,
+        scenarios,
+      };
+    })
+    .filter((d) => d.scenarios.length);
 </script>
 
 <div class="indicator-selection">

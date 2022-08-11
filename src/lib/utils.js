@@ -1,10 +1,12 @@
-import { format } from 'd3-format';
 import { has, set, compact } from 'lodash-es';
-import { handle } from '$lib/api/api.js';
 import { loadFromAPI } from '$lib/../routes/api/utils.js';
 import qs from 'qs';
 import { browser } from '$app/env';
-import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from '$lib/../config.js';
+import {
+  STATUS_LOADING,
+  STATUS_SUCCESS,
+  STATUS_FAILED,
+} from '$lib/../config.js';
 
 export const getUID = function (obj) {
   return obj?.uid || null;
@@ -31,7 +33,6 @@ export const formatObjArr = function (arr, key) {
 };
 
 async function request(params, url) {
-  if (!browser) return undefined;
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
   });
@@ -54,9 +55,21 @@ function updateDate(old, addr, newData) {
 }
 
 export async function load(cache, endpoint, param, addr, url) {
-  cache.update((old) => updateDate(old, addr, { status: STATUS_LOADING, data: {} }));
+  if (!browser) {
+    cache.update((old) =>
+      updateDate(old, addr, { status: STATUS_LOADING, data: {} })
+    );
+    return;
+  }
+
+  cache.update((old) =>
+    updateDate(old, addr, { status: STATUS_LOADING, data: {} })
+  );
   const newData = await request(param, url);
   cache.update((old) =>
-    updateDate(old, addr, { status: newData ? STATUS_SUCCESS : STATUS_FAILED, data: newData })
+    updateDate(old, addr, {
+      status: newData ? STATUS_SUCCESS : STATUS_FAILED,
+      data: newData,
+    })
   );
 }

@@ -19,6 +19,6 @@ export const IMPACT_GEO_DATA = derived(
   async ([], set) => {
     // We don’t need any parameter, but instead just the reactivity of the other stores.
     // This endpoint only has one dimension so we take the first item.
-    set(handle(END_IMPACT_GEO, 'get')[0]);
+    set(handle(END_IMPACT_GEO, 'get'));
   }
 );

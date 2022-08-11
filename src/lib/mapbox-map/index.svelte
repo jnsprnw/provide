@@ -9,6 +9,7 @@
   import { writable } from 'svelte/store';
 
   export let bounds;
+  export let resize;
 
   const MAP = writable(null);
 
@@ -33,6 +34,9 @@
       console.log('A webglcontextlost event occurred.');
     });
   });
+
+  // Whenever the resize parameter changes, the map should be resized
+  $: (resize || !resize) && $MAP && $MAP.resize();
 
   // $: if (bounds) {
   //   map?.fitBounds(bounds, {
