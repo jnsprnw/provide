@@ -65,6 +65,12 @@ i.emoji {
   }
 }
 
+.chart-tick {
+  font-style: normal;
+  font-size: var(--font-size-large-s);
+  fill: var(--color-text-weaker);
+}
+
 
 .content-header {
   .title {

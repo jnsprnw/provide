@@ -52,6 +52,6 @@
 
 <ul>
   {#each data as datum}
-  <li><a href={datum.url}>How will <strong>{datum.indicator.label}</strong> in <strong>{datum.geography.label}</strong> develop under a <strong>{datum.scenario.label}</strong>?</a></li>
+  <li><a href={datum.url}>How will <strong>{datum.indicator.label}</strong> in <strong>{datum.geography.label}</strong> develop under a <strong>{datum.scenario.label}</strong> scenario?</a></li>
   {/each}
 </ul>

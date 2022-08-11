@@ -59,6 +59,7 @@
         y={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
         dx={isBandwidth ? -5 : dxTick}
         dy={isBandwidth ? 0 : dyTick}
+        class="chart-tick"
         style="
           text-anchor:{isBandwidth ? 'end' : textAnchor};
         "
@@ -73,19 +74,8 @@
 </g>
 
 <style lang="scss">
-  .tick {
-    font-size: var(--font-size-s);
-  }
-
   .tick line {
     //@include gridline();
-  }
-
-  .tick text {
-    text-anchor: middle;
-    alignment-baseline: middle;
-    font-size: var(--font-size-s);
-    fill: var(--color-text-weaker);
   }
 
   .tick.tick-0 line {

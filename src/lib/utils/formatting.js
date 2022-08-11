@@ -3,6 +3,7 @@ import { formatDefaultLocale, formatLocale } from "d3-format";
 export const NA_STRING = "—";
 export const FORMAT_CURRENCY = "$,.0f";
 export const FORMAT_INTEGER = ",.0f";
+export const FORMAT_TON = ".0s";
 export const FORMAT_FLOAT = ",.1f";
 export const FORMAT_YEAR = ".0f";
 export const FORMAT_CELSIUS = ".0f";
@@ -27,6 +28,8 @@ const indicatorFormats = {
   percent: f(FORMAT_PERCENT),
   year: f(FORMAT_YEAR),
   celsius: f(FORMAT_CELSIUS),
+  'degrees-celsius': f(FORMAT_CELSIUS), // Do we want to have degrees twice?
+  ton: f(FORMAT_TON),
 
   // format for anything else
   default: f(FORMAT_INTEGER),
@@ -34,6 +37,7 @@ const indicatorFormats = {
 
 const suffixes = {
   celsius: ' °C',
+  'degrees-celsius': ' °C', // Do we want to have degrees twice?
   gty: ' Gt/y'
 }
 

@@ -32,10 +32,12 @@
   );
 </script>
 
-<div class="figure-container">
+<div class="figure-container" class:hasTitle={title}>
+  {#if title}
   <header>
     <h5 class="title-chart title-chart--title">{title}</h5> <small class="title-chart title-chart--small">in {unit}</small>
   </header>
+  {/if}
   <div class="chart-container">
     <LayerCake
       {padding}
@@ -64,13 +66,15 @@
   }
 
   .figure-container {
-    display: grid;
-    grid-template-rows: auto 1fr;
-    gap: var(--size-spacer-large-s);
+    &.hasTitle {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: var(--size-spacer-large-s);
 
-    header {
-      & > * {
-        display: inline-block
+      header {
+        & > * {
+          display: inline-block
+        }
       }
     }
   }
