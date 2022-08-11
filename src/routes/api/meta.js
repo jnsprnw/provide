@@ -7,8 +7,6 @@ export async function get() {
   const meta = await loadFromAPI(`${import.meta.env.VITE_DATA_API_URL}/meta/`, '', fetch);
   return {
     body: {
-      descriptionIndicators,
-      descriptionScenarios,
       ...meta,
       indicators: meta.indicators.map((indicator) => {
         const description = take(descriptionIndicators.find(d => d.attributes.UID === indicator.uid), ['attributes', 'Description'])
