@@ -4,6 +4,7 @@
   import Tab from '$lib/helper/tabs/tab.svelte';
   import TabContent from '$lib/helper/tabs/tab-content.svelte';
   import Indicators from './indicators.svelte';
+  import IndicatorParameters from './IndicatorParameters.svelte';
 
   $: sectors = $SECTORS.map((sector) => {
     const indicators = $AVAILABLE_INDICATORS.filter(
@@ -32,6 +33,7 @@
     </svelte:fragment>
   </Tabs>
 </div>
+<div><IndicatorParameters /></div>
 
 <style lang="scss">
   @import '../../../styles/global.scss';

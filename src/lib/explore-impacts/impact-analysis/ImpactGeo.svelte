@@ -5,8 +5,10 @@
   import { max, min } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
-  import { STATUS_SUCCESS } from '$lib/../config.js';
+  import { IMPACT_GEO_YEARS, STATUS_SUCCESS } from '$lib/../config.js';
+  import Select from '$lib/helper/select/index.svelte';
   import Grid from '$lib/helper/Grid.svelte';
+  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
   $: data = $IMPACT_GEO_DATA;
 
   $: loadedData = data
@@ -23,8 +25,17 @@
     domain = [minVal, maxVal];
     return scaleLinear().domain(domain).range(range);
   })();
+
+  $: console.log($CURRENT_IMPACT_GEO_YEAR_UID);
 </script>
 
+<Grid class="maps" container>
+  <Select
+    options={IMPACT_GEO_YEARS}
+    bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
+    label="Year"
+  />
+</Grid>
 <Grid class="maps" container>
   {#each data as d}
     <Grid class="map-wrapper" md={12 / data.length}>

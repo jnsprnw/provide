@@ -43,12 +43,16 @@ export const SCENARIOS = (() => {
       const scenarios = scenariosRaw.map((scenarioRaw) => {
         const scenario = { ...scenarioRaw };
         SCENARIO_DATA_KEYS.forEach((key) => {
-          const { data, yearStart, yearStep } = get(scenarioRaw, ['scenarioData', key], {});
+          const { data, yearStart, yearStep } = get(
+            scenarioRaw,
+            ['scenarioData', key],
+            {}
+          );
           if (data && yearStart && yearStep) {
-          	scenario[key] = data.map((value, i) => ({
-	            value,
-	            year: yearStart + yearStep * i,
-	          }));
+            scenario[key] = data.map((value, i) => ({
+              value,
+              year: yearStart + yearStep * i,
+            }));
           }
         });
         return scenario;
@@ -115,6 +119,8 @@ export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
   );
   set(geography);
 });
+
+export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
 
 /* SCENARIO STATE */
 export const CURRENT_SCENARIOS_UID = writable(['sp']); // Currently selected scenarios (not hovered1)

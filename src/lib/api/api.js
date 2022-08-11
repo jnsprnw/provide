@@ -18,7 +18,6 @@ import {
   CURRENT_INDICATOR_UID,
   CURRENT_INDICATOR_OPTIONS,
   CURRENT_INDICATOR_PARAMETERS_KEYS,
-  INDICATORS,
 } from '$lib/../stores/store.js';
 
 function returnDefault(callback) {
@@ -122,7 +121,7 @@ export function handle(
       missing.forEach(({ addr, param }) => {
         // We load each missing data point. In our case, a list of scenarios with other parameters
         load(store, endpoint, param, addr, url);
-      })
+      });
       // We could also just return the array and let the component extract the first (and only) value
       return addr.map((a) => get(data, a));
       // const values = addr.map(a => get(data, a));

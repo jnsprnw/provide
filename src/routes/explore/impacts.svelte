@@ -11,7 +11,6 @@
   import GeographySelection from '$lib/explore-impacts/geography-selection/index.svelte';
   import ScenarioSelection from '$lib/explore-impacts/scenario-selection/index.svelte';
   import IndicatorSelection from '$lib/explore-impacts/indicator-selection/index.svelte';
-  import SelectionOptions from '$lib/explore-impacts/indicator-parameters/index.svelte';
 
   import {
     CURRENT_GEOGRAPHY,
@@ -75,29 +74,26 @@
 <div class="impacts-analysis container">
   <div class="wrapper">
     <SelectionMessage />
-    <SelectionOptions />
-    {#if true || ($CURRENT_GEOGRAPHY !== null && $CURRENT_SCENARIOS !== [] && $CURRENT_INDICATOR !== null)}
-      <Tabs type="nav">
-        <Tab label="Impact analysis" />
-        <Tab label="(Un)avoidable risk" />
-        <Tab label="Mitigation benefits" />
-        <Tab label="Reversibility" />
-        <svelte:fragment slot="content">
-          <TabContent>
-            <ImpactAnalysis />
-          </TabContent>
-          <TabContent>
-            <UnAvoidableRisk />
-          </TabContent>
-          <TabContent>
-            <MitigationBenefits />
-          </TabContent>
-          <TabContent>
-            <Reversibility />
-          </TabContent>
-        </svelte:fragment>
-      </Tabs>
-    {/if}
+    <Tabs type="nav">
+      <Tab label="Impact analysis" />
+      <Tab label="(Un)avoidable risk" />
+      <Tab label="Mitigation benefits" />
+      <Tab label="Reversibility" />
+      <svelte:fragment slot="content">
+        <TabContent>
+          <ImpactAnalysis />
+        </TabContent>
+        <TabContent>
+          <UnAvoidableRisk />
+        </TabContent>
+        <TabContent>
+          <MitigationBenefits />
+        </TabContent>
+        <TabContent>
+          <Reversibility />
+        </TabContent>
+      </svelte:fragment>
+    </Tabs>
   </div>
 </div>
 
