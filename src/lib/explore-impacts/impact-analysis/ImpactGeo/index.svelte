@@ -14,13 +14,13 @@
   let displayOption = 'side-by-side';
   $: data = $IMPACT_GEO_DATA;
 
+  // So we don't have to check in every step whether data is loaded
+  $: loadedData = data.filter((d) => d.status === STATUS_SUCCESS);
+
   $: isDoubleMap = loadedData.length === 2;
   $: showDifference = displayOption === 'difference' && isDoubleMap;
 
   $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
-
-  // So we don't have to check in every step whether data is loaded
-  $: loadedData = data.filter((d) => d.status === STATUS_SUCCESS);
 
   function calculateDifference(grids) {
     const [grid1, grid2] = grids;
@@ -54,7 +54,7 @@
   })();
 </script>
 
-<Header bind:displayOption data={renderedData} />
+<Header bind:displayOption {showDifference} {data} />
 <div class={`maps cols-${renderedData.length}`}>
   {#each renderedData as d}
     <div class="map-wrapper">

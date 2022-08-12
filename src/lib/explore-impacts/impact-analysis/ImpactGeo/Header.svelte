@@ -15,7 +15,7 @@
   } from '$lib/../config.js';
 
   export let displayOption;
-  export let data;
+  export let showDifference;
 </script>
 
 <div class="container">
@@ -24,13 +24,21 @@
       <h2>
         Change in {$CURRENT_INDICATOR.label} in {$CURRENT_GEOGRAPHY.label} in {$CURRENT_IMPACT_GEO_YEAR_UID}
       </h2>
-      {#if data.length > 1}
+      {#if showDifference}
+        <p>
+          This map compares the change in {$CURRENT_INDICATOR.label} (expressed in
+          degrees {$CURRENT_INDICATOR.unit.labelLong}) in {$CURRENT_GEOGRAPHY.label}
+          in {$CURRENT_IMPACT_GEO_YEAR_UID} between a {$CURRENT_SCENARIOS[0]
+            .label} and a {$CURRENT_SCENARIOS[1].label} scenario. The reference period
+          is {$CURRENT_INDICATOR_OPTIONS.reference.label}.
+        </p>
+      {:else if $CURRENT_SCENARIOS.length > 1}
         <p>
           These maps show the change in {$CURRENT_INDICATOR.label} (expressed in
           degrees {$CURRENT_INDICATOR.unit.labelLong}) in {$CURRENT_GEOGRAPHY.label}
-          in {$CURRENT_IMPACT_GEO_YEAR_UID} under {data.length} different scenarios
-          compared to the reference period {$CURRENT_INDICATOR_OPTIONS.reference
-            .label}.
+          in {$CURRENT_IMPACT_GEO_YEAR_UID} under {$CURRENT_SCENARIOS.length} different
+          scenarios compared to the reference period {$CURRENT_INDICATOR_OPTIONS
+            .reference.label}.
         </p>
       {:else}
         <p>
@@ -43,7 +51,7 @@
       {/if}
     </div>
     <div class="controls">
-      {#if data.length === 2}
+      {#if $CURRENT_SCENARIOS.length === 2}
         <div class="control">
           <SegmentedControl
             options={IMPACT_GEO_DISPLAY_OPTIONS}
