@@ -24,3 +24,14 @@ export const IMPACT_GEO_YEARS = [
     label: '2100',
   },
 ];
+
+export const IMPACT_GEO_DISPLAY_OPTIONS = [
+  {
+    label: 'Difference',
+    value: 'difference',
+  },
+  {
+    label: 'Side by side',
+    value: 'side-by-side',
+  },
+];

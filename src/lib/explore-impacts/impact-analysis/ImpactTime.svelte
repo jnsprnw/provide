@@ -16,7 +16,7 @@
   import ResolutionTime from './helper/ResolutionTime.svelte';
   import TitleTimeSeries from './helper/TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './helper/DescriptionTimeSeries.svelte';
-  import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from "$lib/../config.js";
+  import { STATUS_SUCCESS } from '$lib/../config.js';
 
   $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;
 

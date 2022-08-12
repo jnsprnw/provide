@@ -11,24 +11,15 @@
 
   const dispatch = createEventDispatcher();
 
-  function handleChange() {
-    dispatch('change', { key: uid, value });
-  }
+  // function handleChange() {
+  //   dispatch('change', { key: uid, value });
+  // }
 
   $: selectId = uid || `select-${instance}`;
 
   instance++;
-  $: console.log(value, options);
 </script>
 
-<!--     <SegmentedControl
-      label="Show"
-      options={[
-        { label: 'Difference', value: 'difference' },
-        { label: 'Side by side', value: 'side-by-side' },
-      ]}
-      bind:value={view}
-    /> -->
 <div class="root">
   <legend class="control-label" for={selectId}>{label}</legend>
   <fieldset role="radiogroup" class="segments" id={selectId}>
@@ -41,7 +32,6 @@
           id={option.uid || option.value}
           value={option.uid || option.value}
           bind:group={value}
-          on:change={() => console.log('changed')}
         />
         <label class="segment-label" for={option.uid || option.value}
           >{option.label}</label

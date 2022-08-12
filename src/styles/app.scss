@@ -4,9 +4,11 @@
 @import "./fonts";
 @import "./accordion";
 
-@import "./includes/fluid_type";
+@import "./theme/theme.scss";
 @import "./theme/theme_css_vars";
 @import "./sass_vars_and_mixins.scss";
+//@import "./includes/fluid_type";
+
 
 body {
 	min-height: 100vh;
