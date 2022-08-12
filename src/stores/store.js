@@ -93,6 +93,10 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
 );
 
 export const INDICATOR_PARAMETERS = writable([]);
+export const DICTIONARY_INDICATOR_PARAMETERS = derived(
+  INDICATOR_PARAMETERS,
+  ($parameters) => keyBy($parameters, 'uid')
+);
 
 /* GEOGRAPHY STATE */
 export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
@@ -189,7 +193,7 @@ export const CURRENT_INDICATOR_PARAMETERS = derived(
       {}
     );
     // Updating the current option selection with the default values, in case they were not present for the previous indicator
-    CURRENT_INDICATOR_OPTIONS.update((old) => ({
+    CURRENT_INDICATOR_OPTION_VALUES.update((old) => ({
       ...defaultValues,
       ...old,
     }));
@@ -198,7 +202,23 @@ export const CURRENT_INDICATOR_PARAMETERS = derived(
 );
 
 // Key value store of currently selected parameters
-export const CURRENT_INDICATOR_OPTIONS = writable({});
+export const CURRENT_INDICATOR_OPTION_VALUES = writable({});
+
+// Key value store of full parameter objects
+export const CURRENT_INDICATOR_OPTIONS = derived(
+  [CURRENT_INDICATOR_OPTION_VALUES, DICTIONARY_INDICATOR_PARAMETERS],
+  ([$currentOptions, $parameters]) =>
+    reduce(
+      $currentOptions,
+      (acc, value, key) => {
+        acc[key] = $parameters[key].options.find(
+          (option) => option.value === value
+        );
+        return acc;
+      },
+      {}
+    )
+);
 
 // Utility for quicker access to list of indicator parameters
 export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(

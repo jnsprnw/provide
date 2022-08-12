@@ -3,12 +3,12 @@
   import { get, compact } from 'lodash-es';
   import {
     CURRENT_INDICATOR_PARAMETERS,
-    CURRENT_INDICATOR_OPTIONS,
+    CURRENT_INDICATOR_OPTION_VALUES,
   } from '$lib/../stores/store.js';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
     .map((parameter) => {
-      let value = get($CURRENT_INDICATOR_OPTIONS, parameter.uid);
+      let value = get($CURRENT_INDICATOR_OPTION_VALUES, parameter.uid);
       return {
         ...parameter,
         value,
@@ -17,7 +17,7 @@
     .filter((d) => d.options.length > 1);
 
   function handleChange({ detail: { key, value } }) {
-    CURRENT_INDICATOR_OPTIONS.update((old) => ({
+    CURRENT_INDICATOR_OPTION_VALUES.update((old) => ({
       ...old,
       [key]: value,
     }));

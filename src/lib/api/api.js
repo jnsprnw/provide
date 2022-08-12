@@ -18,7 +18,7 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
-  CURRENT_INDICATOR_OPTIONS,
+  CURRENT_INDICATOR_OPTION_VALUES,
   CURRENT_INDICATOR_PARAMETERS_KEYS,
   CURRENT_IMPACT_GEO_YEAR_UID,
 } from '$lib/../stores/store.js';
@@ -62,7 +62,7 @@ export function handle(
         ...result,
         [key]:
           get(params, ['options', key]) ||
-          get(take(CURRENT_INDICATOR_OPTIONS), [key]),
+          get(take(CURRENT_INDICATOR_OPTION_VALUES), [key]),
       };
     },
     {}

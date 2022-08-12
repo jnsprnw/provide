@@ -13,9 +13,9 @@
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
-  import ResolutionTime from './helper/ResolutionTime.svelte';
-  import TitleTimeSeries from './helper/TitleTimeSeries.svelte';
-  import DescriptionTimeSeries from './helper/DescriptionTimeSeries.svelte';
+  import ResolutionTime from './ResolutionTime.svelte';
+  import TitleTimeSeries from './TitleTimeSeries.svelte';
+  import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
   import { STATUS_SUCCESS } from '$lib/../config.js';
 
   $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;

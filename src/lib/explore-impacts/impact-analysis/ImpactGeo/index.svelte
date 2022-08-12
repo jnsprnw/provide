@@ -1,20 +1,14 @@
 <script>
   import MapboxMap from '$lib/mapbox-map/index.svelte';
   import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
+  import Header from './Header.svelte';
   import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
   import { GEO_SHAPE_DATA } from '$stores/geo-shape.js';
-  import { extent, max, min } from 'd3-array';
+  import { extent } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
-  import {
-    IMPACT_GEO_YEARS,
-    IMPACT_GEO_DISPLAY_OPTIONS,
-    STATUS_SUCCESS,
-  } from '$lib/../config.js';
-  import Select from '$lib/helper/select/index.svelte';
-  import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
-  import Grid from '$lib/helper/Grid.svelte';
-  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
+  import { STATUS_SUCCESS } from '$lib/../config.js';
+
   import Mask from '$lib/mapbox-map/Mask.svelte';
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
@@ -60,31 +54,7 @@
   })();
 </script>
 
-<div class="container">
-  <div class="wrapper grid header">
-    <div class="info">
-      <h2>Title</h2>
-      <p>Description</p>
-    </div>
-    <div class="controls">
-      {#if isDoubleMap}
-        <div class="control">
-          <SegmentedControl
-            options={IMPACT_GEO_DISPLAY_OPTIONS}
-            bind:value={displayOption}
-          />
-        </div>
-      {/if}
-      <div class="control">
-        <Select
-          options={IMPACT_GEO_YEARS}
-          bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
-          label="Year"
-        />
-      </div>
-    </div>
-  </div>
-</div>
+<Header bind:displayOption data={renderedData} />
 <div class={`maps cols-${renderedData.length}`}>
   {#each renderedData as d}
     <div class="map-wrapper">
@@ -99,25 +69,6 @@
 </div>
 
 <style lang="scss">
-  .header {
-    margin-bottom: var(--space-s);
-    align-items: end;
-  }
-
-  .info {
-    grid-column: 1 / span 6;
-  }
-
-  .controls {
-    display: flex;
-    justify-content: flex-end;
-    grid-column: -1 / -4;
-  }
-
-  .control {
-    margin-left: var(--space-m);
-  }
-
   .maps {
     display: flex;
 

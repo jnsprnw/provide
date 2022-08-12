@@ -5,7 +5,7 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
   CURRENT_INDICATOR_UID,
-  CURRENT_INDICATOR_OPTIONS,
+  CURRENT_INDICATOR_OPTION_VALUES,
 } from './store.js';
 
 export const IMPACT_TIME_DISTRIBUTION_CACHE = writable({});
@@ -16,7 +16,7 @@ export const IMPACT_TIME_DISTRIBUTION_DATA = derived(
     CURRENT_GEOGRAPHY_UID,
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
-    CURRENT_INDICATOR_OPTIONS,
+    CURRENT_INDICATOR_OPTION_VALUES,
   ],
   async (stores, set) => {
     set(handle(END_DISTRIBUTION, 'get')[0]); // This endpoint only has one dimension.
