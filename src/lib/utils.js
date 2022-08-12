@@ -1,4 +1,4 @@
-import { has, set, compact } from 'lodash-es';
+import { has, get, set, compact } from 'lodash-es';
 import { loadFromAPI } from '$lib/../routes/api/utils.js';
 import qs from 'qs';
 import { browser } from '$app/env';
@@ -42,9 +42,7 @@ async function request(params, url) {
 
 export function hasInObject(data, addr, param) {
   return compact(
-    addr.map((a, i) => {
-      return has(data, a) ? false : { addr: a, param: param[i] };
-    })
+    addr.map((a, i) => (get(data, a) ? false : { addr: a, param: param[i] }))
   );
 }
 

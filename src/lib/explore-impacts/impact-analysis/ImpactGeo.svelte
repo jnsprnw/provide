@@ -16,7 +16,6 @@
   import Grid from '$lib/helper/Grid.svelte';
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
   import Mask from '$lib/mapbox-map/Mask.svelte';
-  import { value } from 'lodash-es';
   const theme = getContext('theme');
   let displayOption = 'difference';
   $: data = $IMPACT_GEO_DATA;
