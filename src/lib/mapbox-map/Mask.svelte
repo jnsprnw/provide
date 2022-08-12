@@ -2,7 +2,9 @@
   import difference from '@turf/difference';
   import { getContext, onDestroy } from 'svelte';
 
-  export let feature = {
+  export let feature;
+
+  $: maskFeature = feature || {
     type: 'Feature',
     geometry: { coordinates: [], type: 'Polygon' },
   };
@@ -25,7 +27,8 @@
       ],
     },
   };
-  $: mask = difference(worldRect, feature);
+
+  $: mask = difference(worldRect, maskFeature);
 
   const { MAP } = getContext('map');
 

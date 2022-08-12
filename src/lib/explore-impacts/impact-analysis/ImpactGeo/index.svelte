@@ -59,9 +59,9 @@
   {#each renderedData as d}
     <div class="map-wrapper">
       <MapboxMap fitShape={shape} resize={renderedData.length}>
-        <Mask feature={shape} layerId="mask-layer" />
+        <!-- <Mask feature={shape} layerId="mask-layer" /> -->
         {#if d.status === STATUS_SUCCESS}
-          <RasterLayer {colorScale} {...d.data} before="mask-layer" />
+          <RasterLayer {colorScale} {...d.data} before="water" />
         {/if}
       </MapboxMap>
     </div>
