@@ -21,14 +21,15 @@
 </script>
 
 <div class="root">
-  <legend class="control-label" for={selectId}>{label}</legend>
+  {#if label}
+    <legend class="control-label" for={selectId}>{label}</legend>
+  {/if}
   <fieldset role="radiogroup" class="segments" id={selectId}>
     {#each options as option}
       <div class="segment">
         <input
           type="radio"
           class="segment-button"
-          class:is-checked={value === option.value}
           id={option.uid || option.value}
           value={option.uid || option.value}
           bind:group={value}
@@ -46,15 +47,25 @@
 
   .root {
     display: flex;
+    font-size: var(--font-size-s);
   }
   .control-label {
     display: inline;
+    margin-right: var(--space-xs);
+    color: var(--color-text-weaker);
   }
   .segments {
     display: flex;
   }
   .segment {
     cursor: pointer;
+
+    &:first-child .segment-label {
+      padding-left: 0;
+    }
+    &:last-child .segment-label {
+      padding-right: 0;
+    }
   }
   .segment-button {
     @include visually-hidden();
@@ -62,7 +73,7 @@
     &:checked {
       & + .segment-label {
         font-weight: var(--font-font-weight-bold);
-        box-shadow: inset 0 -3px 0 var(--color-functional-accent);
+        box-shadow: inset 0 -2px 0 var(--color-functional-accent);
       }
     }
 
@@ -71,9 +82,8 @@
     }
   }
   .segment-label {
-    font-size: var(--font-size-s);
     color: var(--color-text-base);
-    padding: 0.4em;
-    box-shadow: inset 0 -1px 0 var(--color-foreground-weakest);
+    padding: 0.4em 0.3em;
+    box-shadow: inset 0 -2px 0 var(--color-foreground-weakest);
   }
 </style>

@@ -17,7 +17,7 @@
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
   import Mask from '$lib/mapbox-map/Mask.svelte';
   const theme = getContext('theme');
-  let displayOption = 'difference';
+  let displayOption = 'side-by-side';
   $: data = $IMPACT_GEO_DATA;
 
   $: isDoubleMap = loadedData.length === 2;
@@ -60,21 +60,30 @@
   })();
 </script>
 
-<div class="header">
-  <Grid class="maps" container>
-    <Select
-      options={IMPACT_GEO_YEARS}
-      bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
-      label="Year"
-    />
-    {#if isDoubleMap}
-      <SegmentedControl
-        options={IMPACT_GEO_DISPLAY_OPTIONS}
-        bind:value={displayOption}
-        label="Show"
-      />
-    {/if}
-  </Grid>
+<div class="container">
+  <div class="wrapper grid header">
+    <div class="info">
+      <h2>Title</h2>
+      <p>Description</p>
+    </div>
+    <div class="controls">
+      {#if isDoubleMap}
+        <div class="control">
+          <SegmentedControl
+            options={IMPACT_GEO_DISPLAY_OPTIONS}
+            bind:value={displayOption}
+          />
+        </div>
+      {/if}
+      <div class="control">
+        <Select
+          options={IMPACT_GEO_YEARS}
+          bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
+          label="Year"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 <div class={`maps cols-${renderedData.length}`}>
   {#each renderedData as d}
@@ -92,7 +101,23 @@
 <style lang="scss">
   .header {
     margin-bottom: var(--space-s);
+    align-items: end;
   }
+
+  .info {
+    grid-column: 1 / span 6;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: -1 / -4;
+  }
+
+  .control {
+    margin-left: var(--space-m);
+  }
+
   .maps {
     display: flex;
 
