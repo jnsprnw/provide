@@ -8,6 +8,7 @@
   import { getContext } from 'svelte';
   import { IMPACT_GEO_YEARS, STATUS_SUCCESS } from '$lib/../config.js';
   import Select from '$lib/helper/select/index.svelte';
+  import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import Grid from '$lib/helper/Grid.svelte';
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
   import Mask from '$lib/mapbox-map/Mask.svelte';
@@ -28,6 +29,19 @@
     domain = [minVal, maxVal];
     return scaleLinear().domain(domain).range(range);
   })();
+
+  $: displayOptions = [
+    {
+      label: 'Difference',
+      value: 'difference',
+    },
+    {
+      label: 'Side by side',
+      value: 'side-by-side',
+    },
+  ];
+
+  $: displayOption = 'difference';
 </script>
 
 <Grid class="maps" container>
@@ -35,6 +49,11 @@
     options={IMPACT_GEO_YEARS}
     bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
     label="Year"
+  />
+  <SegmentedControl
+    options={displayOptions}
+    bind:value={displayOption}
+    label="Show"
   />
 </Grid>
 <div class={`maps cols-${data.length}`}>
