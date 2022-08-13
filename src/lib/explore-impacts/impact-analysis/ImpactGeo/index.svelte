@@ -9,65 +9,83 @@
   import { getContext } from 'svelte';
   import { STATUS_SUCCESS } from '$lib/../config.js';
   import Mask from '$lib/mapbox-map/Mask.svelte';
+  import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
+  import { isEmpty } from 'lodash-es';
+  import Spinner from '$lib/helper/Spinner.svelte';
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
+  $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
+
   $: data = $IMPACT_GEO_DATA;
-
-  // So we don't have to check in every step whether data is loaded
-  $: loadedData = data.filter((d) => d.status === STATUS_SUCCESS);
-  $: allDataLoaded = loadedData.length === data.length;
-
   $: isDoubleMap = data.length === 2;
   $: showDifference = displayOption === 'difference' && isDoubleMap;
 
-  $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
-
-  $: calculateDifference = () => {
-    if (!allDataLoaded) return data;
-    const [grid1, grid2] = data;
-    return {
-      ...grid1,
-      data: {
-        ...grid1.data,
-        data: grid1.data.data.map((row, lngIndex) =>
-          row.map((value, latIndex) =>
-            value === null ? null : grid2.data.data[lngIndex][latIndex] - value
-          )
-        ),
-      },
+  $: process = ({ data }) => {
+    const calculateDifference = () => {
+      const [grid1, grid2] = data;
+      return {
+        ...grid1,
+        data: {
+          ...grid1.data,
+          data: grid1.data.data.map((row, lngIndex) =>
+            row.map((value, latIndex) =>
+              value === null
+                ? null
+                : grid2.data.data[lngIndex][latIndex] - value
+            )
+          ),
+        },
+      };
     };
-  };
 
-  // The data that is actually being rendered
-  $: renderedData = showDifference ? [calculateDifference()] : data;
+    // The data that is actually being rendered
+    const renderedData = showDifference ? [calculateDifference()] : data;
 
-  $: colorScale = (() => {
-    let domain = [0, 1];
-    let range = [$theme.color.category[5], $theme.color.category[3]];
-    if (allDataLoaded) {
+    const colorScale = (() => {
+      let domain = [0, 1];
+      let range = [$theme.color.category[5], $theme.color.category[3]];
       let flatData = renderedData.map((grid) => grid.data.data).flat(3);
       domain = extent(flatData);
-    }
-    return scaleLinear().domain(domain).range(range);
-  })();
+      return scaleLinear().domain(domain).range(range);
+    })();
+
+    return { data: renderedData, colorScale };
+  };
 </script>
 
-<Header bind:displayOption {showDifference} {data} />
-<div class={`maps cols-${renderedData.length}`}>
-  {#each renderedData as d}
-    <div class="map-wrapper">
-      <MapboxMap fitShape={shape} resize={renderedData.length}>
-        <Mask feature={shape} layerId="mask-layer" />
-        {#if d.status === STATUS_SUCCESS}
-          <RasterLayer {colorScale} {...d.data} before="mask-layer" />
-        {/if}
-      </MapboxMap>
-    </div>
-  {/each}
-</div>
+<LoadingWrapper
+  let:props={{ data, colorScale }}
+  {process}
+  slotProps={{ data: $IMPACT_GEO_DATA }}
+  let:isLoading
+>
+  <div slot="empty" class="placeholder">Loading</div>
+  <Header bind:displayOption {showDifference} {data} />
+  <div class={`maps cols-${data.length}`}>
+    {#each data as d}
+      <div class="map-wrapper">
+        <MapboxMap fitShape={shape} resize={data.length}>
+          <Mask feature={shape} layerId="mask-layer" />
+          {#if d.status === STATUS_SUCCESS}
+            <RasterLayer {colorScale} {...d.data} before="mask-layer" />
+          {/if}
+        </MapboxMap>
+      </div>
+    {/each}
+    <Spinner {isLoading} />
+  </div>
+</LoadingWrapper>
 
 <style lang="scss">
+  .placeholder {
+    height: 400px;
+    background: var(--color-foreground-weakest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .maps {
+    position: relative;
     display: flex;
 
     &.cols-1 .map-wrapper {
