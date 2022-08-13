@@ -6,7 +6,7 @@ export const FORMAT_INTEGER = ",.0f";
 export const FORMAT_TON = ".0s";
 export const FORMAT_FLOAT = ",.1f";
 export const FORMAT_YEAR = ".0f";
-export const FORMAT_CELSIUS = ".0f";
+export const FORMAT_CELSIUS = ".1f";
 export const FORMAT_PERCENT = ".0%";
 
 // the basic formatting function sued

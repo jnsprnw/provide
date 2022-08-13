@@ -4,18 +4,20 @@
     CURRENT_INDICATOR,
     DICTIONARY_SCENARIOS,
     DICTIONARY_CURRENT_SCENARIOS,
+    CURRENT_INDICATOR_UNIT_UID
   } from '$lib/../stores/store.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
   import Select from '$lib/helper/Select/index.svelte';
   import { min } from 'd3-array';
+  import { formatValue } from "$lib/utils/formatting";
 
   let currentThreshold;
 
   $: process = ({ data: { data }, indicator, scenarios, currentScenarios }) => {
     const thresholds = data.thresholds.map((value) => ({
-      label: value,
+      label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
     }));
     currentThreshold = currentThreshold || thresholds[0].value;
@@ -54,8 +56,6 @@
   };
 </script>
 
-<h2>(Un)Avoidable Risk</h2>
-
 <LoadingWrapper
   let:props
   let:isLoading
@@ -68,14 +68,14 @@
   }}
 >
   <div slot="placeholder">This is a custom loading thing</div>
-  <ChartInfo />
+  <ChartInfo {currentThreshold} />
   <Select
     label="Threshold"
     options={props.thresholds}
     bind:value={currentThreshold}
   />
   <div class="chart">
-    <RiskChart {isLoading} {...props} />
+    <RiskChart {isLoading} {...props} unit="celsius" />
   </div>
 </LoadingWrapper>
 

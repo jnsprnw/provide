@@ -1,6 +1,7 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { formatValue } from '$lib/utils/formatting';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';
   import { scaleBand } from 'd3-scale';
@@ -10,6 +11,8 @@
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
+
+  $: formatTickY = (d) => formatValue(d, unit);
 
   const padding = { top: 0, right: 20, bottom: 0, left: 20 };
 
@@ -25,13 +28,13 @@
     x={xKey}
     y={yKey}
     yDomain={[0, 1]}
-    xScale={scaleBand()}
+    xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
     flatData={flatten(data)}
   >
     <Svg>
       <RiskLevels />
       <AxisX {padding} />
-      <AxisY />
+      <AxisY formatTick={formatTickY} />
     </Svg>
   </LayerCake>
 </div>

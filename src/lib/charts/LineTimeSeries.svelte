@@ -1,5 +1,5 @@
 <script>
-  import { Html, LayerCake, Svg } from 'layercake';
+  import { LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
