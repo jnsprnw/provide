@@ -27,6 +27,9 @@
     // First sort by `highlight`, then by `color`
     a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
   );
+
+  $: console.log(flatten(sortedData))
+  $: console.log(sortedData)
 </script>
 
 <div class="figure-container" class:hasTitle={title}>
