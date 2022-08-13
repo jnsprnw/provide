@@ -1,15 +1,58 @@
 <script>
   import { UN_AVOIDABLE_RISK_DATA } from '$lib/../stores/un-avoidable-risk.js';
-  import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
-  import RiskChart from '$lib/charts/RiskChart.svelte';
+  import {
+    CURRENT_INDICATOR,
+    DICTIONARY_SCENARIOS,
+    DICTIONARY_CURRENT_SCENARIOS,
+  } from '$lib/../stores/store.js';
+  import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
+  import ChartInfo from './ChartInfo.svelte';
+  import Select from '$lib/helper/Select/index.svelte';
+  import { min } from 'd3-array';
 
-  function process(props) {
-    return props;
-  }
+  let currentThreshold;
+
+  $: process = ({ data: { data }, indicator, scenarios, currentScenarios }) => {
+    const thresholds = data.thresholds.map((value) => ({
+      label: value,
+      value,
+    }));
+    currentThreshold = currentThreshold || thresholds[0].value;
+
+    const thresholdIndex = data.thresholds.indexOf(currentThreshold);
+    const processedScenarios = data.data.map((scenarioData) => {
+      const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
+      const scenario = currentScenarios[key] || scenarios[key];
+      const values = data.years.map((year, yearIndex) => ({
+        year,
+        value: scenarioData[key][thresholdIndex][yearIndex],
+      }));
+      return {
+        ...scenario,
+        values,
+      };
+    });
+
+    const unavoidableValues = data.years.map((year, yearIndex) => ({
+      year,
+      value: min(processedScenarios, (d) => d.values[yearIndex].value),
+    }));
+
+    unavoidableValues.unshift({
+      year: "Today's risk",
+      value: data.today[thresholdIndex],
+    });
+
+    processedScenarios.unshift({
+      uid: 'unavoidable',
+      label: 'Unavoidable',
+      values: unavoidableValues,
+    });
+
+    return { thresholds, data: processedScenarios };
+  };
 </script>
-
-<p>{$CURRENT_INDICATOR_UID}</p>
 
 <h2>(Un)Avoidable Risk</h2>
 
@@ -17,11 +60,28 @@
   let:props
   let:isLoading
   {process}
-  slotProps={{ data: $UN_AVOIDABLE_RISK_DATA }}
+  slotProps={{
+    data: $UN_AVOIDABLE_RISK_DATA,
+    scenarios: $DICTIONARY_SCENARIOS,
+    currentScenarios: $DICTIONARY_CURRENT_SCENARIOS,
+    indicator: $CURRENT_INDICATOR,
+  }}
 >
-  <div slot="empty">This is a custom loading thing</div>
-  <RiskChart {isLoading} {...props} />
+  <div slot="placeholder">This is a custom loading thing</div>
+  <ChartInfo />
+  <Select
+    label="Threshold"
+    options={props.thresholds}
+    bind:value={currentThreshold}
+  />
+  <div class="chart">
+    <RiskChart {isLoading} {...props} />
+  </div>
 </LoadingWrapper>
 
 <style lang="scss">
+  .chart {
+    width: 100%;
+    height: 500px;
+  }
 </style>

@@ -126,7 +126,7 @@ export function handle(
       param = [{ geography, indicator, ...options }]; // We need this for the load function
       data = take(UN_AVOIDABLE_RISK_CACHE);
       store = UN_AVOIDABLE_RISK_CACHE;
-      url = '/api/un-avoidable-risk';
+      url = `${import.meta.env.VITE_DATA_API_URL}/unavoidable-risk`;
       break;
   }
   if (addr && data && store && url) {

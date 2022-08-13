@@ -59,7 +59,7 @@
   slotProps={{ data: $IMPACT_GEO_DATA }}
   let:isLoading
 >
-  <div slot="empty" class="placeholder">Loading</div>
+  <div slot="placeholder" class="placeholder">Loading</div>
   <Header bind:displayOption {showDifference} {data} />
   <div class={`maps cols-${data.length}`}>
     {#each data as d}

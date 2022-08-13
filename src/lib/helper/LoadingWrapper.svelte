@@ -20,11 +20,12 @@
     isLoading = false;
   }
 
-  $: if (!isLoading) currentSlotProps = process(slotProps);
+  $: if (!isLoading)
+    currentSlotProps = process ? process(slotProps) : slotProps;
 </script>
 
 {#if isEmpty && !renderWhileEmpty}
-  <slot name="empty"><div class="empty-loader">Loading</div></slot>
+  <slot name="placeholder"><div class="placeholder">Loading</div></slot>
 {:else}
   {#if isLoading}
     <slot name="loading" />
@@ -33,10 +34,9 @@
 {/if}
 
 <style>
-  .empty-loader {
+  .placeholder {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: rgba(255, 0, 0, 0.2);
   }
 </style>

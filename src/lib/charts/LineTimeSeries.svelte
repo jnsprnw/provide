@@ -5,9 +5,6 @@
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
-  import { getContext } from 'svelte';
-
-  const theme = getContext('theme');
 
   export let data = [];
   export let xKey = 'year';
@@ -17,7 +14,7 @@
 
   // TODO: Get unit label
 
-  const padding = { top: 0, right: 20, bottom: 20, left: 20 };
+  const padding = { top: 0, right: 20, bottom: 0, left: 20 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -34,9 +31,10 @@
 
 <div class="figure-container" class:hasTitle={title}>
   {#if title}
-  <header>
-    <h5 class="title-chart title-chart--title">{title}</h5> <small class="title-chart title-chart--small">in {unit}</small>
-  </header>
+    <header>
+      <h5 class="title-chart title-chart--title">{title}</h5>
+      <small class="title-chart title-chart--small">in {unit}</small>
+    </header>
   {/if}
   <div class="chart-container">
     <LayerCake
@@ -47,12 +45,8 @@
       flatData={flatten(sortedData)}
     >
       <Svg>
-        <AxisX
-          gridlines={false}
-          ticks={6}
-          padding={{ top: 10, left: 0, right: 0 }}
-        />
-        <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
+        <AxisX gridlines={false} ticks={6} {padding} />
+        <AxisY {padding} ticks={4} xTick={-3} formatTick={formatTickY} />
         <MultipleLineLayer />
       </Svg>
     </LayerCake>
@@ -60,7 +54,8 @@
 </div>
 
 <style lang="scss">
-  .figure-container, .chart-container {
+  .figure-container,
+  .chart-container {
     width: 100%;
     height: 100%;
   }
@@ -73,7 +68,7 @@
 
       header {
         & > * {
-          display: inline-block
+          display: inline-block;
         }
       }
     }

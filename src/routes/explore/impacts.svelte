@@ -74,7 +74,7 @@
 <div class="impacts-analysis container">
   <div class="wrapper">
     <SelectionMessage />
-    <Tabs type="nav" selected={0}>
+    <Tabs type="nav" selected={1}>
       <Tab label="Impact analysis" />
       <Tab label="(Un)avoidable risk" />
       <Tab label="Mitigation benefits" />
