@@ -8,7 +8,6 @@
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
   import { STATUS_SUCCESS } from '$lib/../config.js';
-
   import Mask from '$lib/mapbox-map/Mask.svelte';
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
@@ -16,14 +15,16 @@
 
   // So we don't have to check in every step whether data is loaded
   $: loadedData = data.filter((d) => d.status === STATUS_SUCCESS);
+  $: allDataLoaded = loadedData.length === data.length;
 
-  $: isDoubleMap = loadedData.length === 2;
+  $: isDoubleMap = data.length === 2;
   $: showDifference = displayOption === 'difference' && isDoubleMap;
 
   $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
 
-  function calculateDifference(grids) {
-    const [grid1, grid2] = grids;
+  $: calculateDifference = () => {
+    if (!allDataLoaded) return data;
+    const [grid1, grid2] = data;
     return {
       ...grid1,
       data: {
@@ -35,21 +36,18 @@
         ),
       },
     };
-  }
-
-  // Used to calculate scale
-  $: calculatedData = showDifference
-    ? [calculateDifference(loadedData)]
-    : loadedData;
+  };
 
   // The data that is actually being rendered
-  $: renderedData = showDifference ? calculatedData : data;
+  $: renderedData = showDifference ? [calculateDifference()] : data;
 
   $: colorScale = (() => {
     let domain = [0, 1];
     let range = [$theme.color.category[5], $theme.color.category[3]];
-    let flatData = calculatedData.map((grid) => grid.data.data).flat(3);
-    domain = extent(flatData);
+    if (allDataLoaded) {
+      let flatData = renderedData.map((grid) => grid.data.data).flat(3);
+      domain = extent(flatData);
+    }
     return scaleLinear().domain(domain).range(range);
   })();
 </script>
@@ -59,9 +57,9 @@
   {#each renderedData as d}
     <div class="map-wrapper">
       <MapboxMap fitShape={shape} resize={renderedData.length}>
-        <!-- <Mask feature={shape} layerId="mask-layer" /> -->
+        <Mask feature={shape} layerId="mask-layer" />
         {#if d.status === STATUS_SUCCESS}
-          <RasterLayer {colorScale} {...d.data} before="water" />
+          <RasterLayer {colorScale} {...d.data} before="mask-layer" />
         {/if}
       </MapboxMap>
     </div>
