@@ -4,7 +4,7 @@
     CURRENT_INDICATOR,
     DICTIONARY_SCENARIOS,
     DICTIONARY_CURRENT_SCENARIOS,
-    CURRENT_INDICATOR_UNIT_UID
+    CURRENT_INDICATOR_UNIT_UID,
   } from '$lib/../stores/store.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -77,7 +77,7 @@
   }}
 >
   <div slot="placeholder">This is a custom loading thing</div>
-<<<<<<< HEAD
+
   <div class="wrapper grid">
     <div class="chart-info">
       <ChartInfo {...props} threshold={currentThreshold} />
@@ -92,16 +92,6 @@
         <RiskChart {isLoading} {...props} />
       </div>
     </div>
-=======
-  <ChartInfo {currentThreshold} />
-  <Select
-    label="Threshold"
-    options={props.thresholds}
-    bind:value={currentThreshold}
-  />
-  <div class="chart">
-    <RiskChart {isLoading} {...props} unit="celsius" />
->>>>>>> ed49616ec8f641da5b27aad4e9d6b95fbe655bf2
   </div>
 </LoadingWrapper>
 
