@@ -59,13 +59,13 @@
 </script>
 
 <LoadingWrapper
-  let:props={{ data, colorScale }}
+  let:props
   {process}
   slotProps={{ data: $IMPACT_GEO_DATA }}
   let:isLoading
 >
   <div slot="placeholder" class="placeholder">Loading</div>
-  <Header bind:displayOption {showDifference} {data} />
+  <Header bind:displayOption {showDifference} {...props} />
   <div class={`maps cols-${data.length}`}>
     {#each data as d}
       <div class="map-wrapper">
@@ -78,7 +78,11 @@
         >
           <Mask feature={shape} layerId="mask-layer" />
           {#if d.status === STATUS_SUCCESS}
-            <RasterLayer {colorScale} {...d.data} before="mask-layer" />
+            <RasterLayer
+              colorScale={props.colorScale}
+              {...d.data}
+              before="mask-layer"
+            />
           {/if}
         </MapboxMap>
       </div>
