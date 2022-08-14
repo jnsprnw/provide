@@ -80,18 +80,20 @@
       <Tab label="Mitigation benefits" />
       <Tab label="Reversibility" />
       <svelte:fragment slot="content">
-        <TabContent>
-          <ImpactAnalysis />
-        </TabContent>
-        <TabContent>
-          <UnAvoidableRisk />
-        </TabContent>
-        <TabContent>
-          <MitigationBenefits />
-        </TabContent>
-        <TabContent>
-          <Reversibility />
-        </TabContent>
+        <div class="padding-top-xl">
+          <TabContent>
+            <ImpactAnalysis />
+          </TabContent>
+          <TabContent>
+            <UnAvoidableRisk />
+          </TabContent>
+          <TabContent>
+            <MitigationBenefits />
+          </TabContent>
+          <TabContent>
+            <Reversibility />
+          </TabContent>
+        </div>
       </svelte:fragment>
     </Tabs>
   </div>

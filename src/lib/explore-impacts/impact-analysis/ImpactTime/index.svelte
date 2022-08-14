@@ -57,58 +57,53 @@
     });
 </script>
 
-<Grid container>
-  <Grid md="8">
+<div class="wrapper grid">
+  <div class="chart">
     {#if hasSingleScenario}
       {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === STATUS_SUCCESS}
-        <div class="impact-time-chart">
-          <LineDistributionChart
-            {...distributionData}
-            unit={$CURRENT_INDICATOR_UNIT_UID}
-          />
-        </div>
-      {/if}
-    {:else}
-      <div class="impact-time-chart">
-        <LineTimeSeries
-          data={impactTimeData}
+        <LineDistributionChart
+          {...distributionData}
           unit={$CURRENT_INDICATOR_UNIT_UID}
         />
-      </div>
+      {/if}
+    {:else}
+      <LineTimeSeries
+        data={impactTimeData}
+        unit={$CURRENT_INDICATOR_UNIT_UID}
+      />
     {/if}
-  </Grid>
-  <Grid md="4">
-    <div>
-      <TitleTimeSeries
-        indicator={$CURRENT_INDICATOR}
-        geography={$CURRENT_GEOGRAPHY}
-        {hasSingleScenario}
-        {impactTimeData}
-        {distributionData}
-      />
-      <DescriptionTimeSeries
-        indicator={$CURRENT_INDICATOR}
-        geography={$CURRENT_GEOGRAPHY}
-        scenarios={$CURRENT_SCENARIOS}
-      />
-      <p>
-        The gridded background shows the certainty of our calculations. The
-        darker the color, the more likely it will become true.
-      </p>
-      <dl>
-        <ResolutionTime
-          {hasSingleScenario}
-          {impactTimeData}
-          {distributionData}
-        />
-      </dl>
-    </div>
-  </Grid>
-</Grid>
+  </div>
+  <div class="chart-info">
+    <TitleTimeSeries
+      indicator={$CURRENT_INDICATOR}
+      geography={$CURRENT_GEOGRAPHY}
+      {hasSingleScenario}
+      {impactTimeData}
+      {distributionData}
+    />
+    <DescriptionTimeSeries
+      indicator={$CURRENT_INDICATOR}
+      geography={$CURRENT_GEOGRAPHY}
+      scenarios={$CURRENT_SCENARIOS}
+    />
+    <p>
+      The gridded background shows the certainty of our calculations. The darker
+      the color, the more likely it will become true.
+    </p>
+    <dl>
+      <ResolutionTime {hasSingleScenario} {impactTimeData} {distributionData} />
+    </dl>
+  </div>
+</div>
 
 <style lang="scss">
-  .impact-time-chart {
+  .chart {
     height: 400px;
-    width: 100%;
+    grid-column: 1 / span 7;
+    margin-bottom: var(--space-xxl);
+  }
+
+  .chart-info {
+    grid-column: 8 / span 5;
   }
 </style>

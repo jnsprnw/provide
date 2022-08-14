@@ -1,8 +1,8 @@
 <script>
   export let type = 'list';
   export let selected = 0;
-  import { createEventDispatcher, afterUpdate, setContext, tick } from "svelte";
-  import { writable, derived } from "svelte/store";
+  import { createEventDispatcher, afterUpdate, setContext, tick } from 'svelte';
+  import { writable, derived } from 'svelte/store';
   const dispatch = createEventDispatcher();
   const tabs = writable([]);
   const tabsById = derived(tabs, (_) =>
@@ -15,7 +15,7 @@
   );
   const selectedContent = writable(undefined);
   let refTabList = null;
-  setContext("Tabs", {
+  setContext('Tabs', {
     type,
     tabs,
     contentById,
@@ -57,7 +57,7 @@
   afterUpdate(() => {
     selected = currentIndex;
     if (prevIndex > -1 && prevIndex !== currentIndex) {
-      dispatch("change", currentIndex);
+      dispatch('change', currentIndex);
     }
     prevIndex = currentIndex;
   });
@@ -75,17 +75,14 @@
     }
   }
 </script>
+
 <div
   {...$$restProps}
   role="navigation"
-  class:tabs="{true}"
+  class:tabs={true}
   class={`tabs-type-${type}`}
 >
-  <ul
-    bind:this="{refTabList}"
-    role="tablist"
-    class:tabs__nav="{true}"
-  >
+  <ul bind:this={refTabList} role="tablist" class:tabs__nav={true}>
     <slot />
   </ul>
 </div>

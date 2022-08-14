@@ -97,12 +97,12 @@
 
 <style lang="scss">
   .chart-container {
-    grid-column: 5 / span 8;
+    grid-column: 7 / span 6;
   }
   .chart {
-    height: 500px;
+    height: 400px;
   }
   .chart-info {
-    grid-column: 1 / span 4;
+    grid-column: 1 / span 5;
   }
 </style>
