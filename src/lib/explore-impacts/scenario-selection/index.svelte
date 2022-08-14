@@ -12,6 +12,7 @@
   } from '$lib/../stores/store.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
 
   let hoveredScenario;
@@ -43,8 +44,8 @@
         label: scenario['label'],
         highlight: renderedScenario?.uid === scenario.uid,
         color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
-        x: scenario.scenarioData['warming2050'].data,
-        y: scenario.scenarioData['warming2050-2100'].data
+        x: scenario.scenarioData['warming2050-2100'].data,
+        y: scenario.scenarioData['warming2050'].data
       };
     });
 </script>
@@ -77,10 +78,13 @@
       <Tab label="Trajectories" />
       <svelte:fragment slot="content">
         <TabContent>
-          <span>{ JSON.stringify(warmingData)}</span>
+          <div class="scenario-scatterplot">
+            <ScatterplotWarming data={warmingData} unit="celsius" />
+            <p>Text describing the chart</p>
+          </div>
         </TabContent>
         <TabContent>
-          <div class="scenario-charts">
+          <div class="scenario-trajectories">
             <div class="scenario-chart">
               <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
             </div>
@@ -105,7 +109,14 @@
       grid-template-rows: minmax(150px, auto) auto 1fr;
       grid-gap: var(--font-size-large-xs); // TODO
 
-      .scenario-charts {
+      .scenario-scatterplot {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: var(--font-size-large-xs); // TODO
+        height: 200px;
+      }
+
+      .scenario-trajectories {
         display: grid;
         grid-template-columns: minmax(200px, auto) 1fr;
         grid-gap: var(--font-size-large-xs); // TODO

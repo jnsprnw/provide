@@ -1,27 +1,16 @@
 <script>
-  import { formatObjArr } from '$lib/utils.js';
+  import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
 
   export let indicator;
   export let geography;
   export let scenarios;
-
-  $: scenarioList = formatObjArr(scenarios, 'label');
 </script>
 
 <p>
   This graph shows how absolute changes in {indicator.label} (expressed in {indicator
     .unit.labelLong}) will play out over time in {geography.label} at different global
   warming levels compared to the reference period 1986-2006 (TODO), based on the
-  {#each scenarioList as { type, value }}
-    {#if type === 'element'}
-      <em class="text-underlined" style={`--color: ${value.color}`}
-        >{value.label}</em
-      >
-    {:else}
-      {value}
-    {/if}
-  {/each}
-  scenario{#if scenarioList.length > 1}s{/if}.
+  <ScenarioList {scenarios} />.
 </p>
 
 <style lang="scss">

@@ -1,5 +1,6 @@
 <script>
   import Select from '$lib/helper/select/index.svelte';
+  import ScenarioList from '$lib/helper/chart-description/scenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import {
     CURRENT_IMPACT_GEO_YEAR_UID,
@@ -28,16 +29,14 @@
         <p>
           This map compares the change in {$CURRENT_INDICATOR.label} (expressed in
           degrees {$CURRENT_INDICATOR.unit.labelLong}) in {$CURRENT_GEOGRAPHY.label}
-          in {$CURRENT_IMPACT_GEO_YEAR_UID} between a {$CURRENT_SCENARIOS[0]
-            .label} and a {$CURRENT_SCENARIOS[1].label} scenario. The reference period
+          in {$CURRENT_IMPACT_GEO_YEAR_UID} between <ScenarioList />. The reference period
           is {$CURRENT_INDICATOR_OPTIONS.reference.label}.
         </p>
       {:else if $CURRENT_SCENARIOS.length > 1}
         <p>
           These maps show the change in {$CURRENT_INDICATOR.label} (expressed in
           degrees {$CURRENT_INDICATOR.unit.labelLong}) in {$CURRENT_GEOGRAPHY.label}
-          in {$CURRENT_IMPACT_GEO_YEAR_UID} under {$CURRENT_SCENARIOS.length} different
-          scenarios compared to the reference period {$CURRENT_INDICATOR_OPTIONS
+          in {$CURRENT_IMPACT_GEO_YEAR_UID} under the <ScenarioList /> compared to the reference period {$CURRENT_INDICATOR_OPTIONS
             .reference.label}.
         </p>
       {:else}
@@ -45,7 +44,7 @@
           This map shows the absolute change in {$CURRENT_INDICATOR.label} (expressed
           in
           {$CURRENT_INDICATOR.unit.labelLong}) in {$CURRENT_GEOGRAPHY.label} in {$CURRENT_IMPACT_GEO_YEAR_UID}
-          under a {$CURRENT_SCENARIOS[0].label} compared to the reference period
+          under a <ScenarioList /> compared to the reference period
           {$CURRENT_INDICATOR_OPTIONS.reference.label}.
         </p>
       {/if}
