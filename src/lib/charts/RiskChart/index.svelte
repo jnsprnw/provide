@@ -6,11 +6,14 @@
   import AxisY from '../axes/AxisY.svelte';
   import { scaleBand } from 'd3-scale';
   import RiskLevels from './RiskLevels.svelte';
+  import { getContext } from 'svelte';
 
   export let data;
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
+
+  const theme = getContext('theme');
 
   $: formatTickY = (d) => formatValue(d, unit);
 
@@ -32,7 +35,7 @@
     flatData={flatten(data)}
   >
     <Svg>
-      <RiskLevels />
+      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
       <AxisX {padding} />
       <AxisY formatTick={formatTickY} />
     </Svg>

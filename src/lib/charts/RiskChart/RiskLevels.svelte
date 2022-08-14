@@ -1,16 +1,21 @@
 <script>
   import { UNAVOIDABLE_UID } from '$lib/../config';
+  import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
 
   const { data, xScale, yGet, height, xGet } = getContext('LayerCake');
 
-  $: console.log();
+  export let hatchingColor;
+
   $: years = $xScale.domain();
 
   $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID);
   $: unavoidable = $data.filter((d) => d.uid === UNAVOIDABLE_UID)[0];
 </script>
 
+<defs>
+  <Hatching color={hatchingColor} />
+</defs>
 <g>
   {#each years as year, yearIndex}
     <rect
@@ -18,6 +23,7 @@
       y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
       height={$height - $yGet(unavoidable.values[yearIndex])}
       width={$xScale.bandwidth()}
+      fill="url(#hatching)"
     />
   {/each}
   {#each scenarios as scenario}
