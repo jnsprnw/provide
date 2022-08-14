@@ -1,5 +1,5 @@
 <script>
-  import { value } from 'lodash-es';
+  import { UNAVOIDABLE_UID } from '$lib/../config';
   import { getContext } from 'svelte';
 
   const { data, xScale, yGet, height, xGet } = getContext('LayerCake');
@@ -7,8 +7,8 @@
   $: console.log();
   $: years = $xScale.domain();
 
-  $: scenarios = $data.filter((d) => d.uid !== 'unavoidable');
-  $: unavoidable = $data.filter((d) => d.uid === 'unavoidable')[0];
+  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID);
+  $: unavoidable = $data.filter((d) => d.uid === UNAVOIDABLE_UID)[0];
 </script>
 
 <g>

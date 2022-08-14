@@ -21,7 +21,9 @@
   }
 
   $: if (!isLoading)
-    currentSlotProps = process ? process(slotProps) : slotProps;
+    currentSlotProps = process
+      ? { ...slotProps, ...process(slotProps) } // Make sure all props are part of the passed props, but allow for overwriting them
+      : slotProps;
 </script>
 
 {#if isEmpty && !renderWhileEmpty}

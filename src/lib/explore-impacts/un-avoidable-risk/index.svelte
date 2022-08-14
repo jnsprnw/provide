@@ -10,10 +10,12 @@
   import ChartInfo from './ChartInfo.svelte';
   import Select from '$lib/helper/Select/index.svelte';
   import { min } from 'd3-array';
+  import { formatValue } from '$lib/utils/formatting';
+  import { UNAVOIDABLE_UID } from '$lib/../config.js';
 
   let currentThreshold;
 
-  $: process = ({ data: { data }, indicator, scenarios, currentScenarios }) => {
+  $: process = ({ data: { data }, scenarios, currentScenarios }) => {
     const thresholds = data.thresholds.map((value) => ({
       label: value,
       value,
@@ -24,20 +26,28 @@
     const processedScenarios = data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
       const scenario = currentScenarios[key] || scenarios[key];
-      const values = data.years.map((year, yearIndex) => ({
-        year,
-        value: scenarioData[key][thresholdIndex][yearIndex],
-      }));
+      const values = data.years.map((year, yearIndex) => {
+        const value = scenarioData[key][thresholdIndex][yearIndex];
+        return {
+          year,
+          value,
+          formattedValue: formatValue(value, 'percent'),
+        };
+      });
       return {
         ...scenario,
         values,
       };
     });
 
-    const unavoidableValues = data.years.map((year, yearIndex) => ({
-      year,
-      value: min(processedScenarios, (d) => d.values[yearIndex].value),
-    }));
+    const unavoidableValues = data.years.map((year, yearIndex) => {
+      const value = min(processedScenarios, (d) => d.values[yearIndex].value);
+      return {
+        year,
+        value,
+        formattedValue: formatValue(value, 'percent'),
+      };
+    });
 
     unavoidableValues.unshift({
       year: "Today's risk",
@@ -45,7 +55,7 @@
     });
 
     processedScenarios.unshift({
-      uid: 'unavoidable',
+      uid: UNAVOIDABLE_UID,
       label: 'Unavoidable',
       values: unavoidableValues,
     });
@@ -53,8 +63,6 @@
     return { thresholds, data: processedScenarios };
   };
 </script>
-
-<h2>(Un)Avoidable Risk</h2>
 
 <LoadingWrapper
   let:props
@@ -68,20 +76,31 @@
   }}
 >
   <div slot="placeholder">This is a custom loading thing</div>
-  <ChartInfo />
-  <Select
-    label="Threshold"
-    options={props.thresholds}
-    bind:value={currentThreshold}
-  />
-  <div class="chart">
-    <RiskChart {isLoading} {...props} />
+  <div class="wrapper grid">
+    <div class="chart-info">
+      <ChartInfo {...props} threshold={currentThreshold} />
+    </div>
+    <div class="chart-container">
+      <Select
+        label="Threshold"
+        options={props.thresholds}
+        bind:value={currentThreshold}
+      />
+      <div class="chart">
+        <RiskChart {isLoading} {...props} />
+      </div>
+    </div>
   </div>
 </LoadingWrapper>
 
 <style lang="scss">
+  .chart-container {
+    grid-column: 5 / span 8;
+  }
   .chart {
-    width: 100%;
     height: 500px;
+  }
+  .chart-info {
+    grid-column: 1 / span 4;
   }
 </style>

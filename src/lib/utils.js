@@ -1,4 +1,4 @@
-import { has, get, set, compact } from 'lodash-es';
+import { get, set, compact } from 'lodash-es';
 import { loadFromAPI } from '$lib/../routes/api/utils.js';
 import qs from 'qs';
 import { browser } from '$app/env';

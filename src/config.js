@@ -10,6 +10,9 @@ export const STATUS_FAILED = 'failed';
 
 export const DEFAULT_FORMAT_UID = 'float';
 
+export const SHIFTING_PATHWAYS_UID = 'sp';
+export const UNAVOIDABLE_UID = 'unavoidable';
+
 export const IMPACT_GEO_YEARS = [
   {
     uid: '2030',

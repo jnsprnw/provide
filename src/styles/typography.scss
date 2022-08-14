@@ -48,10 +48,11 @@ i.emoji {
   }
 }
 
-.text-scenario-label { // This is used to highlight scenarios in a text
+.text-underlined { // This is used to highlight scenarios in a text
   font-style: normal;
   font-weight: var(--font-font-weight-bold);
   text-decoration: underline;
+  text-decoration-color: var(--color, inherit);
   text-decoration-thickness: 2px;
   text-underline-offset: 2px;
 }

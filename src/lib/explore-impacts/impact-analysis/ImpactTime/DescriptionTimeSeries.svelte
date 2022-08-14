@@ -14,9 +14,8 @@
   warming levels compared to the reference period 1986-2006 (TODO), based on the
   {#each scenarioList as { type, value }}
     {#if type === 'element'}
-      <em
-        class="text-scenario-label"
-        style={`text-decoration-color: ${value.color}`}>{value.label}</em
+      <em class="text-underlined" style={`--color: ${value.color}`}
+        >{value.label}</em
       >
     {:else}
       {value}
