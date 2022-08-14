@@ -10,7 +10,6 @@
   import { STATUS_SUCCESS } from '$lib/../config.js';
   import Mask from '$lib/mapbox-map/Mask.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { isEmpty } from 'lodash-es';
   import Spinner from '$lib/helper/Spinner.svelte';
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
@@ -19,6 +18,10 @@
   $: data = $IMPACT_GEO_DATA;
   $: isDoubleMap = data.length === 2;
   $: showDifference = displayOption === 'difference' && isDoubleMap;
+
+  let zoom;
+  let center;
+  let bounds;
 
   $: process = ({ data }) => {
     const calculateDifference = () => {
@@ -51,6 +54,8 @@
 
     return { data: renderedData, colorScale };
   };
+
+  //$: console.log(center);
 </script>
 
 <LoadingWrapper
@@ -64,7 +69,13 @@
   <div class={`maps cols-${data.length}`}>
     {#each data as d}
       <div class="map-wrapper">
-        <MapboxMap fitShape={shape} resize={data.length}>
+        <MapboxMap
+          bind:zoom
+          bind:center
+          bind:bounds
+          fitShape={shape}
+          resize={data.length}
+        >
           <Mask feature={shape} layerId="mask-layer" />
           {#if d.status === STATUS_SUCCESS}
             <RasterLayer {colorScale} {...d.data} before="mask-layer" />
