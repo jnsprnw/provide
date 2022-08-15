@@ -27,8 +27,7 @@ const indicatorFormats = {
   float: f(FORMAT_FLOAT),
   percent: f(FORMAT_PERCENT),
   year: f(FORMAT_YEAR),
-  celsius: f(FORMAT_CELSIUS),
-  'degrees-celsius': f(FORMAT_CELSIUS), // Do we want to have degrees twice?
+  'degrees-celsius': f(FORMAT_CELSIUS),
   ton: f(FORMAT_TON),
 
   // format for anything else
@@ -36,14 +35,17 @@ const indicatorFormats = {
 };
 
 const suffixes = {
-  celsius: ' °C',
-  'degrees-celsius': ' °C', // Do we want to have degrees twice?
+  'degrees-celsius': ' °C',
   gty: ' Gt/y'
 }
 
 export const formatValue = (d, indicatorId) => {
-  const formatter = indicatorFormats[indicatorId] || indicatorFormats["default"];
+  let indicator = indicatorId;
+  if (indicator === 'celsius') { // Fixed for now. TODO
+    indicator = 'degrees-celsius';
+  }
+  const formatter = indicatorFormats[indicator] || indicatorFormats["default"];
   const value = formatter(d);
-  const suffix = suffixes[indicatorId];
+  const suffix = suffixes[indicator];
   return suffix ? value + suffix : value;
 };
