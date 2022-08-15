@@ -30,13 +30,15 @@
       y={yKey}
       data={sortedData}
       flatData={sortedData}
+      xDomain={[-0.5, 1.2]}
+      yDomain={[1.3, 2.3]}
     >
     <!-- xNice={true}
       yNice={true} -->
       <Svg>
         <Sectors />
-        <AxisX {padding} formatTick={formatTick} />
-        <AxisY {padding} formatTick={formatTick} />
+        <AxisX {padding} formatTick={formatTick} ticks={[-0.5, 0, 1.2]} />
+        <AxisY {padding} formatTick={formatTick} ticks={[1.3, 1.5, 1.6, 2.3]} />
         <Dots />
       </Svg>
     </LayerCake>
