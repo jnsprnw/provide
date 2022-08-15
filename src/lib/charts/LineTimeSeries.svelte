@@ -14,7 +14,7 @@
 
   // TODO: Get unit label
 
-  const padding = { top: 0, right: 20, bottom: 0, left: 20 };
+  const padding = { top: 0, right: 10, bottom: 0, left: 40 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {

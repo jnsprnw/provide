@@ -27,6 +27,8 @@
     : isBandwidth
     ? $yScale.domain()
     : $yScale.ticks(ticks);
+
+  const TICK_PADDING = 5;
 </script>
 
 <g class="axis y-axis" transform="translate({-padding.left}, 0)">
@@ -34,7 +36,7 @@
     <g
       class="tick tick-{tick}"
       transform="translate({$xScale.range()[0] +
-        (isBandwidth ? padding.left : 0)},
+        (isBandwidth ? padding.left : padding.left - TICK_PADDING)},
       {$yScale(tick)})"
     >
       {#if gridlines !== false}

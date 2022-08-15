@@ -21,7 +21,7 @@
   export let zKey = 'distribution';
   export let unit = DEFAULT_FORMAT_UID;
 
-  const padding = { top: 0, right: 20, bottom: 20, left: 20 };
+  const padding = { top: 0, right: 10, bottom: 20, left: 40 };
 
   $: formatTickY = (d) => formatValue(d, unit);
 
