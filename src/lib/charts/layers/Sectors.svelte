@@ -35,7 +35,7 @@
     bg: 1
   }];
 
-  const fillColor = interpolateLab($theme.color.petrol200, $theme.color.petrol100);
+  const fillColor = interpolateLab($theme.color.petrol300, $theme.color.petrol100);
 
   $: fields = sectors.map(({ label, x, y, textPostion = 'top', bg }) => {
     let [xMin, xMax] = x;
@@ -85,6 +85,6 @@
     stroke-width: 1px;
     // fill: var(--color-background-weakest);
     stroke: var(--color-background-base);
-    opacity: 0.5;
+    opacity: 0.2;
   }
 </style>
