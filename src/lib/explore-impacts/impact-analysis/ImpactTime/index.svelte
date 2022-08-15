@@ -87,10 +87,13 @@
       scenarios={$CURRENT_SCENARIOS}
     />
     <p>
-      The gridded background shows the certainty of our calculations. The darker
-      the color, the more likely it will become true.
+      {#if hasSingleScenario}
+      The line indicates the median estimate, while the colour variations indicate the dispersion of possible results around the median (the darker the colour, the more likely they can be obtained for this scenario).
+      {:else}
+      The lines indicates the median estimates for each scenario.
+      {/if}
     </p>
-    <dl>
+    <dl class="chart-info-facts">
       <ResolutionTime {hasSingleScenario} {impactTimeData} {distributionData} />
     </dl>
   </div>
@@ -105,5 +108,9 @@
 
   .chart-info {
     grid-column: 8 / span 5;
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-spacer-large-s);
+    // grid-template-rows: auto;
   }
 </style>

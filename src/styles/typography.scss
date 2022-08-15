@@ -57,6 +57,16 @@ i.emoji {
   text-underline-offset: 2px;
 }
 
+.chart-info-facts {
+  color: var(--color-text-weaker);
+  font-size: var(--font-size-large-s);
+  line-height: var(--font-line-height-base);
+
+  dt, dd {
+    font-weight: var(--font-font-weight-regular);
+  }
+}
+
 .title-chart {
   font-style: normal;
   font-size: var(--font-size-large-s);
