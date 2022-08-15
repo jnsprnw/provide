@@ -62,6 +62,7 @@
         dx={isBandwidth ? -5 : dxTick}
         dy={isBandwidth ? 0 : dyTick}
         class="chart-tick"
+        dominant-baseline="middle"
         style="
           text-anchor:{isBandwidth ? 'end' : textAnchor};
         "
