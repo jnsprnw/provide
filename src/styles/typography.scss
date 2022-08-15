@@ -72,6 +72,16 @@ i.emoji {
   fill: var(--color-text-weaker);
 }
 
+.chart-label {
+  font-style: normal;
+  font-size: var(--font-size-large-s);
+  fill: var(--color-text-weaker);
+
+  .chart-label--bold {
+    font-weight: var(--font-font-weight-bold);
+  }
+}
+
 
 .content-header {
   .title {
