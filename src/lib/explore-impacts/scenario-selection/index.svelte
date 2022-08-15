@@ -77,23 +77,41 @@
         <p>{renderedScenario.description || 'Description missing'}</p>
       {/if}
     </div>
-    <Tabs type="nav">
+    <Tabs type="nav" format="compact">
       <Tab label="Overshoot vs warming" />
       <Tab label="Trajectories" />
       <svelte:fragment slot="content">
         <TabContent>
-          <div class="scenario-scatterplot">
-            <ScatterplotWarming data={warmingData} unit="degrees-celsius" />
-            <p>Text describing the chart</p>
+          <div class="scenario-warming">
+            <div class="scenario-chart">
+              <ScatterplotWarming data={warmingData} unit="degrees-celsius" />
+            </div>
+            <div class="scenario-description">
+              <p>Text describing the chart</p>
+            </div>
           </div>
         </TabContent>
         <TabContent>
           <div class="scenario-trajectories">
             <div class="scenario-chart">
-              <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
+              <LineTimeSeries
+                data={emissionsData}
+                unit="ton"
+                title="Global GHG emissions"
+                ticksYHighlighted={[0]}
+                yTicks={4}
+                xTicks={4} />
             </div>
             <div class="scenario-chart">
-              <LineTimeSeries data={temperatureData} unit="degrees-celsius" title="Global mean tempearture" />
+              <LineTimeSeries
+                data={temperatureData}
+                unit="degrees-celsius"
+                title="Global mean tempearture"
+                yDomain={[1, 3]}
+                ticksYHighlighted={[1]}
+                ticks={4}
+                yTicks={4}
+                xTicks={4} />
             </div>
           </div>
         </TabContent>
@@ -110,26 +128,21 @@
 
     .scenario-split {
       display: grid;
-      grid-template-rows: minmax(150px, auto) auto 1fr;
-      grid-gap: var(--font-size-large-xs); // TODO
+      grid-template-rows: minmax(130px, auto) auto 1fr;
+      grid-gap: var(--font-size-large-xl); // TODO
 
-      .scenario-scatterplot {
+      .scenario-warming, .scenario-trajectories {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: var(--font-size-large-xs); // TODO
-        height: 200px;
-      }
-
-      .scenario-trajectories {
-        display: grid;
-        grid-template-columns: minmax(200px, auto) 1fr;
-        grid-gap: var(--font-size-large-xs); // TODO
+        align-content: stretch;
+        grid-auto-flow: column;
+        grid-gap: var(--font-size-large-xl);
       }
     }
   }
 
-  .scenario-chart {
-    width: 380px;
-    height: 200px;
+  .scenario-chart, .scenario-description {
+    width: 100%;
+    height: 280px;
   }
 </style>

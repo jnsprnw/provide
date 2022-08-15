@@ -37,7 +37,9 @@
     <Svg>
       <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
       <AxisX {padding} />
-      <AxisY formatTick={formatTickY} />
+      <AxisY
+        formatTick={formatTickY}
+        ticksHighlighted={[0, 1]} />
     </Svg>
   </LayerCake>
 </div>

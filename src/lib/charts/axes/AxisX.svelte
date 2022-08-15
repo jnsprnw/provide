@@ -2,10 +2,11 @@
   import { formatValue } from "$lib/utils/formatting";
   import { first, last, range, uniq } from "lodash-es";
   import { getContext } from "svelte";
-  const { width, height, xScale, yScale } = getContext("LayerCake");
+  const { width, xScale, yScale } = getContext("LayerCake");
 
   export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
   export let gridlines = true;
+  export let gridClass = '';
   export let formatTick = (d) => formatValue(d, "year");
   export let baseline = false;
   export let snapTicks = false;
@@ -16,6 +17,7 @@
   export let dyTick = 0;
   export let forceShow = null;
   export let minTickSpace = 30;
+  export let ticksHighlighted = [];
 
   $: isBandwidth = typeof $xScale.bandwidth === "function";
 
@@ -47,7 +49,7 @@
     return "middle";
   };
 
-  const TICK_PADDING = 10;
+  const TICK_PADDING = 15;
 </script>
 
 <g class="axis x-axis">
@@ -67,6 +69,8 @@
     >
       {#if gridlines !== false}
         <line
+          class={`chart-grid ${gridClass}`}
+          class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
           y1={$yScale.range()[1] - $yScale.range()[0]}
           y2="0"
           x1="0"

@@ -12,10 +12,14 @@
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
   export let title;
+  export let yDomain = undefined;
+  export let ticksYHighlighted = [0];
+  export let xTicks = 4;
+  export let yTicks = 4;
 
   // TODO: Get unit label
 
-  const padding = { top: 5, right: 10, bottom: 20, left: 40 };
+  const padding = { top: 5, right: 10, bottom: 30, left: 40 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -45,10 +49,16 @@
       y={yKey}
       data={sortedData}
       flatData={flatten(sortedData)}
+      yDomain={yDomain}
     >
       <Svg>
-        <AxisX gridlines={false} ticks={6} {padding} />
-        <AxisY {padding} ticks={4} xTick={-3} formatTick={formatTickY} />
+        <AxisX gridlines={false} ticks={xTicks} {padding} />
+        <AxisY
+          {padding}
+          ticks={yTicks}
+          xTick={-3}
+          formatTick={formatTickY}
+          ticksHighlighted={ticksYHighlighted} />
         <MultipleLineLayer />
       </Svg>
     </LayerCake>

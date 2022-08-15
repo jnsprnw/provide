@@ -36,12 +36,10 @@
       xDomain={[-0.5, 1.2]}
       yDomain={[1.3, 2.3]}
     >
-    <!-- xNice={true}
-      yNice={true} -->
       <Svg>
         <Sectors />
-        <AxisX {padding} formatTick={formatTick} ticks={[-0.5, 0, 1.2]} />
-        <AxisY {padding} formatTick={formatTick} ticks={[1.3, 1.5, 1.6, 2.3]} />
+        <AxisX {padding} formatTick={formatTick} ticks={[-0.5, 0, 1.2]} gridClass="chart-grid--invert" />
+        <AxisY {padding} formatTick={formatTick} ticks={[1.3, 1.5, 1.6, 2.3]} gridClass="chart-grid--invert" />
         <Dots />
       </Svg>
     </LayerCake>
