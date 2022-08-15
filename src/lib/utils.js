@@ -1,4 +1,4 @@
-import { get, set, compact } from 'lodash-es';
+import { get, set, compact, uniq } from 'lodash-es';
 import { loadFromAPI } from '$lib/../routes/api/utils.js';
 import qs from 'qs';
 import { browser } from '$app/env';
@@ -31,6 +31,15 @@ export const formatObjArr = function (arr, key) {
     };
   });
 };
+
+export const formatList = function (arr = []) {
+  if (arr.length === 0) { return '' }
+  const formatter = new Intl.ListFormat('en-GB', {
+    style: 'long',
+    type: 'conjunction',
+  });
+  return formatter.format(uniq(arr.map(d => String(d))));
+}
 
 async function request(params, url) {
   const query = qs.stringify(params, {

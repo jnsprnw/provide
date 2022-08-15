@@ -2,6 +2,7 @@
   import { formatValue } from '$lib/utils/formatting';
   import { SHIFTING_PATHWAYS_UID, UNAVOIDABLE_UID } from '$lib/../config.js';
   import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
+  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
 
   export let indicator;
   export let threshold;
@@ -19,6 +20,7 @@
     ? scenarios.filter((scenario) => scenario.uid !== SHIFTING_PATHWAYS_UID)
     : scenarios;
   $: formattedThreshold = formatValue(threshold, indicator.unit.uid);
+  $: model = undefined; // TODO
 </script>
 
 <h2>
@@ -42,3 +44,7 @@
     2100.
   {/if}
 </p>
+<ChartFacts>
+  <dt>Model:</dt>
+  <dd>{ model || '—' }</dd>
+</ChartFacts>

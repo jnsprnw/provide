@@ -33,5 +33,5 @@
 	$: steps = formatStepsLabel(getSteps(hasSingleScenario, impactTimeData, distributionData));
 </script>
 
-<dt>Time resolution</dt>
-<dd>{ steps }</dd>
+<dt>Time resolution:</dt>
+<dd>{ steps || '—' }</dd>

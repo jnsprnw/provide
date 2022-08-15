@@ -2,6 +2,7 @@
   import Select from '$lib/helper/select/index.svelte';
   import ScenarioList from '$lib/helper/chart-description/scenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
+  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import {
     CURRENT_IMPACT_GEO_YEAR_UID,
     CURRENT_GEOGRAPHY,
@@ -15,13 +16,21 @@
     IMPACT_GEO_DISPLAY_OPTIONS,
   } from '$lib/../config.js';
 
+  import {
+    formatList,
+  } from '$lib/utils.js';
+
   export let displayOption;
   export let showDifference;
+  export let data;
+  
+  $: spatialResolution = formatList(data.map(({ data }) => `${data.resolution}°`))
+  $: model = undefined; // TODO
 </script>
 
 <div class="container">
   <div class="wrapper grid header">
-    <div class="info">
+    <div class="chart-info">
       <h2>
         Change in {$CURRENT_INDICATOR.label} in {$CURRENT_GEOGRAPHY.label} in {$CURRENT_IMPACT_GEO_YEAR_UID}
       </h2>
@@ -57,6 +66,12 @@
           <ScenarioList scenarios={$CURRENT_SCENARIOS} />.
         </p>
       {/if}
+      <ChartFacts direction="horizontal">
+        <dt>Spatial resolution:</dt>
+        <dd>{ spatialResolution || '—' }</dd>
+        <dt>Model:</dt>
+        <dd>{ model || '—' }</dd>
+      </ChartFacts>
     </div>
     <div class="controls">
       {#if $CURRENT_SCENARIOS.length === 2}
@@ -79,13 +94,16 @@
 </div>
 
 <style lang="scss">
+  @import '../../../../styles/global.scss';
+
   .header {
     margin-bottom: var(--space-s);
     align-items: end;
   }
 
-  .info {
+  .chart-info {
     grid-column: 1 / span 6;
+    @include chart-info-layout();
   }
 
   .controls {

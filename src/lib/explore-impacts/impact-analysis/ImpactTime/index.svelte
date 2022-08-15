@@ -16,6 +16,7 @@
   import ResolutionTime from './ResolutionTime.svelte';
   import TitleTimeSeries from './TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
+  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import { STATUS_SUCCESS } from '$lib/../config.js';
 
   $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;
@@ -55,6 +56,8 @@
         })),
       };
     });
+
+  $: model = undefined; // TODO
 </script>
 
 <div class="wrapper grid">
@@ -93,13 +96,17 @@
       The lines indicates the median estimates for each scenario.
       {/if}
     </p>
-    <dl class="chart-info-facts">
+    <ChartFacts>
       <ResolutionTime {hasSingleScenario} {impactTimeData} {distributionData} />
-    </dl>
+      <dt>Model:</dt>
+      <dd>{ model || '—' }</dd>
+    </ChartFacts>
   </div>
 </div>
 
 <style lang="scss">
+  @import '../../../../styles/global.scss';
+
   .chart {
     height: 400px;
     grid-column: 1 / span 7;
@@ -108,9 +115,6 @@
 
   .chart-info {
     grid-column: 8 / span 5;
-    display: flex;
-    flex-direction: column;
-    gap: var(--size-spacer-large-s);
-    // grid-template-rows: auto;
+    @include chart-info-layout();
   }
 </style>

@@ -25,6 +25,12 @@ $extra-wide: 1700px !default;
   }
 }
 
+@mixin chart-info-layout() {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacer-large-s);
+}
+
 @mixin button-reset() {
   display: inline-block;
   padding: 0;
