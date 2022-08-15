@@ -48,7 +48,12 @@
     class="sector"
     d={`M${xMin} ${yMin}H${xMax}V${yMax}H${xMin}Z`}
   />
-  <text class="chart-label" dominant-baseline={baseline} x={xText} y={yText} text-anchor="middle">{ label }</text>
+  <text
+    class="chart-label"
+    dominant-baseline={baseline}
+    x={xText}
+    y={yText}
+    text-anchor="middle">{ label }</text>
 </g>
 {/each}
 
