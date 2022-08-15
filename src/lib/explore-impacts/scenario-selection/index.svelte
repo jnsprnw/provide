@@ -79,7 +79,7 @@
       <svelte:fragment slot="content">
         <TabContent>
           <div class="scenario-scatterplot">
-            <ScatterplotWarming data={warmingData} unit="celsius" />
+            <ScatterplotWarming data={warmingData} unit="degrees-celsius" />
             <p>Text describing the chart</p>
           </div>
         </TabContent>
@@ -89,7 +89,7 @@
               <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
             </div>
             <div class="scenario-chart">
-              <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
+              <LineTimeSeries data={temperatureData} unit="degrees-celsius" title="Global mean tempearture" />
             </div>
           </div>
         </TabContent>
