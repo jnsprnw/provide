@@ -22,8 +22,7 @@
 </script>
 
 <h2>
-  Probability of {indicator.label} exceeding {threshold}&thinsp;{indicator.unit
-    .label}
+  Probability of {indicator.label} exceeding {formattedThreshold}
 </h2>
 <p>
   Today’s risk of {indicator.label} exceeding {formattedThreshold} amounts to {today
