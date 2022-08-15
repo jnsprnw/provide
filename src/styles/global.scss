@@ -143,6 +143,11 @@ $extra-wide: 1700px !default;
   border-bottom: var(--stroke-active-bold) solid transparent;
   transition: border-bottom-color 0.3s ease-out; // TODO
 
+  &.tab--compact {
+    padding: var(--size-space-large-xxxs) 0;
+    border-bottom: var(--stroke-active) solid transparent;
+  }
+
   .link {
     color: var(--color-brand-stronger);
     transition: color 0.3s ease-out; // TODO

@@ -1,5 +1,6 @@
 <script>
   export let type = 'list';
+  export let format = undefined;
   export let selected = 0;
   import { createEventDispatcher, afterUpdate, setContext, tick } from 'svelte';
   import { writable, derived } from 'svelte/store';
@@ -17,6 +18,7 @@
   let refTabList = null;
   setContext('Tabs', {
     type,
+    format,
     tabs,
     contentById,
     selectedTab,

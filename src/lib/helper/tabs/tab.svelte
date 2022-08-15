@@ -8,7 +8,7 @@
   export let tabindex = "0";
   export let id = "ccs-" + Math.random().toString(36);
   export let ref = null;
-  const { selectedTab, add, update, change, type } = getContext("Tabs");
+  const { selectedTab, add, update, change, type, format } = getContext("Tabs");
   add({ id, label, disabled });
   $: selected = $selectedTab === id;
 </script>
@@ -19,6 +19,7 @@
   role="presentation"
   class:tab={ true }
   class={`tab-type-${type}`}
+  class:tab--compact={format === 'compact'}
   aria-selected={selected}
   aria-disabled={disabled}
   aria-current={ selected ? loc : 'false' }
