@@ -46,6 +46,8 @@
     }
     return "middle";
   };
+
+  const TICK_PADDING = 10;
 </script>
 
 <g class="axis x-axis">
@@ -82,11 +84,12 @@
       </text> -->
       <text
         x={xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}
-        y={yTick}
+        y={yTick + TICK_PADDING}
         dx={dxTick}
         dy={dyTick}
         text-anchor={textAnchor(i)}
         class="chart-tick"
+        dominant-baseline="haning"
       >
         {formatTick(tick)}
       </text>
