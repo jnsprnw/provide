@@ -91,6 +91,7 @@
 
 <style lang="scss">
   .sector {
+    transition: fill 0.3s ease-out;
     opacity: 0.2;
   }
 </style>
