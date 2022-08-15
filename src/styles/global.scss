@@ -50,13 +50,29 @@ $extra-wide: 1700px !default;
   }
 }
 
+@mixin input-field() {
+  display: block;
+  border: 1px solid var(--color-light-petrol200);
+  border-radius: var(--radius-interactive-l);
+  transition: border-color 0.3s ease-out;
+  padding: var(--size-space-large-xxs);
+
+  &:hover, &:not(:placeholder-shown) {
+    border-color: var(--color-light-petrol400);
+  }
+
+  &:focus {
+    border-color: var(--color-light-functional-accent);
+    outline: none;
+  }
+}
+
 @mixin tab() {
   display: block;
   border: 1px solid transparent;
   background-color: transparent;
   border-radius: var(--radius-interactive-l);
   transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
-  border-radius: var(--radius-interactive-l);
   padding: var(--size-space-large-xxs);
   cursor: pointer;
 

@@ -23,7 +23,7 @@
 
   $: defaultResults = sortBy(
     $CURRENT_GEOGRAPHIES.map((d) => ({ item: d })),
-    ['item.continent.label', 'item.label']
+    ['item.hasContinent', 'item.continent.label', 'item.label']
   );
 
   // Search with default options
@@ -83,29 +83,37 @@
 
 <div class="selection-country-wrapper">
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY_UID}>
-    <input type="text" bind:value={term} placeholder="Search…" />
-    <VirtualList items={results} let:item height="200px">
-      <!-- TODO: 200px -->
-      <RadioTile
-        value={item.uid}
-        on:mouseover={() => (hoveredGeography = item?.uid)}
-      >
-        {#if item?.continent?.label}<span>{item.continent.label}</span>{/if}
-        {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
-        <span>{@html item.label}</span>
-      </RadioTile>
-    </VirtualList>
+    <input class="searchbox" type="text" bind:value={term} placeholder="Search…" />
+    <div class="country-container">
+      <VirtualList items={results} let:item>
+        <!-- TODO: 200px -->
+        <RadioTile
+          value={item.uid}
+          on:mouseover={() => (hoveredGeography = item?.uid)}
+        >
+          {#if item?.continent?.label}<span>{item.continent.label}</span>{/if}
+          {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
+          <span>{@html item.label}</span>
+        </RadioTile>
+      </VirtualList>
+    </div>
   </TileGroup>
   <Map hovered={hoveredGeography} selected={$CURRENT_GEOGRAPHY_UID} />
 </div>
 
 <style lang="scss">
-  mark {
-    background-color: yellow;
+  @import '../../../styles/global.scss';
+
+  .searchbox {
+    @include input-field();
   }
 
   .selection-country-wrapper {
     display: grid;
     grid-template-columns: 1fr 2fr;
+
+    .country-container {
+      height: 295px;
+    }
   }
 </style>

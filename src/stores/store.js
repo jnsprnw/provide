@@ -20,10 +20,14 @@ export const GEOGRAPHIES = (() => {
     set: ({ geographyTypes, continents, ...meta }) => {
       const continentsDict = keyBy(continents, 'uid');
       const geographies = geographyTypes.reduce((acc, type) => {
-        const list = get(meta, type.uid, []).map((geography) => ({
-          ...geography,
-          continent: get(continentsDict, geography.continent),
-        }));
+        const list = get(meta, type.uid, []).map((geography) => {
+          const continent = get(continentsDict, geography.continent);
+          return {
+            ...geography,
+            continent,
+            hasContinent: Boolean(continent)
+          }
+        });
         return {
           ...acc,
           [type.uid]: list,
