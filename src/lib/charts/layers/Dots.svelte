@@ -1,17 +1,35 @@
 <script>
   import { getContext } from 'svelte';
   const { data, xGet, yGet } = getContext('LayerCake');
+
+  const R_BIG = 8;
+  const R_SMALL = 4;
 </script>
 
 {#each $data as dot}
-  <circle
-    class="dot"
-    class:highlight={dot.highlight}
-    cx={$xGet(dot)}
-    cy={$yGet(dot)}
-    r={dot.color || dot.highlight ? 8 : 4}
-    style={`fill: ${dot.color}`}
-  />
+  <g transform={`translate(${$xGet(dot)}, ${$yGet(dot)})`}>
+    <circle
+      class="dot"
+      class:highlight={dot.highlight}
+      r={dot.color || dot.highlight ? R_BIG : R_SMALL}
+      style={`fill: ${dot.color}`}
+    />
+    {#if dot.highlight}
+    <g transform={`translate(${0}, ${-1 * R_BIG - 4})`}>
+      <text
+        class="chart-label chart-label--bold chart-label--bg"
+        text-anchor="middle">
+        { dot.label }
+      </text>
+      <text
+        class="chart-label chart-label--bold"
+        text-anchor="middle">
+        { dot.label }
+      </text>
+    </g>
+    {/if}
+    <text>
+  </g>
 {/each}
 
 <style lang="scss">

@@ -73,7 +73,14 @@ i.emoji {
   font-size: var(--font-size-large-s);
   fill: var(--color-text-weaker);
 
-  .chart-label--bold {
+  &.chart-label--bg {
+    fill: var(--color-light-background-base);
+    stroke: var(--color-light-background-base);
+    stroke-opacity: 0.5;
+    stroke-width: 4px;
+  }
+
+  &.chart-label--bold {
     font-weight: var(--font-font-weight-bold);
   }
 }
