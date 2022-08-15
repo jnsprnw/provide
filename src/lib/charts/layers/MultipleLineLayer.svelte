@@ -35,10 +35,11 @@
     stroke-linejoin: round;
     stroke-linecap: round;
     stroke-width: 2.5px;
-    stroke: var(--color-background-weakest);
+    stroke: var(--color-light-petrol200);
 
     &.highlight {
-      stroke-width: 4px;
+      stroke-width: 3px;
+      stroke: var(--color-light-petrol500);
     }
 
     &.background {

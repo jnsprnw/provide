@@ -35,12 +35,12 @@
 <style lang="scss">
   .dot {
     stroke-width: 2px;
-    fill: var(--color-background-weakest);
+    fill: var(--color-light-petrol200);
     stroke: var(--color-background-base);
     stroke-opacity: 0.75;
 
-    // &.highlight {
-    //   stroke-width: 4px;
-    // }
+    &.highlight {
+      fill: var(--color-light-petrol500);
+    }
   }
 </style>

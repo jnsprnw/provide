@@ -2,7 +2,7 @@
   import Tabs from '$lib/helper/tabs/tabs.svelte';
   import Tab from '$lib/helper/tabs/tab.svelte';
   import TabContent from '$lib/helper/tabs/tab-content.svelte';
-  import { partition, flatten } from 'lodash-es';
+  import { partition, flatten, has } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
     CURRENT_SCENARIOS,
@@ -29,10 +29,12 @@
   $: [emissionsData, temperatureData] = SCENARIO_DATA_KEYS.map(
     (key) => {
       return $SCENARIOS.map((scenario) => {
+        const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
         return {
           ...scenario,
           highlight: renderedScenario?.uid === scenario.uid,
-          color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+          color,
+          isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
           values: scenario[key], // TODO: How is this working? should be child of scenarioData
         };
       });
@@ -40,10 +42,12 @@
   );
 
   $: warmingData = $SCENARIOS.map((scenario) => {
+    const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
       return {
         label: scenario['label'],
         highlight: renderedScenario?.uid === scenario.uid,
-        color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+        color,
+        isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
         x: scenario.scenarioData['warming2050-2100'].data,
         y: scenario.scenarioData['warming2050'].data
       };

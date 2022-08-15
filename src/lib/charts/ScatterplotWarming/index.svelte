@@ -6,6 +6,7 @@
   import Sectors from '../layers/Sectors.svelte';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';
+  import { sortBy } from 'lodash-es';
 
   export let data = [];
   export let xKey = 'x';
@@ -16,10 +17,12 @@
 
   $: formatTick = (d) => formatValue(d, unit);
 
-  $: sortedData = data.slice(0).sort((a, b) =>
-    // First sort by `highlight`, then by `color`
-    a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
-  );
+  $: sortedData = sortBy(data, ['highlight', 'isSelected'])
+  // This sorting is somewhat buggy.
+  // $: sortedData = data.slice(0).sort((a, b) =>
+  //   // First sort by `highlight`, then by `color`
+  //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
+  // );
 </script>
 
 <div class="figure-container">
