@@ -48,6 +48,7 @@
 .chart-grid {
   stroke: var(--color-light-petrol100);
   stroke-dasharray: 2 2;
+  pointer-events: none;
 
   &.chart-grid--invert {
     stroke: var(--color-background-base);

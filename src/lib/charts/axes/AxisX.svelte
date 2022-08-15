@@ -71,7 +71,7 @@
         <line
           class={`chart-grid ${gridClass}`}
           class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
-          y1={$yScale.range()[1] - $yScale.range()[0]}
+          y1={$yScale.range()[1] - $yScale.range()[0] - TICK_PADDING}
           y2="0"
           x1="0"
           x2="0"
@@ -106,16 +106,16 @@
 </g>
 
 <style lang="scss">
-  line,
-  .tick line {
-    //@include gridline();
-  }
+  // line,
+  // .tick line {
+  //   //@include gridline();
+  // }
 
-  rect {
-    fill: none;
-    stroke: var(--color-foreground-weaker);
-    stroke-width: 1;
-  }
+  // rect {
+  //   fill: none;
+  //   stroke: var(--color-foreground-weaker);
+  //   stroke-width: 1;
+  // }
 
   // .bg {
   //   stroke-width: 5;
@@ -123,7 +123,7 @@
   //   stroke: var(--color-background-weaker);
   // }
 
-  .baseline {
-    stroke-dasharray: 0;
-  }
+  // .baseline {
+  //   stroke-dasharray: 0;
+  // }
 </style>

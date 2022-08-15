@@ -3,7 +3,7 @@
   const { data, xGet, yGet } = getContext('LayerCake');
 
   const R_BIG = 8;
-  const R_SMALL = 4;
+  const R_SMALL = 5;
 </script>
 
 {#each $data as dot}
@@ -34,8 +34,9 @@
 
 <style lang="scss">
   .dot {
+    pointer-events: none;
     stroke-width: 2px;
-    fill: var(--color-light-petrol200);
+    fill: var(--color-light-petrol300);
     stroke: var(--color-background-base);
     stroke-opacity: 0.75;
 

@@ -2,7 +2,7 @@
   import Tabs from '$lib/helper/tabs/tabs.svelte';
   import Tab from '$lib/helper/tabs/tab.svelte';
   import TabContent from '$lib/helper/tabs/tab-content.svelte';
-  import { partition, flatten, has } from 'lodash-es';
+  import { partition, flatten, get } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
     CURRENT_SCENARIOS,
@@ -14,6 +14,7 @@
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
+  import { getContext } from 'svelte';
 
   let hoveredScenario;
   $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
@@ -52,6 +53,17 @@
         y: scenario.scenarioData['warming2050'].data
       };
     });
+
+  let currentWarmingTextUID;
+
+  const warmingTexts = {
+    'default': 'Some text about this graph that explains how to read it and what can be read from it. It shouldn’t be much longer than 3-4 brief sentences without explaining all scenarios in detail it should summarize the key points.',
+    'high-overshoot': '<strong>High Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by more than 0.1°C by 2050, and exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially useful to explore the reversibility of climate impacts after global warming has stabilised and as it is being reverted.',
+    'low-overshoot': '<strong>Low or No Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by at most 0.1°C, and may exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially used to explore climate impacts if global warming is being kept at levels compatible with the Long-Term Temperature Goal of the Paris Agreement.',
+    'high-warming': 'Pathways with <strong>High Continuous Warming</strong> lead to an exceedance of the 1.5°C global warming level by 2050, and exhibit further global warming thereafter. Such scenarios can be especially used to explore climate impacts for high levels of global warming.'
+  }
+
+  $: currentWarmingText = get(warmingTexts, currentWarmingTextUID) || get(warmingTexts, 'default');
 </script>
 
 <div class="scenario-selection">
@@ -84,10 +96,13 @@
         <TabContent>
           <div class="scenario-warming">
             <div class="scenario-chart">
-              <ScatterplotWarming data={warmingData} unit="degrees-celsius" />
+              <ScatterplotWarming
+                data={warmingData}
+                unit="degrees-celsius"
+                bind:hoveredSector={currentWarmingTextUID} />
             </div>
             <div class="scenario-description">
-              <p>Text describing the chart</p>
+              <p>{ @html currentWarmingText }</p>
             </div>
           </div>
         </TabContent>

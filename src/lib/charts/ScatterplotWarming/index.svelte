@@ -23,6 +23,7 @@
   //   // First sort by `highlight`, then by `color`
   //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
   // );
+  export let hoveredSector;
 </script>
 
 <div class="figure-container">
@@ -37,7 +38,7 @@
       yDomain={[1.3, 2.3]}
     >
       <Svg>
-        <Sectors />
+        <Sectors bind:hoveredSector={hoveredSector} />
         <AxisX {padding} formatTick={formatTick} ticks={[-0.5, 0, 1.2]} gridClass="chart-grid--invert" />
         <AxisY {padding} formatTick={formatTick} ticks={[1.3, 1.5, 1.6, 2.3]} gridClass="chart-grid--invert" />
         <Dots />
