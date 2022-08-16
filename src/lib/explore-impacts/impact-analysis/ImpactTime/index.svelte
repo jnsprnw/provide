@@ -2,7 +2,6 @@
   import { IMPACT_TIME_DISTRIBUTION_DATA } from '$lib/../stores/impact-time-distribution.js';
   import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
   import {
-    CURRENT_INDICATOR_UNIT_UID,
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
@@ -67,7 +66,6 @@
     hasSingleScenario,
   }}
   let:props={{
-    unit,
     indicator,
     scenarios,
     geography,
@@ -77,7 +75,6 @@
     impactDistributionData: $IMPACT_TIME_DISTRIBUTION_DATA,
   }}
   props={{
-    unit: $CURRENT_INDICATOR_UNIT_UID,
     indicator: $CURRENT_INDICATOR,
     scenarios: $CURRENT_SCENARIOS,
     geography: $CURRENT_GEOGRAPHY,
@@ -86,9 +83,9 @@
   <div class="wrapper grid">
     <div class="chart">
       {#if hasSingleScenario}
-        <LineDistributionChart {...impactDistribution} {unit} />
+        <LineDistributionChart {...impactDistribution} unit={indicator.unit} />
       {:else}
-        <LineTimeSeries data={impactTime} unit />
+        <LineTimeSeries data={impactTime} unit={indicator.unit} />
       {/if}
     </div>
     <div class="chart-info">

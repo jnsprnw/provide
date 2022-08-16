@@ -30,9 +30,9 @@
   Today’s risk of {indicator.label} exceeding {formattedThreshold} amounts to {today
     .values[0].formattedValue}.
   {#each scenarioList as scenario}
-    A <ScenarioSingle scenario={scenario} /> puts us on a trajectory where it would reach {scenario.values[0]
-      .formattedValue} in 2030, {scenario.values[1].formattedValue} in 2050 and {scenario
-      .values[2].formattedValue} in 2100.
+    A <ScenarioSingle {scenario} /> puts us on a trajectory where it would reach
+    {scenario.values[0].formattedValue} in 2030, {scenario.values[1]
+      .formattedValue} in 2050 and {scenario.values[2].formattedValue} in 2100.
   {/each}
   {#if showSpMessage}
     But ambitious mitigation according to the
@@ -46,5 +46,5 @@
 </p>
 <ChartFacts>
   <dt>Model:</dt>
-  <dd>{ model || '—' }</dd>
+  <dd>{model || '—'}</dd>
 </ChartFacts>
