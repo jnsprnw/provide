@@ -204,8 +204,8 @@
       }
     },
     "fontFamily": {
-      "base": "Barlow",
-      "heading": "Raleway"
+      "base": "Lato",
+      "heading": "Lato"
     },
     "lineHeight": {
       "base": "160%",
@@ -217,7 +217,9 @@
       "bold": "Bold",
       "regularNumber": 400,
       "boldNumber": 600,
-      "regularItalic": "Italic"
+      "regularItalic": "Italic",
+      "extrabold": "ExtraBold",
+      "extraboldNumber": 800
     },
     "letterSpacing": {
       "base": "0%",
@@ -327,5 +329,11 @@
     "default": 1,
     "active": 2,
     "active-bold": 4
+  },
+  "transition": {
+    "duration": {
+      "base": "300ms",
+      "quick": "100ms"
+    }
   }
 }
