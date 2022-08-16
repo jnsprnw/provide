@@ -87,37 +87,53 @@
 
     span {
       padding: var(--size-space-large-m);
-      transition: box-shadow var(--transition-duration-base) ease-out; // TODO
+      transition: box-shadow var(--transition-duration-base) ease-out;
       font-size: var(--font-size-large-l);
-      font-weight: var(--font-font-weight-bold);
-      border-radius: var(--radius-interactive-l); // TODO
-      box-shadow: inset 0px 0px 0px var(--stroke-default)
-        var(--color-light-blue300); // We use box-shadow to not resize the button on border-size.
+      border-radius: var(--radius-interactive-l);
+      box-shadow: inset 0px 0px 0px var(--stroke-default) var(--color-light-blue300); // We use box-shadow to not resize the button on border-size.
       display: grid;
       grid-template-columns: repeat(2, auto);
-      grid-gap: 1rem; // TODO
+      grid-gap: var(--size-space-large-s);
       align-items: end;
       justify-content: space-between;
-      background-color: #fff;
+      background-color: var(--color-light-background-base);
+      color: var(--color-light-brand-stronger);
 
       &.hasMoreItems {
         grid-template-columns: repeat(3, auto);
       }
 
+      strong {
+        font-weight: var(--font-weight-extrabold);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 240px;
+      }
+
+      small {
+        display: block;
+        font-weight: var(--font-weight-regular);
+        margin-left: var(--size-space-large-s);
+      }
+
       &.tabs--missing {
         * {
           font-style: var(--font-font-weight-regular-italic); // TODO
-          font-weight: var(
-            --font-font-weight-regular
-          ); // TODO. Why is this not working?
+          font-weight: var(--font-weight-regular); // TODO. Why is this not working?
         }
+      }
+    }
+
+    &:hover, &:focus {
+      span {
+        box-shadow: inset 0px 0px 0px var(--stroke-default) var(--color-light-blue600);
       }
     }
 
     &[aria-selected="true"] {
       span {
-        box-shadow: inset 0px 0px 0px var(--stroke-active)
-          var(--color-functional-accent);
+        box-shadow: inset 0px 0px 0px var(--stroke-active) var(--color-functional-accent);
       }
     }
 

@@ -11,11 +11,17 @@
 </script>
 
 <li class="list-link--{type}" class:disabled={disabled} class:active={isActive}>
+	{#if !disabled}
 	<a
 		class="link"
 		href={`/${link}`}
 		aria-current={ariaLabel}
 		aria-disabled={disabled}><slot /></a>
+	{:else}
+	<div
+		class="link"
+		aria-disabled={disabled}><slot /></div>
+	{/if}
 </li>
 
 <style lang="scss">

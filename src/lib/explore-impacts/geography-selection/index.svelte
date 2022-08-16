@@ -10,6 +10,7 @@
 </script>
 
 <div class="geography-selection">
+  <span class="intro">Select a type of geography and a geography for which you would like to explore impacts</span>
   <Tabs bind:selected={$CURRENT_GEOGRAPHY_TYPE_INDEX}>
     <span class="text-label text-label--bold">Geographies</span>
     {#each $GEOGRAPHY_TYPES as { label, emoji, isAvailable }}

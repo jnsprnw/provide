@@ -106,17 +106,14 @@
   .impacts-header {
     background-color: var(--color-light-blue100); // TODO
     border-bottom: 1px solid var(--color-light-blue200); // TODO
-    padding: 2rem 0 6rem; // TODO
+    padding: var(--size-space-large-xl) 0 calc(var(--size-space-large-xl) + 4rem); // TODO
     margin-bottom: -4rem;
-  }
-
-  .impacts-selection {
-    // border-bottom: 1px solid var(--color-light-blue200); // I think no border is better
   }
 
   .explore-description {
     font-size: var(--font-size-large-l);
+    max-width: 75ch;
     line-height: var(--font-line-height-base);
-    color: var(--color-light-blue700);
+    color: var(--color-light-brand-stronger);
   }
 </style>
