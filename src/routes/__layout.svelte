@@ -72,8 +72,8 @@
   }
 
   .page-footer {
-    margin: var(--font-size-large-xxl) 0; // TODO
-    padding-top: var(--font-size-large-xxl);
+    margin: var(--size-space-large-xxxl) 0 var(--size-space-large-xl);
+    padding-top: var(--size-space-large-xxl);
     border-top: 1px solid var(--color-light-blue300); // TODO
 
     .page-author {

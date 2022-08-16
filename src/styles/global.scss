@@ -65,6 +65,10 @@ $extra-wide: 1700px !default;
     border-color: var(--color-light-functional-accent);
     outline: none;
   }
+
+  &::placeholder {
+    color: var(--color-brand-base);
+  }
 }
 
 @mixin tab() {
@@ -77,6 +81,7 @@ $extra-wide: 1700px !default;
   cursor: pointer;
 
   span {
+    color: var(--color-light-brand-stronger);
     font-size: var(--font-size-large-m);
     font-weight: var(--font-font-weight-regular);
     transition: color var(--transition-duration-base) ease-out;
@@ -90,7 +95,7 @@ $extra-wide: 1700px !default;
     border-color: var(--color-functional-accent);
 
     span {
-      color: var(--color-light-blue700);
+      color: var(--color-light-brand-stronger);
       font-weight: var(--font-font-weight-bold);
     }
   }
@@ -100,10 +105,12 @@ $extra-wide: 1700px !default;
   &.tile--disabled,
   &.tile--disabled:hover {
     &, div {
-      // pointer-events: none;
-      color: var(--color-light-blue300); // TODO
       cursor: not-allowed;
       background-color: transparent !important;
+
+      span {
+        color: var(--color-light-blue300);
+      }
     }
   }
 }
@@ -137,7 +144,7 @@ $extra-wide: 1700px !default;
 @mixin selection-panel {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: var(--size-space-large-xl) var(--size-space-large-xs);
+  gap: var(--size-space-large-xl) var(--size-space-large-xl);
   margin-top: var(--size-space-large-l);
   margin-bottom: var(--size-space-large-xl);
 
@@ -163,7 +170,7 @@ $extra-wide: 1700px !default;
 @mixin tab-nav-tab {
   padding: var(--size-space-large-xs) 0;
   border-bottom: var(--stroke-active-bold) solid transparent;
-  transition: border-bottom-color var(--transition-duration-base) ease-out; // TODO
+  transition: border-bottom-color var(--transition-duration-base) ease-out;
 
   &.tab--compact {
     padding: var(--size-space-large-xxxs) 0;
@@ -172,11 +179,11 @@ $extra-wide: 1700px !default;
 
   .link {
     color: var(--color-light-functional-accent);
-    transition: color var(--transition-duration-base) ease-out; // TODO
+    transition: color var(--transition-duration-base) ease-out;
     cursor: pointer;
 
     &:hover, &:focus {
-      * {
+      .link {
         color: var(--color-light-functional-accent);
       }
       outline: none;
@@ -191,11 +198,18 @@ $extra-wide: 1700px !default;
     }
   }
 
-  &.disabled,
-  &.disabled:hover {
+  &[aria-disabled="true"], // Used in tabs
+  &[aria-disabled="true"]:hover, // Used in tabs
+  &.tile--disabled,
+  &.tile--disabled:hover,
+  &.disabled, // Used in LinkList
+  &.disabled:hover { // Used in LinkList
+    background-color: transparent !important;
+    border-bottom-color: transparent;
+
     .link {
-      color: var(--color-light-blue300);
       cursor: not-allowed;
+      color: var(--color-light-blue300);
     }
   }
 }

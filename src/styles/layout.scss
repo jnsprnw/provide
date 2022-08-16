@@ -10,6 +10,12 @@
   max-width: 1165px;
   width: 100vw;
 
+  &.vertical-space {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: var(--size-spacer-large-xl);
+  }
+
   &.grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
