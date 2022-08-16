@@ -1,28 +1,47 @@
 <script>
   import { getContext } from 'svelte';
   const { data, xGet, yGet } = getContext('LayerCake');
+
+  const R_BIG = 8;
+  const R_SMALL = 5;
 </script>
 
 {#each $data as dot}
-  <circle
-    class="dot"
-    class:highlight={dot.highlight}
-    cx={$xGet(dot)}
-    cy={$yGet(dot)}
-    r={dot.color || dot.highlight ? 8 : 4}
-    style={`fill: ${dot.color}`}
-  />
+  <g transform={`translate(${$xGet(dot)}, ${$yGet(dot)})`}>
+    <circle
+      class="dot"
+      class:highlight={dot.highlight}
+      r={dot.color || dot.highlight ? R_BIG : R_SMALL}
+      style={`fill: ${dot.color}`}
+    />
+    {#if dot.highlight}
+    <g transform={`translate(${0}, ${-1 * R_BIG - 4})`}>
+      <text
+        class="chart-label chart-label--bold chart-label--bg"
+        text-anchor="middle">
+        { dot.label }
+      </text>
+      <text
+        class="chart-label chart-label--bold"
+        text-anchor="middle">
+        { dot.label }
+      </text>
+    </g>
+    {/if}
+    <text>
+  </g>
 {/each}
 
 <style lang="scss">
   .dot {
+    pointer-events: none;
     stroke-width: 2px;
-    fill: var(--color-background-weakest);
+    fill: var(--color-light-petrol300);
     stroke: var(--color-background-base);
     stroke-opacity: 0.75;
 
-    // &.highlight {
-    //   stroke-width: 4px;
-    // }
+    &.highlight {
+      fill: var(--color-light-petrol500);
+    }
   }
 </style>

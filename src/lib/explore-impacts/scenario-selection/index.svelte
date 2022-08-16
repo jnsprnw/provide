@@ -2,7 +2,7 @@
   import Tabs from '$lib/helper/tabs/tabs.svelte';
   import Tab from '$lib/helper/tabs/tab.svelte';
   import TabContent from '$lib/helper/tabs/tab-content.svelte';
-  import { partition, flatten } from 'lodash-es';
+  import { partition, flatten, get } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
     CURRENT_SCENARIOS,
@@ -14,6 +14,7 @@
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
+  import { getContext } from 'svelte';
 
   let hoveredScenario;
   $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
@@ -29,10 +30,12 @@
   $: [emissionsData, temperatureData] = SCENARIO_DATA_KEYS.map(
     (key) => {
       return $SCENARIOS.map((scenario) => {
+        const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
         return {
           ...scenario,
           highlight: renderedScenario?.uid === scenario.uid,
-          color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+          color,
+          isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
           values: scenario[key], // TODO: How is this working? should be child of scenarioData
         };
       });
@@ -40,14 +43,27 @@
   );
 
   $: warmingData = $SCENARIOS.map((scenario) => {
+    const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
       return {
         label: scenario['label'],
         highlight: renderedScenario?.uid === scenario.uid,
-        color: $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color,
+        color,
+        isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
         x: scenario.scenarioData['warming2050-2100'].data,
         y: scenario.scenarioData['warming2050'].data
       };
     });
+
+  let currentWarmingTextUID;
+
+  const warmingTexts = {
+    'default': 'Some text about this graph that explains how to read it and what can be read from it. It shouldn’t be much longer than 3-4 brief sentences without explaining all scenarios in detail it should summarize the key points.',
+    'high-overshoot': '<strong>High Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by more than 0.1°C by 2050, and exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially useful to explore the reversibility of climate impacts after global warming has stabilised and as it is being reverted.',
+    'low-overshoot': '<strong>Low or No Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by at most 0.1°C, and may exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially used to explore climate impacts if global warming is being kept at levels compatible with the Long-Term Temperature Goal of the Paris Agreement.',
+    'high-warming': 'Pathways with <strong>High Continuous Warming</strong> lead to an exceedance of the 1.5°C global warming level by 2050, and exhibit further global warming thereafter. Such scenarios can be especially used to explore climate impacts for high levels of global warming.'
+  }
+
+  $: currentWarmingText = get(warmingTexts, currentWarmingTextUID) || get(warmingTexts, 'default');
 </script>
 
 <div class="scenario-selection">
@@ -73,23 +89,44 @@
         <p>{renderedScenario.description || 'Description missing'}</p>
       {/if}
     </div>
-    <Tabs type="nav">
+    <Tabs type="nav" format="compact">
       <Tab label="Overshoot vs warming" />
       <Tab label="Trajectories" />
       <svelte:fragment slot="content">
         <TabContent>
-          <div class="scenario-scatterplot">
-            <ScatterplotWarming data={warmingData} unit="celsius" />
-            <p>Text describing the chart</p>
+          <div class="scenario-warming">
+            <div class="scenario-chart">
+              <ScatterplotWarming
+                data={warmingData}
+                unit="degrees-celsius"
+                bind:hoveredSector={currentWarmingTextUID} />
+            </div>
+            <div class="scenario-description">
+              <p>{ @html currentWarmingText }</p>
+            </div>
           </div>
         </TabContent>
         <TabContent>
           <div class="scenario-trajectories">
             <div class="scenario-chart">
-              <LineTimeSeries data={emissionsData} unit="ton" title="Global GHG emissions" />
+              <LineTimeSeries
+                data={emissionsData}
+                unit="ton"
+                title="Global GHG emissions"
+                ticksYHighlighted={[0]}
+                yTicks={4}
+                xTicks={4} />
             </div>
             <div class="scenario-chart">
-              <LineTimeSeries data={temperatureData} unit="celsius" title="Global mean tempearture" />
+              <LineTimeSeries
+                data={temperatureData}
+                unit="degrees-celsius"
+                title="Global mean tempearture"
+                yDomain={[1, 3]}
+                ticksYHighlighted={[1]}
+                ticks={4}
+                yTicks={4}
+                xTicks={4} />
             </div>
           </div>
         </TabContent>
@@ -106,26 +143,21 @@
 
     .scenario-split {
       display: grid;
-      grid-template-rows: minmax(150px, auto) auto 1fr;
-      grid-gap: var(--font-size-large-xs); // TODO
+      grid-template-rows: minmax(130px, auto) auto 1fr;
+      grid-gap: var(--font-size-large-xl); // TODO
 
-      .scenario-scatterplot {
+      .scenario-warming, .scenario-trajectories {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: var(--font-size-large-xs); // TODO
-        height: 200px;
-      }
-
-      .scenario-trajectories {
-        display: grid;
-        grid-template-columns: minmax(200px, auto) 1fr;
-        grid-gap: var(--font-size-large-xs); // TODO
+        align-content: stretch;
+        grid-auto-flow: column;
+        grid-gap: var(--font-size-large-xl);
       }
     }
   }
 
-  .scenario-chart {
-    width: 380px;
-    height: 200px;
+  .scenario-chart, .scenario-description {
+    width: 100%;
+    height: 280px;
   }
 </style>

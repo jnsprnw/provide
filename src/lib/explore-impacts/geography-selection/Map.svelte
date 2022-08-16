@@ -4,12 +4,12 @@
   import { geoPath, geoEqualEarth } from 'd3-geo';
   import { feature } from 'topojson-client';
   import * as world from './ne_110m_admin_0_countries.json';
-  import { createEventDispatcher } from 'svelte';
+  import {
+    UID_WORLD
+  } from '$lib/../config.js';
 
   export let hovered;
   export let selected;
-
-  const dispatch = createEventDispatcher();
 
   const MAP_KEY = 'ne_110m_admin_0_countries';
 
@@ -72,13 +72,6 @@
   const resizeSVG = () => {
     ({ width, height } = svg.getBoundingClientRect());
   };
-
-  function handleOver(item) {
-    //   $HOVER_GEOGRAPHY_UID = item;
-    //   dispatch('over', {
-    // 		item
-    // 	});
-  }
 </script>
 
 <figure class="page-map" role="main">
@@ -94,7 +87,10 @@
     <g>
       <g role="list">
         {#each countries as country}
-          <path d={country.d} on:mouseover={() => handleOver(country.code)} />
+          <path
+            d={country.d}
+            class:active={selected === UID_WORLD} 
+            class:hover={hovered === UID_WORLD} />
         {/each}
       </g>
       <g role="list">
@@ -108,13 +104,14 @@
         {/if}
       </g>
     </g>
-    <desc id="map-description">A map!</desc>
+    <desc id="map-description">TODO</desc>
   </svg>
 </figure>
 
 <style lang="scss">
   path {
     fill: var(--color-light-blue200);
+    transition: fill 0.2s ease-out;
 
     &.hover {
       fill: var(--color-light-blue400);

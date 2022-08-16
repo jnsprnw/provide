@@ -1,7 +1,3 @@
-dt {
-  font-weight: var(--weight-bold);
-}
-
 dd + dt {
   margin-top: var(--spacing-2);
 }
@@ -21,6 +17,11 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-family-header);
+}
+
+mark {
+  background-color: var(--color-light-petrol100);
+  color: var(--color-light-gray800);
 }
 
 i.emoji {
@@ -70,6 +71,23 @@ i.emoji {
   font-style: normal;
   font-size: var(--font-size-large-s);
   fill: var(--color-text-weaker);
+}
+
+.chart-label {
+  font-style: normal;
+  font-size: var(--font-size-large-s);
+  fill: var(--color-text-weaker);
+
+  &.chart-label--bg {
+    fill: var(--color-light-background-base);
+    stroke: var(--color-light-background-base);
+    stroke-opacity: 0.5;
+    stroke-width: 4px;
+  }
+
+  &.chart-label--bold {
+    font-weight: var(--font-font-weight-bold);
+  }
 }
 
 

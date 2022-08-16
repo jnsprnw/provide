@@ -1,6 +1,8 @@
 <script>
   import { formatValue } from '$lib/utils/formatting';
   import { SHIFTING_PATHWAYS_UID, UNAVOIDABLE_UID } from '$lib/../config.js';
+  import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
+  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
 
   export let indicator;
   export let threshold;
@@ -18,28 +20,23 @@
     ? scenarios.filter((scenario) => scenario.uid !== SHIFTING_PATHWAYS_UID)
     : scenarios;
   $: formattedThreshold = formatValue(threshold, indicator.unit.uid);
+  $: model = undefined; // TODO
 </script>
 
 <h2>
-  Probability of {indicator.label} exceeding {threshold}&thinsp;{indicator.unit
-    .label}
+  Probability of {indicator.label} exceeding {formattedThreshold}
 </h2>
 <p>
   Today’s risk of {indicator.label} exceeding {formattedThreshold} amounts to {today
     .values[0].formattedValue}.
   {#each scenarioList as scenario}
-    A <em class="text-underlined" style={`--color: ${scenario.color}`}
-      >{scenario.label}</em
-    >
-    scenario puts us on a trajectory where it would reach {scenario.values[0]
+    A <ScenarioSingle scenario={scenario} /> puts us on a trajectory where it would reach {scenario.values[0]
       .formattedValue} in 2030, {scenario.values[1].formattedValue} in 2050 and {scenario
       .values[2].formattedValue} in 2100.
   {/each}
   {#if showSpMessage}
-    But ambitious mitigation according to the <em
-      class="text-underlined"
-      style={`--color: ${spData.color}`}>{spData.label}</em
-    >
+    But ambitious mitigation according to the
+    <ScenarioSingle scenario={spData} />
     scenario could avoid some of it, leaving us with an unavoidable risk of {indicator.label}
     exceeding
     {formattedThreshold} of {spData.values[0].formattedValue} in 2030, {spData
@@ -47,3 +44,7 @@
     2100.
   {/if}
 </p>
+<ChartFacts>
+  <dt>Model:</dt>
+  <dd>{ model || '—' }</dd>
+</ChartFacts>

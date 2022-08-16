@@ -2,15 +2,14 @@
   import { CURRENT_SCENARIOS } from '$lib/../stores/store';
   import { formatObjArr } from '$lib/utils.js';
   export let scenarios = $CURRENT_SCENARIOS;
+  import ScenarioSingle from './ScenarioSingle.svelte';
 
   $: scenarioList = formatObjArr(scenarios, 'label');
 </script>
 
 {#each scenarioList as { type, value }}
   {#if type === 'element'}
-    <em class="text-underlined" style={`--color: ${value.color}`}>
-      {value.label}
-    </em>
+    <ScenarioSingle scenario={value} />
   {:else}
     {value}
   {/if}

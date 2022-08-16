@@ -6,7 +6,9 @@
   export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
 
   export let ticks = 4;
+  export let ticksHighlighted = [0];
   export let gridlines = true;
+  export let gridClass = '';
 
   export let xTick = 0;
   export let yTick = 0;
@@ -18,7 +20,7 @@
   export let rightToLeft = false;
   export let formatTick = (d) => formatValue(d, "default");
 
-  $: tickLength = (tickSize ?? $width) - tickPadding;
+  $: tickLength = (tickSize ?? $width) + tickPadding;
 
   $: isBandwidth = typeof $yScale.bandwidth === "function";
 
@@ -34,11 +36,13 @@
     <g
       class="tick tick-{tick}"
       transform="translate({$xScale.range()[0] +
-        (isBandwidth ? padding.left : 0)},
+        (isBandwidth ? padding.left : padding.left - tickPadding)},
       {$yScale(tick)})"
     >
       {#if gridlines !== false}
         <line
+          class={`chart-grid ${gridClass}`}
+          class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
           x1={rightToLeft ? -tickPadding : tickPadding}
           x2={rightToLeft ? -tickLength : tickLength}
           y1={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
@@ -60,6 +64,7 @@
         dx={isBandwidth ? -5 : dxTick}
         dy={isBandwidth ? 0 : dyTick}
         class="chart-tick"
+        dominant-baseline="middle"
         style="
           text-anchor:{isBandwidth ? 'end' : textAnchor};
         "
@@ -74,14 +79,14 @@
 </g>
 
 <style lang="scss">
-  .tick line {
-    //@include gridline();
-  }
+  // .tick line {
+  //   //@include gridline();
+  // }
 
-  .tick.tick-0 line {
-    stroke-dasharray: 0;
-    stroke: var(--color-foreground-weaker);
-  }
+  // .tick.tick-0 line {
+  //   stroke-dasharray: 0;
+  //   stroke: var(--color-foreground-weaker);
+  // }
 
   // .bg {
   //   stroke-width: 5;

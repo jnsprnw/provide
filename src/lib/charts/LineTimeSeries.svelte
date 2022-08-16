@@ -5,16 +5,21 @@
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
+  import { sortBy } from 'lodash-es';
 
   export let data = [];
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
   export let title;
+  export let yDomain = undefined;
+  export let ticksYHighlighted = [0];
+  export let xTicks = 4;
+  export let yTicks = 4;
 
   // TODO: Get unit label
 
-  const padding = { top: 0, right: 20, bottom: 0, left: 20 };
+  const padding = { top: 5, right: 10, bottom: 30, left: 40 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -23,10 +28,11 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
 
-  $: sortedData = data.slice(0).sort((a, b) =>
-    // First sort by `highlight`, then by `color`
-    a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
-  );
+  $: sortedData = sortBy(data, ['highlight', 'isSelected'])
+  // $: sortedData = data.slice(0).sort((a, b) =>
+  //   // First sort by `highlight`, then by `color`
+  //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
+  // );
 </script>
 
 <div class="figure-container" class:hasTitle={title}>
@@ -43,10 +49,16 @@
       y={yKey}
       data={sortedData}
       flatData={flatten(sortedData)}
+      yDomain={yDomain}
     >
       <Svg>
-        <AxisX gridlines={false} ticks={6} {padding} />
-        <AxisY {padding} ticks={4} xTick={-3} formatTick={formatTickY} />
+        <AxisX gridlines={false} ticks={xTicks} {padding} />
+        <AxisY
+          {padding}
+          ticks={yTicks}
+          xTick={-3}
+          formatTick={formatTickY}
+          ticksHighlighted={ticksYHighlighted} />
         <MultipleLineLayer />
       </Svg>
     </LayerCake>

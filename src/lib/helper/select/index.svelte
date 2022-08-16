@@ -80,7 +80,7 @@
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
-    color: var(--text-color-base);
+    color: var(--text-color-base); // TODO: Does this color exist?
     font-weight: 600;
   }
 </style>

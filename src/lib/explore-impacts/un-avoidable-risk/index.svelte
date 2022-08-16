@@ -96,6 +96,8 @@
 </LoadingWrapper>
 
 <style lang="scss">
+  @import '../../../styles/global.scss';
+
   .chart-container {
     grid-column: 7 / span 6;
   }
@@ -104,5 +106,6 @@
   }
   .chart-info {
     grid-column: 1 / span 5;
+    @include chart-info-layout();
   }
 </style>

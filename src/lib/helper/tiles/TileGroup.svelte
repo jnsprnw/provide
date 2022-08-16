@@ -30,7 +30,7 @@
 
 <fieldset disabled="{disabled}" class:tile-group="{true}" {...$$restProps}>
   <legend class:text-label="{true}" class:text-label--bold={true}>{legend}</legend>
-  <div>
+  <div class="tile-group-content">
     <slot />
   </div>
 </fieldset>
@@ -39,6 +39,19 @@
   @import "../../../styles/global.scss";
 
   .tile-group {
+    legend {
+      margin-bottom: var(--size-space-large-xxxs); // I don't know why flex or grid gap is not working here.
+    }
+
     @include unstyle-fieldset();
+
+    .tile-group-content {
+      display: grid;
+      flex-direction: column;
+      grid-auto-flow: column;
+      row-gap: var(--size-space-large-xxxs);
+      grid-template-rows: auto 1fr;
+      height: 100%;
+    }
   }
 </style>

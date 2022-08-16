@@ -27,10 +27,7 @@
   <div class="wrapper">
     <div class="explore-intro">
       <p class="explore-description">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor
-        sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-        ut labore et dolore magna aliqua.
+        Explore how different levels of climate action will lead to different climate impacts over the countries, cities, and other geography types you're interested in. Visualise their evolution over time and space, the risk of exceeding critical impact thresholds, as well as the reversibility of impacts under overshoot scenarios.
       </p>
     </div>
   </div>
@@ -75,7 +72,7 @@
   <div class="wrapper">
     <SelectionMessage />
     <Tabs type="nav" selected={0}>
-      <Tab label="Impact analysis" />
+      <Tab label="Impact overview" />
       <Tab label="(Un)avoidable risk" />
       <Tab label="Mitigation benefits" />
       <Tab label="Reversibility" />

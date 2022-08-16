@@ -7,6 +7,7 @@ export const SCENARIO_DATA_KEYS = ['emissions', 'mean-temperature'];
 export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCESS = 'success';
 export const STATUS_FAILED = 'failed';
+export const UID_WORLD = 'world';
 
 export const DEFAULT_FORMAT_UID = 'float';
 
