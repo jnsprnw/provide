@@ -4,12 +4,11 @@
 
   export let slotProps;
   export let process;
-  export let id;
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
   export let renderWhileEmpty = false; // If set to true, slot component has to know how to deal with unloaded data
 
-  let currentSlotProps = slotProps; // Always holds previous props and only gets updated once all data is loaded
+  let currentSlotProps; // Always holds previous props and only gets updated once all data is loaded
 
   function flattenData(datum, acc = []) {
     if (Array.isArray(datum) || !datum.status) {
@@ -24,7 +23,8 @@
   $: flatData = flattenData(slotProps.data);
   $: loadedData = filter(flatData, (d) => d.status === STATUS_SUCCESS);
 
-  $: if (loadedData.length > 0) isEmpty = false;
+  // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
+  $: if (currentSlotProps) isEmpty = false;
 
   $: if (loadedData.length !== flatData.length) {
     isLoading = true;

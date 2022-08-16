@@ -70,7 +70,6 @@
     scenarios,
     geography,
   }}
-  id="bla"
   slotProps={{
     data: {
       impactTimeData: $IMPACT_TIME_DATA,
