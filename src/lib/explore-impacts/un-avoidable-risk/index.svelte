@@ -61,7 +61,9 @@
       values: unavoidableValues,
     });
 
-    return { thresholds, data: processedScenarios };
+    const { model, parameter } = data;
+
+    return { thresholds, data: processedScenarios, model, parameter };
   };
 </script>
 

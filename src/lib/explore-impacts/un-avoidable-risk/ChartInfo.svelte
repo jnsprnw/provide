@@ -3,11 +3,14 @@
   import { SHIFTING_PATHWAYS_UID, UNAVOIDABLE_UID } from '$lib/../config.js';
   import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
+  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
 
   export let indicator;
   export let threshold;
   export let data;
   export let currentScenarios;
+  export let model;
+  export let parameter;
 
   $: scenarios = data.filter((scenario) => currentScenarios[scenario.uid]);
   $: today = data.find((d) => d.uid === UNAVOIDABLE_UID);
@@ -20,7 +23,6 @@
     ? scenarios.filter((scenario) => scenario.uid !== SHIFTING_PATHWAYS_UID)
     : scenarios;
   $: formattedThreshold = formatValue(threshold, indicator.unit.uid);
-  $: model = undefined; // TODO
 </script>
 
 <h2>
@@ -45,6 +47,5 @@
   {/if}
 </p>
 <ChartFacts>
-  <dt>Model:</dt>
-  <dd>{model || '—'}</dd>
+  <ModelList data={[model]} />
 </ChartFacts>
