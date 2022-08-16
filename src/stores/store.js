@@ -197,7 +197,6 @@ export const CURRENT_INDICATOR_PARAMETERS = derived(
       {}
     );
 
-    defaultValues = { ...defaultValues, reference: 'pre-industrial' };
     // Updating the current option selection with the default values, in case they were not present for the previous indicator
     CURRENT_INDICATOR_OPTION_VALUES.update((old) => ({
       ...defaultValues,
