@@ -13,6 +13,7 @@
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
   import { UNAVOIDABLE_UID, KEY_PARAMETERS, KEY_MODEL } from '$lib/../config.js';
+  import { sortBy, reverse } from 'lodash-es';
   
   let currentThreshold;
 
@@ -24,7 +25,7 @@
     currentThreshold = currentThreshold || thresholds[0].value;
 
     const thresholdIndex = data.thresholds.indexOf(currentThreshold);
-    const processedScenarios = data.data.map((scenarioData) => {
+    const processedScenarios = reverse(sortBy(data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
       const scenario = currentScenarios[key] || scenarios[key];
       const values = data.years.map((year, yearIndex) => {
@@ -39,7 +40,7 @@
         ...scenario,
         values,
       };
-    });
+    }), 'color'));
 
     const unavoidableValues = data.years.map((year, yearIndex) => {
       const value = min(processedScenarios, (d) => d.values[yearIndex].value);
@@ -92,7 +93,7 @@
         bind:value={currentThreshold}
       />
       <div class="chart">
-        <RiskChart {isLoading} {...props} {...asyncProps} />
+        <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
       </div>
     </div>
   </div>
