@@ -69,28 +69,26 @@
 </div>
 
 <div class="impacts-analysis container">
-  <div class="wrapper">
+  <div class="wrapper vertical-space">
     <SelectionMessage />
     <Tabs type="nav" selected={0}>
       <Tab label="Impact overview" />
       <Tab label="(Un)avoidable risk" />
-      <Tab label="Mitigation benefits" />
-      <Tab label="Reversibility" />
+      <Tab label="Mitigation benefits" disabled={true} />
+      <Tab label="Reversibility" disabled={true} />
       <svelte:fragment slot="content">
-        <div class="padding-top-xl">
-          <TabContent>
-            <ImpactAnalysis />
-          </TabContent>
-          <TabContent>
-            <UnAvoidableRisk />
-          </TabContent>
-          <TabContent>
-            <MitigationBenefits />
-          </TabContent>
-          <TabContent>
-            <Reversibility />
-          </TabContent>
-        </div>
+        <TabContent>
+          <ImpactAnalysis />
+        </TabContent>
+        <TabContent>
+          <UnAvoidableRisk />
+        </TabContent>
+        <TabContent>
+          <MitigationBenefits />
+        </TabContent>
+        <TabContent>
+          <Reversibility />
+        </TabContent>
       </svelte:fragment>
     </Tabs>
   </div>

@@ -23,6 +23,7 @@
   aria-selected={selected}
   aria-disabled={disabled}
   aria-current={ selected ? loc : 'false' }
+  title={disabled ? 'Not yet available' : label}
   class:active={selected}
   {...$$restProps}
   on:click|preventDefault={() => {

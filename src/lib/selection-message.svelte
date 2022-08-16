@@ -20,8 +20,8 @@
 
 <style lang="scss">
 	.selection-message {
-		background-color: var(--color-light-blue100); // TODO
-		padding: 1rem; // TODO
-		margin: 1rem 0;
+		background-color: var(--color-light-blue100);
+		border: 1px solid var(--color-light-blue200);
+		padding: var(--size-spacer-large-s);
 	}
 </style>
