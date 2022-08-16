@@ -86,10 +86,12 @@
       geography={$CURRENT_GEOGRAPHY}
       scenarios={$CURRENT_SCENARIOS}
     />
-    <p>
-      The gridded background shows the certainty of our calculations. The darker
-      the color, the more likely it will become true.
-    </p>
+    {#if hasSingleScenario}
+      <p>
+        The gridded background shows the certainty of our calculations. The
+        darker the color, the more likely it will become true.
+      </p>
+    {/if}
     <dl>
       <ResolutionTime {hasSingleScenario} {impactTimeData} {distributionData} />
     </dl>
