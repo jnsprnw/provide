@@ -15,6 +15,7 @@
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ModelList from '$lib/helper/chart-description/ModelList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
+  import { KEY_PARAMETERS, KEY_MODEL } from "$lib/../config.js";
 
   $: process = ({ impactDistributionData, impactTimeData }) => {
     const impactDistribution = (() => {
@@ -24,8 +25,8 @@
         yearStep,
         valueStep,
         data,
-        model,
-        parameter
+        [KEY_MODEL]: model,
+        [KEY_PARAMETERS]: parameters
       } = impactDistributionData.data;
 
       const mean = data?.mean.map((value, i) => {
@@ -40,7 +41,7 @@
         }));
       });
 
-      return { mean, distribution, yearStep, valueStep, model, parameter };
+      return { mean, distribution, yearStep, valueStep, model, parameters };
     })();
 
     const impactTime = impactTimeData.map((datum, i) => {
@@ -48,8 +49,8 @@
         yearStart,
         yearStep,
         data,
-        model,
-        parameter
+        [KEY_MODEL]: model,
+        [KEY_PARAMETERS]: parameters
       } = datum.data; // Why is datum.data undefined on server here?
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
@@ -57,7 +58,7 @@
         color: $CURRENT_SCENARIOS[i].color,
         yearStart,
         yearStep,
-        parameter,
+        parameters,
         model,
         values: indicatorData.map((values, i) => ({
           value: values[values.length - 2],

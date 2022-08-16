@@ -10,7 +10,7 @@
   export let data;
   export let currentScenarios;
   export let model;
-  export let parameter;
+  export let parameters;
 
   $: scenarios = data.filter((scenario) => currentScenarios[scenario.uid]);
   $: today = data.find((d) => d.uid === UNAVOIDABLE_UID);

@@ -12,8 +12,8 @@
   import Select from '$lib/helper/Select/index.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import { UNAVOIDABLE_UID } from '$lib/../config.js';
-
+  import { UNAVOIDABLE_UID, KEY_PARAMETERS, KEY_MODEL } from '$lib/../config.js';
+  
   let currentThreshold;
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
@@ -61,9 +61,9 @@
       values: unavoidableValues,
     });
 
-    const { model, parameter } = data;
+    const { [KEY_MODEL]: model, [KEY_PARAMETERS]: parameters } = data;
 
-    return { thresholds, data: processedScenarios, model, parameter };
+    return { thresholds, data: processedScenarios, model, parameters };
   };
 </script>
 
