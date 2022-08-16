@@ -13,11 +13,13 @@ export const loadFromStrapi = function (url, fetch) {
 
 // Load data from Climate Analytics API
 // We use the fetch function provided by Svelte if provided.
-export const loadFromAPI = function (url, query, svelteFetch = fetch) {
-  return new Promise(async (resolve) => {
+export const loadFromAPI = async function (url, query, svelteFetch = fetch) {
+  try {
     const res = await svelteFetch(`${url}?${query}`); // ${import.meta.env.VITE_DATA_API_URL}
     const data = await res.json();
-    //await timeout();
-    resolve(data);
-  });
+    return data;
+  } catch (e) {
+    console.log(e);
+    return undefined;
+  }
 };

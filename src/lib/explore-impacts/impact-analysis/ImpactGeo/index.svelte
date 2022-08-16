@@ -23,9 +23,9 @@
   let center;
   let bounds;
 
-  $: process = ({ data }) => {
+  $: process = (asyncProps) => {
     const calculateDifference = () => {
-      const [grid1, grid2] = data;
+      const [grid1, grid2] = asyncProps;
       return {
         ...grid1,
         data: {
@@ -42,7 +42,7 @@
     };
 
     // The data that is actually being rendered
-    const renderedData = showDifference ? [calculateDifference()] : data;
+    const renderedData = showDifference ? [calculateDifference()] : asyncProps;
 
     const colorScale = (() => {
       let domain = [0, 1];
@@ -54,18 +54,16 @@
 
     return { data: renderedData, colorScale };
   };
-
-  //$: console.log(center);
 </script>
 
 <LoadingWrapper
-  let:props
+  let:asyncProps
+  asyncProps={$IMPACT_GEO_DATA}
   {process}
-  slotProps={{ data: $IMPACT_GEO_DATA }}
   let:isLoading
 >
   <div slot="placeholder" class="placeholder">Loading</div>
-  <Header bind:displayOption {showDifference} {...props} />
+  <Header bind:displayOption {showDifference} {...asyncProps} />
   <div class={`maps cols-${data.length}`}>
     {#each data as d}
       <div class="map-wrapper">
@@ -79,7 +77,7 @@
           <Mask feature={shape} layerId="mask-layer" />
           {#if d.status === STATUS_SUCCESS}
             <RasterLayer
-              colorScale={props.colorScale}
+              colorScale={asyncProps.colorScale}
               {...d.data}
               before="mask-layer"
             />

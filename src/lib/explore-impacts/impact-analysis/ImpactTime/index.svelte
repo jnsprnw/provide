@@ -16,7 +16,7 @@
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
 
-  $: process = ({ data: { impactDistributionData, impactTimeData } }) => {
+  $: process = ({ impactDistributionData, impactTimeData }) => {
     const impactDistribution = (() => {
       const { yearStart, valueStart, yearStep, valueStep, data } =
         impactDistributionData.data;
@@ -61,20 +61,22 @@
 
 <LoadingWrapper
   {process}
-  let:props={{
+  let:asyncProps={{
     impactTime,
     impactDistribution,
     hasSingleScenario,
+  }}
+  let:props={{
     unit,
     indicator,
     scenarios,
     geography,
   }}
-  slotProps={{
-    data: {
-      impactTimeData: $IMPACT_TIME_DATA,
-      impactDistributionData: $IMPACT_TIME_DISTRIBUTION_DATA,
-    },
+  asyncProps={{
+    impactTimeData: $IMPACT_TIME_DATA,
+    impactDistributionData: $IMPACT_TIME_DISTRIBUTION_DATA,
+  }}
+  props={{
     unit: $CURRENT_INDICATOR_UNIT_UID,
     indicator: $CURRENT_INDICATOR,
     scenarios: $CURRENT_SCENARIOS,

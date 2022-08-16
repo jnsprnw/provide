@@ -16,7 +16,7 @@
 
   let currentThreshold;
 
-  $: process = ({ data: { data }, scenarios, currentScenarios }) => {
+  $: process = ({ data }, { scenarios, currentScenarios }) => {
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
@@ -67,10 +67,11 @@
 
 <LoadingWrapper
   let:props
+  let:asyncProps
   let:isLoading
   {process}
-  slotProps={{
-    data: $UN_AVOIDABLE_RISK_DATA,
+  asyncProps={$UN_AVOIDABLE_RISK_DATA}
+  props={{
     scenarios: $DICTIONARY_SCENARIOS,
     currentScenarios: $DICTIONARY_CURRENT_SCENARIOS,
     indicator: $CURRENT_INDICATOR,
@@ -80,16 +81,16 @@
 
   <div class="wrapper grid">
     <div class="chart-info">
-      <ChartInfo {...props} threshold={currentThreshold} />
+      <ChartInfo {...props} {...asyncProps} threshold={currentThreshold} />
     </div>
     <div class="chart-container">
       <Select
         label="Threshold"
-        options={props.thresholds}
+        options={asyncProps.thresholds}
         bind:value={currentThreshold}
       />
       <div class="chart">
-        <RiskChart {isLoading} {...props} />
+        <RiskChart {isLoading} {...props} {...asyncProps} />
       </div>
     </div>
   </div>
