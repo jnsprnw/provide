@@ -27,7 +27,7 @@
   $: loadedData = filter(flatData, (d) => d.status === STATUS_SUCCESS);
 
   // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
-  $: if (asyncProps) isEmpty = false;
+  $: if (currentAsyncProps) isEmpty = false;
 
   $: if (loadedData.length !== flatData.length) {
     isLoading = true;
@@ -44,7 +44,7 @@
 </script>
 
 {#if isEmpty && !renderWhileEmpty}
-  <slot name="placeholder"><div class="placeholder">Loadingz</div></slot>
+  <slot name="placeholder"><div class="placeholder">Loading</div></slot>
 {:else}
   {#if isLoading}
     <slot name="loading" />

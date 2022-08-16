@@ -25,8 +25,8 @@ export const GEOGRAPHIES = (() => {
           return {
             ...geography,
             continent,
-            hasContinent: Boolean(continent)
-          }
+            hasContinent: Boolean(continent),
+          };
         });
         return {
           ...acc,
@@ -131,7 +131,7 @@ export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
 export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
 
 /* SCENARIO STATE */
-export const CURRENT_SCENARIOS_UID = writable(['sp']); // Currently selected scenarios (not hovered1)
+export const CURRENT_SCENARIOS_UID = writable(['curpol']); // Currently selected scenarios (not hovered1)
 
 export const CURRENT_SCENARIOS = derived(
   [CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME],
@@ -191,11 +191,13 @@ export const CURRENT_INDICATOR_PARAMETERS = derived(
       $parameters.find(({ uid }) => uid === key)
     );
 
-    const defaultValues = reduce(
+    let defaultValues = reduce(
       $indicator.parameters,
       (acc, [def], key) => ({ ...acc, [key]: def }),
       {}
     );
+
+    defaultValues = { ...defaultValues, reference: 'pre-industrial' };
     // Updating the current option selection with the default values, in case they were not present for the previous indicator
     CURRENT_INDICATOR_OPTION_VALUES.update((old) => ({
       ...defaultValues,
