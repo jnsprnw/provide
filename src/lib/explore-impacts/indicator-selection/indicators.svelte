@@ -2,30 +2,16 @@
   import { CURRENT_INDICATOR_UID } from '$lib/../stores/store.js';
   import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
   import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
-  import {
-    CURRENT_GEOGRAPHY_UID,
-    CURRENT_SCENARIOS_UID,
-    CURRENT_SCENARIOS,
-  } from '$lib/../stores/store.js';
-  import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
-  import { handle } from '$lib/api/api.js';
-  import { END_IMPACT_TIME, STATUS_SUCCESS } from '$lib/../config.js';
+  import { CURRENT_SCENARIOS } from '$lib/../stores/store.js';
+  import { STATUS_SUCCESS } from '$lib/../config.js';
   import PreviewTimeSeries from '$lib/charts/PreviewTimeSeries.svelte';
+  import { IMPACT_TIME_ALL_DATA } from '$lib/../stores/impact-time-all';
 
   export let indicators = [];
 
   $: indicatorData = indicators
     .map((indicator) => {
-      const scenarios = handle(
-        END_IMPACT_TIME,
-        'get',
-        {
-          geography: $CURRENT_GEOGRAPHY_UID,
-          scenarios: $CURRENT_SCENARIOS_UID,
-          indicator: indicator.uid,
-        },
-        $IMPACT_TIME_CACHE
-      )
+      const scenarios = $IMPACT_TIME_ALL_DATA
         .filter(({ status }) => status === STATUS_SUCCESS)
         .map((response, i) => {
           const { data } = response;

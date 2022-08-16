@@ -8,6 +8,7 @@ import {
   END_UN_AVOIDABLE_RISK,
   END_IMPACT_GEO,
   END_GEO_SHAPE,
+  END_IMPACT_TIME_ALL,
 } from '$lib/../config.js';
 import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
 import { IMPACT_TIME_DISTRIBUTION_CACHE } from '$lib/../stores/impact-time-distribution.js';
@@ -22,6 +23,7 @@ import {
   CURRENT_INDICATOR_PARAMETERS_KEYS,
   CURRENT_IMPACT_GEO_YEAR_UID,
 } from '$lib/../stores/store.js';
+import { IMPACT_TIME_ALL_CACHE } from '$lib/../stores/impact-time-all';
 
 function returnDefault(callback) {
   if (callback === 'get') {
@@ -71,6 +73,26 @@ export function handle(
   const optionsValues = map(options, (value) => value);
 
   switch (endpoint) {
+    case END_IMPACT_TIME_ALL:
+      addr = scenarios.map((scenario) => {
+        return [geography, scenario];
+      });
+      param = scenarios.map((scenario) => ({
+        geography,
+        scenario,
+      })); // We need this for the load function
+      data = take(IMPACT_TIME_ALL_CACHE);
+      store = IMPACT_TIME_ALL_CACHE;
+      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time`;
+      break;
+    case END_DISTRIBUTION:
+      scenario = scenarios[0];
+      addr = [[geography, scenario, indicator, ...optionsValues]];
+      param = [{ geography, indicator, scenarios: [scenario], ...options }]; // We need this for the load function
+      data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
+      store = IMPACT_TIME_DISTRIBUTION_CACHE;
+      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time-distribution`;
+      break;
     case END_IMPACT_TIME:
       addr = scenarios.map((scenario) => {
         return [geography, scenario, indicator, ...optionsValues];

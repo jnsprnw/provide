@@ -1,6 +1,4 @@
 <script>
-  import { get } from 'lodash-es';
-  import Grid from '$lib/helper/Grid.svelte';
   import { IMPACT_TIME_DISTRIBUTION_DATA } from '$lib/../stores/impact-time-distribution.js';
   import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
   import {
@@ -8,7 +6,6 @@
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
-    CURRENT_SCENARIOS_UID,
     CURRENT_SCENARIOS,
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
@@ -17,34 +14,31 @@
   import TitleTimeSeries from './TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import { STATUS_SUCCESS } from '$lib/../config.js';
+  import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
 
-  $: hasSingleScenario = $CURRENT_SCENARIOS_UID.length === 1;
+  $: process = ({ data: { impactDistributionData, impactTimeData } }) => {
+    const impactDistribution = (() => {
+      const { yearStart, valueStart, yearStep, valueStep, data } =
+        impactDistributionData.data;
 
-  $: distributionData = (() => {
-    const { yearStart, valueStart, yearStep, valueStep, data } =
-      get($IMPACT_TIME_DISTRIBUTION_DATA, ['data']) || {};
+      const mean = data?.mean.map((value, i) => {
+        return { year: yearStart + yearStep * i, value };
+      });
 
-    const mean = data?.mean.map((value, i) => {
-      return { year: yearStart + yearStep * i, value };
-    });
+      const distribution = data?.distribution.map((yearValues, i) => {
+        return yearValues.map((distribution, j) => ({
+          year: yearStart + yearStep * i,
+          value: valueStart + valueStep * j,
+          distribution,
+        }));
+      });
 
-    const distribution = data?.distribution.map((yearValues, i) => {
-      return yearValues.map((distribution, j) => ({
-        year: yearStart + yearStep * i,
-        value: valueStart + valueStep * j,
-        distribution,
-      }));
-    });
+      return { mean, distribution, yearStep, valueStep };
+    })();
 
-    return { mean, distribution, yearStep, valueStep };
-  })();
-
-  $: impactTimeData = $IMPACT_TIME_DATA
-    .filter((d) => d.status === STATUS_SUCCESS)
-    .map((datum, i) => {
-      const { yearStart, yearStep, data } = datum.data || {}; // Why is datum.data undefined on server here?
-      const indicatorData = data ? data[$CURRENT_INDICATOR_UID] : [];
+    const impactTime = impactTimeData.map((datum, i) => {
+      const { yearStart, yearStep, data } = datum.data; // Why is datum.data undefined on server here?
+      const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
         color: $CURRENT_SCENARIOS[i].color,
@@ -57,55 +51,76 @@
       };
     });
 
+    const hasSingleScenario = impactTimeData.length === 1;
+
+    return { impactTime, impactDistribution, hasSingleScenario };
+  };
+
   $: model = undefined; // TODO
 </script>
 
-<div class="wrapper grid">
-  <div class="chart">
-    {#if hasSingleScenario}
-      {#if get($IMPACT_TIME_DISTRIBUTION_DATA, ['status']) === STATUS_SUCCESS}
-        <LineDistributionChart
-          {...distributionData}
-          unit={$CURRENT_INDICATOR_UNIT_UID}
-        />
-      {/if}
-    {:else}
-      <LineTimeSeries
-        data={impactTimeData}
-        unit={$CURRENT_INDICATOR_UNIT_UID}
-      />
-    {/if}
-  </div>
-  <div class="chart-info">
-    <TitleTimeSeries
-      indicator={$CURRENT_INDICATOR}
-      geography={$CURRENT_GEOGRAPHY}
-      {hasSingleScenario}
-      {impactTimeData}
-      {distributionData}
-    />
-    <DescriptionTimeSeries
-      indicator={$CURRENT_INDICATOR}
-      geography={$CURRENT_GEOGRAPHY}
-      scenarios={$CURRENT_SCENARIOS}
-    />
-    <p>
+<LoadingWrapper
+  {process}
+  let:props={{
+    impactTime,
+    impactDistribution,
+    hasSingleScenario,
+    unit,
+    indicator,
+    scenarios,
+    geography,
+  }}
+  id="bla"
+  slotProps={{
+    data: {
+      impactTimeData: $IMPACT_TIME_DATA,
+      impactDistributionData: $IMPACT_TIME_DISTRIBUTION_DATA,
+    },
+    unit: $CURRENT_INDICATOR_UNIT_UID,
+    indicator: $CURRENT_INDICATOR,
+    scenarios: $CURRENT_SCENARIOS,
+    geography: $CURRENT_GEOGRAPHY,
+  }}
+>
+  <div class="wrapper grid">
+    <div class="chart">
       {#if hasSingleScenario}
-        The line indicates the median estimate, while the colour variations
-        indicate the dispersion of possible results around the median (the
-        darker the colour, the more likely they can be obtained for this
-        scenario).
+        <LineDistributionChart {...impactDistribution} {unit} />
       {:else}
-        The lines indicates the median estimates for each scenario.
+        <LineTimeSeries data={impactTime} unit />
       {/if}
-    </p>
-    <ChartFacts>
-      <ResolutionTime {hasSingleScenario} {impactTimeData} {distributionData} />
-      <dt>Model:</dt>
-      <dd>{model || '—'}</dd>
-    </ChartFacts>
+    </div>
+    <div class="chart-info">
+      <TitleTimeSeries
+        {indicator}
+        {geography}
+        {hasSingleScenario}
+        impactTimeData={impactTime}
+        distributionData={impactDistribution}
+      />
+      <DescriptionTimeSeries {indicator} {geography} {scenarios} />
+      <p>
+        {#if hasSingleScenario}
+          The line indicates the median estimate, while the colour variations
+          indicate the dispersion of possible results around the median (the
+          darker the colour, the more likely they can be obtained for this
+          scenario).
+        {:else}
+          The lines indicates the median estimates for each scenario.
+        {/if}
+      </p>
+      <ChartFacts>
+        <ResolutionTime
+          {hasSingleScenario}
+          impactTimeData={impactTime}
+          distributionData={impactDistribution}
+        />
+        <dt>Model:</dt>
+        <dd>{model || '—'}</dd>
+      </ChartFacts>
+    </div>
   </div>
-</div>
+</LoadingWrapper>
 
 <style lang="scss">
   @import '../../../../styles/global.scss';
