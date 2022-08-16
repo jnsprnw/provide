@@ -1,14 +1,6 @@
-dd + dt {
-  margin-top: var(--spacing-2);
-}
-
 * {
-  font-family: var(--font-family-default);
+  font-family: var(--font-font-family-base);
   font-weight: var(--font-font-weight-regular);
-}
-
-strong {
-  font-weight: var(--font-font-weight-bold);
 }
 
 a {
@@ -16,7 +8,7 @@ a {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-header);
+  font-family: var(--font-font-family-heading);
 }
 
 mark {
