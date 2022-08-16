@@ -54,7 +54,7 @@ $extra-wide: 1700px !default;
   display: block;
   border: 1px solid var(--color-light-petrol200);
   border-radius: var(--radius-interactive-l);
-  transition: border-color 0.3s ease-out;
+  transition: border-color var(--transition-duration-base) ease-out;
   padding: var(--size-space-large-xxs);
 
   &:hover, &:not(:placeholder-shown) {
@@ -72,14 +72,14 @@ $extra-wide: 1700px !default;
   border: 1px solid transparent;
   background-color: transparent;
   border-radius: var(--radius-interactive-l);
-  transition: background-color 0.3s ease-out, border-color 0.3s ease-out;
+  transition: background-color var(--transition-duration-base) ease-out, border-color var(--transition-duration-base) ease-out;
   padding: var(--size-space-large-xxs);
   cursor: pointer;
 
   span {
     font-size: var(--font-size-large-m);
     font-weight: var(--font-font-weight-regular);
-    transition: color 0.3s ease-out;
+    transition: color var(--transition-duration-base) ease-out;
   }
 
   &:hover, &:focus {
@@ -157,7 +157,7 @@ $extra-wide: 1700px !default;
 @mixin tab-nav-tab {
   padding: var(--size-space-large-xs) 0;
   border-bottom: var(--stroke-active-bold) solid transparent;
-  transition: border-bottom-color 0.3s ease-out; // TODO
+  transition: border-bottom-color var(--transition-duration-base) ease-out; // TODO
 
   &.tab--compact {
     padding: var(--size-space-large-xxxs) 0;
@@ -166,7 +166,7 @@ $extra-wide: 1700px !default;
 
   .link {
     color: var(--color-brand-stronger);
-    transition: color 0.3s ease-out; // TODO
+    transition: color var(--transition-duration-base) ease-out; // TODO
     cursor: pointer;
 
     &:hover, &:focus {

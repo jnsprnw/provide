@@ -111,7 +111,7 @@
 <style lang="scss">
   path {
     fill: var(--color-light-blue200);
-    transition: fill 0.2s ease-out;
+    transition: fill var(--transition-duration-quick) ease-out;
 
     &.hover {
       fill: var(--color-light-blue400);

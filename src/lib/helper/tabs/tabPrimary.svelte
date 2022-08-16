@@ -82,12 +82,12 @@
     gap: var(--size-spacer-large-xs);
     cursor: pointer;
     min-width: 170px;
-    transition: color 0.3s ease-out;
+    transition: color var(--transition-duration-base) ease-out;
     line-height: 1.2; // TODO: Test with Congo (Democratic Republic), Gradual Strengthening and Near-surface air temperature
 
     span {
       padding: var(--size-space-large-m);
-      transition: box-shadow 0.3s ease-out; // TODO
+      transition: box-shadow var(--transition-duration-base) ease-out; // TODO
       font-size: var(--font-size-large-l);
       font-weight: var(--font-font-weight-bold);
       border-radius: var(--radius-interactive-l); // TODO

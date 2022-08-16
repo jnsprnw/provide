@@ -160,21 +160,21 @@
     grid-gap: 1rem; // TODO
     align-items: end;
     justify-content: space-between;
-    transition: color 0.3s ease-out;
+    transition: color var(--transition-duration-base) ease-out;
 
     .color-indicator {
       color: transparent;
-      transition: color 0.3s ease-out;
+      transition: color var(--transition-duration-base) ease-out;
     }
 
     .mark {
       color: #fff; // TODO
-      transition: color 0.3s ease-out;
+      transition: color var(--transition-duration-base) ease-out;
     }
 
     .box {
       color: var(--color-light-blue300); // TODO
-      transition: color 0.3s ease-out;
+      transition: color var(--transition-duration-base) ease-out;
     }
   }
   input:checked + label {

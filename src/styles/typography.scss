@@ -148,7 +148,7 @@ i.emoji {
     color: var(--color-brand-stronger);
     text-decoration: underline;
     text-decoration-color: var(--color-brand-weaker);
-    transition: text-decoration-color 0.3s ease;
+    transition: text-decoration-color var(--transition-duration-base) ease;
 
     &:hover, &:focus {
       text-decoration-color: var(--color-brand-stronger);
