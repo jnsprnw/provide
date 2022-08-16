@@ -13,12 +13,20 @@
   import TitleTimeSeries from './TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
+  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
 
   $: process = ({ impactDistributionData, impactTimeData }) => {
     const impactDistribution = (() => {
-      const { yearStart, valueStart, yearStep, valueStep, data } =
-        impactDistributionData.data;
+      const {
+        yearStart,
+        valueStart,
+        yearStep,
+        valueStep,
+        data,
+        model,
+        parameter
+      } = impactDistributionData.data;
 
       const mean = data?.mean.map((value, i) => {
         return { year: yearStart + yearStep * i, value };
@@ -32,17 +40,25 @@
         }));
       });
 
-      return { mean, distribution, yearStep, valueStep };
+      return { mean, distribution, yearStep, valueStep, model, parameter };
     })();
 
     const impactTime = impactTimeData.map((datum, i) => {
-      const { yearStart, yearStep, data } = datum.data; // Why is datum.data undefined on server here?
+      const {
+        yearStart,
+        yearStep,
+        data,
+        model,
+        parameter
+      } = datum.data; // Why is datum.data undefined on server here?
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
         color: $CURRENT_SCENARIOS[i].color,
         yearStart,
         yearStep,
+        parameter,
+        model,
         values: indicatorData.map((values, i) => ({
           value: values[values.length - 2],
           year: yearStart + yearStep * i,
@@ -54,8 +70,6 @@
 
     return { impactTime, impactDistribution, hasSingleScenario };
   };
-
-  $: model = undefined; // TODO
 </script>
 
 <LoadingWrapper
@@ -113,8 +127,9 @@
           impactTimeData={impactTime}
           distributionData={impactDistribution}
         />
-        <dt>Model:</dt>
-        <dd>{model || '—'}</dd>
+        <ModelList
+          data={hasSingleScenario ? [impactDistribution.model] : impactTime.map(d => d.model)}
+        />
       </ChartFacts>
     </div>
   </div>

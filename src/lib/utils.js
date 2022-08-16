@@ -38,7 +38,11 @@ export const formatList = function (arr = []) {
     style: 'long',
     type: 'conjunction',
   });
-  return formatter.format(uniq(arr.map(d => String(d))));
+  const list = uniq(arr.map(d => String(d)))
+  return {
+    label: formatter.format(list),
+    length: list.length
+  };
 }
 
 async function request(params, url) {

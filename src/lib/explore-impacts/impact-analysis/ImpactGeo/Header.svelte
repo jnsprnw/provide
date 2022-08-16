@@ -3,78 +3,75 @@
   import ScenarioList from '$lib/helper/chart-description/scenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
+  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
+  import SpatialResolutionList from '$lib/helper/chart-description/SpatialResolutionList.svelte';
+  import {
+    CURRENT_IMPACT_GEO_YEAR_UID,
+    CURRENT_GEOGRAPHY,
+    CURRENT_INDICATOR,
+    CURRENT_INDICATOR_OPTIONS,
+    CURRENT_SCENARIOS,
+  } from '$lib/../stores/store';
 
   import {
     IMPACT_GEO_YEARS,
     IMPACT_GEO_DISPLAY_OPTIONS,
   } from '$lib/../config.js';
 
-  import { formatList } from '$lib/utils.js';
-
   export let displayOption;
   export let showDifference;
-  export let currentYear;
-  export let currentIndicator;
-  export let currentOptions;
-  export let currentScenarios;
-  export let currentGeography;
-  export let resolution;
-
-  // $: spatialResolution = formatList(
-  //   data.map(({ data }) => `${data.resolution}°`)
-  // );
-
-  $: model = undefined; // TODO
+  export let data;
 </script>
 
 <div class="container">
   <div class="wrapper grid header">
     <div class="chart-info">
       <h2>
-        Change in {currentIndicator.label} in {currentGeography.label} in {currentYear}
+        Change in {$CURRENT_INDICATOR.label} in {$CURRENT_GEOGRAPHY.label} in {$CURRENT_IMPACT_GEO_YEAR_UID}
       </h2>
       {#if showDifference}
         <p>
           This map shows the differences in change of
-          {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
-          {currentGeography.label} in
-          {currentYear} compared to the reference period
-          {currentOptions.reference.label} between
-          <ScenarioList scenarios={currentScenarios} />.
+          {$CURRENT_INDICATOR.label} (expressed in 
+          {$CURRENT_INDICATOR.unit.labelLong}) in 
+          {$CURRENT_GEOGRAPHY.label} in 
+          {$CURRENT_IMPACT_GEO_YEAR_UID} compared to the reference period
+          {$CURRENT_INDICATOR_OPTIONS.reference.label} between
+          <ScenarioList scenarios={$CURRENT_SCENARIOS} />.
         </p>
-      {:else if currentScenarios.length > 1}
+      {:else if $CURRENT_SCENARIOS.length > 1}
         <p>
           These maps show the changes in
-          {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
-          {currentGeography.label} in
-          {currentYear} compared to the reference period
-          {currentOptions.reference.label}, according to the
-          <ScenarioList scenarios={currentScenarios} /> .
+          {$CURRENT_INDICATOR.label} (expressed in 
+          {$CURRENT_INDICATOR.unit.labelLong}) in 
+          {$CURRENT_GEOGRAPHY.label} in
+          {$CURRENT_IMPACT_GEO_YEAR_UID} compared to the reference period
+          {$CURRENT_INDICATOR_OPTIONS.reference.label}, according to the
+          <ScenarioList scenarios={$CURRENT_SCENARIOS} /> .
         </p>
       {:else}
         <p>
           This map shows the changes in
-          {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
-          {currentGeography.label} in
-          {currentYear}
+          {$CURRENT_INDICATOR.label} (expressed in
+          {$CURRENT_INDICATOR.unit.labelLong}) in
+          {$CURRENT_GEOGRAPHY.label} in
+          {$CURRENT_IMPACT_GEO_YEAR_UID}
           compared to the reference period
-          {currentOptions.reference.label}, according to the
-          <ScenarioList scenarios={currentScenarios} />.
+          {$CURRENT_INDICATOR_OPTIONS.reference.label}, according to the
+          <ScenarioList scenarios={$CURRENT_SCENARIOS} />.
         </p>
       {/if}
       <ChartFacts direction="horizontal">
-        <dt>Spatial resolution:</dt>
-        <dd>{resolution || '—'}</dd>
-        <dt>Model:</dt>
-        <dd>{model || '—'}</dd>
+        <SpatialResolutionList
+          data={data.map(d => d.resolution)}
+        />
+        <ModelList
+          data={data.map(d => d.model)}
+        />
       </ChartFacts>
     </div>
     <div class="controls">
-      {#if currentScenarios.length === 2}
+      {#if $CURRENT_SCENARIOS.length === 2}
         <div class="control">
           <SegmentedControl
             options={IMPACT_GEO_DISPLAY_OPTIONS}
@@ -109,7 +106,7 @@
   .controls {
     display: flex;
     justify-content: flex-end;
-    grid-column: -1 / -5;
+    grid-column: -1 / -4;
   }
 
   .control {
