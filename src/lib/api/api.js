@@ -1,7 +1,7 @@
 // This file holds the handle function, which all endpoints use to interact with the API.
 import { get as take } from 'svelte/store';
 import { load, hasInObject } from '$lib/utils.js';
-import { isArray, get, map } from 'lodash-es';
+import { get, map } from 'lodash-es';
 import {
   END_IMPACT_TIME,
   END_DISTRIBUTION,
