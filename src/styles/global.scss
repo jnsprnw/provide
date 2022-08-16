@@ -55,7 +55,7 @@ $extra-wide: 1700px !default;
   border: 1px solid var(--color-light-blue300);
   border-radius: var(--radius-interactive-l);
   transition: border-color var(--transition-duration-base) ease-out;
-  padding: var(--size-space-large-xxs);
+  padding: var(--space-xxs);
 
   &:hover, &:not(:placeholder-shown) {
     border-color: var(--color-light-blue600);
@@ -77,7 +77,7 @@ $extra-wide: 1700px !default;
   background-color: transparent;
   border-radius: var(--radius-interactive-l);
   transition: background-color var(--transition-duration-base) ease-out, border-color var(--transition-duration-base) ease-out;
-  padding: var(--size-space-large-xxs);
+  padding: var(--space-xxs);
   cursor: pointer;
 
   span {
@@ -144,9 +144,9 @@ $extra-wide: 1700px !default;
 @mixin selection-panel {
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: var(--size-space-large-xl) var(--size-space-large-xl);
-  margin-top: var(--size-space-large-l);
-  margin-bottom: var(--size-space-large-xl);
+  gap: var(--space-xl) var(--space-xl);
+  margin-top: var(--space-l);
+  border-bottom: 1px solid var(--color-foreground-weakest);
 
   .intro {
     grid-column: 1 / span 2;
@@ -163,17 +163,17 @@ $extra-wide: 1700px !default;
     margin: 0;
     padding: 0;
     display: flex;
-    column-gap: var(--size-space-large-l); // TODO: Different spacing for Explore Navigation and Impacts Navigation
+    column-gap: var(--space-l); // TODO: Different spacing for Explore Navigation and Impacts Navigation
   }
 }
 
 @mixin tab-nav-tab {
-  padding: var(--size-space-large-xs) 0;
+  padding: var(--space-xs) 0;
   border-bottom: var(--stroke-active-bold) solid transparent;
   transition: border-bottom-color var(--transition-duration-base) ease-out;
 
   &.tab--compact {
-    padding: var(--size-space-large-xxxs) 0;
+    padding: var(--space-xxxs) 0;
     border-bottom: var(--stroke-active) solid transparent;
   }
 

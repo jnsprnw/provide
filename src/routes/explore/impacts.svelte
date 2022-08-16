@@ -27,7 +27,11 @@
   <div class="wrapper">
     <div class="explore-intro">
       <p class="explore-description">
-        Explore how different levels of climate action will lead to different climate impacts over the countries, cities, and other geography types you're interested in. Visualise their evolution over time and space, the risk of exceeding critical impact thresholds, as well as the reversibility of impacts under overshoot scenarios.
+        Explore how different levels of climate action will lead to different
+        climate impacts over the countries, cities, and other geography types
+        you're interested in. Visualise their evolution over time and space, the
+        risk of exceeding critical impact thresholds, as well as the
+        reversibility of impacts under overshoot scenarios.
       </p>
     </div>
   </div>
@@ -70,7 +74,7 @@
 
 <div class="impacts-analysis container">
   <div class="wrapper vertical-space">
-    <SelectionMessage />
+    <!-- <SelectionMessage /> -->
     <Tabs type="nav" selected={0}>
       <Tab label="Impact overview" />
       <Tab label="(Un)avoidable risk" />
@@ -104,8 +108,13 @@
   .impacts-header {
     background-color: var(--color-light-blue100); // TODO
     border-bottom: 1px solid var(--color-light-blue200); // TODO
-    padding: var(--size-space-large-xl) 0 calc(var(--size-space-large-xl) + 4rem); // TODO
+    padding: var(--size-space-large-xl) 0
+      calc(var(--size-space-large-xl) + 4rem); // TODO
     margin-bottom: -4rem;
+  }
+
+  .impacts-selection {
+    margin-bottom: var(--space-xl);
   }
 
   .explore-description {

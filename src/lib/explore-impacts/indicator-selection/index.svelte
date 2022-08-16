@@ -18,7 +18,7 @@
   });
 </script>
 
-<div class="sector-selection">
+<div class="indicator-selection">
   <Tabs>
     <span class="text-label text-label--bold">Sectors</span>
     {#each sectors as { icon, label, disabled }}
@@ -33,12 +33,18 @@
     </svelte:fragment>
   </Tabs>
 </div>
-<div><IndicatorParameters /></div>
+<div class="indicator-parameters"><IndicatorParameters /></div>
 
 <style lang="scss">
   @import '../../../styles/global.scss';
 
-  .sector-selection {
+  .indicator-selection {
     @include selection-panel();
+    padding-bottom: var(--space-m);
+  }
+
+  .indicator-parameters {
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--color-foreground-weakest);
   }
 </style>

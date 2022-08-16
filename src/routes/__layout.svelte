@@ -1,8 +1,8 @@
 <script>
-  import ThemeProvider from "../styles/ThemeProvider.svelte";
-  import "../styles/app.scss";
+  import ThemeProvider from '../styles/ThemeProvider.svelte';
+  import '../styles/app.scss';
   import { page } from '$app/stores';
-  import ListLink from "$lib/helper/ListLink.svelte";
+  import ListLink from '$lib/helper/ListLink.svelte';
 
   $: currentPath = $page.routeId || '';
 </script>
@@ -13,10 +13,16 @@
       <h1>Provide</h1>
       <ul class="menu-main">
         <ListLink {currentPath} link="">Home</ListLink>
-        <ListLink {currentPath} link="explore/impacts" startsWith={true}>Explore</ListLink>
+        <ListLink {currentPath} link="explore/impacts" startsWith={true}
+          >Explore</ListLink
+        >
         <ListLink {currentPath} link="about">About</ListLink>
-        <ListLink {currentPath} link="technical-documentation">Technical Documentation</ListLink>
-        <ListLink {currentPath} link="contact-imprint">Contact and Imprint</ListLink>
+        <ListLink {currentPath} link="technical-documentation"
+          >Technical Documentation</ListLink
+        >
+        <ListLink {currentPath} link="contact-imprint"
+          >Contact and Imprint</ListLink
+        >
       </ul>
     </div>
   </nav>

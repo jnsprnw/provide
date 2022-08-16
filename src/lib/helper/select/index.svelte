@@ -36,7 +36,7 @@
 
   .root {
     display: flex;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
   }
 
   .control-label {

@@ -4,6 +4,7 @@
   import {
     CURRENT_INDICATOR_PARAMETERS,
     CURRENT_INDICATOR_OPTION_VALUES,
+    CURRENT_INDICATOR,
   } from '$lib/../stores/store.js';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
@@ -24,6 +25,21 @@
   }
 </script>
 
-{#each parameters as parameter}
-  <Select {...parameter} on:change={handleChange} />
-{/each}
+<div class="wrapper">
+  <div class="label">Options for {$CURRENT_INDICATOR.label}</div>
+  <div>
+    {#each parameters as parameter}
+      <Select {...parameter} on:change={handleChange} />
+    {/each}
+  </div>
+</div>
+
+<style lang="scss">
+  .wrapper {
+    display: flex;
+  }
+
+  .label {
+    margin-right: var(--space-m);
+  }
+</style>
