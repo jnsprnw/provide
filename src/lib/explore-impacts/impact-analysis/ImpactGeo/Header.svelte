@@ -3,6 +3,7 @@
   import ScenarioList from '$lib/helper/chart-description/scenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
+  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store';
 
   import {
     IMPACT_GEO_YEARS,
@@ -84,7 +85,7 @@
       <div class="control">
         <Select
           options={IMPACT_GEO_YEARS}
-          bind:value={currentYear}
+          bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
           label="Year"
         />
       </div>
