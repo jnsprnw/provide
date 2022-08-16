@@ -7,13 +7,18 @@
   import { extent } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
-  import { STATUS_SUCCESS } from '$lib/../config.js';
   import Mask from '$lib/mapbox-map/Mask.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
+  import {
+    CURRENT_GEOGRAPHY,
+    CURRENT_IMPACT_GEO_YEAR_UID,
+    CURRENT_INDICATOR,
+    CURRENT_INDICATOR_OPTIONS,
+    CURRENT_SCENARIOS,
+  } from '$lib/../stores/store';
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
-  $: shape = $GEO_SHAPE_DATA.data.data?.features[0];
 
   $: data = $IMPACT_GEO_DATA;
   $: isDoubleMap = data.length === 2;
@@ -23,9 +28,9 @@
   let center;
   let bounds;
 
-  $: process = (asyncProps) => {
+  $: process = ({ geoData, geoShape }) => {
     const calculateDifference = () => {
-      const [grid1, grid2] = asyncProps;
+      const [grid1, grid2] = geoData;
       return {
         ...grid1,
         data: {
@@ -42,7 +47,7 @@
     };
 
     // The data that is actually being rendered
-    const renderedData = showDifference ? [calculateDifference()] : asyncProps;
+    const renderedData = showDifference ? [calculateDifference()] : geoData;
 
     const colorScale = (() => {
       let domain = [0, 1];
@@ -52,36 +57,51 @@
       return scaleLinear().domain(domain).range(range);
     })();
 
-    return { data: renderedData, colorScale };
+    return {
+      geoData: renderedData,
+      geoShape: geoShape.data.data?.features[0],
+      colorScale,
+    };
   };
 </script>
 
 <LoadingWrapper
   let:asyncProps
-  asyncProps={$IMPACT_GEO_DATA}
+  let:props
+  asyncProps={{ geoData: $IMPACT_GEO_DATA, geoShape: $GEO_SHAPE_DATA }}
+  props={{
+    currentYear: $CURRENT_IMPACT_GEO_YEAR_UID,
+    currentGeography: $CURRENT_GEOGRAPHY,
+    currentIndicator: $CURRENT_INDICATOR,
+    currentOptions: $CURRENT_INDICATOR_OPTIONS,
+    currentScenarios: $CURRENT_SCENARIOS,
+  }}
   {process}
   let:isLoading
 >
   <div slot="placeholder" class="placeholder">Loading</div>
-  <Header bind:displayOption {showDifference} {...asyncProps} />
-  <div class={`maps cols-${data.length}`}>
-    {#each data as d}
+  <Header
+    bind:displayOption
+    {showDifference}
+    {...props}
+    resolution={asyncProps.geoData[0].data.resolution}
+  />
+  <div class={`maps cols-${asyncProps.geoData.length}`}>
+    {#each asyncProps.geoData as d}
       <div class="map-wrapper">
         <MapboxMap
           bind:zoom
           bind:center
           bind:bounds
-          fitShape={shape}
-          resize={data.length}
+          fitShape={asyncProps.geoShape}
+          resize={asyncProps.geoData.length}
         >
-          <Mask feature={shape} layerId="mask-layer" />
-          {#if d.status === STATUS_SUCCESS}
-            <RasterLayer
-              colorScale={asyncProps.colorScale}
-              {...d.data}
-              before="mask-layer"
-            />
-          {/if}
+          <Mask feature={asyncProps.geoShape} layerId="mask-layer" />
+          <RasterLayer
+            colorScale={asyncProps.colorScale}
+            {...d.data}
+            before="mask-layer"
+          />
         </MapboxMap>
       </div>
     {/each}
