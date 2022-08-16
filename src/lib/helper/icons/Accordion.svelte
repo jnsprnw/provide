@@ -10,11 +10,11 @@
 
 <style lang="scss">
   svg {
-    transition: color 0.3s ease-out;
+    transition: color var(--transition-duration-base) ease-out;
     align-self: center;
 
     path {
-      transition: transform 0.3s ease-out, color 0.3s ease-out; // TODO: Not working in Firefox
+      transition: transform var(--transition-duration-base) ease-out, color var(--transition-duration-base) ease-out; // TODO: Not working in Firefox
     }
 
     &.isOpen {

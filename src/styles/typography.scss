@@ -1,23 +1,31 @@
-dd + dt {
-  margin-top: var(--spacing-2);
+// Because Figma uses font weight names instead of number, we need to remap these values
+:root {
+  --font-weight-regular: var(--font-font-weight-regular-number);
+  --font-weight-bold: var(--font-font-weight-bold-number);
+  --font-weight-extrabold: var(--font-font-weight-extrabold-number);
 }
 
 * {
-  font-family: var(--font-family-default);
-  font-weight: var(--font-font-weight-regular);
-}
-
-strong {
-  font-weight: var(--font-font-weight-bold);
+  font-family: var(--font-font-family-base);
 }
 
 a {
   text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-header);
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-font-family-heading);
+}
+
+// h1, h2, h3, h4, h5, h6, p, span {
+//   color: var(--color-light-brand-stronger);
+// }
 
 mark {
   background-color: var(--color-light-petrol100);
@@ -28,14 +36,24 @@ i.emoji {
   font-style: normal;
 }
 
-.page-menu { // TODO
-  * {
-    color: #fff; // TODO
-  }
-
+.page-menu {
   .list-link--default {
+    a {
+      transition: color var(--transition-duration-base) ease-out;
+      color: var(--color-light-brand-base);
+      // color: var(--color-light-background-weakest);
+
+      &:hover, &:focus {
+        color: var(--color-light-brand-stronger);
+      }
+    }
+
     &.active {
-      font-weight: var(--font-font-weight-bold);
+      font-weight: var(--font-weight-extrabold);
+
+      a {
+        color: var(--color-light-functional-accent);
+      }
     }
   }
 }
@@ -148,7 +166,7 @@ i.emoji {
     color: var(--color-brand-stronger);
     text-decoration: underline;
     text-decoration-color: var(--color-brand-weaker);
-    transition: text-decoration-color 0.3s ease;
+    transition: text-decoration-color var(--transition-duration-base) ease;
 
     &:hover, &:focus {
       text-decoration-color: var(--color-brand-stronger);

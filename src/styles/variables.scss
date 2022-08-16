@@ -1,26 +1,5 @@
 :root {
-	--font-family-default: Barlow;
-	--font-family-header: Barlow;
-	--color-white: #fff;
-	--color-default: #222;
-	// https://type-scale.com/?size=15&scale=1.250&text=A%20Visual%20Type%20Scale&font=Poppins&fontweight=400&bodyfont=body_font_default&bodyfontweight=400&lineheight=1.75&backgroundcolor=%23ffffff&fontcolor=%23000000&preview=false
-	--space-xxxl: 6rem;
-	--space-xxl: 3rem;
-	--space-xl: 2rem;
-	--space-l: 1.5rem;
-	--space-m: 1rem;
-	--space-s: 0.75rem;
-	--space-xs: 0.5rem;
-
-	--font-size-xxxl: 2.8561rem;
-	--font-size-xxl: 2.197rem;
-	--font-size-xl: 1.69rem;
-	--font-size-l: 1.3rem;
-	--font-size-m: 1rem;
-	--font-size-s: 0.76923077rem;
-	--font-size-xs: 0.59171598rem;
-
-	--transition: 0.3s ease;
-	--weight-default: 400;
-	--weight-bold: 600;
+	--font-font-weight-regular: var(--font-font-weight-regular-number);
+	--font-font-weight-bold: var(--font-font-weight-bold-number);
+	--font-font-weight-extrabold: var(--font-font-weight-extrabold-number);
 }

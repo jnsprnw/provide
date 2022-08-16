@@ -67,18 +67,6 @@
       };
     }
   );
-
-  // function handleOverMap ({ detail }) {
-  //   if (detail?.item) {
-  //     const index = findIndex(results, ({ item }) => item.uid === detail?.item);
-
-  //     if (index >= 0) {
-  //       scrollToIndex(index);
-  //     }
-  //   }
-  // }
-
-  // let scrollToIndex;
 </script>
 
 <div class="selection-country-wrapper">
@@ -90,6 +78,7 @@
         <RadioTile
           value={item.uid}
           on:mouseover={() => (hoveredGeography = item?.uid)}
+          on:mouseleave={() => (hoveredGeography = undefined)}
         >
           {#if item?.continent?.label}<span>{item.continent.label}</span>{/if}
           {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}

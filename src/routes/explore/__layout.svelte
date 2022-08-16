@@ -59,7 +59,7 @@
     <span class="text-label">Explore</span>
     <ul>
       <ListLink {currentPath} link="explore/impacts" loc="location" type="tab">
-        <h2 class="title">Explore Impacts</h2>
+        <h2 class="title">Impacts</h2>
         <span class="subtitle">Select scenarios and explore impacts</span>
       </ListLink>
       <ListLink
@@ -69,7 +69,7 @@
         disabled={true}
         type="tab"
       >
-        <h2 class="title">Explore Scenarios</h2>
+        <h2 class="title">Emission Scenarios</h2>
         <span class="subtitle"
           >Set an impact threshold and explore scenarios</span
         >
@@ -84,7 +84,6 @@
   @import '../../styles/global.scss';
 
   .explore-menu {
-    padding-top: 2rem; // TODO
     background-color: var(--color-light-blue100);
 
     .wrapper {
@@ -92,6 +91,7 @@
 
       .title {
         font-size: var(--font-size-large-xl);
+        font-weight: var(--font-weight-bold);
       }
 
       .subtitle {

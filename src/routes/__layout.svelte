@@ -43,22 +43,31 @@
 </ThemeProvider>
 
 <style lang="scss">
-  @import "../styles/global.scss";
-
   .page-menu {
-    background-color: var(--color-light-blue700);
+    // background-color: var(--color-light-brand-stronger);
+    background-color: var(--color-light-blue100);
     width: 100vw;
-    padding: var(--font-size-large-l);
+    padding: var(--size-space-large-xl);
 
     .wrapper {
       align-items: center; // Vertical center the menu
+      gap: var(--size-space-large-xxl);
+      grid-template-columns: auto 1fr;
+      padding-bottom: var(--size-space-large-xl);
+      border-bottom: 1px solid var(--color-light-blue200);
+
+      h1 {
+        font-weight: var(--font-weight-extrabold);
+        text-transform: uppercase;
+        color: var(--color-light-brand-stronger);
+        // color: var(--color-light-background-base);
+      }
     }
 
     .menu-main {
       display: flex;
-      gap: var(--font-size-large-l);
-
-      white-space: nowrap
+      gap: var(--size-space-large-m);
+      white-space: nowrap;
     }
   }
 
@@ -84,11 +93,5 @@
         grid-gap: var(--font-size-large-xs); // TODO
       }
     }
-  }
-
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
   }
 </style>

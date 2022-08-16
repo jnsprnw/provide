@@ -1,5 +1,4 @@
 @import "./reset";
-@import "./variables";
 @import "./global";
 @import "./fonts";
 @import "./accordion";
@@ -9,7 +8,6 @@
 @import "./sass_vars_and_mixins.scss";
 @import "./spacing.scss";
 //@import "./includes/fluid_type";
-
 
 body {
 	min-height: 100vh;
