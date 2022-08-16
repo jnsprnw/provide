@@ -32,6 +32,7 @@
         <line
           x2={$xScale.bandwidth()}
           class="line"
+          class:active={Boolean(scenario.color)}
           style={`stroke: ${scenario.color};`}
         />
       </g>
@@ -39,9 +40,13 @@
   {/each}
 </g>
 
-<style>
+<style lang="scss">
   .line {
     stroke-width: 2;
     stroke: var(--color-foreground-weakest);
+
+    &.active {
+      stroke-width: 4;
+    }
   }
 </style>
