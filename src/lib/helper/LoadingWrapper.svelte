@@ -1,5 +1,5 @@
 <script>
-  import { STATUS_SUCCESS } from '$lib/../config.js';
+  import { STATUS_FAILED, STATUS_SUCCESS } from '$lib/../config.js';
   import { each, filter } from 'lodash-es';
 
   export let props; // Regular props/state that need to be kept in sync with the asyncProps
@@ -8,6 +8,7 @@
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
   export let renderWhileEmpty = false; // If set to true, slot component has to know how to deal with unloaded data
+  export let isFailed = false;
 
   let currentProps;
   let currentAsyncProps; // Always holds previous props and only gets updated once all data is loaded
@@ -25,6 +26,7 @@
   $: flatData = flattenData(asyncProps);
 
   $: loadedData = filter(flatData, (d) => d.status === STATUS_SUCCESS);
+  $: isFailed = filter(flatData, (d) => d.status === STATUS_FAILED).length;
 
   // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
   $: if (currentAsyncProps) isEmpty = false;
@@ -43,7 +45,9 @@
   }
 </script>
 
-{#if isEmpty && !renderWhileEmpty}
+{#if isFailed}
+  <slot name="failed"><div class="error-message">Failed</div></slot>
+{:else if isEmpty && !renderWhileEmpty}
   <slot name="placeholder"><div class="placeholder">Loading</div></slot>
 {:else}
   {#if isLoading}
@@ -59,8 +63,10 @@
 
 <style>
   .placeholder {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  }
+
+  .error-message {
+    background: var(--color-background-weakest);
+    text-align: center;
   }
 </style>

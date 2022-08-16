@@ -19,7 +19,6 @@ export const loadFromAPI = async function (url, query, svelteFetch = fetch) {
     const data = await res.json();
     return data;
   } catch (e) {
-    console.log(e);
     return undefined;
   }
 };
