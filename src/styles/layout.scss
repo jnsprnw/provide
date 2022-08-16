@@ -13,7 +13,7 @@
   &.vertical-space {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    grid-gap: var(--size-spacer-large-xl);
+    grid-gap: var(--space-xl);
   }
 
   &.grid {
@@ -24,13 +24,13 @@
 
   &.content-layout {
     display: grid;
-    grid-gap: var(--size-spacer-large-xxxl); // TODO
-    margin-bottom: var(--size-spacer-large-xxxl);
+    grid-gap: var(--space-xxxl); // TODO
+    margin-bottom: var(--space-xxxl);
 
     section {
       display: grid;
       grid-template-columns: 2fr 3fr;
-      grid-gap: var(--size-spacer-large-xl); // TODO
+      grid-gap: var(--space-xl); // TODO
 
       .text {
         grid-column: 2 / span 1;
@@ -69,10 +69,10 @@
 // CHART STYLING END
 
 .content-header {
-  margin: var(--size-spacer-large-xxl) 0;
+  margin: var(--space-xxl) 0;
 
   .wrapper {
-    padding-bottom: var(--size-spacer-large-xxl);
+    padding-bottom: var(--space-xxl);
     border-bottom: 1px solid var(--color-light-blue300);
   }
 
@@ -82,33 +82,33 @@
   }
 
   .nav-inpage {
-    margin-top: var(--size-spacer-large-xxl);
+    margin-top: var(--space-xxl);
 
     &.subcategories {
       display: flex;
-      gap: var(--size-spacer-large-xl); // TODO
+      gap: var(--space-xl); // TODO
     }
   }
 }
 
 .content-content {
   .headline-paragraph, h2 {
-    margin-bottom: var(--size-spacer-large-s);
+    margin-bottom: var(--space-s);
   }
 
   .link {
     display: block;
-    margin-top: var(--size-spacer-large-s);
+    margin-top: var(--space-s);
   }
 
   p {
     & + p {
-      margin-top: var(--size-spacer-large-s);
+      margin-top: var(--space-s);
     }
   }
 
   p + .headline-paragraph, p + h2 {
-    margin-top: var(--size-spacer-large-m);
+    margin-top: var(--space-m);
   }
 }
 

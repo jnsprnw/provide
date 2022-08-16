@@ -73,7 +73,7 @@
 </div>
 
 <div class="impacts-analysis container">
-  <div class="wrapper vertical-space">
+  <div class="wrapper">
     <!-- <SelectionMessage /> -->
     <Tabs type="nav" selected={0}>
       <Tab label="Impact overview" />

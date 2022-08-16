@@ -20,46 +20,47 @@
   const theme = getContext('theme');
   let displayOption = 'side-by-side';
 
-  $: data = $IMPACT_GEO_DATA;
-  $: isDoubleMap = data.length === 2;
-  $: showDifference = displayOption === 'difference' && isDoubleMap;
-
   let zoom;
   let center;
   let bounds;
 
-  $: process = ({ geoData, geoShape }) => {
+  $: process = ({ geoData, geoShape }, { currentScenarios }) => {
+    const isDoubleMap = geoData.length === 2;
+    const showDifference = displayOption === 'difference' && isDoubleMap;
+    const isMultipMap = geoData.length > 1 && !showDifference;
+
     const calculateDifference = () => {
       const [grid1, grid2] = geoData;
       return {
-        ...grid1,
-        data: {
-          ...grid1.data,
-          data: grid1.data.data.map((row, lngIndex) =>
-            row.map((value, latIndex) =>
-              value === null
-                ? null
-                : grid2.data.data[lngIndex][latIndex] - value
-            )
-          ),
-        },
+        ...grid1.data,
+        data: grid1.data.data.map((row, lngIndex) =>
+          row.map((value, latIndex) =>
+            value === null ? null : grid2.data.data[lngIndex][latIndex] - value
+          )
+        ),
       };
     };
 
     // The data that is actually being rendered
-    const renderedData = showDifference ? [calculateDifference()] : geoData;
+    const renderedData = showDifference
+      ? [calculateDifference()]
+      : geoData.map((d, i) => ({
+          ...(isMultipMap ? currentScenarios[i] : {}),
+          ...d.data,
+        }));
 
     const colorScale = (() => {
       let domain = [0, 1];
       let range = [$theme.color.category[5], $theme.color.category[3]];
-      let flatData = renderedData.map((grid) => grid.data.data).flat(3);
+      let flatData = renderedData.map((grid) => grid.data).flat(3);
       domain = extent(flatData);
       return scaleLinear().domain(domain).range(range);
     })();
 
     return {
+      showDifference,
       geoData: renderedData,
-      geoShape: geoShape.data.data?.features[0],
+      geoShape: geoShape.data.data.features[0],
       colorScale,
     };
   };
@@ -82,9 +83,9 @@
   <div slot="placeholder" class="placeholder">Loading</div>
   <Header
     bind:displayOption
-    {showDifference}
+    showDifference={asyncProps.showDifference}
     {...props}
-    resolution={asyncProps.geoData[0].data.resolution}
+    resolution={asyncProps.geoData[0].resolution}
   />
   <div class={`maps cols-${asyncProps.geoData.length}`}>
     {#each asyncProps.geoData as d}
@@ -99,10 +100,18 @@
           <Mask feature={asyncProps.geoShape} layerId="mask-layer" />
           <RasterLayer
             colorScale={asyncProps.colorScale}
-            {...d.data}
+            {...d}
             before="mask-layer"
           />
         </MapboxMap>
+        {#if d.label}
+          <div
+            style="--color: {d.color};"
+            class="text-underlined scenario-label"
+          >
+            {d.label}
+          </div>
+        {/if}
       </div>
     {/each}
     <Spinner {isLoading} />
@@ -136,10 +145,20 @@
 
   .map-wrapper {
     height: 600px;
+    position: relative;
     border: 1px solid var(--color-foreground-weakest);
 
     &:not(:last-child) {
       border-right: none;
     }
+  }
+
+  .scenario-label {
+    position: absolute;
+    top: var(--space-xxs);
+    left: var(--space-xs);
+    background: var(--color-background-base);
+    color: var(--color-text-weaker);
+    font-size: var(--font-size-s);
   }
 </style>
