@@ -101,9 +101,9 @@
   <div class="wrapper grid">
     <div class="chart">
       {#if hasSingleScenario}
-        <LineDistributionChart {...impactDistribution} unit={indicator.unit} />
+        <LineDistributionChart {...impactDistribution} unit={indicator.unit.uid} />
       {:else}
-        <LineTimeSeries data={impactTime} unit={indicator.unit} />
+        <LineTimeSeries data={impactTime} unit={indicator.unit.uid} />
       {/if}
     </div>
     <div class="chart-info">
