@@ -37,9 +37,12 @@
 <style lang="scss">
   .wrapper {
     display: flex;
+    align-items: center;
   }
 
   .label {
     margin-right: var(--space-m);
+    font-size: var(--font-size-s);
+    color: var(--color-light-text-base);
   }
 </style>

@@ -36,13 +36,13 @@
 
   .root {
     display: flex;
-    font-size: var(--font-size-m);
+    font-size: var(--font-size-s);
   }
 
   .control-label {
     display: inline;
     margin-right: var(--space-xs);
-    color: var(--color-text-weaker);
+    color: var(--color-light-text-base);
   }
 
   .select-wrapper {
@@ -54,8 +54,8 @@
       content: '';
       width: 0.45em;
       height: 0.45em;
-      border-right: 1px solid var(--color-text-weaker);
-      border-bottom: 1px solid var(--color-text-weaker);
+      border-right: 1px solid var(--color-light-foreground-base);
+      border-bottom: 1px solid var(--color-light-foreground-base);
       transform: rotate(45deg) translate(-0.2em);
       // background-color: var(--color-text-weaker);
       // clip-path: polygon(100% 0%, 0 0%, 50% 100%);
@@ -80,7 +80,8 @@
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
-    color: var(--text-color-base); // TODO: Does this color exist?
-    font-weight: 600;
+    font-size: var(--font-size-s);
+    color: var(--color-light-text-base);
+    font-weight: var(--font-font-weight-bold-number);
   }
 </style>

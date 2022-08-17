@@ -115,6 +115,7 @@
 
   .impacts-selection {
     margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-foreground-weakest);
   }
 
   .explore-description {
