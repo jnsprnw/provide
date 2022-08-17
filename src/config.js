@@ -10,7 +10,7 @@ export const STATUS_SUCCESS = 'success';
 export const STATUS_FAILED = 'failed';
 export const UID_WORLD = 'world';
 export const KEY_MODEL = 'model';
-export const KEY_PARAMETERS = 'parameter';
+export const KEY_PARAMETERS = 'parameters';
 
 export const DEFAULT_FORMAT_UID = 'float';
 
