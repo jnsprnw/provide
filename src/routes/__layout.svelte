@@ -12,17 +12,24 @@
     <div class="wrapper grid">
       <h1>Provide</h1>
       <ul class="menu-main">
-        <ListLink {currentPath} link="">Home</ListLink>
-        <ListLink {currentPath} link="explore/impacts" startsWith={true}
-          >Explore</ListLink
-        >
-        <ListLink {currentPath} link="about">About</ListLink>
-        <ListLink {currentPath} link="technical-documentation"
-          >Technical Documentation</ListLink
-        >
-        <ListLink {currentPath} link="contact-imprint"
-          >Contact and Imprint</ListLink
-        >
+        <ListLink {currentPath} link="">
+          Home
+        </ListLink>
+        <ListLink {currentPath} link="explore/impacts" startsWith={true}>
+          Explore
+        </ListLink>
+        <ListLink {currentPath} link="about">
+          About
+        </ListLink>
+        <ListLink {currentPath} link="technical-documentation">
+          Technical Documentation
+        </ListLink>
+        <ListLink {currentPath} link="glossary">
+          Glossary
+        </ListLink>
+        <ListLink {currentPath} link="contact-imprint">
+          Contact and Imprint
+        </ListLink>
       </ul>
     </div>
   </nav>

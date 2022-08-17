@@ -24,7 +24,7 @@
 </script>
 
 <svelte:head>
-  <title>FAQ</title>
+  <title>About</title>
 </svelte:head>
 
 <div class="about-header content-header container">
