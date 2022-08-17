@@ -5,8 +5,8 @@
     CURRENT_GEOGRAPHY_UID,
     CURRENT_GEOGRAPHIES,
   } from '$lib/../stores/store.js';
-  import TileGroup from '$lib/helper/tiles/TileGroup.svelte';
-  import RadioTile from '$lib/helper/tiles/RadioTile.svelte';
+  import TileGroup from '$helper/tiles/TileGroup.svelte';
+  import RadioTile from '$helper/tiles/RadioTile.svelte';
   import Map from './Map.svelte';
   import { sortBy } from 'lodash-es';
 
@@ -71,7 +71,12 @@
 
 <div class="selection-country-wrapper">
   <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY_UID}>
-    <input class="searchbox" type="text" bind:value={term} placeholder="Search…" />
+    <input
+      class="searchbox"
+      type="text"
+      bind:value={term}
+      placeholder="Search…"
+    />
     <div class="country-container">
       <VirtualList items={results} let:item>
         <!-- TODO: 200px -->
