@@ -29,27 +29,24 @@
     currentThreshold = currentThreshold || thresholds[0].value;
 
     const thresholdIndex = data.thresholds.indexOf(currentThreshold);
-    const processedScenarios = reverse(
-      sortBy(
-        data.data.map((scenarioData) => {
-          const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
-          const scenario = currentScenarios[key] || scenarios[key];
-          const values = data.years.map((year, yearIndex) => {
-            const value = scenarioData[key][thresholdIndex][yearIndex];
-            return {
-              year,
-              value,
-              formattedValue: formatValue(value, 'percent'),
-            };
-          });
-          return {
-            ...scenario,
-            values,
-          };
-        }),
-        'color'
-      )
-    );
+    let processedScenarios = data.data.map((scenarioData) => {
+      const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
+      const scenario = currentScenarios[key] || scenarios[key];
+      const values = data.years.map((year, yearIndex) => {
+        const value = scenarioData[key][thresholdIndex][yearIndex];
+        return {
+          year,
+          value,
+          formattedValue: formatValue(value, 'percent'),
+        };
+      });
+      return {
+        ...scenario,
+        values,
+      };
+    });
+
+    processedScenarios = reverse(sortBy(processedScenarios, 'color'))
 
     const unavoidableValues = data.years.map((year, yearIndex) => {
       const value = min(processedScenarios, (d) => d.values[yearIndex].value);
