@@ -6,6 +6,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
+    CURRENT_INDICATOR_OPTIONS
   } from '$lib/../stores/store.js';
   import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
@@ -84,6 +85,7 @@
     indicator,
     scenarios,
     geography,
+    parameters,
   }}
   asyncProps={{
     impactTimeData: $IMPACT_TIME_DATA,
@@ -93,6 +95,7 @@
     indicator: $CURRENT_INDICATOR,
     scenarios: $CURRENT_SCENARIOS,
     geography: $CURRENT_GEOGRAPHY,
+    parameters: $CURRENT_INDICATOR_OPTIONS // Should this be called parameters or options?
   }}
 >
   <div class="wrapper grid">
@@ -111,7 +114,7 @@
         impactTimeData={impactTime}
         distributionData={impactDistribution}
       />
-      <DescriptionTimeSeries {indicator} {geography} {scenarios} />
+      <DescriptionTimeSeries {indicator} {geography} {scenarios} {parameters} />
       <p>
         {#if hasSingleScenario}
           The line indicates the median estimate, while the colour variations
