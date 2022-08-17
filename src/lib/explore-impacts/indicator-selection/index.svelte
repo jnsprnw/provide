@@ -19,6 +19,9 @@
 </script>
 
 <div class="indicator-selection">
+  <span class="intro">
+    Select an indicator from the list of sectors for which you would like to explore impacts
+  </span>
   <Tabs>
     <span class="text-label text-label--bold">Sectors</span>
     {#each sectors as { icon, label, disabled }}

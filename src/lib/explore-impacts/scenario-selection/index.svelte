@@ -80,20 +80,24 @@
 </script>
 
 <div class="scenario-selection">
-  <VirtualList items={scenarios} let:item height="400px">
-    <!-- TODO: 400px -->
-    {#if item.isSpacer}
-      <span class="text-label text-label--bold">{item.label}</span>
-    {:else}
-      <Scenario
-        labelText={item.label}
-        bind:group={$CURRENT_SCENARIOS_UID}
-        value={item.uid}
-        on:mouseover={() => (hoveredScenario = item)}
-        on:mouseleave={() => (hoveredScenario = null)}
-      />
-    {/if}
-  </VirtualList>
+  <span class="intro">
+    Select one or more scenarios for which you would like to explore impacts
+  </span>
+  <div class="scenario-list">
+    {#each scenarios as scenario}
+      {#if scenario.isSpacer}
+        <span class="text-label text-label--bold">{scenario.label}</span>
+      {:else}
+        <Scenario
+          labelText={scenario.label}
+          bind:group={$CURRENT_SCENARIOS_UID}
+          value={scenario.uid}
+          on:mouseover={() => (hoveredScenario = scenario)}
+          on:mouseleave={() => (hoveredScenario = null)}
+        />
+      {/if}
+    {/each}
+  </div>
 
   <div class="scenario-split">
     <div>
