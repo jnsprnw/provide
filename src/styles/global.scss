@@ -178,19 +178,20 @@ $extra-wide: 1700px !default;
   }
 
   .link {
-    color: var(--color-light-functional-accent);
+    color: var(--color-light-text-weaker);
     transition: color var(--transition-duration-base) ease-out;
     cursor: pointer;
+  }
 
-    &:hover, &:focus {
-      .link {
-        color: var(--color-light-functional-accent);
-      }
-      outline: none;
+  &:hover, &:focus {
+    .link {
+      color: var(--color-light-text-base);
     }
+    outline: none;
   }
 
   &.active {
+    color: var(--color-light-functional-accent);
     border-bottom-color: var(--color-functional-accent);
 
     .link {
@@ -209,7 +210,7 @@ $extra-wide: 1700px !default;
 
     .link {
       cursor: not-allowed;
-      color: var(--color-light-blue300);
+      color: var(--color-light-text-weakest);
     }
   }
 }
