@@ -9,12 +9,16 @@
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
-  import Select from '$lib/helper/Select/index.svelte';
+  import Select from '$lib/helper/select/index.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import { UNAVOIDABLE_UID, KEY_PARAMETERS, KEY_MODEL } from '$lib/../config.js';
+  import {
+    UNAVOIDABLE_UID,
+    KEY_PARAMETERS,
+    KEY_MODEL,
+  } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
-  
+
   let currentThreshold;
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
@@ -25,22 +29,27 @@
     currentThreshold = currentThreshold || thresholds[0].value;
 
     const thresholdIndex = data.thresholds.indexOf(currentThreshold);
-    const processedScenarios = reverse(sortBy(data.data.map((scenarioData) => {
-      const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
-      const scenario = currentScenarios[key] || scenarios[key];
-      const values = data.years.map((year, yearIndex) => {
-        const value = scenarioData[key][thresholdIndex][yearIndex];
-        return {
-          year,
-          value,
-          formattedValue: formatValue(value, 'percent'),
-        };
-      });
-      return {
-        ...scenario,
-        values,
-      };
-    }), 'color'));
+    const processedScenarios = reverse(
+      sortBy(
+        data.data.map((scenarioData) => {
+          const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
+          const scenario = currentScenarios[key] || scenarios[key];
+          const values = data.years.map((year, yearIndex) => {
+            const value = scenarioData[key][thresholdIndex][yearIndex];
+            return {
+              year,
+              value,
+              formattedValue: formatValue(value, 'percent'),
+            };
+          });
+          return {
+            ...scenario,
+            values,
+          };
+        }),
+        'color'
+      )
+    );
 
     const unavoidableValues = data.years.map((year, yearIndex) => {
       const value = min(processedScenarios, (d) => d.values[yearIndex].value);
