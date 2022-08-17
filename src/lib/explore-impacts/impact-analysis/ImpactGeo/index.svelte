@@ -81,39 +81,43 @@
   let:isLoading
 >
   <div slot="placeholder" class="placeholder">Loading</div>
-  <Header
-    bind:displayOption
-    showDifference={asyncProps.showDifference}
-    {...props}
-    data={asyncProps.geoData}
-  />
-  <div class={`maps cols-${asyncProps.geoData.length}`}>
-    {#each asyncProps.geoData as d}
-      <div class="map-wrapper">
-        <MapboxMap
-          bind:zoom
-          bind:center
-          bind:bounds
-          fitShape={asyncProps.geoShape}
-          resize={asyncProps.geoData.length}
-        >
-          <Mask feature={asyncProps.geoShape} layerId="mask-layer" />
-          <RasterLayer
-            colorScale={asyncProps.colorScale}
-            {...d}
-            before="mask-layer"
-          />
-        </MapboxMap>
-        {#if d.label}
-          <div
-            style="--color: {d.color};"
-            class="text-underlined scenario-label"
+  <div class="wrapper grid">
+    <div class="chart-info">
+      <Header
+        bind:displayOption
+        showDifference={asyncProps.showDifference}
+        {...props}
+        data={asyncProps.geoData}
+      />
+    </div>
+    <div class={`maps cols-${asyncProps.geoData.length}`}>
+      {#each asyncProps.geoData as d}
+        <div class="map-wrapper">
+          <MapboxMap
+            bind:zoom
+            bind:center
+            bind:bounds
+            fitShape={asyncProps.geoShape}
+            resize={asyncProps.geoData.length}
           >
-            {d.label}
-          </div>
-        {/if}
-      </div>
-    {/each}
+            <Mask feature={asyncProps.geoShape} layerId="mask-layer" />
+            <RasterLayer
+              colorScale={asyncProps.colorScale}
+              {...d}
+              before="mask-layer"
+            />
+          </MapboxMap>
+          {#if d.label}
+            <div
+              style="--color: {d.color};"
+              class="text-underlined scenario-label"
+            >
+              {d.label}
+            </div>
+          {/if}
+        </div>
+      {/each}
+    </div>
     <Spinner {isLoading} />
   </div>
 </LoadingWrapper>
@@ -126,7 +130,11 @@
     align-items: center;
     justify-content: center;
   }
+  .chart-info {
+    grid-column: 1 / -1;
+  }
   .maps {
+    grid-column: 1 / -1;
     position: relative;
     display: flex;
 

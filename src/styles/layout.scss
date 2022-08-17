@@ -14,12 +14,14 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xxl);
   }
 
   &.grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: 1rem; // TODO
+    grid-gap: var(--space-m) var(--space-s);
   }
 
   &.content-layout {
