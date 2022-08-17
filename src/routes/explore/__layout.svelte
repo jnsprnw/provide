@@ -25,6 +25,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
+    UNITS
   } from '$lib/../stores/store.js';
 
   export let meta;
@@ -35,6 +36,7 @@
   SCENARIOS.set(meta.scenarios);
   GEOGRAPHIES.set(meta);
   INDICATOR_PARAMETERS.set(meta.indicatorParameters);
+  UNITS.set(meta.units);
 
   $: params = parse(new URL($page.url).search.replace(/^\?/, ''));
 

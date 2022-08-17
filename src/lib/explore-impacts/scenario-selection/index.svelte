@@ -35,10 +35,16 @@
         highlight: renderedScenario?.uid === scenario.uid,
         color,
         isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
-        values: scenario[key], // TODO: How is this working? should be child of scenarioData
+        values: scenario[key].data,
+        unit: scenario[key].unit
       };
     });
   });
+
+  $: [emissionsUnit, temperatureUnit] = [emissionsData, temperatureData].map(scenarios => scenarios[0]?.unit)
+
+  const KEY_UNIT_X = 'unitX';
+  const KEY_UNIT_Y = 'unitY';
 
   $: warmingData = $SCENARIOS.map((scenario) => {
     const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
@@ -49,8 +55,12 @@
       isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
       x: scenario.scenarioData['warming2050-2100'].data,
       y: scenario.scenarioData['warming2050'].data,
+      [KEY_UNIT_X]: scenario.scenarioData['warming2050-2100'].unit,
+      [KEY_UNIT_Y]: scenario.scenarioData['warming2050'].unit
     };
   });
+
+  $: [warmingUnitX, warmingUnitY] = [KEY_UNIT_X, KEY_UNIT_Y].map(key => get(warmingData, [0, key]))
 
   let currentWarmingTextUID;
 
@@ -101,7 +111,8 @@
             <div class="scenario-chart">
               <ScatterplotWarming
                 data={warmingData}
-                unit="degrees-celsius"
+                unitX={warmingUnitX}
+                unity={warmingUnitY}
                 bind:hoveredSector={currentWarmingTextUID}
               />
             </div>
@@ -115,7 +126,7 @@
             <div class="scenario-chart">
               <LineTimeSeries
                 data={emissionsData}
-                unit="ton"
+                unit={emissionsUnit}
                 title="Global GHG emissions"
                 ticksYHighlighted={[0]}
                 yTicks={4}
@@ -125,7 +136,7 @@
             <div class="scenario-chart">
               <LineTimeSeries
                 data={temperatureData}
-                unit="degrees-celsius"
+                unit={temperatureUnit}
                 title="Global mean tempearture"
                 yDomain={[1, 3]}
                 ticksYHighlighted={[1]}

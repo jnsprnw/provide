@@ -6,6 +6,7 @@
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
   import { sortBy } from 'lodash-es';
+  import Unit from '$lib/helper/chart-description/Unit.svelte';
 
   export let data = [];
   export let xKey = 'year';
@@ -29,17 +30,13 @@
   $: formatTickY = (d) => formatValue(d, unit);
 
   $: sortedData = sortBy(data, ['highlight', 'isSelected'])
-  // $: sortedData = data.slice(0).sort((a, b) =>
-  //   // First sort by `highlight`, then by `color`
-  //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
-  // );
 </script>
 
 <div class="figure-container" class:hasTitle={title}>
   {#if title}
     <header>
       <h5 class="title-chart title-chart--title">{title}</h5>
-      <small class="title-chart title-chart--small">in {unit}</small>
+      <small class="title-chart title-chart--small">in <Unit {unit} /></small>
     </header>
   {/if}
   <div class="chart-container">

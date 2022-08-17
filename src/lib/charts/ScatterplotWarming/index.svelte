@@ -13,11 +13,15 @@
   export let data = [];
   export let xKey = 'x';
   export let yKey = 'y';
-  export let unit = DEFAULT_FORMAT_UID;
+  export let unitX = DEFAULT_FORMAT_UID;
+  export let unitY = DEFAULT_FORMAT_UID;
 
   const padding = { top: 5, right: 15, bottom: 20, left: 40 };
 
-  $: formatTick = (d) => formatValue(d, unit);
+  $: formatTickX = (d) => formatValue(d, unitX);
+  $: formatTickY = (d) => formatValue(d, unitY);
+
+  $: console.log({ unitX, formatTickX }, formatTickX(0.5))
 
   $: sortedData = sortBy(data, ['highlight', 'isSelected'])
   // This sorting is somewhat buggy.
@@ -43,8 +47,8 @@
         <Sectors bind:hoveredSector={hoveredSector} />
         <AxisXLabel {padding} label="Warming between 2050 and 2100" />
         <AxisYLabel {padding} label="Warming in 2050" />
-        <AxisX {padding} formatTick={formatTick} ticks={[-0.5, 0, 1.2]} gridClass="chart-grid--invert" />
-        <AxisY {padding} formatTick={formatTick} ticks={[1.3, 1.5, 1.6, 2.3]} gridClass="chart-grid--invert" />
+        <AxisX {padding} formatTick={formatTickX} ticks={[-0.5, 0, 1.2]} gridClass="chart-grid--invert" />
+        <AxisY {padding} formatTick={formatTickY} ticks={[1.3, 1.5, 1.6, 2.3]} gridClass="chart-grid--invert" />
         <Dots />
       </Svg>
     </LayerCake>
