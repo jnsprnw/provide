@@ -1,6 +1,6 @@
 <script>
   import Select from '$lib/helper/select/index.svelte';
-  import ScenarioList from '$lib/helper/chart-description/scenarioList.svelte';
+  import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ModelList from '$lib/helper/chart-description/ModelList.svelte';

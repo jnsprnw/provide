@@ -86,7 +86,6 @@
     showDifference={asyncProps.showDifference}
     {...props}
     data={asyncProps.geoData}
-    resolution={asyncProps.geoData[0].resolution}
   />
   <div class={`maps cols-${asyncProps.geoData.length}`}>
     {#each asyncProps.geoData as d}
