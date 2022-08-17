@@ -30,6 +30,7 @@
     {data}
     x={xKey}
     y={yKey}
+    {padding}
     yDomain={[0, 1]}
     xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
     flatData={flatten(data)}
