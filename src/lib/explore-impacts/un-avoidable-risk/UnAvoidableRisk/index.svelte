@@ -12,11 +12,7 @@
   import Select from '$lib/helper/select/index.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import {
-    UNAVOIDABLE_UID,
-    KEY_PARAMETERS,
-    KEY_MODEL,
-  } from '$lib/../config.js';
+  import { UNAVOIDABLE_UID } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
 
   let currentThreshold;
@@ -46,7 +42,7 @@
       };
     });
 
-    processedScenarios = reverse(sortBy(processedScenarios, 'color'))
+    processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
     const unavoidableValues = data.years.map((year, yearIndex) => {
       const value = min(processedScenarios, (d) => d.values[yearIndex].value);
@@ -68,9 +64,7 @@
       values: unavoidableValues,
     });
 
-    const { [KEY_MODEL]: model, [KEY_PARAMETERS]: parameters } = data;
-
-    return { thresholds, data: processedScenarios, model, parameters };
+    return { ...data, thresholds, data: processedScenarios };
   };
 </script>
 
@@ -86,18 +80,18 @@
     indicator: $CURRENT_INDICATOR,
   }}
 >
-  <div slot="placeholder">This is a custom loading thing</div>
-
   <div class="wrapper grid">
     <div class="chart-info">
       <ChartInfo {...props} {...asyncProps} threshold={currentThreshold} />
     </div>
     <div class="chart-container">
-      <Select
-        label="Threshold"
-        options={asyncProps.thresholds}
-        bind:value={currentThreshold}
-      />
+      <div class="chart-options">
+        <Select
+          label="Threshold"
+          options={asyncProps.thresholds}
+          bind:value={currentThreshold}
+        />
+      </div>
       <div class="chart">
         <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
       </div>
@@ -111,9 +105,15 @@
   .chart-container {
     grid-column: 7 / span 6;
   }
+
+  .chart-options {
+    margin-bottom: var(--space-m);
+  }
+
   .chart {
     height: 400px;
   }
+
   .chart-info {
     grid-column: 1 / span 5;
     @include chart-info-layout();

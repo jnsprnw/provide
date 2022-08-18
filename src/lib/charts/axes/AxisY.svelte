@@ -1,7 +1,7 @@
 <script>
-  import { formatValue } from "$lib/utils/formatting";
-  import { getContext } from "svelte";
-  const { width, height, xScale, yScale } = getContext("LayerCake");
+  import { formatValue } from '$lib/utils/formatting';
+  import { getContext } from 'svelte';
+  const { width, height, xScale, yScale } = getContext('LayerCake');
 
   export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
 
@@ -16,13 +16,13 @@
   export let dyTick = 0;
   export let tickPadding = 3;
   export let tickSize;
-  export let textAnchor = "end";
+  export let textAnchor = 'end';
   export let rightToLeft = false;
-  export let formatTick = (d) => formatValue(d, "default");
+  export let formatTick = (d) => formatValue(d, 'default');
 
   $: tickLength = (tickSize ?? $width) + tickPadding;
 
-  $: isBandwidth = typeof $yScale.bandwidth === "function";
+  $: isBandwidth = typeof $yScale.bandwidth === 'function';
 
   $: tickVals = Array.isArray(ticks)
     ? ticks
@@ -77,20 +77,3 @@
     <slot />
   </g>
 </g>
-
-<style lang="scss">
-  // .tick line {
-  //   //@include gridline();
-  // }
-
-  // .tick.tick-0 line {
-  //   stroke-dasharray: 0;
-  //   stroke: var(--color-foreground-weaker);
-  // }
-
-  // .bg {
-  //   stroke-width: 5;
-  //   fill: var(--color-background-weaker);
-  //   stroke: var(--color-background-weaker);
-  // }
-</style>

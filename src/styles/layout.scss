@@ -57,6 +57,7 @@
   stroke: var(--color-light-petrol100);
   stroke-dasharray: 2 2;
   pointer-events: none;
+  shape-rendering: crispEdges;
 
   &.chart-grid--invert {
     stroke: var(--color-background-base);

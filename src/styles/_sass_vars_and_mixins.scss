@@ -146,25 +146,6 @@
   font-weight: var(--font-font-weight-bold-number);
 }
 
-@mixin gridline {
-  stroke: var(--color-foreground-weakest);
-  fill: none;
-  stroke-dasharray: 1.5 1.5;
-}
-
-.gridline {
-  @include gridline;
-}
-
-@mixin gridline-thin {
-  stroke: var(--color-foreground-weakest);
-  fill: none;
-  opacity: 0.33;
-}
-.gridline-thin {
-  @include gridline-thin;
-}
-
 @mixin text-border($color, $width) {
   text-shadow: -$width $width 0 $color, -$width 0px 0 $color,
     -$width -$width 0 $color, 0 -$width 0 $color, $width -$width 0 $color,

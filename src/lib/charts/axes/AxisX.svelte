@@ -1,13 +1,13 @@
 <script>
-  import { formatValue } from "$lib/utils/formatting";
-  import { first, last, range, uniq } from "lodash-es";
-  import { getContext } from "svelte";
-  const { width, xScale, yScale } = getContext("LayerCake");
+  import { formatValue } from '$lib/utils/formatting';
+  import { first, last, range, uniq } from 'lodash-es';
+  import { getContext } from 'svelte';
+  const { width, xScale, yScale } = getContext('LayerCake');
 
   export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
   export let gridlines = true;
   export let gridClass = '';
-  export let formatTick = (d) => formatValue(d, "year");
+  export let formatTick = (d) => formatValue(d, 'year');
   export let baseline = false;
   export let snapTicks = false;
   export let ticks = 4;
@@ -19,7 +19,7 @@
   export let minTickSpace = 30;
   export let ticksHighlighted = [];
 
-  $: isBandwidth = typeof $xScale.bandwidth === "function";
+  $: isBandwidth = typeof $xScale.bandwidth === 'function';
 
   $: xDomain = $xScale.domain();
   $: endTicks = forceShow
@@ -30,7 +30,7 @@
     ? ticks
     : isBandwidth
     ? $xScale.domain()
-    : typeof ticks === "function"
+    : typeof ticks === 'function'
     ? ticks($xScale.ticks())
     : $xScale.ticks(ticks);
 
@@ -40,13 +40,13 @@
   $: textAnchor = (i) => {
     if (snapTicks) {
       if (i === 0) {
-        return "start";
+        return 'start';
       }
       if (i === visibleTicks.length - 1) {
-        return "end";
+        return 'end';
       }
     }
-    return "middle";
+    return 'middle';
   };
 
   const TICK_PADDING = 15;
@@ -104,26 +104,3 @@
     <slot />
   </g>
 </g>
-
-<style lang="scss">
-  // line,
-  // .tick line {
-  //   //@include gridline();
-  // }
-
-  // rect {
-  //   fill: none;
-  //   stroke: var(--color-foreground-weaker);
-  //   stroke-width: 1;
-  // }
-
-  // .bg {
-  //   stroke-width: 5;
-  //   fill: var(--color-background-weaker);
-  //   stroke: var(--color-background-weaker);
-  // }
-
-  // .baseline {
-  //   stroke-dasharray: 0;
-  // }
-</style>
