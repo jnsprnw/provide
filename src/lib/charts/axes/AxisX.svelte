@@ -77,15 +77,6 @@
           x2="0"
         />
       {/if}
-      <!-- <text
-        class="bg"
-        x="{xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}"
-        y="{yTick}"
-        dx="{dxTick}"
-        dy="{dyTick}"
-        text-anchor="{textAnchor(i)}">
-        {formatTick(tick)}
-      </text> -->
       <text
         x={xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}
         y={yTick + TICK_PADDING}
@@ -93,7 +84,6 @@
         dy={dyTick}
         text-anchor={textAnchor(i)}
         class="chart-tick"
-        dominant-baseline="haning"
       >
         {formatTick(tick)}
       </text>

@@ -3,7 +3,7 @@
   import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
 
-  const { data, xScale, yGet, height, xGet } = getContext('LayerCake');
+  const { data, xScale, yScale, yGet, height, xGet } = getContext('LayerCake');
 
   export let hatchingColor;
 

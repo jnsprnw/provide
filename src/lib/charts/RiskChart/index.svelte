@@ -7,6 +7,7 @@
   import { scaleBand } from 'd3-scale';
   import RiskLevels from './RiskLevels.svelte';
   import { getContext } from 'svelte';
+  import RiskLabels from './RiskLabels.svelte';
 
   export let data;
   export let xKey = 'year';
@@ -17,7 +18,7 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
 
-  const padding = { top: 5, right: 10, bottom: 20, left: 40 };
+  const padding = { top: 5, right: 0, bottom: 20, left: 40 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -40,6 +41,11 @@
       <AxisX {padding} />
       <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
     </Svg>
+    <Html>
+      <div class="labels">
+        <RiskLabels />
+      </div>
+    </Html>
   </LayerCake>
 </div>
 
@@ -51,11 +57,13 @@
   }
 
   .chart-container {
-    width: 80%;
+    width: 70%;
     height: 100%;
   }
 
   .labels {
-    width: 20%;
+    position: absolute;
+    width: 42.86%;
+    left: 100%;
   }
 </style>
