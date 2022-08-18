@@ -138,7 +138,7 @@ $extra-wide: 1700px !default;
   font-size: var(--font-size-large-s);
   text-transform: var(--font-text-case-uppercase);
   letter-spacing: var(--font-letter-spacing-looser);
-  color: var(--color-light-brand-stronger);
+  color: var(--color-light-text-weaker);
 }
 
 @mixin selection-panel {
