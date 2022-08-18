@@ -81,27 +81,27 @@
         <span class="text-label">Impacts</span>
         <span class="description">Select a geographical region, one or several scenarios, and explore corresponding impacts</span>
       </div>
-      <figure>
-        Graphic
+      <figure class="container">
+        <img src="/img/impacts.png" />
       </figure>
-      <a class="btn" href="/explore/impacts">Explore impacts</a>
+      <a class="btn btn--big" href="/explore/impacts">Explore impacts</a>
     </section>
     <section class="path">
       <div>
         <span class="text-label">Emission scenarios</span>
         <span class="description">Select a geographical region, an impact threshold, and explore scenarios under which the threshold won't be exceeded</span>
       </div>
-      <figure>
-        Graphic
+      <figure class="container">
+        <img src="/img/emission-scenarios.png" />
       </figure>
-      <span class="btn" href="/explore/emission-scenarios">Explore emission scenarios</span>
+      <span class="btn btn--big" aria-disabled="true">in development</span>
     </section>
   </div>
 </div>
 
 <style lang="scss">
   .stories {
-    background-color: var(--color-light-blue100);
+    background-color: var(--color-light-background-stronger);
     width: 100%;
 
     .stories-wrapper {
@@ -118,7 +118,7 @@
           flex-direction: column;
           align-items: flex-start;
           gap: var(--space-s);
-          color: var(--color-light-brand-stronger);
+          color: var(--color-light-font-base);
           font-size: var(--font-size-large-xl);
           font-weight: var(--font-font-weight-regular);
           background-color: var(--color-light-background-base);
@@ -146,14 +146,27 @@
     border: 1px solid transparent;
     color: var(--color-light-background-base);
     transition: background-color var(--transition-duration-base) ease-out;
-    padding: var(--size-space-large-xxs);
+    padding: var(--size-space-large-xxs) var(--size-space-large-m);
     cursor: pointer;
     font-size: var(--font-size-large-m);
     font-weight: var(--font-font-weight-regular);
     text-align: center;
 
+    &.btn--big {
+      padding: var(--size-space-large-xs);
+      font-size: var(--font-size-large-l);
+      font-weight: var(--font-weight-extrabold);
+    }
+
     &:focus, &:hover {
       background-color: var(--color-brand-stronger);
+    }
+
+    &[aria-disabled="true"],
+    &[aria-disabled="true"]:hover {
+      background-color: var(--color-light-foreground-weakest);
+      color: var(--color-light-text-weaker);
+      cursor: not-allowed;
     }
   }
 
@@ -164,8 +177,16 @@
       grid-column: 2 / -2;
       margin: var(--space-xxxl) 0;
       text-align: center;
-      font-size: var(--font-size-large-l);
-      color: var(--color-light-brand-stronger);
+      color: var(--color-light-font-base);
+
+      h4 {
+        font-size: var(--font-size-large-l);
+        margin-bottom: var(--space-m);
+      }
+
+      p {
+        font-size: var(--font-size-large-xl);
+      }
     }
 
     .path {
@@ -173,18 +194,23 @@
       grid-template-rows: 1fr auto auto;
       grid-gap: var(--space-xs);
       grid-column-start: span 6;
-      background-color: var(--color-light-blue100);
+      background-color: var(--color-light-background-stronger);
+
+      figure img {
+        width: 80%;
+      }
       
       .text-label {
         display: block;
-        padding: var(--space-m) 0 0 var(--space-m);
+        padding: var(--space-xl) 0 0 var(--space-xl);
       }
 
       .description {
-        padding: 0 0 0 var(--space-m);
+        padding: 0 var(--space-xl) 0 var(--space-xl);
         display: block;
-        font-size: var(--font-size-large-l);
-        color: var(--color-light-brand-stronger);
+        font-size: var(--font-size-large-xl);
+        color: var(--color-light-text-base);
+        font-weight: var(--font-weight-extrabold);
       }
 
       figure {
