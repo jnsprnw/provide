@@ -2,22 +2,24 @@
   import { loadFromStrapi, loadFromAPI } from '$lib/../routes/api/utils.js';
   import { get, find, compact } from 'lodash-es';
   import qs from "qs";
+  import { formatObjArr } from '$lib/utils.js';
 
   export const load = async ({ fetch }) => {
     const meta = await loadFromAPI(`/api/meta/`, '', fetch);
     const stories = await loadFromStrapi('stories', fetch);
 
     const datum = compact(stories.map(({ attributes }) => {
-      const { indicator: indicatorUID, type, geographyType, geography: geographyUID, scenario: scenarioUID } = attributes;
-      const geography = find(get(meta, [geographyType], []), { uid: geographyUID });
+      const { Indicator: indicatorUID, Type, GeographyType, Geography: geographyUID, Scenarios: scenarioUIDs } = attributes;
+      const geography = find(get(meta, [GeographyType], []), { uid: geographyUID });
       const indicator = find(get(meta, 'indicators', []), { uid: indicatorUID });
-      const scenario = find(get(meta, 'scenarios', []), { uid: scenarioUID });
-      if (geography && indicator && scenario) {
+      const scenarioList = scenarioUIDs.map(({ UID }) => UID);
+      const scenarios = scenarioList.map(uid => find(get(meta, 'scenarios', []), { uid }));
+      if (geography && indicator && scenarios.length) {
         const query = qs.stringify(
           {
             indicator: indicatorUID,
             geography: geographyUID,
-            scenario: scenarioUID
+            scenarios: scenarioList
           },
           {
             encodeValuesOnly: true,
@@ -26,8 +28,8 @@
         return {
           geography,
           indicator,
-          scenario,
-          url: `explore/${type}?${query}`
+          scenarios: formatObjArr(scenarios, 'label'),
+          url: `explore/${Type}?${query}`
         }
       } else {
         return false;
@@ -44,6 +46,27 @@
 
 <script>
   export let data;
+
+  let currentStoryID = 0;
+  let height;
+
+  $: currentStory = get(data, currentStoryID || 0);
+
+  const intervalID = setInterval(nextStory, 4000);
+
+  function nextStory() {
+    const next = currentStoryID === data.length - 1 ? 0 : currentStoryID + 1;
+    changeStory(next);
+  }
+
+  function changeStory(index) {
+    currentStoryID = index;
+  }
+
+  function handClick(index) {
+    clearInterval(intervalID);
+    changeStory(index)
+  }
 </script>
 
 <svelte:head>
@@ -54,18 +77,32 @@
   <div class="wrapper grid">
     <div class="stories-wrapper">
       <ul>
-        {#each data as datum}
         <li class="story">
-          <span>
-            How will
-            <em>{datum.indicator.label}</em> in
-            <em>{#if datum.geography.emoji}{datum.geography.emoji}&nbsp;{/if}{datum.geography.label}</em> develop under a
-            <em>{datum.scenario.label}</em> scenario?
-          </span>
-          <a class="btn" href={datum.url}>Explore use case</a>
+          <div class="story-wrapper" style={`height: ${height}px;`}>
+            {#key currentStory}
+            <span bind:clientHeight={height}>
+              How will
+              <em>{currentStory.indicator.label}</em> in
+              <em>{#if currentStory.geography.emoji}{currentStory.geography.emoji}&nbsp;{/if}{currentStory.geography.label}</em> develop under the 
+              {#each currentStory.scenarios as { type, value }}
+                {#if type === 'element'}
+                  <em>{ value.label }</em>
+                {:else}
+                  {value}
+                {/if}
+              {/each}
+              scenario{#if currentStory.scenarios.length > 1}s{/if}?
+            </span>
+            {/key}
+          </div>
+          <a class="story-link btn" href={currentStory.url}>Explore</a>
         </li>
-        {/each}
       </ul>
+    </div>
+    <div class="stories-nav">
+      {#each data as datum, i}
+      <button on:click={() => handClick(i)} class:active={currentStoryID === i}>{ i }</button>
+      {/each}
     </div>
   </div>
 </div>
@@ -112,8 +149,11 @@
         list-style: none;
         padding: 0;
         margin: 0;
+        position: relative;
+        min-height: 260px;
 
         .story {
+          position: absolute;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -122,10 +162,18 @@
           font-size: var(--font-size-large-xl);
           font-weight: var(--font-font-weight-regular);
           background-color: var(--color-light-background-base);
-          padding: var(--space-m);
-          margin: var(--space-m);
+          padding: var(--space-l);
+          margin: var(--space-xl) var(--space-m) var(--space-xxl);
           border-radius: var(--radius-interactive-l);
           max-width: 40ch;
+
+          .story-wrapper {
+            transition: height 0.3s ease-out;
+          }
+
+          span {
+            display: block;
+          }
 
           em {
             font-weight: var(--font-font-weight-bold);
@@ -135,6 +183,37 @@
           .btn {
             border-radius: var(--radius-interactive-l);
           }
+
+          .story-link {
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+
+    .stories-nav {
+      display: flex;
+      gap: var(--space-m);
+      margin: var(--space-xl) 0 var(--space-m) var(--space-m);
+
+      button {
+        border: none;
+        background-color: var(--color-light-foreground-weaker);
+        width: var(--space-xs);
+        height: var(--space-xs);
+        border-radius: 50%;
+        text-indent: -999em;
+        cursor: pointer;
+        overflow: hidden;
+        transition: transform var(--transition-duration-base) ease-out, background-color var(--transition-duration-base) ease-out;
+
+        &:hover, &:focus {
+          background-color: var(--color-light-foreground-base);
+        }
+
+        &.active {
+          background-color: var(--color-light-foreground-base);
+          transform: scale3d(1.3, 1.3, 1.3);
         }
       }
     }
