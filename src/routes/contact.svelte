@@ -3,12 +3,12 @@
   import { loadFromStrapi } from './api/utils.js';
 
   export const load = async ({ fetch }) => {
-    const data = await loadFromStrapi('disclaimer', fetch);
-    const { Text } = data.attributes;
+    const data = await loadFromStrapi('contact', fetch);
+    const { Contact } = data.attributes;
 
     return {
       props: {
-        text: parse(Text)
+        text: parse(Contact)
       }
     };
   }
@@ -21,12 +21,12 @@
 </script>
 
 <svelte:head>
-  <title>Contact and Imprint</title>
+  <title>Contact</title>
 </svelte:head>
 
 <div class="contact-header content-header container">
   <div class="wrapper">
-    <h1 class="title">Contact and Imprint</h1>
+    <h1 class="title">Contact</h1>
   </div>
 </div>
 
@@ -43,9 +43,9 @@
 <style lang="scss">
   @import '../styles/global.scss';
 
-  .section {
-    .topic {
-      grid-column: 1 / span 6;
+  .contact-content {
+    .btn {
+      margin-top: var(--space-s);
     }
   }
 </style>

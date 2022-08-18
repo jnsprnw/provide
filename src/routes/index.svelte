@@ -222,36 +222,6 @@
     }
   }
 
-  .btn {
-    background-color: var(--color-functional-accent);
-    display: block;
-    border: 1px solid transparent;
-    color: var(--color-light-background-base);
-    transition: background-color var(--transition-duration-base) ease-out;
-    padding: var(--size-space-large-xxs) var(--size-space-large-m);
-    cursor: pointer;
-    font-size: var(--font-size-large-m);
-    font-weight: var(--font-font-weight-regular);
-    text-align: center;
-
-    &.btn--big {
-      padding: var(--size-space-large-xs);
-      font-size: var(--font-size-large-l);
-      font-weight: var(--font-weight-extrabold);
-    }
-
-    &:focus, &:hover {
-      background-color: var(--color-brand-stronger);
-    }
-
-    &[aria-disabled="true"],
-    &[aria-disabled="true"]:hover {
-      background-color: var(--color-light-foreground-weakest);
-      color: var(--color-light-text-weaker);
-      cursor: not-allowed;
-    }
-  }
-
   .paths {
     margin: var(--space-l) 0;
 

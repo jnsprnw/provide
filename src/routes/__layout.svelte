@@ -27,8 +27,8 @@
         <ListLink {currentPath} link="glossary">
           Glossary
         </ListLink>
-        <ListLink {currentPath} link="contact-imprint">
-          Contact and Imprint
+        <ListLink {currentPath} link="contact">
+          Contact
         </ListLink>
       </ul>
     </div>
