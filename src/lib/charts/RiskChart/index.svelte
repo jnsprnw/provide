@@ -17,6 +17,7 @@
   const theme = getContext('theme');
 
   $: formatTickY = (d) => formatValue(d, unit);
+  $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
 
   const padding = { top: 5, right: 0, bottom: 20, left: 40 };
 
@@ -38,7 +39,7 @@
   >
     <Svg>
       <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
-      <AxisX {padding} />
+      <AxisX {padding} formatTick={formatTickX} />
       <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
     </Svg>
     <Html>
