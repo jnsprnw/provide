@@ -44,7 +44,7 @@
   $: params = parse(currentURL.search.replace(/^\?/, ''));
 
   $: {
-    const { indicator, geography, scenario } = params;
+    const { indicator, geography, scenarios } = params;
     let newUrl = currentURL;
     if (indicator) {
       newUrl.searchParams.delete('indicator');
@@ -54,9 +54,11 @@
       newUrl.searchParams.delete('geography');
       CURRENT_GEOGRAPHY_UID.set(geography);
     }
-    if (scenario) {
-      newUrl.searchParams.delete('scenario');
-      CURRENT_SCENARIOS_UID.set([scenario]);
+    if (scenarios) {
+      scenarios.forEach((s, i) => {
+        newUrl.searchParams.delete(`scenarios[${i}]`);
+      })
+      CURRENT_SCENARIOS_UID.set(scenarios);
     }
     if (browser) window.history.replaceState(null, null, newUrl.href);
   }
