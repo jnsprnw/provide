@@ -136,7 +136,7 @@
     </div>
     <Spinner {isLoading} />
   </div>
-  <Legend scale={asyncProps.colorScale} />
+  <Legend unit={props.currentIndicator.unit} scale={asyncProps.colorScale} />
 </LoadingWrapper>
 
 <style lang="scss">

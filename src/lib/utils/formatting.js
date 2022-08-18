@@ -1,22 +1,22 @@
-import { formatDefaultLocale, formatLocale } from "d3-format";
+import { formatDefaultLocale, formatLocale } from 'd3-format';
 
-export const NA_STRING = "—";
-export const FORMAT_CURRENCY = "$,.0f";
-export const FORMAT_INTEGER = ",.0f";
-export const FORMAT_EMISSION = ".0s";
-export const FORMAT_FLOAT = ",.1f";
-export const FORMAT_YEAR = ".0f";
-export const FORMAT_CELSIUS = ".1f";
-export const FORMAT_PERCENT = ".0%";
+export const NA_STRING = '—';
+export const FORMAT_CURRENCY = '$,.0f';
+export const FORMAT_INTEGER = ',.0f';
+export const FORMAT_EMISSION = '.0s';
+export const FORMAT_FLOAT = ',.1f';
+export const FORMAT_YEAR = '.0f';
+export const FORMAT_CELSIUS = '.1f';
+export const FORMAT_PERCENT = '.0%';
 
 // the basic formatting function sued
 const f = formatLocale({
   ...formatDefaultLocale,
-  decimal: ".",
-  currency: ["", "  €"],
-  percent: " %",
+  decimal: '.',
+  currency: ['', '  €'],
+  percent: ' %',
   nan: NA_STRING,
-  thousands: ",",
+  thousands: ',',
   grouping: [3],
 }).format;
 
@@ -35,16 +35,21 @@ const indicatorFormats = {
 };
 
 const suffixes = {
-  'degrees-celsius': ' °C'
-}
+  'degrees-celsius': ' °C',
+};
 
-export const formatValue = (d, indicatorId) => {
+export const formatValue = (
+  d,
+  indicatorId,
+  { addSuffix } = { addSuffix: true }
+) => {
   let indicator = indicatorId;
-  if (indicator === 'celsius') { // Fixed for now. TODO
+  if (indicator === 'celsius') {
+    // Fixed for now. TODO
     indicator = 'degrees-celsius';
   }
-  const formatter = indicatorFormats[indicator] || indicatorFormats["default"];
+  const formatter = indicatorFormats[indicator] || indicatorFormats['default'];
   const value = formatter(d);
-  const suffix = suffixes[indicator];
+  const suffix = addSuffix && suffixes[indicator];
   return suffix ? value + suffix : value;
 };
