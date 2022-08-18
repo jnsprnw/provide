@@ -25,29 +25,22 @@
     }, []);
 </script>
 
-<div class="wrapper">
-  <div class="chart-container">
-    <LayerCake
-      {data}
-      x={xKey}
-      y={yKey}
-      yDomain={[0, 1]}
-      xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
-      flatData={flatten(data)}
-    >
-      <Svg>
-        <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
-        <AxisX {padding} />
-        <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
-      </Svg>
-      <Html />
-    </LayerCake>
-  </div>
-
-  <div class="labels">
-    <div>Some label</div>
-    <div>Some very long label that is too long for one line</div>
-  </div>
+<div class="chart-container">
+  <LayerCake
+    {data}
+    x={xKey}
+    y={yKey}
+    {padding}
+    yDomain={[0, 1]}
+    xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
+    flatData={flatten(data)}
+  >
+    <Svg>
+      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
+      <AxisX {padding} />
+      <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+    </Svg>
+  </LayerCake>
 </div>
 
 <style lang="scss">

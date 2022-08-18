@@ -25,6 +25,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
+    UNITS
   } from '$lib/../stores/store.js';
 
   export let meta;
@@ -35,20 +36,28 @@
   SCENARIOS.set(meta.scenarios);
   GEOGRAPHIES.set(meta);
   INDICATOR_PARAMETERS.set(meta.indicatorParameters);
+  UNITS.set(meta.units);
 
-  $: params = parse(new URL($page.url).search.replace(/^\?/, ''));
+  $: currentURL = new URL($page.url);
+
+  $: params = parse(currentURL.search.replace(/^\?/, ''));
 
   $: {
     const { indicator, geography, scenario } = params;
+    let newUrl = currentURL;
     if (indicator) {
+      newUrl.searchParams.delete('indicator');
       CURRENT_INDICATOR_UID.set(indicator);
     }
     if (geography) {
+      newUrl.searchParams.delete('geography');
       CURRENT_GEOGRAPHY_UID.set(geography);
     }
     if (scenario) {
+      newUrl.searchParams.delete('scenario');
       CURRENT_SCENARIOS_UID.set([scenario]);
     }
+    window.history.replaceState(null, null, newUrl.href);
   }
 
   $: currentPath = $page.routeId || '';

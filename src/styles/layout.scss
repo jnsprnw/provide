@@ -14,12 +14,14 @@
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: var(--space-xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-xxl);
   }
 
   &.grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: 1rem; // TODO
+    grid-gap: var(--space-m) var(--space-s);
   }
 
   &.content-layout {
@@ -69,12 +71,10 @@
 // CHART STYLING END
 
 .content-header {
-  margin: var(--space-xxl) 0;
-
-  .wrapper {
-    padding-bottom: var(--space-xxl);
-    border-bottom: 1px solid var(--color-light-blue300);
-  }
+  padding: var(--space-xl) 0 var(--space-xxl);
+  margin-bottom: var(--space-xxl);
+  background-color: var(--color-light-background-stronger);
+  border-bottom: 1px solid var(--color-light-background-strongest);
 
   .title {
     display: block;
@@ -96,9 +96,13 @@
     margin-bottom: var(--space-s);
   }
 
+  .headline-paragraph {
+    width: 100%;
+  }
+
   .link {
     display: block;
-    margin-top: var(--space-s);
+    margin-top: var(--space-xs);
   }
 
   p {
@@ -107,8 +111,8 @@
     }
   }
 
-  p + .headline-paragraph, p + h2 {
-    margin-top: var(--space-m);
+  p + .headline-paragraph, p + h2, dd + .headline-paragraph, footer + h2, footer + .headline-paragraph {
+    margin-top: var(--space-l);
   }
 }
 

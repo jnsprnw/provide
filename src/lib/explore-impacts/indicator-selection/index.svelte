@@ -19,6 +19,9 @@
 </script>
 
 <div class="indicator-selection">
+  <span class="intro">
+    Select an indicator from the list of sectors for which you would like to explore impacts
+  </span>
   <Tabs>
     <span class="text-label text-label--bold">Sectors</span>
     {#each sectors as { icon, label, disabled }}
@@ -45,6 +48,6 @@
 
   .indicator-parameters {
     padding: var(--space-xs) 0;
-    border-bottom: 1px solid var(--color-foreground-weakest);
+    border-top: 1px solid var(--color-light-background-stronger); // Do we need another very light foreground color?
   }
 </style>

@@ -17,6 +17,8 @@
       }
     };
   }
+  export const hydrate = false;
+  export const router = false;
 </script>
 
 <script>
@@ -24,7 +26,7 @@
 </script>
 
 <svelte:head>
-  <title>FAQ</title>
+  <title>About</title>
 </svelte:head>
 
 <div class="about-header content-header container">

@@ -4,17 +4,18 @@
     "light": {
       "background": {
         "base": "#ffffff",
-        "weaker": "#eef3f7",
-        "weakest": "#cfd8dd"
+        "stronger": "#f0f3f5",
+        "strongest": "#cfd8de"
       },
       "foreground": {
-        "base": "#465f6d",
-        "weaker": "#aebec6",
-        "weakest": "#cfd8dd"
+        "base": "#214b63",
+        "weaker": "#afbec7",
+        "weakest": "#cfd8de"
       },
       "text": {
+        "base": "#122936",
         "weaker": "#59788a",
-        "base": "#122936"
+        "weakest": "#afbec7"
       },
       "brand": {
         "base": "#59788a",
@@ -55,13 +56,14 @@
       "gray600": "#555555",
       "gray700": "#393939",
       "gray800": "#222222",
-      "petrol100": "#cfd8dd",
-      "petrol200": "#aebec6",
+      "petrol50": "#f0f3f5",
+      "petrol100": "#cfd8de",
+      "petrol200": "#afbec7",
       "petrol300": "#90a5b1",
-      "petrol400": "#738e9c",
+      "petrol400": "#798d9b",
       "petrol500": "#59788a",
-      "petrol600": "#465f6d",
-      "petrol700": "#354853",
+      "petrol600": "#214b63",
+      "petrol700": "#193a4d",
       "petrol800": "#122936",
       "blue100": "#f1f3f9",
       "blue200": "#d0d6ed",

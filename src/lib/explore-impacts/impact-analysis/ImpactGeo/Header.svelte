@@ -94,7 +94,7 @@
   @import '../../../../styles/global.scss';
 
   .header {
-    margin-bottom: var(--space-s);
+    // margin-bottom: var(--space-s);
     align-items: end;
   }
 

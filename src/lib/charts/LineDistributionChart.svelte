@@ -51,9 +51,9 @@
       <AxisX
         gridlines={false}
         ticks={6}
-        padding={{ top: 10, left: 0, right: 0 }}
+        {padding}
       />
-      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
+      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} {padding} />
       <LineLayer color={$theme.color.background.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>

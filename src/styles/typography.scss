@@ -144,22 +144,34 @@ i.emoji {
 .content-content {
   .headline-section {
     color: var(--color-brand-stronger);
-    font-weight: var(--font-font-weight-bold);
+    font-weight: var(--font-font-weight-extrabold-number);
     font-size: var(--font-size-large-xxl);
     line-height: var(--font-line-height-tightest);
   }
 
-  .headline-paragraph, h2 {
+  .headline-paragraph, h2, h3 {
     color: var(--color-brand-stronger);
-    font-weight: var(--font-font-weight-bold);
+    font-weight: var(--font-font-weight-extrabold-number);
     font-size: var(--font-size-large-xl);
     line-height: var(--font-line-height-tightest);
+    display: inline-block;
+
+    abbr {
+      font-weight: var(--font-weight-regular);
+      font-size: var(--font-size-large-s);
+      display: inline-block;
+      margin-left: var(--space-m);
+    }
   }
 
   p {
     color: var(--color-brand-stronger);
     font-size: var(--font-size-large-m);
     line-height: var(--font-line-height-base);
+  }
+
+  .link {
+    font-size: var(--font-size-large-s);
   }
 
   a {

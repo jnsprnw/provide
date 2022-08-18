@@ -3,7 +3,7 @@ import { formatDefaultLocale, formatLocale } from "d3-format";
 export const NA_STRING = "—";
 export const FORMAT_CURRENCY = "$,.0f";
 export const FORMAT_INTEGER = ",.0f";
-export const FORMAT_TON = ".0s";
+export const FORMAT_EMISSION = ".0s";
 export const FORMAT_FLOAT = ",.1f";
 export const FORMAT_YEAR = ".0f";
 export const FORMAT_CELSIUS = ".1f";
@@ -28,15 +28,14 @@ const indicatorFormats = {
   percent: f(FORMAT_PERCENT),
   year: f(FORMAT_YEAR),
   'degrees-celsius': f(FORMAT_CELSIUS),
-  ton: f(FORMAT_TON),
+  'gigaton-co2eq-year': f(FORMAT_EMISSION),
 
   // format for anything else
   default: f(FORMAT_INTEGER),
 };
 
 const suffixes = {
-  'degrees-celsius': ' °C',
-  gty: ' Gt/y'
+  'degrees-celsius': ' °C'
 }
 
 export const formatValue = (d, indicatorId) => {

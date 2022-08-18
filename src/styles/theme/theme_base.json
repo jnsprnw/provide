@@ -37,56 +37,56 @@
             "base"
           ]
         },
-        "weaker": {
-          "value": "#eef3f7",
+        "stronger": {
+          "value": "#F0F3F5",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#eef3f7",
+            "value": "#F0F3F5",
             "type": "color",
             "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
           },
-          "name": "weaker",
+          "name": "stronger",
           "attributes": {},
           "path": [
             "color",
             "light",
             "background",
-            "weaker"
+            "stronger"
           ]
         },
-        "weakest": {
-          "value": "#cfd8dd",
+        "strongest": {
+          "value": "#CFD8DE",
           "type": "color",
           "description": "A shaded background color, used e.g. as a backdrop in containers.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#cfd8dd",
+            "value": "#CFD8DE",
             "type": "color",
             "description": "A shaded background color, used e.g. as a backdrop in containers."
           },
-          "name": "weakest",
+          "name": "strongest",
           "attributes": {},
           "path": [
             "color",
             "light",
             "background",
-            "weakest"
+            "strongest"
           ]
         }
       },
       "foreground": {
         "base": {
-          "value": "#465f6d",
+          "value": "#214B63",
           "type": "color",
           "description": "Used for elements in the foreground that have a strong contrast to the background.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#465f6d",
+            "value": "#214B63",
             "type": "color",
             "description": "Used for elements in the foreground that have a strong contrast to the background."
           },
@@ -100,13 +100,13 @@
           ]
         },
         "weaker": {
-          "value": "#aebec6",
+          "value": "#AFBEC7",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes).",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#aebec6",
+            "value": "#AFBEC7",
             "type": "color",
             "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
           },
@@ -120,12 +120,12 @@
           ]
         },
         "weakest": {
-          "value": "#cfd8dd",
+          "value": "#CFD8DE",
           "type": "color",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#cfd8dd",
+            "value": "#CFD8DE",
             "type": "color"
           },
           "name": "weakest",
@@ -139,6 +139,26 @@
         }
       },
       "text": {
+        "base": {
+          "value": "#122936",
+          "type": "color",
+          "description": "Default text color for strong background contrast.",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#122936",
+            "type": "color",
+            "description": "Default text color for strong background contrast."
+          },
+          "name": "base",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "text",
+            "base"
+          ]
+        },
         "weaker": {
           "value": "#59788A",
           "type": "color",
@@ -159,24 +179,22 @@
             "weaker"
           ]
         },
-        "base": {
-          "value": "#122936",
+        "weakest": {
+          "value": "#AFBEC7",
           "type": "color",
-          "description": "Default text color for strong background contrast.",
           "filePath": "./transformed/tokens.json",
           "isSource": true,
           "original": {
-            "value": "#122936",
-            "type": "color",
-            "description": "Default text color for strong background contrast."
+            "value": "#AFBEC7",
+            "type": "color"
           },
-          "name": "base",
+          "name": "weakest",
           "attributes": {},
           "path": [
             "color",
             "light",
             "text",
-            "base"
+            "weakest"
           ]
         }
       },
@@ -758,14 +776,31 @@
           "gray800"
         ]
       },
+      "petrol50": {
+        "value": "#F0F3F5",
+        "type": "color",
+        "filePath": "./transformed/tokens.json",
+        "isSource": true,
+        "original": {
+          "value": "#F0F3F5",
+          "type": "color"
+        },
+        "name": "petrol50",
+        "attributes": {},
+        "path": [
+          "color",
+          "light",
+          "petrol50"
+        ]
+      },
       "petrol100": {
-        "value": "#cfd8dd",
+        "value": "#CFD8DE",
         "type": "color",
         "description": "Do not use for UI elements or text. Contrast is 1.45:1 against background #ffffff",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "#cfd8dd",
+          "value": "#CFD8DE",
           "type": "color",
           "description": "Do not use for UI elements or text. Contrast is 1.45:1 against background #ffffff"
         },
@@ -778,13 +813,13 @@
         ]
       },
       "petrol200": {
-        "value": "#aebec6",
+        "value": "#AFBEC7",
         "type": "color",
         "description": "Do not use for UI elements or text. Contrast is 1.9:1 against background #ffffff",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "#aebec6",
+          "value": "#AFBEC7",
           "type": "color",
           "description": "Do not use for UI elements or text. Contrast is 1.9:1 against background #ffffff"
         },
@@ -816,13 +851,13 @@
         ]
       },
       "petrol400": {
-        "value": "#738e9c",
+        "value": "#798D9B",
         "type": "color",
         "description": "Color can be used for UI elements or large text. Contrast is 3.45:1 against background #ffffff",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "#738e9c",
+          "value": "#798D9B",
           "type": "color",
           "description": "Color can be used for UI elements or large text. Contrast is 3.45:1 against background #ffffff"
         },
@@ -854,13 +889,13 @@
         ]
       },
       "petrol600": {
-        "value": "#465f6d",
+        "value": "#214B63",
         "type": "color",
         "description": "Color can be used for small text. Contrast is 6.69:1 against background #ffffff",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "#465f6d",
+          "value": "#214B63",
           "type": "color",
           "description": "Color can be used for small text. Contrast is 6.69:1 against background #ffffff"
         },
@@ -873,13 +908,13 @@
         ]
       },
       "petrol700": {
-        "value": "#354853",
+        "value": "#193A4D",
         "type": "color",
         "description": "Color can be used for small text. Contrast is 9.44:1 against background #ffffff",
         "filePath": "./transformed/tokens.json",
         "isSource": true,
         "original": {
-          "value": "#354853",
+          "value": "#193A4D",
           "type": "color",
           "description": "Color can be used for small text. Contrast is 9.44:1 against background #ffffff"
         },

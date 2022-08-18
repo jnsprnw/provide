@@ -47,16 +47,20 @@ export const SCENARIOS = (() => {
       const scenarios = scenariosRaw.map((scenarioRaw) => {
         const scenario = { ...scenarioRaw };
         SCENARIO_DATA_KEYS.forEach((key) => {
-          const { data, yearStart, yearStep } = get(
+          const { data, yearStart, yearStep, unit } = get(
             scenarioRaw,
             ['scenarioData', key],
             {}
           );
           if (data && yearStart && yearStep) {
-            scenario[key] = data.map((value, i) => ({
+            const datum = data.map((value, i) => ({
               value,
               year: yearStart + yearStep * i,
             }));
+            scenario[key] = {
+              data: datum,
+              unit
+            }
           }
         });
         return scenario;
@@ -240,3 +244,14 @@ export const ALL_PARAMETERS_SELECTED = derived(
   ([geography, scenarios, indicator]) =>
     geography && scenarios.length && indicator
 );
+
+/* UNITS */
+export const UNITS = (() => {
+  const store = writable();
+  return {
+    ...store,
+    set: (units) => {
+      store.set(keyBy(units, 'uid'));
+    },
+  };
+})();
