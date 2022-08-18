@@ -25,8 +25,9 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
-    UNITS
+    UNITS,
   } from '$lib/../stores/store.js';
+  import { browser } from '$app/env';
 
   export let meta;
 
@@ -57,7 +58,7 @@
       newUrl.searchParams.delete('scenario');
       CURRENT_SCENARIOS_UID.set([scenario]);
     }
-    window.history.replaceState(null, null, newUrl.href);
+    if (browser) window.history.replaceState(null, null, newUrl.href);
   }
 
   $: currentPath = $page.routeId || '';
