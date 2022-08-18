@@ -27,7 +27,7 @@
   })();
 </script>
 
-<div class="wrapper">
+<div class="root">
   <span class="tick-label">Below<br />{formatValue(domain[0], unit.uid)}</span>
   <div
     class="canvas-wrapper"
@@ -49,7 +49,7 @@
 </div>
 
 <style lang="scss">
-  .wrapper {
+  .root {
     display: flex;
     align-items: center;
   }

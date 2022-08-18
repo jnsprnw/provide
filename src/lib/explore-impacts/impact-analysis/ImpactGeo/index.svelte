@@ -135,8 +135,13 @@
       {/each}
     </div>
     <Spinner {isLoading} />
+    <div class="legend">
+      <Legend
+        unit={props.currentIndicator.unit}
+        scale={asyncProps.colorScale}
+      />
+    </div>
   </div>
-  <Legend unit={props.currentIndicator.unit} scale={asyncProps.colorScale} />
 </LoadingWrapper>
 
 <style lang="scss">
@@ -185,5 +190,11 @@
     background: var(--color-background-base);
     color: var(--color-text-weaker);
     font-size: var(--font-size-s);
+  }
+
+  .legend {
+    grid-column: 1 / span 12;
+    display: flex;
+    justify-content: flex-end;
   }
 </style>
