@@ -5,10 +5,11 @@
 
   export const load = async ({ fetch }) => {
     const data = await loadFromStrapi('technical-documentation', fetch);
-    const { Models, Scenarios } = data.attributes;
+    const { Models, Scenarios, ModelsIntro, ScenariosIntro } = data.attributes;
 
     return {
       props: {
+        modelsIntro: parse(ModelsIntro),
         models: Models.map(({ Title, Description, Link }) => {
           return {
             title: Title,
@@ -17,6 +18,7 @@
             link: Link
           }
         }),
+        scenariosIntro: parse(ScenariosIntro),
         scenarios: Scenarios.map(({ Title, Description }) => {
           return {
             title: Title,
@@ -32,8 +34,10 @@
 </script>
 
 <script>
+  export let modelsIntro;
   export let models;
   export let scenarios;
+  export let scenariosIntro;
 </script>
 
 <svelte:head>
@@ -73,6 +77,7 @@
         <h2 id="models" class="headline-section">Models</h2>
       </header>
       <div class="text">
+        { @html modelsIntro }
         {#each models as { title, description, link, slug }}
         <h3 id={slug} class="headline-paragraph">{ title }</h3>
         { @html description }
@@ -85,6 +90,7 @@
         <h2 id="scenarios" class="headline-section">Scenarios</h2>
       </header>
       <div class="text">
+        { @html scenariosIntro }
         {#each scenarios as { title, description, slug }}
         <h3 id={slug} class="headline-paragraph">{ title }</h3>
         { @html description }

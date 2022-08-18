@@ -16,6 +16,8 @@
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
   import { getContext } from 'svelte';
 
+  let heightScenarioDescription = 130;
+
   let hoveredScenario;
   $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
 
@@ -100,10 +102,12 @@
   </div>
 
   <div class="scenario-split">
-    <div>
+    <div class="scenario-description" style={`height: ${heightScenarioDescription}px;`}>
       {#if renderedScenario}
-        <h3>{renderedScenario.label}</h3>
-        <p>{renderedScenario.description || 'Description missing'}</p>
+        <div bind:clientHeight={heightScenarioDescription}>
+          <h3>{renderedScenario.label}</h3>
+          <p>{renderedScenario.description || 'Description missing'}</p>
+        </div>
       {/if}
     </div>
     <Tabs type="nav" format="compact">
@@ -120,7 +124,7 @@
                 bind:hoveredSector={currentWarmingTextUID}
               />
             </div>
-            <div class="scenario-description">
+            <div class="quadrant-description">
               <p>{@html currentWarmingText}</p>
             </div>
           </div>
@@ -179,8 +183,12 @@
     }
   }
 
-  .scenario-chart,
   .scenario-description {
+    transition: height 0.1s ease-out;
+  }
+
+  .scenario-chart,
+  .quadrant-description {
     width: 100%;
     height: 280px;
   }

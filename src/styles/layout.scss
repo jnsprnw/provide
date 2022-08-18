@@ -92,7 +92,7 @@
 }
 
 .content-content {
-  .headline-paragraph, h2 {
+  .headline-paragraph, h2, h3, h4, h5, h6 {
     margin-bottom: var(--space-s);
   }
 
@@ -111,8 +111,13 @@
     }
   }
 
-  p + .headline-paragraph, p + h2, dd + .headline-paragraph, footer + h2, footer + .headline-paragraph {
+  p + .headline-paragraph, p + h2, p + h3, p + h4, dd + .headline-paragraph, footer + h2, footer + .headline-paragraph {
     margin-top: var(--space-l);
+  }
+
+  .btn {
+    margin-top: var(--space-s);
+    display: inline-block;
   }
 }
 
