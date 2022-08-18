@@ -1,6 +1,6 @@
 <script context="module">
   import { loadFromStrapi, loadFromAPI } from '$lib/../routes/api/utils.js';
-  import { get, find, compact } from 'lodash-es';
+  import { get, find, compact, uniq } from 'lodash-es';
   import qs from "qs";
   import { formatObjArr } from '$lib/utils.js';
 
@@ -9,11 +9,14 @@
     const stories = await loadFromStrapi('stories', fetch);
 
     const datum = compact(stories.map(({ attributes }) => {
-      const { Indicator: indicatorUID, Type, GeographyType, Geography: geographyUID, Scenarios: scenarioUIDs } = attributes;
-      const geography = find(get(meta, [GeographyType], []), { uid: geographyUID });
+      const { Indicator: _indicatorUID, Type, GeographyType: _GeographyType, Geography: _geographyUID, Scenarios: scenarioUIDs } = attributes;
+      let geographyUID = _geographyUID.trim();
+      let indicatorUID = _indicatorUID.trim();
+      let geographyType = _GeographyType.trim();
+      const geography = find(get(meta, [geographyType], []), { uid: geographyUID });
       const indicator = find(get(meta, 'indicators', []), { uid: indicatorUID });
-      const scenarioList = scenarioUIDs.map(({ UID }) => UID);
-      const scenarios = scenarioList.map(uid => find(get(meta, 'scenarios', []), { uid }));
+      const scenarioList = uniq(scenarioUIDs.map(({ UID }) => UID.trim()));
+      const scenarios = compact(scenarioList.map(uid => find(get(meta, 'scenarios', []), { uid }))).slice(0, 3);
       if (geography && indicator && scenarios.length) {
         const query = qs.stringify(
           {
