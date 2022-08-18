@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg } from 'layercake';
+  import { Html, LayerCake, Svg } from 'layercake';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
   import { formatValue } from '$lib/utils/formatting';
   import AxisX from '../axes/AxisX.svelte';
@@ -25,28 +25,44 @@
     }, []);
 </script>
 
-<div class="chart-container">
-  <LayerCake
-    {data}
-    x={xKey}
-    y={yKey}
-    yDomain={[0, 1]}
-    xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
-    flatData={flatten(data)}
-  >
-    <Svg>
-      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
-      <AxisX {padding} />
-      <AxisY
-        formatTick={formatTickY}
-        ticksHighlighted={[0, 1]} />
-    </Svg>
-  </LayerCake>
+<div class="wrapper">
+  <div class="chart-container">
+    <LayerCake
+      {data}
+      x={xKey}
+      y={yKey}
+      yDomain={[0, 1]}
+      xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
+      flatData={flatten(data)}
+    >
+      <Svg>
+        <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
+        <AxisX {padding} />
+        <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+      </Svg>
+      <Html />
+    </LayerCake>
+  </div>
+
+  <div class="labels">
+    <div>Some label</div>
+    <div>Some very long label that is too long for one line</div>
+  </div>
 </div>
 
 <style lang="scss">
-  .chart-container {
+  .wrapper {
     width: 100%;
     height: 100%;
+    display: flex;
+  }
+
+  .chart-container {
+    width: 80%;
+    height: 100%;
+  }
+
+  .labels {
+    width: 20%;
   }
 </style>

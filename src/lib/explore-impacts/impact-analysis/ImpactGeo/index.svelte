@@ -2,6 +2,7 @@
   import MapboxMap from '$lib/mapbox-map/index.svelte';
   import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
   import Header from './Header.svelte';
+  import Legend from './Legend.svelte';
   import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
   import { GEO_SHAPE_DATA } from '$stores/geo-shape.js';
   import { extent } from 'd3-array';
@@ -50,10 +51,25 @@
         }));
 
     const colorScale = (() => {
-      let domain = [0, 1];
-      let range = [$theme.color.category[5], $theme.color.category[3]];
-      let flatData = renderedData.map((grid) => grid.data).flat(3);
-      domain = extent(flatData);
+      //const range = ['#F9CEA6', '#DE3F27'];
+      const sequentialPositiveRange = ['#F9CEA6', '#C91C1C'];
+      const sequentialNegativeRange = ['#437E8E', '#DACFBF'];
+      const divergingRange = ['#437E8E', '#F4E4D6', '#C91C1C'];
+      let range;
+      const flatData = renderedData.map((grid) => grid.data).flat(3);
+      const domain = extent(flatData);
+      const isSequential =
+        (domain[0] >= 0 && domain[1] >= 0) || (domain[0] < 0 && domain[1] < 0);
+      if (isSequential) {
+        range =
+          domain[0] >= 0 ? sequentialPositiveRange : sequentialNegativeRange;
+      } else {
+        range = divergingRange;
+      }
+
+      //[-x, 0, +x]
+      //[-x, -x]
+      //[+x, +x]
       return scaleLinear().domain(domain).range(range);
     })();
 
@@ -116,6 +132,7 @@
     {/each}
     <Spinner {isLoading} />
   </div>
+  <Legend scale={asyncProps.colorScale} />
 </LoadingWrapper>
 
 <style lang="scss">
