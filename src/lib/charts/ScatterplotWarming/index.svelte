@@ -21,9 +21,9 @@
   $: formatTickX = (d) => formatValue(d, unitX);
   $: formatTickY = (d) => formatValue(d, unitY);
 
-  $: console.log({ unitX, formatTickX }, formatTickX(0.5))
+  //$: console.log({ unitX, formatTickX }, formatTickX(0.5))
 
-  $: sortedData = sortBy(data, ['highlight', 'isSelected'])
+  $: sortedData = sortBy(data, ['highlight', 'isSelected']);
   // This sorting is somewhat buggy.
   // $: sortedData = data.slice(0).sort((a, b) =>
   //   // First sort by `highlight`, then by `color`
@@ -44,11 +44,21 @@
       yDomain={[1.3, 2.3]}
     >
       <Svg>
-        <Sectors bind:hoveredSector={hoveredSector} />
+        <Sectors bind:hoveredSector />
         <AxisXLabel {padding} label="Warming between 2050 and 2100" />
         <AxisYLabel {padding} label="Warming in 2050" />
-        <AxisX {padding} formatTick={formatTickX} ticks={[-0.5, 0, 1.2]} gridClass="chart-grid--invert" />
-        <AxisY {padding} formatTick={formatTickY} ticks={[1.3, 1.5, 1.6, 2.3]} gridClass="chart-grid--invert" />
+        <AxisX
+          {padding}
+          formatTick={formatTickX}
+          ticks={[-0.5, 0, 1.2]}
+          gridClass="chart-grid--invert"
+        />
+        <AxisY
+          {padding}
+          formatTick={formatTickY}
+          ticks={[1.3, 1.5, 1.6, 2.3]}
+          gridClass="chart-grid--invert"
+        />
         <Dots />
       </Svg>
     </LayerCake>

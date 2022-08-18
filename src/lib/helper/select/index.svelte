@@ -36,13 +36,13 @@
 
   .root {
     display: flex;
-    font-size: var(--font-size-s);
+    font-size: var(--font-size-m);
   }
 
   .control-label {
     display: inline;
     margin-right: var(--space-xs);
-    color: var(--color-light-text-base);
+    color: var(--color-light-text-weaker);
   }
 
   .select-wrapper {
@@ -80,7 +80,6 @@
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
-    font-size: var(--font-size-s);
     color: var(--color-light-text-base);
     font-weight: var(--font-font-weight-bold-number);
   }

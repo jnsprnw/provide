@@ -42,7 +42,6 @@
 
   .label {
     margin-right: var(--space-m);
-    font-size: var(--font-size-s);
     color: var(--color-light-text-base);
   }
 </style>

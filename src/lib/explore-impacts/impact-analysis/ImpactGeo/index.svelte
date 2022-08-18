@@ -96,7 +96,6 @@
   {process}
   let:isLoading
 >
-  <div slot="placeholder" class="placeholder">Loading</div>
   <div class="wrapper grid">
     <div class="chart-info">
       <Header
@@ -145,13 +144,6 @@
 </LoadingWrapper>
 
 <style lang="scss">
-  .placeholder {
-    height: 400px;
-    background: var(--color-foreground-weakest);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .chart-info {
     grid-column: 1 / -1;
   }

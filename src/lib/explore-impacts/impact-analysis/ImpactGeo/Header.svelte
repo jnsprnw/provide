@@ -32,9 +32,9 @@
       {#if showDifference}
         <p>
           This map shows the differences in change of
-          {$CURRENT_INDICATOR.label} (expressed in 
-          {$CURRENT_INDICATOR.unit.labelLong}) in 
-          {$CURRENT_GEOGRAPHY.label} in 
+          {$CURRENT_INDICATOR.label} (expressed in
+          {$CURRENT_INDICATOR.unit.labelLong}) in
+          {$CURRENT_GEOGRAPHY.label} in
           {$CURRENT_IMPACT_GEO_YEAR_UID} compared to the reference period
           {$CURRENT_INDICATOR_OPTIONS.reference.label} between
           <ScenarioList scenarios={$CURRENT_SCENARIOS} />.
@@ -42,8 +42,8 @@
       {:else if $CURRENT_SCENARIOS.length > 1}
         <p>
           These maps show the changes in
-          {$CURRENT_INDICATOR.label} (expressed in 
-          {$CURRENT_INDICATOR.unit.labelLong}) in 
+          {$CURRENT_INDICATOR.label} (expressed in
+          {$CURRENT_INDICATOR.unit.labelLong}) in
           {$CURRENT_GEOGRAPHY.label} in
           {$CURRENT_IMPACT_GEO_YEAR_UID} compared to the reference period
           {$CURRENT_INDICATOR_OPTIONS.reference.label}, according to the
@@ -62,12 +62,8 @@
         </p>
       {/if}
       <ChartFacts direction="horizontal">
-        <SpatialResolutionList
-          data={data.map(d => d.resolution)}
-        />
-        <ModelList
-          data={data.map(d => d.model)}
-        />
+        <SpatialResolutionList data={data.map((d) => d.resolution)} />
+        <ModelList data={data.map((d) => d.model)} />
       </ChartFacts>
     </div>
     <div class="controls">
@@ -106,7 +102,7 @@
   .controls {
     display: flex;
     justify-content: flex-end;
-    grid-column: -1 / -4;
+    grid-column: -1 / -5;
   }
 
   .control {
