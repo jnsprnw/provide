@@ -1,9 +1,8 @@
 <script>
-  import Tabs from '$lib/helper/tabs/tabs.svelte';
-  import Tab from '$lib/helper/tabs/tab.svelte';
-  import SelectionMessage from '$lib/selection-message.svelte';
-  import TabPrimary from '$lib/helper/tabs/tabPrimary.svelte';
-  import TabContent from '$lib/helper/tabs/tab-content.svelte';
+  import Tabs from '$lib/helper/tabs/Tabs.svelte';
+  import Tab from '$lib/helper/tabs/Tab.svelte';
+  import TabPrimary from '$lib/helper/tabs/TabPrimary.svelte';
+  import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import ImpactAnalysis from '$lib/explore-impacts/impact-analysis/index.svelte';
   import UnAvoidableRisk from '$lib/explore-impacts/un-avoidable-risk/index.svelte';
   import MitigationBenefits from '$lib/explore-impacts/mitigation-benefits/index.svelte';
@@ -106,22 +105,21 @@
   }
 
   .impacts-header {
-    background-color: var(--color-light-blue100); // TODO
-    border-bottom: 1px solid var(--color-light-blue200); // TODO
-    padding: var(--size-space-large-xl) 0
-      calc(var(--size-space-large-xl) + 4rem); // TODO
+    background-color: var(--color-background-stronger);
+    border-bottom: 1px solid var(--color-foreground-weaker);
+    padding: var(--space-xl) 0 calc(var(--space-xl) + 4rem); // TODO
     margin-bottom: -4rem;
   }
 
   .impacts-selection {
     margin-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--color-foreground-weakest);
+    border-bottom: 1px solid var(--color-foreground-weaker);
   }
 
   .explore-description {
-    font-size: var(--font-size-large-l);
+    font-size: var(--font-size-l);
     max-width: 75ch;
     line-height: var(--font-line-height-base);
-    color: var(--color-light-brand-stronger);
+    color: var(--color-brand-stronger);
   }
 </style>

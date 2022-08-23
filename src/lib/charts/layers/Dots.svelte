@@ -15,33 +15,32 @@
       style={`fill: ${dot.color}`}
     />
     {#if dot.highlight}
-    <g transform={`translate(${0}, ${-1 * R_BIG - 4})`}>
-      <text
-        class="chart-label chart-label--bold chart-label--bg"
-        text-anchor="middle">
-        { dot.label }
-      </text>
-      <text
-        class="chart-label chart-label--bold"
-        text-anchor="middle">
-        { dot.label }
-      </text>
-    </g>
+      <g transform={`translate(${0}, ${-1 * R_BIG - 4})`}>
+        <text
+          class="chart-label chart-label--bold chart-label--bg"
+          text-anchor="middle"
+        >
+          {dot.label}
+        </text>
+        <text class="chart-label chart-label--bold" text-anchor="middle">
+          {dot.label}
+        </text>
+      </g>
     {/if}
-    <text>
-  </g>
+    <text /></g
+  >
 {/each}
 
 <style lang="scss">
   .dot {
     pointer-events: none;
     stroke-width: 2px;
-    fill: var(--color-light-petrol300);
+    fill: var(--color-foreground-weaker);
     stroke: var(--color-background-base);
     stroke-opacity: 0.75;
 
     &.highlight {
-      fill: var(--color-light-petrol500);
+      fill: var(--color-foreground-base);
     }
   }
 </style>

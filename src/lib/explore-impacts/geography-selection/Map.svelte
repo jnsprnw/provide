@@ -4,9 +4,7 @@
   import { geoPath, geoEqualEarth } from 'd3-geo';
   import { feature } from 'topojson-client';
   import * as world from './ne_110m_admin_0_countries.json';
-  import {
-    UID_WORLD
-  } from '$lib/../config.js';
+  import { UID_WORLD } from '$lib/../config.js';
 
   export let hovered;
   export let selected;
@@ -89,8 +87,9 @@
         {#each countries as country}
           <path
             d={country.d}
-            class:active={selected === UID_WORLD} 
-            class:hover={hovered === UID_WORLD} />
+            class:active={selected === UID_WORLD}
+            class:hover={hovered === UID_WORLD}
+          />
         {/each}
       </g>
       <g role="list">
@@ -110,11 +109,11 @@
 
 <style lang="scss">
   path {
-    fill: var(--color-light-blue200);
+    fill: var(--color-foreground-weakest);
     transition: fill var(--transition-duration-quick) ease-out;
 
     &.hover {
-      fill: var(--color-light-blue400);
+      fill: var(--color-foreground-base);
     }
 
     &.active {

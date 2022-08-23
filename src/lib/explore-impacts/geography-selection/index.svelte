@@ -1,7 +1,7 @@
 <script>
-  import Tabs from '$lib/helper/tabs/tabs.svelte';
-  import Tab from '$lib/helper/tabs/tab.svelte';
-  import TabContent from '$lib/helper/tabs/tab-content.svelte';
+  import Tabs from '$lib/helper/tabs/Tabs.svelte';
+  import Tab from '$lib/helper/tabs/Tab.svelte';
+  import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import Countries from './Countries.svelte';
   import {
     CURRENT_GEOGRAPHY_TYPE_INDEX,
@@ -11,7 +11,8 @@
 
 <div class="geography-selection">
   <span class="intro">
-    Select a type of geography and a geography for which you would like to explore impacts
+    Select a type of geography and a geography for which you would like to
+    explore impacts
   </span>
   <Tabs bind:selected={$CURRENT_GEOGRAPHY_TYPE_INDEX}>
     <span class="text-label text-label--bold">Geographies</span>

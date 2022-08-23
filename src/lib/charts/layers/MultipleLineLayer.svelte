@@ -23,6 +23,7 @@
   />
   <path
     class={`path-line`}
+    class:primary={line.color}
     class:highlight={line.highlight}
     d={path(line.values)}
     style={`stroke: ${line.color}`}
@@ -35,11 +36,16 @@
     stroke-linejoin: round;
     stroke-linecap: round;
     stroke-width: 2.5px;
-    stroke: var(--color-light-petrol200);
+    stroke: var(--color-foreground-base);
+    stroke-opacity: 0.3;
 
     &.highlight {
       stroke-width: 3px;
-      stroke: var(--color-light-petrol500);
+      stroke-opacity: 0.6;
+    }
+
+    &.primary {
+      stroke-opacity: 1;
     }
 
     &.background {

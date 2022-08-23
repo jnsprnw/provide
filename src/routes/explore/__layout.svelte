@@ -57,7 +57,7 @@
     if (scenarios) {
       scenarios.forEach((s, i) => {
         newUrl.searchParams.delete(`scenarios[${i}]`);
-      })
+      });
       CURRENT_SCENARIOS_UID.set(scenarios);
     }
     if (browser) window.history.replaceState(null, null, newUrl.href);
@@ -96,7 +96,7 @@
   @import '../../styles/global.scss';
 
   .explore-menu {
-    background-color: var(--color-light-blue100);
+    background-color: var(--color-background-stronger);
 
     .wrapper {
       @include tab-nav-wrapper();

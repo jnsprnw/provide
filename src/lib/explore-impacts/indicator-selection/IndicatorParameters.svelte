@@ -42,6 +42,6 @@
 
   .label {
     margin-right: var(--space-m);
-    color: var(--color-light-text-base);
+    color: var(--color-text-base);
   }
 </style>

@@ -173,22 +173,13 @@
     }
 
     .box {
-      color: var(--color-light-blue300); // TODO
+      color: var(--color-foreground-weaker); // TODO
       transition: color var(--transition-duration-base) ease-out;
     }
   }
   input:checked + label {
     .box {
       color: var(--color-functional-accent);
-    }
-    &.checked-0 .color-indicator {
-      color: var(--color-light-category-0);
-    }
-    &.checked-1 .color-indicator {
-      color: var(--color-light-category-1);
-    }
-    &.checked-2 .color-indicator {
-      color: var(--color-light-category-2);
     }
   }
 </style>

@@ -1,7 +1,7 @@
 <script>
-  import Tabs from '$lib/helper/tabs/tabs.svelte';
-  import Tab from '$lib/helper/tabs/tab.svelte';
-  import TabContent from '$lib/helper/tabs/tab-content.svelte';
+  import Tabs from '$lib/helper/tabs/Tabs.svelte';
+  import Tab from '$lib/helper/tabs/Tab.svelte';
+  import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import { partition, flatten, get } from 'lodash-es';
   import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
@@ -38,12 +38,14 @@
         color,
         isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
         values: scenario[key].data,
-        unit: scenario[key].unit
+        unit: scenario[key].unit,
       };
     });
   });
 
-  $: [emissionsUnit, temperatureUnit] = [emissionsData, temperatureData].map(scenarios => scenarios[0]?.unit)
+  $: [emissionsUnit, temperatureUnit] = [emissionsData, temperatureData].map(
+    (scenarios) => scenarios[0]?.unit
+  );
 
   const KEY_UNIT_X = 'unitX';
   const KEY_UNIT_Y = 'unitY';
@@ -58,11 +60,13 @@
       x: scenario.scenarioData['warming2050-2100'].data,
       y: scenario.scenarioData['warming2050'].data,
       [KEY_UNIT_X]: scenario.scenarioData['warming2050-2100'].unit,
-      [KEY_UNIT_Y]: scenario.scenarioData['warming2050'].unit
+      [KEY_UNIT_Y]: scenario.scenarioData['warming2050'].unit,
     };
   });
 
-  $: [warmingUnitX, warmingUnitY] = [KEY_UNIT_X, KEY_UNIT_Y].map(key => get(warmingData, [0, key]))
+  $: [warmingUnitX, warmingUnitY] = [KEY_UNIT_X, KEY_UNIT_Y].map((key) =>
+    get(warmingData, [0, key])
+  );
 
   let currentWarmingTextUID;
 
@@ -102,7 +106,10 @@
   </div>
 
   <div class="scenario-split">
-    <div class="scenario-description" style={`height: ${heightScenarioDescription}px;`}>
+    <div
+      class="scenario-description"
+      style={`height: ${heightScenarioDescription}px;`}
+    >
       {#if renderedScenario}
         <div bind:clientHeight={heightScenarioDescription}>
           <h3>{renderedScenario.label}</h3>

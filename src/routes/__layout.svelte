@@ -12,24 +12,16 @@
     <div class="wrapper grid">
       <h1>Provide</h1>
       <ul class="menu-main">
-        <ListLink {currentPath} link="">
-          Home
-        </ListLink>
+        <ListLink {currentPath} link="">Home</ListLink>
         <ListLink {currentPath} link="explore/impacts" startsWith={true}>
           Explore
         </ListLink>
-        <ListLink {currentPath} link="about">
-          About
-        </ListLink>
+        <ListLink {currentPath} link="about">About</ListLink>
         <ListLink {currentPath} link="technical-documentation">
           Technical Documentation
         </ListLink>
-        <ListLink {currentPath} link="glossary">
-          Glossary
-        </ListLink>
-        <ListLink {currentPath} link="contact">
-          Contact
-        </ListLink>
+        <ListLink {currentPath} link="glossary">Glossary</ListLink>
+        <ListLink {currentPath} link="contact">Contact</ListLink>
       </ul>
     </div>
   </nav>
@@ -57,8 +49,7 @@
 
 <style lang="scss">
   .page-menu {
-    // background-color: var(--color-light-brand-stronger);
-    background-color: var(--color-light-blue100);
+    background-color: var(--color-background-stronger);
     width: 100vw;
     padding: var(--size-space-large-xl);
 
@@ -67,13 +58,13 @@
       gap: var(--size-space-large-xxl);
       grid-template-columns: auto 1fr;
       padding-bottom: var(--size-space-large-xl);
-      border-bottom: 1px solid var(--color-light-blue200);
+      border-bottom: 1px solid var(--color-foreground-weaker);
 
       h1 {
         font-weight: var(--font-weight-extrabold);
         text-transform: uppercase;
-        color: var(--color-light-brand-stronger);
-        // color: var(--color-light-background-base);
+        color: var(--color-brand-stronger);
+        // color: var(--color-background-base);
       }
     }
 
@@ -87,7 +78,7 @@
   .page-footer {
     margin: var(--size-space-large-xxxl) 0 var(--size-space-large-xl);
     padding-top: var(--size-space-large-xxl);
-    border-top: 1px solid var(--color-light-blue300); // TODO
+    border-top: 1px solid var(--color-foreground-weakest); // TODO
 
     .page-author {
       grid-column: 1 / span 8;

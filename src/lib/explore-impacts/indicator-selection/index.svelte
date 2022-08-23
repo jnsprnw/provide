@@ -1,8 +1,8 @@
 <script>
   import { AVAILABLE_INDICATORS, SECTORS } from '$lib/../stores/store.js';
-  import Tabs from '$lib/helper/tabs/tabs.svelte';
-  import Tab from '$lib/helper/tabs/tab.svelte';
-  import TabContent from '$lib/helper/tabs/tab-content.svelte';
+  import Tabs from '$lib/helper/tabs/Tabs.svelte';
+  import Tab from '$lib/helper/tabs/Tab.svelte';
+  import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import Indicators from './indicators.svelte';
   import IndicatorParameters from './IndicatorParameters.svelte';
 
@@ -20,7 +20,8 @@
 
 <div class="indicator-selection">
   <span class="intro">
-    Select an indicator from the list of sectors for which you would like to explore impacts
+    Select an indicator from the list of sectors for which you would like to
+    explore impacts
   </span>
   <Tabs>
     <span class="text-label text-label--bold">Sectors</span>
@@ -48,6 +49,6 @@
 
   .indicator-parameters {
     padding: var(--space-xs) 0;
-    border-top: 1px solid var(--color-light-background-stronger); // Do we need another very light foreground color?
+    border-top: 1px solid var(--color-foreground-weakest); // Do we need another very light foreground color?
   }
 </style>

@@ -24,12 +24,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 // h1, h2, h3, h4, h5, h6, p, span {
-//   color: var(--color-light-brand-stronger);
+//   color: var(--color-brand-stronger);
 // }
 
 mark {
-  background-color: var(--color-light-petrol100);
-  color: var(--color-light-gray800);
+  background-color: var(--color-background-stronger);
+  color: var(--color-text-base);
 }
 
 i.emoji {
@@ -40,11 +40,11 @@ i.emoji {
   .list-link--default {
     a {
       transition: color var(--transition-duration-base) ease-out;
-      color: var(--color-light-brand-base);
-      // color: var(--color-light-background-weakest);
+      color: var(--color-brand-base);
+      // color: var(--color-background-weakest);
 
       &:hover, &:focus {
-        color: var(--color-light-brand-stronger);
+        color: var(--color-brand-stronger);
       }
     }
 
@@ -52,7 +52,7 @@ i.emoji {
       font-weight: var(--font-weight-extrabold);
 
       a {
-        color: var(--color-light-functional-accent);
+        color: var(--color-functional-accent);
       }
     }
   }
@@ -80,7 +80,7 @@ i.emoji {
   background-color: var(--color-functional-accent);
   display: block;
   border: 1px solid transparent;
-  color: var(--color-light-background-base) !important;
+  color: var(--color-background-base) !important;
   text-decoration: none !important;
   transition: background-color var(--transition-duration-base) ease-out;
   padding: var(--size-space-large-xxs) var(--size-space-large-m);
@@ -101,8 +101,8 @@ i.emoji {
 
   &[aria-disabled="true"],
   &[aria-disabled="true"]:hover {
-    background-color: var(--color-light-foreground-weakest);
-    color: var(--color-light-text-weaker);
+    background-color: var(--color-foreground-weakest);
+    color: var(--color-text-weaker);
     cursor: not-allowed;
   }
 }
@@ -128,8 +128,8 @@ i.emoji {
   fill: var(--color-text-weaker);
 
   &.chart-label--bg {
-    fill: var(--color-light-background-base);
-    stroke: var(--color-light-background-base);
+    fill: var(--color-background-base);
+    stroke: var(--color-background-base);
     stroke-opacity: 0.5;
     stroke-width: 4px;
   }
@@ -200,8 +200,8 @@ i.emoji {
     padding: var(--space-s);
     margin-top: var(--space-s);
     margin-bottom: var(--space-s);
-    background-color: var(--color-light-background-stronger);
-    border: 1px solid var(--color-light-background-strongest);
+    background-color: var(--color-background-stronger);
+    border: 1px solid var(--color-background-strongest);
   }
 
   p {
