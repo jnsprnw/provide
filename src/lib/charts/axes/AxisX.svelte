@@ -2,9 +2,8 @@
   import { formatValue } from '$lib/utils/formatting';
   import { first, last, range, uniq } from 'lodash-es';
   import { getContext } from 'svelte';
-  const { width, xScale, yScale } = getContext('LayerCake');
+  const { width, xScale, yScale, height } = getContext('LayerCake');
 
-  export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
   export let gridlines = true;
   export let gridClass = '';
   export let formatTick = (d) => formatValue(d, 'year');
@@ -48,49 +47,41 @@
     }
     return 'middle';
   };
-
-  const TICK_PADDING = 15;
 </script>
 
-<g class="axis x-axis">
-  {#if baseline === true}
-    <line
-      class="baseline"
-      y1={$yScale.range()[0] + 0.5}
-      y2={$yScale.range()[0] + 0.5}
-      x1="0"
-      x2={$width}
-    />
-  {/if}
-  {#each visibleTicks as tick, i}
-    <g
-      class="tick tick-{tick}"
-      transform="translate({$xScale(tick)},{$yScale.range()[0] + padding.top})"
+{#if baseline === true}
+  <line
+    class="baseline"
+    y1={$yScale.range()[0] + 0.5}
+    y2={$yScale.range()[0] + 0.5}
+    x1="0"
+    x2={$width}
+  />
+{/if}
+{#each visibleTicks as tick, i}
+  <g
+    class="tick tick-{tick}"
+    transform="translate({$xScale(tick)},{$yScale.range()[0]})"
+  >
+    {#if gridlines !== true}
+      <line
+        class={`chart-grid ${gridClass}`}
+        class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
+        y1={-$height}
+        y2="0"
+        x1="0"
+        x2="0"
+      />
+    {/if}
+    <text
+      x={xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}
+      y={yTick}
+      dx={dxTick}
+      dy={dyTick}
+      text-anchor={textAnchor(i)}
+      class="chart-tick"
     >
-      {#if gridlines !== false}
-        <line
-          class={`chart-grid ${gridClass}`}
-          class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
-          y1={$yScale.range()[1] - $yScale.range()[0] - TICK_PADDING}
-          y2="0"
-          x1="0"
-          x2="0"
-        />
-      {/if}
-      <text
-        x={xTick || isBandwidth ? $xScale.bandwidth() / 2 : 0}
-        y={yTick + TICK_PADDING}
-        dx={dxTick}
-        dy={dyTick}
-        text-anchor={textAnchor(i)}
-        class="chart-tick"
-      >
-        {formatTick(tick)}
-      </text>
-    </g>
-  {/each}
-
-  <g transform="translate({[0, $yScale.range()[0]]})">
-    <slot />
+      {formatTick(tick)}
+    </text>
   </g>
-</g>
+{/each}

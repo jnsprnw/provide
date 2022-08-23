@@ -19,14 +19,15 @@
 
           return {
             ...scenario,
-            values: data.data[indicator.uid].map((values, i) => {
-              return {
-                year: data.yearStart + data.yearStep * i,
-                min: values[0],
-                value: values[1],
-                max: values[2],
-              };
-            }),
+            values:
+              data.data[indicator.uid]?.map((values, i) => {
+                return {
+                  year: data.yearStart + data.yearStep * i,
+                  min: values[0],
+                  value: values[1],
+                  max: values[2],
+                };
+              }) || [],
           };
         });
 

@@ -25,12 +25,10 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
 
-  $: flatData = distribution
-    .reduce((acc, d) => {
-      d.forEach((d) => acc.push(d));
-      return acc;
-    }, [])
-    .filter((d) => d.distribution > 0.001); // TODO: This is only for now since we don't need all the tiny values in the grid
+  $: flatData = distribution.reduce((acc, d) => {
+    d.forEach((d) => acc.push(d));
+    return acc;
+  }, []);
 </script>
 
 <div class="chart-container">
@@ -48,12 +46,8 @@
       <ColorMatrix />
     </Canvas>
     <Svg>
-      <AxisX
-        gridlines={false}
-        ticks={6}
-        {padding}
-      />
-      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} {padding} />
+      <AxisX gridlines={false} ticks={6} />
+      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
       <LineLayer color={$theme.color.background.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>
