@@ -115,16 +115,7 @@
         distributionData={impactDistribution}
       />
       <DescriptionTimeSeries {indicator} {geography} {scenarios} {parameters} />
-      <p>
-        {#if hasSingleScenario}
-          The line indicates the median estimate, while the colour variations
-          indicate the dispersion of possible results around the median (the
-          darker the colour, the more likely they can be obtained for this
-          scenario).
-        {:else}
-          The lines indicates the median estimates for each scenario.
-        {/if}
-      </p>
+
       <ChartFacts>
         <ResolutionTime
           {hasSingleScenario}

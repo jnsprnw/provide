@@ -1,37 +1,43 @@
 <script>
-	import { uniq, isArray } from 'lodash-es';
+  import { uniq, isArray } from 'lodash-es';
 
-	export let hasSingleScenario;
-	export let impactTimeData;
-	export let distributionData;
+  export let hasSingleScenario;
+  export let impactTimeData;
+  export let distributionData;
 
-	function getSteps (hasSingleScenario, time_series, distribution) {
+  function getSteps(hasSingleScenario, time_series, distribution) {
     if (hasSingleScenario && distribution?.mean?.length) {
-      return distribution.yearStep
+      return distribution.yearStep;
     } else if (!hasSingleScenario && time_series.length) {
-      return uniq(time_series.map(({ yearStep }) => yearStep))
+      return uniq(time_series.map(({ yearStep }) => yearStep));
     } else {
       return undefined;
     }
   }
 
-  function formatYearLabel (year) {
+  function formatYearLabel(year) {
     return `${year} ${year === 1 ? 'year' : 'years'}`;
   }
 
-  const formatter = new Intl.ListFormat('en-GB', { style: 'long', type: 'conjunction' });
+  const formatter = new Intl.ListFormat('en-GB', {
+    style: 'long',
+    type: 'conjunction',
+  });
 
-	function formatStepsLabel (steps) {
-    if (!steps) { return undefined }
-    else if (isArray(steps)) {
-      return formatter.format(steps.map(year => formatYearLabel(year)))
+  function formatStepsLabel(steps) {
+    if (!steps) {
+      return undefined;
+    } else if (isArray(steps)) {
+      return formatter.format(steps.map((year) => formatYearLabel(year)));
     } else {
-      return formatYearLabel(steps)
+      return formatYearLabel(steps);
     }
   }
 
-	$: steps = formatStepsLabel(getSteps(hasSingleScenario, impactTimeData, distributionData));
+  $: steps = formatStepsLabel(
+    getSteps(hasSingleScenario, impactTimeData, distributionData)
+  );
 </script>
 
-<dt>Time resolution:</dt>
-<dd>{ steps || '—' }</dd>
+<dt>Data time increments:</dt>
+<dd>{steps || '—'}</dd>

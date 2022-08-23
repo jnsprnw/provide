@@ -136,36 +136,35 @@
     <header>
       <h4>How to start?</h4>
       <p>
-        The PROVIDE Climate Services Dashboard allows to explore climate impacts
-        across a wide range of emissions scenarios and geographic entities.
-        There are two modes through which to explore the data.
+        allows you to explore future impacts from climate change as the world
+        warms. Start by picking a mode.
       </p>
     </header>
     <section class="path">
       <div>
         <span class="text-label">Impacts</span>
         <span class="description"
-          >Select a geographical region, one or several scenarios, and explore
+          >Pick a geography, select one or several scenarios, and explore
           corresponding impacts</span
         >
       </div>
       <figure class="container">
         <img src="/img/impacts.png" />
       </figure>
-      <a class="btn btn--big" href="/explore/impacts">Explore impacts</a>
+      <a class="btn btn--big" href="/explore/impacts">Explore</a>
     </section>
     <section class="path">
       <div>
         <span class="text-label">Emission scenarios</span>
         <span class="description"
-          >Select a geographical region, an impact threshold, and explore
-          scenarios under which the threshold won't be exceeded</span
-        >
+          >Pick a geography, select a threshold for a climate impact, explore
+          scenarios under which the threshold won't be exceeded
+        </span>
       </div>
       <figure class="container">
         <img src="/img/emission-scenarios.png" />
       </figure>
-      <span class="btn btn--big" aria-disabled="true">in development</span>
+      <span class="btn btn--big" aria-disabled="true">In development</span>
     </section>
   </div>
 </div>

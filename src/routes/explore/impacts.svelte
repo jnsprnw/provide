@@ -27,10 +27,8 @@
     <div class="explore-intro">
       <p class="explore-description">
         Explore how different levels of climate action will lead to different
-        climate impacts over the countries, cities, and other geography types
-        you're interested in. Visualise their evolution over time and space, the
-        risk of exceeding critical impact thresholds, as well as the
-        reversibility of impacts under overshoot scenarios.
+        climate impacts for countries, cities, and more. See where risk
+        escalates and under what conditions impacts could be avoided.
       </p>
     </div>
   </div>
@@ -118,7 +116,7 @@
 
   .explore-description {
     font-size: var(--font-size-l);
-    max-width: 75ch;
+    max-width: 60ch;
     line-height: var(--font-line-height-base);
     color: var(--color-brand-stronger);
   }

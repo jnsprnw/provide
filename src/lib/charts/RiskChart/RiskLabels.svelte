@@ -11,7 +11,7 @@
 
   $: ticks = [
     {
-      label: 'Unavoidable risk even under best scenario',
+      label: 'Unavoidable risk even with the highest-ambition scenario',
       min: 0,
       max: unavoidableValue,
     },

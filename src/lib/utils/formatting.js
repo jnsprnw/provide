@@ -8,6 +8,7 @@ export const FORMAT_FLOAT = ',.1f';
 export const FORMAT_YEAR = '.0f';
 export const FORMAT_CELSIUS = '.1f';
 export const FORMAT_PERCENT = '.0%';
+export const FORMAT_DEGREE = '.1f';
 
 // the basic formatting function sued
 const f = formatLocale({
@@ -29,6 +30,7 @@ const indicatorFormats = {
   year: f(FORMAT_YEAR),
   'degrees-celsius': f(FORMAT_CELSIUS),
   'gigaton-co2eq-year': f(FORMAT_EMISSION),
+  degree: f(FORMAT_DEGREE),
 
   // format for anything else
   default: f(FORMAT_INTEGER),
@@ -36,6 +38,7 @@ const indicatorFormats = {
 
 const suffixes = {
   'degrees-celsius': ' °C',
+  degree: ' °',
 };
 
 export const formatValue = (

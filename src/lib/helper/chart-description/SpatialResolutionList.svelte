@@ -1,12 +1,10 @@
 <script>
-  import { formatList } from '$lib/utils.js';
+  import { formatValue } from '$lib/utils/formatting';
 
-  export let data;
-
-  $: arr = data.map(d => `${d}°`)
-
-  $: ({ label, length } = formatList(arr))
+  export let resolution;
+  $: formatted = formatValue(resolution, 'degree');
+  $: label = resolution ? `${formatted} × ${formatted}` : '—';
 </script>
 
-<dt>Spatial resolution{#if length > 1}s{/if}:</dt>
-<dd>{ label || '—' }</dd>
+<dt>Spatial resolution:</dt>
+<dd>{label}</dd>

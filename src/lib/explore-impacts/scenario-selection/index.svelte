@@ -72,13 +72,13 @@
 
   const warmingTexts = {
     default:
-      'Some text about this graph that explains how to read it and what can be read from it. It shouldn’t be much longer than 3-4 brief sentences without explaining all scenarios in detail it should summarize the key points.',
+      'See how scenarios compare when it comes to warming and overshooting 1.5°C to 2050 and to 2100. Hover to learn more about the scenario categories.',
     'high-overshoot':
-      '<strong>High Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by more than 0.1°C by 2050, and exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially useful to explore the reversibility of climate impacts after global warming has stabilised and as it is being reverted.',
+      '<strong>High overshoot</strong> scenarios exceed 1.5°C by more than 0.1°C by 2050, but exhibit a decrease in global mean temperature in the second half of the 21st century. These scenarios are especially useful to see if climate impacts are reversible after warming has stopped and temperatures have been brought back down.',
     'low-overshoot':
-      '<strong>Low or No Overshoot</strong> Pathways lead to an exceedance of the 1.5°C global warming level by at most 0.1°C, and may exhibit a decrease in Global Mean Temperature in the second half of the 21st century. Such scenarios can be especially used to explore climate impacts if global warming is being kept at levels compatible with the Long-Term Temperature Goal of the Paris Agreement.',
+      '<strong>Low or no overshoot</strong> scenarios exceed 1.5°C of warming level by at most 0.1°C, and if so exhibit a decrease in global mean temperature in the second half of the 21st century. These scenarios are primarily used to explore climate impacts close to the 1.5°C warming limit of the Paris Agreement.',
     'high-warming':
-      'Pathways with <strong>High Continuous Warming</strong> lead to an exceedance of the 1.5°C global warming level by 2050, and exhibit further global warming thereafter. Such scenarios can be especially used to explore climate impacts for high levels of global warming.',
+      'Scenarios with <strong>high continuous warming</strong> exceed 1.5°C of warming by 2050, and see further warming thereafter. They are useful to see the climate impacts that would result from high levels of global warming.',
   };
 
   $: currentWarmingText =
@@ -87,7 +87,7 @@
 
 <div class="scenario-selection">
   <span class="intro">
-    Select one or more scenarios for which you would like to explore impacts
+    Select the warming scenario(s) you would like to explore
   </span>
   <div class="scenario-list">
     {#each scenarios as scenario}
