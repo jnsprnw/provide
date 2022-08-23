@@ -8,7 +8,7 @@
     CURRENT_SCENARIOS,
     CURRENT_INDICATOR_OPTIONS,
   } from '$lib/../stores/store.js';
-  import DistributionChart from '$lib/charts/DistributionChart.svelte';
+  import DistributionChart from '$lib/charts/DistributionChart/DistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
   import TitleTimeSeries from './TitleTimeSeries.svelte';

@@ -44,6 +44,7 @@
   .line {
     stroke-width: 2;
     stroke: var(--color-foreground-weakest);
+    shape-rendering: crispEdges;
 
     &.active {
       stroke-width: 4;

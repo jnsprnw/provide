@@ -1,6 +1,6 @@
 .chart-gridline {
   stroke: var(--color-foreground-weakest);
-  //stroke-dasharray: 2 2;
+  stroke-dasharray: 2 2;
   shape-rendering: crispEdges;
 
   &.chart-gridline--invert {

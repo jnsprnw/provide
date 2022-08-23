@@ -3,70 +3,45 @@
   import { getContext } from 'svelte';
   const { width, height, xScale, yScale } = getContext('LayerCake');
 
-  export let padding = { top: 0, left: 0, right: 0, bottom: 0 };
-
   export let ticks = 4;
   export let ticksHighlighted = [0];
   export let gridlines = true;
   export let gridClass = '';
 
-  export let xTick = 0;
-  export let yTick = 0;
-  export let dxTick = 0;
-  export let dyTick = 0;
-  export let tickPadding = 3;
-  export let tickSize;
-  export let textAnchor = 'end';
-  export let rightToLeft = false;
   export let formatTick = (d) => formatValue(d, 'default');
 
-  $: tickLength = (tickSize ?? $width) + tickPadding;
+  export let x; // Base x position of the axis, usually full width or 0
+  export let y; // Base y position of the axis, usually 0
+  export let labelX = 10; // Defines the distance between zero position of the chart and the x center of the label
+  export let lineStart = 0; // If 0, tick line starts at zero position of the chart
+  export let lineLength; // If positive, line extends to bottom, if negative extends to top. Default is -height
+  export let orientation = 1; // 1 for left hand axis extending to right, -1 if other way around
+  export let textAnchor;
 
-  $: isBandwidth = typeof $yScale.bandwidth === 'function';
+  $: xPos = x ?? orientation === 1 ? 0 : $width;
+  $: yPos = y ?? 0;
+  $: labelTextAnchor = textAnchor || orientation === 1 ? 'end' : 'start';
 
-  $: tickVals = Array.isArray(ticks)
-    ? ticks
-    : isBandwidth
-    ? $yScale.domain()
-    : $yScale.ticks(ticks);
+  $: tickVals = Array.isArray(ticks) ? ticks : $yScale.ticks(ticks);
 </script>
 
-<g class="axis y-axis" transform="translate({-padding.left}, 0)">
+<g class="axis y-axis" transform={`translate(${xPos}, ${yPos})`}>
   {#each tickVals as tick, i}
-    <g
-      class="tick tick-{tick}"
-      transform="translate({$xScale.range()[0] +
-        (isBandwidth ? padding.left : padding.left - tickPadding)},
-      {$yScale(tick)})"
-    >
+    <g class="tick tick-{tick}" transform="translate(0, {$yScale(tick)})">
       {#if gridlines !== false}
         <line
           class={`chart-gridline ${gridClass}`}
           class:chart-gridline--highlighed={ticksHighlighted.includes(tick)}
-          x1={rightToLeft ? -tickPadding : tickPadding}
-          x2={rightToLeft ? -tickLength : tickLength}
-          y1={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
-          y2={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
+          x1={lineStart}
+          x2={lineLength ? lineLength * orientation : $width * orientation}
         />
       {/if}
-      <!-- <text
-        x="{xTick}"
-        y="{yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}"
-        dx="{isBandwidth ? -5 : dxTick}"
-        dy="{isBandwidth ? 4 : dyTick}"
-        class="bg"
-        style="text-anchor:{isBandwidth ? 'end' : textAnchor};">
-        {formatTick(tick)}
-      </text> -->
       <text
-        x={xTick}
-        y={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}
-        dx={isBandwidth ? -5 : dxTick}
-        dy={isBandwidth ? 0 : dyTick}
-        class="chart-tick"
+        x={labelX * -orientation}
+        class="chart-tick-label"
         dominant-baseline="middle"
         style="
-          text-anchor:{isBandwidth ? 'end' : textAnchor};
+          text-anchor: {labelTextAnchor};
         "
       >
         {formatTick(tick)}

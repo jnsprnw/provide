@@ -19,7 +19,7 @@
   $: formatTickY = (d) => formatValue(d, unit);
   $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
 
-  const padding = { top: 5, right: 0, bottom: 20, left: 40 };
+  const padding = { top: 5, right: 0, bottom: 20, left: 0 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -39,7 +39,7 @@
   >
     <Svg>
       <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
-      <AxisX {padding} formatTick={formatTickX} />
+      <AxisX gridlines={false} {padding} formatTick={formatTickX} />
       <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
     </Svg>
     <Html>
@@ -51,20 +51,16 @@
 </div>
 
 <style lang="scss">
-  .wrapper {
-    width: 100%;
-    height: 100%;
-    display: flex;
-  }
-
   .chart-container {
-    width: 70%;
+    width: 75%;
     height: 100%;
   }
 
   .labels {
     position: absolute;
-    width: 42.86%;
+    // Is contained within element that has 75% width of its parent but
+    // needs to fill up the remaining 25% hence -> (100 - 75)/75 = 35.7
+    width: 35.7%;
     left: 100%;
   }
 </style>

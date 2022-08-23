@@ -47,7 +47,7 @@
       {yDomain}
     >
       <Svg>
-        <AxisX gridlines={false} ticks={xTicks} {padding} />
+        <AxisX ticks={xTicks} {padding} />
         <AxisY
           {padding}
           ticks={yTicks}

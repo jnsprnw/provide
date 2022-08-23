@@ -3,10 +3,10 @@
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
 
-  import LineLayer from './layers/LineLayer.svelte';
-  import AxisX from './axes/AxisX.svelte';
-  import AxisY from './axes/AxisY.svelte';
-  import ColorMatrix from './layers/ColorMatrix.svelte';
+  import LineLayer from '../layers/LineLayer.svelte';
+  import AxisX from '../axes/AxisX.svelte';
+  import AxisY from '../axes/AxisY.svelte';
+  import ColorMatrix from '../layers/ColorMatrix.svelte';
   import { getContext } from 'svelte';
 
   const theme = getContext('theme');
@@ -22,6 +22,13 @@
 
   const padding = { top: 0, right: 0, bottom: 15, left: 40 };
 
+  let width = 0;
+  let height = 0;
+  $: chartWidth = width - padding.left - padding.right;
+  $: chartHeight = height - padding.top - padding.bottom;
+  $: xStepSize = chartWidth / distribution.length;
+  $: yStepSize = chartHeight / distribution[0]?.length;
+
   $: formatTickY = (d) => formatValue(d, unit);
 
   $: flatData = distribution.reduce((acc, d) => {
@@ -30,7 +37,11 @@
   }, []);
 </script>
 
-<div class="chart-container">
+<div
+  class="chart-container"
+  bind:clientWidth={width}
+  bind:clientHeight={height}
+>
   <LayerCake
     custom={{ xStep: yearStep, yStep: valueStep }}
     {padding}
@@ -38,6 +49,8 @@
     y={yKey}
     z={zKey}
     zRange={['white', $theme.color.category[0]]}
+    xRange={[xStepSize / 2, chartWidth - xStepSize / 2]}
+    yRange={[chartHeight - yStepSize / 2, yStepSize / 2]}
     data={mean}
     {flatData}
   >
@@ -45,8 +58,8 @@
       <ColorMatrix />
     </Canvas>
     <Svg>
-      <AxisX snapTicks={true} gridlines={false} ticks={5} />
-      <AxisY ticks={4} gridlines={false} formatTick={formatTickY} />
+      <AxisX gridlines={false} ticks={5} />
+      <AxisY gridlines={false} ticks={4} formatTick={formatTickY} />
       <LineLayer color={$theme.color.background.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>
