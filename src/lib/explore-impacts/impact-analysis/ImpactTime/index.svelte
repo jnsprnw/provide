@@ -6,9 +6,9 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
-    CURRENT_INDICATOR_OPTIONS
+    CURRENT_INDICATOR_OPTIONS,
   } from '$lib/../stores/store.js';
-  import LineDistributionChart from '$lib/charts/LineDistributionChart.svelte';
+  import DistributionChart from '$lib/charts/DistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
   import TitleTimeSeries from './TitleTimeSeries.svelte';
@@ -16,7 +16,7 @@
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ModelList from '$lib/helper/chart-description/ModelList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { KEY_PARAMETERS, KEY_MODEL } from "$lib/../config.js";
+  import { KEY_PARAMETERS, KEY_MODEL } from '$lib/../config.js';
 
   $: process = ({ impactDistributionData, impactTimeData }) => {
     const impactDistribution = (() => {
@@ -27,7 +27,7 @@
         valueStep,
         data,
         [KEY_MODEL]: model,
-        [KEY_PARAMETERS]: parameters
+        [KEY_PARAMETERS]: parameters,
       } = impactDistributionData.data;
 
       const mean = data?.mean.map((value, i) => {
@@ -51,8 +51,8 @@
         yearStep,
         data,
         [KEY_MODEL]: model,
-        [KEY_PARAMETERS]: parameters
-      } = datum.data; // Why is datum.data undefined on server here?
+        [KEY_PARAMETERS]: parameters,
+      } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
@@ -95,13 +95,13 @@
     indicator: $CURRENT_INDICATOR,
     scenarios: $CURRENT_SCENARIOS,
     geography: $CURRENT_GEOGRAPHY,
-    parameters: $CURRENT_INDICATOR_OPTIONS // Should this be called parameters or options?
+    parameters: $CURRENT_INDICATOR_OPTIONS,
   }}
 >
   <div class="wrapper grid">
     <div class="chart">
       {#if hasSingleScenario}
-        <LineDistributionChart {...impactDistribution} unit={indicator.unit.uid} />
+        <DistributionChart {...impactDistribution} unit={indicator.unit.uid} />
       {:else}
         <LineTimeSeries data={impactTime} unit={indicator.unit.uid} />
       {/if}
@@ -132,7 +132,9 @@
           distributionData={impactDistribution}
         />
         <ModelList
-          data={hasSingleScenario ? [impactDistribution.model] : impactTime.map(d => d.model)}
+          data={hasSingleScenario
+            ? [impactDistribution.model]
+            : impactTime.map((d) => d.model)}
         />
       </ChartFacts>
     </div>

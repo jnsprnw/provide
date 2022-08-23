@@ -18,8 +18,6 @@
   export let xTicks = 4;
   export let yTicks = 4;
 
-  // TODO: Get unit label
-
   const padding = { top: 5, right: 10, bottom: 30, left: 40 };
 
   const flatten = (data) =>
@@ -29,7 +27,7 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
 
-  $: sortedData = sortBy(data, ['highlight', 'isSelected'])
+  $: sortedData = sortBy(data, ['highlight', 'isSelected']);
 </script>
 
 <div class="figure-container" class:hasTitle={title}>
@@ -46,7 +44,7 @@
       y={yKey}
       data={sortedData}
       flatData={flatten(sortedData)}
-      yDomain={yDomain}
+      {yDomain}
     >
       <Svg>
         <AxisX gridlines={false} ticks={xTicks} {padding} />
@@ -55,7 +53,8 @@
           ticks={yTicks}
           xTick={-3}
           formatTick={formatTickY}
-          ticksHighlighted={ticksYHighlighted} />
+          ticksHighlighted={ticksYHighlighted}
+        />
         <MultipleLineLayer />
       </Svg>
     </LayerCake>

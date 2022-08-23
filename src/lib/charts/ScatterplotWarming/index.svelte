@@ -51,13 +51,13 @@
           {padding}
           formatTick={formatTickX}
           ticks={[-0.5, 0, 1.2]}
-          gridClass="chart-grid--invert"
+          gridClass="chart-gridline--invert"
         />
         <AxisY
           {padding}
           formatTick={formatTickY}
           ticks={[1.3, 1.5, 1.6, 2.3]}
-          gridClass="chart-grid--invert"
+          gridClass="chart-gridline--invert"
         />
         <Dots />
       </Svg>

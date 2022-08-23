@@ -1,12 +1,11 @@
 <script>
-  import { LayerCake, Svg, Canvas, Html } from 'layercake';
+  import { LayerCake, Svg, Canvas } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
 
   import LineLayer from './layers/LineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
-  import { extent } from 'd3-array';
   import ColorMatrix from './layers/ColorMatrix.svelte';
   import { getContext } from 'svelte';
 
@@ -21,7 +20,7 @@
   export let zKey = 'distribution';
   export let unit = DEFAULT_FORMAT_UID;
 
-  const padding = { top: 5, right: 10, bottom: 20, left: 40 };
+  const padding = { top: 0, right: 0, bottom: 15, left: 40 };
 
   $: formatTickY = (d) => formatValue(d, unit);
 
@@ -46,8 +45,8 @@
       <ColorMatrix />
     </Canvas>
     <Svg>
-      <AxisX gridlines={false} ticks={6} />
-      <AxisY ticks={4} xTick={-3} formatTick={formatTickY} />
+      <AxisX snapTicks={true} gridlines={false} ticks={5} />
+      <AxisY ticks={4} gridlines={false} formatTick={formatTickY} />
       <LineLayer color={$theme.color.background.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>

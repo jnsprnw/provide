@@ -41,8 +41,8 @@
     >
       {#if gridlines !== false}
         <line
-          class={`chart-grid ${gridClass}`}
-          class:chart-grid--highlighed={ticksHighlighted.includes(tick)}
+          class={`chart-gridline ${gridClass}`}
+          class:chart-gridline--highlighed={ticksHighlighted.includes(tick)}
           x1={rightToLeft ? -tickPadding : tickPadding}
           x2={rightToLeft ? -tickLength : tickLength}
           y1={yTick + (isBandwidth ? $yScale.bandwidth() / 2 : 0)}

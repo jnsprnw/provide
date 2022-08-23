@@ -21,7 +21,7 @@
   &.grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-gap: var(--space-m) var(--space-s);
+    grid-gap: var(--space-m) var(--space-m);
   }
 
   &.content-layout {
@@ -51,25 +51,6 @@
     gap: 1rem; // TODO
   }
 }
-
-// CHART STYLING
-.chart-grid {
-  stroke: var(--color-light-petrol100);
-  stroke-dasharray: 2 2;
-  pointer-events: none;
-  shape-rendering: crispEdges;
-
-  &.chart-grid--invert {
-    stroke: var(--color-background-base);
-    stroke-dasharray: none;
-  }
-
-  &.chart-grid--highlighed {
-    stroke: var(--color-light-petrol400);
-    stroke-dasharray: 2 1;
-  }
-}
-// CHART STYLING END
 
 .content-header {
   padding: var(--space-xl) 0 var(--space-xxl);
