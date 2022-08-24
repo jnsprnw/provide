@@ -5,8 +5,8 @@
 </script>
 
 {#if $ALL_PARAMETERS_SELECTED}
-<div class="wrapper vertical-space">
-  <ImpactTime />
-  <ImpactGeo />
-</div>
+  <div class="wrapper vertical-space">
+    <ImpactTime />
+    <ImpactGeo />
+  </div>
 {/if}

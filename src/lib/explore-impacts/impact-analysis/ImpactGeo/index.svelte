@@ -19,7 +19,7 @@
   } from '$lib/../stores/store';
   import { END_GEO_SHAPE, END_IMPACT_GEO } from '$lib/../config.js';
   import { writable } from 'svelte/store';
-  import { dataStore } from '$lib/api/new-api';
+  import { dataPlease } from '$lib/api/new-api';
 
   let displayOption = 'side-by-side';
 
@@ -30,7 +30,7 @@
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
 
-  $: dataStore(
+  $: dataPlease(
     IMPACT_GEO_DATA,
     $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_GEO,
@@ -44,7 +44,7 @@
     }))
   );
 
-  $: dataStore(GEO_SHAPE_DATA, {
+  $: dataPlease(GEO_SHAPE_DATA, {
     endpoint: END_GEO_SHAPE,
     params: {
       geography: $CURRENT_GEOGRAPHY.uid,
@@ -77,7 +77,6 @@
         }));
 
     const colorScale = (() => {
-      //const range = ['#F9CEA6', '#DE3F27'];
       const sequentialPositiveRange = ['#F9CEA6', '#C91C1C'];
       const sequentialNegativeRange = ['#437E8E', '#DACFBF'];
       const divergingRange = ['#437E8E', '#F4E4D6', '#C91C1C'];

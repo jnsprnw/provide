@@ -8,12 +8,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
-  import {
-    KEY_PARAMETERS,
-    KEY_MODEL,
-    END_IMPACT_TIME,
-    END_DISTRIBUTION,
-  } from '$lib/../config.js';
+  import { END_IMPACT_TIME, END_DISTRIBUTION } from '$lib/../config.js';
   import DistributionChart from '$lib/charts/DistributionChart/DistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
@@ -23,12 +18,12 @@
   import ModelList from '$lib/helper/chart-description/ModelList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
-  import { dataStore } from '$lib/api/new-api';
+  import { dataPlease } from '$lib/api/new-api';
 
   let IMPACT_TIME_DATA = writable([]);
   let IMPACT_TIME_DISTRIBUTION_DATA = writable({});
 
-  $: dataStore(
+  $: dataPlease(
     IMPACT_TIME_DATA,
     $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_TIME,
@@ -41,7 +36,7 @@
     }))
   );
 
-  $: dataStore(IMPACT_TIME_DISTRIBUTION_DATA, {
+  $: dataPlease(IMPACT_TIME_DISTRIBUTION_DATA, {
     endpoint: END_DISTRIBUTION,
     params: {
       geography: $CURRENT_GEOGRAPHY.uid,
@@ -51,7 +46,7 @@
     },
   });
 
-  $: process = ({ impactDistributionData, impactTimeData }) => {
+  $: process = ({ impactDistributionData, impactTimeData }, { scenarios }) => {
     const impactDistribution = (() => {
       const {
         yearStart,
@@ -83,7 +78,7 @@
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
-        color: $CURRENT_SCENARIOS[i].color,
+        color: scenarios[i].color,
         yearStart,
         yearStep,
         parameters,

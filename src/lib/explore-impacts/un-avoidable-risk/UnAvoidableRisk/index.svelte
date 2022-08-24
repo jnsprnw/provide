@@ -15,13 +15,13 @@
   import { formatValue } from '$lib/utils/formatting';
   import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
-  import { dataStore } from '$lib/api/new-api';
+  import { dataPlease } from '$lib/api/new-api';
   import { writable } from 'svelte/store';
 
   let currentThreshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
-  $: dataStore(UN_AVOIDABLE_RISK_DATA, {
+  $: dataPlease(UN_AVOIDABLE_RISK_DATA, {
     endpoint: END_UN_AVOIDABLE_RISK,
     params: {
       geography: $CURRENT_GEOGRAPHY.uid,
