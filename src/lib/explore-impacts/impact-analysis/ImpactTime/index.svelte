@@ -1,13 +1,19 @@
 <script>
-  import { IMPACT_TIME_DISTRIBUTION_DATA } from '$lib/../stores/impact-time-distribution.js';
-  import { IMPACT_TIME_DATA } from '$lib/../stores/impact-time.js';
   import {
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
     CURRENT_INDICATOR_OPTIONS,
+    CURRENT_INDICATOR_OPTION_VALUES,
+    CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
+  import {
+    KEY_PARAMETERS,
+    KEY_MODEL,
+    END_IMPACT_TIME,
+    END_DISTRIBUTION,
+  } from '$lib/../config.js';
   import DistributionChart from '$lib/charts/DistributionChart/DistributionChart.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
@@ -16,7 +22,34 @@
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ModelList from '$lib/helper/chart-description/ModelList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { KEY_PARAMETERS, KEY_MODEL } from '$lib/../config.js';
+  import { writable } from 'svelte/store';
+  import { dataStore } from '$lib/api/new-api';
+
+  let IMPACT_TIME_DATA = writable([]);
+  let IMPACT_TIME_DISTRIBUTION_DATA = writable({});
+
+  $: dataStore(
+    IMPACT_TIME_DATA,
+    $CURRENT_SCENARIOS_UID.map((scenario) => ({
+      endpoint: END_IMPACT_TIME,
+      params: {
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
+        scenario,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
+      },
+    }))
+  );
+
+  $: dataStore(IMPACT_TIME_DISTRIBUTION_DATA, {
+    endpoint: END_DISTRIBUTION,
+    params: {
+      geography: $CURRENT_GEOGRAPHY.uid,
+      indicator: $CURRENT_INDICATOR.uid,
+      scenario: $CURRENT_SCENARIOS_UID[0],
+      ...$CURRENT_INDICATOR_OPTION_VALUES,
+    },
+  });
 
   $: process = ({ impactDistributionData, impactTimeData }) => {
     const impactDistribution = (() => {
@@ -26,8 +59,8 @@
         yearStep,
         valueStep,
         data,
-        [KEY_MODEL]: model,
-        [KEY_PARAMETERS]: parameters,
+        model,
+        parameters,
       } = impactDistributionData.data;
 
       const mean = data?.mean.map((value, i) => {
@@ -46,13 +79,7 @@
     })();
 
     const impactTime = impactTimeData.map((datum, i) => {
-      const {
-        yearStart,
-        yearStep,
-        data,
-        [KEY_MODEL]: model,
-        [KEY_PARAMETERS]: parameters,
-      } = datum.data;
+      const { yearStart, yearStep, data, model, parameters } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {

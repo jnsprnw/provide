@@ -33,24 +33,26 @@ export const formatObjArr = function (arr, key) {
 };
 
 export const formatList = function (arr = []) {
-  if (arr.length === 0) { return '' }
+  if (arr.length === 0) {
+    return '';
+  }
   const formatter = new Intl.ListFormat('en-GB', {
     style: 'long',
     type: 'conjunction',
   });
-  const list = uniq(arr.map(d => String(d)))
+  const list = uniq(arr.map((d) => String(d)));
   return {
     label: formatter.format(list),
-    length: list.length
+    length: list.length,
   };
-}
+};
 
 async function request(params, url) {
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
   });
   // console.log("loading:", { params, url, query, url }, `${url}?${query}`);
-  return await loadFromAPI(url, query);
+  return await loadFromAPI(`${url}?${query}`);
 }
 
 export function hasInObject(data, addr, param) {

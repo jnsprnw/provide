@@ -1,10 +1,11 @@
 <script>
-  import { UN_AVOIDABLE_RISK_DATA } from '$lib/../stores/un-avoidable-risk.js';
   import {
     CURRENT_INDICATOR,
     DICTIONARY_SCENARIOS,
     DICTIONARY_CURRENT_SCENARIOS,
     CURRENT_INDICATOR_UNIT_UID,
+    CURRENT_GEOGRAPHY,
+    CURRENT_INDICATOR_OPTION_VALUES,
   } from '$lib/../stores/store.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -12,10 +13,22 @@
   import Select from '$lib/helper/select/index.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import { UNAVOIDABLE_UID } from '$lib/../config.js';
+  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
+  import { dataStore } from '$lib/api/new-api';
+  import { writable } from 'svelte/store';
 
   let currentThreshold;
+  let UN_AVOIDABLE_RISK_DATA = writable({});
+
+  $: dataStore(UN_AVOIDABLE_RISK_DATA, {
+    endpoint: END_UN_AVOIDABLE_RISK,
+    params: {
+      geography: $CURRENT_GEOGRAPHY.uid,
+      indicator: $CURRENT_INDICATOR.uid,
+      ...$CURRENT_INDICATOR_OPTION_VALUES,
+    },
+  });
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
     const thresholds = data.thresholds.map((value) => ({

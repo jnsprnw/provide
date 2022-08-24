@@ -3,11 +3,8 @@
   import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
   import Header from './Header.svelte';
   import Legend from './Legend.svelte';
-  import { IMPACT_GEO_DATA } from '$stores/impact-geo.js';
-  import { GEO_SHAPE_DATA } from '$stores/geo-shape.js';
   import { extent } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
-  import { getContext } from 'svelte';
   import Mask from '$lib/mapbox-map/Mask.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
@@ -16,14 +13,43 @@
     CURRENT_IMPACT_GEO_YEAR_UID,
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_OPTIONS,
+    CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS,
+    CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store';
-  const theme = getContext('theme');
+  import { END_GEO_SHAPE, END_IMPACT_GEO } from '$lib/../config.js';
+  import { writable } from 'svelte/store';
+  import { dataStore } from '$lib/api/new-api';
+
   let displayOption = 'side-by-side';
 
   let zoom;
   let center;
   let bounds;
+
+  let IMPACT_GEO_DATA = writable([]);
+  let GEO_SHAPE_DATA = writable({});
+
+  $: dataStore(
+    IMPACT_GEO_DATA,
+    $CURRENT_SCENARIOS_UID.map((scenario) => ({
+      endpoint: END_IMPACT_GEO,
+      params: {
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
+        scenario,
+        year: $CURRENT_IMPACT_GEO_YEAR_UID,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
+      },
+    }))
+  );
+
+  $: dataStore(GEO_SHAPE_DATA, {
+    endpoint: END_GEO_SHAPE,
+    params: {
+      geography: $CURRENT_GEOGRAPHY.uid,
+    },
+  });
 
   $: process = ({ geoData, geoShape }, { currentScenarios }) => {
     const isDoubleMap = geoData.length === 2;

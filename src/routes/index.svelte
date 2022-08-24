@@ -5,7 +5,7 @@
   import { formatObjArr } from '$lib/utils.js';
 
   export const load = async ({ fetch }) => {
-    const meta = await loadFromAPI(`/api/meta/`, '', fetch);
+    const meta = await loadFromAPI(`/api/meta/`, fetch);
     const stories = await loadFromStrapi('stories', fetch);
 
     const datum = compact(

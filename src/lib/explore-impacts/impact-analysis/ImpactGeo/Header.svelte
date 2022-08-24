@@ -10,12 +10,13 @@
     IMPACT_GEO_YEARS,
     IMPACT_GEO_DISPLAY_OPTIONS,
   } from '$lib/../config.js';
+  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store.js';
 
-  export let currentYear;
   export let currentGeography;
   export let currentIndicator;
   export let currentOptions;
   export let currentScenarios;
+  export let currentYear;
 
   export let displayOption;
   export let showDifference;
@@ -77,7 +78,7 @@
       <div class="control">
         <Select
           options={IMPACT_GEO_YEARS}
-          bind:value={currentYear}
+          bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
           label="Year"
         />
       </div>

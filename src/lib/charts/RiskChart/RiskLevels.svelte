@@ -13,32 +13,34 @@
   $: unavoidable = $data.filter((d) => d.uid === UNAVOIDABLE_UID)[0];
 </script>
 
-<defs>
-  <Hatching color={hatchingColor} />
-</defs>
-<g>
-  {#each years as year, yearIndex}
-    <rect
-      x={$xScale(year)}
-      y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
-      height={$height - $yGet(unavoidable.values[yearIndex])}
-      width={$xScale.bandwidth()}
-      fill="url(#hatching)"
-    />
-  {/each}
-  {#each scenarios as scenario}
-    {#each scenario.values as value}
-      <g transform={`translate(${$xGet(value)} ,${$yGet(value)})`}>
-        <line
-          x2={$xScale.bandwidth()}
-          class="line"
-          class:active={Boolean(scenario.color)}
-          style={`stroke: ${scenario.color};`}
-        />
-      </g>
+{#if $height > 0}
+  <defs>
+    <Hatching color={hatchingColor} />
+  </defs>
+  <g>
+    {#each years as year, yearIndex}
+      <rect
+        x={$xScale(year)}
+        y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
+        height={$height - $yGet(unavoidable.values[yearIndex])}
+        width={$xScale.bandwidth()}
+        fill="url(#hatching)"
+      />
     {/each}
-  {/each}
-</g>
+    {#each scenarios as scenario}
+      {#each scenario.values as value}
+        <g transform={`translate(${$xGet(value)} ,${$yGet(value)})`}>
+          <line
+            x2={$xScale.bandwidth()}
+            class="line"
+            class:active={Boolean(scenario.color)}
+            style={`stroke: ${scenario.color};`}
+          />
+        </g>
+      {/each}
+    {/each}
+  </g>
+{/if}
 
 <style lang="scss">
   .line {

@@ -12,7 +12,7 @@
 
   const options = {
     includeScore: true,
-    
+
     keys: ['label', 'uid'],
     includeMatches: true,
   };

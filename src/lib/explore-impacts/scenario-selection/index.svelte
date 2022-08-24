@@ -3,7 +3,6 @@
   import Tab from '$lib/helper/tabs/Tab.svelte';
   import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import { partition, flatten, get } from 'lodash-es';
-  import VirtualList from '@sveltejs/svelte-virtual-list';
   import {
     CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
@@ -14,7 +13,6 @@
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
-  import { getContext } from 'svelte';
 
   let heightScenarioDescription = 130;
 
@@ -53,7 +51,7 @@
   $: warmingData = $SCENARIOS.map((scenario) => {
     const color = $DICTIONARY_CURRENT_SCENARIOS[scenario.uid]?.color;
     return {
-      label: scenario['label'],
+      ...scenario,
       highlight: renderedScenario?.uid === scenario.uid,
       color,
       isSelected: Boolean(color), // This is used for sorting. The hex value of the color does some strange things to the sorting.
