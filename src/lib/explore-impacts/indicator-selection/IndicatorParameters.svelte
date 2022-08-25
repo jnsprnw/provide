@@ -27,9 +27,11 @@
 
 <div class="wrapper">
   <div class="label">Options for {$CURRENT_INDICATOR.label}</div>
-  <div>
+  <div class="parameters">
     {#each parameters as parameter}
-      <Select {...parameter} on:change={handleChange} />
+      <div class="parameter">
+        <Select {...parameter} on:change={handleChange} />
+      </div>
     {/each}
   </div>
 </div>
@@ -43,5 +45,14 @@
   .label {
     margin-right: var(--space-m);
     color: var(--color-text-base);
+  }
+
+  .parameters {
+    display: flex;
+    align-items: center;
+  }
+
+  .parameter {
+    margin-right: var(--space-m);
   }
 </style>
