@@ -1,7 +1,7 @@
 import { STATUS_LOADING, STATUS_SUCCESS } from '$lib/../config';
 import { loadFromAPI } from '$lib/../routes/api/utils';
 import qs from 'qs';
-import { clone, forEach, reduce } from 'lodash';
+import { clone, forEach, reduce } from 'lodash-es';
 
 const cache = {};
 
