@@ -136,8 +136,8 @@
     <header>
       <h4>How to start?</h4>
       <p>
-        allows you to explore future impacts from climate change as the world
-        warms. Start by picking a mode.
+        The <b>Climate risk dashboard</b> allows you to explore future impacts from
+        climate change as the world warms. Start by picking a mode.
       </p>
     </header>
     <section class="path">
@@ -153,12 +153,12 @@
       </figure>
       <a class="btn btn--big" href="/explore/impacts">Explore</a>
     </section>
-    <section class="path">
+    <section class="path disabled">
       <div>
         <span class="text-label">Emission scenarios</span>
         <span class="description"
-          >Pick a geography, select a threshold for a climate impact, explore
-          scenarios under which the threshold won't be exceeded
+          >Select a threshold for a climate impact, explore scenarios under
+          which the threshold won't be exceeded
         </span>
       </div>
       <figure class="container">
@@ -301,6 +301,10 @@
         width: 100%;
         text-align: center;
         padding: var(--space-m);
+      }
+
+      &.disabled {
+        opacity: 0.6;
       }
     }
   }

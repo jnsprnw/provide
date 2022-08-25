@@ -18,7 +18,7 @@
         </ListLink>
         <ListLink {currentPath} link="about">About</ListLink>
         <ListLink {currentPath} link="technical-documentation">
-          Technical Documentation
+          Methodology
         </ListLink>
         <ListLink {currentPath} link="glossary">Glossary</ListLink>
         <ListLink {currentPath} link="contact">Contact</ListLink>

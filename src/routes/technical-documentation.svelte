@@ -1,6 +1,6 @@
 <script context="module">
   import { parse } from 'marked';
-  import { kebabCase } from "lodash-es";
+  import { kebabCase } from 'lodash-es';
   import { loadFromStrapi } from './api/utils.js';
 
   export const load = async ({ fetch }) => {
@@ -15,20 +15,20 @@
             title: Title,
             slug: kebabCase(Title),
             description: parse(Description),
-            link: Link
-          }
+            link: Link,
+          };
         }),
         scenariosIntro: parse(ScenariosIntro),
         scenarios: Scenarios.map(({ Title, Description }) => {
           return {
             title: Title,
             slug: kebabCase(Title),
-            description: parse(Description)
-          }
+            description: parse(Description),
+          };
         }),
-      }
+      },
     };
-  }
+  };
   export const hydrate = false;
   export const router = false;
 </script>
@@ -41,19 +41,19 @@
 </script>
 
 <svelte:head>
-  <title>Technical Documentation</title>
+  <title>Methodology</title>
 </svelte:head>
 
 <div class="technical-documentation-header content-header container">
   <div class="wrapper">
-    <h1 class="title">Technical Documentation</h1>
+    <h1 class="title">Methodology</h1>
     <nav>
       <ul class="nav-inpage subcategories">
         <li>
           <a href="#models" class="nav-headline-section">Models</a>
           <ul>
             {#each models as { title, slug }}
-            <li><a href={`#${slug}`}>{ title }</a></li>
+              <li><a href={`#${slug}`}>{title}</a></li>
             {/each}
           </ul>
         </li>
@@ -61,7 +61,7 @@
           <a href="#scenarios" class="nav-headline-section">Scenarios</a>
           <ul>
             {#each scenarios as { title, slug }}
-            <li><a href={`#${slug}`}>{ title }</a></li>
+              <li><a href={`#${slug}`}>{title}</a></li>
             {/each}
           </ul>
         </li>
@@ -77,11 +77,11 @@
         <h2 id="models" class="headline-section">Models</h2>
       </header>
       <div class="text">
-        { @html modelsIntro }
+        {@html modelsIntro}
         {#each models as { title, description, link, slug }}
-        <h3 id={slug} class="headline-paragraph">{ title }</h3>
-        { @html description }
-        <a href={link} class="link">More information about { title }</a>
+          <h3 id={slug} class="headline-paragraph">{title}</h3>
+          {@html description}
+          <a href={link} class="link">More information about {title}</a>
         {/each}
       </div>
     </section>
@@ -90,10 +90,10 @@
         <h2 id="scenarios" class="headline-section">Scenarios</h2>
       </header>
       <div class="text">
-        { @html scenariosIntro }
+        {@html scenariosIntro}
         {#each scenarios as { title, description, slug }}
-        <h3 id={slug} class="headline-paragraph">{ title }</h3>
-        { @html description }
+          <h3 id={slug} class="headline-paragraph">{title}</h3>
+          {@html description}
         {/each}
       </div>
     </section>

@@ -1,19 +1,15 @@
 <script>
-	
 </script>
 
 <svelte:head>
-	<title>Explore</title>
+  <title>Explore</title>
 </svelte:head>
 
 <div class="explore-intro">
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit
+    amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+    labore et dolore magna aliqua.
+  </p>
 </div>
-
-<style lang="scss">
-	@import '../../styles/global.scss';
-
-	span {
-		display: block;
-	}
-</style>

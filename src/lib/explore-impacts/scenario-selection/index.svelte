@@ -41,9 +41,8 @@
     });
   });
 
-  $: [emissionsUnit, temperatureUnit] = [emissionsData, temperatureData].map(
-    (scenarios) => scenarios[0]?.unit
-  );
+  $: emissionsUnit = emissionsData[0]?.unit;
+  $: temperatureUnit = temperatureData[0]?.unit;
 
   const KEY_UNIT_X = 'unitX';
   const KEY_UNIT_Y = 'unitY';
@@ -150,7 +149,7 @@
               <LineTimeSeries
                 data={temperatureData}
                 unit={temperatureUnit}
-                title="Global mean tempearture"
+                title="Global mean temperature"
                 yDomain={[1, 3]}
                 ticksYHighlighted={[1]}
                 ticks={4}

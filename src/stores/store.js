@@ -47,7 +47,7 @@ export const SCENARIOS = (() => {
       const scenarios = scenariosRaw.map((scenarioRaw) => {
         const scenario = { ...scenarioRaw };
         SCENARIO_DATA_KEYS.forEach((key) => {
-          const { data, yearStart, yearStep, unit } = get(
+          const { data, yearStart, yearStep, units } = get(
             scenarioRaw,
             ['scenarioData', key],
             {}
@@ -59,8 +59,8 @@ export const SCENARIOS = (() => {
             }));
             scenario[key] = {
               data: datum,
-              unit
-            }
+              unit: units,
+            };
           }
         });
         return scenario;
