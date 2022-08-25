@@ -13,7 +13,9 @@
    * Specify the bound group
    * @type {ReadonlyArray<any>}
    */
-  const MAX_SELECTABLE_SCENARIOS = 3;
+  export let maxSelectableItems = 3;
+  export let minSelectableItems = 1;
+
   export let group = undefined;
   /** Specify whether the checkbox is indeterminate */
   export let indeterminate = false;
@@ -38,7 +40,7 @@
   export let ref = null;
   import { createEventDispatcher } from 'svelte';
   const dispatch = createEventDispatcher();
-  $: isFull = group.length >= MAX_SELECTABLE_SCENARIOS;
+  $: isFull = group.length >= maxSelectableItems;
   $: useGroup = Array.isArray(group);
   $: checked = useGroup ? group.includes(value) : checked;
   $: position = group.indexOf(value);
@@ -47,6 +49,7 @@
   $: isTruncated = refLabel?.offsetWidth < refLabel?.scrollWidth;
   $: title = !title && isTruncated ? refLabel?.innerText : title;
   $: disabled = isFull && !checked;
+  $: console.log(disabled);
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
@@ -75,11 +78,10 @@
     on:change={() => {
       if (useGroup) {
         if (group.includes(value)) {
-          group = group.filter((item) => item !== value);
-        } else {
-          if (!isFull) {
-            group = [...group, value];
-          }
+          const filtered = group.filter((item) => item !== value);
+          group = filtered.length >= minSelectableItems ? filtered : group;
+        } else if (!isFull) {
+          group = [...group, value];
         }
       } else {
         checked = !checked;
