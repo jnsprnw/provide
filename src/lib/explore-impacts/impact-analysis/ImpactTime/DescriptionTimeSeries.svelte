@@ -5,6 +5,8 @@
   export let geography;
   export let scenarios;
   export let parameters;
+
+  $: multiScenario = scenarios.length > 1;
 </script>
 
 <p>
@@ -13,7 +15,10 @@
   reference period {parameters?.reference?.label}, according to the
   <ScenarioList {scenarios} />.
 </p>
-<p>The lines indicates the median estimates for each scenario.</p>
+<p>
+  {multiScenario ? 'The lines indicate' : 'The line indicates'} the median estimates
+  for {multiScenario ? 'each' : 'the'} scenario.
+</p>
 
 <!-- <p>
   {#if scenarios.length === 1}
