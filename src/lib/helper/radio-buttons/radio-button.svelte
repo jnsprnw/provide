@@ -16,8 +16,6 @@
   export let labelPosition = 'right';
   /** Specify the label text */
   export let labelText = '';
-  /** Set to `true` to visually hide the label text */
-  export let hideLabel = false;
   /** Set an id for the input element */
   export let id = 'ccs-' + Math.random().toString(36);
   /** Specify a name attribute for the radio button input */

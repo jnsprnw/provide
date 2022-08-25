@@ -62,9 +62,6 @@
 {/if}
 
 <style>
-  .placeholder {
-  }
-
   .error-message {
     background: var(--color-background-weakest);
     text-align: center;
