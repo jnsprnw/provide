@@ -11,6 +11,7 @@ const cache = {};
  * Data is then stored on a svelte store.
  */
 const fetchMultiple = (store, configs) => {
+  const isObject = configs.constructor === Object;
   // Create object/array of url string used to retrieve data either from cache or api
   const urls = reduce(
     configs,
@@ -22,7 +23,7 @@ const fetchMultiple = (store, configs) => {
       acc[keyOrIndex] = url;
       return acc;
     },
-    configs.constructor === Object ? {} : []
+    isObject ? {} : []
   );
 
   // Create array or object containing either cached data or empty objects
@@ -45,7 +46,7 @@ const fetchMultiple = (store, configs) => {
       }
       return acc;
     },
-    configs.constructor === Object ? {} : []
+    isObject ? {} : []
   );
 
   // Set initial data
@@ -60,7 +61,7 @@ const fetchMultiple = (store, configs) => {
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
         if (old[keyOrIndex] !== d) return old;
-        const next = clone(old);
+        const next = isObject ? { ...old } : [...old];
         next[keyOrIndex] = cache[d.url];
         return next;
       });
