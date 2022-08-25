@@ -4,14 +4,12 @@
   export let y0Key = 'min';
   export let y1Key = 'max';
 
-  const { data, xGet, yScale, zGet } = getContext('LayerCake');
+  const { data, xGet, yScale } = getContext('LayerCake');
 
   $: areaGen = area()
     .x((d) => $xGet(d))
     .y0((d) => $yScale(d[y0Key]))
     .y1((d) => $yScale(d[y1Key]));
-
-  $: console.log($data);
 </script>
 
 {#each $data as d}

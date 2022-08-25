@@ -7,8 +7,6 @@
   import AxisY from './axes/AxisY.svelte';
   import { sortBy } from 'lodash-es';
   import Unit from '$lib/helper/chart-description/Unit.svelte';
-  import AreaLayer from './layers/AreaLayer.svelte';
-  import LineLayer from './layers/LineLayer.svelte';
   import MultipleAreaLayer from './layers/MultipleAreaLayer.svelte';
 
   export let data = [];
