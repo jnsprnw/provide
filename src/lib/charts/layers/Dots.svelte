@@ -15,7 +15,7 @@
       style={`fill: ${dot.color}`}
     />
     {#if dot.highlight}
-      <g transform={`translate(${0}, ${-1 * R_BIG - 4})`}>
+      <g transform={`translate(0, ${-R_BIG - 4})`}>
         <text
           class="chart-label chart-label--bold chart-label--bg"
           text-anchor="middle"
@@ -27,8 +27,7 @@
         </text>
       </g>
     {/if}
-    <text /></g
-  >
+  </g>
 {/each}
 
 <style lang="scss">
