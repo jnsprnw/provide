@@ -8,8 +8,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
-  import { END_IMPACT_TIME, END_DISTRIBUTION } from '$lib/../config.js';
-  import DistributionChart from '$lib/charts/DistributionChart/DistributionChart.svelte';
+  import { END_IMPACT_TIME } from '$lib/../config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
   import TitleTimeSeries from './TitleTimeSeries.svelte';
@@ -21,7 +20,6 @@
   import { dataPlease } from '$lib/api/new-api';
 
   let IMPACT_TIME_DATA = writable([]);
-  let IMPACT_TIME_DISTRIBUTION_DATA = writable({});
 
   $: dataPlease(
     IMPACT_TIME_DATA,
@@ -36,43 +34,7 @@
     }))
   );
 
-  $: dataPlease(IMPACT_TIME_DISTRIBUTION_DATA, {
-    endpoint: END_DISTRIBUTION,
-    params: {
-      geography: $CURRENT_GEOGRAPHY.uid,
-      indicator: $CURRENT_INDICATOR.uid,
-      scenario: $CURRENT_SCENARIOS_UID[0],
-      ...$CURRENT_INDICATOR_OPTION_VALUES,
-    },
-  });
-
-  $: process = ({ impactDistributionData, impactTimeData }, { scenarios }) => {
-    const impactDistribution = (() => {
-      const {
-        yearStart,
-        valueStart,
-        yearStep,
-        valueStep,
-        data,
-        model,
-        parameters,
-      } = impactDistributionData.data;
-
-      const mean = data?.mean.map((value, i) => {
-        return { year: yearStart + yearStep * i, value };
-      });
-
-      const distribution = data?.distribution.map((yearValues, i) => {
-        return yearValues.map((distribution, j) => ({
-          year: yearStart + yearStep * i,
-          value: valueStart + valueStep * j,
-          distribution,
-        }));
-      });
-
-      return { mean, distribution, yearStep, valueStep, model, parameters };
-    })();
-
+  $: process = ({ impactTimeData }, { scenarios }) => {
     const impactTime = impactTimeData.map((datum, i) => {
       const { yearStart, yearStep, data, model, parameters } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
@@ -84,7 +46,9 @@
         parameters,
         model,
         values: indicatorData.map((values, i) => ({
-          value: values[values.length - 2],
+          min: values[0],
+          value: values[1],
+          max: values[2],
           year: yearStart + yearStep * i,
         })),
       };
@@ -92,7 +56,7 @@
 
     const hasSingleScenario = impactTimeData.length === 1;
 
-    return { impactTime, impactDistribution, hasSingleScenario };
+    return { impactTime, hasSingleScenario };
   };
 </script>
 
@@ -100,7 +64,6 @@
   {process}
   let:asyncProps={{
     impactTime,
-    impactDistribution,
     hasSingleScenario,
   }}
   let:props={{
@@ -111,7 +74,6 @@
   }}
   asyncProps={{
     impactTimeData: $IMPACT_TIME_DATA,
-    impactDistributionData: $IMPACT_TIME_DISTRIBUTION_DATA,
   }}
   props={{
     indicator: $CURRENT_INDICATOR,
@@ -122,11 +84,7 @@
 >
   <div class="wrapper grid">
     <div class="chart">
-      {#if hasSingleScenario}
-        <DistributionChart {...impactDistribution} unit={indicator.unit.uid} />
-      {:else}
-        <LineTimeSeries data={impactTime} unit={indicator.unit.uid} />
-      {/if}
+      <LineTimeSeries data={impactTime} unit={indicator.unit.uid} />
     </div>
     <div class="chart-info">
       <TitleTimeSeries
@@ -134,21 +92,12 @@
         {geography}
         {hasSingleScenario}
         impactTimeData={impactTime}
-        distributionData={impactDistribution}
       />
       <DescriptionTimeSeries {indicator} {geography} {scenarios} {parameters} />
 
       <ChartFacts>
-        <ResolutionTime
-          {hasSingleScenario}
-          impactTimeData={impactTime}
-          distributionData={impactDistribution}
-        />
-        <ModelList
-          data={hasSingleScenario
-            ? [impactDistribution.model]
-            : impactTime.map((d) => d.model)}
-        />
+        <ResolutionTime {hasSingleScenario} impactTimeData={impactTime} />
+        <ModelList data={impactTime.map((d) => d.model)} />
       </ChartFacts>
     </div>
   </div>

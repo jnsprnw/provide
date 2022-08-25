@@ -3,9 +3,7 @@
 
   export let indicator;
   export let geography;
-  export let hasSingleScenario;
   export let impactTimeData;
-  export let distributionData;
 
   // function getMaxYear(hasSingleScenario, time_series, distribution) {
   //   if (hasSingleScenario && distribution?.mean?.length) {

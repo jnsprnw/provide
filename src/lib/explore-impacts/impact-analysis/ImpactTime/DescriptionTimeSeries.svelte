@@ -13,8 +13,9 @@
   reference period {parameters?.reference?.label}, according to the
   <ScenarioList {scenarios} />.
 </p>
+<p>The lines indicates the median estimates for each scenario.</p>
 
-<p>
+<!-- <p>
   {#if scenarios.length === 1}
     The line indicates the median, while the colour variations shows the spread
     of possible results (the darker the colour, the more likely they are for
@@ -22,7 +23,6 @@
   {:else}
     The lines indicates the median estimates for each scenario.
   {/if}
-</p>
-
+</p> -->
 <style lang="scss">
 </style>

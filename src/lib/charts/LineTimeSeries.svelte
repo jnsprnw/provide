@@ -7,6 +7,9 @@
   import AxisY from './axes/AxisY.svelte';
   import { sortBy } from 'lodash-es';
   import Unit from '$lib/helper/chart-description/Unit.svelte';
+  import AreaLayer from './layers/AreaLayer.svelte';
+  import LineLayer from './layers/LineLayer.svelte';
+  import MultipleAreaLayer from './layers/MultipleAreaLayer.svelte';
 
   export let data = [];
   export let xKey = 'year';
@@ -22,12 +25,18 @@
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
-      return memo.concat(group.values);
+      group.values.forEach(({ min, value, max, year }) => {
+        memo.push({ year, value: min });
+        memo.push({ year, value });
+        memo.push({ year, value: max });
+      });
+      return memo;
     }, []);
 
   $: formatTickY = (d) => formatValue(d, unit);
 
   $: sortedData = sortBy(data, ['highlight', 'isSelected']);
+  $: isMultiLine = data.length > 1;
 </script>
 
 <div class="figure-container" class:hasTitle={title}>
@@ -42,20 +51,23 @@
       {padding}
       x={xKey}
       y={yKey}
-      data={sortedData}
-      flatData={flatten(sortedData)}
       {yDomain}
+      data={sortedData}
+      flatData={flatten(data)}
     >
       <Svg>
-        <AxisX ticks={xTicks} {padding} />
+        <AxisX ticks={xTicks} />
         <AxisY
-          {padding}
           ticks={yTicks}
           xTick={-3}
           formatTick={formatTickY}
           ticksHighlighted={ticksYHighlighted}
         />
+
         <MultipleLineLayer />
+        {#if !isMultiLine}
+          <MultipleAreaLayer color={data[0].color} />
+        {/if}
       </Svg>
     </LayerCake>
   </div>
