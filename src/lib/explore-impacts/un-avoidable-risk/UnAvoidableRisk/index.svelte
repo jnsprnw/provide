@@ -6,6 +6,7 @@
     CURRENT_INDICATOR_UNIT_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_INDICATOR_OPTION_VALUES,
+    CURRENT_INDICATOR_OPTIONS,
   } from '$lib/../stores/store.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -92,6 +93,8 @@
     scenarios: $DICTIONARY_SCENARIOS,
     currentScenarios: $DICTIONARY_CURRENT_SCENARIOS,
     indicator: $CURRENT_INDICATOR,
+    currentGeography: $CURRENT_GEOGRAPHY,
+    currentIndicatorOptions: $CURRENT_INDICATOR_OPTIONS,
   }}
 >
   <div class="wrapper grid">

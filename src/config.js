@@ -15,6 +15,10 @@ export const KEY_PARAMETERS = 'parameters';
 export const DEFAULT_FORMAT_UID = 'float';
 
 export const SHIFTING_PATHWAYS_UID = 'sp';
+export const CURRENT_POLICY_UID = 'curpol';
+export const MEAN_TEMPERATURE_UID = 'mean-temperature';
+export const HOT_EXTREME_UID = 'hot-extreme';
+export const PRESENT_DAY_UID = 'present-day';
 export const UNAVOIDABLE_UID = 'unavoidable';
 
 export const IMPACT_GEO_YEARS = [
