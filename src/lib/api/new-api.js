@@ -1,4 +1,4 @@
-import { STATUS_LOADING, STATUS_SUCCESS } from '$lib/../config';
+import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$lib/../config';
 import { loadFromAPI } from '$lib/../routes/api/utils';
 import qs from 'qs';
 import { clone, forEach, reduce } from 'lodash-es';
@@ -57,7 +57,10 @@ const fetchMultiple = (store, configs) => {
   forEach(initialData, (d, keyOrIndex) => {
     if (typeof d.data.then !== 'function') return;
     d.data.then((data) => {
-      cache[d.url] = { status: STATUS_SUCCESS, data };
+      cache[d.url] = data
+        ? { status: STATUS_SUCCESS, data }
+        : { status: STATUS_FAILED, data };
+
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
         if (old[keyOrIndex] !== d) return old;
