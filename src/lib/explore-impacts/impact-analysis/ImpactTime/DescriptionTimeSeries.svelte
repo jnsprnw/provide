@@ -5,8 +5,6 @@
   export let geography;
   export let scenarios;
   export let parameters;
-
-  $: multiScenario = scenarios.length > 1;
 </script>
 
 <p>
@@ -15,19 +13,15 @@
   reference period {parameters?.reference?.label}, according to the
   <ScenarioList {scenarios} />.
 </p>
+
 <p>
-  {multiScenario ? 'The lines indicate' : 'The line indicates'} the median estimates
-  for {multiScenario ? 'each' : 'the'} scenario.
+  {#if scenarios.length > 1}
+    The line indicates the median estimate for this scenario, while the coloured
+    area shows the uncertainty range (see Methodology for more information).
+  {:else}
+    The lines indicate the median estimates for each scenario.
+  {/if}
 </p>
 
-<!-- <p>
-  {#if scenarios.length === 1}
-    The line indicates the median, while the colour variations shows the spread
-    of possible results (the darker the colour, the more likely they are for
-    this scenario).
-  {:else}
-    The lines indicates the median estimates for each scenario.
-  {/if}
-</p> -->
 <style lang="scss">
 </style>
