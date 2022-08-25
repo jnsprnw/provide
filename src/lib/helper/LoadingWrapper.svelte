@@ -46,7 +46,9 @@
 </script>
 
 {#if isFailed}
-  <slot name="failed"><div class="error-message">Failed</div></slot>
+  <slot name="failed"
+    ><div class="error-message">Something went wrong here!</div></slot
+  >
 {:else if isEmpty && !renderWhileEmpty}
   <slot name="placeholder"><div class="placeholder">Loading</div></slot>
 {:else}
@@ -63,7 +65,9 @@
 
 <style>
   .error-message {
-    background: var(--color-background-weakest);
+    background: var(--color-background-stronger);
+    padding: var(--space-xl) 0;
+    border: 1px solid var(--color-foreground-weakest);
     text-align: center;
   }
 </style>
