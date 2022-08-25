@@ -139,7 +139,7 @@
               <LineTimeSeries
                 data={emissionsData}
                 unit={emissionsUnit}
-                title="Global GHG emissions"
+                yLabel="Global GHG emissions"
                 ticksYHighlighted={[0]}
                 yTicks={4}
                 xTicks={4}
@@ -149,7 +149,7 @@
               <LineTimeSeries
                 data={temperatureData}
                 unit={temperatureUnit}
-                title="Global mean temperature"
+                yLabel="Global mean temperature"
                 yDomain={[1, 3]}
                 ticksYHighlighted={[1]}
                 ticks={4}
@@ -194,6 +194,6 @@
   .scenario-chart,
   .quadrant-description {
     width: 100%;
-    height: 280px;
+    height: 250px;
   }
 </style>

@@ -1,6 +1,7 @@
 <script>
   import { formatValue } from '$lib/utils/formatting';
   import { getContext } from 'svelte';
+  import { UNITS } from '$lib/../stores/store.js';
   const { width, height, xScale, yScale } = getContext('LayerCake');
 
   export let ticks = 4;
@@ -10,6 +11,10 @@
 
   export let formatTick = (d) => formatValue(d, 'default');
 
+  export let axisLabel;
+  export let unit;
+  export let padding;
+  export let showLabel = false;
   export let x; // Base x position of the axis, usually full width or 0
   export let y; // Base y position of the axis, usually 0
   export let labelX = 10; // Defines the distance between zero position of the chart and the x center of the label
@@ -25,6 +30,13 @@
   $: tickVals = Array.isArray(ticks) ? ticks : $yScale.ticks(ticks);
 </script>
 
+{#if axisLabel || showLabel}
+  <text transform={`translate(0, ${-padding.top + 9})`} class="axis-label"
+    ><tspan class="axis-name">{axisLabel}</tspan>
+    {#if unit}<tspan class="axis-unit">in {$UNITS[unit]?.label || unit}</tspan
+      >{/if}</text
+  >
+{/if}
 <g class="axis y-axis" transform={`translate(${xPos}, ${yPos})`}>
   {#each tickVals as tick, i}
     <g class="tick tick-{tick}" transform="translate(0, {$yScale(tick)})">
@@ -52,3 +64,14 @@
     <slot />
   </g>
 </g>
+
+<style>
+  .axis-label {
+    font-size: var(--font-size-s);
+    fill: var(--color-text-base);
+  }
+
+  .axis-name {
+    font-weight: var(--font-font-weight-bold);
+  }
+</style>

@@ -84,7 +84,11 @@
 >
   <div class="wrapper grid">
     <div class="chart">
-      <LineTimeSeries data={impactTime} unit={indicator.unit.uid} />
+      <LineTimeSeries
+        yLabel={indicator.label}
+        data={impactTime}
+        unit={indicator.unit.uid}
+      />
     </div>
     <div class="chart-info">
       <TitleTimeSeries
