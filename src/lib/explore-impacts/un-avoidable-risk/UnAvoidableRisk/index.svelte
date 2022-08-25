@@ -67,7 +67,7 @@
     });
 
     unavoidableValues.unshift({
-      year: "(2011-2020) Today's risk",
+      year: "Today's risk",
       value: data.today[thresholdIndex],
       formattedValue: formatValue(data.today[thresholdIndex], 'percent'),
     });

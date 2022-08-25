@@ -68,7 +68,7 @@
 <style>
   .axis-label {
     font-size: var(--font-size-s);
-    fill: var(--color-text-base);
+    fill: var(--color-text-weaker);
   }
 
   .axis-name {
