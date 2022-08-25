@@ -78,6 +78,7 @@
   .page-footer {
     margin: var(--size-space-large-xxxl) 0 var(--size-space-large-xl);
     padding-top: var(--size-space-large-xxl);
+    padding-bottom: var(--size-space-large-xl);
     border-top: 1px solid var(--color-foreground-weakest); // TODO
 
     .page-author {

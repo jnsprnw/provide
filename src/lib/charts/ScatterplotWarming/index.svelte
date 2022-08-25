@@ -3,7 +3,7 @@
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
   import Dots from '../layers/Dots.svelte';
-  import Sectors from '../layers/Sectors.svelte';
+  import Sectors from './Sectors.svelte';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';
   import { sortBy } from 'lodash-es';
@@ -44,9 +44,6 @@
       yDomain={[1.3, 2.3]}
     >
       <Svg>
-        <Sectors bind:hoveredSector />
-        <AxisXLabel {padding} label="Warming between 2050 and 2100" />
-        <AxisYLabel {padding} label="Warming in 2050" />
         <AxisX
           {padding}
           formatTick={formatTickX}
@@ -59,6 +56,9 @@
           ticks={[1.3, 1.5, 1.6, 2.3]}
           gridClass="chart-gridline--invert"
         />
+        <Sectors bind:hoveredSector />
+        <AxisXLabel {padding} label="Warming between 2050 and 2100" />
+        <AxisYLabel {padding} label="Warming in 2050" />
         <Dots />
       </Svg>
     </LayerCake>
