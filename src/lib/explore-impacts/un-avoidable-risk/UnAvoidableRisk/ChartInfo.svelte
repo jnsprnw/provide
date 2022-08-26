@@ -70,8 +70,8 @@
   in 2050 and {curpolData.values[2].formattedValue} in 2100. In contrast, the <ScenarioSingle
     scenario={spData}
   /> scenario – considered as the scenario with the highest feasible mitigation levels
-  – would limit this risk to {spData.values[0].formatValue} in 2030, {spData
-    .values[1].formatValue} in 2050 and {spData.values[2].formatValue} in 2100.
+  – would limit this risk to {spData.values[0].formattedValue} in 2030, {spData
+    .values[1].formattedValue} in 2050 and {spData.values[2].formattedValue} in 2100.
 </p>
 <!-- Information about remaining selected scenarios -->
 {#if remainingScenarios.length}
