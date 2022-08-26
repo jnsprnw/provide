@@ -47,7 +47,7 @@
 
 {#if isFailed}
   <slot name="failed"
-    ><div class="error-message">Something went wrong here!</div></slot
+    ><div class="error-message">⚠️ Something went wrong here!</div></slot
   >
 {:else if isEmpty && !renderWhileEmpty}
   <slot name="placeholder"><div class="placeholder">Loading</div></slot>

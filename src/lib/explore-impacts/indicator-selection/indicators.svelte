@@ -4,6 +4,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
     CURRENT_SCENARIOS,
+    INDICATORS,
   } from '$lib/../stores/store.js';
   import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
   import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
@@ -23,6 +24,7 @@
       params: {
         geography: $CURRENT_GEOGRAPHY_UID,
         scenario,
+        indicator: $INDICATORS.map((d) => d.uid),
       },
     }))
   );

@@ -55,7 +55,7 @@ const fetchMultiple = (store, configs) => {
   // Go through initial data and check if there is a pending promise
   // If promise is present, update data on resolve
   forEach(initialData, (d, keyOrIndex) => {
-    if (typeof d.data.then !== 'function') return;
+    if (typeof d.data?.then !== 'function') return;
     d.data.then((data) => {
       cache[d.url] = data
         ? { status: STATUS_SUCCESS, data }

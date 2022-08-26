@@ -20,12 +20,17 @@
   import { END_GEO_SHAPE, END_IMPACT_GEO } from '$lib/../config.js';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
+  import { interpolateLab } from 'd3-interpolate';
 
   let displayOption = 'side-by-side';
 
   let zoom;
   let center;
   let bounds;
+
+  const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];
+  const NEGATIVE_RANGE = ['#437E8E', '#DACFBF'];
+  const DIVERGING_RANGE = ['#437E8E', '#F4E4D6', '#C91C1C'];
 
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
@@ -77,25 +82,46 @@
         }));
 
     const colorScale = (() => {
-      const sequentialPositiveRange = ['#F9CEA6', '#C91C1C'];
-      const sequentialNegativeRange = ['#437E8E', '#DACFBF'];
-      const divergingRange = ['#437E8E', '#F4E4D6', '#C91C1C'];
       let range;
       const flatData = renderedData.map((grid) => grid.data).flat(3);
-      const domain = extent(flatData);
-      const isSequential =
-        (domain[0] >= 0 && domain[1] >= 0) || (domain[0] < 0 && domain[1] < 0);
+      let domain = extent(flatData);
+      let [min, max] = domain;
+      // Include 0 values to prevent dividing by zero when creating a diverging scale
+      const isSequential = (min >= 0 && max >= 0) || (min <= 0 && max <= 0);
       if (isSequential) {
-        range =
-          domain[0] >= 0 ? sequentialPositiveRange : sequentialNegativeRange;
+        range = min >= 0 ? POSITIVE_RANGE : NEGATIVE_RANGE;
       } else {
-        range = divergingRange;
+        // Is positive extent bigger than negative? Every calculation later on depends on this
+        const leansPositive = Math.abs(min) <= max;
+        // Set min/max extents according to which side the scale leans
+        const maxExtent = leansPositive ? max : min;
+        const minExtent = leansPositive ? min : max;
+        const extentRatio = Math.abs(minExtent / maxExtent);
+        // Color for the side that extends fully
+        const maxColor = leansPositive
+          ? DIVERGING_RANGE[2]
+          : DIVERGING_RANGE[0];
+        // Color for the side that gets cut somwhere
+        const fullMinColor = leansPositive
+          ? DIVERGING_RANGE[0]
+          : DIVERGING_RANGE[2];
+        // Find color at the correct ratio
+        const minRange = scaleLinear()
+          .domain([0, minExtent])
+          .range([DIVERGING_RANGE[1], fullMinColor])(extentRatio * minExtent);
+
+        range = leansPositive
+          ? [minRange, DIVERGING_RANGE[1], maxColor]
+          : [maxColor, DIVERGING_RANGE[1], minRange];
+        domain = leansPositive
+          ? [minExtent, 0, maxExtent]
+          : [maxExtent, 0, minExtent];
       }
 
-      //[-x, 0, +x]
-      //[-x, -x]
-      //[+x, +x]
-      return scaleLinear().domain(domain).range(range);
+      return scaleLinear()
+        .interpolate(interpolateLab)
+        .domain(domain)
+        .range(range);
     })();
 
     return {

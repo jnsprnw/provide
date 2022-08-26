@@ -2,6 +2,7 @@
   import { formatValue } from '$lib/utils/formatting';
 
   import { rgb } from 'd3-color';
+  import { scaleLinear } from 'd3-scale';
 
   export let scale;
   export let unit;
@@ -9,17 +10,26 @@
   let canvas;
   let width;
   let height;
-  $: ticks = scale.copy().ticks(4).slice(1, -1);
-  $: colorScale = scale.copy().domain([0, width]);
-  $: xScale = scale.copy().range([0, width]);
   $: domain = scale.domain();
+  $: range = scale.range();
+  $: isSequential = domain.length === 2;
+  $: domainDelta = Math.abs(domain[0] - domain[domain.length - 1]);
+  // Find the range to position x ticks and the gradient values
+  // If scale is not sequential, the middle point is calculated depending on the
+  // ratio between the range above and below zero
+  $: xRange = isSequential
+    ? [0, width]
+    : [0, Math.abs((domain[0] / domainDelta) * width), width];
+  $: colorScale = scaleLinear().domain(xRange).range(range);
+  $: xScale = scaleLinear().domain(domain).range(xRange);
+  $: tick = isSequential ? [domain[0] + domainDelta / 2] : [0];
 
   $: (async () => {
     if (canvas) {
       const ctx = canvas.getContext('2d');
       await ctx.clearRect(0, 0, width, height);
 
-      for (let x = 0; x < width; x++) {
+      for (let x = domain[0]; x < width; x++) {
         ctx.fillStyle = rgb(colorScale(x)).hex();
         ctx.fillRect(x, 0, 1, height);
       }
@@ -36,16 +46,14 @@
   >
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
-      {#each ticks as tick}
-        <span style={`left: ${xScale(tick)}px;`} class="tick"
-          ><span class="tick-label"
-            >{formatValue(tick, unit.uid, { addSuffix: false })}</span
-          ></span
-        >
-      {/each}
+      <span style={`left: ${xScale(tick)}px;`} class="tick"
+        ><span class="tick-label">{formatValue(tick, unit.uid)}</span></span
+      >
     </div>
   </div>
-  <span class="tick-label">Above<br />{formatValue(domain[1], unit.uid)}</span>
+  <span class="tick-label"
+    >Above<br />{formatValue(domain[domain.length - 1], unit.uid)}</span
+  >
 </div>
 
 <style lang="scss">
