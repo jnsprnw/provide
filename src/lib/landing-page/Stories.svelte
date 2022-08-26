@@ -5,6 +5,10 @@
   import { END_IMPACT_TIME } from '$lib/../config';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
+  import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
+  import { getContext } from 'svelte';
+  import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
 
   export let stories;
 
@@ -12,8 +16,16 @@
 
   let currentStoryID = 0;
   let height;
+  const theme = getContext('theme');
 
-  $: currentStory = get(stories, currentStoryID);
+  $: currentStory = (() => {
+    const story = get(stories, currentStoryID);
+    story.scenarios = story.scenarios.map((scenario, i) => ({
+      ...scenario,
+      color: $theme.color.scenarios[i],
+    }));
+    return story;
+  })();
 
   const intervalID = setInterval(nextStory, 4000);
 
@@ -31,6 +43,29 @@
     changeStory(index);
   }
 
+  $: process = ({ data }, { currentStory }) => {
+    const impactTime = data.map((datum, i) => {
+      const { yearStart, yearStep, data, model, parameters } = datum.data;
+      const indicatorData = data[currentStory.indicator.uid];
+
+      return {
+        color: currentStory.scenarios[i].color,
+        yearStart,
+        yearStep,
+        parameters,
+        model,
+        values: indicatorData.map((values, i) => ({
+          min: values[0],
+          value: values[1],
+          max: values[2],
+          year: yearStart + yearStep * i,
+        })),
+      };
+    });
+
+    return { data: impactTime };
+  };
+
   $: dataPlease(
     IMPACT_TIME_DATA,
     currentStory.scenarios.map((scenario) => ({
@@ -44,43 +79,67 @@
   );
 </script>
 
-<div class="stories-wrapper">
-  <ul>
-    <li class="story">
-      <div class="story-wrapper" style={`height: ${height}px;`}>
-        {#key currentStory}
-          <span bind:clientHeight={height}>
-            How will
-            <em>{currentStory.indicator.label}</em> in
-            <em
-              >{#if currentStory.geography.emoji}{currentStory.geography
-                  .emoji}&nbsp;{/if}{currentStory.geography.label}</em
-            >
-            develop under the
-            {#each formatObjArr(currentStory.scenarios, 'label') as { type, value }}
-              {#if type === 'element'}
-                <em>{value.label}</em>
-              {:else}
-                {value}
-              {/if}
-            {/each}
-            scenario{#if currentStory.scenarios.length > 1}s{/if}?
-          </span>
-        {/key}
-      </div>
-      <a class="story-link btn" href={currentStory.url}>Explore</a>
-    </li>
-  </ul>
-</div>
-<div class="stories-nav">
-  {#each stories as datum, i}
-    <button on:click={() => handClick(i)} class:active={currentStoryID === i}
-      >{i}</button
+<div class="stories container">
+  <!-- <div class="background">
+    <LoadingWrapper
+      let:asyncProps={{ data }}
+      let:props={{ currentStory }}
+      asyncProps={{ data: $IMPACT_TIME_DATA }}
+      props={{ currentStory }}
+      {process}
     >
-  {/each}
+      <LineTimeSeries
+        showcase={true}
+        {data}
+        unit={currentStory.indicator.unit}
+      />
+    </LoadingWrapper>
+  </div> -->
+  <div class="wrapper grid">
+    <div class="stories-wrapper">
+      <ul>
+        <li class="story">
+          <div class="story-wrapper" style={`height: ${height}px;`}>
+            {#key currentStory}
+              <span bind:clientHeight={height}>
+                How will
+                <em>{currentStory.indicator.label}</em> in
+                <em
+                  >{#if currentStory.geography.emoji}{currentStory.geography
+                      .emoji}&nbsp;{/if}{currentStory.geography.label}</em
+                >
+                develop under the
+                <ScenarioList scenarios={currentStory.scenarios} />?
+              </span>
+            {/key}
+          </div>
+          <a class="story-link btn" href={currentStory.url}>Explore</a>
+        </li>
+      </ul>
+    </div>
+    <div class="stories-nav">
+      {#each stories as datum, i}
+        <button
+          on:click={() => handClick(i)}
+          class:active={currentStoryID === i}>{i}</button
+        >
+      {/each}
+    </div>
+  </div>
 </div>
 
 <style lang="scss">
+  .stories {
+    background-color: var(--color-background-stronger);
+    width: 100%;
+    position: relative;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+  }
+
   .stories-wrapper {
     grid-column: 1 / -1;
     margin-bottom: var(--space-xl);

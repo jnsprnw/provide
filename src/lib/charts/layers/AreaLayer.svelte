@@ -5,7 +5,7 @@
   export let y1Key = 'max';
   export let color;
 
-  const { data, xGet, yScale, zGet } = getContext('LayerCake');
+  const { data, xGet, yScale } = getContext('LayerCake');
 
   $: areaGen = area()
     .x((d) => $xGet(d))

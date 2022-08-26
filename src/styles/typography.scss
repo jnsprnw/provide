@@ -72,8 +72,8 @@ i.emoji {
   font-weight: var(--font-font-weight-bold);
   text-decoration: underline;
   text-decoration-color: var(--color, inherit);
-  text-decoration-thickness: 2px;
-  text-underline-offset: 2px;
+  text-decoration-thickness: .13em;
+  text-underline-offset: .13em;
 }
 
 .btn {

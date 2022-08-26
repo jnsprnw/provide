@@ -102,13 +102,15 @@
       <ChartInfo {...props} {...asyncProps} threshold={currentThreshold} />
     </div>
     <div class="chart-container">
-      <div class="chart-options">
-        <Select
-          label="Threshold"
-          options={asyncProps.thresholds}
-          bind:value={currentThreshold}
-        />
-      </div>
+      {#if asyncProps.thresholds.length > 1}
+        <div class="chart-options">
+          <Select
+            label="Threshold"
+            options={asyncProps.thresholds}
+            bind:value={currentThreshold}
+          />
+        </div>
+      {/if}
       <div class="chart">
         <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
       </div>

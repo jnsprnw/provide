@@ -15,7 +15,7 @@
 </p>
 
 <p>
-  {#if scenarios.length > 1}
+  {#if scenarios.length === 1}
     The line indicates the median estimate for this scenario, while the coloured
     area shows the uncertainty range (see Methodology for more information).
   {:else}

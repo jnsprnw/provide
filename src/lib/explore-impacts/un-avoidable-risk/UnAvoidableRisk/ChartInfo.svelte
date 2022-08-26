@@ -50,15 +50,15 @@
   {#if isMeanTemperature}
     Today (2011-2020), the risk of annual mean temperatures in {currentGeography.label}
     exceeding
-    {formattedThreshold} from 2011-2020 levels is {today.values[0]
-      .formattedValue}.
+    {formattedThreshold} from {currentIndicatorOptions.reference.label} levels is
+    {today.values[0].formattedValue}.
   {:else if isPresentDay}
     The risk of a {currentIndicatorOptions.frequency.label} year {indicatorAdjective}
     year occurring today (in 2011-2020) in {currentGeography.label} is
     {today.values[0].formattedValue}.
   {:else}
-    Today, the risk of a what used to be a 1-in-20 year {indicatorAdjective} year
-    in 1850-1900 in Denmark is {today.values[0].formattedValue}.
+    Today, the risk of what used to be a 1-in-20 year {indicatorAdjective} year in
+    1850-1900 in Denmark is {today.values[0].formattedValue}.
   {/if}
 </p>
 <!-- Information about best/worst case -->

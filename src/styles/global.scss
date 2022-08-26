@@ -214,3 +214,15 @@ $extra-wide: 1700px !default;
     }
   }
 }
+
+@keyframes defer-visibility {
+  0% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

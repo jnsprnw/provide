@@ -71,11 +71,7 @@
   <title>Provide Project</title>
 </svelte:head>
 
-<div class="stories container">
-  <div class="wrapper grid">
-    <Stories {stories} />
-  </div>
-</div>
+<Stories {stories} />
 
 <div class="paths container">
   <div class="wrapper grid">
@@ -84,11 +80,6 @@
 </div>
 
 <style lang="scss">
-  .stories {
-    background-color: var(--color-background-stronger);
-    width: 100%;
-  }
-
   .paths {
     margin: var(--space-l) 0;
   }

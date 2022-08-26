@@ -45,6 +45,7 @@
         yearStep,
         parameters,
         model,
+        strokeWidth: 3,
         values: indicatorData.map((values, i) => ({
           min: values[0],
           value: values[1],

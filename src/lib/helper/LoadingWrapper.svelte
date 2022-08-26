@@ -50,7 +50,7 @@
     ><div class="error-message">⚠️ Something went wrong here!</div></slot
   >
 {:else if isEmpty && !renderWhileEmpty}
-  <slot name="placeholder"><div class="placeholder">Loading</div></slot>
+  <slot name="placeholder" />
 {:else}
   {#if isLoading}
     <slot name="loading" />
