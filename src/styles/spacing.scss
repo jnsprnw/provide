@@ -160,3 +160,39 @@
 .margin-xs {
   @include margin(xs);
 }
+
+
+.margin-vertical-xxxl {
+  margin-top: var(--space-xxxl);
+  margin-bottom: var(--space-xxxl);
+}
+
+.margin-vertical-xxl {
+  margin-top: var(--space-xxl);
+  margin-bottom: var(--space-xxl);
+}
+
+.margin-vertical-xl {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-xl);
+}
+
+.margin-vertical-l {
+  margin-top: var(--space-l);
+  margin-bottom: var(--space-l);
+}
+
+.margin-vertical-m {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+
+.margin-vertical-s {
+  margin-top: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+
+.margin-vertical-xs {
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}

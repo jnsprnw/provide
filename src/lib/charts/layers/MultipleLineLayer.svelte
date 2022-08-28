@@ -4,6 +4,7 @@
 
   import { getContext } from 'svelte';
   import { line } from 'd3-shape';
+  import { beforeNavigate } from '$app/navigation';
 
   export let curve;
   export let drawBackground = true;
@@ -14,13 +15,18 @@
   $: path = line().x($xGet).y($yGet);
   $: curve && path.curve(curve);
 
-  function draw(node, { speed = 1 }) {
+  // If component gets unmounted, the ongoing transition keeps component from onmounting so we need a
+  // way to prevent component from transitioning when moving away from the page...
+  let animateOut = animate;
+
+  function draw(node, { speed = 1, animate = true }) {
     const pathLength = node.getTotalLength();
     const duration = pathLength / (speed * 0.5 * (Math.random() * 0.3 + 1));
+    // Mapping function so time in/out transition don't happen at the same time
     const defer = scaleLinear().domain([0, 0.6, 1]).range([0, 0, 1]);
 
     return {
-      duration,
+      duration: animate ? duration : 0,
       css: (t) => {
         return `
         stroke-dasharray: ${pathLength};
@@ -29,6 +35,10 @@
       },
     };
   }
+
+  beforeNavigate(() => {
+    animateOut = false;
+  });
 
   $: paths = $data.map((line) => path(line.values));
 </script>
@@ -41,7 +51,7 @@
     {#if animate}
       <path
         in:draw
-        out:draw
+        out:draw={{ animate: animateOut }}
         class={`path-line`}
         class:primary={line.color}
         class:highlight={line.highlight}

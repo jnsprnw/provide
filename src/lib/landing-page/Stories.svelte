@@ -6,9 +6,10 @@
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { getContext } from 'svelte';
+  import { getContext, onDestroy } from 'svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
+  import { afterNavigate, beforeNavigate } from '$app/navigation';
 
   export let stories;
 
@@ -80,7 +81,7 @@
 </script>
 
 <div class="stories container">
-  <!-- <div class="background">
+  <div class="background">
     <LoadingWrapper
       let:asyncProps={{ data }}
       let:props={{ currentStory }}
@@ -94,7 +95,7 @@
         unit={currentStory.indicator.unit}
       />
     </LoadingWrapper>
-  </div> -->
+  </div>
   <div class="wrapper grid">
     <div class="stories-wrapper">
       <ul>
