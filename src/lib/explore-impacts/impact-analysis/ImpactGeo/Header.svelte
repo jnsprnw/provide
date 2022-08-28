@@ -41,7 +41,7 @@
         </p>
       {:else if currentScenarios.length > 1}
         <p>
-          These maps show the change in
+          These maps show the changes in
           {currentIndicator.label} (expressed in
           {currentIndicator.unit.labelLong}) in
           {currentGeography.label} in

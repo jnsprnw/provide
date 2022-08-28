@@ -79,7 +79,7 @@
     {#each remainingScenarios as scenario}
       <ScenarioSingle {scenario} /> would lead to risk levels of {scenario
         .values[0].formattedValue} in 2030, {scenario.values[1].formattedValue} in
-      2050 and {scenario.values[2].formattedValue} in 2100.
+      2050 and {scenario.values[2].formattedValue} in 2100.{' '}
     {/each}
   </p>
 {/if}

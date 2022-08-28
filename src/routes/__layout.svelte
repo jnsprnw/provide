@@ -17,9 +17,7 @@
           Explore
         </ListLink>
         <ListLink {currentPath} link="about">About</ListLink>
-        <ListLink {currentPath} link="technical-documentation">
-          Methodology
-        </ListLink>
+        <ListLink {currentPath} link="methodology">Methodology</ListLink>
         <ListLink {currentPath} link="glossary">Glossary</ListLink>
         <ListLink {currentPath} link="contact">Contact</ListLink>
       </ul>
@@ -36,11 +34,10 @@
       </div>
       <nav class="page-sitemap">
         <ul>
-          <li>FAQ</li>
-          <li>Glossary</li>
-          <li>Methodology</li>
-          <li>About</li>
-          <li>Contact</li>
+          <li><a href="/about" {currentPath}>About</a></li>
+          <li><a href="/methodology" {currentPath}>Methodology</a></li>
+          <li><a href="/glossary" {currentPath}>Glossary</a></li>
+          <li><a href="/contact" {currentPath}>Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -96,6 +93,10 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: var(--font-size-large-xs); // TODO
+      }
+
+      a {
+        color: var(--color-text-base);
       }
     }
   }
