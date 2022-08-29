@@ -159,13 +159,15 @@
         align-items: flex-start;
         gap: var(--space-s);
         color: var(--color-font-base);
-        font-size: var(--font-size-large-xl);
+        font-size: var(--font-size-xl);
         font-weight: var(--font-font-weight-regular);
         background-color: var(--color-background-base);
         padding: var(--space-l);
         margin: var(--space-xl) var(--space-m) var(--space-xxl);
         border-radius: var(--radius-interactive-l);
         max-width: 40ch;
+        // box-shadow: var(--space-xxs) var(--space-xxs) 10px
+        //   var(--color-background-strongest);
 
         .story-wrapper {
           transition: height 0.3s ease-out;
