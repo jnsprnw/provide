@@ -17,12 +17,11 @@
       }
     };
   }
-  // export const hydrate = false;
+  export const hydrate = false;
   export const router = false;
 </script>
 
 <script>
-  import Anchor from '$lib/helper/Anchor.svelte';
   export let sections;
 </script>
 
@@ -36,9 +35,7 @@
     <nav>
       <ul class="nav-inpage">
         {#each sections as { slug, title }}
-        <li>
-          <Anchor hash={slug} label={title} />
-        </li>
+        <li><a href={`#${slug}`}>{ title }</a></li>
         {/each}
       </ul>
     </nav>

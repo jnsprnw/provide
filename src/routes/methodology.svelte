@@ -29,12 +29,11 @@
       },
     };
   };
-  // export const hydrate = false;
+  export const hydrate = false;
   export const router = false;
 </script>
 
 <script>
-  import Anchor from '$lib/helper/Anchor.svelte';
   export let modelsIntro;
   export let models;
   export let scenarios;
@@ -54,9 +53,7 @@
           <a href="#models" class="nav-headline-section">Models</a>
           <ul>
             {#each models as { title, slug }}
-              <li>
-                <Anchor hash={slug} label={title} />
-              </li>
+              <li><a href={`#${slug}`}>{title}</a></li>
             {/each}
           </ul>
         </li>
@@ -64,9 +61,7 @@
           <a href="#scenarios" class="nav-headline-section">Scenarios</a>
           <ul>
             {#each scenarios as { title, slug }}
-              <li>
-                <Anchor hash={slug} label={title} />
-              </li>
+              <li><a href={`#${slug}`}>{title}</a></li>
             {/each}
           </ul>
         </li>

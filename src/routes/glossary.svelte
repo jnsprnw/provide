@@ -25,12 +25,11 @@
       }
     };
   }
-  // export const hydrate = false;
+  export const hydrate = false;
   export const router = false;
 </script>
 
 <script>
-  import Anchor from '$lib/helper/Anchor.svelte';
   export let entries;
 </script>
 
@@ -45,7 +44,7 @@
       <ul class="nav-inpage subcategories">
         {#each entries as [category]}
         <li>
-          <Anchor hash={kebabCase(category)} label={category} isHeadline={true} />
+          <a href={`#${kebabCase(category)}`} class="nav-headline-section">{ category }</a>
         </li>
         {/each}
       </ul>
