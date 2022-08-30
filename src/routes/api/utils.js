@@ -1,3 +1,5 @@
+import { get as take } from 'lodash-es';
+
 // Load data from Strapi
 export const loadFromStrapi = function (url, fetch) {
   return new Promise(async (resolve) => {
@@ -22,3 +24,37 @@ export const loadFromAPI = async function (url, svelteFetch = fetch) {
     return undefined;
   }
 };
+
+export const loadMetaData = function (svelteFetch = fetch) {
+  return new Promise(async (resolve) => {
+    const descriptionIndicators = await loadFromStrapi('indicators', svelteFetch);
+    const descriptionScenarios = await loadFromStrapi('scenarios', svelteFetch);
+    const meta = await loadFromAPI(
+      `${import.meta.env.VITE_DATA_API_URL}/meta/`,
+      svelteFetch
+    );
+    resolve({
+      ...meta,
+      indicators: meta.indicators.map((indicator) => {
+        const description = take(
+          descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),
+          ['attributes', 'Description']
+        );
+        return {
+          ...indicator,
+          description,
+        };
+      }),
+      scenarios: meta.scenarios.map((indicator) => {
+        const description = take(
+          descriptionScenarios.find((d) => d.attributes.UID === indicator.uid),
+          ['attributes', 'Description']
+        );
+        return {
+          ...indicator,
+          description,
+        };
+      }),
+    });
+  })
+}

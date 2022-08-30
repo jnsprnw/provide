@@ -1,10 +1,10 @@
 <script context="module">
-  import { loadFromStrapi, loadFromAPI } from '$lib/../routes/api/utils.js';
+  import { loadFromStrapi, loadMetaData } from '$lib/../routes/api/utils.js';
   import { get, find, compact, uniq } from 'lodash-es';
   import qs from 'qs';
 
   export const load = async ({ fetch }) => {
-    const meta = await loadFromAPI(`/api/meta/`, fetch);
+    const meta = await loadMetaData(fetch);
     const storiesRaw = await loadFromStrapi('stories', fetch);
 
     const stories = compact(
