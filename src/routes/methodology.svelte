@@ -10,20 +10,22 @@
     return {
       props: {
         modelsIntro: parse(ModelsIntro),
-        models: Models.map(({ Title, Description, Link }) => {
+        models: Models.map(({ Title, Description, Link, Label }) => {
           return {
             title: Title,
             slug: kebabCase(Title),
             description: parse(Description),
             link: Link,
+            label: Label || Title
           };
         }),
         scenariosIntro: parse(ScenariosIntro),
-        scenarios: Scenarios.map(({ Title, Description }) => {
+        scenarios: Scenarios.map(({ Title, Description, Label }) => {
           return {
             title: Title,
             slug: kebabCase(Title),
             description: parse(Description),
+            label: Label || Title
           };
         }),
       },
@@ -52,16 +54,16 @@
         <li>
           <a href="#models" class="nav-headline-section">Models</a>
           <ul>
-            {#each models as { title, slug }}
-              <li><a href={`#${slug}`}>{title}</a></li>
+            {#each models as { title, slug, label }}
+              <li><a href={`#${slug}`}>{ label }</a></li>
             {/each}
           </ul>
         </li>
         <li>
           <a href="#scenarios" class="nav-headline-section">Scenarios</a>
           <ul>
-            {#each scenarios as { title, slug }}
-              <li><a href={`#${slug}`}>{title}</a></li>
+            {#each scenarios as { title, slug, label }}
+              <li><a href={`#${slug}`}>{ label }</a></li>
             {/each}
           </ul>
         </li>
