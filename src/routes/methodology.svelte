@@ -81,7 +81,9 @@
         {#each models as { title, description, link, slug }}
           <h3 id={slug} class="headline-paragraph">{title}</h3>
           {@html description}
+          {#if link}
           <a href={link} class="link">More information about {title}</a>
+          {/if}
         {/each}
       </div>
     </section>
