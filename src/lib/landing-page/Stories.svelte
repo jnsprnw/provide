@@ -2,7 +2,7 @@
   import { formatObjArr } from '$lib/utils.js';
 
   import { get } from 'lodash-es';
-  import { END_IMPACT_TIME } from '$lib/../config';
+  import { END_IMPACT_TIME, KEY_MODEL } from '$lib/../config';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -46,7 +46,7 @@
 
   $: process = ({ data }, { currentStory }) => {
     const impactTime = data.map((datum, i) => {
-      const { yearStart, yearStep, data, model, parameters } = datum.data;
+      const { yearStart, yearStep, data, [KEY_MODEL]: model, parameters } = datum.data;
       const indicatorData = data[currentStory.indicator.uid];
 
       return {

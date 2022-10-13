@@ -18,7 +18,9 @@
     &.chart-info-facts--horizontal {
       grid-auto-flow: column;
       grid-template-rows: auto auto;
-      grid-gap: var(--size-spacer-large-xxxs) var(--size-spacer-large-xs);
+      grid-gap: var(--size-spacer-large-xxxs) var(--size-spacer-large-l);
+      grid-template-columns: unset;
+      justify-content: start;
     }
   }
 </style>

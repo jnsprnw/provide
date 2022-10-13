@@ -10,13 +10,14 @@
   } from '$lib/../config.js';
   import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
+  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
 
   export let indicator;
   export let threshold;
   export let data;
   export let currentScenarios;
-  export let model;
+  export let model; // The model used for the data in this chart. Provided by the API.
+  export let source; // The data source used for the data in this chart. Provided by the API.
   export let currentGeography;
   export let currentIndicatorOptions;
 
@@ -84,5 +85,6 @@
   </p>
 {/if}
 <ChartFacts>
-  <ModelList data={[model]} />
+  <ChartMetaList data={[model]} term="Model" />
+  <ChartMetaList data={[source]} term="Source" />
 </ChartFacts>

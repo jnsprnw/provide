@@ -14,7 +14,12 @@
   import Select from '$lib/helper/select/index.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID } from '$lib/../config.js';
+  import {
+    END_UN_AVOIDABLE_RISK,
+    UNAVOIDABLE_UID,
+    KEY_MODEL,
+    KEY_SOURCE
+  } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
   import { dataPlease } from '$lib/api/new-api';
   import { writable } from 'svelte/store';
@@ -79,7 +84,14 @@
       values: unavoidableValues,
     });
 
-    return { ...data, thresholds, data: processedScenarios };
+    return {
+      ...data,
+      thresholds,
+      data: processedScenarios,
+      // The following two items would be included anyway, but we state them for clarity
+      model: data[KEY_MODEL],
+      source: data[KEY_SOURCE]
+    };
   };
 </script>
 
