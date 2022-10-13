@@ -17,7 +17,9 @@
 <p>
   {#if scenarios.length === 1}
     The line indicates the median estimate for this scenario, while the coloured
-    area shows the uncertainty range (see Methodology for more information).
+    area shows the confidence interval that illustrates model uncertainty,
+    arising from its imperfect description of both the climate sensitivity and
+    the local response to global warming.
   {:else}
     The lines indicate the median estimates for each scenario.
   {/if}

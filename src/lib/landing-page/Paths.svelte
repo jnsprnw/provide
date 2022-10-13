@@ -1,7 +1,7 @@
 <header>
   <h4>How to start?</h4>
   <p>
-    The <b>Climate risk dashboard</b> allows you to explore future impacts from climate
+    The <b>climate risk dashboard</b> allows you to explore future impacts from climate
     change as the world warms. Start by picking a mode.
   </p>
 </header>

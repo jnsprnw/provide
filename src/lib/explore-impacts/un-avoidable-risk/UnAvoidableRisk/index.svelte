@@ -32,13 +32,18 @@
   });
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
+    const hasThresholds = !!data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
     }));
-    currentThreshold = currentThreshold || thresholds[0].value;
 
-    const thresholdIndex = data.thresholds.indexOf(currentThreshold);
+    currentThreshold =
+      (hasThresholds && currentThreshold) || thresholds[0]?.value;
+
+    const thresholdIndex = hasThresholds
+      ? data.thresholds.indexOf(currentThreshold)
+      : 0;
     let processedScenarios = data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
       const scenario = currentScenarios[key] || scenarios[key];

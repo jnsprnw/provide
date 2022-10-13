@@ -29,7 +29,7 @@
   <footer class="page-footer container">
     <div class="wrapper grid">
       <div class="page-author">
-        <strong>Provide</strong>
+        <strong class="page-name">Provide</strong>
         <span>Climate Analytics 2022</span>
       </div>
       <nav class="page-sitemap">
@@ -48,13 +48,13 @@
   .page-menu {
     background-color: var(--color-background-stronger);
     width: 100vw;
-    padding: var(--size-space-large-xl);
+    padding: var(--space-xl);
 
     .wrapper {
       align-items: center; // Vertical center the menu
-      gap: var(--size-space-large-xxl);
+      gap: var(--space-xxl);
       grid-template-columns: auto 1fr;
-      padding-bottom: var(--size-space-large-xl);
+      padding-bottom: var(--space-xl);
       border-bottom: 1px solid var(--color-foreground-weaker);
 
       h1 {
@@ -67,15 +67,15 @@
 
     .menu-main {
       display: flex;
-      gap: var(--size-space-large-m);
+      gap: var(--space-m);
       white-space: nowrap;
     }
   }
 
   .page-footer {
-    margin: var(--size-space-large-xxxl) 0 var(--size-space-large-xl);
-    padding-top: var(--size-space-large-xxl);
-    padding-bottom: var(--size-space-large-xl);
+    margin: var(--space-xxxl) 0 var(--space-xl);
+    padding-top: var(--space-xxl);
+    padding-bottom: var(--space-xl);
     border-top: 1px solid var(--color-foreground-weakest); // TODO
 
     .page-author {
@@ -92,12 +92,17 @@
       ul {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-gap: var(--font-size-large-xs); // TODO
+        grid-gap: var(--font-size-xs); // TODO
       }
 
       a {
         color: var(--color-text-base);
       }
+    }
+
+    .page-name {
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
   }
 </style>
