@@ -1,3 +1,4 @@
+export const TokenSetOrder0 = "global";
 export const Weakest = 0.1;
 export const ColorLightBackgroundBase = "#ffffff";
 export const ColorLightBackgroundStronger = "#f0f3f5";
@@ -14,6 +15,7 @@ export const ColorLightBrandWeaker = "#90a5b1";
 export const ColorLightFunctionalAccent = "#95ad28";
 export const ColorLightFunctionalFilteredOut = "#e4e1d8";
 export const ColorLightFunctionalNotAvailable = "#b2b2b2";
+export const ColorLightFunctionalWarn = "#ffe060";
 export const ColorLightCategory0 = "#5abac1";
 export const ColorLightCategory1 = "#3c96e5";
 export const ColorLightCategory2 = "#f5c54a";

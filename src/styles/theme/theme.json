@@ -1,4 +1,7 @@
 {
+  "tokenSetOrder": {
+    "0": "global"
+  },
   "weakest": 0.1,
   "color": {
     "light": {
@@ -25,7 +28,8 @@
       "functional": {
         "accent": "#95ad28",
         "filtered-out": "#e4e1d8",
-        "not-available": "#b2b2b2"
+        "not-available": "#b2b2b2",
+        "warn": "#ffe060"
       },
       "category": {
         "0": "#5abac1",

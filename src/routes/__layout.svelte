@@ -3,14 +3,16 @@
   import '../styles/app.scss';
   import { page } from '$app/stores';
   import ListLink from '$lib/helper/ListLink.svelte';
+  import Banner from '$lib/helper/Banner.svelte';
 
   $: currentPath = $page.routeId || '';
 </script>
 
 <ThemeProvider>
+  <Banner />
   <nav class="page-menu container">
     <div class="wrapper grid">
-      <h1>Provide</h1>
+      <h1 class="site-logo">Provide<span class="beta-badge">Beta</span></h1>
       <ul class="menu-main">
         <ListLink {currentPath} link="">Home</ListLink>
         <ListLink {currentPath} link="explore/impacts" startsWith={true}>
@@ -69,6 +71,22 @@
       display: flex;
       gap: var(--space-m);
       white-space: nowrap;
+    }
+
+    .site-logo {
+      position: relative;
+    }
+
+    .beta-badge {
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: var(--color-functional-warn);
+      vertical-align: super;
+      display: inline-block;
+      line-height: 1em;
+      padding: 2px 3px;
+      transform: translate(2px, -2px);
     }
   }
 

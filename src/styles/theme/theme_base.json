@@ -1,4 +1,22 @@
 {
+  "tokenSetOrder": {
+    "0": {
+      "value": "global",
+      "type": "other",
+      "filePath": "./transformed/tokens.json",
+      "isSource": true,
+      "original": {
+        "value": "global",
+        "type": "other"
+      },
+      "name": "0",
+      "attributes": {},
+      "path": [
+        "tokenSetOrder",
+        "0"
+      ]
+    }
+  },
   "weakest": {
     "value": 0.1,
     "type": "opacity",
@@ -319,6 +337,24 @@
             "light",
             "functional",
             "not-available"
+          ]
+        },
+        "warn": {
+          "value": "#ffe060",
+          "type": "color",
+          "filePath": "./transformed/tokens.json",
+          "isSource": true,
+          "original": {
+            "value": "#ffe060",
+            "type": "color"
+          },
+          "name": "warn",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "functional",
+            "warn"
           ]
         }
       },
