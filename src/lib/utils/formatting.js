@@ -14,8 +14,8 @@ export const FORMAT_DEGREE = '.1f';
 const f = formatLocale({
   ...formatDefaultLocale,
   decimal: '.',
-  currency: ['', ' €'],
-  percent: ' %',
+  currency: ['', ' €'],
+  percent: ' %',
   nan: NA_STRING,
   thousands: ',',
   grouping: [3],
@@ -37,8 +37,8 @@ const indicatorFormats = {
 };
 
 const suffixes = {
-  'degrees-celsius': ' °C',
-  degree: ' °',
+  'degrees-celsius': ' °C',
+  degree: ' °',
 };
 
 export const formatValue = (
