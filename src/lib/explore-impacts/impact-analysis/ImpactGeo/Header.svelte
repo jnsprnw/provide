@@ -3,12 +3,14 @@
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
+  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
   import SpatialResolutionList from '$lib/helper/chart-description/SpatialResolutionList.svelte';
 
   import {
     IMPACT_GEO_YEARS,
     IMPACT_GEO_DISPLAY_OPTIONS,
+    KEY_MODEL,
+    KEY_SOURCE
   } from '$lib/../config.js';
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store.js';
 
@@ -63,7 +65,8 @@
       {/if}
       <ChartFacts direction="horizontal">
         <SpatialResolutionList resolution={data[0].resolution} />
-        <ModelList data={data.map((d) => d.model)} />
+        <ChartMetaList data={data.map((d) => d[KEY_MODEL])} term="Model" />
+        <ChartMetaList data={data.map((d) => d[KEY_SOURCE])} term="Source" />
       </ChartFacts>
     </div>
     <div class="controls">

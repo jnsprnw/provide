@@ -8,13 +8,13 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
   } from '$lib/../stores/store.js';
-  import { END_IMPACT_TIME } from '$lib/../config.js';
+  import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$lib/../config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ResolutionTime from './ResolutionTime.svelte';
   import TitleTimeSeries from './TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
+  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
@@ -36,7 +36,7 @@
 
   $: process = ({ impactTimeData }, { scenarios }) => {
     const impactTime = impactTimeData.map((datum, i) => {
-      const { yearStart, yearStep, data, model, parameters } = datum.data;
+      const { yearStart, yearStep, data, [KEY_MODEL]: model, [KEY_SOURCE]: source, parameters } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
@@ -45,6 +45,7 @@
         yearStep,
         parameters,
         model,
+        source,
         strokeWidth: 3,
         values: indicatorData.map((values, i) => ({
           min: values[0],
@@ -102,7 +103,8 @@
 
       <ChartFacts>
         <ResolutionTime {hasSingleScenario} impactTimeData={impactTime} />
-        <ModelList data={impactTime.map((d) => d.model)} />
+        <ChartMetaList data={impactTime.map((d) => d.model)} term="Model" />
+        <ChartMetaList data={impactTime.map((d) => d.source)} term="Source" />
       </ChartFacts>
     </div>
   </div>

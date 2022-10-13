@@ -10,13 +10,14 @@
   } from '$lib/../config.js';
   import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import ModelList from '$lib/helper/chart-description/ModelList.svelte';
+  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
 
   export let indicator;
   export let threshold;
   export let data;
   export let currentScenarios;
-  export let model;
+  export let model; // The model used for the data in this chart. Provided by the API.
+  export let source; // The data source used for the data in this chart. Provided by the API.
   export let currentGeography;
   export let currentIndicatorOptions;
 
@@ -48,17 +49,17 @@
 <!-- Information about today's risk -->
 <p>
   {#if isMeanTemperature}
-    Today (2011-2020), the risk of annual mean temperatures in {currentGeography.label}
+    Today (2011–2020), the risk of annual mean temperatures in {currentGeography.label}
     exceeding
     {formattedThreshold} from {currentIndicatorOptions.reference.label} levels is
     {today.values[0].formattedValue}.
   {:else if isPresentDay}
     The risk of a {currentIndicatorOptions.frequency.label} year {indicatorAdjective}
-    year occurring today (in 2011-2020) in {currentGeography.label} is
+    year occurring today (in 2011–2020) in {currentGeography.label} is
     {today.values[0].formattedValue}.
   {:else}
-    Today, the risk of what used to be a 1-in-20 year {indicatorAdjective} year in
-    1850-1900 in Denmark is {today.values[0].formattedValue}.
+    Today, the risk of what used to be a {currentIndicatorOptions.frequency.label} year {indicatorAdjective} year in
+    1850–1900 in {currentGeography.label} is {today.values[0].formattedValue}.
   {/if}
 </p>
 <!-- Information about best/worst case -->
@@ -84,5 +85,6 @@
   </p>
 {/if}
 <ChartFacts>
-  <ModelList data={[model]} />
+  <ChartMetaList data={[model]} term="Model" />
+  <ChartMetaList data={[source]} term="Source" />
 </ChartFacts>

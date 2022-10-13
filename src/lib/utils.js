@@ -32,7 +32,8 @@ export const formatObjArr = function (arr, key) {
   });
 };
 
-export const formatList = function (arr = []) {
+export const formatList = function (_arr = []) {
+  const arr = _arr.filter(Boolean);
   if (arr.length === 0) {
     return '';
   }
