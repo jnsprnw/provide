@@ -3,6 +3,10 @@
 </script>
 
 <script>
+  import {
+    KEY_LABEL,
+    KEY_LABEL_LONG
+  } from '$lib/../config.js';
   import { createEventDispatcher } from 'svelte';
   export let options = [];
   export let value;
@@ -21,11 +25,11 @@
 </script>
 
 <div class="root">
-  <label class="control-label" for={selectId}>{label}</label>
+  <label class="control-label" for={selectId}>{ label }</label>
   <div class="select-wrapper">
     <select class="select" id={selectId} bind:value on:change={handleChange}>
       {#each options as option}
-        <option value={option.uid || option.value}>{option.label}</option>
+        <option value={option.uid || option.value}>{ option[KEY_LABEL_LONG] || option[KEY_LABEL] }</option>
       {/each}
     </select>
   </div>
