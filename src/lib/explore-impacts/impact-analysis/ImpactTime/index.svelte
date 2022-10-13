@@ -36,7 +36,16 @@
 
   $: process = ({ impactTimeData }, { scenarios }) => {
     const impactTime = impactTimeData.map((datum, i) => {
-      const { yearStart, yearStep, data, [KEY_MODEL]: model, [KEY_SOURCE]: source, parameters } = datum.data;
+      const MODEL = KEY_MODEL;
+      const SOURCE = KEY_SOURCE;
+      const {
+        yearStart,
+        yearStep,
+        data,
+        [MODEL]: model,
+        [SOURCE]: source,
+        parameters
+      } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
       return {
