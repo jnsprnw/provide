@@ -57,7 +57,7 @@
     year occurring today (in 2011–2020) in {currentGeography.label} is
     {today.values[0].formattedValue}.
   {:else}
-    Today, the risk of what used to be a 1-in-20 year {indicatorAdjective} year in
+    Today, the risk of what used to be a {currentIndicatorOptions.frequency.label} year {indicatorAdjective} year in
     1850–1900 in {currentGeography.label} is {today.values[0].formattedValue}.
   {/if}
 </p>
