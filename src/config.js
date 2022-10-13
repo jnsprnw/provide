@@ -12,6 +12,8 @@ export const UID_WORLD = 'world';
 export const KEY_MODEL = 'model';
 export const KEY_SOURCE = 'source';
 export const KEY_PARAMETERS = 'parameters';
+export const KEY_LABEL = 'label';
+export const KEY_LABEL_LONG = 'labelLong';
 
 export const DEFAULT_FORMAT_UID = 'float';
 
