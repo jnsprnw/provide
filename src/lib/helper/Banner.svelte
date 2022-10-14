@@ -1,7 +1,8 @@
 <div class="banner container">
   <div class="wrapper grid">
     <div class="inner content-content">
-      <b>This is a preliminary version, using unpublished data.</b><br />
+      <b>This is a preliminary version, using data that is not yet published.</b
+      ><br />
       Feedback is welcome and can be sent at
       <a href="mailto:climate.risk.dashboard@climateanalytics.org"
         >climate.risk.dashboard@climateanalytics.org</a

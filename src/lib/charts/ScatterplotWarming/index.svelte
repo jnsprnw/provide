@@ -32,41 +32,38 @@
   export let hoveredSector;
 </script>
 
-<div class="figure-container">
-  <div class="chart-container">
-    <LayerCake
-      {padding}
-      x={xKey}
-      y={yKey}
-      data={sortedData}
-      flatData={sortedData}
-      xDomain={[-0.5, 1.2]}
-      yDomain={[1.3, 2.3]}
-    >
-      <Svg>
-        <AxisX
-          {padding}
-          formatTick={formatTickX}
-          ticks={[-0.5, 0, 1.2]}
-          gridClass="chart-gridline--invert"
-        />
-        <AxisY
-          {padding}
-          formatTick={formatTickY}
-          ticks={[1.3, 1.5, 1.6, 2.3]}
-          gridClass="chart-gridline--invert"
-        />
-        <Sectors bind:hoveredSector />
-        <AxisXLabel {padding} label="Warming between 2050 and 2100" />
-        <AxisYLabel {padding} label="Warming in 2050" />
-        <Dots />
-      </Svg>
-    </LayerCake>
-  </div>
+<div class="chart-container">
+  <LayerCake
+    {padding}
+    x={xKey}
+    y={yKey}
+    data={sortedData}
+    flatData={sortedData}
+    xDomain={[-0.5, 1.2]}
+    yDomain={[1.3, 2.3]}
+  >
+    <Svg>
+      <AxisX
+        {padding}
+        formatTick={formatTickX}
+        ticks={[-0.5, 0, 1.2]}
+        gridClass="chart-gridline--invert"
+      />
+      <AxisY
+        {padding}
+        formatTick={formatTickY}
+        ticks={[1.3, 1.5, 1.6, 2.3]}
+        gridClass="chart-gridline--invert"
+      />
+      <Sectors bind:hoveredSector />
+      <AxisXLabel {padding} label="Warming between 2050 and 2100" />
+      <AxisYLabel {padding} label="Warming in 2050" />
+      <Dots />
+    </Svg>
+  </LayerCake>
 </div>
 
 <style lang="scss">
-  .figure-container,
   .chart-container {
     width: 100%;
     height: 100%;

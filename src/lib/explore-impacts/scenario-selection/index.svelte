@@ -13,6 +13,8 @@
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
   import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
+  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
+  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
 
   let heightScenarioDescription = 130;
 
@@ -119,7 +121,7 @@
       <Tab label="Trajectories" />
       <svelte:fragment slot="content">
         <TabContent>
-          <div class="scenario-warming">
+          <div class="chart-tab">
             <div class="scenario-chart">
               <ScatterplotWarming
                 data={warmingData}
@@ -128,13 +130,20 @@
                 bind:hoveredSector={currentWarmingTextUID}
               />
             </div>
-            <div class="quadrant-description">
+            <div class="plot-info">
               <p>{@html currentWarmingText}</p>
+              <ChartFacts>
+                <ChartMetaList
+                  data={['FaIR (Smith et al., 2018)']}
+                  term="Model"
+                />
+                <ChartMetaList data={['Lamboll et al. (2022)']} term="Source" />
+              </ChartFacts>
             </div>
           </div>
         </TabContent>
         <TabContent>
-          <div class="scenario-trajectories">
+          <div class="chart-tab">
             <div class="scenario-chart">
               <LineTimeSeries
                 data={emissionsData}
@@ -176,8 +185,7 @@
       grid-template-rows: minmax(130px, auto) auto 1fr;
       grid-gap: var(--font-size-large-xl); // TODO
 
-      .scenario-warming,
-      .scenario-trajectories {
+      .chart-tab {
         display: grid;
         grid-template-columns: 1fr 1fr;
         align-content: stretch;
@@ -191,9 +199,14 @@
     transition: height 0.1s ease-out;
   }
 
-  .scenario-chart,
-  .quadrant-description {
+  .scenario-chart {
     width: 100%;
     height: 250px;
+  }
+
+  .plot-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 </style>

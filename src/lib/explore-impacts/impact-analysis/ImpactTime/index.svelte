@@ -10,11 +10,12 @@
   } from '$lib/../stores/store.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$lib/../config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
-  import ResolutionTime from './ResolutionTime.svelte';
+
   import TitleTimeSeries from './TitleTimeSeries.svelte';
   import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
+  import ResolutionTime from './ResolutionTime.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
@@ -44,7 +45,7 @@
         data,
         [MODEL]: model,
         [SOURCE]: source,
-        parameters
+        parameters,
       } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
 
