@@ -5,6 +5,7 @@
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
+  import Message from './Message.svelte';
   import { sortBy } from 'lodash-es';
   import MultipleAreaLayer from './layers/MultipleAreaLayer.svelte';
   import { curveCardinal } from 'd3-shape';
@@ -19,6 +20,7 @@
   export let xTicks = 4;
   export let yTicks = 4;
   export let showcase = false;
+  export let isSmall = false;
 
   const padding = showcase
     ? { top: 0, right: 0, bottom: 0, left: 0 }
@@ -62,8 +64,8 @@
           formatTick={formatTickY}
           ticksHighlighted={ticksYHighlighted}
         />
+        <Message {isSmall} />
       {/if}
-
       <MultipleLineLayer
         animate={showcase}
         drawBackground={!showcase}

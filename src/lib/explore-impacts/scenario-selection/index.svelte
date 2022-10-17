@@ -152,6 +152,7 @@
                 ticksYHighlighted={[0]}
                 yTicks={4}
                 xTicks={4}
+                isSmall={true}
               />
             </div>
             <div class="scenario-chart">
@@ -164,6 +165,7 @@
                 ticks={4}
                 yTicks={4}
                 xTicks={4}
+                isSmall={true}
               />
             </div>
           </div>

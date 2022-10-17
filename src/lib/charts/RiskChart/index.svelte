@@ -4,6 +4,7 @@
   import { formatValue } from '$lib/utils/formatting';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';
+  import Message from '../Message.svelte';
   import { scaleBand } from 'd3-scale';
   import RiskLevels from './RiskLevels.svelte';
   import { getContext } from 'svelte';
@@ -38,9 +39,10 @@
     flatData={flatten(data)}
   >
     <Svg>
-      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
       <AxisX gridlines={false} {padding} formatTick={formatTickX} />
       <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+      <Message />
+      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
     </Svg>
     <Html>
       <div class="labels">
