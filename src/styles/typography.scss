@@ -76,6 +76,22 @@ i.emoji {
   text-underline-offset: .13em;
 }
 
+.chart-message {
+  font-style: normal;
+  font-size: var(--font-size-large-xl);
+  fill: var(--color-light-petrol100);
+  color: var(--color-light-petrol100);
+
+  &.chart-message--small {
+    font-size: var(--font-size-large-m);
+  }
+
+  &.chart-message--background {
+    stroke: var(--color-background-base);
+    stroke-width: 5px;
+  }
+}
+
 .btn {
   background-color: var(--color-functional-accent);
   display: block;

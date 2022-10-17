@@ -159,6 +159,7 @@
     <div class={`maps cols-${asyncProps.geoData.length}`}>
       {#each asyncProps.geoData as d}
         <div class="map-wrapper">
+          <span class="chart-message">Preliminary results</span>
           <MapboxMap
             bind:zoom
             bind:center
@@ -239,5 +240,12 @@
     grid-column: 1 / span 12;
     display: flex;
     justify-content: flex-end;
+  }
+
+  .chart-message {
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    z-index: 10;
   }
 </style>
