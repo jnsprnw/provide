@@ -67,7 +67,7 @@
         <Message {isSmall} />
       {/if}
       <MultipleLineLayer
-        animate={showcase}
+        animate={false}
         drawBackground={!showcase}
         curve={showcase && curveCardinal}
       />

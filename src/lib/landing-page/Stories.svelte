@@ -46,7 +46,14 @@
 
   $: process = ({ data }, { currentStory }) => {
     const impactTime = data.map((datum, i) => {
-      const { yearStart, yearStep, data, [KEY_MODEL]: model, parameters } = datum.data;
+      const MODEL_KEY = KEY_MODEL;
+      const {
+        yearStart,
+        yearStep,
+        data,
+        [MODEL_KEY]: model,
+        parameters,
+      } = datum.data;
       const indicatorData = data[currentStory.indicator.uid];
 
       return {
@@ -196,7 +203,9 @@
   .stories-nav {
     display: flex;
     gap: var(--space-m);
-    margin: var(--space-xl) 0 var(--space-m) var(--space-m);
+    margin-left: var(--space-m);
+    margin-bottom: var(--space-m);
+    z-index: 1;
 
     button {
       border: none;
