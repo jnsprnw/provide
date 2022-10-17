@@ -22,18 +22,5 @@
 </g>
 
 <style lang="scss">
-  .chart-message {
-    font-style: normal;
-    font-size: var(--font-size-large-xl);
-    fill: var(--color-light-petrol100);
-
-    &.chart-message--small {
-      font-size: var(--font-size-large-m);
-    }
-
-    &.chart-message--background {
-      stroke: var(--color-background-base);
-      stroke-width: 5px;
-    }
-  }
+  
 </style>
