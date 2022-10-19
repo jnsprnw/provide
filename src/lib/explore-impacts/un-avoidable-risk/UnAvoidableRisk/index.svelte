@@ -18,7 +18,7 @@
     END_UN_AVOIDABLE_RISK,
     UNAVOIDABLE_UID,
     KEY_MODEL,
-    KEY_SOURCE
+    KEY_SOURCE,
   } from '$lib/../config.js';
   import { sortBy, reverse } from 'lodash-es';
   import { dataPlease } from '$lib/api/new-api';
@@ -37,6 +37,7 @@
   });
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
+    console.log(data);
     const hasThresholds = !!data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
@@ -95,7 +96,7 @@
       data: processedScenarios,
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
-      source: data[KEY_SOURCE]
+      source: data[KEY_SOURCE],
     };
   };
 </script>
