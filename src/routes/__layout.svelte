@@ -9,10 +9,10 @@
   const author =
     'PROVIDE consortium under direction of Climate Analytics with Jonas Parnow and Flavio Gortana';
   const keywords =
-    'climate impacts,climate change,climate modeling,climate scenarios,local impacts';
+    'climate impacts,climate change,climate modelling,climate scenarios,local impacts,temperature overshoot, adaptation, emissions pathways';
   const description =
     'Explore future impacts from climate change as the world warms.';
-  const title = 'PROVIDE — Climate Risk Dashboard';
+  const title = 'Climate Risk Dashboard — PROVIDE';
 
   $: currentPath = $page.routeId || '';
 </script>
