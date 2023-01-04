@@ -37,7 +37,6 @@
   });
 
   $: process = ({ data }, { scenarios, currentScenarios }) => {
-    console.log(data);
     const hasThresholds = !!data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
