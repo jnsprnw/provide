@@ -274,6 +274,174 @@
           "value": "#191E04",
           "type": "color"
         }
+      },
+      "grayCold": {
+        "50": {
+          "value": "#F6FAFE",
+          "type": "color"
+        },
+        "100": {
+          "value": "#DDE3E8",
+          "type": "color"
+        },
+        "200": {
+          "value": "#C1C7CC",
+          "type": "color"
+        },
+        "300": {
+          "value": "#A6ACB1",
+          "type": "color"
+        },
+        "400": {
+          "value": "#8B9296",
+          "type": "color"
+        },
+        "500": {
+          "value": "#72787C",
+          "type": "color"
+        },
+        "600": {
+          "value": "#595F63",
+          "type": "color"
+        },
+        "700": {
+          "value": "#42484C",
+          "type": "color"
+        },
+        "800": {
+          "value": "#2B3135",
+          "type": "color"
+        },
+        "900": {
+          "value": "#171D21",
+          "type": "color"
+        }
+      },
+      "pink": {
+        "50": {
+          "value": "#FEF8F9",
+          "type": "color"
+        },
+        "100": {
+          "value": "#F9D9EB",
+          "type": "color"
+        },
+        "200": {
+          "value": "#F4B2DC",
+          "type": "color"
+        },
+        "300": {
+          "value": "#ED88CD",
+          "type": "color"
+        },
+        "400": {
+          "value": "#CF6EB1",
+          "type": "color"
+        },
+        "500": {
+          "value": "#B15497",
+          "type": "color"
+        },
+        "600": {
+          "value": "#953B7C",
+          "type": "color"
+        },
+        "700": {
+          "value": "#782263",
+          "type": "color"
+        },
+        "800": {
+          "value": "#580F48",
+          "type": "color"
+        },
+        "900": {
+          "value": "#35062B",
+          "type": "color"
+        }
+      },
+      "orange": {
+        "50": {
+          "value": "#FEF8F5",
+          "type": "color"
+        },
+        "100": {
+          "value": "#F9DDC5",
+          "type": "color"
+        },
+        "200": {
+          "value": "#F5B985",
+          "type": "color"
+        },
+        "300": {
+          "value": "#E9974A",
+          "type": "color"
+        },
+        "400": {
+          "value": "#CA7D34",
+          "type": "color"
+        },
+        "500": {
+          "value": "#AA6523",
+          "type": "color"
+        },
+        "600": {
+          "value": "#88501A",
+          "type": "color"
+        },
+        "700": {
+          "value": "#673C11",
+          "type": "color"
+        },
+        "800": {
+          "value": "#482909",
+          "type": "color"
+        },
+        "900": {
+          "value": "#2B1603",
+          "type": "color"
+        }
+      },
+      "gold": {
+        "50": {
+          "value": "#FEF8F4",
+          "type": "color"
+        },
+        "100": {
+          "value": "#FBDFAC",
+          "type": "color"
+        },
+        "200": {
+          "value": "#EEBF5E",
+          "type": "color"
+        },
+        "300": {
+          "value": "#D0A447",
+          "type": "color"
+        },
+        "400": {
+          "value": "#B38931",
+          "type": "color"
+        },
+        "500": {
+          "value": "#957124",
+          "type": "color"
+        },
+        "600": {
+          "value": "#76591A",
+          "type": "color"
+        },
+        "700": {
+          "value": "#594311",
+          "type": "color"
+        },
+        "800": {
+          "value": "#3E2E09",
+          "type": "color"
+        },
+        "900": {
+          "value": "#241A03",
+          "type": "color"
+        }
       }
     }
   },
@@ -862,29 +1030,29 @@
           "description": "The default light background color, used e.g. as a backdrop for charts or cards."
         },
         "weaker": {
-          "value": "{color.grey.800}",
+          "value": "{color.grayCold.50}",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
         },
         "weakest": {
-          "value": "{color.grey.750}",
+          "value": "{color.grayCold.100}",
           "type": "color",
           "description": "A shaded background color, used e.g. as a backdrop in containers."
         }
       },
       "foreground": {
         "base": {
-          "value": "{color.grey.100}",
+          "value": "{color.grayCold.900}",
           "type": "color",
           "description": "Used for elements in the foreground that have a strong contrast to the background."
         },
         "weaker": {
-          "value": "{color.grey.400}",
+          "value": "{color.grayCold.600}",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
         },
         "weakest": {
-          "value": "{color.grey.600}",
+          "value": "{color.grayCold.300}",
           "type": "color",
           "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
         }
@@ -896,7 +1064,7 @@
           "description": "Default text color for strong background contrast."
         },
         "weaker": {
-          "value": "{color.grey.400}",
+          "value": "{color.grayCold.600}",
           "type": "color",
           "description": "Text color with weaker background contrast."
         },
@@ -909,56 +1077,28 @@
             "value": "#ABAFB0",
             "type": "color"
           }
-        },
-        "modelAspect": {
-          "climate": {
-            "value": "#cea200",
-            "type": "color"
-          },
-          "scopeConditions": {
-            "value": "#3483a5",
-            "type": "color"
-          },
-          "conflict": {
-            "value": "#c24050",
-            "type": "color"
-          }
         }
       },
       "theme": {
         "weaker": {
-          "value": "{color.teal.600}",
+          "value": "{color.petrol.400}",
           "type": "color",
           "description": "Weaker version of theme color"
         },
         "base": {
-          "value": "{color.teal.400}",
+          "value": "{color.petrol.700}",
           "type": "color",
           "description": "Main theme color, usually the brand color."
         },
         "stronger": {
-          "value": "{color.teal.200}",
+          "value": "{color.petrol.800}",
           "type": "color",
           "description": "Stronger version of theme color"
         }
       },
-      "modelAspect": {
-        "climate": {
-          "value": "#eeb900",
-          "type": "color"
-        },
-        "scopeConditions": {
-          "value": "#43abd7",
-          "type": "color"
-        },
-        "conflict": {
-          "value": "#fa5a6d",
-          "type": "color"
-        }
-      },
       "functional": {
         "accent": {
-          "value": "#7b83d5",
+          "value": "{color.grass.200}",
           "type": "color",
           "description": "Used for author-driven accents of parts of charts, texts and other elements."
         },
@@ -978,7 +1118,7 @@
           "description": "Used for visual marks (e.g. countries in maps) where data is missing from the dataset."
         },
         "link": {
-          "value": "{color.teal.200}",
+          "value": "{color.petrol.700}",
           "type": "color",
           "description": "Used for links."
         }
