@@ -4,7 +4,7 @@
   import { geoPath, geoEqualEarth } from 'd3-geo';
   import { feature } from 'topojson-client';
   import * as world from './ne_110m_admin_0_countries.json';
-  import { UID_WORLD } from '$lib/../config.js';
+  import { UID_WORLD } from '$src/config.js';
 
   export let hovered;
   export let selected;

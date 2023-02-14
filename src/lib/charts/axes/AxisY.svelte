@@ -1,7 +1,7 @@
 <script>
   import { formatValue } from '$lib/utils/formatting';
   import { getContext } from 'svelte';
-  import { UNITS } from '$lib/../stores/store.js';
+  import { UNITS } from '$stores/meta.js';
   const { width, height, xScale, yScale } = getContext('LayerCake');
 
   export let ticks = 4;

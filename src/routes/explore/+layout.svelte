@@ -1,6 +1,5 @@
 <script>
   import { page } from '$app/stores';
-  import { parse } from 'qs';
   import ListLink from '$lib/helper/ListLink.svelte';
   import {
     SECTORS,
@@ -9,54 +8,23 @@
     GEOGRAPHIES,
     SCENARIOS,
     INDICATOR_PARAMETERS,
-    CURRENT_INDICATOR_UID,
-    CURRENT_GEOGRAPHY_UID,
-    CURRENT_SCENARIOS_UID,
     UNITS,
-  } from '$stores/store.js';
-  import { browser } from '$app/environment';
+  } from '$stores/meta.js';
+  import { urlToState } from '$utils/url';
 
   export let data;
 
   const { meta } = data;
 
   GEOGRAPHY_TYPES.set(meta.geographyTypes);
+  GEOGRAPHIES.set(meta);
   INDICATORS.set(meta);
   SECTORS.set(meta.sectors);
   SCENARIOS.set(meta.scenarios);
-  GEOGRAPHIES.set(meta);
   INDICATOR_PARAMETERS.set(meta.indicatorParameters);
   UNITS.set(meta.units);
 
-  $: currentURL = new URL($page.url);
-
-  $: params = parse(currentURL.search.replace(/^\?/, ''));
-
-  $: urlToStateMapping = {
-    indicator: CURRENT_INDICATOR_UID,
-    geography: CURRENT_GEOGRAPHY_UID,
-    scenarios: CURRENT_SCENARIOS_UID,
-  };
-
-  $: {
-    const { indicator, geography, scenarios } = params;
-    let newUrl = currentURL;
-    if (indicator) {
-      newUrl.searchParams.delete('indicator');
-      CURRENT_INDICATOR_UID.set(indicator);
-    }
-    if (geography) {
-      newUrl.searchParams.delete('geography');
-      CURRENT_GEOGRAPHY_UID.set(geography);
-    }
-    if (scenarios) {
-      scenarios.forEach((s, i) => {
-        newUrl.searchParams.delete(`scenarios[${i}]`);
-      });
-      CURRENT_SCENARIOS_UID.set(scenarios);
-    }
-    if (browser) window.history.replaceState(null, null, newUrl.href);
-  }
+  $: urlToState($page.url);
 
   $: currentPath = $page.routeId || '';
 </script>

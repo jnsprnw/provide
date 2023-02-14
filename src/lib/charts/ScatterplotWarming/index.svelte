@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import Dots from '../layers/Dots.svelte';
   import Sectors from './Sectors.svelte';
   import AxisX from '../axes/AxisX.svelte';

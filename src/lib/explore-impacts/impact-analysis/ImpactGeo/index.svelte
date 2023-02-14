@@ -16,8 +16,8 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
-  } from '$lib/../stores/store';
-  import { END_GEO_SHAPE, END_IMPACT_GEO } from '$lib/../config.js';
+  } from '$src/stores/store';
+  import { END_GEO_SHAPE, END_IMPACT_GEO } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
   import { interpolateLab } from 'd3-interpolate';

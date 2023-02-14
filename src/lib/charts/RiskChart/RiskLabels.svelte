@@ -1,6 +1,6 @@
 <script>
   import { getContext, tick } from 'svelte';
-  import { UNAVOIDABLE_UID } from '$lib/../config';
+  import { UNAVOIDABLE_UID } from '$src/config';
   import { max } from 'd3-array';
 
   const { data, yScale } = getContext('LayerCake');

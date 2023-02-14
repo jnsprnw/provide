@@ -1,13 +1,13 @@
 <script>
   import {
     CURRENT_INDICATOR,
-    DICTIONARY_SCENARIOS,
-    DICTIONARY_CURRENT_SCENARIOS,
     CURRENT_INDICATOR_UNIT_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_INDICATOR_OPTIONS,
-  } from '$lib/../stores/store.js';
+    DICTIONARY_CURRENT_SCENARIOS,
+  } from '$stores/store.js';
+  import { DICTIONARY_SCENARIOS } from '$stores/meta.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
@@ -19,7 +19,7 @@
     UNAVOIDABLE_UID,
     KEY_MODEL,
     KEY_SOURCE,
-  } from '$lib/../config.js';
+  } from '$src/config.js';
   import { sortBy, reverse } from 'lodash-es';
   import { dataPlease } from '$lib/api/new-api';
   import { writable } from 'svelte/store';

@@ -1,5 +1,6 @@
 <script>
-  import { AVAILABLE_INDICATORS, SECTORS } from '$lib/../stores/store.js';
+  import { AVAILABLE_INDICATORS } from '$stores/store.js';
+  import { SECTORS } from '$stores/meta.js';
   import Tabs from '$lib/helper/tabs/Tabs.svelte';
   import Tab from '$lib/helper/tabs/Tab.svelte';
   import TabContent from '$lib/helper/tabs/TabContent.svelte';

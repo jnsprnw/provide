@@ -1,10 +1,7 @@
 <script>
   import VirtualList from 'svelte-virtual-list';
   import Fuse from 'fuse.js';
-  import {
-    CURRENT_GEOGRAPHY_UID,
-    CURRENT_GEOGRAPHIES,
-  } from '$lib/../stores/store.js';
+  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHIES } from '$stores/store.js';
   import TileGroup from '$helper/tiles/TileGroup.svelte';
   import RadioTile from '$helper/tiles/RadioTile.svelte';
   import Map from './Map.svelte';

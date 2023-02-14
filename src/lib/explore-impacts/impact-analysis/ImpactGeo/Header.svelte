@@ -10,9 +10,9 @@
     IMPACT_GEO_YEARS,
     IMPACT_GEO_DISPLAY_OPTIONS,
     KEY_MODEL,
-    KEY_SOURCE
-  } from '$lib/../config.js';
-  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$lib/../stores/store.js';
+    KEY_SOURCE,
+  } from '$src/config.js';
+  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$stores/store.js';
 
   export let currentGeography;
   export let currentIndicator;

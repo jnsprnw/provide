@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg, Canvas } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
 
   import LineLayer from '../layers/LineLayer.svelte';
   import AxisX from '../axes/AxisX.svelte';

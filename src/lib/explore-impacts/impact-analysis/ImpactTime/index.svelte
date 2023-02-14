@@ -7,8 +7,8 @@
     CURRENT_INDICATOR_OPTIONS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
-  } from '$lib/../stores/store.js';
-  import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$lib/../config.js';
+  } from '$stores/store.js';
+  import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
   import TitleTimeSeries from './TitleTimeSeries.svelte';

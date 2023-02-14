@@ -1,5 +1,5 @@
 <script>
-  import { STATUS_FAILED, STATUS_SUCCESS } from '$lib/../config.js';
+  import { STATUS_FAILED, STATUS_SUCCESS } from '$src/config.js';
   import { each, filter } from 'lodash-es';
 
   export let props; // Regular props/state that need to be kept in sync with the asyncProps

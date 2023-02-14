@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';

@@ -1,6 +1,6 @@
 <script>
   import { Html, LayerCake, Svg } from 'layercake';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import { formatValue } from '$lib/utils/formatting';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';

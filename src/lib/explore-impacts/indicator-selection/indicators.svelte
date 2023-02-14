@@ -4,11 +4,11 @@
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
     CURRENT_SCENARIOS,
-    INDICATORS,
-  } from '$lib/../stores/store.js';
+  } from '$stores/store.js';
+  import { INDICATORS } from '$stores/meta.js';
   import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
   import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';
-  import { END_IMPACT_TIME } from '$lib/../config.js';
+  import { END_IMPACT_TIME } from '$src/config.js';
   import PreviewTimeSeries from '$lib/charts/PreviewTimeSeries.svelte';
   import { dataPlease } from '$lib/api/new-api';
   import { writable } from 'svelte/store';

@@ -1,5 +1,5 @@
 <script>
-  import { UNAVOIDABLE_UID } from '$lib/../config';
+  import { UNAVOIDABLE_UID } from '$src/config';
   import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
 

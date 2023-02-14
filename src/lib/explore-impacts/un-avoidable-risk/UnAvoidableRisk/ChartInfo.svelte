@@ -7,7 +7,7 @@
     PRESENT_DAY_UID,
     SHIFTING_PATHWAYS_UID,
     UNAVOIDABLE_UID,
-  } from '$lib/../config.js';
+  } from '$src/config.js';
   import ScenarioSingle from '$lib/helper/chart-description/ScenarioSingle.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
@@ -58,8 +58,9 @@
     year occurring today (in 2011–2020) in {currentGeography.label} is
     {today.values[0].formattedValue}.
   {:else}
-    Today, the risk of what used to be a {currentIndicatorOptions.frequency.label} year {indicatorAdjective} year in
-    1850–1900 in {currentGeography.label} is {today.values[0].formattedValue}.
+    Today, the risk of what used to be a {currentIndicatorOptions.frequency
+      .label} year {indicatorAdjective} year in 1850–1900 in {currentGeography.label}
+    is {today.values[0].formattedValue}.
   {/if}
 </p>
 <!-- Information about best/worst case -->

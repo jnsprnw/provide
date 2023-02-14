@@ -5,14 +5,14 @@
   import { partition, flatten, get } from 'lodash-es';
   import {
     CURRENT_SCENARIOS,
-    CURRENT_SCENARIOS_UID,
     DICTIONARY_CURRENT_SCENARIOS,
-    SCENARIOS,
-  } from '$lib/../stores/store.js';
+    CURRENT_SCENARIOS_UID,
+  } from '$stores/store.js';
+  import { SCENARIOS } from '$stores/meta.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScatterplotWarming from '$lib/charts/ScatterplotWarming/index.svelte';
-  import { SCENARIO_DATA_KEYS } from '$lib/../config.js';
+  import { SCENARIO_DATA_KEYS } from '$src/config.js';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
 

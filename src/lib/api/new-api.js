@@ -1,10 +1,30 @@
 import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
-import { loadFromAPI } from '$utils/apis.js';
 import qs from 'qs';
 import { forEach, reduce } from 'lodash-es';
 import { browser } from '$app/environment';
 
+/*
+ * These functions are intended to dynamically load data from the client upon user interaction
+ * They will not do anything when called on the server, other than returning an emty "loading" response
+ */
+
 const cache = {};
+
+/*
+ * Loads data from Climate Analytics API
+ */
+export const loadFromAPI = async function (url) {
+  // If this is executed on the server, we simply pretend to be loading so the rest
+  // of the loading process doesn't need to be altered
+  if (!browser) return new Promise((res) => res);
+  try {
+    const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
+    const data = await res.json();
+    return data;
+  } catch (e) {
+    return undefined;
+  }
+};
 
 /*
  * This function accepts an array or dictionary of config objects.
@@ -96,7 +116,6 @@ const fetchSingle = (store, { endpoint, params }) => {
 };
 
 export const dataPlease = (store, config = []) => {
-  if (!browser) return;
   if (config.endpoint && config.params) fetchSingle(store, config);
   else fetchMultiple(store, config);
 };

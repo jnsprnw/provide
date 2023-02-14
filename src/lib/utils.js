@@ -1,12 +1,4 @@
-import { get, set, compact, uniq } from 'lodash-es';
-import { loadFromAPI } from '$utils/apis.js';
-import qs from 'qs';
-import { browser } from '$app/environment';
-import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from '$src/config.js';
-
-export const getUID = function (obj) {
-  return obj?.uid || null;
-};
+import { uniq } from 'lodash-es';
 
 export const formatObjArr = function (arr, key) {
   const formatter = new Intl.ListFormat('en-GB', {
@@ -43,43 +35,3 @@ export const formatList = function (_arr = []) {
     length: list.length,
   };
 };
-
-async function request(params, url) {
-  const query = qs.stringify(params, {
-    encodeValuesOnly: true,
-  });
-  // console.log("loading:", { params, url, query, url }, `${url}?${query}`);
-  return await loadFromAPI(`${url}?${query}`);
-}
-
-export function hasInObject(data, addr, param) {
-  return compact(
-    addr.map((a, i) => (get(data, a) ? false : { addr: a, param: param[i] }))
-  );
-}
-
-function updateDate(old, addr, newData) {
-  const obj = old;
-  set(obj, addr, newData);
-  return obj;
-}
-
-export async function load(cache, endpoint, param, addr, url) {
-  if (!browser) {
-    cache.update((old) =>
-      updateDate(old, addr, { status: STATUS_LOADING, data: {} })
-    );
-    return;
-  }
-
-  cache.update((old) =>
-    updateDate(old, addr, { status: STATUS_LOADING, data: {} })
-  );
-  const newData = await request(param, url);
-  cache.update((old) =>
-    updateDate(old, addr, {
-      status: newData ? STATUS_SUCCESS : STATUS_FAILED,
-      data: newData,
-    })
-  );
-}
