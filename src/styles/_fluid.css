@@ -1,0 +1,205 @@
+/*
+
+	Fluid modular type
+	from utopia.fyi
+
+  TODO: create loops for repetitive code. 
+  style-dict format? sass? 
+  (would like to stick with postcss as far as possible though)
+
+*/
+
+:root {
+	/* lower viewport limit (no unit) */
+	--fluid-min-width: var(--size-small-viewport-limit, 320);
+
+	/* upper viewport limit (no unit) */
+	--fluid-max-width: var(--size-large-viewport-limit, 1440);
+
+	/* scale factor based on text zoom (with unit) */
+	--sf: calc(1rem / 16);
+}
+
+.size-fluid {
+	--size-font-size-xs: var(--fluid-font-size-xs);
+	--size-font-size-s: var(--fluid-font-size-s);
+	--size-font-size-m: var(--fluid-font-size-m);
+	--size-font-size-l: var(--fluid-font-size-l);
+	--size-font-size-xl: var(--fluid-font-size-xl);
+	--size-font-size-xxl: var(--fluid-font-size-xxl);
+	--size-font-size-xxxl: var(--fluid-font-size-xxxl);
+	--size-font-size-xxxxl: var(--fluid-font-size-xxxxl);
+	--size-font-size-xxxxxl: var(--fluid-font-size-xxxxxl);
+
+	--size-space-xxxxs: var(--fluid-space-xxxxs);
+	--size-space-xxxs: var(--fluid-space-xxxs);
+	--size-space-xxs: var(--fluid-space-xxs);
+	--size-space-xs: var(--fluid-space-xs);
+	--size-space-s: var(--fluid-space-s);
+	--size-space-m: var(--fluid-space-m);
+	--size-space-l: var(--fluid-space-l);
+	--size-space-xl: var(--fluid-space-xl);
+	--size-space-xxl: var(--fluid-space-xxl);
+	--size-space-xxxl: var(--fluid-space-xxxl);
+	--size-space-xxxxl: var(--fluid-space-xxxxl);
+	--size-space-xxxxxl: var(--fluid-space-xxxxxl);
+}
+
+:root {
+	/* calculate scaling factor (0px-1px) based on viewport */
+	--fluid-bp: clamp(
+		0px,
+		calc(
+			(100vw - var(--fluid-min-width) * 1px) / (var(--fluid-max-width) - var(--fluid-min-width))
+		),
+		1px
+	);
+
+	/* calculate fluid font-sizes */
+
+	--fluid-font-size-xs-min: var(--size-small-font-size-xs);
+	--fluid-font-size-xs-max: var(--size-large-font-size-xs);
+	--fluid-font-size-xs: calc(
+		(var(--sf) * var(--fluid-font-size-xs-min)) +
+			(var(--fluid-font-size-xs-max) - var(--fluid-font-size-xs-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-s-min: var(--size-small-font-size-s);
+	--fluid-font-size-s-max: var(--size-large-font-size-s);
+	--fluid-font-size-s: calc(
+		(var(--sf) * var(--fluid-font-size-s-min)) +
+			(var(--fluid-font-size-s-max) - var(--fluid-font-size-s-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-m-min: var(--size-small-font-size-m);
+	--fluid-font-size-m-max: var(--size-large-font-size-m);
+	--fluid-font-size-m: calc(
+		(var(--sf) * var(--fluid-font-size-m-min)) +
+			(var(--fluid-font-size-m-max) - var(--fluid-font-size-m-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-l-min: var(--size-small-font-size-l);
+	--fluid-font-size-l-max: var(--size-large-font-size-l);
+	--fluid-font-size-l: calc(
+		(var(--sf) * var(--fluid-font-size-l-min)) +
+			(var(--fluid-font-size-l-max) - var(--fluid-font-size-l-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-xl-min: var(--size-small-font-size-xl);
+	--fluid-font-size-xl-max: var(--size-large-font-size-xl);
+	--fluid-font-size-xl: calc(
+		(var(--sf) * var(--fluid-font-size-xl-min)) +
+			(var(--fluid-font-size-xl-max) - var(--fluid-font-size-xl-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-xxl-min: var(--size-small-font-size-xxl);
+	--fluid-font-size-xxl-max: var(--size-large-font-size-xxl);
+	--fluid-font-size-xxl: calc(
+		(var(--sf) * var(--fluid-font-size-xxl-min)) +
+			(var(--fluid-font-size-xxl-max) - var(--fluid-font-size-xxl-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-xxxl-min: var(--size-small-font-size-xxxl);
+	--fluid-font-size-xxxl-max: var(--size-large-font-size-xxxl);
+	--fluid-font-size-xxxl: calc(
+		(var(--sf) * var(--fluid-font-size-xxxl-min)) +
+			(var(--fluid-font-size-xxxl-max) - var(--fluid-font-size-xxxl-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-xxxxl-min: var(--size-small-font-size-xxxxl);
+	--fluid-font-size-xxxxl-max: var(--size-large-font-size-xxxxl);
+	--fluid-font-size-xxxxl: calc(
+		(var(--sf) * var(--fluid-font-size-xxxxl-min)) +
+			(var(--fluid-font-size-xxxxl-max) - var(--fluid-font-size-xxxxl-min)) * var(--fluid-bp)
+	);
+
+	--fluid-font-size-xxxxxl-min: var(--size-small-font-size-xxxxxl);
+	--fluid-font-size-xxxxxl-max: var(--size-large-font-size-xxxxxl);
+	--fluid-font-size-xxxxxl: calc(
+		(var(--sf) * var(--fluid-font-size-xxxxxl-min)) +
+			(var(--fluid-font-size-xxxxxl-max) - var(--fluid-font-size-xxxxxl-min)) * var(--fluid-bp)
+	);
+
+	/* calculate fluid space sizes */
+
+	--space-xxxxs-min: var(--size-small-space-xxxxs);
+	--space-xxxxs-max: var(--size-large-space-xxxxs);
+	--fluid-space-xxxxs: calc(
+		(var(--sf) * var(--space-xxxxs-min)) + (var(--space-xxxxs-max) - var(--space-xxxxs-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxxs-min: var(--size-small-space-xxxs);
+	--space-xxxs-max: var(--size-large-space-xxxs);
+	--fluid-space-xxxs: calc(
+		(var(--sf) * var(--space-xxxs-min)) + (var(--space-xxxs-max) - var(--space-xxxs-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxs-min: var(--size-small-space-xxs);
+	--space-xxs-max: var(--size-large-space-xxs);
+	--fluid-space-xxs: calc(
+		(var(--sf) * var(--space-xxs-min)) + (var(--space-xxs-max) - var(--space-xxs-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xs-min: var(--size-small-space-xs);
+	--space-xs-max: var(--size-large-space-xs);
+	--fluid-space-xs: calc(
+		(var(--sf) * var(--space-xs-min)) + (var(--space-xs-max) - var(--space-xs-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-s-min: var(--size-small-space-s);
+	--space-s-max: var(--size-large-space-s);
+	--fluid-space-s: calc(
+		(var(--sf) * var(--space-s-min)) + (var(--space-s-max) - var(--space-s-min)) * var(--fluid-bp)
+	);
+
+	--space-m-min: var(--size-small-space-m);
+	--space-m-max: var(--size-large-space-m);
+	--fluid-space-m: calc(
+		(var(--sf) * var(--space-m-min)) + (var(--space-m-max) - var(--space-m-min)) * var(--fluid-bp)
+	);
+
+	--space-l-min: var(--size-small-space-l);
+	--space-l-max: var(--size-large-space-l);
+	--fluid-space-l: calc(
+		(var(--sf) * var(--space-l-min)) + (var(--space-l-max) - var(--space-l-min)) * var(--fluid-bp)
+	);
+
+	--space-xl-min: var(--size-small-space-xl);
+	--space-xl-max: var(--size-large-space-xl);
+	--fluid-space-xl: calc(
+		(var(--sf) * var(--space-xl-min)) + (var(--space-xl-max) - var(--space-xl-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxl-min: var(--size-small-space-xxl);
+	--space-xxl-max: var(--size-large-space-xxl);
+	--fluid-space-xxl: calc(
+		(var(--sf) * var(--space-xxl-min)) + (var(--space-xxl-max) - var(--space-xxl-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxxl-min: var(--size-small-space-xxxl);
+	--space-xxxl-max: var(--size-large-space-xxxl);
+	--fluid-space-xxxl: calc(
+		(var(--sf) * var(--space-xxxl-min)) + (var(--space-xxxl-max) - var(--space-xxxl-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxxxl-min: var(--size-small-space-xxxxl);
+	--space-xxxxl-max: var(--size-large-space-xxxxl);
+	--fluid-space-xxxxl: calc(
+		(var(--sf) * var(--space-xxxxl-min)) + (var(--space-xxxxl-max) - var(--space-xxxxl-min)) *
+			var(--fluid-bp)
+	);
+
+	--space-xxxxxl-min: var(--size-small-space-xxxxxl);
+	--space-xxxxxl-max: var(--size-large-space-xxxxxl);
+	--fluid-space-xxxxxl: calc(
+		(var(--sf) * var(--space-xxxxxl-min)) + (var(--space-xxxxxl-max) - var(--space-xxxxxl-min)) *
+			var(--fluid-bp)
+	);
+}

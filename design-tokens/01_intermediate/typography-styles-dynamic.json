@@ -1,0 +1,570 @@
+{
+  "typography": {
+    "style": {
+      "base": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.regular}",
+          "lineHeight": "{typography.lineHeight.base}",
+          "fontSize": "{size.fontSize.m}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "heading": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.heading}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xxxl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "subhead": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.l}",
+          "letterSpacing": "{typography.letterSpacing.looser}",
+          "paragraphSpacing": "{typography.paragraphSpacing.none}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.uppercase}"
+        },
+        "type": "typography"
+      },
+      "h1": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.heading}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xxxl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "h2": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.heading}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xxl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "h3": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.heading}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "h4": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.heading}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.l}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "mono": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.mono}",
+          "fontWeight": "{typography.fontWeight.regular}",
+          "lineHeight": "{typography.lineHeight.base}",
+          "fontSize": "{size.fontSize.m}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "caption": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.regular}",
+          "lineHeight": "{typography.lineHeight.base}",
+          "fontSize": "{size.fontSize.s}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography"
+      },
+      "huge": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xxl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for summary statistics, large numbers, etc."
+      },
+      "large": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.xl}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for the title of a chart."
+      },
+      "majorPrimary": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tighter}",
+          "fontSize": "{size.fontSize.m}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for legend main labels, as well as individual value annotations."
+      },
+      "majorSecondary": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.regular}",
+          "lineHeight": "{typography.lineHeight.tighter}",
+          "fontSize": "{size.fontSize.m}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for secondary legend labels, description, and the chart subtitle."
+      },
+      "minorPrimary": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.bold}",
+          "lineHeight": "{typography.lineHeight.tightest}",
+          "fontSize": "{size.fontSize.s}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for smaller annotations in charts."
+      },
+      "minorSecondary": {
+        "value": {
+          "fontFamily": "{typography.fontFamily.base}",
+          "fontWeight": "{typography.fontWeight.regular}",
+          "lineHeight": "{typography.lineHeight.tighter}",
+          "fontSize": "{size.fontSize.s}",
+          "letterSpacing": "{typography.letterSpacing.base}",
+          "paragraphSpacing": "{typography.paragraphSpacing.base}",
+          "textDecoration": "{typography.textDecoration.none}",
+          "textCase": "{typography.textCase.none}"
+        },
+        "type": "typography",
+        "description": "Used for tick labels, secondary annotations, footer text."
+      }
+    },
+    "fontFamily": {
+      "base": {
+        "value": "BundesSans Office",
+        "type": "fontFamilies"
+      },
+      "heading": {
+        "value": "BundesSans Office",
+        "type": "fontFamilies"
+      },
+      "mono": {
+        "value": "Fira Mono",
+        "type": "fontFamilies"
+      }
+    },
+    "lineHeight": {
+      "base": {
+        "value": "160%",
+        "type": "lineHeights"
+      },
+      "tighter": {
+        "value": "145%",
+        "type": "lineHeights"
+      },
+      "tightest": {
+        "value": "115%",
+        "type": "lineHeights"
+      }
+    },
+    "fontWeight": {
+      "regular": {
+        "value": 400,
+        "type": "fontWeights"
+      },
+      "medium": {
+        "value": 500,
+        "type": "fontWeights"
+      },
+      "semiBold": {
+        "value": 600,
+        "type": "fontWeights"
+      },
+      "bold": {
+        "value": 700,
+        "type": "fontWeights"
+      }
+    },
+    "letterSpacing": {
+      "base": {
+        "value": "0%",
+        "type": "letterSpacing"
+      },
+      "looser": {
+        "value": "15%",
+        "type": "letterSpacing"
+      }
+    },
+    "paragraphSpacing": {
+      "none": {
+        "value": 0,
+        "type": "paragraphSpacing"
+      },
+      "base": {
+        "value": 8,
+        "type": "paragraphSpacing"
+      }
+    },
+    "textCase": {
+      "none": {
+        "value": "none",
+        "type": "textCase"
+      },
+      "uppercase": {
+        "value": "uppercase",
+        "type": "textCase"
+      }
+    },
+    "textDecoration": {
+      "none": {
+        "value": "none",
+        "type": "textDecoration"
+      }
+    }
+  },
+  "size": {
+    "parameter": {
+      "fontSize": {
+        "scaleFactor": {
+          "value": 1.33,
+          "type": "other"
+        },
+        "scaleFactorBelowOne": {
+          "value": 1.1,
+          "type": "other"
+        },
+        "base": {
+          "value": 16,
+          "type": "other"
+        }
+      },
+      "space": {
+        "scaleFactor": {
+          "value": 1.5,
+          "type": "other"
+        },
+        "scaleFactorBelowOne": {
+          "value": 1.5,
+          "type": "other"
+        },
+        "base": {
+          "value": 24,
+          "type": "other"
+        }
+      }
+    },
+    "chartWidth": {
+      "value": 920,
+      "type": "sizing"
+    },
+    "viewportLimit": {
+      "value": "{size.maxContentWidth}",
+      "type": "sizing"
+    },
+    "meta": {
+      "label": {
+        "value": "Large",
+        "type": "other"
+      }
+    },
+    "borderWidth": {
+      "s": {
+        "value": ".5",
+        "type": "borderWidth",
+        "description": "The smallest border size. Used for gridlines."
+      },
+      "m": {
+        "value": 1,
+        "type": "borderWidth",
+        "description": "The default border size. Used for axes borders, default data lines."
+      },
+      "l": {
+        "value": 2,
+        "type": "borderWidth",
+        "description": "A larger border size. Used for borders between filled elements."
+      },
+      "xl": {
+        "value": 3,
+        "type": "borderWidth",
+        "description": "A larger border size. Used for lines in focus, and the bottom chart container line."
+      },
+      "xxl": {
+        "value": 4,
+        "type": "borderWidth",
+        "description": "The largest border size. Used for the top chart container line."
+      }
+    },
+    "fontSize": {
+      "xs": {
+        "value": "round({size.fontSize.s} / {size.parameter.fontSize.scaleFactorBelowOne})",
+        "type": "fontSizes"
+      },
+      "s": {
+        "value": "round({size.fontSize.m} / {size.parameter.fontSize.scaleFactorBelowOne})",
+        "type": "fontSizes"
+      },
+      "m": {
+        "value": "round({size.parameter.fontSize.base})",
+        "type": "fontSizes"
+      },
+      "l": {
+        "value": "round({size.fontSize.m} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      },
+      "xl": {
+        "value": "round({size.fontSize.l} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      },
+      "xxl": {
+        "value": "round({size.fontSize.xl} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      },
+      "xxxl": {
+        "value": "round({size.fontSize.xxl} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      },
+      "xxxxl": {
+        "value": "round({size.fontSize.xxxl} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      },
+      "xxxxxl": {
+        "value": "round({size.fontSize.xxxxl} * {size.parameter.fontSize.scaleFactor})",
+        "type": "fontSizes"
+      }
+    },
+    "space": {
+      "xxxxs": {
+        "value": "round({size.space.xxxs} / {size.parameter.space.scaleFactorBelowOne})",
+        "type": "spacing"
+      },
+      "xxxs": {
+        "value": "round({size.space.xxs} / {size.parameter.space.scaleFactorBelowOne})",
+        "type": "spacing"
+      },
+      "xxs": {
+        "value": "round({size.space.xs} / {size.parameter.space.scaleFactorBelowOne})",
+        "type": "spacing"
+      },
+      "xs": {
+        "value": "round({size.space.s} / {size.parameter.space.scaleFactorBelowOne})",
+        "type": "spacing"
+      },
+      "s": {
+        "value": "round({size.space.m} / {size.parameter.space.scaleFactorBelowOne})",
+        "type": "spacing"
+      },
+      "m": {
+        "value": "round({size.parameter.space.base})",
+        "type": "spacing"
+      },
+      "l": {
+        "value": "round({size.space.m} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      },
+      "xl": {
+        "value": "round({size.space.l} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      },
+      "xxl": {
+        "value": "round({size.space.xl} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      },
+      "xxxl": {
+        "value": "round({size.space.xxl} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      },
+      "xxxxl": {
+        "value": "round({size.space.xxxl} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      },
+      "xxxxxl": {
+        "value": "round({size.space.xxxxl} * {size.parameter.space.scaleFactor})",
+        "type": "spacing"
+      }
+    },
+    "maxContentWidth": {
+      "value": 1440,
+      "type": "sizing"
+    },
+    "minContentWidth": {
+      "value": 480,
+      "type": "sizing"
+    },
+    "breakpoint": {
+      "xs": {
+        "value": 480,
+        "type": "sizing"
+      },
+      "sm": {
+        "value": 640,
+        "type": "sizing"
+      },
+      "md": {
+        "value": 960,
+        "type": "sizing"
+      },
+      "lg": {
+        "value": 1200,
+        "type": "sizing"
+      },
+      "xl": {
+        "value": 1440,
+        "type": "sizing"
+      }
+    },
+    "borderRadius": {
+      "base": {
+        "value": 1,
+        "type": "borderRadius"
+      },
+      "bigger": {
+        "value": 3,
+        "type": "borderRadius"
+      }
+    }
+  },
+  "meta": {
+    "projectTitle": {
+      "value": "PREVIEW",
+      "type": "string",
+      "description": "Project title"
+    },
+    "version": {
+      "value": "v1.0-WIP",
+      "type": "string",
+      "description": "Version"
+    },
+    "projectSubtitle": {
+      "value": "Data Design Language",
+      "type": "string",
+      "category": "content"
+    },
+    "styleRepoUrl": {
+      "value": "preview.auswaertiges-amt.de/data-design-language",
+      "type": "string",
+      "category": "content"
+    },
+    "lastUpdated": {
+      "value": "2022-10-26",
+      "type": "string",
+      "description": "Last updated"
+    },
+    "authors": {
+      "value": "Moritz Stefaner / Truth & Beauty with Flavio Gortana",
+      "type": "string",
+      "description": "Authors"
+    }
+  },
+  "effect": {
+    "shadow": {
+      "s": {
+        "value": {
+          "x": 1,
+          "y": 1,
+          "blur": 2,
+          "spread": 0,
+          "color": "#00000033",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow"
+      },
+      "m": {
+        "value": {
+          "x": 1,
+          "y": 1,
+          "blur": 3,
+          "spread": 0,
+          "color": "#00000033",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow"
+      },
+      "l": {
+        "value": {
+          "x": 2,
+          "y": 2,
+          "blur": 6,
+          "spread": 0,
+          "color": "#00000033",
+          "type": "dropShadow"
+        },
+        "type": "boxShadow"
+      },
+      "xl": {
+        "value": {
+          "color": "#00000033",
+          "type": "dropShadow",
+          "x": 2,
+          "y": 2,
+          "blur": 15,
+          "spread": 0
+        },
+        "type": "boxShadow"
+      }
+    }
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "color": {
+    "meta": {
+      "label": "Light"
+    },
+    "blendMode": {
+      "additive": "multiply",
+      "max": "darken"
+    },
+    "background": {
+      "base": "#ffffff",
+      "weaker": "#f6fafe",
+      "weakest": "#dde3e8"
+    },
+    "foreground": {
+      "base": "#171d21",
+      "weaker": "#595f63",
+      "weakest": "#a6acb1"
+    },
+    "text": {
+      "base": "#191919",
+      "weaker": "#595f63",
+      "inverted": {
+        "base": "#f8f8f8",
+        "weaker": "#abafb0"
+      }
+    },
+    "theme": {
+      "weaker": "#489ac6",
+      "base": "#1c4c64",
+      "stronger": "#123446"
+    },
+    "functional": {
+      "accent": "#c0ce6b",
+      "filteredOut": "#bec5c9",
+      "focus": "#ffcb01",
+      "notAvailable": "#b2b2b2",
+      "link": "#1c4c64"
+    },
+    "category": {
+      "base": {
+        "0": "#297cb5",
+        "1": "#905ea7",
+        "2": "#de5f4a",
+        "3": "#ffa81b",
+        "4": "#51a27c",
+        "5": "#9da61d",
+        "99": "#9ea9b5"
+      },
+      "weaker": {
+        "0": "#83bad9",
+        "1": "#b386c8",
+        "2": "#e38c7c",
+        "3": "#f8c975",
+        "4": "#83c0a4",
+        "5": "#ced56d",
+        "99": "#c0c8d2"
+      },
+      "stronger": {
+        "0": "#0161a3",
+        "1": "#492658",
+        "2": "#a72817",
+        "3": "#b26d00",
+        "4": "#0b5932",
+        "5": "#565d00",
+        "99": "#6b7581"
+      }
+    },
+    "diverging": {
+      "negative": {
+        "1": "#e98676",
+        "2": "#a12917"
+      },
+      "neutral": "#dde3e8",
+      "positive": {
+        "1": "#79abbc",
+        "2": "#0e3e63"
+      }
+    },
+    "complementary": {
+      "weaker": "#e98676",
+      "base": "#dc6454",
+      "stronger": "#a12917"
+    },
+    "sequential": {
+      "0": "#c3d6dc",
+      "1": "#79abbc",
+      "2": "#377796",
+      "3": "#0e3e63",
+      "positive": {
+        "0": "#c3d6dc",
+        "1": "#79abbc",
+        "2": "#377796",
+        "3": "#0e3e63"
+      },
+      "negative": {
+        "0": "#fbc8bf",
+        "1": "#e98676",
+        "2": "#c9513f",
+        "3": "#a12917"
+      }
+    }
+  }
+}

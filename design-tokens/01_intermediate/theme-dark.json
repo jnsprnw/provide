@@ -1,0 +1,334 @@
+{
+  "color": {
+    "meta": {
+      "label": {
+        "value": "Dark",
+        "type": "string"
+      }
+    },
+    "blendMode": {
+      "additive": {
+        "value": "screen",
+        "type": "string"
+      },
+      "max": {
+        "value": "lighten",
+        "type": "string"
+      }
+    },
+    "background": {
+      "base": {
+        "value": "#202020",
+        "type": "color"
+      },
+      "weaker": {
+        "value": "#303030",
+        "type": "color",
+        "description": "slightly shaded background"
+      },
+      "weakest": {
+        "value": "#666",
+        "type": "color"
+      }
+    },
+    "foreground": {
+      "base": {
+        "value": "#EEE",
+        "type": "color"
+      },
+      "weaker": {
+        "value": "#AAA",
+        "type": "color"
+      },
+      "weakest": {
+        "value": "#777",
+        "type": "color"
+      }
+    },
+    "text": {
+      "weaker": {
+        "value": "#AAA",
+        "type": "color"
+      },
+      "base": {
+        "value": "#DDD",
+        "type": "color"
+      },
+      "stronger": {
+        "value": "#FFF",
+        "type": "color",
+        "description": "Stronger text color for maximum background contrast."
+      },
+      "inverted": {
+        "base": {
+          "value": "#191919",
+          "type": "color"
+        },
+        "weaker": {
+          "value": "#6b7581",
+          "type": "color"
+        }
+      },
+      "modelAspect": {
+        "climate": {
+          "value": "#ffcb01",
+          "type": "color",
+          "description": "Climate"
+        },
+        "conflict": {
+          "value": "#fa5a6d",
+          "type": "color",
+          "description": "Category color \"conflict\""
+        },
+        "scopeConditions": {
+          "value": "#90d3fb",
+          "type": "color",
+          "description": "Scope conditions"
+        }
+      }
+    },
+    "theme": {
+      "base": {
+        "value": "#44a8c3",
+        "type": "color"
+      },
+      "weaker": {
+        "value": "#256f81",
+        "type": "color"
+      },
+      "stronger": {
+        "value": "#83c3d4",
+        "type": "color"
+      }
+    },
+    "modelAspect": {
+      "climate": {
+        "value": "#ffcb01",
+        "type": "color",
+        "description": "Climate"
+      },
+      "conflict": {
+        "value": "#fa5a6d",
+        "type": "color",
+        "description": "Category color \"conflict\""
+      },
+      "scopeConditions": {
+        "value": "#90d3fb",
+        "type": "color",
+        "description": "Scope conditions"
+      }
+    },
+    "functional": {
+      "accent": {
+        "value": "#bfc4f9",
+        "type": "color"
+      },
+      "focus": {
+        "value": "#ffcb01",
+        "type": "color"
+      },
+      "not-available": {
+        "value": "#cccccc",
+        "type": "color"
+      },
+      "filtered-out": {
+        "value": "#474b69",
+        "type": "color"
+      },
+      "link": {
+        "value": "#C3D6DC",
+        "type": "color",
+        "description": "Used for links."
+      }
+    },
+    "category": {
+      "stronger": {
+        "0": {
+          "value": "#83BAD9",
+          "type": "color"
+        },
+        "1": {
+          "value": "#B386C8",
+          "type": "color"
+        },
+        "2": {
+          "value": "#E38C7C",
+          "type": "color"
+        },
+        "3": {
+          "value": "#F8C975",
+          "type": "color"
+        },
+        "4": {
+          "value": "#83C0A4",
+          "type": "color"
+        },
+        "5": {
+          "value": "#CED56D",
+          "type": "color"
+        },
+        "99": {
+          "value": "#c0c8d2",
+          "type": "color"
+        }
+      },
+      "base": {
+        "0": {
+          "value": "#22699A",
+          "type": "color"
+        },
+        "1": {
+          "value": "#825497",
+          "type": "color"
+        },
+        "2": {
+          "value": "#C85543",
+          "type": "color"
+        },
+        "3": {
+          "value": "#DC9D38",
+          "type": "color"
+        },
+        "4": {
+          "value": "#458A69",
+          "type": "color"
+        },
+        "5": {
+          "value": "#7E8518",
+          "type": "color"
+        },
+        "99": {
+          "value": "#9ea9b5",
+          "type": "color"
+        }
+      },
+      "weaker": {
+        "0": {
+          "value": "#124874",
+          "type": "color"
+        },
+        "1": {
+          "value": "#613F70",
+          "type": "color"
+        },
+        "2": {
+          "value": "#993D31",
+          "type": "color"
+        },
+        "3": {
+          "value": "#A07730",
+          "type": "color"
+        },
+        "4": {
+          "value": "#366D53",
+          "type": "color"
+        },
+        "5": {
+          "value": "#575B20",
+          "type": "color"
+        },
+        "99": {
+          "value": "#6b7581",
+          "type": "color"
+        }
+      }
+    },
+    "complementary": {
+      "base": {
+        "value": "#CC4233",
+        "type": "color",
+        "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
+      },
+      "weaker": {
+        "value": "#832521",
+        "type": "color",
+        "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
+      },
+      "stronger": {
+        "value": "#DA5C4B",
+        "type": "color",
+        "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
+      }
+    },
+    "diverging": {
+      "positive": {
+        "1": {
+          "value": "#256f81",
+          "type": "color"
+        },
+        "2": {
+          "value": "#66b5cb",
+          "type": "color"
+        }
+      },
+      "neutral": {
+        "value": "#2C343E",
+        "type": "color"
+      },
+      "negative": {
+        "1": {
+          "value": "#832521",
+          "type": "color"
+        },
+        "2": {
+          "value": "#DA5C4B",
+          "type": "color"
+        }
+      }
+    },
+    "sequential": {
+      "0": {
+        "value": "#175462",
+        "type": "color"
+      },
+      "1": {
+        "value": "#348ba1",
+        "type": "color"
+      },
+      "2": {
+        "value": "#66b5cb",
+        "type": "color"
+      },
+      "3": {
+        "value": "#9ed0dd",
+        "type": "color"
+      },
+      "positive": {
+        "0": {
+          "value": "#175462",
+          "type": "color"
+        },
+        "1": {
+          "value": "#348ba1",
+          "type": "color"
+        },
+        "2": {
+          "value": "#66b5cb",
+          "type": "color"
+        },
+        "3": {
+          "value": "#9ed0dd",
+          "type": "color"
+        }
+      },
+      "negative": {
+        "0": {
+          "value": "#601817",
+          "type": "color"
+        },
+        "1": {
+          "value": "#A7332A",
+          "type": "color"
+        },
+        "2": {
+          "value": "#DA5C4B",
+          "type": "color"
+        },
+        "3": {
+          "value": "#F38C7C",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

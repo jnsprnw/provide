@@ -1,0 +1,71 @@
+:where(.theme-dark) {
+  --color-sequential-negative-3: #f38c7c;
+  --color-sequential-negative-2: #da5c4b;
+  --color-sequential-negative-1: #a7332a;
+  --color-sequential-negative-0: #601817;
+  --color-sequential-positive-3: #9ed0dd;
+  --color-sequential-positive-2: #66b5cb;
+  --color-sequential-positive-1: #348ba1;
+  --color-sequential-positive-0: #175462;
+  --color-sequential-3: #9ed0dd;
+  --color-sequential-2: #66b5cb;
+  --color-sequential-1: #348ba1;
+  --color-sequential-0: #175462;
+  --color-diverging-negative-2: #da5c4b;
+  --color-diverging-negative-1: #832521;
+  --color-diverging-neutral: #2c343e;
+  --color-diverging-positive-2: #66b5cb;
+  --color-diverging-positive-1: #256f81;
+  --color-complementary-stronger: #da5c4b; /* First step in the based diverging color scale, used for the lowest (most negative) value.  */
+  --color-complementary-weaker: #832521; /* Second step in the base diverging color scale, used for values lower than zero (or data median). */
+  --color-complementary-base: #cc4233; /* Second step in the base diverging color scale, used for values lower than zero (or data median). */
+  --color-category-weaker-99: #6b7581;
+  --color-category-weaker-5: #575b20;
+  --color-category-weaker-4: #366d53;
+  --color-category-weaker-3: #a07730;
+  --color-category-weaker-2: #993d31;
+  --color-category-weaker-1: #613f70;
+  --color-category-weaker-0: #124874;
+  --color-category-base-99: #9ea9b5;
+  --color-category-base-5: #7e8518;
+  --color-category-base-4: #458a69;
+  --color-category-base-3: #dc9d38;
+  --color-category-base-2: #c85543;
+  --color-category-base-1: #825497;
+  --color-category-base-0: #22699a;
+  --color-category-stronger-99: #c0c8d2;
+  --color-category-stronger-5: #ced56d;
+  --color-category-stronger-4: #83c0a4;
+  --color-category-stronger-3: #f8c975;
+  --color-category-stronger-2: #e38c7c;
+  --color-category-stronger-1: #b386c8;
+  --color-category-stronger-0: #83bad9;
+  --color-functional-link: #c3d6dc; /* Used for links. */
+  --color-functional-filtered-out: #474b69;
+  --color-functional-not-available: #cccccc;
+  --color-functional-focus: #ffcb01;
+  --color-functional-accent: #bfc4f9;
+  --color-model-aspect-scope-conditions: #90d3fb; /* Scope conditions */
+  --color-model-aspect-conflict: #fa5a6d; /* Category color "conflict" */
+  --color-model-aspect-climate: #ffcb01; /* Climate */
+  --color-theme-stronger: #83c3d4;
+  --color-theme-weaker: #256f81;
+  --color-theme-base: #44a8c3;
+  --color-text-model-aspect-scope-conditions: #90d3fb; /* Scope conditions */
+  --color-text-model-aspect-conflict: #fa5a6d; /* Category color "conflict" */
+  --color-text-model-aspect-climate: #ffcb01; /* Climate */
+  --color-text-inverted-weaker: #6b7581;
+  --color-text-inverted-base: #191919;
+  --color-text-stronger: #ffffff; /* Stronger text color for maximum background contrast. */
+  --color-text-base: #dddddd;
+  --color-text-weaker: #aaaaaa;
+  --color-foreground-weakest: #777777;
+  --color-foreground-weaker: #aaaaaa;
+  --color-foreground-base: #eeeeee;
+  --color-background-weakest: #666666;
+  --color-background-weaker: #303030; /* slightly shaded background */
+  --color-background-base: #202020;
+  --color-blend-mode-max: lighten;
+  --color-blend-mode-additive: screen;
+  --color-meta-label: Dark;
+}

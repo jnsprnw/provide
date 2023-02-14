@@ -1,0 +1,318 @@
+{
+  "color": {
+    "meta": {
+      "label": {
+        "value": "Light",
+        "type": "string"
+      }
+    },
+    "blendMode": {
+      "additive": {
+        "value": "multiply",
+        "type": "string"
+      },
+      "max": {
+        "value": "darken",
+        "type": "string"
+      }
+    },
+    "background": {
+      "base": {
+        "value": "#FFF",
+        "type": "color",
+        "description": "The default light background color, used e.g. as a backdrop for charts or cards."
+      },
+      "weaker": {
+        "value": "#F6FAFE",
+        "type": "color",
+        "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
+      },
+      "weakest": {
+        "value": "#DDE3E8",
+        "type": "color",
+        "description": "A shaded background color, used e.g. as a backdrop in containers."
+      }
+    },
+    "foreground": {
+      "base": {
+        "value": "#171D21",
+        "type": "color",
+        "description": "Used for elements in the foreground that have a strong contrast to the background."
+      },
+      "weaker": {
+        "value": "#595F63",
+        "type": "color",
+        "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
+      },
+      "weakest": {
+        "value": "#A6ACB1",
+        "type": "color",
+        "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
+      }
+    },
+    "text": {
+      "base": {
+        "value": "#191919",
+        "type": "color",
+        "description": "Default text color for strong background contrast."
+      },
+      "weaker": {
+        "value": "#595F63",
+        "type": "color",
+        "description": "Text color with weaker background contrast."
+      },
+      "inverted": {
+        "base": {
+          "value": "#f8f8f8",
+          "type": "color"
+        },
+        "weaker": {
+          "value": "#ABAFB0",
+          "type": "color"
+        }
+      }
+    },
+    "theme": {
+      "weaker": {
+        "value": "#489AC6",
+        "type": "color",
+        "description": "Weaker version of theme color"
+      },
+      "base": {
+        "value": "#1C4C64",
+        "type": "color",
+        "description": "Main theme color, usually the brand color."
+      },
+      "stronger": {
+        "value": "#123446",
+        "type": "color",
+        "description": "Stronger version of theme color"
+      }
+    },
+    "functional": {
+      "accent": {
+        "value": "#C0CE6B",
+        "type": "color",
+        "description": "Used for author-driven accents of parts of charts, texts and other elements."
+      },
+      "filteredOut": {
+        "value": "#BEC5C9",
+        "type": "color",
+        "description": "Used for visual marks in charts that have been filtered out."
+      },
+      "focus": {
+        "value": "#ffcb01",
+        "type": "color",
+        "description": "Used for author-driven accents of parts of charts, texts and other elements."
+      },
+      "notAvailable": {
+        "value": "#b2b2b2",
+        "type": "color",
+        "description": "Used for visual marks (e.g. countries in maps) where data is missing from the dataset."
+      },
+      "link": {
+        "value": "#1C4C64",
+        "type": "color",
+        "description": "Used for links."
+      }
+    },
+    "category": {
+      "base": {
+        "0": {
+          "value": "#297cb5",
+          "type": "color"
+        },
+        "1": {
+          "value": "#905ea7",
+          "type": "color"
+        },
+        "2": {
+          "value": "#de5f4a",
+          "type": "color"
+        },
+        "3": {
+          "value": "#FFA81B",
+          "type": "color"
+        },
+        "4": {
+          "value": "#51a27c",
+          "type": "color"
+        },
+        "5": {
+          "value": "#9da61d",
+          "type": "color"
+        },
+        "99": {
+          "value": "#9ea9b5",
+          "type": "color"
+        }
+      },
+      "weaker": {
+        "0": {
+          "value": "#83bad9",
+          "type": "color"
+        },
+        "1": {
+          "value": "#b386c8",
+          "type": "color"
+        },
+        "2": {
+          "value": "#e38c7c",
+          "type": "color"
+        },
+        "3": {
+          "value": "#f8c975",
+          "type": "color"
+        },
+        "4": {
+          "value": "#83c0a4",
+          "type": "color"
+        },
+        "5": {
+          "value": "#ced56d",
+          "type": "color"
+        },
+        "99": {
+          "value": "#c0c8d2",
+          "type": "color"
+        }
+      },
+      "stronger": {
+        "0": {
+          "value": "#0161a3",
+          "type": "color"
+        },
+        "1": {
+          "value": "#492658",
+          "type": "color"
+        },
+        "2": {
+          "value": "#a72817",
+          "type": "color"
+        },
+        "3": {
+          "value": "#b26d00",
+          "type": "color"
+        },
+        "4": {
+          "value": "#0b5932",
+          "type": "color"
+        },
+        "5": {
+          "value": "#565d00",
+          "type": "color"
+        },
+        "99": {
+          "value": "#6b7581",
+          "type": "color"
+        }
+      }
+    },
+    "diverging": {
+      "negative": {
+        "1": {
+          "value": "#e98676",
+          "type": "color",
+          "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
+        },
+        "2": {
+          "value": "#a12917",
+          "type": "color",
+          "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
+        }
+      },
+      "neutral": {
+        "value": "#DDE3E8",
+        "type": "color",
+        "description": "Third step in the base diverging color scale, used for zero or data median."
+      },
+      "positive": {
+        "1": {
+          "value": "#79ABBC",
+          "type": "color",
+          "description": "Fourth step in the base diverging color scale, used for values higher than zero (or data median)."
+        },
+        "2": {
+          "value": "#0E3E63",
+          "type": "color",
+          "description": "Fifth step in the base diverging color scale, used for the highest (most positive) value. "
+        }
+      }
+    },
+    "complementary": {
+      "weaker": {
+        "value": "#e98676",
+        "type": "color",
+        "description": "Weaker version of complementary color."
+      },
+      "base": {
+        "value": "#dc6454",
+        "type": "color",
+        "description": "Main complementary color."
+      },
+      "stronger": {
+        "value": "#a12917",
+        "type": "color",
+        "description": "Stronger version of complementary color."
+      }
+    },
+    "sequential": {
+      "0": {
+        "value": "#C3D6DC",
+        "type": "color"
+      },
+      "1": {
+        "value": "#79ABBC",
+        "type": "color"
+      },
+      "2": {
+        "value": "#377796",
+        "type": "color"
+      },
+      "3": {
+        "value": "#0E3E63",
+        "type": "color"
+      },
+      "positive": {
+        "0": {
+          "value": "#C3D6DC",
+          "type": "color",
+          "description": "First step in the base (theme) sequential color scale, used for the lowest value. "
+        },
+        "1": {
+          "value": "#79ABBC",
+          "type": "color",
+          "description": "Second step in the base (theme) sequential color scale."
+        },
+        "2": {
+          "value": "#377796",
+          "type": "color",
+          "description": "Thirs step in the base (theme) sequential color scale."
+        },
+        "3": {
+          "value": "#0E3E63",
+          "type": "color",
+          "description": "Third and final step in the base (theme) sequential color scale."
+        }
+      },
+      "negative": {
+        "0": {
+          "value": "#fbc8bf",
+          "type": "color"
+        },
+        "1": {
+          "value": "#e98676",
+          "type": "color"
+        },
+        "2": {
+          "value": "#c9513f",
+          "type": "color"
+        },
+        "3": {
+          "value": "#a12917",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

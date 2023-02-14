@@ -1,0 +1,215 @@
+@import "sanitize.css";
+@import "./theme/css/global.css";
+@import "./theme/css/theme-light.css";
+@import "./theme/css/theme-dark.css";
+@import "./theme/css/size-large.css";
+@import "./theme/css/size-small.css";
+@import "./theme/css/size-namespaced.css";
+@import "./theme/css/typography-styles-dynamic.css";
+@import "./_breakpoints.css";
+@import "./_fonts.css";
+@import "./_fluid.css";
+@import "./_basscss.custom.css";
+@import "./_utils.css";
+
+/* Basics */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	@extend .theme-light;
+	@extend .typography-style-base;
+	@extend .size-fluid;
+
+	margin: 0;
+	padding: 0;
+}
+
+/* Basics */
+
+p {
+	@extend .max-paragraph-width;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@extend .typography-style-heading;
+	margin: var(--space-m) 0;
+}
+
+h1 {
+	@extend .typography-style-h1;
+}
+
+h2 {
+	@extend .typography-style-h2;
+}
+
+h3 {
+	@extend .typography-style-h3;
+}
+
+svg {
+	display: block;
+}
+
+svg text {
+	fill: var(--color-text-base);
+}
+
+.button {
+	@extend .shadow-s;
+	@extend .typography-style-base;
+	@extend .rounded;
+	@extend .color-text-base;
+
+	padding: var(--space-xxs) var(--space-s);
+	background-color: var(--color-background-base);
+	border: 1px solid var(--color-foreground-weaker);
+
+	cursor: pointer;
+	transition: transform, border;
+	transition-duration: var(--duration-ui);
+
+	&:hover {
+		border: 1px solid var(--color-foreground-base);
+	}
+
+	&:active {
+		transform: scale(0.98);
+	}
+
+	&:disabled {
+		box-shadow: none;
+		border-color: var(--color-foreground-weakest);
+		color: var(--color-text-weaker);
+		pointer-events: none;
+		background: none;
+	}
+
+	&.selected {
+		font-weight: var(--typography-font-weight-bold);
+	}
+}
+
+a,
+[role="link"] {
+	color: var(--color-functional-link);
+	text-decoration: none;
+	&:is([aria-current], :hover, :active, :focus) {
+		/* text-decoration: underline; */
+	}
+	&:focus {
+		/* background: var(--color-functional-focus); */
+	}
+}
+
+button,
+select {
+	@extend .button;
+}
+
+:where(.card) {
+	box-shadow: var(--effect-shadow-m);
+	background: var(--color-background-base);
+	border-radius: var(--size-border-radius-base);
+}
+
+.rough-annotation path {
+	@extend .blendmode-max;
+}
+
+/*
+  Animation
+*/
+
+:root {
+	--duration-ui: 200ms;
+}
+
+body {
+	scroll-behavior: smooth;
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+	body,
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+/* LOADER */
+
+/* // Cursor */
+[aria-busy="true"] {
+	cursor: progress;
+}
+
+/* // Everything except form elements */
+[aria-busy="true"]:not(input, select, textarea) {
+	&::before {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		border: 0.125em solid var(--color-theme-base);
+		border-radius: 1em;
+		border-right-color: var(--color-theme-weaker);
+		content: "";
+		vertical-align: text-bottom;
+		vertical-align: -0.125em;
+		animation: spinner 0.5s linear infinite;
+	}
+
+	&:not(:empty) {
+		&::before {
+			margin-left: 0;
+			margin-inline-start: 0;
+			margin-right: var(--space-xs);
+			margin-inline-end: var(--space-xs);
+		}
+	}
+
+	&:empty {
+		text-align: center;
+	}
+}
+
+/* // Buttons and links */
+button,
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+a {
+	&[aria-busy="true"] {
+		pointer-events: none;
+	}
+}
+
+/* // Animation: rotate */
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* DETAILS ACCORDION */
+
+details {
+	display: block;
+	width: 100%;
+	border-top: 1px solid var(--color-foreground-weakest);
+	border-bottom: 1px solid var(--color-foreground-weakest);
+	padding: var(--space-s) 0;
+	/* // Open */
+	&[open] {
+		> summary {
+			margin-bottom: calc(var(--space-m));
+		}
+	}
+}

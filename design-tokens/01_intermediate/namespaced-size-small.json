@@ -1,0 +1,165 @@
+{
+  "size": {
+    "small": {
+      "parameter": {
+        "fontSize": {
+          "scaleFactor": {
+            "value": 1.2,
+            "type": "other"
+          },
+          "scaleFactorBelowOne": {
+            "value": 1.1,
+            "type": "other"
+          },
+          "base": {
+            "value": 14,
+            "type": "other"
+          }
+        },
+        "space": {
+          "scaleFactor": {
+            "value": 1.33,
+            "type": "other"
+          },
+          "scaleFactorBelowOne": {
+            "value": 1.5,
+            "type": "other"
+          },
+          "base": {
+            "value": 14,
+            "type": "other"
+          }
+        }
+      },
+      "chartWidth": {
+        "value": 480,
+        "type": "sizing"
+      },
+      "viewportLimit": {
+        "value": 480,
+        "type": "sizing"
+      },
+      "meta": {
+        "label": {
+          "value": "Small",
+          "type": "other"
+        }
+      },
+      "borderWidth": {
+        "s": {
+          "value": 0.5,
+          "type": "borderWidth",
+          "description": "The smallest border size. Used for gridlines."
+        },
+        "m": {
+          "value": 1,
+          "type": "borderWidth",
+          "description": "The default border size. Used for axes borders, default data lines."
+        },
+        "l": {
+          "value": 1.5,
+          "type": "borderWidth",
+          "description": "A larger border size. Used for borders between filled elements."
+        },
+        "xl": {
+          "value": 2,
+          "type": "borderWidth",
+          "description": "A larger border size. Used for lines in focus, and the bottom chart container line."
+        },
+        "xxl": {
+          "value": 3,
+          "type": "borderWidth",
+          "description": "The largest border size. Used for the top chart container line."
+        }
+      },
+      "fontSize": {
+        "xs": {
+          "value": 12,
+          "type": "fontSizes"
+        },
+        "s": {
+          "value": 13,
+          "type": "fontSizes"
+        },
+        "m": {
+          "value": 14,
+          "type": "fontSizes"
+        },
+        "l": {
+          "value": 17,
+          "type": "fontSizes"
+        },
+        "xl": {
+          "value": 20,
+          "type": "fontSizes"
+        },
+        "xxl": {
+          "value": 24,
+          "type": "fontSizes"
+        },
+        "xxxl": {
+          "value": 29,
+          "type": "fontSizes"
+        },
+        "xxxxl": {
+          "value": 35,
+          "type": "fontSizes"
+        },
+        "xxxxxl": {
+          "value": 42,
+          "type": "fontSizes"
+        }
+      },
+      "space": {
+        "xxxxs": {
+          "value": 2,
+          "type": "spacing"
+        },
+        "xxxs": {
+          "value": 3,
+          "type": "spacing"
+        },
+        "xxs": {
+          "value": 4,
+          "type": "spacing"
+        },
+        "xs": {
+          "value": 6,
+          "type": "spacing"
+        },
+        "s": {
+          "value": 9,
+          "type": "spacing"
+        },
+        "m": {
+          "value": 14,
+          "type": "spacing"
+        },
+        "l": {
+          "value": 19,
+          "type": "spacing"
+        },
+        "xl": {
+          "value": 25,
+          "type": "spacing"
+        },
+        "xxl": {
+          "value": 33,
+          "type": "spacing"
+        },
+        "xxxl": {
+          "value": 44,
+          "type": "spacing"
+        },
+        "xxxxl": {
+          "value": 59,
+          "type": "spacing"
+        },
+        "xxxxxl": {
+          "value": 78,
+          "type": "spacing"
+        }
+      }
+    }
+  }
+}

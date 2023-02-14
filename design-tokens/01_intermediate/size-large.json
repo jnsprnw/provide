@@ -1,0 +1,265 @@
+{
+  "size": {
+    "parameter": {
+      "fontSize": {
+        "scaleFactor": {
+          "value": 1.33,
+          "type": "other"
+        },
+        "scaleFactorBelowOne": {
+          "value": 1.1,
+          "type": "other"
+        },
+        "base": {
+          "value": 16,
+          "type": "other"
+        }
+      },
+      "space": {
+        "scaleFactor": {
+          "value": 1.5,
+          "type": "other"
+        },
+        "scaleFactorBelowOne": {
+          "value": 1.5,
+          "type": "other"
+        },
+        "base": {
+          "value": 24,
+          "type": "other"
+        }
+      }
+    },
+    "chartWidth": {
+      "value": 920,
+      "type": "sizing"
+    },
+    "viewportLimit": {
+      "value": 1440,
+      "type": "sizing"
+    },
+    "meta": {
+      "label": {
+        "value": "Large",
+        "type": "other"
+      }
+    },
+    "borderWidth": {
+      "s": {
+        "value": 0.5,
+        "type": "borderWidth",
+        "description": "The smallest border size. Used for gridlines."
+      },
+      "m": {
+        "value": 1,
+        "type": "borderWidth",
+        "description": "The default border size. Used for axes borders, default data lines."
+      },
+      "l": {
+        "value": 2,
+        "type": "borderWidth",
+        "description": "A larger border size. Used for borders between filled elements."
+      },
+      "xl": {
+        "value": 3,
+        "type": "borderWidth",
+        "description": "A larger border size. Used for lines in focus, and the bottom chart container line."
+      },
+      "xxl": {
+        "value": 4,
+        "type": "borderWidth",
+        "description": "The largest border size. Used for the top chart container line."
+      }
+    },
+    "fontSize": {
+      "xs": {
+        "value": 14,
+        "type": "fontSizes"
+      },
+      "s": {
+        "value": 15,
+        "type": "fontSizes"
+      },
+      "m": {
+        "value": 16,
+        "type": "fontSizes"
+      },
+      "l": {
+        "value": 21,
+        "type": "fontSizes"
+      },
+      "xl": {
+        "value": 28,
+        "type": "fontSizes"
+      },
+      "xxl": {
+        "value": 37,
+        "type": "fontSizes"
+      },
+      "xxxl": {
+        "value": 49,
+        "type": "fontSizes"
+      },
+      "xxxxl": {
+        "value": 65,
+        "type": "fontSizes"
+      },
+      "xxxxxl": {
+        "value": 86,
+        "type": "fontSizes"
+      }
+    },
+    "space": {
+      "xxxxs": {
+        "value": 3,
+        "type": "spacing"
+      },
+      "xxxs": {
+        "value": 5,
+        "type": "spacing"
+      },
+      "xxs": {
+        "value": 7,
+        "type": "spacing"
+      },
+      "xs": {
+        "value": 11,
+        "type": "spacing"
+      },
+      "s": {
+        "value": 16,
+        "type": "spacing"
+      },
+      "m": {
+        "value": 24,
+        "type": "spacing"
+      },
+      "l": {
+        "value": 36,
+        "type": "spacing"
+      },
+      "xl": {
+        "value": 54,
+        "type": "spacing"
+      },
+      "xxl": {
+        "value": 81,
+        "type": "spacing"
+      },
+      "xxxl": {
+        "value": 122,
+        "type": "spacing"
+      },
+      "xxxxl": {
+        "value": 183,
+        "type": "spacing"
+      },
+      "xxxxxl": {
+        "value": 275,
+        "type": "spacing"
+      }
+    }
+  },
+  "typography": {
+    "style": {
+      "base": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 400,
+          "lineHeight": "160%",
+          "fontSize": 16,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "The default text style."
+      },
+      "huge": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 700,
+          "lineHeight": "115%",
+          "fontSize": 37,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for summary statistics, large numbers, etc."
+      },
+      "large": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 700,
+          "lineHeight": "115%",
+          "fontSize": 28,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for the title of a chart."
+      },
+      "majorPrimary": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 700,
+          "lineHeight": "145%",
+          "fontSize": 16,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for legend main labels, as well as individual value annotations."
+      },
+      "majorSecondary": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 400,
+          "lineHeight": "145%",
+          "fontSize": 16,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for secondary legend labels, description, and the chart subtitle."
+      },
+      "minorPrimary": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 700,
+          "lineHeight": "115%",
+          "fontSize": 15,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for smaller annotations in charts."
+      },
+      "minorSecondary": {
+        "value": {
+          "fontFamily": "BundesSans Office",
+          "fontWeight": 400,
+          "lineHeight": "145%",
+          "fontSize": 15,
+          "letterSpacing": "0%",
+          "paragraphSpacing": 8,
+          "textDecoration": "none",
+          "textCase": "none"
+        },
+        "type": "typography",
+        "description": "Used for tick labels, secondary annotations, footer text."
+      }
+    }
+  }
+}

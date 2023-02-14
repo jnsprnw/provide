@@ -1,0 +1,82 @@
+:root {
+  --effect-shadow-xl: 2px 2px 15px 0px #00000033;
+  --effect-shadow-l: 2px 2px 6px 0px #00000033;
+  --effect-shadow-m: 1px 1px 3px 0px #00000033;
+  --effect-shadow-s: 1px 1px 2px 0px #00000033;
+  --meta-authors: Moritz Stefaner / Truth & Beauty with Flavio Gortana; /* Authors */
+  --meta-last-updated: 1986; /* Last updated */
+  --meta-style-repo-url: preview.auswaertiges-amt.de/data-design-language;
+  --meta-project-subtitle: Data Design Language;
+  --meta-version: v1.0-WIP; /* Version */
+  --meta-project-title: PREVIEW; /* Project title */
+  --size-border-radius-bigger: 3px;
+  --size-border-radius-base: 1px;
+  --size-breakpoint-xl: 1440px;
+  --size-breakpoint-lg: 1200px;
+  --size-breakpoint-md: 960px;
+  --size-breakpoint-sm: 640px;
+  --size-breakpoint-xs: 480px;
+  --size-min-content-width: 480px;
+  --size-max-content-width: 1440px;
+  --size-space-xxxxxl: 275px;
+  --size-space-xxxxl: 183px;
+  --size-space-xxxl: 122px;
+  --size-space-xxl: 81px;
+  --size-space-xl: 54px;
+  --size-space-l: 36px;
+  --size-space-m: 24px;
+  --size-space-s: 16px;
+  --size-space-xs: 11px;
+  --size-space-xxs: 7px;
+  --size-space-xxxs: 5px;
+  --size-space-xxxxs: 3px;
+  --size-font-size-xxxxxl: 86px;
+  --size-font-size-xxxxl: 65px;
+  --size-font-size-xxxl: 49px;
+  --size-font-size-xxl: 37px;
+  --size-font-size-xl: 28px;
+  --size-font-size-l: 21px;
+  --size-font-size-m: 16px;
+  --size-font-size-s: 15px;
+  --size-font-size-xs: 14px;
+  --size-border-width-xxl: 4px; /* The largest border size. Used for the top chart container line. */
+  --size-border-width-xl: 3px; /* A larger border size. Used for lines in focus, and the bottom chart container line. */
+  --size-border-width-l: 2px; /* A larger border size. Used for borders between filled elements. */
+  --size-border-width-m: 1px; /* The default border size. Used for axes borders, default data lines. */
+  --size-border-width-s: 0.5px; /* The smallest border size. Used for gridlines. */
+  --size-meta-label: Large;
+  --size-viewport-limit: 1440px;
+  --size-chart-width: 920px;
+  --size-parameter-space-base: 24;
+  --size-parameter-space-scale-factor-below-one: 1.5;
+  --size-parameter-space-scale-factor: 1.5;
+  --size-parameter-font-size-base: 16;
+  --size-parameter-font-size-scale-factor-below-one: 1.1;
+  --size-parameter-font-size-scale-factor: 1.33;
+  --typography-text-decoration-none: none;
+  --typography-text-case-uppercase: uppercase;
+  --typography-text-case-none: none;
+  --typography-paragraph-spacing-base: 8;
+  --typography-paragraph-spacing-none: 0;
+  --typography-letter-spacing-looser: 15%;
+  --typography-letter-spacing-base: 0%;
+  --typography-font-weight-bold: 700;
+  --typography-font-weight-semi-bold: 600;
+  --typography-font-weight-medium: 500;
+  --typography-font-weight-regular: 400;
+  --typography-line-height-tightest: 115%;
+  --typography-line-height-tighter: 145%;
+  --typography-line-height-base: 160%;
+  --typography-font-family-mono: Fira Mono;
+  --typography-font-family-heading: BundesSans Office;
+  --typography-font-family-base: BundesSans Office;
+  --typography-style-caption: [object Object];
+  --typography-style-mono: [object Object];
+  --typography-style-h4: [object Object];
+  --typography-style-h3: [object Object];
+  --typography-style-h2: [object Object];
+  --typography-style-h1: [object Object];
+  --typography-style-subhead: [object Object];
+  --typography-style-heading: [object Object];
+  --typography-style-base: [object Object];
+}

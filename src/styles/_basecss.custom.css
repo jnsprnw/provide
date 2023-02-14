@@ -1,0 +1,460 @@
+/* Grid import */
+@import './grid/grid';
+
+/* reset */
+:where(:root) {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+  cursor: default;
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+}
+
+/* Basscss Layout */
+
+.inline {
+  display: inline;
+}
+.block {
+  display: block;
+}
+.inline-block {
+  display: inline-block;
+}
+.table {
+  display: table;
+}
+.table-cell {
+  display: table-cell;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+.overflow-scroll {
+  overflow: scroll;
+}
+.overflow-auto {
+  overflow: auto;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: ' ';
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+
+.left {
+  float: left;
+}
+.right {
+  float: right;
+}
+
+.fit {
+  max-width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+@media (--breakpoint-sm) {
+  .sm-flex {
+    display: flex;
+  }
+}
+
+@media (--breakpoint-md) {
+  .md-flex {
+    display: flex;
+  }
+}
+
+@media (--breakpoint-lg) {
+  .lg-flex {
+    display: flex;
+  }
+}
+
+.flex-column,
+.flex.column {
+  flex-direction: column;
+}
+
+.flex-wrap,
+.flex.wrap {
+  flex-wrap: wrap;
+}
+
+.flex-grow-0,
+.flex.grow-0 {
+  flex-grow: 0;
+}
+
+.flex-grow-1,
+.flex.grow-1 {
+  flex-grow: 1;
+}
+
+.center {
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+
+.flex-center {
+  display: flex;
+  place-items: center;
+  place-content: center;
+}
+
+.grid-center {
+  display: grid;
+  place-items: center;
+  place-content: center;
+}
+
+.display-grid {
+  display: grid;
+}
+
+.items-start {
+  align-items: flex-start;
+}
+.items-end {
+  align-items: flex-end;
+}
+.items-center {
+  align-items: center;
+}
+.items-baseline {
+  align-items: baseline;
+}
+.items-stretch {
+  align-items: stretch;
+}
+
+.self-start {
+  align-self: flex-start;
+}
+.self-end {
+  align-self: flex-end;
+}
+.self-center {
+  align-self: center;
+}
+.self-baseline {
+  align-self: baseline;
+}
+.self-stretch {
+  align-self: stretch;
+}
+
+.justify-items-start {
+  justify-items: flex-start;
+}
+.justify-items-end {
+  justify-items: flex-end;
+}
+.justify-items-center {
+  justify-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+.content-start {
+  align-content: flex-start;
+}
+.content-end {
+  align-content: flex-end;
+}
+.content-center {
+  align-content: center;
+}
+.content-between {
+  align-content: space-between;
+}
+.content-around {
+  align-content: space-around;
+}
+.content-stretch {
+  align-content: stretch;
+}
+
+/* 1. Fix for Chrome 44 bug. https://code.google.com/p/chromium/issues/detail?id=506893 */
+.flex-auto {
+  flex: 1 1 auto;
+  min-width: 0; /* 1 */
+  min-height: 0; /* 1 */
+}
+.flex-none {
+  flex: none;
+}
+
+.order-0 {
+  order: 0;
+}
+.order-1 {
+  order: 1;
+}
+.order-2 {
+  order: 2;
+}
+.order-3 {
+  order: 3;
+}
+.order-last {
+  order: 99999;
+}
+
+/* Basscss Hide */
+
+.hide {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+@media (--breakpoint-xs) {
+  .xs-hide {
+    display: none !important;
+  }
+}
+
+@media (--breakpoint-sm-md) {
+  .sm-hide {
+    display: none !important;
+  }
+}
+
+@media (--breakpoint-md-lg) {
+  .md-hide {
+    display: none !important;
+  }
+}
+
+@media (--breakpoint-lg) {
+  .lg-hide {
+    display: none !important;
+  }
+}
+
+.display-none {
+  display: none !important;
+}
+
+/* Basscss Position */
+
+.relative {
+  position: relative;
+}
+.absolute {
+  position: absolute;
+}
+.fixed {
+  position: fixed;
+}
+
+.top-0 {
+  top: 0;
+}
+.right-0 {
+  right: 0;
+}
+.bottom-0 {
+  bottom: 0;
+}
+.left-0 {
+  left: 0;
+}
+
+.z1 {
+  z-index: var(--z1);
+}
+.z2 {
+  z-index: var(--z2);
+}
+.z3 {
+  z-index: var(--z3);
+}
+.z4 {
+  z-index: var(--z4);
+}
+
+:root {
+  --z1: 1;
+  --z2: 2;
+  --z3: 3;
+  --z4: 4;
+}
+
+/* Basscss Align */
+
+.align-baseline {
+  vertical-align: baseline;
+}
+.align-top {
+  vertical-align: top;
+}
+.align-middle {
+  vertical-align: middle;
+}
+.align-bottom {
+  vertical-align: bottom;
+}
+
+/* Basscss Typography */
+
+.font-family-inherit {
+  font-family: inherit;
+}
+.font-size-inherit {
+  font-size: inherit;
+}
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.align-left {
+  text-align: left;
+}
+.align-center {
+  text-align: center;
+}
+.align-right {
+  text-align: right;
+}
+.align-justify {
+  text-align: justify;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+.break-word {
+  word-wrap: break-word;
+}
+
+.list-style-none {
+  list-style: none;
+}
+.underline {
+  text-decoration: underline;
+}
+
+.truncate {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-reset {
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Basscss Border */
+
+.border {
+  border: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+hr {
+  border: 0;
+  border-top: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+.border-none {
+  border: 0;
+}
+
+.border-top {
+  border-top: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+.border-right {
+  border-right: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+.border-bottom {
+  border-bottom: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+.border-left {
+  border-left: var(--border-width) solid
+    var(--border-color, var(--color-foreground-weakest));
+}
+
+.rounded {
+  border-radius: var(--border-radius);
+}
+.circle {
+  border-radius: 50%;
+}
+
+.not-rounded {
+  border-radius: 0;
+}
+
+.rounded-top {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+.rounded-right {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+.rounded-bottom {
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+.rounded-left {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+:root {
+  --border-width: var(--size-border-width-m, 1px);
+  --border-radius: var(--size-border-radius-base, 5px);
+}
+
+/* BassCss extensions */
+
+.grid {
+  @extend .clearfix;
+  display: flex;
+  flex-wrap: wrap;
+  .col {
+    flex-grow: 0;
+    flex-shrink: 0;
+  }
+}

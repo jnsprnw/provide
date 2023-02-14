@@ -1,0 +1,22 @@
+{
+	"name": "design-token-example",
+	"version": "1.0.0",
+	"author": "",
+	"watch": {
+		"build": [
+			"00_input/**/*.json"
+		]
+	},
+	"scripts": {
+		"build": "./build-all.sh",
+		"watch": "npm-watch"
+	},
+	"dependencies": {
+		"npm-watch": "^0.9.0",
+		"style-dictionary": "^3.7.1",
+		"token-transformer": "0.0.27"
+	},
+	"devDependencies": {
+		"jq-cli-wrapper": "^1.6.1"
+	}
+}

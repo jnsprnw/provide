@@ -1,34 +1,28 @@
 <script>
+  import { browser } from '$app/environment';
   // import { preferredThemeId } from "$state/Responsiveness.js";
-  import { interpolateLab, piecewise } from 'd3-interpolate';
-  import { hsl } from 'd3-color';
-  import { scaleOrdinal } from 'd3-scale';
+  import { interpolateLab, piecewise, scaleOrdinal, hsl } from 'd3';
   import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   import { get } from 'lodash-es';
-  import designTokens from './theme/theme.json';
-  import THEME from './theme-store.js';
+  import designTokens from './theme/json/global.json';
+  import designTokensLight from './theme/json/theme-light.json';
+  import designTokensDark from './theme/json/theme-dark.json';
 
-  export let id = 'light';
+  export let id;
 
-  export let background = true;
+  const themeStore = writable();
+  setContext('theme', themeStore);
 
-  setContext('theme', THEME);
-
-  $: makeTextColor = (color, factor = 0.2) => {
-    const c = hsl(color);
-    c.l = id === 'light' ? factor : 1 - factor * 0.5;
-    return c;
-  };
-
-  $: blendMode = id === 'light' ? 'multiply' : 'screen';
   $: mapStyle =
     id === 'light'
       ? 'mapbox://styles/flaviogortana/cl441r0ed007014pl9ap5a52a'
       : 'mapbox://styles/flaviogortana/cl441r0ed007014pl9ap5a52a';
 
-  $: makeLinearScale = (a) => {
-    const steps = range(0, 1.001, 1 / (a.length - 1));
-    return scaleLinear().range(a).domain(steps).interpolate(interpolateLab);
+  $: makeTextColor = (color, factor = 0.2) => {
+    const c = hsl(color);
+    c.l = id === 'light' ? factor : 1 - factor * 0.5;
+    return c;
   };
 
   $: hasContrastToBackground = (color) => {
@@ -37,68 +31,103 @@
   };
 
   $: {
-    const colors = designTokens.color[id];
-    // const colors = designTokens.color.light;
+    if (!id) {
+      if (browser) {
+        id = window.matchMedia('(prefers-color-scheme: dark)').matches
+          ? 'dark'
+          : 'light';
+      } else {
+        id = 'light';
+      }
+    }
+  }
+
+  $: {
+    const colors = {
+      light: designTokensLight,
+      dark: designTokensDark,
+    }[id].color;
+
+    // console.log(colors);
 
     const colorSteps = {
       sequential: [
         colors.sequential['0'],
-        // colors.sequential["1"],
-        // colors.sequential["2"],
+        colors.sequential['1'],
+        colors.sequential['2'],
         colors.sequential['3'],
       ],
 
       diverging: [
-        colors.diverging['negative-2'],
-        // colors.diverging["negative-1"],
-        colors.diverging['neutral'],
-        // colors.diverging["positive-1"],
-        colors.diverging['positive-2'],
+        colors.diverging.negative['2'],
+        colors.diverging.negative['1'],
+        colors.diverging.neutral,
+        colors.diverging.positive['1'],
+        colors.diverging.positive['2'],
       ],
 
       categorical: [
-        colors.category['0'],
-        colors.category['1'],
-        colors.category['2'],
-        colors.category['3'],
-        colors.category['4'],
+        colors.category.base['0'],
+        colors.category.base['1'],
+        colors.category.base['2'],
+        colors.category.base['3'],
+        colors.category.base['4'],
+        colors.category.base['5'],
+      ],
+
+      'categorical-stronger': [
+        colors.category.stronger['0'],
+        colors.category.stronger['1'],
+        colors.category.stronger['2'],
+        colors.category.stronger['3'],
+        colors.category.stronger['4'],
+        colors.category.stronger['5'],
+      ],
+
+      'categorical-weaker': [
+        colors.category.weaker['0'],
+        colors.category.weaker['1'],
+        colors.category.weaker['2'],
+        colors.category.weaker['3'],
+        colors.category.weaker['4'],
+        colors.category.stronger['5'],
       ],
     };
 
-    const scenarioColors = [
-      colors.category[0],
-      colors.category[1],
-      colors.category[2],
-    ];
-
-    $THEME = {
+    $themeStore = {
       id: id,
-      mapStyle,
       ...designTokens,
-      blendMode,
+      mapStyle,
       color: {
         ...colors,
         makeTextColor,
         hasContrastToBackground,
-        get: (d) => get(colors, d) || d, // TODO: check if whole lodash is loaded
         steps: colorSteps,
-        scenarios: scenarioColors,
+        get: (d) => get(colors, d) || d,
         scales: {
           sequential: piecewise(interpolateLab, colorSteps.sequential),
           diverging: piecewise(interpolateLab, colorSteps.diverging),
           categorical: scaleOrdinal().range(colorSteps.categorical),
+          'categorical-stronger': scaleOrdinal().range(
+            colorSteps['categorical-stronger']
+          ),
+          'categorical-weaker': scaleOrdinal().range(
+            colorSteps['categorical-weaker']
+          ),
         },
       },
     };
   }
 </script>
 
-<div class:background class="theme-{id}">
+<div
+  class="theme-{id}"
+  style="
+    display: contents;
+  "
+>
   <slot />
 </div>
 
 <style>
-  div {
-    /* display: contents; */
-  }
 </style>
