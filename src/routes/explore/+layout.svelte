@@ -1,16 +1,3 @@
-<script context="module">
-  import { loadMetaData } from '$lib/../routes/api/utils.js';
-
-  export const load = async ({ fetch }) => {
-    const meta = await loadMetaData(fetch);
-    return {
-      props: {
-        meta,
-      },
-    };
-  };
-</script>
-
 <script>
   import { page } from '$app/stores';
   import { parse } from 'qs';
@@ -26,10 +13,12 @@
     CURRENT_GEOGRAPHY_UID,
     CURRENT_SCENARIOS_UID,
     UNITS,
-  } from '$lib/../stores/store.js';
-  import { browser } from '$app/env';
+  } from '$stores/store.js';
+  import { browser } from '$app/environment';
 
-  export let meta;
+  export let data;
+
+  const { meta } = data;
 
   GEOGRAPHY_TYPES.set(meta.geographyTypes);
   INDICATORS.set(meta);
@@ -42,6 +31,12 @@
   $: currentURL = new URL($page.url);
 
   $: params = parse(currentURL.search.replace(/^\?/, ''));
+
+  $: urlToStateMapping = {
+    indicator: CURRENT_INDICATOR_UID,
+    geography: CURRENT_GEOGRAPHY_UID,
+    scenarios: CURRENT_SCENARIOS_UID,
+  };
 
   $: {
     const { indicator, geography, scenarios } = params;
@@ -93,13 +88,13 @@
 <slot />
 
 <style lang="scss">
-  @import '../../styles/global.scss';
+  //@import '../../styles/global.scss';
 
   .explore-menu {
     background-color: var(--color-background-stronger);
 
     .wrapper {
-      @include tab-nav-wrapper();
+      //@include tab-nav-wrapper();
 
       .title {
         font-size: var(--font-size-large-xl);

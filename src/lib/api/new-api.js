@@ -1,7 +1,8 @@
-import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$lib/../config';
-import { loadFromAPI } from '$lib/../routes/api/utils';
+import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
+import { loadFromAPI } from '$utils/apis.js';
 import qs from 'qs';
-import { clone, forEach, reduce } from 'lodash-es';
+import { forEach, reduce } from 'lodash-es';
+import { browser } from '$app/environment';
 
 const cache = {};
 
@@ -95,6 +96,7 @@ const fetchSingle = (store, { endpoint, params }) => {
 };
 
 export const dataPlease = (store, config = []) => {
+  if (!browser) return;
   if (config.endpoint && config.params) fetchSingle(store, config);
   else fetchMultiple(store, config);
 };

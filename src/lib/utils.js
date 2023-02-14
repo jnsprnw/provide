@@ -1,12 +1,8 @@
 import { get, set, compact, uniq } from 'lodash-es';
-import { loadFromAPI } from '$lib/../routes/api/utils.js';
+import { loadFromAPI } from '$utils/apis.js';
 import qs from 'qs';
-import { browser } from '$app/env';
-import {
-  STATUS_LOADING,
-  STATUS_SUCCESS,
-  STATUS_FAILED,
-} from '$lib/../config.js';
+import { browser } from '$app/environment';
+import { STATUS_LOADING, STATUS_SUCCESS, STATUS_FAILED } from '$src/config.js';
 
 export const getUID = function (obj) {
   return obj?.uid || null;

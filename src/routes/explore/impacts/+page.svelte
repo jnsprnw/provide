@@ -15,7 +15,7 @@
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
     CURRENT_INDICATOR,
-  } from '$lib/../stores/store.js';
+  } from '$stores/store.js';
 </script>
 
 <svelte:head>
@@ -71,7 +71,6 @@
 
 <div class="impacts-analysis container">
   <div class="wrapper">
-    <!-- <SelectionMessage /> -->
     <Tabs type="nav" selected={0}>
       <Tab label="Impact overview" />
       <Tab label="(Un)avoidable risk" />
@@ -96,7 +95,7 @@
 </div>
 
 <style lang="scss">
-  @import '../../styles/global.scss';
+  //@import '../../styles/global.scss';
 
   span {
     display: block;

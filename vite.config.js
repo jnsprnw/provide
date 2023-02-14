@@ -7,6 +7,7 @@ const config = {
   plugins: [sveltekit()],
   resolve: {
     alias: {
+      $src: path.resolve('./src'),
       $styles: path.resolve('./src/styles'),
       $lib: path.resolve('./src/lib'),
       $utils: path.resolve('./src/lib/utils'),

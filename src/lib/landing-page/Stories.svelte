@@ -1,15 +1,12 @@
 <script>
-  import { formatObjArr } from '$lib/utils.js';
-
   import { get } from 'lodash-es';
-  import { END_IMPACT_TIME, KEY_MODEL } from '$lib/../config';
+  import { END_IMPACT_TIME, KEY_MODEL } from '$src/config';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { getContext, onDestroy } from 'svelte';
+  import { getContext } from 'svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
-  import { afterNavigate, beforeNavigate } from '$app/navigation';
 
   export let stories;
 

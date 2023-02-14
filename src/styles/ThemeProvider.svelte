@@ -1,18 +1,19 @@
 <script>
   import { browser } from '$app/environment';
   // import { preferredThemeId } from "$state/Responsiveness.js";
-  import { interpolateLab, piecewise, scaleOrdinal, hsl } from 'd3';
+  import { scaleOrdinal } from 'd3-scale';
+  import { interpolateLab, piecewise } from 'd3-interpolate';
+  import { hsl } from 'd3-color';
   import { setContext } from 'svelte';
-  import { writable } from 'svelte/store';
   import { get } from 'lodash-es';
-  import designTokens from './theme/json/global.json';
-  import designTokensLight from './theme/json/theme-light.json';
-  import designTokensDark from './theme/json/theme-dark.json';
+  import THEME from './theme-store.js';
+  import designTokens from './theme_new/json/global.json';
+  import designTokensLight from './theme_new/json/theme-light.json';
+  import designTokensDark from './theme_new/json/theme-dark.json';
 
   export let id;
 
-  const themeStore = writable();
-  setContext('theme', themeStore);
+  setContext('theme', THEME);
 
   $: mapStyle =
     id === 'light'
@@ -94,7 +95,13 @@
       ],
     };
 
-    $themeStore = {
+    const scenarios = [
+      colors.category.base[0],
+      colors.category.base[1],
+      colors.category.base[2],
+    ];
+
+    $THEME = {
       id: id,
       ...designTokens,
       mapStyle,
@@ -103,6 +110,7 @@
         makeTextColor,
         hasContrastToBackground,
         steps: colorSteps,
+        scenarios,
         get: (d) => get(colors, d) || d,
         scales: {
           sequential: piecewise(interpolateLab, colorSteps.sequential),
