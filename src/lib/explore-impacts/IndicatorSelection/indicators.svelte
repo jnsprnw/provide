@@ -4,7 +4,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
     CURRENT_SCENARIOS,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
   import { INDICATORS } from '$stores/meta.js';
   import RadioButton from '$lib/helper/radio-buttons/radio-button.svelte';
   import RadioButtonGroup from '$lib/helper/radio-buttons/radio-button-group.svelte';

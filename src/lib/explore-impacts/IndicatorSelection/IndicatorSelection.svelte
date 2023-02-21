@@ -1,5 +1,5 @@
 <script>
-  import { AVAILABLE_INDICATORS } from '$stores/store.js';
+  import { AVAILABLE_INDICATORS } from '$stores/state.js';
   import { SECTORS } from '$stores/meta.js';
   import Tabs from '$lib/helper/tabs/Tabs.svelte';
   import Tab from '$lib/helper/tabs/Tab.svelte';

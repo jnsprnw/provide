@@ -5,7 +5,7 @@ import {
   CURRENT_INDICATOR_UID,
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
-} from '$stores/store.js';
+} from '$stores/state.js';
 
 const urlToStateMapping = {
   indicator: CURRENT_INDICATOR_UID,

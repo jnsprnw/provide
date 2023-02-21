@@ -3,7 +3,7 @@
     CURRENT_INDICATOR,
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
 </script>
 
 <span

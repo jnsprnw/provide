@@ -7,7 +7,7 @@
     CURRENT_INDICATOR_OPTIONS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
 
@@ -121,7 +121,7 @@
 </LoadingWrapper>
 
 <style lang="scss">
-  @import '../../../../styles/global.scss';
+  //@import '../../../../styles/global.scss';
 
   .chart {
     height: 400px;
@@ -131,6 +131,6 @@
 
   .chart-info {
     grid-column: 8 / span 5;
-    @include chart-info-layout();
+    //@include chart-info-layout();
   }
 </style>

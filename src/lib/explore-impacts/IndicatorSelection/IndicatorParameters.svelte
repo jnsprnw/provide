@@ -5,7 +5,7 @@
     CURRENT_INDICATOR_PARAMETERS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_INDICATOR,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
     .map((parameter) => {

@@ -6,7 +6,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_INDICATOR_OPTIONS,
     DICTIONARY_CURRENT_SCENARIOS,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
   import { DICTIONARY_SCENARIOS } from '$stores/meta.js';
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -136,22 +136,22 @@
 </LoadingWrapper>
 
 <style lang="scss">
-  @import '../../../../styles/global.scss';
+  //@import '../../../../styles/global.scss';
 
-  .chart-container {
-    grid-column: 7 / span 6;
-  }
+  // .chart-container {
+  //   grid-column: 7 / span 6;
+  // }
 
-  .chart-options {
-    margin-bottom: var(--space-m);
-  }
+  // .chart-options {
+  //   margin-bottom: var(--space-m);
+  // }
 
-  .chart {
-    height: 400px;
-  }
+  // .chart {
+  //   height: 400px;
+  // }
 
-  .chart-info {
-    grid-column: 1 / span 5;
-    @include chart-info-layout();
-  }
+  // .chart-info {
+  //   grid-column: 1 / span 5;
+  //   @include chart-info-layout();
+  // }
 </style>

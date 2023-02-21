@@ -1,11 +1,11 @@
 <script>
-  import MapboxMap from '$lib/mapbox-map/index.svelte';
-  import RasterLayer from '$lib/mapbox-map/RasterLayer.svelte';
+  import MapboxMap from '$lib/MapboxMap/MapboxMap.svelte';
+  import RasterLayer from '$lib/MapboxMap/RasterLayer.svelte';
   import Header from './Header.svelte';
   import Legend from './Legend.svelte';
   import { extent } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
-  import Mask from '$lib/mapbox-map/Mask.svelte';
+  import Mask from '$lib/MapboxMap/Mask.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
   import {
@@ -16,7 +16,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
-  } from '$src/stores/store';
+  } from '$src/stores/state';
   import { END_GEO_SHAPE, END_IMPACT_GEO } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { dataPlease } from '$lib/api/new-api';

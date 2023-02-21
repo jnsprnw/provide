@@ -3,7 +3,7 @@
   import Tab from '$lib/helper/tabs/Tab.svelte';
   import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import Countries from './Countries.svelte';
-  import { CURRENT_GEOGRAPHY_TYPE_INDEX } from '$stores/store.js';
+  import { CURRENT_GEOGRAPHY_TYPE_INDEX } from '$stores/state.js';
   import { GEOGRAPHY_TYPES } from '$stores/meta.js';
 </script>
 

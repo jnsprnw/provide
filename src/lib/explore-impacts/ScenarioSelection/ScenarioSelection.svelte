@@ -7,7 +7,7 @@
     CURRENT_SCENARIOS,
     DICTIONARY_CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
-  } from '$stores/store.js';
+  } from '$stores/state.js';
   import { SCENARIOS } from '$stores/meta.js';
   import Scenario from './scenario.svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
