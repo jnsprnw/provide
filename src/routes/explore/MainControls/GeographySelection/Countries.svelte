@@ -94,18 +94,18 @@
 </div>
 
 <style lang="scss">
-  @import '../../../styles/global.scss';
+  // @import '../../../styles/global.scss';
 
-  .searchbox {
-    @include input-field();
-  }
+  // .searchbox {
+  //   @include input-field();
+  // }
 
-  .selection-country-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
+  // .selection-country-wrapper {
+  //   display: grid;
+  //   grid-template-columns: 1fr 2fr;
 
-    .country-container {
-      height: 295px;
-    }
-  }
+  //   .country-container {
+  //     height: 295px;
+  //   }
+  // }
 </style>

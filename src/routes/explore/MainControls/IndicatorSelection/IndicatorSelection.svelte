@@ -38,15 +38,15 @@
 <div class="indicator-parameters"><IndicatorParameters /></div>
 
 <style lang="scss">
-  @import '../../../styles/global.scss';
+  // @import '../../../styles/global.scss';
 
-  .indicator-selection {
-    @include selection-panel();
-    padding-bottom: var(--space-m);
-  }
+  // .indicator-selection {
+  //   @include selection-panel();
+  //   padding-bottom: var(--space-m);
+  // }
 
-  .indicator-parameters {
-    padding: var(--space-xs) 0;
-    border-top: 1px solid var(--color-foreground-weakest); // Do we need another very light foreground color?
-  }
+  // .indicator-parameters {
+  //   padding: var(--space-xs) 0;
+  //   border-top: 1px solid var(--color-foreground-weakest); // Do we need another very light foreground color?
+  // }
 </style>

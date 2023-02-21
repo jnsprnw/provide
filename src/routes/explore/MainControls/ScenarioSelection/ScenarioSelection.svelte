@@ -176,39 +176,39 @@
 </div>
 
 <style lang="scss">
-  @import '../../../styles/global.scss';
+  // @import '../../../styles/global.scss';
 
-  .scenario-selection {
-    @include selection-panel();
-    padding-bottom: var(--space-m);
+  //   .scenario-selection {
+  //     @include selection-panel();
+  //     padding-bottom: var(--space-m);
 
-    .scenario-split {
-      display: grid;
-      grid-template-rows: minmax(130px, auto) auto 1fr;
-      grid-gap: var(--font-size-large-xl); // TODO
+  //     .scenario-split {
+  //       display: grid;
+  //       grid-template-rows: minmax(130px, auto) auto 1fr;
+  //       grid-gap: var(--font-size-large-xl); // TODO
 
-      .chart-tab {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-content: stretch;
-        grid-auto-flow: column;
-        grid-gap: var(--font-size-large-xl);
-      }
-    }
-  }
+  //       .chart-tab {
+  //         display: grid;
+  //         grid-template-columns: 1fr 1fr;
+  //         align-content: stretch;
+  //         grid-auto-flow: column;
+  //         grid-gap: var(--font-size-large-xl);
+  //       }
+  //     }
+  //   }
 
-  .scenario-description {
-    transition: height 0.1s ease-out;
-  }
+  //   .scenario-description {
+  //     transition: height 0.1s ease-out;
+  //   }
 
-  .scenario-chart {
-    width: 100%;
-    height: 250px;
-  }
+  //   .scenario-chart {
+  //     width: 100%;
+  //     height: 250px;
+  //   }
 
-  .plot-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  //   .plot-info {
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: space-between;
+  //   }
 </style>

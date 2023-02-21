@@ -147,40 +147,40 @@
 </div>
 
 <style lang="scss">
-  @import '../../../styles/global.scss';
+  // @import '../../../styles/global.scss';
 
-  input {
-    @include visually-hidden();
-  }
+  // input {
+  //   @include visually-hidden();
+  // }
 
-  .checkbox-label {
-    @include tab();
+  // .checkbox-label {
+  //   @include tab();
 
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    grid-gap: 1rem; // TODO
-    align-items: end;
-    justify-content: space-between;
-    transition: color var(--transition-duration-base) ease-out;
+  //   display: grid;
+  //   grid-template-columns: auto 1fr auto;
+  //   grid-gap: 1rem; // TODO
+  //   align-items: end;
+  //   justify-content: space-between;
+  //   transition: color var(--transition-duration-base) ease-out;
 
-    .color-indicator {
-      color: transparent;
-      transition: color var(--transition-duration-base) ease-out;
-    }
+  //   .color-indicator {
+  //     color: transparent;
+  //     transition: color var(--transition-duration-base) ease-out;
+  //   }
 
-    .mark {
-      color: #fff; // TODO
-      transition: color var(--transition-duration-base) ease-out;
-    }
+  //   .mark {
+  //     color: #fff; // TODO
+  //     transition: color var(--transition-duration-base) ease-out;
+  //   }
 
-    .box {
-      color: var(--color-foreground-weaker); // TODO
-      transition: color var(--transition-duration-base) ease-out;
-    }
-  }
-  input:checked + label {
-    .box {
-      color: var(--color-functional-accent);
-    }
-  }
+  //   .box {
+  //     color: var(--color-foreground-weaker); // TODO
+  //     transition: color var(--transition-duration-base) ease-out;
+  //   }
+  // }
+  // input:checked + label {
+  //   .box {
+  //     color: var(--color-functional-accent);
+  //   }
+  // }
 </style>

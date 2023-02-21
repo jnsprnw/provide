@@ -29,9 +29,9 @@
 </div>
 
 <style lang="scss">
-  @import '../../../styles/global.scss';
+  // @import '../../../styles/global.scss';
 
-  .geography-selection {
-    @include selection-panel();
-  }
+  // .geography-selection {
+  //   @include selection-panel();
+  // }
 </style>
