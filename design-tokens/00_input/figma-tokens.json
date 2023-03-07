@@ -1,196 +1,6 @@
 {
   "_palettes": {
     "color": {
-      "grey": {
-        "100": {
-          "value": "#191919",
-          "type": "color"
-        },
-        "300": {
-          "value": "#3d4246",
-          "type": "color"
-        },
-        "400": {
-          "value": "#6b7581",
-          "type": "color"
-        },
-        "500": {
-          "value": "#9ea9b5",
-          "type": "color"
-        },
-        "600": {
-          "value": "#c0c8d2",
-          "type": "color"
-        },
-        "750": {
-          "value": "#e0e2e4",
-          "type": "color"
-        },
-        "800": {
-          "value": "#f1f2f3",
-          "type": "color"
-        },
-        "900": {
-          "value": "#FFF",
-          "type": "color"
-        },
-        "000": {
-          "value": "#000",
-          "type": "color"
-        }
-      },
-      "teal": {
-        "100": {
-          "value": "#002348",
-          "type": "color"
-        },
-        "200": {
-          "value": "#0E3E63",
-          "type": "color"
-        },
-        "300": {
-          "value": "#215A7D",
-          "type": "color"
-        },
-        "400": {
-          "value": "#377796",
-          "type": "color"
-        },
-        "500": {
-          "value": "#5196AE",
-          "type": "color"
-        },
-        "600": {
-          "value": "#79ABBC",
-          "type": "color"
-        },
-        "700": {
-          "value": "#9FC1CC",
-          "type": "color"
-        },
-        "800": {
-          "value": "#C3D6DC",
-          "type": "color"
-        },
-        "900": {
-          "value": "#E8ECED",
-          "type": "color"
-        }
-      },
-      "red": {
-        "100": {
-          "value": "#8D1000",
-          "type": "color"
-        },
-        "200": {
-          "value": "#a12917",
-          "type": "color"
-        },
-        "300": {
-          "value": "#b53d2b",
-          "type": "color"
-        },
-        "400": {
-          "value": "#c9513f",
-          "type": "color"
-        },
-        "500": {
-          "value": "#dc6454",
-          "type": "color"
-        },
-        "600": {
-          "value": "#e98676",
-          "type": "color"
-        },
-        "700": {
-          "value": "#f3a79a",
-          "type": "color"
-        },
-        "800": {
-          "value": "#fbc8bf",
-          "type": "color"
-        },
-        "900": {
-          "value": "#FFE9E5",
-          "type": "color"
-        }
-      },
-      "red-dark": {
-        "100": {
-          "value": "#400C0A",
-          "type": "color"
-        },
-        "200": {
-          "value": "#601817",
-          "type": "color"
-        },
-        "300": {
-          "value": "#832521",
-          "type": "color"
-        },
-        "400": {
-          "value": "#A7332A",
-          "type": "color"
-        },
-        "500": {
-          "value": "#CC4233",
-          "type": "color"
-        },
-        "600": {
-          "value": "#DA5C4B",
-          "type": "color"
-        },
-        "700": {
-          "value": "#E77463",
-          "type": "color"
-        },
-        "800": {
-          "value": "#F38C7C",
-          "type": "color"
-        },
-        "900": {
-          "value": "#FEA496",
-          "type": "color"
-        }
-      },
-      "teal-dark": {
-        "100": {
-          "value": "#093A45",
-          "type": "color"
-        },
-        "200": {
-          "value": "#175462",
-          "type": "color"
-        },
-        "300": {
-          "value": "#256f81",
-          "type": "color"
-        },
-        "400": {
-          "value": "#348ba1",
-          "type": "color"
-        },
-        "500": {
-          "value": "#44a8c3",
-          "type": "color"
-        },
-        "600": {
-          "value": "#66b5cb",
-          "type": "color"
-        },
-        "700": {
-          "value": "#83c3d4",
-          "type": "color"
-        },
-        "800": {
-          "value": "#9ed0dd",
-          "type": "color"
-        },
-        "900": {
-          "value": "#B8DEE7",
-          "type": "color"
-        }
-      },
       "petrol": {
         "50": {
           "value": "#F6FAFE",
@@ -276,6 +86,10 @@
         }
       },
       "grayCold": {
+        "0": {
+          "value": "#FFFFFF",
+          "type": "color"
+        },
         "50": {
           "value": "#F6FAFE",
           "type": "color"
@@ -475,7 +289,7 @@
           "type": "borderRadius"
         },
         "bigger": {
-          "value": "3",
+          "value": "4",
           "type": "borderRadius"
         }
       }
@@ -577,7 +391,7 @@
     "typography": {
       "fontFamily": {
         "base": {
-          "value": "BundesSans Office",
+          "value": "Lato",
           "type": "fontFamilies"
         },
         "heading": {
@@ -595,7 +409,7 @@
           "type": "lineHeights"
         },
         "tighter": {
-          "value": "145%",
+          "value": "140%",
           "type": "lineHeights"
         },
         "tightest": {
@@ -860,11 +674,11 @@
       "parameter": {
         "fontSize": {
           "scaleFactor": {
-            "value": "1.33",
+            "value": "1.2",
             "type": "other"
           },
           "scaleFactorBelowOne": {
-            "value": "1.1",
+            "value": "1.15",
             "type": "other"
           },
           "base": {
@@ -1025,12 +839,12 @@
       },
       "background": {
         "base": {
-          "value": "{color.grey.900}",
+          "value": "{color.grayCold.0}",
           "type": "color",
           "description": "The default light background color, used e.g. as a backdrop for charts or cards."
         },
         "weaker": {
-          "value": "{color.grayCold.50}",
+          "value": "#F2F6F7",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
         },
@@ -1059,7 +873,7 @@
       },
       "text": {
         "base": {
-          "value": "{color.grey.100}",
+          "value": "{color.grayCold.900}",
           "type": "color",
           "description": "Default text color for strong background contrast."
         },
@@ -1081,17 +895,17 @@
       },
       "theme": {
         "weaker": {
-          "value": "{color.petrol.400}",
+          "value": "#547D94",
           "type": "color",
           "description": "Weaker version of theme color"
         },
         "base": {
-          "value": "{color.petrol.700}",
+          "value": "#1C4C64",
           "type": "color",
           "description": "Main theme color, usually the brand color."
         },
         "stronger": {
-          "value": "{color.petrol.800}",
+          "value": "#071D2B",
           "type": "color",
           "description": "Stronger version of theme color"
         }
