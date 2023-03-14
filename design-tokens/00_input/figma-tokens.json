@@ -844,58 +844,62 @@
           "description": "The default light background color, used e.g. as a backdrop for charts or cards."
         },
         "weaker": {
-          "value": "#F4F6F7",
+          "value": "#F5F7F7",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
         },
         "weakest": {
-          "value": "{color.grayCold.100}",
+          "value": "#DCE0E3",
           "type": "color",
           "description": "A shaded background color, used e.g. as a backdrop in containers."
         }
       },
       "foreground": {
         "base": {
-          "value": "{color.grayCold.900}",
+          "value": "#1B1E20",
           "type": "color",
           "description": "Used for elements in the foreground that have a strong contrast to the background."
         },
-        "weaker": {
-          "value": "{color.grayCold.400}",
+        "weak": {
+          "value": "#616A72",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
         },
-        "weakest": {
-          "value": "{color.grayCold.200}",
+        "weaker": {
+          "value": "#99A4AC",
           "type": "color",
           "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
+        },
+        "weakest": {
+          "value": "#BAC1C7",
+          "type": "color"
         }
       },
       "text": {
         "base": {
-          "value": "{color.grayCold.900}",
+          "value": "#1B1E20",
           "type": "color",
           "description": "Default text color for strong background contrast."
         },
         "weaker": {
-          "value": "{color.grayCold.600}",
+          "value": "#616A72",
           "type": "color",
           "description": "Text color with weaker background contrast."
         }
       },
       "theme": {
         "weaker": {
-          "value": "{color.petrol.500}",
+          "value": "#316F91",
           "type": "color",
           "description": "Weaker version of theme color"
         },
         "base": {
-          "value": "{color.petrol.600}",
+          "value": "#155375",
           "type": "color",
           "description": "Main theme color, usually the brand color."
         },
         "stronger": {
-          "value": "#071D2B",
+          "value": "#0E3950",
           "type": "color",
           "description": "Stronger version of theme color"
         }
