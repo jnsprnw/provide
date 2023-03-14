@@ -844,7 +844,7 @@
           "description": "The default light background color, used e.g. as a backdrop for charts or cards."
         },
         "weaker": {
-          "value": "#F2F6F7",
+          "value": "#F4F6F7",
           "type": "color",
           "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
         },
@@ -861,12 +861,12 @@
           "description": "Used for elements in the foreground that have a strong contrast to the background."
         },
         "weaker": {
-          "value": "{color.grayCold.600}",
+          "value": "{color.grayCold.400}",
           "type": "color",
           "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
         },
         "weakest": {
-          "value": "{color.grayCold.300}",
+          "value": "{color.grayCold.200}",
           "type": "color",
           "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
         }
@@ -881,26 +881,16 @@
           "value": "{color.grayCold.600}",
           "type": "color",
           "description": "Text color with weaker background contrast."
-        },
-        "inverted": {
-          "base": {
-            "value": "#f8f8f8",
-            "type": "color"
-          },
-          "weaker": {
-            "value": "#ABAFB0",
-            "type": "color"
-          }
         }
       },
       "theme": {
         "weaker": {
-          "value": "#547D94",
+          "value": "{color.petrol.500}",
           "type": "color",
           "description": "Weaker version of theme color"
         },
         "base": {
-          "value": "#1C4C64",
+          "value": "{color.petrol.600}",
           "type": "color",
           "description": "Main theme color, usually the brand color."
         },
@@ -940,15 +930,15 @@
       "category": {
         "base": {
           "0": {
-            "value": "#297cb5",
+            "value": "#C94C24",
             "type": "color"
           },
           "1": {
-            "value": "#905ea7",
+            "value": "#58CBD3",
             "type": "color"
           },
           "2": {
-            "value": "#de5f4a",
+            "value": "#F4BD49",
             "type": "color"
           },
           "3": {
