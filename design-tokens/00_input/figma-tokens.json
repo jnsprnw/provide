@@ -871,7 +871,7 @@
           "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
         },
         "weakest": {
-          "value": "#BAC1C7",
+          "value": "#DCE0E3",
           "type": "color"
         }
       },
