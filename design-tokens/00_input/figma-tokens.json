@@ -875,18 +875,6 @@
           "type": "color"
         }
       },
-      "text": {
-        "base": {
-          "value": "#1B1E20",
-          "type": "color",
-          "description": "Default text color for strong background contrast."
-        },
-        "weaker": {
-          "value": "#616A72",
-          "type": "color",
-          "description": "Text color with weaker background contrast."
-        }
-      },
       "theme": {
         "weaker": {
           "value": "#316F91",
@@ -958,7 +946,7 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.500}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -988,7 +976,7 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.600}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -1018,7 +1006,7 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.400}",
+            "value": "#ffffff",
             "type": "color"
           }
         }
@@ -1026,12 +1014,12 @@
       "diverging": {
         "negative": {
           "1": {
-            "value": "{color.red.600}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
           },
           "2": {
-            "value": "{color.red.200}",
+            "value": "#ffffff",
             "type": "color",
             "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
           }
@@ -1043,12 +1031,12 @@
         },
         "positive": {
           "1": {
-            "value": "{color.teal.600}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Fourth step in the base diverging color scale, used for values higher than zero (or data median)."
           },
           "2": {
-            "value": "{color.sequential.positive.3}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Fifth step in the base diverging color scale, used for the highest (most positive) value. "
           }
@@ -1056,75 +1044,75 @@
       },
       "complementary": {
         "weaker": {
-          "value": "{color.red.600}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Weaker version of complementary color."
         },
         "base": {
-          "value": "{color.red.500}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Main complementary color."
         },
         "stronger": {
-          "value": "{color.red.200}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Stronger version of complementary color."
         }
       },
       "sequential": {
         "0": {
-          "value": "{color.sequential.positive.0}",
+          "value": "#ffffff",
           "type": "color"
         },
         "1": {
-          "value": "{color.sequential.positive.1}",
+          "value": "#ffffff",
           "type": "color"
         },
         "2": {
-          "value": "{color.sequential.positive.2}",
+          "value": "#ffffff",
           "type": "color"
         },
         "3": {
-          "value": "{color.sequential.positive.3}",
+          "value": "#ffffff",
           "type": "color"
         },
         "positive": {
           "0": {
-            "value": "{color.teal.800}",
+            "value": "#ffffff",
             "type": "color",
             "description": "First step in the base (theme) sequential color scale, used for the lowest value. "
           },
           "1": {
-            "value": "{color.teal.600}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Second step in the base (theme) sequential color scale."
           },
           "2": {
-            "value": "{color.teal.400}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Thirs step in the base (theme) sequential color scale."
           },
           "3": {
-            "value": "{color.teal.200}",
+            "value": "#ffffff",
             "type": "color",
             "description": "Third and final step in the base (theme) sequential color scale."
           }
         },
         "negative": {
           "0": {
-            "value": "{color.red.800}",
+            "value": "#ffffff",
             "type": "color"
           },
           "1": {
-            "value": "{color.red.600}",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "{color.red.400}",
+            "value": "#ffffff",
             "type": "color"
           },
           "3": {
-            "value": "{color.red.200}",
+            "value": "#ffffff",
             "type": "color"
           }
         }
@@ -1192,16 +1180,6 @@
           "type": "color",
           "description": "Stronger text color for maximum background contrast."
         },
-        "inverted": {
-          "base": {
-            "value": "{color.grey.100}",
-            "type": "color"
-          },
-          "weaker": {
-            "value": "{color.grey.400}",
-            "type": "color"
-          }
-        },
         "modelAspect": {
           "climate": {
             "value": "#ffcb01",
@@ -1222,15 +1200,15 @@
       },
       "theme": {
         "base": {
-          "value": "{color.teal-dark.500}",
+          "value": "#ffffff",
           "type": "color"
         },
         "weaker": {
-          "value": "{color.teal-dark.300}",
+          "value": "#ffffff",
           "type": "color"
         },
         "stronger": {
-          "value": "{color.teal-dark.700}",
+          "value": "#ffffff",
           "type": "color"
         }
       },
@@ -1269,7 +1247,7 @@
           "type": "color"
         },
         "link": {
-          "value": "{color.teal.800}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Used for links."
         }
@@ -1301,7 +1279,7 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.600}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -1331,7 +1309,7 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.500}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -1361,24 +1339,24 @@
             "type": "color"
           },
           "99": {
-            "value": "{color.grey.400}",
+            "value": "#ffffff",
             "type": "color"
           }
         }
       },
       "complementary": {
         "base": {
-          "value": "{color.red-dark.500}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
         },
         "weaker": {
-          "value": "{color.red-dark.300}",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
         },
         "stronger": {
-          "value": "{color.red-dark.600}",
+          "value": "#ffffff",
           "type": "color",
           "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
         }
@@ -1386,11 +1364,11 @@
       "diverging": {
         "positive": {
           "1": {
-            "value": "{color.teal-dark.300}",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "{color.teal-dark.600}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -1400,65 +1378,65 @@
         },
         "negative": {
           "1": {
-            "value": "{color.red-dark.300}",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "{color.red-dark.600}",
+            "value": "#ffffff",
             "type": "color"
           }
         }
       },
       "sequential": {
         "0": {
-          "value": "{color.sequential.positive.0}",
+          "value": "#ffffff",
           "type": "color"
         },
         "1": {
-          "value": "{color.sequential.positive.1}",
+          "value": "#ffffff",
           "type": "color"
         },
         "2": {
-          "value": "{color.sequential.positive.2}",
+          "value": "#ffffff",
           "type": "color"
         },
         "3": {
-          "value": "{color.sequential.positive.3}",
+          "value": "#ffffff",
           "type": "color"
         },
         "positive": {
           "0": {
-            "value": "{color.teal-dark.200}",
+            "value": "#ffffff",
             "type": "color"
           },
           "1": {
-            "value": "{color.teal-dark.400}",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "{color.teal-dark.600}",
+            "value": "#ffffff",
             "type": "color"
           },
           "3": {
-            "value": "{color.teal-dark.800}",
+            "value": "#ffffff",
             "type": "color"
           }
         },
         "negative": {
           "0": {
-            "value": "{color.red-dark.200}",
+            "value": "#ffffff",
             "type": "color"
           },
           "1": {
-            "value": "{color.red-dark.400}",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "{color.red-dark.600}",
+            "value": "#ffffff",
             "type": "color"
           },
           "3": {
-            "value": "{color.red-dark.800}",
+            "value": "#ffffff",
             "type": "color"
           }
         }
