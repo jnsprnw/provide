@@ -1,52 +1,21 @@
 <script>
-  import ThemeProvider from '$styles/ThemeProvider.svelte';
   import '$styles/app.postcss';
-  import { page } from '$app/stores';
-  import ListLink from '$lib/helper/ListLink.svelte';
-  import Banner from '$lib/helper/Banner.svelte';
-  import HtmlHead from '$lib/helper/HtmlHead.svelte';
-
-  $: currentPath = $page.routeId || '';
+  import ThemeProvider from '$styles/ThemeProvider.svelte';
+  import Header from '$lib/site/Header.svelte';
+  import Banner from '$lib/site/Banner.svelte';
+  import HtmlHead from '$lib/site/HtmlHead.svelte';
+  import Footer from '$lib/site/Footer.svelte';
 </script>
 
 <HtmlHead />
 
 <ThemeProvider>
-  <Banner />
-  <nav class="page-menu bg-background-weaker container">
-    <div class="wrapper grid">
-      <h1 class="site-logo">Provide<span class="beta-badge">Beta</span></h1>
-      <ul class="menu-main">
-        <ListLink {currentPath} link="">Home</ListLink>
-        <ListLink {currentPath} link="explore/impacts" startsWith={true}>
-          Explore
-        </ListLink>
-        <ListLink {currentPath} link="about">About</ListLink>
-        <ListLink {currentPath} link="methodology">Methodology</ListLink>
-        <ListLink {currentPath} link="glossary">Glossary</ListLink>
-        <ListLink {currentPath} link="contact">Contact</ListLink>
-      </ul>
-    </div>
-  </nav>
+  <!-- <Banner /> -->
+  <Header />
   <main class="page-main container">
     <slot />
   </main>
-  <footer class="page-footer container">
-    <div class="wrapper grid">
-      <div class="page-author">
-        <strong class="page-name">Provide</strong>
-        <span>Climate Analytics 2022</span>
-      </div>
-      <nav class="page-sitemap">
-        <ul>
-          <li><a href="/about" {currentPath}>About</a></li>
-          <li><a href="/methodology" {currentPath}>Methodology</a></li>
-          <li><a href="/glossary" {currentPath}>Glossary</a></li>
-          <li><a href="/contact" {currentPath}>Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </footer>
+  <Footer />
 </ThemeProvider>
 
 <style lang="postcss">

@@ -4,7 +4,7 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte}'],
   theme: {
     fontFamily: {
-      sans: ['Gudea', 'sans-serif'],
+      sans: ['Lato', 'sans-serif'],
     },
     extend: {
       colors: {
