@@ -38,7 +38,7 @@
   {/if}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .chart-container {
     width: 100%;
     height: 100%;

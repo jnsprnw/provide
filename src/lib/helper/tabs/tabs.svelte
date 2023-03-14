@@ -90,7 +90,7 @@
 </div>
 <slot name="content" />
 
-<style lang="scss">
+<style lang="postcss">
   @import '../../../styles/global.scss';
 
   .tabs {

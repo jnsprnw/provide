@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .contact-content {
     .btn {
       margin-top: var(--space-s);

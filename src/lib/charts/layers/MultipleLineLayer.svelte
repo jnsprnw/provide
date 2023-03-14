@@ -70,7 +70,7 @@
   {/key}
 {/each}
 
-<style lang="scss">
+<style lang="postcss">
   .path-line {
     fill: none;
     stroke-linejoin: round;

@@ -93,7 +93,7 @@
   <Map hovered={hoveredGeography} selected={$CURRENT_GEOGRAPHY_UID} />
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   // @import '../../../styles/global.scss';
 
   // .searchbox {

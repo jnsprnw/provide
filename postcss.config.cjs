@@ -1,11 +1,13 @@
-const autoprefixer = require("autoprefixer");
-const extend = require("postcss-extend");
-const nested = require("postcss-nested");
-const customMedia = require("postcss-custom-media");
-const each = require("postcss-each");
+const autoprefixer = require('autoprefixer');
+const extend = require('postcss-extend');
+const nested = require('postcss-nested');
+const customMedia = require('postcss-custom-media');
+const each = require('postcss-each');
+const tailwind = require('tailwindcss');
 
 const config = {
-	plugins: [autoprefixer, extend, nested, customMedia, each],
+  parser: 'postcss-scss',
+  plugins: [nested, extend, customMedia, each, tailwind, autoprefixer],
 };
 
 module.exports = config;

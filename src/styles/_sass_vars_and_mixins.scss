@@ -3,7 +3,7 @@
 	SASS variables
 	When possible, prefer css vars, but e.g. breakpoints can only be set with sass	
 
-	Import this stylesheet in e.g. svelte components that need to make media queries or use the mixins defined below. (Make sure to use <style lang="scss">.)
+	Import this stylesheet in e.g. svelte components that need to make media queries or use the mixins defined below. (Make sure to use <style lang="postcss">.)
 
 */
 
@@ -82,10 +82,10 @@
   --color-text-weaker: var(--color-#{$theme}-text-weaker);
   --color-text-base: var(--color-#{$theme}-text-base);
 
-  @if #{$theme} == "light" {
+  @if #{$theme} == 'light' {
     --blend-mode: multiply;
   }
-  @if #{$theme} == "dark" {
+  @if #{$theme} == 'dark' {
     --blend-mode: screen;
   }
 }

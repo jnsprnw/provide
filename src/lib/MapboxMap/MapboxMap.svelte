@@ -87,7 +87,7 @@
   <slot />
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
   .container {
     display: block;
     width: 100%;

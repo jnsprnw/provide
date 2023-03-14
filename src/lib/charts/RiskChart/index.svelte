@@ -52,7 +52,7 @@
   </LayerCake>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .chart-container {
     width: 75%;
     height: 100%;

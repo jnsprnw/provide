@@ -1,0 +1,115 @@
+{
+  "color": {
+    "meta": {
+      "label": "Dark"
+    },
+    "blendMode": {
+      "additive": "screen",
+      "max": "lighten"
+    },
+    "background": {
+      "base": "#202020",
+      "weaker": "#303030",
+      "weakest": "#666666"
+    },
+    "foreground": {
+      "base": "#eeeeee",
+      "weaker": "#aaaaaa",
+      "weakest": "#777777"
+    },
+    "text": {
+      "weaker": "#aaaaaa",
+      "base": "#dddddd",
+      "stronger": "#ffffff",
+      "inverted": {
+        "base": "#191919",
+        "weaker": "#6b7581"
+      },
+      "modelAspect": {
+        "climate": "#ffcb01",
+        "conflict": "#fa5a6d",
+        "scopeConditions": "#90d3fb"
+      }
+    },
+    "theme": {
+      "base": "#44a8c3",
+      "weaker": "#256f81",
+      "stronger": "#83c3d4"
+    },
+    "modelAspect": {
+      "climate": "#ffcb01",
+      "conflict": "#fa5a6d",
+      "scopeConditions": "#90d3fb"
+    },
+    "functional": {
+      "accent": "#bfc4f9",
+      "focus": "#ffcb01",
+      "not-available": "#cccccc",
+      "filtered-out": "#474b69",
+      "link": "#c3d6dc"
+    },
+    "category": {
+      "stronger": {
+        "0": "#83bad9",
+        "1": "#b386c8",
+        "2": "#e38c7c",
+        "3": "#f8c975",
+        "4": "#83c0a4",
+        "5": "#ced56d",
+        "99": "#c0c8d2"
+      },
+      "base": {
+        "0": "#22699a",
+        "1": "#825497",
+        "2": "#c85543",
+        "3": "#dc9d38",
+        "4": "#458a69",
+        "5": "#7e8518",
+        "99": "#9ea9b5"
+      },
+      "weaker": {
+        "0": "#124874",
+        "1": "#613f70",
+        "2": "#993d31",
+        "3": "#a07730",
+        "4": "#366d53",
+        "5": "#575b20",
+        "99": "#6b7581"
+      }
+    },
+    "complementary": {
+      "base": "#cc4233",
+      "weaker": "#832521",
+      "stronger": "#da5c4b"
+    },
+    "diverging": {
+      "positive": {
+        "1": "#256f81",
+        "2": "#66b5cb"
+      },
+      "neutral": "#2c343e",
+      "negative": {
+        "1": "#832521",
+        "2": "#da5c4b"
+      }
+    },
+    "sequential": {
+      "0": "#175462",
+      "1": "#348ba1",
+      "2": "#66b5cb",
+      "3": "#9ed0dd",
+      "positive": {
+        "0": "#175462",
+        "1": "#348ba1",
+        "2": "#66b5cb",
+        "3": "#9ed0dd"
+      },
+      "negative": {
+        "0": "#601817",
+        "1": "#a7332a",
+        "2": "#da5c4b",
+        "3": "#f38c7c"
+      }
+    }
+  }
+}

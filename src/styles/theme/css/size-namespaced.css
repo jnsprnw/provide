@@ -1,0 +1,72 @@
+:root {
+  --size-large-parameter-font-size-scale-factor: 1.33;
+  --size-large-parameter-font-size-scale-factor-below-one: 1.1;
+  --size-large-parameter-font-size-base: 16;
+  --size-large-parameter-space-scale-factor: 1.5;
+  --size-large-parameter-space-scale-factor-below-one: 1.5;
+  --size-large-parameter-space-base: 24;
+  --size-large-chart-width: 920;
+  --size-large-viewport-limit: 1440;
+  --size-large-meta-label: Large;
+  --size-large-border-width-s: 0.5; /* The smallest border size. Used for gridlines. */
+  --size-large-border-width-m: 1; /* The default border size. Used for axes borders, default data lines. */
+  --size-large-border-width-l: 2; /* A larger border size. Used for borders between filled elements. */
+  --size-large-border-width-xl: 3; /* A larger border size. Used for lines in focus, and the bottom chart container line. */
+  --size-large-border-width-xxl: 4; /* The largest border size. Used for the top chart container line. */
+  --size-large-font-size-xs: 14;
+  --size-large-font-size-s: 15;
+  --size-large-font-size-m: 16;
+  --size-large-font-size-l: 21;
+  --size-large-font-size-xl: 28;
+  --size-large-font-size-xxl: 37;
+  --size-large-font-size-xxxl: 49;
+  --size-large-font-size-xxxxl: 65;
+  --size-large-font-size-xxxxxl: 86;
+  --size-large-space-xxxxs: 3;
+  --size-large-space-xxxs: 5;
+  --size-large-space-xxs: 7;
+  --size-large-space-xs: 11;
+  --size-large-space-s: 16;
+  --size-large-space-m: 24;
+  --size-large-space-l: 36;
+  --size-large-space-xl: 54;
+  --size-large-space-xxl: 81;
+  --size-large-space-xxxl: 122;
+  --size-large-space-xxxxl: 183;
+  --size-large-space-xxxxxl: 275;
+  --size-small-parameter-font-size-scale-factor: 1.2;
+  --size-small-parameter-font-size-scale-factor-below-one: 1.1;
+  --size-small-parameter-font-size-base: 14;
+  --size-small-parameter-space-scale-factor: 1.33;
+  --size-small-parameter-space-scale-factor-below-one: 1.5;
+  --size-small-parameter-space-base: 14;
+  --size-small-chart-width: 480;
+  --size-small-viewport-limit: 480;
+  --size-small-meta-label: Small;
+  --size-small-border-width-s: 0.5; /* The smallest border size. Used for gridlines. */
+  --size-small-border-width-m: 1; /* The default border size. Used for axes borders, default data lines. */
+  --size-small-border-width-l: 1.5; /* A larger border size. Used for borders between filled elements. */
+  --size-small-border-width-xl: 2; /* A larger border size. Used for lines in focus, and the bottom chart container line. */
+  --size-small-border-width-xxl: 3; /* The largest border size. Used for the top chart container line. */
+  --size-small-font-size-xs: 12;
+  --size-small-font-size-s: 13;
+  --size-small-font-size-m: 14;
+  --size-small-font-size-l: 17;
+  --size-small-font-size-xl: 20;
+  --size-small-font-size-xxl: 24;
+  --size-small-font-size-xxxl: 29;
+  --size-small-font-size-xxxxl: 35;
+  --size-small-font-size-xxxxxl: 42;
+  --size-small-space-xxxxs: 2;
+  --size-small-space-xxxs: 3;
+  --size-small-space-xxs: 4;
+  --size-small-space-xs: 6;
+  --size-small-space-s: 9;
+  --size-small-space-m: 14;
+  --size-small-space-l: 19;
+  --size-small-space-xl: 25;
+  --size-small-space-xxl: 33;
+  --size-small-space-xxxl: 44;
+  --size-small-space-xxxxl: 59;
+  --size-small-space-xxxxxl: 78;
+}

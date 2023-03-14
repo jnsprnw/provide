@@ -7,12 +7,12 @@
   /** Set to `true` to disable the tile group */
   export let disabled = false;
   /** Specify the legend text */
-  export let legend = "";
-  import { createEventDispatcher, setContext } from "svelte";
-  import { writable } from "svelte/store";
+  export let legend = '';
+  import { createEventDispatcher, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
   const dispatch = createEventDispatcher();
   const selectedValue = writable(selected);
-  setContext("TileGroup", {
+  setContext('TileGroup', {
     selectedValue,
     add: ({ checked, value }) => {
       if (checked) {
@@ -21,26 +21,29 @@
     },
     update: (value) => {
       selectedValue.set(value);
-      dispatch("select", value);
+      dispatch('select', value);
     },
   });
   $: selected = $selectedValue;
   $: selectedValue.set(selected);
 </script>
 
-<fieldset disabled="{disabled}" class:tile-group="{true}" {...$$restProps}>
-  <legend class:text-label="{true}" class:text-label--bold={true}>{legend}</legend>
+<fieldset {disabled} class:tile-group={true} {...$$restProps}>
+  <legend class:text-label={true} class:text-label--bold={true}>{legend}</legend
+  >
   <div class="tile-group-content">
     <slot />
   </div>
 </fieldset>
 
-<style lang="scss">
-  @import "../../../styles/global.scss";
+<style lang="postcss">
+  @import '../../../styles/global.scss';
 
   .tile-group {
     legend {
-      margin-bottom: var(--size-space-large-xxxs); // I don't know why flex or grid gap is not working here.
+      margin-bottom: var(
+        --size-space-large-xxxs
+      ); // I don't know why flex or grid gap is not working here.
     }
 
     @include unstyle-fieldset();

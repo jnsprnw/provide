@@ -56,7 +56,7 @@
   >
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .root {
     display: flex;
     align-items: center;

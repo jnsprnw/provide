@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .wrapper {
     display: flex;
     align-items: center;

@@ -107,7 +107,7 @@
   </svg>
 </figure>
 
-<style lang="scss">
+<style lang="postcss">
   path {
     fill: var(--color-foreground-weakest);
     transition: fill var(--transition-duration-quick) ease-out;

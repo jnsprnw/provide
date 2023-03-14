@@ -46,7 +46,7 @@
   {/each}
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .root {
     width: 100%;
   }

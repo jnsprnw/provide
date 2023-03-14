@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .paths {
     margin: var(--space-l) 0;
   }

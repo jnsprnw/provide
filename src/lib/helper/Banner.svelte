@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .banner {
     padding: var(--space-xxs) var(--space-s) var(--space-xs);
     background: var(--color-functional-warn);

@@ -36,7 +36,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .section {
     .topic {
       grid-column: 1 / span 6;

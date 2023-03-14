@@ -42,7 +42,7 @@
   </g>
 {/if}
 
-<style lang="scss">
+<style lang="postcss">
   .line {
     stroke-width: 2;
     stroke: var(--color-foreground-weakest);

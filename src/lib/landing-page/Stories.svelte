@@ -133,7 +133,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .stories {
     background-color: var(--color-background-stronger);
     width: 100%;
@@ -170,8 +170,6 @@
         margin: var(--space-xl) var(--space-m) var(--space-xxl);
         border-radius: var(--radius-interactive-l);
         max-width: 40ch;
-        // box-shadow: var(--space-xxs) var(--space-xxs) 10px
-        //   var(--color-background-strongest);
 
         .story-wrapper {
           transition: height 0.3s ease-out;

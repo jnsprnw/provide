@@ -104,7 +104,7 @@
   </g>
 {/each}
 
-<style lang="scss">
+<style lang="postcss">
   .sector {
     stroke: var(--color-background-base);
     stroke-width: 1;

@@ -175,7 +175,7 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   // @import '../../../styles/global.scss';
 
   //   .scenario-selection {

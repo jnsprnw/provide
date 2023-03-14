@@ -195,7 +195,7 @@
   </div>
 </LoadingWrapper>
 
-<style lang="scss">
+<style lang="postcss">
   .chart-info {
     grid-column: 1 / -1;
   }

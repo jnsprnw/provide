@@ -57,7 +57,7 @@
   </div>
 </li>
 
-<style lang="scss">
+<style lang="postcss">
   @import '../../../styles/global.scss';
 
   .tab {

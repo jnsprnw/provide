@@ -30,7 +30,7 @@
   </g>
 {/each}
 
-<style lang="scss">
+<style lang="postcss">
   .dot {
     pointer-events: none;
     stroke-width: 2px;

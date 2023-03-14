@@ -7,7 +7,7 @@
   /** Set to `true` to disable the radio buttons */
   export let disabled = false;
   /** Specify the legend text */
-  export let legendText = "";
+  export let legendText = '';
   /** Set to `true` to visually hide the legend */
   export let hideLegend = false;
   /**
@@ -20,11 +20,11 @@
     createEventDispatcher,
     onMount,
     setContext,
-  } from "svelte";
-  import { writable } from "svelte/store";
+  } from 'svelte';
+  import { writable } from 'svelte/store';
   const dispatch = createEventDispatcher();
   const selectedValue = writable(selected);
-  setContext("RadioButtonGroup", {
+  setContext('RadioButtonGroup', {
     selectedValue,
     add: ({ checked, value }) => {
       if (checked) {
@@ -43,14 +43,14 @@
   });
   selectedValue.subscribe((value) => {
     selected = value;
-    dispatch("change", value);
+    dispatch('change', value);
   });
 </script>
 
 <!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
-  id="{id}"
-  class:form-item="{true}"
+  {id}
+  class:form-item={true}
   {...$$restProps}
   on:click
   on:mouseover
@@ -59,13 +59,13 @@
 >
   <fieldset class="radio-button-group">
     <legend class="label text-label text-label--bold">
-      { legendText }
+      {legendText}
     </legend>
     <slot />
   </fieldset>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .radio-button-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

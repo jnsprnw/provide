@@ -81,7 +81,7 @@
   </div>
 </LoadingWrapper>
 
-<style lang="scss">
+<style lang="postcss">
   .preview-chart {
     height: 25px;
     max-width: 100px;

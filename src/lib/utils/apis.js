@@ -1,12 +1,18 @@
 import { get } from 'lodash-es';
 
-export const loadFromStrapi = function (url, fetch) {
+export const loadFromStrapi = function (path, fetch) {
+  const url = `https://provide-cms.herokuapp.com/api/${path}?populate=*`;
   return new Promise(async (resolve) => {
-    const res = await fetch(
-      `https://provide-cms.herokuapp.com/api/${url}?populate=*`
-    );
-    const data = await res.json();
-    resolve(data.data);
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+      resolve(data.data);
+    } catch (e) {
+      console.log('Failed to fetch ', url);
+      console.log(e);
+      const res = await loadFromStrapi(path, fetch);
+      resolve(res);
+    }
   });
 };
 

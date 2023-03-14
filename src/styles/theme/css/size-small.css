@@ -1,0 +1,44 @@
+:where(.size-small) {
+  --typography-style-minor-secondary: [object Object]; /* Used for tick labels, secondary annotations, footer text. */
+  --typography-style-minor-primary: [object Object]; /* Used for smaller annotations in charts. */
+  --typography-style-major-secondary: [object Object]; /* Used for secondary legend labels, description, and the chart subtitle. */
+  --typography-style-major-primary: [object Object]; /* Used for legend main labels, as well as individual value annotations. */
+  --typography-style-large: [object Object]; /* Used for the title of a chart. */
+  --typography-style-huge: [object Object]; /* Used for summary statistics, large numbers, etc. */
+  --typography-style-base: [object Object]; /* The default text style. */
+  --size-space-xxxxxl: 78px;
+  --size-space-xxxxl: 59px;
+  --size-space-xxxl: 44px;
+  --size-space-xxl: 33px;
+  --size-space-xl: 25px;
+  --size-space-l: 19px;
+  --size-space-m: 14px;
+  --size-space-s: 9px;
+  --size-space-xs: 6px;
+  --size-space-xxs: 4px;
+  --size-space-xxxs: 3px;
+  --size-space-xxxxs: 2px;
+  --size-font-size-xxxxxl: 42px;
+  --size-font-size-xxxxl: 35px;
+  --size-font-size-xxxl: 29px;
+  --size-font-size-xxl: 24px;
+  --size-font-size-xl: 20px;
+  --size-font-size-l: 17px;
+  --size-font-size-m: 14px;
+  --size-font-size-s: 13px;
+  --size-font-size-xs: 12px;
+  --size-border-width-xxl: 3px; /* The largest border size. Used for the top chart container line. */
+  --size-border-width-xl: 2px; /* A larger border size. Used for lines in focus, and the bottom chart container line. */
+  --size-border-width-l: 1.5px; /* A larger border size. Used for borders between filled elements. */
+  --size-border-width-m: 1px; /* The default border size. Used for axes borders, default data lines. */
+  --size-border-width-s: 0.5px; /* The smallest border size. Used for gridlines. */
+  --size-meta-label: Small;
+  --size-viewport-limit: 480px;
+  --size-chart-width: 480px;
+  --size-parameter-space-base: 14;
+  --size-parameter-space-scale-factor-below-one: 1.5;
+  --size-parameter-space-scale-factor: 1.33;
+  --size-parameter-font-size-base: 14;
+  --size-parameter-font-size-scale-factor-below-one: 1.1;
+  --size-parameter-font-size-scale-factor: 1.2;
+}

@@ -89,26 +89,26 @@
   </div>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   //@import '../../../../styles/global.scss';
 
-  // .header {
-  //   // margin-bottom: var(--space-s);
-  //   align-items: end;
-  // }
+  .header {
+    //margin-bottom: var(--space-s);
+    align-items: end;
+  }
 
-  // .chart-info {
-  //   grid-column: 1 / span 6;
-  //   @include chart-info-layout();
-  // }
+  .chart-info {
+    grid-column: 1 / span 6;
+    @include chart-info-layout();
+  }
 
-  // .controls {
-  //   display: flex;
-  //   justify-content: flex-end;
-  //   grid-column: -1 / -5;
-  // }
+  .controls {
+    display: flex;
+    justify-content: flex-end;
+    grid-column: -1 / -5;
+  }
 
-  // .control {
-  //   margin-left: var(--space-m);
-  // }
+  .control {
+    margin-left: var(--space-m);
+  }
 </style>

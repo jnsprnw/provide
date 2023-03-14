@@ -32,7 +32,7 @@
   <span class="btn btn--big" aria-disabled="true">In development</span>
 </section>
 
-<style lang="scss">
+<style lang="postcss">
   header {
     grid-column: 2 / -2;
     margin: var(--space-xxxl) 0;

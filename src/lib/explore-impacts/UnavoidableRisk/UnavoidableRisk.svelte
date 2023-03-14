@@ -135,7 +135,7 @@
   </div>
 </LoadingWrapper>
 
-<style lang="scss">
+<style lang="postcss">
   //@import '../../../../styles/global.scss';
 
   // .chart-container {
