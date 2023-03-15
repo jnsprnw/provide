@@ -1,5 +1,5 @@
 <script>
-  import Select from '$lib/helper/select/index.svelte';
+  import Select from '$lib/controls/Select/Select.svelte';
   import {
     CURRENT_INDICATOR_PARAMETERS,
     CURRENT_INDICATOR_OPTION_VALUES,
@@ -19,7 +19,7 @@
     });
 </script>
 
-<div class="flex">
+<div class="flex gap-4">
   {#each parameters as parameter}
     <Select {...parameter} on:change={handleChange} />
   {/each}

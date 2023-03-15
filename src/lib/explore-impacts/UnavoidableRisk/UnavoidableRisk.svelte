@@ -11,7 +11,7 @@
   import RiskChart from '$lib/charts/RiskChart/index.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
-  import Select from '$lib/helper/select/index.svelte';
+  import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
   import {

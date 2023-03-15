@@ -1,5 +1,5 @@
 <script>
-  import Select from '$lib/helper/select/index.svelte';
+  import Select from '$lib/controls/Select/Select.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
   import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';

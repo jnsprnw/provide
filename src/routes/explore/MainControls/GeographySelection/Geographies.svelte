@@ -1,9 +1,7 @@
 <script>
-  import {
-    RadioGroup,
-    RadioGroupLabel,
-    RadioGroupOption,
-  } from '@rgossiaux/svelte-headlessui';
+  import InteractiveListItem from '$lib/controls/InteractiveListItem.svelte';
+  import VirtualList from 'svelte-virtual-list';
+  import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
   import Fuse from 'fuse.js';
 
   import { sortBy } from 'lodash-es';
@@ -71,26 +69,23 @@
   );
 </script>
 
-<div>
+<div class="border-r border-foreground-weakest p-4 pb-0">
   <input type="text" bind:value={term} placeholder="Search for country…" />
   <RadioGroup
     value={current}
     on:change={(e) => (current = e.detail)}
-    class="h-96 overflow-scroll"
+    class="h-96 w-60"
   >
-    {#each results as item}
+    <VirtualList items={results} let:item>
       <RadioGroupOption value={item.uid} let:checked>
-        <div
-          class:text-theme-base={checked}
-          on:focus={() => (hoveredItem = item?.uid)}
-          on:mouseover={() => (hoveredItem = item?.uid)}
-          on:mouseleave={() => (hoveredItem = undefined)}
-        >
-          {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
-          <span>{@html item.label}</span>
-        </div>
+        <InteractiveListItem
+          {...item}
+          icon={item.emoji}
+          selected={checked}
+          bind:hovered={hoveredItem}
+        />
       </RadioGroupOption>
-    {/each}
+    </VirtualList>
   </RadioGroup>
 </div>
 
