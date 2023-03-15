@@ -1,26 +1,30 @@
 <script>
-  import VirtualList from 'svelte-virtual-list';
+  import {
+    RadioGroup,
+    RadioGroupLabel,
+    RadioGroupOption,
+  } from '@rgossiaux/svelte-headlessui';
   import Fuse from 'fuse.js';
-  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHIES } from '$stores/state.js';
-  import TileGroup from '$helper/tiles/TileGroup.svelte';
-  import RadioTile from '$helper/tiles/RadioTile.svelte';
-  import Map from './Map.svelte';
+
   import { sortBy } from 'lodash-es';
+  import Map from './Map.svelte';
+
+  export let items;
+  export let current;
 
   const options = {
     includeScore: true,
-
     keys: ['label', 'uid'],
     includeMatches: true,
   };
 
-  $: fuse = new Fuse($CURRENT_GEOGRAPHIES, options);
+  $: fuse = new Fuse(items, options);
 
   let term = '';
   let hoveredGeography;
 
   $: defaultResults = sortBy(
-    $CURRENT_GEOGRAPHIES.map((d) => ({ item: d })),
+    items.map((d) => ({ item: d })),
     ['item.hasContinent', 'item.continent.label', 'item.label']
   );
 
@@ -67,45 +71,30 @@
   );
 </script>
 
-<div class="selection-country-wrapper">
-  <TileGroup legend="Countries" bind:selected={$CURRENT_GEOGRAPHY_UID}>
-    <input
-      class="searchbox"
-      type="text"
-      bind:value={term}
-      placeholder="Search…"
-    />
-    <div class="country-container">
-      <VirtualList items={results} let:item>
-        <!-- TODO: 200px -->
-        <RadioTile
-          value={item.uid}
+<div>
+  <input type="text" bind:value={term} placeholder="Search…" />
+  <RadioGroup
+    value={current}
+    on:change={(e) => (current = e.detail)}
+    class="h-96 overflow-scroll"
+  >
+    <RadioGroupLabel>Plan</RadioGroupLabel>
+    {#each results as item}
+      <RadioGroupOption value={item.uid} let:checked>
+        <div
+          class:text-theme-base={checked}
+          on:focus={() => (hoveredGeography = item?.uid)}
           on:mouseover={() => (hoveredGeography = item?.uid)}
           on:mouseleave={() => (hoveredGeography = undefined)}
         >
-          {#if item?.continent?.label}<span>{item.continent.label}</span>{/if}
           {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
           <span>{@html item.label}</span>
-        </RadioTile>
-      </VirtualList>
-    </div>
-  </TileGroup>
-  <Map hovered={hoveredGeography} selected={$CURRENT_GEOGRAPHY_UID} />
+        </div>
+      </RadioGroupOption>
+    {/each}
+  </RadioGroup>
 </div>
 
-<style lang="postcss">
-  // @import '../../../styles/global.scss';
-
-  // .searchbox {
-  //   @include input-field();
-  // }
-
-  // .selection-country-wrapper {
-  //   display: grid;
-  //   grid-template-columns: 1fr 2fr;
-
-  //   .country-container {
-  //     height: 295px;
-  //   }
-  // }
-</style>
+<div class="w-96 self-center">
+  <Map hovered={hoveredGeography} selected={current} />
+</div>

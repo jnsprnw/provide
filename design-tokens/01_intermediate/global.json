@@ -3,7 +3,7 @@
     "style": {
       "base": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
           "lineHeight": "160%",
           "fontSize": 16,
@@ -19,7 +19,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 49,
+          "fontSize": 34,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -29,10 +29,10 @@
       },
       "subhead": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 21,
+          "fontSize": 19,
           "letterSpacing": "15%",
           "paragraphSpacing": 0,
           "textDecoration": "none",
@@ -45,7 +45,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 49,
+          "fontSize": 34,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -58,7 +58,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 37,
+          "fontSize": 28,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -71,7 +71,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 28,
+          "fontSize": 23,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -84,7 +84,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": 21,
+          "fontSize": 19,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -107,10 +107,10 @@
       },
       "caption": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
           "lineHeight": "160%",
-          "fontSize": 15,
+          "fontSize": 14,
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -121,7 +121,7 @@
     },
     "fontFamily": {
       "base": {
-        "value": "BundesSans Office",
+        "value": "Lato",
         "type": "fontFamilies"
       },
       "heading": {
@@ -139,7 +139,7 @@
         "type": "lineHeights"
       },
       "tighter": {
-        "value": "145%",
+        "value": "140%",
         "type": "lineHeights"
       },
       "tightest": {
@@ -206,11 +206,11 @@
     "parameter": {
       "fontSize": {
         "scaleFactor": {
-          "value": 1.33,
+          "value": 1.2,
           "type": "other"
         },
         "scaleFactorBelowOne": {
-          "value": 1.1,
+          "value": 1.15,
           "type": "other"
         },
         "base": {
@@ -276,11 +276,11 @@
     },
     "fontSize": {
       "xs": {
-        "value": 14,
+        "value": 12,
         "type": "fontSizes"
       },
       "s": {
-        "value": 15,
+        "value": 14,
         "type": "fontSizes"
       },
       "m": {
@@ -288,27 +288,27 @@
         "type": "fontSizes"
       },
       "l": {
-        "value": 21,
+        "value": 19,
         "type": "fontSizes"
       },
       "xl": {
-        "value": 28,
+        "value": 23,
         "type": "fontSizes"
       },
       "xxl": {
-        "value": 37,
+        "value": 28,
         "type": "fontSizes"
       },
       "xxxl": {
-        "value": 49,
+        "value": 34,
         "type": "fontSizes"
       },
       "xxxxl": {
-        "value": 65,
+        "value": 41,
         "type": "fontSizes"
       },
       "xxxxxl": {
-        "value": 86,
+        "value": 49,
         "type": "fontSizes"
       }
     },
@@ -398,7 +398,7 @@
         "type": "borderRadius"
       },
       "bigger": {
-        "value": 3,
+        "value": 4,
         "type": "borderRadius"
       }
     }

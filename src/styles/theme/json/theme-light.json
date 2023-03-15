@@ -9,26 +9,19 @@
     },
     "background": {
       "base": "#ffffff",
-      "weaker": "#f6fafe",
-      "weakest": "#dde3e8"
+      "weaker": "#f5f7f7",
+      "weakest": "#dce0e3"
     },
     "foreground": {
-      "base": "#171d21",
-      "weaker": "#595f63",
-      "weakest": "#a6acb1"
-    },
-    "text": {
-      "base": "#191919",
-      "weaker": "#595f63",
-      "inverted": {
-        "base": "#f8f8f8",
-        "weaker": "#abafb0"
-      }
+      "base": "#1b1e20",
+      "weak": "#616a72",
+      "weaker": "#99a4ac",
+      "weakest": "#dce0e3"
     },
     "theme": {
-      "weaker": "#489ac6",
-      "base": "#1c4c64",
-      "stronger": "#123446"
+      "weaker": "#316f91",
+      "base": "#155375",
+      "stronger": "#0e3950"
     },
     "functional": {
       "accent": "#c0ce6b",
@@ -39,13 +32,13 @@
     },
     "category": {
       "base": {
-        "0": "#297cb5",
-        "1": "#905ea7",
-        "2": "#de5f4a",
+        "0": "#c94c24",
+        "1": "#58cbd3",
+        "2": "#f4bd49",
         "3": "#ffa81b",
         "4": "#51a27c",
         "5": "#9da61d",
-        "99": "#9ea9b5"
+        "99": "#ffffff"
       },
       "weaker": {
         "0": "#83bad9",
@@ -54,7 +47,7 @@
         "3": "#f8c975",
         "4": "#83c0a4",
         "5": "#ced56d",
-        "99": "#c0c8d2"
+        "99": "#ffffff"
       },
       "stronger": {
         "0": "#0161a3",
@@ -63,41 +56,41 @@
         "3": "#b26d00",
         "4": "#0b5932",
         "5": "#565d00",
-        "99": "#6b7581"
+        "99": "#ffffff"
       }
     },
     "diverging": {
       "negative": {
-        "1": "#e98676",
-        "2": "#a12917"
+        "1": "#ffffff",
+        "2": "#ffffff"
       },
-      "neutral": "#dde3e8",
+      "neutral": "#dce0e3",
       "positive": {
-        "1": "#79abbc",
-        "2": "#0e3e63"
+        "1": "#ffffff",
+        "2": "#ffffff"
       }
     },
     "complementary": {
-      "weaker": "#e98676",
-      "base": "#dc6454",
-      "stronger": "#a12917"
+      "weaker": "#ffffff",
+      "base": "#ffffff",
+      "stronger": "#ffffff"
     },
     "sequential": {
-      "0": "#c3d6dc",
-      "1": "#79abbc",
-      "2": "#377796",
-      "3": "#0e3e63",
+      "0": "#ffffff",
+      "1": "#ffffff",
+      "2": "#ffffff",
+      "3": "#ffffff",
       "positive": {
-        "0": "#c3d6dc",
-        "1": "#79abbc",
-        "2": "#377796",
-        "3": "#0e3e63"
+        "0": "#ffffff",
+        "1": "#ffffff",
+        "2": "#ffffff",
+        "3": "#ffffff"
       },
       "negative": {
-        "0": "#fbc8bf",
-        "1": "#e98676",
-        "2": "#c9513f",
-        "3": "#a12917"
+        "0": "#ffffff",
+        "1": "#ffffff",
+        "2": "#ffffff",
+        "3": "#ffffff"
       }
     }
   }

@@ -4,12 +4,12 @@
       "parameter": {
         "fontSize": {
           "scaleFactor": {
-            "value": 1.33,
+            "value": 1.2,
             "type": "other",
             "filePath": "01_intermediate/namespaced-size-large.json",
             "isSource": true,
             "original": {
-              "value": 1.33,
+              "value": 1.2,
               "type": "other"
             },
             "name": "scaleFactor",
@@ -23,12 +23,12 @@
             ]
           },
           "scaleFactorBelowOne": {
-            "value": 1.1,
+            "value": 1.15,
             "type": "other",
             "filePath": "01_intermediate/namespaced-size-large.json",
             "isSource": true,
             "original": {
-              "value": 1.1,
+              "value": 1.15,
               "type": "other"
             },
             "name": "scaleFactorBelowOne",
@@ -279,12 +279,12 @@
       },
       "fontSize": {
         "xs": {
-          "value": 14,
+          "value": 12,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 14,
+            "value": 12,
             "type": "fontSizes"
           },
           "name": "xs",
@@ -297,12 +297,12 @@
           ]
         },
         "s": {
-          "value": 15,
+          "value": 14,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 15,
+            "value": 14,
             "type": "fontSizes"
           },
           "name": "s",
@@ -333,12 +333,12 @@
           ]
         },
         "l": {
-          "value": 21,
+          "value": 19,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 21,
+            "value": 19,
             "type": "fontSizes"
           },
           "name": "l",
@@ -351,12 +351,12 @@
           ]
         },
         "xl": {
-          "value": 28,
+          "value": 23,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 28,
+            "value": 23,
             "type": "fontSizes"
           },
           "name": "xl",
@@ -369,12 +369,12 @@
           ]
         },
         "xxl": {
-          "value": 37,
+          "value": 28,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 37,
+            "value": 28,
             "type": "fontSizes"
           },
           "name": "xxl",
@@ -387,12 +387,12 @@
           ]
         },
         "xxxl": {
-          "value": 49,
+          "value": 34,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 49,
+            "value": 34,
             "type": "fontSizes"
           },
           "name": "xxxl",
@@ -405,12 +405,12 @@
           ]
         },
         "xxxxl": {
-          "value": 65,
+          "value": 41,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 65,
+            "value": 41,
             "type": "fontSizes"
           },
           "name": "xxxxl",
@@ -423,12 +423,12 @@
           ]
         },
         "xxxxxl": {
-          "value": 86,
+          "value": 49,
           "type": "fontSizes",
           "filePath": "01_intermediate/namespaced-size-large.json",
           "isSource": true,
           "original": {
-            "value": 86,
+            "value": 49,
             "type": "fontSizes"
           },
           "name": "xxxxxl",
@@ -1323,12 +1323,12 @@
     "parameter": {
       "fontSize": {
         "scaleFactor": {
-          "value": 1.33,
+          "value": 1.2,
           "type": "other",
           "filePath": "01_intermediate/namespaced-typography.json",
           "isSource": true,
           "original": {
-            "value": 1.33,
+            "value": 1.2,
             "type": "other"
           },
           "name": "scaleFactor",
@@ -1341,12 +1341,12 @@
           ]
         },
         "scaleFactorBelowOne": {
-          "value": 1.1,
+          "value": 1.15,
           "type": "other",
           "filePath": "01_intermediate/namespaced-typography.json",
           "isSource": true,
           "original": {
-            "value": 1.1,
+            "value": 1.15,
             "type": "other"
           },
           "name": "scaleFactorBelowOne",
@@ -1584,7 +1584,7 @@
     },
     "fontSize": {
       "xs": {
-        "value": "round(round(round(16) / 1.1) / 1.1)",
+        "value": "round(round(round(16) / 1.15) / 1.15)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1601,7 +1601,7 @@
         ]
       },
       "s": {
-        "value": "round(round(16) / 1.1)",
+        "value": "round(round(16) / 1.15)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1635,7 +1635,7 @@
         ]
       },
       "l": {
-        "value": "round(round(16) * 1.33)",
+        "value": "round(round(16) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1652,7 +1652,7 @@
         ]
       },
       "xl": {
-        "value": "round(round(round(16) * 1.33) * 1.33)",
+        "value": "round(round(round(16) * 1.2) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1669,7 +1669,7 @@
         ]
       },
       "xxl": {
-        "value": "round(round(round(round(16) * 1.33) * 1.33) * 1.33)",
+        "value": "round(round(round(round(16) * 1.2) * 1.2) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1686,7 +1686,7 @@
         ]
       },
       "xxxl": {
-        "value": "round(round(round(round(round(16) * 1.33) * 1.33) * 1.33) * 1.33)",
+        "value": "round(round(round(round(round(16) * 1.2) * 1.2) * 1.2) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1703,7 +1703,7 @@
         ]
       },
       "xxxxl": {
-        "value": "round(round(round(round(round(round(16) * 1.33) * 1.33) * 1.33) * 1.33) * 1.33)",
+        "value": "round(round(round(round(round(round(16) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -1720,7 +1720,7 @@
         ]
       },
       "xxxxxl": {
-        "value": "round(round(round(round(round(round(round(16) * 1.33) * 1.33) * 1.33) * 1.33) * 1.33) * 1.33)",
+        "value": "round(round(round(round(round(round(round(16) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2)",
         "type": "fontSizes",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
@@ -2081,12 +2081,12 @@
         ]
       },
       "bigger": {
-        "value": 3,
+        "value": 4,
         "type": "borderRadius",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
         "original": {
-          "value": 3,
+          "value": 4,
           "type": "borderRadius"
         },
         "name": "bigger",
@@ -2330,46 +2330,6 @@
             "stronger"
           ]
         },
-        "inverted": {
-          "base": {
-            "value": "#191919",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-dark.json",
-            "isSource": true,
-            "original": {
-              "value": "#191919",
-              "type": "color"
-            },
-            "name": "base",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "text",
-              "inverted",
-              "base"
-            ]
-          },
-          "weaker": {
-            "value": "#6b7581",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-dark.json",
-            "isSource": true,
-            "original": {
-              "value": "#6b7581",
-              "type": "color"
-            },
-            "name": "weaker",
-            "attributes": {},
-            "path": [
-              "color",
-              "dark",
-              "text",
-              "inverted",
-              "weaker"
-            ]
-          }
-        },
         "modelAspect": {
           "climate": {
             "value": "#ffcb01",
@@ -2438,12 +2398,12 @@
       },
       "theme": {
         "base": {
-          "value": "#44a8c3",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#44a8c3",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "base",
@@ -2456,12 +2416,12 @@
           ]
         },
         "weaker": {
-          "value": "#256f81",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#256f81",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "weaker",
@@ -2474,12 +2434,12 @@
           ]
         },
         "stronger": {
-          "value": "#83c3d4",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#83c3d4",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "stronger",
@@ -2628,13 +2588,13 @@
           ]
         },
         "link": {
-          "value": "#C3D6DC",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Used for links.",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#C3D6DC",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Used for links."
           },
@@ -2765,12 +2725,12 @@
             ]
           },
           "99": {
-            "value": "#c0c8d2",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#c0c8d2",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -2900,12 +2860,12 @@
             ]
           },
           "99": {
-            "value": "#9ea9b5",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#9ea9b5",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -3035,12 +2995,12 @@
             ]
           },
           "99": {
-            "value": "#6b7581",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#6b7581",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -3057,13 +3017,13 @@
       },
       "complementary": {
         "base": {
-          "value": "#CC4233",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median).",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#CC4233",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
           },
@@ -3077,13 +3037,13 @@
           ]
         },
         "weaker": {
-          "value": "#832521",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median).",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#832521",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
           },
@@ -3097,13 +3057,13 @@
           ]
         },
         "stronger": {
-          "value": "#DA5C4B",
+          "value": "#ffffff",
           "type": "color",
           "comment": "First step in the based diverging color scale, used for the lowest (most negative) value. ",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#DA5C4B",
+            "value": "#ffffff",
             "type": "color",
             "comment": "First step in the based diverging color scale, used for the lowest (most negative) value. "
           },
@@ -3120,12 +3080,12 @@
       "diverging": {
         "positive": {
           "1": {
-            "value": "#256f81",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#256f81",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "1",
@@ -3139,12 +3099,12 @@
             ]
           },
           "2": {
-            "value": "#66b5cb",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#66b5cb",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "2",
@@ -3178,12 +3138,12 @@
         },
         "negative": {
           "1": {
-            "value": "#832521",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#832521",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "1",
@@ -3197,12 +3157,12 @@
             ]
           },
           "2": {
-            "value": "#DA5C4B",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#DA5C4B",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "2",
@@ -3219,12 +3179,12 @@
       },
       "sequential": {
         "0": {
-          "value": "#175462",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#175462",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "0",
@@ -3237,12 +3197,12 @@
           ]
         },
         "1": {
-          "value": "#348ba1",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#348ba1",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "1",
@@ -3255,12 +3215,12 @@
           ]
         },
         "2": {
-          "value": "#66b5cb",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#66b5cb",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "2",
@@ -3273,12 +3233,12 @@
           ]
         },
         "3": {
-          "value": "#9ed0dd",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-dark.json",
           "isSource": true,
           "original": {
-            "value": "#9ed0dd",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "3",
@@ -3292,12 +3252,12 @@
         },
         "positive": {
           "0": {
-            "value": "#175462",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#175462",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "0",
@@ -3311,12 +3271,12 @@
             ]
           },
           "1": {
-            "value": "#348ba1",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#348ba1",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "1",
@@ -3330,12 +3290,12 @@
             ]
           },
           "2": {
-            "value": "#66b5cb",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#66b5cb",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "2",
@@ -3349,12 +3309,12 @@
             ]
           },
           "3": {
-            "value": "#9ed0dd",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#9ed0dd",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "3",
@@ -3370,12 +3330,12 @@
         },
         "negative": {
           "0": {
-            "value": "#601817",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#601817",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "0",
@@ -3389,12 +3349,12 @@
             ]
           },
           "1": {
-            "value": "#A7332A",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#A7332A",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "1",
@@ -3408,12 +3368,12 @@
             ]
           },
           "2": {
-            "value": "#DA5C4B",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#DA5C4B",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "2",
@@ -3427,12 +3387,12 @@
             ]
           },
           "3": {
-            "value": "#F38C7C",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-dark.json",
             "isSource": true,
             "original": {
-              "value": "#F38C7C",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "3",
@@ -3509,13 +3469,13 @@
       },
       "background": {
         "base": {
-          "value": "#FFF",
+          "value": "#FFFFFF",
           "type": "color",
           "comment": "The default light background color, used e.g. as a backdrop for charts or cards.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#FFF",
+            "value": "#FFFFFF",
             "type": "color",
             "comment": "The default light background color, used e.g. as a backdrop for charts or cards."
           },
@@ -3529,13 +3489,13 @@
           ]
         },
         "weaker": {
-          "value": "#F6FAFE",
+          "value": "#F5F7F7",
           "type": "color",
           "comment": "A slightly shaded background color, used e.g. as a backdrop behind card elements.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#F6FAFE",
+            "value": "#F5F7F7",
             "type": "color",
             "comment": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
           },
@@ -3549,13 +3509,13 @@
           ]
         },
         "weakest": {
-          "value": "#DDE3E8",
+          "value": "#DCE0E3",
           "type": "color",
           "comment": "A shaded background color, used e.g. as a backdrop in containers.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#DDE3E8",
+            "value": "#DCE0E3",
             "type": "color",
             "comment": "A shaded background color, used e.g. as a backdrop in containers."
           },
@@ -3571,13 +3531,13 @@
       },
       "foreground": {
         "base": {
-          "value": "#171D21",
+          "value": "#1B1E20",
           "type": "color",
           "comment": "Used for elements in the foreground that have a strong contrast to the background.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#171D21",
+            "value": "#1B1E20",
             "type": "color",
             "comment": "Used for elements in the foreground that have a strong contrast to the background."
           },
@@ -3590,16 +3550,36 @@
             "base"
           ]
         },
-        "weaker": {
-          "value": "#595F63",
+        "weak": {
+          "value": "#616A72",
           "type": "color",
           "comment": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes).",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#595F63",
+            "value": "#616A72",
             "type": "color",
             "comment": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
+          },
+          "name": "weak",
+          "attributes": {},
+          "path": [
+            "color",
+            "light",
+            "foreground",
+            "weak"
+          ]
+        },
+        "weaker": {
+          "value": "#99A4AC",
+          "type": "color",
+          "comment": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)",
+          "filePath": "01_intermediate/namespaced-theme-light.json",
+          "isSource": true,
+          "original": {
+            "value": "#99A4AC",
+            "type": "color",
+            "comment": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
           },
           "name": "weaker",
           "attributes": {},
@@ -3611,15 +3591,13 @@
           ]
         },
         "weakest": {
-          "value": "#A6ACB1",
+          "value": "#DCE0E3",
           "type": "color",
-          "comment": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#A6ACB1",
-            "type": "color",
-            "comment": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
+            "value": "#DCE0E3",
+            "type": "color"
           },
           "name": "weakest",
           "attributes": {},
@@ -3631,97 +3609,15 @@
           ]
         }
       },
-      "text": {
-        "base": {
-          "value": "#191919",
-          "type": "color",
-          "comment": "Default text color for strong background contrast.",
-          "filePath": "01_intermediate/namespaced-theme-light.json",
-          "isSource": true,
-          "original": {
-            "value": "#191919",
-            "type": "color",
-            "comment": "Default text color for strong background contrast."
-          },
-          "name": "base",
-          "attributes": {},
-          "path": [
-            "color",
-            "light",
-            "text",
-            "base"
-          ]
-        },
-        "weaker": {
-          "value": "#595F63",
-          "type": "color",
-          "comment": "Text color with weaker background contrast.",
-          "filePath": "01_intermediate/namespaced-theme-light.json",
-          "isSource": true,
-          "original": {
-            "value": "#595F63",
-            "type": "color",
-            "comment": "Text color with weaker background contrast."
-          },
-          "name": "weaker",
-          "attributes": {},
-          "path": [
-            "color",
-            "light",
-            "text",
-            "weaker"
-          ]
-        },
-        "inverted": {
-          "base": {
-            "value": "#f8f8f8",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#f8f8f8",
-              "type": "color"
-            },
-            "name": "base",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "text",
-              "inverted",
-              "base"
-            ]
-          },
-          "weaker": {
-            "value": "#ABAFB0",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#ABAFB0",
-              "type": "color"
-            },
-            "name": "weaker",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "text",
-              "inverted",
-              "weaker"
-            ]
-          }
-        }
-      },
       "theme": {
         "weaker": {
-          "value": "#489AC6",
+          "value": "#316F91",
           "type": "color",
           "comment": "Weaker version of theme color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#489AC6",
+            "value": "#316F91",
             "type": "color",
             "comment": "Weaker version of theme color"
           },
@@ -3735,13 +3631,13 @@
           ]
         },
         "base": {
-          "value": "#1C4C64",
+          "value": "#155375",
           "type": "color",
           "comment": "Main theme color, usually the brand color.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#1C4C64",
+            "value": "#155375",
             "type": "color",
             "comment": "Main theme color, usually the brand color."
           },
@@ -3755,13 +3651,13 @@
           ]
         },
         "stronger": {
-          "value": "#123446",
+          "value": "#0E3950",
           "type": "color",
           "comment": "Stronger version of theme color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#123446",
+            "value": "#0E3950",
             "type": "color",
             "comment": "Stronger version of theme color"
           },
@@ -3880,12 +3776,12 @@
       "category": {
         "base": {
           "0": {
-            "value": "#297cb5",
+            "value": "#C94C24",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#297cb5",
+              "value": "#C94C24",
               "type": "color"
             },
             "name": "0",
@@ -3899,12 +3795,12 @@
             ]
           },
           "1": {
-            "value": "#905ea7",
+            "value": "#58CBD3",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#905ea7",
+              "value": "#58CBD3",
               "type": "color"
             },
             "name": "1",
@@ -3918,12 +3814,12 @@
             ]
           },
           "2": {
-            "value": "#de5f4a",
+            "value": "#F4BD49",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#de5f4a",
+              "value": "#F4BD49",
               "type": "color"
             },
             "name": "2",
@@ -3994,12 +3890,12 @@
             ]
           },
           "99": {
-            "value": "#9ea9b5",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#9ea9b5",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -4129,12 +4025,12 @@
             ]
           },
           "99": {
-            "value": "#c0c8d2",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#c0c8d2",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -4264,12 +4160,12 @@
             ]
           },
           "99": {
-            "value": "#6b7581",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#6b7581",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "99",
@@ -4287,13 +4183,13 @@
       "diverging": {
         "negative": {
           "1": {
-            "value": "#e98676",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median).",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#e98676",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
             },
@@ -4308,13 +4204,13 @@
             ]
           },
           "2": {
-            "value": "#a12917",
+            "value": "#ffffff",
             "type": "color",
             "comment": "First step in the based diverging color scale, used for the lowest (most negative) value. ",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#a12917",
+              "value": "#ffffff",
               "type": "color",
               "comment": "First step in the based diverging color scale, used for the lowest (most negative) value. "
             },
@@ -4330,13 +4226,13 @@
           }
         },
         "neutral": {
-          "value": "#DDE3E8",
+          "value": "#DCE0E3",
           "type": "color",
           "comment": "Third step in the base diverging color scale, used for zero or data median.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#DDE3E8",
+            "value": "#DCE0E3",
             "type": "color",
             "comment": "Third step in the base diverging color scale, used for zero or data median."
           },
@@ -4351,13 +4247,13 @@
         },
         "positive": {
           "1": {
-            "value": "#79ABBC",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Fourth step in the base diverging color scale, used for values higher than zero (or data median).",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#79ABBC",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Fourth step in the base diverging color scale, used for values higher than zero (or data median)."
             },
@@ -4372,13 +4268,13 @@
             ]
           },
           "2": {
-            "value": "#0E3E63",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Fifth step in the base diverging color scale, used for the highest (most positive) value. ",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#0E3E63",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Fifth step in the base diverging color scale, used for the highest (most positive) value. "
             },
@@ -4396,13 +4292,13 @@
       },
       "complementary": {
         "weaker": {
-          "value": "#e98676",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Weaker version of complementary color.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#e98676",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Weaker version of complementary color."
           },
@@ -4416,13 +4312,13 @@
           ]
         },
         "base": {
-          "value": "#dc6454",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Main complementary color.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#dc6454",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Main complementary color."
           },
@@ -4436,13 +4332,13 @@
           ]
         },
         "stronger": {
-          "value": "#a12917",
+          "value": "#ffffff",
           "type": "color",
           "comment": "Stronger version of complementary color.",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#a12917",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Stronger version of complementary color."
           },
@@ -4458,12 +4354,12 @@
       },
       "sequential": {
         "0": {
-          "value": "#C3D6DC",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#C3D6DC",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "0",
@@ -4476,12 +4372,12 @@
           ]
         },
         "1": {
-          "value": "#79ABBC",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#79ABBC",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "1",
@@ -4494,12 +4390,12 @@
           ]
         },
         "2": {
-          "value": "#377796",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#377796",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "2",
@@ -4512,12 +4408,12 @@
           ]
         },
         "3": {
-          "value": "#0E3E63",
+          "value": "#ffffff",
           "type": "color",
           "filePath": "01_intermediate/namespaced-theme-light.json",
           "isSource": true,
           "original": {
-            "value": "#0E3E63",
+            "value": "#ffffff",
             "type": "color"
           },
           "name": "3",
@@ -4531,13 +4427,13 @@
         },
         "positive": {
           "0": {
-            "value": "#C3D6DC",
+            "value": "#ffffff",
             "type": "color",
             "comment": "First step in the base (theme) sequential color scale, used for the lowest value. ",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#C3D6DC",
+              "value": "#ffffff",
               "type": "color",
               "comment": "First step in the base (theme) sequential color scale, used for the lowest value. "
             },
@@ -4552,13 +4448,13 @@
             ]
           },
           "1": {
-            "value": "#79ABBC",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Second step in the base (theme) sequential color scale.",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#79ABBC",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Second step in the base (theme) sequential color scale."
             },
@@ -4573,13 +4469,13 @@
             ]
           },
           "2": {
-            "value": "#377796",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Thirs step in the base (theme) sequential color scale.",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#377796",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Thirs step in the base (theme) sequential color scale."
             },
@@ -4594,13 +4490,13 @@
             ]
           },
           "3": {
-            "value": "#0E3E63",
+            "value": "#ffffff",
             "type": "color",
             "comment": "Third and final step in the base (theme) sequential color scale.",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#0E3E63",
+              "value": "#ffffff",
               "type": "color",
               "comment": "Third and final step in the base (theme) sequential color scale."
             },
@@ -4617,12 +4513,12 @@
         },
         "negative": {
           "0": {
-            "value": "#fbc8bf",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#fbc8bf",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "0",
@@ -4636,12 +4532,12 @@
             ]
           },
           "1": {
-            "value": "#e98676",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#e98676",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "1",
@@ -4655,12 +4551,12 @@
             ]
           },
           "2": {
-            "value": "#c9513f",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#c9513f",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "2",
@@ -4674,12 +4570,12 @@
             ]
           },
           "3": {
-            "value": "#a12917",
+            "value": "#ffffff",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#a12917",
+              "value": "#ffffff",
               "type": "color"
             },
             "name": "3",
@@ -4700,7 +4596,7 @@
     "style": {
       "base": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
           "lineHeight": "160%",
           "fontSize": "round(16)",
@@ -4738,7 +4634,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(round(round(16) * 1.33) * 1.33) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(round(round(16) * 1.2) * 1.2) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -4770,10 +4666,10 @@
       },
       "subhead": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(16) * 1.33)",
+          "fontSize": "round(round(16) * 1.2)",
           "letterSpacing": "15%",
           "paragraphSpacing": 0,
           "textDecoration": "none",
@@ -4808,7 +4704,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(round(round(16) * 1.33) * 1.33) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(round(round(16) * 1.2) * 1.2) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -4843,7 +4739,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(round(16) * 1.33) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(round(16) * 1.2) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -4878,7 +4774,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(16) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(16) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -4913,7 +4809,7 @@
           "fontFamily": "BundesSans Office",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(16) * 1.33)",
+          "fontSize": "round(round(16) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -4980,10 +4876,10 @@
       },
       "caption": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
           "lineHeight": "160%",
-          "fontSize": "round(round(16) / 1.1)",
+          "fontSize": "round(round(16) / 1.15)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -5015,10 +4911,10 @@
       },
       "huge": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(round(16) * 1.33) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(round(16) * 1.2) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -5052,10 +4948,10 @@
       },
       "large": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(round(16) * 1.33) * 1.33)",
+          "fontSize": "round(round(round(16) * 1.2) * 1.2)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -5089,9 +4985,9 @@
       },
       "majorPrimary": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
-          "lineHeight": "145%",
+          "lineHeight": "140%",
           "fontSize": "round(16)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
@@ -5126,9 +5022,9 @@
       },
       "majorSecondary": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
-          "lineHeight": "145%",
+          "lineHeight": "140%",
           "fontSize": "round(16)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
@@ -5163,10 +5059,10 @@
       },
       "minorPrimary": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 700,
           "lineHeight": "115%",
-          "fontSize": "round(round(16) / 1.1)",
+          "fontSize": "round(round(16) / 1.15)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -5200,10 +5096,10 @@
       },
       "minorSecondary": {
         "value": {
-          "fontFamily": "BundesSans Office",
+          "fontFamily": "Lato",
           "fontWeight": 400,
-          "lineHeight": "145%",
-          "fontSize": "round(round(16) / 1.1)",
+          "lineHeight": "140%",
+          "fontSize": "round(round(16) / 1.15)",
           "letterSpacing": "0%",
           "paragraphSpacing": 8,
           "textDecoration": "none",
@@ -5238,12 +5134,12 @@
     },
     "fontFamily": {
       "base": {
-        "value": "BundesSans Office",
+        "value": "Lato",
         "type": "fontFamilies",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
         "original": {
-          "value": "BundesSans Office",
+          "value": "Lato",
           "type": "fontFamilies"
         },
         "name": "base",
@@ -5308,12 +5204,12 @@
         ]
       },
       "tighter": {
-        "value": "145%",
+        "value": "140%",
         "type": "lineHeights",
         "filePath": "01_intermediate/namespaced-typography.json",
         "isSource": true,
         "original": {
-          "value": "145%",
+          "value": "140%",
           "type": "lineHeights"
         },
         "name": "tighter",

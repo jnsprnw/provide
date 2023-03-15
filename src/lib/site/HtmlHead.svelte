@@ -10,6 +10,7 @@
 </script>
 
 <svelte:head>
+  <title>Provide Project</title>
   <link rel="canonical" href="{url}/" />
   <meta name="author" content={author} />
   <meta name="description" content={description} />

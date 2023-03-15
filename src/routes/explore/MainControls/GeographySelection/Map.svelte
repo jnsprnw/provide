@@ -72,7 +72,7 @@
   };
 </script>
 
-<figure class="page-map" role="main">
+<figure class="w-full" role="main">
   <svg
     bind:this={svg}
     class="vis"
@@ -87,37 +87,23 @@
         {#each countries as country}
           <path
             d={country.d}
-            class:active={selected === UID_WORLD}
-            class:hover={hovered === UID_WORLD}
+            class="fill-background-weakest stroke-background-base stroke-[0.5]"
+            class:fill-theme-weaker={selected === UID_WORLD}
+            class:fill-theme-base={hovered === UID_WORLD}
           />
         {/each}
       </g>
       <g role="list">
         {#if hoveredCountry}
-          <path d={hoveredCountry.d} class="hover" />
+          <path d={hoveredCountry.d} class="fill-foreground-weaker" />
         {/if}
       </g>
       <g role="list">
         {#if selectedCountry}
-          <path d={selectedCountry.d} class="active" />
+          <path d={selectedCountry.d} class="fill-theme-base" />
         {/if}
       </g>
     </g>
     <desc id="map-description">TODO</desc>
   </svg>
 </figure>
-
-<style lang="postcss">
-  path {
-    fill: var(--color-foreground-weakest);
-    transition: fill var(--transition-duration-quick) ease-out;
-
-    &.hover {
-      fill: var(--color-foreground-base);
-    }
-
-    &.active {
-      fill: var(--color-functional-accent);
-    }
-  }
-</style>

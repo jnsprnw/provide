@@ -1,3 +1,5 @@
+@import './fonts.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,9 +17,16 @@
 @import './_basecss.custom.css';
 @import './_utils.css'; */
 
-@import './fonts.css';
-
 /* Basics */
 * {
   box-sizing: border-box;
+}
+
+:where(:root) {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: break-word;
+  cursor: default;
 }

@@ -38,3 +38,5 @@ Folders that contain one primary svelte component are named after this component
 Folders containing multiple components or other files get a kebap case name e.g. `explore-impacts/`.
 
 These naming rules don't apply to the `routes` folder.
+
+## Styling

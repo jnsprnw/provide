@@ -7,7 +7,6 @@
   import UnAvoidableRisk from '$lib/explore-impacts/UnavoidableRisk/UnavoidableRisk.svelte';
   import MitigationBenefits from '$lib/explore-impacts/MitigationBenefits/MitigationBenefits.svelte';
   import Reversibility from '$lib/explore-impacts/Reversibility/Reversibility.svelte';
-  import MainControls from '../MainControls/MainControls.svelte';
 
   import { ALL_PARAMETERS_SELECTED } from '$stores/state.js';
 </script>
@@ -28,9 +27,7 @@
   </div>
 </div>
 
-<div class="impacts-selection container">
-  <MainControls />
-</div>
+<div class="impacts-selection container" />
 
 <div class="impacts-analysis container">
   <div class="wrapper">

@@ -4,11 +4,11 @@
       "parameter": {
         "fontSize": {
           "scaleFactor": {
-            "value": 1.33,
+            "value": 1.2,
             "type": "other"
           },
           "scaleFactorBelowOne": {
-            "value": 1.1,
+            "value": 1.15,
             "type": "other"
           },
           "base": {
@@ -74,11 +74,11 @@
       },
       "fontSize": {
         "xs": {
-          "value": 14,
+          "value": 12,
           "type": "fontSizes"
         },
         "s": {
-          "value": 15,
+          "value": 14,
           "type": "fontSizes"
         },
         "m": {
@@ -86,27 +86,27 @@
           "type": "fontSizes"
         },
         "l": {
-          "value": 21,
+          "value": 19,
           "type": "fontSizes"
         },
         "xl": {
-          "value": 28,
+          "value": 23,
           "type": "fontSizes"
         },
         "xxl": {
-          "value": 37,
+          "value": 28,
           "type": "fontSizes"
         },
         "xxxl": {
-          "value": 49,
+          "value": 34,
           "type": "fontSizes"
         },
         "xxxxl": {
-          "value": 65,
+          "value": 41,
           "type": "fontSizes"
         },
         "xxxxxl": {
-          "value": 86,
+          "value": 49,
           "type": "fontSizes"
         }
       },

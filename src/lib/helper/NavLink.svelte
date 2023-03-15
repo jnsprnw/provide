@@ -8,14 +8,14 @@
   export { clazz as class };
   export let activeClass;
 
-  $: active =
+  $: isActive =
     $page.url.pathname === href || $page.url.pathname.startsWith(href);
-  $: ariaLabel = active ? loc : null;
+  $: ariaLabel = isActive ? loc : null;
 </script>
 
 <a
-  class={`${clazz} ${active && activeClass}`}
+  class={`${clazz} ${isActive && activeClass}`}
   {href}
   aria-current={ariaLabel}
-  aria-disabled={disabled}><slot /></a
+  aria-disabled={disabled}><slot {isActive} /></a
 >

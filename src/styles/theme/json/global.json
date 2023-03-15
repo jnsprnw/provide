@@ -2,7 +2,7 @@
   "typography": {
     "style": {
       "base": {
-        "fontFamily": "BundesSans Office",
+        "fontFamily": "Lato",
         "fontWeight": 400,
         "lineHeight": "160%",
         "fontSize": 16,
@@ -15,17 +15,17 @@
         "fontFamily": "BundesSans Office",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 49,
+        "fontSize": 34,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
         "textCase": "none"
       },
       "subhead": {
-        "fontFamily": "BundesSans Office",
+        "fontFamily": "Lato",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 21,
+        "fontSize": 19,
         "letterSpacing": "15%",
         "paragraphSpacing": 0,
         "textDecoration": "none",
@@ -35,7 +35,7 @@
         "fontFamily": "BundesSans Office",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 49,
+        "fontSize": 34,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
@@ -45,7 +45,7 @@
         "fontFamily": "BundesSans Office",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 37,
+        "fontSize": 28,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
@@ -55,7 +55,7 @@
         "fontFamily": "BundesSans Office",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 28,
+        "fontSize": 23,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
@@ -65,7 +65,7 @@
         "fontFamily": "BundesSans Office",
         "fontWeight": 700,
         "lineHeight": "115%",
-        "fontSize": 21,
+        "fontSize": 19,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
@@ -82,10 +82,10 @@
         "textCase": "none"
       },
       "caption": {
-        "fontFamily": "BundesSans Office",
+        "fontFamily": "Lato",
         "fontWeight": 400,
         "lineHeight": "160%",
-        "fontSize": 15,
+        "fontSize": 14,
         "letterSpacing": "0%",
         "paragraphSpacing": 8,
         "textDecoration": "none",
@@ -93,13 +93,13 @@
       }
     },
     "fontFamily": {
-      "base": "BundesSans Office",
+      "base": "Lato",
       "heading": "BundesSans Office",
       "mono": "Fira Mono"
     },
     "lineHeight": {
       "base": "160%",
-      "tighter": "145%",
+      "tighter": "140%",
       "tightest": "115%"
     },
     "fontWeight": {
@@ -127,8 +127,8 @@
   "size": {
     "parameter": {
       "fontSize": {
-        "scaleFactor": 1.33,
-        "scaleFactorBelowOne": 1.1,
+        "scaleFactor": 1.2,
+        "scaleFactorBelowOne": 1.15,
         "base": 16
       },
       "space": {
@@ -150,15 +150,15 @@
       "xxl": 4
     },
     "fontSize": {
-      "xs": 14,
-      "s": 15,
+      "xs": 12,
+      "s": 14,
       "m": 16,
-      "l": 21,
-      "xl": 28,
-      "xxl": 37,
-      "xxxl": 49,
-      "xxxxl": 65,
-      "xxxxxl": 86
+      "l": 19,
+      "xl": 23,
+      "xxl": 28,
+      "xxxl": 34,
+      "xxxxl": 41,
+      "xxxxxl": 49
     },
     "space": {
       "xxxxs": 3,
@@ -185,7 +185,7 @@
     },
     "borderRadius": {
       "base": 1,
-      "bigger": 3
+      "bigger": 4
     }
   },
   "meta": {

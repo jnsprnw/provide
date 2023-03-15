@@ -60,16 +60,6 @@
           "type": "color",
           "description": "Stronger text color for maximum background contrast."
         },
-        "inverted": {
-          "base": {
-            "value": "#191919",
-            "type": "color"
-          },
-          "weaker": {
-            "value": "#6b7581",
-            "type": "color"
-          }
-        },
         "modelAspect": {
           "climate": {
             "value": "#ffcb01",
@@ -90,15 +80,15 @@
       },
       "theme": {
         "base": {
-          "value": "#44a8c3",
+          "value": "#ffffff",
           "type": "color"
         },
         "weaker": {
-          "value": "#256f81",
+          "value": "#ffffff",
           "type": "color"
         },
         "stronger": {
-          "value": "#83c3d4",
+          "value": "#ffffff",
           "type": "color"
         }
       },
@@ -137,7 +127,7 @@
           "type": "color"
         },
         "link": {
-          "value": "#C3D6DC",
+          "value": "#ffffff",
           "type": "color",
           "description": "Used for links."
         }
@@ -169,7 +159,7 @@
             "type": "color"
           },
           "99": {
-            "value": "#c0c8d2",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -199,7 +189,7 @@
             "type": "color"
           },
           "99": {
-            "value": "#9ea9b5",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -229,24 +219,24 @@
             "type": "color"
           },
           "99": {
-            "value": "#6b7581",
+            "value": "#ffffff",
             "type": "color"
           }
         }
       },
       "complementary": {
         "base": {
-          "value": "#CC4233",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
         },
         "weaker": {
-          "value": "#832521",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
         },
         "stronger": {
-          "value": "#DA5C4B",
+          "value": "#ffffff",
           "type": "color",
           "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
         }
@@ -254,11 +244,11 @@
       "diverging": {
         "positive": {
           "1": {
-            "value": "#256f81",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "#66b5cb",
+            "value": "#ffffff",
             "type": "color"
           }
         },
@@ -268,65 +258,65 @@
         },
         "negative": {
           "1": {
-            "value": "#832521",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "#DA5C4B",
+            "value": "#ffffff",
             "type": "color"
           }
         }
       },
       "sequential": {
         "0": {
-          "value": "#175462",
+          "value": "#ffffff",
           "type": "color"
         },
         "1": {
-          "value": "#348ba1",
+          "value": "#ffffff",
           "type": "color"
         },
         "2": {
-          "value": "#66b5cb",
+          "value": "#ffffff",
           "type": "color"
         },
         "3": {
-          "value": "#9ed0dd",
+          "value": "#ffffff",
           "type": "color"
         },
         "positive": {
           "0": {
-            "value": "#175462",
+            "value": "#ffffff",
             "type": "color"
           },
           "1": {
-            "value": "#348ba1",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "#66b5cb",
+            "value": "#ffffff",
             "type": "color"
           },
           "3": {
-            "value": "#9ed0dd",
+            "value": "#ffffff",
             "type": "color"
           }
         },
         "negative": {
           "0": {
-            "value": "#601817",
+            "value": "#ffffff",
             "type": "color"
           },
           "1": {
-            "value": "#A7332A",
+            "value": "#ffffff",
             "type": "color"
           },
           "2": {
-            "value": "#DA5C4B",
+            "value": "#ffffff",
             "type": "color"
           },
           "3": {
-            "value": "#F38C7C",
+            "value": "#ffffff",
             "type": "color"
           }
         }

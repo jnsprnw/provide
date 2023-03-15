@@ -8,7 +8,7 @@ export const SCENARIO_DATA_KEYS = ['emissions', 'mean-temperature'];
 export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCESS = 'success';
 export const STATUS_FAILED = 'failed';
-export const UID_WORLD = 'world';
+export const UID_WORLD = 'world'; // TODO: There is no world so far
 export const KEY_MODEL = 'model';
 export const KEY_SOURCE = 'source';
 export const KEY_PARAMETERS = 'parameters';
@@ -24,6 +24,7 @@ export const HOT_EXTREME_UID = 'hot-extreme';
 export const PRESENT_DAY_UID = 'present-day';
 export const UNAVOIDABLE_UID = 'unavoidable';
 
+// TODO: Not sure if this is the best place for these options since they are not global
 export const IMPACT_GEO_YEARS = [
   {
     uid: '2030',

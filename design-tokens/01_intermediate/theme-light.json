@@ -18,73 +18,55 @@
     },
     "background": {
       "base": {
-        "value": "#FFF",
+        "value": "#FFFFFF",
         "type": "color",
         "description": "The default light background color, used e.g. as a backdrop for charts or cards."
       },
       "weaker": {
-        "value": "#F6FAFE",
+        "value": "#F5F7F7",
         "type": "color",
         "description": "A slightly shaded background color, used e.g. as a backdrop behind card elements."
       },
       "weakest": {
-        "value": "#DDE3E8",
+        "value": "#DCE0E3",
         "type": "color",
         "description": "A shaded background color, used e.g. as a backdrop in containers."
       }
     },
     "foreground": {
       "base": {
-        "value": "#171D21",
+        "value": "#1B1E20",
         "type": "color",
         "description": "Used for elements in the foreground that have a strong contrast to the background."
       },
-      "weaker": {
-        "value": "#595F63",
+      "weak": {
+        "value": "#616A72",
         "type": "color",
         "description": "Used for elements in the foreground that have a weaker contrast to the background (e.g. axes)."
       },
-      "weakest": {
-        "value": "#A6ACB1",
+      "weaker": {
+        "value": "#99A4AC",
         "type": "color",
         "description": "Used for elements in the foreground that have the weakest contrast to the background (e.g. ticks, help-lines)"
-      }
-    },
-    "text": {
-      "base": {
-        "value": "#191919",
-        "type": "color",
-        "description": "Default text color for strong background contrast."
       },
-      "weaker": {
-        "value": "#595F63",
-        "type": "color",
-        "description": "Text color with weaker background contrast."
-      },
-      "inverted": {
-        "base": {
-          "value": "#f8f8f8",
-          "type": "color"
-        },
-        "weaker": {
-          "value": "#ABAFB0",
-          "type": "color"
-        }
+      "weakest": {
+        "value": "#DCE0E3",
+        "type": "color"
       }
     },
     "theme": {
       "weaker": {
-        "value": "#489AC6",
+        "value": "#316F91",
         "type": "color",
         "description": "Weaker version of theme color"
       },
       "base": {
-        "value": "#1C4C64",
+        "value": "#155375",
         "type": "color",
         "description": "Main theme color, usually the brand color."
       },
       "stronger": {
-        "value": "#123446",
+        "value": "#0E3950",
         "type": "color",
         "description": "Stronger version of theme color"
       }
@@ -119,15 +101,15 @@
     "category": {
       "base": {
         "0": {
-          "value": "#297cb5",
+          "value": "#C94C24",
           "type": "color"
         },
         "1": {
-          "value": "#905ea7",
+          "value": "#58CBD3",
           "type": "color"
         },
         "2": {
-          "value": "#de5f4a",
+          "value": "#F4BD49",
           "type": "color"
         },
         "3": {
@@ -143,7 +125,7 @@
           "type": "color"
         },
         "99": {
-          "value": "#9ea9b5",
+          "value": "#ffffff",
           "type": "color"
         }
       },
@@ -173,7 +155,7 @@
           "type": "color"
         },
         "99": {
-          "value": "#c0c8d2",
+          "value": "#ffffff",
           "type": "color"
         }
       },
@@ -203,7 +185,7 @@
           "type": "color"
         },
         "99": {
-          "value": "#6b7581",
+          "value": "#ffffff",
           "type": "color"
         }
       }
@@ -211,29 +193,29 @@
     "diverging": {
       "negative": {
         "1": {
-          "value": "#e98676",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base diverging color scale, used for values lower than zero (or data median)."
         },
         "2": {
-          "value": "#a12917",
+          "value": "#ffffff",
           "type": "color",
           "description": "First step in the based diverging color scale, used for the lowest (most negative) value. "
         }
       },
       "neutral": {
-        "value": "#DDE3E8",
+        "value": "#DCE0E3",
         "type": "color",
         "description": "Third step in the base diverging color scale, used for zero or data median."
       },
       "positive": {
         "1": {
-          "value": "#79ABBC",
+          "value": "#ffffff",
           "type": "color",
           "description": "Fourth step in the base diverging color scale, used for values higher than zero (or data median)."
         },
         "2": {
-          "value": "#0E3E63",
+          "value": "#ffffff",
           "type": "color",
           "description": "Fifth step in the base diverging color scale, used for the highest (most positive) value. "
         }
@@ -241,75 +223,75 @@
     },
     "complementary": {
       "weaker": {
-        "value": "#e98676",
+        "value": "#ffffff",
         "type": "color",
         "description": "Weaker version of complementary color."
       },
       "base": {
-        "value": "#dc6454",
+        "value": "#ffffff",
         "type": "color",
         "description": "Main complementary color."
       },
       "stronger": {
-        "value": "#a12917",
+        "value": "#ffffff",
         "type": "color",
         "description": "Stronger version of complementary color."
       }
     },
     "sequential": {
       "0": {
-        "value": "#C3D6DC",
+        "value": "#ffffff",
         "type": "color"
       },
       "1": {
-        "value": "#79ABBC",
+        "value": "#ffffff",
         "type": "color"
       },
       "2": {
-        "value": "#377796",
+        "value": "#ffffff",
         "type": "color"
       },
       "3": {
-        "value": "#0E3E63",
+        "value": "#ffffff",
         "type": "color"
       },
       "positive": {
         "0": {
-          "value": "#C3D6DC",
+          "value": "#ffffff",
           "type": "color",
           "description": "First step in the base (theme) sequential color scale, used for the lowest value. "
         },
         "1": {
-          "value": "#79ABBC",
+          "value": "#ffffff",
           "type": "color",
           "description": "Second step in the base (theme) sequential color scale."
         },
         "2": {
-          "value": "#377796",
+          "value": "#ffffff",
           "type": "color",
           "description": "Thirs step in the base (theme) sequential color scale."
         },
         "3": {
-          "value": "#0E3E63",
+          "value": "#ffffff",
           "type": "color",
           "description": "Third and final step in the base (theme) sequential color scale."
         }
       },
       "negative": {
         "0": {
-          "value": "#fbc8bf",
+          "value": "#ffffff",
           "type": "color"
         },
         "1": {
-          "value": "#e98676",
+          "value": "#ffffff",
           "type": "color"
         },
         "2": {
-          "value": "#c9513f",
+          "value": "#ffffff",
           "type": "color"
         },
         "3": {
-          "value": "#a12917",
+          "value": "#ffffff",
           "type": "color"
         }
       }

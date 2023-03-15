@@ -21,10 +21,6 @@
       "weaker": "#aaaaaa",
       "base": "#dddddd",
       "stronger": "#ffffff",
-      "inverted": {
-        "base": "#191919",
-        "weaker": "#6b7581"
-      },
       "modelAspect": {
         "climate": "#ffcb01",
         "conflict": "#fa5a6d",
@@ -32,9 +28,9 @@
       }
     },
     "theme": {
-      "base": "#44a8c3",
-      "weaker": "#256f81",
-      "stronger": "#83c3d4"
+      "base": "#ffffff",
+      "weaker": "#ffffff",
+      "stronger": "#ffffff"
     },
     "modelAspect": {
       "climate": "#ffcb01",
@@ -46,7 +42,7 @@
       "focus": "#ffcb01",
       "not-available": "#cccccc",
       "filtered-out": "#474b69",
-      "link": "#c3d6dc"
+      "link": "#ffffff"
     },
     "category": {
       "stronger": {
@@ -56,7 +52,7 @@
         "3": "#f8c975",
         "4": "#83c0a4",
         "5": "#ced56d",
-        "99": "#c0c8d2"
+        "99": "#ffffff"
       },
       "base": {
         "0": "#22699a",
@@ -65,7 +61,7 @@
         "3": "#dc9d38",
         "4": "#458a69",
         "5": "#7e8518",
-        "99": "#9ea9b5"
+        "99": "#ffffff"
       },
       "weaker": {
         "0": "#124874",
@@ -74,41 +70,41 @@
         "3": "#a07730",
         "4": "#366d53",
         "5": "#575b20",
-        "99": "#6b7581"
+        "99": "#ffffff"
       }
     },
     "complementary": {
-      "base": "#cc4233",
-      "weaker": "#832521",
-      "stronger": "#da5c4b"
+      "base": "#ffffff",
+      "weaker": "#ffffff",
+      "stronger": "#ffffff"
     },
     "diverging": {
       "positive": {
-        "1": "#256f81",
-        "2": "#66b5cb"
+        "1": "#ffffff",
+        "2": "#ffffff"
       },
       "neutral": "#2c343e",
       "negative": {
-        "1": "#832521",
-        "2": "#da5c4b"
+        "1": "#ffffff",
+        "2": "#ffffff"
       }
     },
     "sequential": {
-      "0": "#175462",
-      "1": "#348ba1",
-      "2": "#66b5cb",
-      "3": "#9ed0dd",
+      "0": "#ffffff",
+      "1": "#ffffff",
+      "2": "#ffffff",
+      "3": "#ffffff",
       "positive": {
-        "0": "#175462",
-        "1": "#348ba1",
-        "2": "#66b5cb",
-        "3": "#9ed0dd"
+        "0": "#ffffff",
+        "1": "#ffffff",
+        "2": "#ffffff",
+        "3": "#ffffff"
       },
       "negative": {
-        "0": "#601817",
-        "1": "#a7332a",
-        "2": "#da5c4b",
-        "3": "#f38c7c"
+        "0": "#ffffff",
+        "1": "#ffffff",
+        "2": "#ffffff",
+        "3": "#ffffff"
       }
     }
   }

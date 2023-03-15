@@ -1,6 +1,6 @@
 :root {
-  --size-large-parameter-font-size-scale-factor: 1.33;
-  --size-large-parameter-font-size-scale-factor-below-one: 1.1;
+  --size-large-parameter-font-size-scale-factor: 1.2;
+  --size-large-parameter-font-size-scale-factor-below-one: 1.15;
   --size-large-parameter-font-size-base: 16;
   --size-large-parameter-space-scale-factor: 1.5;
   --size-large-parameter-space-scale-factor-below-one: 1.5;
@@ -13,15 +13,15 @@
   --size-large-border-width-l: 2; /* A larger border size. Used for borders between filled elements. */
   --size-large-border-width-xl: 3; /* A larger border size. Used for lines in focus, and the bottom chart container line. */
   --size-large-border-width-xxl: 4; /* The largest border size. Used for the top chart container line. */
-  --size-large-font-size-xs: 14;
-  --size-large-font-size-s: 15;
+  --size-large-font-size-xs: 12;
+  --size-large-font-size-s: 14;
   --size-large-font-size-m: 16;
-  --size-large-font-size-l: 21;
-  --size-large-font-size-xl: 28;
-  --size-large-font-size-xxl: 37;
-  --size-large-font-size-xxxl: 49;
-  --size-large-font-size-xxxxl: 65;
-  --size-large-font-size-xxxxxl: 86;
+  --size-large-font-size-l: 19;
+  --size-large-font-size-xl: 23;
+  --size-large-font-size-xxl: 28;
+  --size-large-font-size-xxxl: 34;
+  --size-large-font-size-xxxxl: 41;
+  --size-large-font-size-xxxxxl: 49;
   --size-large-space-xxxxs: 3;
   --size-large-space-xxxs: 5;
   --size-large-space-xxs: 7;

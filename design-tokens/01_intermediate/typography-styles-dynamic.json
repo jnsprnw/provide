@@ -205,7 +205,7 @@
     },
     "fontFamily": {
       "base": {
-        "value": "BundesSans Office",
+        "value": "Lato",
         "type": "fontFamilies"
       },
       "heading": {
@@ -223,7 +223,7 @@
         "type": "lineHeights"
       },
       "tighter": {
-        "value": "145%",
+        "value": "140%",
         "type": "lineHeights"
       },
       "tightest": {
@@ -290,11 +290,11 @@
     "parameter": {
       "fontSize": {
         "scaleFactor": {
-          "value": 1.33,
+          "value": 1.2,
           "type": "other"
         },
         "scaleFactorBelowOne": {
-          "value": 1.1,
+          "value": 1.15,
           "type": "other"
         },
         "base": {
@@ -482,7 +482,7 @@
         "type": "borderRadius"
       },
       "bigger": {
-        "value": 3,
+        "value": 4,
         "type": "borderRadius"
       }
     }

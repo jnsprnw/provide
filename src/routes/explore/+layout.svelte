@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores';
-  import ListLink from '$lib/helper/ListLink.svelte';
+  import MainControls from './MainControls/MainControls.svelte';
   import {
     SECTORS,
     INDICATORS,
@@ -11,6 +11,7 @@
     UNITS,
   } from '$stores/meta.js';
   import { urlToState } from '$utils/url';
+  import BigTabs from '$lib/helper/BigTabs.svelte';
 
   export let data;
 
@@ -26,53 +27,26 @@
 
   $: urlToState($page.url);
 
-  $: currentPath = $page.routeId || '';
+  const tabs = [
+    {
+      href: '/explore/impacts',
+      label: 'Impacts',
+      description: 'Select scenarios and explore impacts',
+    },
+    {
+      href: '/explore/scenarios',
+      label: 'Emission Scenarios',
+      description: 'Set an impact threshold and explore scenarios',
+      disabled: true,
+    },
+  ];
 </script>
 
-<nav class="explore-menu container">
-  <div class="wrapper">
-    <span class="text-label">Explore</span>
-    <ul>
-      <ListLink {currentPath} link="explore/impacts" loc="location" type="tab">
-        <h2 class="title">Impacts</h2>
-        <span class="subtitle">Select scenarios and explore impacts</span>
-      </ListLink>
-      <ListLink
-        {currentPath}
-        link="explore/scenarios"
-        loc="location"
-        disabled={true}
-        type="tab"
-      >
-        <h2 class="title">Emission Scenarios</h2>
-        <span class="subtitle"
-          >Set an impact threshold and explore scenarios</span
-        >
-      </ListLink>
-    </ul>
+<nav class="bb-background-weaker">
+  <div class="mx-auto max-w-7xl px-6">
+    <MainControls />
+    <BigTabs {tabs} />
   </div>
 </nav>
 
 <slot />
-
-<style lang="postcss">
-  //@import '../../styles/global.scss';
-
-  .explore-menu {
-    background-color: var(--color-background-stronger);
-
-    .wrapper {
-      //@include tab-nav-wrapper();
-
-      .title {
-        font-size: var(--font-size-large-xl);
-        font-weight: var(--font-weight-bold);
-      }
-
-      .subtitle {
-        font-size: var(--font-size-large-m);
-        line-height: var(--font-line-height-tightest);
-      }
-    }
-  }
-</style>

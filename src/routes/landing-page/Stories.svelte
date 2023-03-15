@@ -84,22 +84,16 @@
   );
 </script>
 
-<div class="stories container">
-  <div class="background">
-    <LoadingWrapper
-      let:asyncProps={{ data }}
-      let:props={{ currentStory }}
-      asyncProps={{ data: $IMPACT_TIME_DATA }}
-      props={{ currentStory }}
-      {process}
-    >
-      <LineTimeSeries
-        showcase={true}
-        {data}
-        unit={currentStory.indicator.unit}
-      />
-    </LoadingWrapper>
-  </div>
+<div class="bg-background-weaker">
+  <LoadingWrapper
+    let:asyncProps={{ data }}
+    let:props={{ currentStory }}
+    asyncProps={{ data: $IMPACT_TIME_DATA }}
+    props={{ currentStory }}
+    {process}
+  >
+    <LineTimeSeries showcase={true} {data} unit={currentStory.indicator.unit} />
+  </LoadingWrapper>
   <div class="wrapper grid">
     <div class="stories-wrapper">
       <ul>
