@@ -11,8 +11,21 @@
   export { clazz as class };
   export let panelClass;
   export let panelPlacement = 'bottom-start';
+  export let buttonClass;
   export let label;
   export let buttonLabel;
+  export let size = 'xl';
+
+  const sizeClasses = {
+    xl: {
+      button: 'text-xl p-5',
+    },
+    md: {
+      button: 'text-md p-3',
+    },
+  };
+
+  $: classes = sizeClasses[size] || {};
 
   const [popperRef, popperContent] = createPopperActions();
 
@@ -31,15 +44,15 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class="flex border w-full border-none bg-background-base p-5 justify-between text-theme-base"
+    class={`flex w-full  bg-background-base justify-between text-theme-base ${classes.button} ${buttonClass}`}
   >
-    <span class="font-bold text-xl">{buttonLabel}</span>
+    <span class="font-bold">{buttonLabel}</span>
     <ExpandIcon isOpen={open} />
   </PopoverButton>
 
   <PopoverPanel
     use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-background-base shadow-xl`}
+    class={`${panelClass} bg-background-base shadow-xl z-50`}
     let:open
   >
     <slot />

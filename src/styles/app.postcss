@@ -30,3 +30,13 @@
   overflow-wrap: break-word;
   cursor: default;
 }
+
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion) {
+  * {
+    scroll-behavior: auto;
+  }
+}

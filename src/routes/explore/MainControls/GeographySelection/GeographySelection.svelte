@@ -22,7 +22,7 @@
   <TabGroup
     vertical
     class="flex"
-    on:change={(e) => ($CURRENT_GEOGRAPHY_TYPE_INDEX = e.detail)}
+    bind:selectedIndex={$CURRENT_GEOGRAPHY_TYPE_INDEX}
   >
     <TabList class="flex items-stretch flex-col p-4">
       {#each $GEOGRAPHY_TYPES as type}

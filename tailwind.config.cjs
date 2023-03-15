@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         ...themeLight.color,
       },
+      borderWidth: {
+        3: '3px',
+      },
     },
   },
   plugins: [],

@@ -1,59 +1,58 @@
 <script>
-  import Tabs from '$lib/helper/tabs/Tabs.svelte';
-  import Tab from '$lib/helper/tabs/Tab.svelte';
-  import TabContent from '$lib/helper/tabs/TabContent.svelte';
   import ImpactTime from '$lib/explore-impacts/ImpactTime/ImpactTime.svelte';
   import ImpactGeo from '$lib/explore-impacts/ImpactGeo/ImpactGeo.svelte';
   import UnAvoidableRisk from '$lib/explore-impacts/UnavoidableRisk/UnavoidableRisk.svelte';
   import MitigationBenefits from '$lib/explore-impacts/MitigationBenefits/MitigationBenefits.svelte';
   import Reversibility from '$lib/explore-impacts/Reversibility/Reversibility.svelte';
+  import ScenarioSelection from './ScenarioSelection/ScenarioSelection.svelte';
 
   import { ALL_PARAMETERS_SELECTED } from '$stores/state.js';
+  import ScrollContent from '$lib/site/ScrollContent.svelte';
+  import Intro from './Intro.svelte';
+
+  const sections = [
+    { component: Intro },
+    {
+      id: 'impact-time',
+      label: 'Time',
+      description:
+        'How will the selected indicator unfold over the coming decades?',
+      component: ImpactTime,
+    },
+    {
+      id: 'impact-geo',
+      label: 'Geography',
+      description:
+        'Where in the selected geography will impacts hit the hardest?',
+      component: ImpactGeo,
+    },
+    {
+      id: 'unavoidable-risk',
+      label: 'Avoidable vs. Unavoidable Risks',
+      description: 'How much impact can be avoided through mitigation?',
+      component: UnAvoidableRisk,
+    },
+    {
+      id: 'mitigation-benefits',
+      label: 'Mitigation benefits',
+      disabled: true,
+      description: 'How will we benefit from increased mitigation efforts?',
+      component: MitigationBenefits,
+    },
+    {
+      id: 'reversibility',
+      label: 'Reversibility',
+      disabled: true,
+      description: 'How much damage can be reversed once it is done?',
+      component: Reversibility,
+    },
+  ];
 </script>
 
 <svelte:head>
   <title>Explore Impacts</title>
 </svelte:head>
 
-<div class="impacts-header container">
-  <div class="wrapper">
-    <div class="explore-intro">
-      <p class="explore-description">
-        Explore how different levels of climate action will lead to different
-        climate impacts for countries, cities, and more. See where risk
-        escalates and under what conditions impacts could be avoided.
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- <div class="impacts-analysis container">
-  <div class="wrapper">
-    <Tabs type="nav" selected={0}>
-      <Tab label="Impact overview" />
-      <Tab label="(Un)avoidable risk" />
-      <Tab label="Mitigation benefits" disabled={true} />
-      <Tab label="Reversibility" disabled={true} />
-
-      <svelte:fragment slot="content">
-        {#if $ALL_PARAMETERS_SELECTED}
-          <div class="wrapper vertical-space">
-            <TabContent>
-              <ImpactTime />
-              <ImpactGeo />
-            </TabContent>
-            <TabContent>
-              <UnAvoidableRisk />
-            </TabContent>
-            <TabContent>
-              <MitigationBenefits />
-            </TabContent>
-            <TabContent>
-              <Reversibility />
-            </TabContent>
-          </div>
-        {/if}
-      </svelte:fragment>
-    </Tabs>
-  </div>
-</div> -->
+<ScrollContent {sections}>
+  <ScenarioSelection slot="before-navigation" />
+</ScrollContent>
