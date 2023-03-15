@@ -42,8 +42,8 @@
   ];
 </script>
 
-<nav class="bb-background-weaker">
-  <div class="mx-auto max-w-7xl px-6">
+<nav class="bg-background-weaker">
+  <div class="mx-auto max-w-7xl px-6 pt-8">
     <MainControls />
     <BigTabs {tabs} />
   </div>

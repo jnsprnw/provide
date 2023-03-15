@@ -21,7 +21,7 @@
   $: fuse = new Fuse(items, options);
 
   let term = '';
-  let hoveredGeography;
+  let hoveredItem;
 
   $: defaultResults = sortBy(
     items.map((d) => ({ item: d })),
@@ -72,20 +72,19 @@
 </script>
 
 <div>
-  <input type="text" bind:value={term} placeholder="Search…" />
+  <input type="text" bind:value={term} placeholder="Search for country…" />
   <RadioGroup
     value={current}
     on:change={(e) => (current = e.detail)}
     class="h-96 overflow-scroll"
   >
-    <RadioGroupLabel>Plan</RadioGroupLabel>
     {#each results as item}
       <RadioGroupOption value={item.uid} let:checked>
         <div
           class:text-theme-base={checked}
-          on:focus={() => (hoveredGeography = item?.uid)}
-          on:mouseover={() => (hoveredGeography = item?.uid)}
-          on:mouseleave={() => (hoveredGeography = undefined)}
+          on:focus={() => (hoveredItem = item?.uid)}
+          on:mouseover={() => (hoveredItem = item?.uid)}
+          on:mouseleave={() => (hoveredItem = undefined)}
         >
           {#if item.emoji}<span><i class="emoji">{item.emoji}</i></span>{/if}
           <span>{@html item.label}</span>
@@ -96,5 +95,5 @@
 </div>
 
 <div class="w-96 self-center">
-  <Map hovered={hoveredGeography} selected={current} />
+  <Map hovered={hoveredItem} selected={current} />
 </div>

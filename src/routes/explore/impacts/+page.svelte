@@ -27,9 +27,7 @@
   </div>
 </div>
 
-<div class="impacts-selection container" />
-
-<div class="impacts-analysis container">
+<!-- <div class="impacts-analysis container">
   <div class="wrapper">
     <Tabs type="nav" selected={0}>
       <Tab label="Impact overview" />
@@ -58,31 +56,4 @@
       </svelte:fragment>
     </Tabs>
   </div>
-</div>
-
-<style lang="postcss">
-  //@import '../../styles/global.scss';
-
-  span {
-    display: block;
-  }
-
-  .impacts-header {
-    background-color: var(--color-background-stronger);
-    border-bottom: 1px solid var(--color-foreground-weaker);
-    padding: var(--space-xl) 0 calc(var(--space-xl) + 4rem); // TODO
-    margin-bottom: -4rem;
-  }
-
-  .impacts-selection {
-    margin-bottom: var(--space-xl);
-    border-bottom: 1px solid var(--color-foreground-weaker);
-  }
-
-  .explore-description {
-    font-size: var(--font-size-l);
-    max-width: 60ch;
-    line-height: var(--font-line-height-base);
-    color: var(--color-brand-stronger);
-  }
-</style>
+</div> -->

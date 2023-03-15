@@ -1,58 +1,26 @@
 <script>
   import Select from '$lib/helper/select/index.svelte';
-  import { get, compact } from 'lodash-es';
   import {
     CURRENT_INDICATOR_PARAMETERS,
     CURRENT_INDICATOR_OPTION_VALUES,
-    CURRENT_INDICATOR,
   } from '$stores/state.js';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
-    .map((parameter) => {
-      let value = get($CURRENT_INDICATOR_OPTION_VALUES, parameter.uid);
-      return {
-        ...parameter,
-        value,
-      };
-    })
+    .map((parameter) => ({
+      ...parameter,
+      value: $CURRENT_INDICATOR_OPTION_VALUES[parameter.uid],
+    }))
     .filter((d) => d.options.length > 1);
 
-  function handleChange({ detail: { key, value } }) {
-    CURRENT_INDICATOR_OPTION_VALUES.update((old) => ({
-      ...old,
+  $: handleChange = ({ detail: { key, value } }) =>
+    ($CURRENT_INDICATOR_OPTION_VALUES = {
+      ...$CURRENT_INDICATOR_OPTION_VALUES,
       [key]: value,
-    }));
-  }
+    });
 </script>
 
-<div class="wrapper">
-  <div class="label">Options for {$CURRENT_INDICATOR.label}</div>
-  <div class="parameters">
-    {#each parameters as parameter}
-      <div class="parameter">
-        <Select {...parameter} on:change={handleChange} />
-      </div>
-    {/each}
-  </div>
+<div class="flex">
+  {#each parameters as parameter}
+    <Select {...parameter} on:change={handleChange} />
+  {/each}
 </div>
-
-<style lang="postcss">
-  .wrapper {
-    display: flex;
-    align-items: center;
-  }
-
-  .label {
-    margin-right: var(--space-m);
-    color: var(--color-text-base);
-  }
-
-  .parameters {
-    display: flex;
-    align-items: center;
-  }
-
-  .parameter {
-    margin-right: var(--space-m);
-  }
-</style>

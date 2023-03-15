@@ -72,7 +72,7 @@
   </span>
 </li>
 
-<style lang="postcss">
+<style lang="scss">
   @import '../../../styles/global.scss';
 
   .tab {

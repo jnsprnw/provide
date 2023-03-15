@@ -1,10 +1,19 @@
 <script>
-  import { AVAILABLE_INDICATORS } from '$stores/state.js';
+  import {
+    AVAILABLE_INDICATORS,
+    CURRENT_INDICATOR,
+    CURRENT_INDICATOR_UID,
+  } from '$stores/state.js';
   import { SECTORS } from '$stores/meta.js';
-  import Tabs from '$lib/helper/tabs/Tabs.svelte';
-  import Tab from '$lib/helper/tabs/Tab.svelte';
-  import TabContent from '$lib/helper/tabs/TabContent.svelte';
-  import Indicators from './indicators.svelte';
+  import {
+    Tab,
+    TabGroup,
+    TabList,
+    TabPanel,
+    TabPanels,
+  } from '@rgossiaux/svelte-headlessui';
+  import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
+  import Indicators from './Indicators.svelte';
   import IndicatorParameters from './IndicatorParameters.svelte';
 
   $: sectors = $SECTORS.map((sector) => {
@@ -19,34 +28,27 @@
   });
 </script>
 
-<div class="indicator-selection">
-  <span class="intro"> Select an indicator to explore </span>
-  <Tabs>
-    <span class="text-label text-label--bold">Sectors</span>
-    {#each sectors as { icon, label, disabled }}
-      <Tab {label} {icon} {disabled} />
-    {/each}
-    <svelte:fragment slot="content">
-      {#each sectors as { indicators }}
-        <TabContent>
-          <Indicators {indicators} />
-        </TabContent>
+<PopoverSelect label="Indicator" buttonLabel={$CURRENT_INDICATOR.label}>
+  <TabGroup slot="panel" vertical class="flex">
+    <span class="text-label text-bold">Sectors</span>
+    <TabList class="flex flex-col">
+      {#each sectors as { label, icon, disabled }}
+        <Tab>
+          {icon}
+          {label}
+        </Tab>
       {/each}
-    </svelte:fragment>
-  </Tabs>
-</div>
+    </TabList>
+    <TabPanels>
+      {#each sectors as { indicators }}
+        <TabPanel class="flex">
+          <Indicators
+            items={indicators}
+            bind:current={$CURRENT_INDICATOR_UID}
+          />
+        </TabPanel>
+      {/each}
+    </TabPanels>
+  </TabGroup>
+</PopoverSelect>
 <div class="indicator-parameters"><IndicatorParameters /></div>
-
-<style lang="postcss">
-  // @import '../../../styles/global.scss';
-
-  // .indicator-selection {
-  //   @include selection-panel();
-  //   padding-bottom: var(--space-m);
-  // }
-
-  // .indicator-parameters {
-  //   padding: var(--space-xs) 0;
-  //   border-top: 1px solid var(--color-foreground-weakest); // Do we need another very light foreground color?
-  // }
-</style>
