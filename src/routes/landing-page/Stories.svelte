@@ -2,7 +2,7 @@
   import { get } from 'lodash-es';
   import { END_IMPACT_TIME, KEY_MODEL } from '$src/config';
   import { writable } from 'svelte/store';
-  import { dataPlease } from '$lib/api/new-api';
+  import { fetchData } from '$lib/api/api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { getContext } from 'svelte';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
@@ -71,7 +71,7 @@
     return { data: impactTime };
   };
 
-  $: dataPlease(
+  $: fetchData(
     IMPACT_TIME_DATA,
     currentStory.scenarios.map((scenario) => ({
       endpoint: END_IMPACT_TIME,

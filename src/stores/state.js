@@ -19,7 +19,9 @@ import {
   DICTIONARY_INDICATOR_PARAMETERS,
 } from './meta.js';
 
-/* GEOGRAPHY STATE */
+/*
+ * GEOGRAPHY STATE
+ */
 export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
 
 export const CURRENT_GEOGRAPHY_TYPE = derived(
@@ -47,7 +49,9 @@ export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
 
 export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
 
-/* SCENARIO STATE */
+/*
+ * SCENARIO STATE
+ */
 export const CURRENT_SCENARIOS_UID = writable(['curpol']); // Currently selected scenarios (not hovered1)
 
 export const CURRENT_SCENARIOS = derived(
@@ -63,7 +67,9 @@ export const DICTIONARY_CURRENT_SCENARIOS = derived(
   ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
 );
 
-/* INDICATOR STATE */
+/*
+ * INDICATOR STATE
+ */
 // We are using Index here because Tabs and TabContent
 export const AVAILABLE_INDICATORS = derived(
   [CURRENT_GEOGRAPHY_TYPE, DICTIONARY_INDICATORS],

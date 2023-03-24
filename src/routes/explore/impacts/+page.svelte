@@ -1,9 +1,9 @@
 <script>
-  import ImpactTime from '$lib/explore-impacts/ImpactTime/ImpactTime.svelte';
-  import ImpactGeo from '$lib/explore-impacts/ImpactGeo/ImpactGeo.svelte';
-  import UnAvoidableRisk from '$lib/explore-impacts/UnavoidableRisk/UnavoidableRisk.svelte';
-  import MitigationBenefits from '$lib/explore-impacts/MitigationBenefits/MitigationBenefits.svelte';
-  import Reversibility from '$lib/explore-impacts/Reversibility/Reversibility.svelte';
+  import ImpactTime from './ImpactTime/ImpactTime.svelte';
+  import ImpactGeo from './ImpactGeo/ImpactGeo.svelte';
+  import UnAvoidableRisk from './UnavoidableRisk/UnavoidableRisk.svelte';
+  import MitigationBenefits from './MitigationBenefits/MitigationBenefits.svelte';
+  import Reversibility from './Reversibility/Reversibility.svelte';
   import ScenarioSelection from './ScenarioSelection/ScenarioSelection.svelte';
 
   import { ALL_PARAMETERS_SELECTED } from '$stores/state.js';

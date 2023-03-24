@@ -52,6 +52,7 @@
       accessToken: import.meta.env.VITE_MAPBOX_ACCESS_TOKEN,
       container: mapId,
       style: $theme.mapStyle,
+      interactive: false,
       attributionControl: false,
     });
 

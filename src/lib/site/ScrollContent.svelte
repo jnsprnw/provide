@@ -19,7 +19,6 @@
     const intersection = intersections.find(
       (intersection) => intersection.isIntersecting
     );
-    console.log(intersections);
     if (intersection) activeSection = intersection.target.id || activeSection;
   }
 
@@ -31,7 +30,7 @@
 
 <div class="grid grid-cols-12 gap-14 pt-8 mx-auto max-w-7xl px-6">
   <div class="col-span-3">
-    <div class="sticky top-0 flex flex-col gap-10">
+    <div class="sticky top-0 flex flex-col gap-10 z-[2]">
       <slot name="before-navigation" />
 
       {#each navItems as { id, label, disabled, description, isActive }}
@@ -63,7 +62,7 @@
   <div class="col-span-9" bind:this={contentEl}>
     {#each sections as section}
       {#if !section.disabled}
-        <div id={section.id}>
+        <div id={section.id} class="mb-16">
           <svelte:component this={section.component} />
         </div>
       {/if}

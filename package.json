@@ -2,7 +2,7 @@
   "name": "provide-website",
   "version": "0.0.1",
   "scripts": {
-    "dev": "vite dev",
+    "dev": "vite dev --mode staging",
     "build": "vite build",
     "preview": "vite preview",
     "package": "svelte-kit package",

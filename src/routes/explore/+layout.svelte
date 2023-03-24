@@ -1,29 +1,8 @@
 <script>
   import { page } from '$app/stores';
   import MainControls from './MainControls/MainControls.svelte';
-  import {
-    SECTORS,
-    INDICATORS,
-    GEOGRAPHY_TYPES,
-    GEOGRAPHIES,
-    SCENARIOS,
-    INDICATOR_PARAMETERS,
-    UNITS,
-  } from '$stores/meta.js';
   import { urlToState } from '$utils/url';
   import BigTabs from '$lib/helper/BigTabs.svelte';
-
-  export let data;
-
-  const { meta } = data;
-
-  GEOGRAPHY_TYPES.set(meta.geographyTypes);
-  GEOGRAPHIES.set(meta);
-  INDICATORS.set(meta);
-  SECTORS.set(meta.sectors);
-  SCENARIOS.set(meta.scenarios);
-  INDICATOR_PARAMETERS.set(meta.indicatorParameters);
-  UNITS.set(meta.units);
 
   $: urlToState($page.url);
 
