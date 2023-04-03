@@ -14,8 +14,14 @@
     UNITS,
   } from '$stores/meta.js';
   import { page } from '$app/stores';
+  import _ from 'lodash';
 
   export let data;
+
+  _.templateSettings = {
+    interpolate: /\{\{(.+?)\}\}/g,
+    evaluate: /\{\{=(.+?)\}\}/g,
+  };
 
   const { meta } = data;
 

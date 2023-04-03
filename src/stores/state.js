@@ -163,3 +163,31 @@ export const ALL_PARAMETERS_SELECTED = derived(
   ([geography, scenarios, indicator]) =>
     geography && scenarios.length && indicator
 );
+
+export const TEMPLATE_PROPS = derived(
+  [
+    CURRENT_GEOGRAPHY,
+    CURRENT_INDICATOR,
+    CURRENT_SCENARIOS,
+    CURRENT_IMPACT_GEO_YEAR_UID,
+    CURRENT_INDICATOR_OPTIONS,
+    CURRENT_INDICATOR_UNIT,
+  ],
+  ([
+    $CURRENT_GEOGRAPHY,
+    $CURRENT_INDICATOR,
+    $CURRENT_SCENARIOS,
+    $CURRENT_IMPACT_GEO_YEAR_UID,
+    $CURRENT_INDICATOR_OPTIONS,
+    $CURRENT_INDICATOR_UNIT,
+  ]) => {
+    return {
+      geography: $CURRENT_GEOGRAPHY,
+      indicator: $CURRENT_INDICATOR,
+      scenarios: $CURRENT_SCENARIOS,
+      year: $CURRENT_IMPACT_GEO_YEAR_UID,
+      indicatorOptions: $CURRENT_INDICATOR_OPTIONS,
+      indicatorUnit: $CURRENT_INDICATOR_UNIT,
+    };
+  }
+);

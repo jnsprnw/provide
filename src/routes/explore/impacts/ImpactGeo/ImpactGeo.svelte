@@ -1,33 +1,40 @@
 <script>
-  import MapboxMap from '$lib/MapboxMap/MapboxMap.svelte';
-  import RasterLayer from '$lib/MapboxMap/RasterLayer.svelte';
+  import FillLayer from '$lib/MapboxMap/FillLayer.svelte';
   import Header from './Header.svelte';
+  import syncMaps from '@mapbox/mapbox-gl-sync-move';
   import Legend from './Legend.svelte';
   import { extent } from 'd3-array';
   import { scaleLinear } from 'd3-scale';
-  import Mask from '$lib/MapboxMap/Mask.svelte';
+  import mask from '@turf/mask';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
   import {
     CURRENT_GEOGRAPHY,
     CURRENT_IMPACT_GEO_YEAR_UID,
     CURRENT_INDICATOR,
-    CURRENT_INDICATOR_OPTIONS,
     CURRENT_INDICATOR_OPTION_VALUES,
-    CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
+    TEMPLATE_PROPS,
   } from '$src/stores/state';
   import { END_GEO_SHAPE, END_IMPACT_GEO } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import { interpolateLab } from 'd3-interpolate';
   import ChartFrame from '$lib/charts/ChartFrame.svelte';
+  import { coordinatesToRectGrid } from '$utils/geo.js';
+  import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
+  import DataSource from '$lib/MapboxMap/DataSource.svelte';
+  import bbox from '@turf/bbox';
+  import Template from '$lib/helper/Template.svelte';
 
   let displayOption = 'side-by-side';
 
-  let zoom;
-  let center;
-  let bounds;
+  let maps = [];
+  // Needed to properly update the sync map thing
+  $: {
+    const newMaps = maps.slice(0);
+    syncMaps(newMaps);
+  }
 
   const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];
   const NEGATIVE_RANGE = ['#437E8E', '#DACFBF'];
@@ -57,13 +64,13 @@
     },
   });
 
-  $: process = ({ geoData, geoShape }, { currentScenarios }) => {
-    const isDoubleMap = geoData.length === 2;
+  $: process = ({ data, shape }, { currentScenarios }) => {
+    const isDoubleMap = data.length === 2;
     const showDifference = displayOption === 'difference' && isDoubleMap;
-    const isMultipMap = geoData.length > 1 && !showDifference;
+    const isMultipMap = data.length > 1 && !showDifference;
 
     const calculateDifference = () => {
-      const [grid1, grid2] = geoData;
+      const [grid1, grid2] = data;
       return {
         ...grid1.data,
         data: grid1.data.data.map((row, lngIndex) =>
@@ -77,7 +84,7 @@
     // The data that is actually being rendered
     const renderedData = showDifference
       ? [calculateDifference()]
-      : geoData.map((d, i) => ({
+      : data.map((d, i) => ({
           ...(isMultipMap ? currentScenarios[i] : {}),
           ...d.data,
         }));
@@ -125,71 +132,69 @@
         .range(range);
     })();
 
+    const geoData = renderedData.map(
+      ({ data, coordinatesOrigin, resolution, ...d }) => ({
+        ...d,
+        data: coordinatesToRectGrid(data, {
+          origin: coordinatesOrigin,
+          resolution,
+          colorScale,
+        }),
+      })
+    );
+
     return {
       showDifference,
-      geoData: renderedData,
-      geoShape: geoShape.data.data.features[0],
+      geoData,
+      geoShape: shape.data.data.features[0],
       colorScale,
     };
   };
 
-  $: title = 'Change in {indicator.label} in {geography.label} in {year.label}';
+  const title =
+    'Change in {{indicator.label}} in {{geography.label}} in {{year}}';
 
-  $: description =
-    'This map shows the change in {indicator.label} (expressed in {unit.label}) in {geography.label} in {year.label} compared to the reference period {referencePeriod.label}.';
+  const description =
+    'This map shows the change in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) in {{geography.label}} in {{year}} compared to the reference period {{indicatorOptions.reference.label}}.';
 </script>
 
 <LoadingWrapper
   let:asyncProps
   let:props
-  asyncProps={{ geoData: $IMPACT_GEO_DATA, geoShape: $GEO_SHAPE_DATA }}
-  props={{
-    currentYear: $CURRENT_IMPACT_GEO_YEAR_UID,
-    currentGeography: $CURRENT_GEOGRAPHY,
-    currentIndicator: $CURRENT_INDICATOR,
-    currentOptions: $CURRENT_INDICATOR_OPTIONS,
-    currentScenarios: $CURRENT_SCENARIOS,
-  }}
+  asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
+  props={$TEMPLATE_PROPS}
   {process}
   let:isLoading
 >
-  <ChartFrame {title} {description}>
+  <ChartFrame {title} {description} templateProps={props}>
     <div class={`maps cols-${asyncProps.geoData.length}`}>
-      {#each asyncProps.geoData as d}
-        <div class="map-wrapper">
-          <span class="chart-message">Preliminary results</span>
-          <MapboxMap
-            bind:zoom
-            bind:center
-            bind:bounds
-            fitShape={asyncProps.geoShape}
-            resize={asyncProps.geoData.length}
-            interactive={false}
-          >
-            <Mask feature={asyncProps.geoShape} layerId="mask-layer" />
-            <RasterLayer
-              colorScale={asyncProps.colorScale}
-              {...d}
-              before="mask-layer"
-            />
-          </MapboxMap>
-          {#if d.label}
-            <div
-              style="--color: {d.color};"
-              class="text-underlined scenario-label"
-            >
-              {d.label}
-            </div>
-          {/if}
-        </div>
-      {/each}
+      {#key asyncProps.geoData.length}
+        {#each asyncProps.geoData as d, i}
+          <div class="map-wrapper">
+            <span class="chart-message">Preliminary results</span>
+            <MapProvider bind:map={maps[i]} bounds={bbox(asyncProps.geoShape)}>
+              <DataSource data={mask(asyncProps.geoShape)}>
+                <FillLayer before="water" id="mask-layer" fillColor="#fff" />
+              </DataSource>
+              <DataSource data={d.data}>
+                <FillLayer before="mask-layer" />
+              </DataSource>
+            </MapProvider>
+            {#if d.label}
+              <div
+                style="--color: {d.color};"
+                class="text-underlined scenario-label"
+              >
+                {d.label}
+              </div>
+            {/if}
+          </div>
+        {/each}
+      {/key}
     </div>
     <Spinner {isLoading} />
     <div class="legend">
-      <Legend
-        unit={props.currentIndicator.unit}
-        scale={asyncProps.colorScale}
-      />
+      <Legend unit={props.indicator.unit} scale={asyncProps.colorScale} />
     </div>
   </ChartFrame>
   <!-- <div class="chart-info">

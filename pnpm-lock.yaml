@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@mapbox/mapbox-gl-sync-move': ^0.3.1
   '@popperjs/core': ^2.11.6
   '@rgossiaux/svelte-headlessui': ^1.0.2
   '@sveltejs/adapter-auto': ^2.0.0
@@ -10,6 +11,8 @@ specifiers:
   '@sveltejs/svelte-virtual-list': ^3.0.1
   '@turf/bbox': ^6.5.0
   '@turf/difference': ^6.5.0
+  '@turf/helpers': ^6.5.0
+  '@turf/mask': ^6.5.0
   autoprefixer: ^10.4.13
   d3-array: ^3.2.0
   d3-color: ^3.1.0
@@ -51,11 +54,14 @@ specifiers:
   vite: ^4.1.1
 
 dependencies:
+  '@mapbox/mapbox-gl-sync-move': 0.3.1
   '@popperjs/core': 2.11.6
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.1
   '@sveltejs/svelte-virtual-list': 3.0.1
   '@turf/bbox': 6.5.0
   '@turf/difference': 6.5.0
+  '@turf/helpers': 6.5.0
+  '@turf/mask': 6.5.0
   d3-array: 3.2.2
   d3-color: 3.1.0
   d3-ease: 3.0.1
@@ -363,6 +369,10 @@ packages:
     resolution: {integrity: sha512-HP6XvfNIzfoMVfyGjBckjiAOQK9WfX0ywdLubuPMPv+Vqf5fj0uCbgBQYpiqcWZT6cbyyRnTSXDheT1ugvF6UQ==}
     dev: false
 
+  /@mapbox/mapbox-gl-sync-move/0.3.1:
+    resolution: {integrity: sha512-Y3PMyj0m/TBJa9OkQnO2TiVDu8sFUPmLF7q/THUHrD/g42qrURpMJJ4kufq4sR60YFMwZdCGBshrbgK5v2xXWw==}
+    dev: false
+
   /@mapbox/point-geometry/0.1.0:
     resolution: {integrity: sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==}
     dev: false
@@ -525,6 +535,13 @@ packages:
     resolution: {integrity: sha512-Wv8PRNCtPD31UVbdJE/KVAWKe7l6US+lJItRR/HOEW3eh+U/JwRCSUl/KZ7bmjM/C+zLNoreM2TU6OoLACs4eg==}
     dependencies:
       '@turf/helpers': 6.5.0
+    dev: false
+
+  /@turf/mask/6.5.0:
+    resolution: {integrity: sha512-RQha4aU8LpBrmrkH8CPaaoAfk0Egj5OuXtv6HuCQnHeGNOQt3TQVibTA3Sh4iduq4EPxnZfDjgsOeKtrCA19lg==}
+    dependencies:
+      '@turf/helpers': 6.5.0
+      polygon-clipping: 0.15.3
     dev: false
 
   /@turf/meta/6.5.0:
