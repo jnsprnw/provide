@@ -4,7 +4,7 @@
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_SCENARIOS,
-    CURRENT_INDICATOR_OPTIONS,
+    TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
   } from '$stores/state.js';
@@ -19,7 +19,8 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
-  import ChartFrame from '$lib/charts/ChartFrame.svelte';
+  import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
+  import { formatValue } from '$lib/utils/formatting';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -68,46 +69,44 @@
     });
 
     const hasSingleScenario = impactTimeData.length === 1;
+    const chartInfo = [
+      { label: 'Model', value: impactTime[0].model },
+      { label: 'Source', value: impactTime[0].source },
+      {
+        label: 'Time resolution',
+        value: `${impactTime[0].yearStep} years`,
+      },
+    ];
 
-    return { impactTime, hasSingleScenario };
+    return { impactTime, hasSingleScenario, chartInfo };
   };
 
-  const description = `This graph shows how changes in {indicator.label} (expressed in {unit.label}) will play out over time in 
-  {geography.label} compared to the reference period {referencePeriod.label}, according to the selected scenario. The line indicates 
+  const description = `This graph shows how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
+  {{geography.label}} compared to the reference period {{indicatorOptions.reference.label}}, according to the selected scenario. The line indicates 
   the median estimate for this scenario`;
+
+  const title = 'Development of {{indicator.label}} in {{geography.label}}';
 </script>
 
 <LoadingWrapper
   {process}
   let:asyncProps={{
     impactTime,
+    chartInfo,
     hasSingleScenario,
   }}
-  let:props={{
-    indicator,
-    scenarios,
-    geography,
-    parameters,
-  }}
+  let:props
   asyncProps={{
     impactTimeData: $IMPACT_TIME_DATA,
   }}
-  props={{
-    indicator: $CURRENT_INDICATOR,
-    scenarios: $CURRENT_SCENARIOS,
-    geography: $CURRENT_GEOGRAPHY,
-    parameters: $CURRENT_INDICATOR_OPTIONS,
-  }}
+  props={$TEMPLATE_PROPS}
 >
-  <ChartFrame
-    title={'Development of {indicator.label} until {timeFrame.label}'}
-    {description}
-  >
+  <ChartFrame {title} {description} templateProps={props} {chartInfo}>
     <div class="aspect-video">
       <LineTimeSeries
-        yLabel={indicator.label}
+        yLabel={props.indicator.label}
         data={impactTime}
-        unit={indicator.unit.uid}
+        unit={props.indicator.unit.uid}
       />
     </div>
   </ChartFrame>

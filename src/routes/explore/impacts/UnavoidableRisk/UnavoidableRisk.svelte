@@ -23,7 +23,7 @@
   import { sortBy, reverse } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
-  import ChartFrame from '$lib/charts/ChartFrame.svelte';
+  import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
 
   let currentThreshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});

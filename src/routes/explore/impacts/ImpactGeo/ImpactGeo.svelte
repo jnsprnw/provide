@@ -20,7 +20,7 @@
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import { interpolateLab } from 'd3-interpolate';
-  import ChartFrame from '$lib/charts/ChartFrame.svelte';
+  import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import { coordinatesToRectGrid } from '$utils/geo.js';
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
   import DataSource from '$lib/MapboxMap/DataSource.svelte';

@@ -1,0 +1,42 @@
+<script>
+  import {
+    Popover,
+    PopoverButton,
+    PopoverPanel,
+  } from '@rgossiaux/svelte-headlessui';
+  import { createPopperActions } from 'svelte-popperjs';
+
+  export let label;
+  export let items;
+  export let panelPlacement = 'bottom-end';
+
+  const [popperRef, popperContent] = createPopperActions();
+
+  const popperOptions = {
+    placement: panelPlacement,
+    strategy: 'fixed',
+    modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
+  };
+</script>
+
+{#if items.length}
+  <Popover>
+    <PopoverButton use={[popperRef]} class="font-bold text-theme-base text-sm"
+      >{label}</PopoverButton
+    >
+
+    <PopoverPanel
+      use={[[popperContent, popperOptions]]}
+      class="bg-background-base shadow-lg z-10 px-4 py-2"
+    >
+      <dl>
+        {#each items as item}
+          <div class="flex text-sm py-1">
+            <dt class="font-bold mr-2">{item.label}</dt>
+            <dd class="min-w-10 text-foreground-weak">{item.value}</dd>
+          </div>
+        {/each}
+      </dl>
+    </PopoverPanel>
+  </Popover>
+{/if}

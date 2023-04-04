@@ -43,6 +43,7 @@ specifiers:
   qs: ^6.11.0
   sanitize.css: ^13.0.0
   sass: ^1.49.11
+  squirrelly: ^8.0.8
   svelte: ^3.48.0
   svelte-popperjs: ^1.3.2
   svelte-preprocess: ^4.10.7
@@ -78,6 +79,7 @@ dependencies:
   mapbox-gl: 2.12.1
   qs: 6.11.0
   sanitize.css: 13.0.0
+  squirrelly: 8.0.8
   svelte-popperjs: 1.3.2_u2a26nokcckqacvdxkzji6ia64
   svelte-virtual-list: 3.0.1
   svelte-virtual-list-ce: 3.1.0-beta.2
@@ -1816,6 +1818,11 @@ packages:
 
   /splaytree/3.1.1:
     resolution: {integrity: sha512-9FaQ18FF0+sZc/ieEeXHt+Jw2eSpUgUtTLDYB/HXKWvhYVyOc7h1hzkn5MMO3GPib9MmXG1go8+OsBBzs/NMww==}
+    dev: false
+
+  /squirrelly/8.0.8:
+    resolution: {integrity: sha512-7dyZJ9Gw86MmH0dYLiESsjGOTj6KG8IWToTaqBuB6LwPI+hyNb6mbQaZwrfnAQ4cMDnSWMUvX/zAYDLTSWLk/w==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /streamsearch/1.1.0:
