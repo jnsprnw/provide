@@ -171,7 +171,9 @@
     templateProps={props}
     chartInfo={asyncProps.chartInfo}
   >
-    <Controls scenarios={props.scenarios} bind:displayOption bind:year />
+    <svelte:fragment slot="controls">
+      <Controls scenarios={props.scenarios} bind:displayOption bind:year />
+    </svelte:fragment>
     <Maps {...props} {...asyncProps} />
   </ChartFrame>
   <Spinner {isLoading} />

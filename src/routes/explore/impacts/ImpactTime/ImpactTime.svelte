@@ -95,7 +95,7 @@
   <ChartFrame {title} {description} templateProps={props} {chartInfo}>
     <div class="aspect-video">
       <LineTimeSeries
-        yLabel={props.indicator.label}
+        yLabel={`${props.indicator.label} ${props.indicator.unit.label}`}
         data={impactTime}
         unit={props.indicator.unit.uid}
       />

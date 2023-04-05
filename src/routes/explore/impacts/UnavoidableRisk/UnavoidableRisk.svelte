@@ -37,7 +37,6 @@
   });
 
   $: process = ({ data }, { scenarios, allScenarios }) => {
-    console.log(data);
     const hasThresholds = !!data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
@@ -119,19 +118,17 @@
   }}
 >
   <ChartFrame {title} {description} templateProps={props}>
-    <div class="chart-container">
+    <div slot="controls">
       {#if asyncProps.thresholds.length > 1}
-        <div name="controls">
-          <Select
-            label="Threshold"
-            options={asyncProps.thresholds}
-            bind:value={currentThreshold}
-          />
-        </div>
+        <Select
+          label="Threshold"
+          options={asyncProps.thresholds}
+          bind:value={currentThreshold}
+        />
       {/if}
-      <div class="aspect-video">
-        <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
-      </div>
+    </div>
+    <div class="aspect-video">
+      <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
     </div>
   </ChartFrame>
 </LoadingWrapper>

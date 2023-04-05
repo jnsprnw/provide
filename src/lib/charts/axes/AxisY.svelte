@@ -31,26 +31,25 @@
 </script>
 
 {#if axisLabel || showLabel}
-  <text transform={`translate(0, ${-padding.top + 9})`} class="axis-label"
-    ><tspan class="axis-name">{axisLabel}</tspan>
-    {#if unit}<tspan class="axis-unit">in {$UNITS[unit]?.label || unit}</tspan
-      >{/if}</text
+  <text
+    transform={`translate(0, ${-padding.top + 9})`}
+    class="text-xs fill-foreground-weak">{axisLabel}</text
   >
 {/if}
-<g class="axis y-axis" transform={`translate(${xPos}, ${yPos})`}>
+<g transform={`translate(${xPos}, ${yPos})`}>
   {#each tickVals as tick, i}
-    <g class="tick tick-{tick}" transform="translate(0, {$yScale(tick)})">
+    <g transform="translate(0, {$yScale(tick)})">
       {#if gridlines !== false}
         <line
-          class={`chart-gridline ${gridClass}`}
-          class:chart-gridline--highlighed={ticksHighlighted.includes(tick)}
+          class={`stroke-foreground-weakest stroke-dasharray-2-3`}
+          class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
           x1={lineStart}
           x2={lineLength ? lineLength * orientation : $width * orientation}
         />
       {/if}
       <text
         x={labelX * -orientation}
-        class="chart-tick-label"
+        class="fill-foreground-weak text-xs"
         dominant-baseline="middle"
         style="
           text-anchor: {labelTextAnchor};
@@ -64,14 +63,3 @@
     <slot />
   </g>
 </g>
-
-<style>
-  .axis-label {
-    font-size: var(--font-size-s);
-    fill: var(--color-text-weaker);
-  }
-
-  .axis-name {
-    font-weight: var(--font-font-weight-bold);
-  }
-</style>

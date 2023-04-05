@@ -19,11 +19,16 @@
   ];
 </script>
 
-<h3 class="font-bold text-2xl mb-3">
-  <Template template={title} data={templateProps} />
-</h3>
-<p class="max-w-lg"><Template template={description} data={templateProps} /></p>
-<slot name="controls" />
+<div class="mb-4">
+  <h3 class="font-bold text-2xl mb-3">
+    <Template template={title} data={templateProps} />
+  </h3>
+  <p class="max-w-xl">
+    <Template template={description} data={templateProps} />
+  </p>
+
+  <slot name="controls" />
+</div>
 <slot />
 <div class="flex justify-end gap-4">
   <InfoButton label="About the data" items={chartInfo} />

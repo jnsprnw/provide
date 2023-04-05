@@ -5,7 +5,6 @@
   import MultipleLineLayer from './layers/MultipleLineLayer.svelte';
   import AxisX from './axes/AxisX.svelte';
   import AxisY from './axes/AxisY.svelte';
-  import Message from './Message.svelte';
   import { sortBy } from 'lodash-es';
   import MultipleAreaLayer from './layers/MultipleAreaLayer.svelte';
   import { curveCardinal } from 'd3-shape';
@@ -56,15 +55,11 @@
         <AxisX ticks={xTicks} />
         <AxisY
           {padding}
-          {unit}
-          axisLabel={yLabel}
-          showLabel={true}
           ticks={yTicks}
           xTick={-3}
           formatTick={formatTickY}
           ticksHighlighted={ticksYHighlighted}
         />
-        <Message {isSmall} />
       {/if}
       <MultipleLineLayer
         animate={false}

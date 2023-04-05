@@ -66,11 +66,11 @@
 
 <g transform={`translate(${xPos}, ${yPos})`}>
   {#each visibleTicks as tick, i}
-    <g class="tick tick-{tick}" transform="translate({$xScale(tick)}, 0)">
+    <g class="" transform="translate({$xScale(tick)}, 0)">
       {#if gridlines !== false}
         <line
-          class={`chart-gridline ${gridClass}`}
-          class:chart-gridline--highlighed={ticksHighlighted.includes(tick)}
+          class={`stroke-foreground-weakest stroke-dasharray-2-3`}
+          class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
           y1={lineStart}
           y2={lineLength ?? -$height}
         />
@@ -79,17 +79,10 @@
         x={isBandwidth ? $xScale.bandwidth() / 2 : 0}
         y={labelOffset + labelY}
         text-anchor={textAnchor(i)}
-        class="chart-tick-label"
+        class="fill-foreground-weak text-xs"
       >
         {formatTick(tick)}
       </text>
     </g>
   {/each}
 </g>
-
-<style>
-  .baseline {
-    stroke: var(--color-foreground-weakest);
-    shape-rendering: crispEdges;
-  }
-</style>
