@@ -3,24 +3,16 @@
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
-    CURRENT_SCENARIOS,
     TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
-
-  import TitleTimeSeries from './TitleTimeSeries.svelte';
-  import DescriptionTimeSeries from './DescriptionTimeSeries.svelte';
-  import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
-  import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
-  import ResolutionTime from './ResolutionTime.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
-  import { formatValue } from '$lib/utils/formatting';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -93,7 +85,6 @@
   let:asyncProps={{
     impactTime,
     chartInfo,
-    hasSingleScenario,
   }}
   let:props
   asyncProps={{
@@ -110,19 +101,4 @@
       />
     </div>
   </ChartFrame>
-  <!-- <div class="chart-info">
-      <TitleTimeSeries
-        {indicator}
-        {geography}
-        {hasSingleScenario}
-        impactTimeData={impactTime}
-      />
-      <DescriptionTimeSeries {indicator} {geography} {scenarios} {parameters} />
-
-      <ChartFacts>
-        <ResolutionTime {hasSingleScenario} impactTimeData={impactTime} />
-        <ChartMetaList data={impactTime.map((d) => d.model)} term="Model" />
-        <ChartMetaList data={impactTime.map((d) => d.source)} term="Source" />
-      </ChartFacts>
-    </div> -->
 </LoadingWrapper>

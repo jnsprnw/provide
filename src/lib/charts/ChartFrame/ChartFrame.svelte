@@ -7,9 +7,6 @@
   export let description;
   export let templateProps;
   export let chartInfo = [];
-  export let data;
-
-  $: console.log(data);
 
   $: downloadOptions = [
     { options: [{ label: 'Download data as CSV', href: '#' }] },
@@ -22,10 +19,10 @@
   ];
 </script>
 
-<h3 class="font-bold text-lg">
+<h3 class="font-bold text-2xl mb-3">
   <Template template={title} data={templateProps} />
 </h3>
-<p><Template template={description} data={templateProps} /></p>
+<p class="max-w-lg"><Template template={description} data={templateProps} /></p>
 <slot name="controls" />
 <slot />
 <div class="flex justify-end gap-4">

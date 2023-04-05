@@ -4,11 +4,10 @@
     CURRENT_INDICATOR_UNIT_UID,
     CURRENT_GEOGRAPHY,
     CURRENT_INDICATOR_OPTION_VALUES,
-    CURRENT_INDICATOR_OPTIONS,
-    DICTIONARY_CURRENT_SCENARIOS,
+    TEMPLATE_PROPS,
   } from '$stores/state.js';
-  import { DICTIONARY_SCENARIOS } from '$stores/meta.js';
-  import RiskChart from '$lib/charts/RiskChart/index.svelte';
+  import { SCENARIOS } from '$stores/meta.js';
+  import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
   import Select from '$lib/controls/Select/Select.svelte';
@@ -20,7 +19,7 @@
     KEY_MODEL,
     KEY_SOURCE,
   } from '$src/config.js';
-  import { sortBy, reverse } from 'lodash-es';
+  import { sortBy, reverse, find } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -37,7 +36,8 @@
     },
   });
 
-  $: process = ({ data }, { scenarios, currentScenarios }) => {
+  $: process = ({ data }, { scenarios, allScenarios }) => {
+    console.log(data);
     const hasThresholds = !!data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
@@ -52,7 +52,7 @@
       : 0;
     let processedScenarios = data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
-      const scenario = currentScenarios[key] || scenarios[key];
+      const scenario = find([...scenarios, ...allScenarios], { uid: key });
       const values = data.years.map((year, yearIndex) => {
         const value = scenarioData[key][thresholdIndex][yearIndex];
         return {
@@ -99,6 +99,11 @@
       source: data[KEY_SOURCE],
     };
   };
+
+  const title =
+    'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
+  const description =
+    'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
 </script>
 
 <LoadingWrapper
@@ -108,29 +113,25 @@
   {process}
   asyncProps={$UN_AVOIDABLE_RISK_DATA}
   props={{
-    scenarios: $DICTIONARY_SCENARIOS,
-    currentScenarios: $DICTIONARY_CURRENT_SCENARIOS,
-    indicator: $CURRENT_INDICATOR,
-    currentGeography: $CURRENT_GEOGRAPHY,
-    currentIndicatorOptions: $CURRENT_INDICATOR_OPTIONS,
+    ...$TEMPLATE_PROPS,
+    allScenarios: $SCENARIOS,
+    threshold: currentThreshold,
   }}
 >
-  <ChartFrame />
-  <div class="chart-info">
-    <ChartInfo {...props} {...asyncProps} threshold={currentThreshold} />
-  </div>
-  <div class="chart-container">
-    {#if asyncProps.thresholds.length > 1}
-      <div class="chart-options">
-        <Select
-          label="Threshold"
-          options={asyncProps.thresholds}
-          bind:value={currentThreshold}
-        />
+  <ChartFrame {title} {description} templateProps={props}>
+    <div class="chart-container">
+      {#if asyncProps.thresholds.length > 1}
+        <div name="controls">
+          <Select
+            label="Threshold"
+            options={asyncProps.thresholds}
+            bind:value={currentThreshold}
+          />
+        </div>
+      {/if}
+      <div class="aspect-video">
+        <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
       </div>
-    {/if}
-    <div class="aspect-video">
-      <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
     </div>
-  </div>
+  </ChartFrame>
 </LoadingWrapper>
