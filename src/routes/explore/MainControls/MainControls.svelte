@@ -7,10 +7,10 @@
 <div class="mb-16">
   <div class="flex gap-4 mb-2">
     <div class="w-1/2">
-      <GeographySelection />
+      <IndicatorSelection />
     </div>
     <div class="w-1/2">
-      <IndicatorSelection />
+      <GeographySelection />
     </div>
   </div>
   <IndicatorParameters />

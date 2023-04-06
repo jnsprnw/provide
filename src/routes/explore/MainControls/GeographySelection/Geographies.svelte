@@ -23,7 +23,7 @@
 
   $: defaultResults = sortBy(
     items.map((d) => ({ item: d })),
-    ['item.hasContinent', 'item.continent.label', 'item.label']
+    ['item.label']
   );
 
   // Search with default options
@@ -69,23 +69,27 @@
   );
 </script>
 
-<div class="border-r border-foreground-weakest p-4 pb-0">
-  <input type="text" bind:value={term} placeholder="Search for country…" />
+<div class="border-r border-foreground-weakest pb-0">
+  <div class="px-3">
+    <input type="text" bind:value={term} placeholder="Search for country…" />
+  </div>
   <RadioGroup
     value={current}
     on:change={(e) => (current = e.detail)}
     class="h-96 w-60"
   >
-    <VirtualList items={results} let:item>
-      <RadioGroupOption value={item.uid} let:checked>
-        <InteractiveListItem
-          {...item}
-          icon={item.emoji}
-          selected={checked}
-          bind:hovered={hoveredItem}
-        />
-      </RadioGroupOption>
-    </VirtualList>
+    {#key results.length}
+      <VirtualList items={results} let:item>
+        <RadioGroupOption value={item.uid} let:checked class="px-3">
+          <InteractiveListItem
+            {...item}
+            icon={item.emoji}
+            selected={checked}
+            bind:hovered={hoveredItem}
+          />
+        </RadioGroupOption>
+      </VirtualList>
+    {/key}
   </RadioGroup>
 </div>
 
