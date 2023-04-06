@@ -7,6 +7,7 @@
 
   const embeds = {
     'impact-time': '../../../explore/impacts/ImpactTime/ImpactTime.svelte',
+    'impact-geography': '../../../explore/impacts/ImpactGeo/ImpactGeo.svelte',
   };
 
   $: urlToState($page.url);

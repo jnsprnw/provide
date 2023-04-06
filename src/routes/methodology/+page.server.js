@@ -15,33 +15,35 @@ export const load = async ({ fetch }) => {
   } = data.attributes;
 
   return {
-    modelsIntro: parse(ModelsIntro || ''),
-    models: Models.map(({ Title, Description, Link, Label }) => {
-      return {
-        title: Title,
-        slug: kebabCase(Label || Title),
-        description: Description && parse(Description),
-        link: Link,
-        label: Label || Title,
-      };
-    }),
-    scenariosIntro: parse(ScenariosIntro || ''),
-    scenarios: Scenarios.map(({ Title, Description, Label }) => {
-      return {
-        title: Title,
-        slug: kebabCase(Label || Title),
-        description: Description && parse(Description),
-        label: Label || Title,
-      };
-    }),
-    dataProcessingIntro: parse(DataProcessingIntro || ''),
-    dataProcessing: DataProcessing.map(({ Title, Description, Label }) => {
-      return {
-        title: Title,
-        slug: kebabCase(Label || Title),
-        description: Description && parse(Description),
-        label: Label || Title,
-      };
-    }),
+    content: {
+      modelsIntro: parse(ModelsIntro || ''),
+      models: Models.map(({ Title, Description, Link, Label }) => {
+        return {
+          title: Title,
+          slug: kebabCase(Label || Title),
+          description: Description && parse(Description),
+          link: Link,
+          label: Label || Title,
+        };
+      }),
+      scenariosIntro: parse(ScenariosIntro || ''),
+      scenarios: Scenarios.map(({ Title, Description, Label }) => {
+        return {
+          title: Title,
+          slug: kebabCase(Label || Title),
+          description: Description && parse(Description),
+          label: Label || Title,
+        };
+      }),
+      dataProcessingIntro: parse(DataProcessingIntro || ''),
+      dataProcessing: DataProcessing.map(({ Title, Description, Label }) => {
+        return {
+          title: Title,
+          slug: kebabCase(Label || Title),
+          description: Description && parse(Description),
+          label: Label || Title,
+        };
+      }),
+    },
   };
 };
