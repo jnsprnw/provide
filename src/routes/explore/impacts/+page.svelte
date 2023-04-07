@@ -15,34 +15,34 @@
     { component: Intro },
     {
       slug: 'impact-time',
-      label: 'Time',
+      title: 'Time',
       description:
         'How will the selected indicator unfold over the coming decades?',
       component: ImpactTime,
     },
     {
       slug: 'impact-geo',
-      label: 'Geography',
+      title: 'Geography',
       description:
         'Where in the selected geography will impacts hit the hardest?',
       component: ImpactGeo,
     },
     {
       slug: 'unavoidable-risk',
-      label: 'Avoidable vs. Unavoidable Risks',
+      title: 'Avoidable vs. Unavoidable Risks',
       description: 'How much impact can be avoided through mitigation?',
       component: UnAvoidableRisk,
     },
     {
       slug: 'mitigation-benefits',
-      label: 'Mitigation benefits',
+      title: 'Mitigation benefits',
       disabled: true,
       description: 'How will we benefit from increased mitigation efforts?',
       component: MitigationBenefits,
     },
     {
       slug: 'reversibility',
-      label: 'Reversibility',
+      title: 'Reversibility',
       disabled: true,
       description: 'How much damage can be reversed once it is done?',
       component: Reversibility,

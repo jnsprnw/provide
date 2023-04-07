@@ -3,6 +3,9 @@
   import ScenarioSection from './BaseSection.svelte';
   import SectionIntro from './SectionIntro.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
+  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
+  import { SCENARIOS } from '$stores/meta';
+  import ScenarioSelector from './ScenarioSelector.svelte';
 
   export let data;
 
@@ -15,7 +18,7 @@
     dataProcessingIntro,
   } = data.content);
 
-  $: content = [
+  $: sections = [
     {
       slug: 'models',
       title: 'Models',
@@ -28,7 +31,15 @@
       title: 'Scenarios',
       component: SectionIntro,
       content: scenariosIntro,
-      sections: scenarios.map((s) => ({ ...s, component: ScenarioSection })),
+      sections: [
+        {
+          title: 'Scenario finder',
+          slug: 'scenario-finder',
+          component: ScenarioSelector,
+          scenarios: $SCENARIOS,
+        },
+        ...scenarios.map((s) => ({ ...s, component: ScenarioSection })),
+      ],
     },
     {
       slug: 'data-processing',
@@ -39,69 +50,22 @@
     },
   ];
 
-  $: flatContent = content.reduce(
+  $: flatSections = sections.reduce(
     (acc, item) => [...acc, item, ...item.sections],
     []
   );
-
-  $: console.log(flatContent);
 
   const query = 'waypoint';
 </script>
 
 <svelte:head>
-  <title>Methodology</title>
+  <title>Documentation</title>
 </svelte:head>
 
-<nav class="bg-background-weaker">
-  <div class="mx-auto max-w-7xl px-6 pt-8">
-    <h1 class="title">Methodology</h1>
-    <nav>
-      <ul class="nav-inpage subcategories">
-        {#if modelsIntro || models.length}
-          <li>
-            <a href="#models" class="nav-headline-section">Models</a>
-            {#if models.length}
-              <ul>
-                {#each models as { slug, label }}
-                  <li><a href={`#${slug}`}>{label}</a></li>
-                {/each}
-              </ul>
-            {/if}
-          </li>
-        {/if}
-        {#if scenariosIntro || scenarios.length}
-          <li>
-            <a href="#scenarios" class="nav-headline-section">Scenarios</a>
-            {#if scenarios.length}
-              <ul>
-                {#each scenarios as { slug, label }}
-                  <li><a href={`#${slug}`}>{label}</a></li>
-                {/each}
-              </ul>
-            {/if}
-          </li>
-        {/if}
-        {#if dataProcessingIntro || dataProcessing.length}
-          <li>
-            <a href="#data-processing" class="nav-headline-section"
-              >Data Processing</a
-            >
-            {#if dataProcessing.length}
-              <ul>
-                {#each dataProcessing as { slug, label }}
-                  <li><a href={`#${slug}`}>{label}</a></li>
-                {/each}
-              </ul>
-            {/if}
-          </li>
-        {/if}
-      </ul>
-    </nav>
-  </div>
-</nav>
-<ScrollContent query={`.${query}`}>
-  {#each flatContent as section}
+<ScrollContent query={`.${query}`} let:index>
+  <NestedNav slot="navigation" {sections} {index} />
+  <h2 class="text-5xl font-bold mb-14">Documentation</h2>
+  {#each flatSections as section}
     <svelte:component this={section.component} {query} {...section} />
   {/each}
 </ScrollContent>

@@ -7,8 +7,6 @@
   let count;
   let offset;
   let progress;
-
-  $: console.log(index);
 </script>
 
 <div class="grid grid-cols-12 gap-10 pt-8 mx-auto max-w-7xl px-6">
@@ -18,7 +16,14 @@
     </div>
   </div>
   <div class="col-span-9">
-    <Scroller bind:count bind:index bind:offset bind:progress {query}>
+    <Scroller
+      bind:count
+      bind:index
+      bind:offset
+      bind:progress
+      {query}
+      threshold={0.01}
+    >
       <div slot="foreground">
         <slot>
           {#each sections as section}

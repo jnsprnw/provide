@@ -1,0 +1,22 @@
+<script>
+  import { CURRENT_SCENARIOS_UID } from '$stores/state';
+
+  export let slug;
+  export let query;
+  export let scenarios;
+</script>
+
+<fieldset id={slug} class={`flex flex-col my-4 bg-background-weaker ${query}`}>
+  {#each scenarios as scenario}
+    <label class="py-1">
+      <input
+        type="checkbox"
+        bind:group={$CURRENT_SCENARIOS_UID}
+        name="scenarios"
+        value={scenario.uid}
+      />
+      {scenario.label}
+    </label>
+  {/each}
+  <a href="/explore/impacts">View in Explorer</a>
+</fieldset>
