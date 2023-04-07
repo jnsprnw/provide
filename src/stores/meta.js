@@ -1,9 +1,19 @@
-import { writable, derived } from 'svelte/store';
-import { get, keyBy } from 'lodash-es';
+import { page } from '$app/stores';
 import { SCENARIO_DATA_KEYS } from '$src/config.js';
+import {
+  get,
+  keyBy,
+} from 'lodash-es';
+import {
+  derived,
+  writable,
+} from 'svelte/store';
 
 // META DATA (This will only be set once on load and won't change again)
-export const GEOGRAPHY_TYPES = writable({});
+export const GEOGRAPHY_TYPES = derived(
+  page,
+  ($page) => $page.data?.meta?.geographyTypes ?? {}
+);
 export const GEOGRAPHIES = (() => {
   const store = writable();
   return {
@@ -66,7 +76,10 @@ export const DICTIONARY_SCENARIOS = derived(SCENARIOS, ($scenarios) =>
   keyBy($scenarios, 'uid')
 );
 
-export const SECTORS = writable([]);
+export const SECTORS = derived(
+  page,
+  ($page) => $page.data?.meta?.sectors ?? []
+);
 
 export const INDICATORS = (() => {
   const store = writable([]);
@@ -91,7 +104,10 @@ export const DICTIONARY_INDICATORS = derived(INDICATORS, ($indicators) =>
   keyBy($indicators, 'uid')
 );
 
-export const INDICATOR_PARAMETERS = writable([]);
+export const INDICATOR_PARAMETERS = derived(
+  page,
+  ($page) => $page.data?.meta?.indicatorParameters ?? []
+);
 export const DICTIONARY_INDICATOR_PARAMETERS = derived(
   INDICATOR_PARAMETERS,
   ($parameters) => keyBy($parameters, 'uid')

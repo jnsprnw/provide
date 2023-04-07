@@ -25,12 +25,9 @@
 
   const { meta } = data;
 
-  GEOGRAPHY_TYPES.set(meta.geographyTypes);
   GEOGRAPHIES.set(meta);
   INDICATORS.set(meta);
-  SECTORS.set(meta.sectors);
   SCENARIOS.set(meta.scenarios);
-  INDICATOR_PARAMETERS.set(meta.indicatorParameters);
   UNITS.set(meta.units);
 
   $: isEmbed = $page.route.id.startsWith('/embed');
