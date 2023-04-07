@@ -12,7 +12,7 @@
     evaluate: /\{\{=(.+?)\}\}/g,
   };
 
-  $: isEmbed = $page.route.id.startsWith('/embed');
+  $: isEmbed = ($page.route.id || '').startsWith('/embed');
 </script>
 
 <HtmlHead />
