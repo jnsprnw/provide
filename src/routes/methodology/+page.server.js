@@ -21,7 +21,7 @@ export const load = async ({ fetch }) => {
         return {
           title: Title,
           slug: kebabCase(Label || Title),
-          description: Description && parse(Description),
+          content: Description && parse(Description),
           link: Link,
           label: Label || Title,
         };
@@ -31,7 +31,7 @@ export const load = async ({ fetch }) => {
         return {
           title: Title,
           slug: kebabCase(Label || Title),
-          description: Description && parse(Description),
+          content: Description && parse(Description),
           label: Label || Title,
         };
       }),
@@ -40,7 +40,7 @@ export const load = async ({ fetch }) => {
         return {
           title: Title,
           slug: kebabCase(Label || Title),
-          description: Description && parse(Description),
+          content: Description && parse(Description),
           label: Label || Title,
         };
       }),

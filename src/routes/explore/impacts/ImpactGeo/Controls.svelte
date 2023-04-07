@@ -1,6 +1,6 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
-  import SegmentedControl from '$lib/helper/segmented-control/index.svelte';
+  import SegmentedControl from '$lib/helper/SegmentedControl/SegmentedControl.svelte';
   import { IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS } from '$src/config.js';
 
   export let displayOption;

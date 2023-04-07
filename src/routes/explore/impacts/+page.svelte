@@ -7,40 +7,41 @@
   import ScenarioSelection from './ScenarioSelection/ScenarioSelection.svelte';
 
   import { ALL_PARAMETERS_SELECTED } from '$stores/state.js';
-  import ScrollContent from '$lib/site/ScrollContent.svelte';
+  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
+  import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import Intro from './Intro.svelte';
 
   const sections = [
     { component: Intro },
     {
-      id: 'impact-time',
+      slug: 'impact-time',
       label: 'Time',
       description:
         'How will the selected indicator unfold over the coming decades?',
       component: ImpactTime,
     },
     {
-      id: 'impact-geo',
+      slug: 'impact-geo',
       label: 'Geography',
       description:
         'Where in the selected geography will impacts hit the hardest?',
       component: ImpactGeo,
     },
     {
-      id: 'unavoidable-risk',
+      slug: 'unavoidable-risk',
       label: 'Avoidable vs. Unavoidable Risks',
       description: 'How much impact can be avoided through mitigation?',
       component: UnAvoidableRisk,
     },
     {
-      id: 'mitigation-benefits',
+      slug: 'mitigation-benefits',
       label: 'Mitigation benefits',
       disabled: true,
       description: 'How will we benefit from increased mitigation efforts?',
       component: MitigationBenefits,
     },
     {
-      id: 'reversibility',
+      slug: 'reversibility',
       label: 'Reversibility',
       disabled: true,
       description: 'How much damage can be reversed once it is done?',
@@ -54,5 +55,8 @@
 </svelte:head>
 
 <ScrollContent {sections}>
-  <ScenarioSelection slot="before-navigation" />
+  <div slot="navigation" class="flex flex-col gap-10" let:index>
+    <ScenarioSelection />
+    <SimpleNav {sections} {index} />
+  </div>
 </ScrollContent>

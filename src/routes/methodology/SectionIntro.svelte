@@ -1,0 +1,10 @@
+<script>
+  import HtmlContent from '$lib/helper/HtmlContent.svelte';
+  export let title;
+  export let content;
+  export let slug;
+  export let query;
+</script>
+
+<h2 id={slug} class="font-bold text-2xl {query}">{title}</h2>
+<HtmlContent {content} />
