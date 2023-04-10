@@ -19,7 +19,7 @@
   export let model; // The model used for the data in this chart. Provided by the API.
   export let source; // The data source used for the data in this chart. Provided by the API.
   export let currentGeography;
-  export let currentIndicatorOptions;
+  export let currentIndicatorOptions = {};
 
   // Find scenario data based on currently selected scenarios
   $: scenarios = data.filter((scenario) => currentScenarios[scenario.uid]);
