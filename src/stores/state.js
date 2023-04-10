@@ -1,22 +1,27 @@
-import { writable, derived, get as getStore } from 'svelte/store';
-import {
-  get,
-  compact,
-  map,
-  reduce,
-  keyBy,
-  isUndefined,
-  isEmpty,
-} from 'lodash-es';
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import {
-  GEOGRAPHY_TYPES,
-  GEOGRAPHIES,
-  DICTIONARY_SCENARIOS,
-  DICTIONARY_INDICATORS,
-  INDICATOR_PARAMETERS,
+  compact,
+  get,
+  isEmpty,
+  isUndefined,
+  keyBy,
+  map,
+  reduce,
+} from 'lodash-es';
+import {
+  derived,
+  get as getStore,
+  writable,
+} from 'svelte/store';
+
+import {
   DICTIONARY_INDICATOR_PARAMETERS,
+  DICTIONARY_INDICATORS,
+  DICTIONARY_SCENARIOS,
+  GEOGRAPHIES,
+  GEOGRAPHY_TYPES,
+  INDICATOR_PARAMETERS,
 } from './meta.js';
 
 /*
@@ -32,8 +37,14 @@ export const CURRENT_GEOGRAPHY_TYPE = derived(
 // Geographies of the currently selected geography type tab
 export const CURRENT_GEOGRAPHIES = derived(
   [GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE],
-  ([$geographies, $currentGeographyType]) =>
-    $geographies[$currentGeographyType.uid]
+  ([$geographies, $currentGeographyType]) => {
+    if ($currentGeographyType?.uid) {
+      const id = $currentGeographyType.uid;
+      if ($geographies && $geographies.hasOwnProperty(id)) {
+        return $geographies[id];
+      }
+    }
+  }
 );
 
 export const CURRENT_GEOGRAPHY_UID = writable('DEU');
@@ -41,8 +52,8 @@ export const CURRENT_GEOGRAPHY_UID = writable('DEU');
 export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
   // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
   // it's value once CURRENT_GEOGRAPHY_UID changes
-  const geography = getStore(CURRENT_GEOGRAPHIES).find(
-    (geography) => geography.uid === $uid
+  const geography = (getStore(CURRENT_GEOGRAPHIES) || []).find(
+    (geography) => geography?.uid === $uid
   );
   set(geography);
 });
@@ -59,7 +70,7 @@ export const CURRENT_SCENARIOS = derived(
   ([$uids, $scenarios, $theme]) =>
     $uids.map((uid, i) => ({
       ...$scenarios[uid],
-      color: $theme.color.scenarios[i],
+      color: $theme?.color?.scenarios[i],
     }))
 );
 export const DICTIONARY_CURRENT_SCENARIOS = derived(
