@@ -13,7 +13,10 @@ export const GEOGRAPHY_TYPES = derived(
 );
 
 export const GEOGRAPHIES = derived(page, ($page) => {
-  const { geographyTypes, continents, ...meta } = $page.data?.meta;
+  const { geographyTypes, continents, ...meta } = $page.data?.meta ?? {
+    geographyTypes: [],
+    continents: [],
+  };
   if (geographyTypes.length && continents.length) {
     const continentsDict = keyBy(continents, 'uid');
     const geographies = geographyTypes.reduce((acc, type) => {
@@ -70,7 +73,9 @@ export const SECTORS = derived(
 );
 
 export const INDICATORS = derived(page, ($page) => {
-  const { indicators: indicatorsRaw, units } = $page.data?.meta;
+  const { indicators: indicatorsRaw, units } = $page.data?.meta ?? {
+    indicators: [],
+  };
   return indicatorsRaw.map((indicator) => {
     return {
       ...indicator,
