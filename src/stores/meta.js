@@ -1,9 +1,6 @@
 import { page } from '$app/stores';
 import { SCENARIO_DATA_KEYS } from '$src/config.js';
-import {
-  get,
-  keyBy,
-} from 'lodash-es';
+import { get, keyBy } from 'lodash-es';
 import { derived } from 'svelte/store';
 
 // META DATA (This will only be set once on load and won't change again)
@@ -13,24 +10,12 @@ export const GEOGRAPHY_TYPES = derived(
 );
 
 export const GEOGRAPHIES = derived(page, ($page) => {
-  const { geographyTypes, continents, ...meta } = $page.data?.meta ?? {
-    geographyTypes: [],
-    continents: [],
-  };
-  if (geographyTypes.length && continents.length) {
-    const continentsDict = keyBy(continents, 'uid');
+  const { geographyTypes, ...meta } = $page.data?.meta ?? {};
+  if (geographyTypes.length) {
     const geographies = geographyTypes.reduce((acc, type) => {
-      const list = get(meta, type.uid, []).map((geography) => {
-        const continent = get(continentsDict, geography.continent);
-        return {
-          ...geography,
-          continent,
-          hasContinent: Boolean(continent),
-        };
-      });
       return {
         ...acc,
-        [type.uid]: list,
+        [type.uid]: get(meta, type.uid, []),
       };
     }, {});
     return geographies;

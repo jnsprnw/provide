@@ -9,11 +9,7 @@ import {
   map,
   reduce,
 } from 'lodash-es';
-import {
-  derived,
-  get as getStore,
-  writable,
-} from 'svelte/store';
+import { derived, get as getStore, writable } from 'svelte/store';
 
 import {
   DICTIONARY_INDICATOR_PARAMETERS,
@@ -146,17 +142,18 @@ export const CURRENT_INDICATOR_OPTION_VALUES = writable({});
 // Key value store of full parameter objects
 export const CURRENT_INDICATOR_OPTIONS = derived(
   [CURRENT_INDICATOR_OPTION_VALUES, DICTIONARY_INDICATOR_PARAMETERS],
-  ([$currentOptions, $parameters]) =>
-    reduce(
+  ([$currentOptions, $parameters]) => {
+    return reduce(
       $currentOptions,
-      (acc, value, key) => {
+      (acc, uid, key) => {
         acc[key] = $parameters[key].options.find(
-          (option) => option.value === value
+          (option) => option.uid === uid
         );
         return acc;
       },
       {}
-    )
+    );
+  }
 );
 
 // Utility for quicker access to list of indicator parameters
