@@ -34,6 +34,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
       'indicators',
       svelteFetch
     );
+
     const descriptionScenarios = await loadFromStrapi('scenarios', svelteFetch);
     const meta = await loadFromAPI(
       `${import.meta.env.VITE_DATA_API_URL}/meta/`,
@@ -46,6 +47,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
           descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),
           ['attributes', 'Description']
         );
+
         return {
           ...indicator,
           description,

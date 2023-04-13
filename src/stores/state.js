@@ -1,14 +1,6 @@
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
-import {
-  compact,
-  get,
-  isEmpty,
-  isUndefined,
-  keyBy,
-  map,
-  reduce,
-} from 'lodash-es';
+import { get, keyBy, map, reduce } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 
 import {
@@ -77,26 +69,6 @@ export const DICTIONARY_CURRENT_SCENARIOS = derived(
 /*
  * INDICATOR STATE
  */
-// We are using Index here because Tabs and TabContent
-export const AVAILABLE_INDICATORS = derived(
-  [CURRENT_GEOGRAPHY_TYPE, DICTIONARY_INDICATORS],
-  ([$type, $indicators]) => {
-    return compact(
-      get($type, 'availableIndicators', []).map((indicator) => {
-        const item = get($indicators, indicator);
-        if (isUndefined(item)) {
-          if (!isEmpty($indicators)) {
-            // TODO: Check for null?
-            console.warn(`Indicator with id ${indicator} was not found.`);
-          }
-          return null;
-        }
-        return item;
-      })
-    );
-  }
-);
-
 export const CURRENT_INDICATOR_UID = writable('mean-temperature');
 
 export const CURRENT_INDICATOR = derived(

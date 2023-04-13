@@ -9,7 +9,7 @@
 <span
   class:text-theme-base={selected}
   class:font-bold={selected}
-  class="py-1 px-3 -mx-2 hover:bg-background-weakest whitespace-nowrap flex cursor-pointer gap-1"
+  class="py-1 px-5 hover:bg-background-weaker whitespace-nowrap flex cursor-pointer gap-1 border-theme-base"
   on:focus={() => (hovered = uid)}
   on:mouseover={() => (hovered = uid)}
   on:mouseleave={() => (hovered = null)}

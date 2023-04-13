@@ -2,8 +2,6 @@
   import ImpactTime from './ImpactTime/ImpactTime.svelte';
   import ImpactGeo from './ImpactGeo/ImpactGeo.svelte';
   import UnAvoidableRisk from './UnavoidableRisk/UnavoidableRisk.svelte';
-  import MitigationBenefits from './MitigationBenefits/MitigationBenefits.svelte';
-  import Reversibility from './Reversibility/Reversibility.svelte';
   import ScenarioSelection from './ScenarioSelection/ScenarioSelection.svelte';
 
   import { ALL_PARAMETERS_SELECTED } from '$stores/state.js';
@@ -33,20 +31,20 @@
       description: 'How much impact can be avoided through mitigation?',
       component: UnAvoidableRisk,
     },
-    {
-      slug: 'mitigation-benefits',
-      title: 'Mitigation benefits',
-      disabled: true,
-      description: 'How will we benefit from increased mitigation efforts?',
-      component: MitigationBenefits,
-    },
-    {
-      slug: 'reversibility',
-      title: 'Reversibility',
-      disabled: true,
-      description: 'How much damage can be reversed once it is done?',
-      component: Reversibility,
-    },
+    // {
+    //   slug: 'mitigation-benefits',
+    //   title: 'Mitigation benefits',
+    //   disabled: true,
+    //   description: 'How will we benefit from increased mitigation efforts?',
+    //   component: MitigationBenefits,
+    // },
+    // {
+    //   slug: 'reversibility',
+    //   title: 'Reversibility',
+    //   disabled: true,
+    //   description: 'How much damage can be reversed once it is done?',
+    //   component: Reversibility,
+    // },
   ];
 </script>
 
