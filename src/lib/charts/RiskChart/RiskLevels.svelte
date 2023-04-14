@@ -28,10 +28,6 @@
     })
   }
 
-  $: console.log({ scenariosRange})
-
-  $: console.log({ scenarios})
-
   $: scenariosRange = getRangeByYear(scenarios)
 
   $: bandwidth = $xScale.bandwidth();
