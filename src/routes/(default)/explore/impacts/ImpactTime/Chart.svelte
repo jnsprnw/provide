@@ -20,7 +20,7 @@
   let yKey = 'value';
 
   const mainChartPadding = { top: 20, right: 0, bottom: 30, left: 40 };
-  const sideChartPadding = { ...mainChartPadding, right: 0, bottom: 30 };
+  const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
 
   $: flatData = data.reduce((memo, group) => {
     group.values.forEach(({ min, value, max, year }) => {
@@ -41,8 +41,6 @@
   });
 
   $: yDomain = extent(flatData, (d) => d.value);
-
-  $: xDomainBoxes = endBoundsData.map((d) => d.id);
   $: isMultiLine = data.length > 1;
   $: mainChartWidth = ['w-full', 'w-10/12', 'w-9/12'][data.length - 1];
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];

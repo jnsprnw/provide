@@ -75,7 +75,7 @@
     fill: none;
     stroke-linejoin: round;
     stroke-linecap: round;
-    stroke-width: 2.5px;
+    stroke-width: 3px;
     stroke: var(--color-foreground-base);
     stroke-opacity: 0.3;
 
@@ -86,12 +86,6 @@
 
     &.primary {
       stroke-opacity: 1;
-    }
-
-    &.background {
-      stroke-width: 6px;
-      stroke: var(--color-background-base);
-      stroke-opacity: 0.75;
     }
   }
 </style>
