@@ -1,6 +1,6 @@
-import { parse } from 'marked';
-import { kebabCase } from 'lodash-es';
 import { loadFromStrapi } from '$utils/apis.js';
+import { kebabCase } from 'lodash-es';
+import { parse } from 'marked';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('technical-documentation', fetch);
@@ -17,33 +17,48 @@ export const load = async ({ fetch }) => {
   return {
     content: {
       modelsIntro: parse(ModelsIntro || ''),
-      models: Models.map(({ Title, Description, Link, Label }) => {
+      models: Models.map(({ UID, Title, Description, Link, Label }) => {
+        const title = Title.trim();
+        const description = Description.trim();
+        if (!title.length || !description.length) {
+          return false;
+        }
         return {
-          title: Title,
-          slug: kebabCase(Label || Title),
-          content: Description && parse(Description),
+          title,
+          slug: kebabCase(UID || Label || title),
+          content: parse(description),
           link: Link,
-          label: Label || Title,
+          label: Label || title,
         };
-      }),
+      }).filter((d) => Boolean(d)),
       scenariosIntro: parse(ScenariosIntro || ''),
-      scenarios: Scenarios.map(({ Title, Description, Label }) => {
+      scenarios: Scenarios.map(({ UID, Title, Description, Label }) => {
+        const title = Title.trim();
+        const description = Description.trim();
+        if (!title.length || !description.length) {
+          return false;
+        }
         return {
-          title: Title,
-          slug: kebabCase(Label || Title),
-          content: Description && parse(Description),
-          label: Label || Title,
+          title,
+          slug: kebabCase(UID || Label || title),
+          content: parse(description),
+          label: Label || title,
         };
-      }),
+      }).filter((d) => Boolean(d)),
       dataProcessingIntro: parse(DataProcessingIntro || ''),
       dataProcessing: DataProcessing.map(({ Title, Description, Label }) => {
+        const title = Title.trim();
+        const description = Description.trim();
+        if (!title.length || !description.length) {
+          return false;
+        }
         return {
-          title: Title,
-          slug: kebabCase(Label || Title),
-          content: Description && parse(Description),
-          label: Label || Title,
+          title,
+          slug: kebabCase(Label || title),
+          content: parse(description),
+          label: Label || title,
         };
-      }),
+      }).filter((d) => Boolean(d)),
     },
   };
 };
