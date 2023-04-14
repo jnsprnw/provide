@@ -8,7 +8,7 @@
     CURRENT_SCENARIOS_UID,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
-  import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  import Chart from './Chart.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -45,12 +45,12 @@
 
       return {
         color: scenarios[i].color,
+        scenario: scenarios[i],
         yearStart,
         yearStep,
         parameters,
         model,
         source,
-        strokeWidth: 3,
         values: indicatorData.map((values, i) => ({
           min: values[0],
           value: values[1],
@@ -93,12 +93,10 @@
   props={$TEMPLATE_PROPS}
 >
   <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-    <div class="aspect-video">
-      <LineTimeSeries
-        yLabel={`${props?.indicator?.label} ${props?.indicator?.unit?.label}`}
-        data={impactTime}
-        unit={props.indicator.unit.uid}
-      />
-    </div>
+    <Chart
+      yLabel={`${props?.indicator?.label} ${props?.indicator?.unit?.label}`}
+      data={impactTime}
+      unit={props.indicator.unit.uid}
+    />
   </ChartFrame>
 </LoadingWrapper>

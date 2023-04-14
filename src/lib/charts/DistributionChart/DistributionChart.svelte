@@ -58,8 +58,8 @@
       <ColorMatrix />
     </Canvas>
     <Svg>
-      <AxisX gridlines={false} ticks={5} />
-      <AxisY gridlines={false} ticks={4} formatTick={formatTickY} />
+      <AxisX showTickLines={false} ticks={5} />
+      <AxisY showTickLines={false} ticks={4} formatTick={formatTickY} />
       <LineLayer color={$theme.color.background.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>

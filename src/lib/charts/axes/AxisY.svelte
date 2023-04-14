@@ -6,13 +6,12 @@
 
   export let ticks = 4;
   export let ticksHighlighted = [0];
-  export let gridlines = true;
-  export let gridClass = '';
+  export let showTickLines = true;
+  export let showTickLabels = true;
 
   export let formatTick = (d) => formatValue(d, 'default');
 
   export let axisLabel;
-  export let unit;
   export let padding;
   export let showLabel = false;
   export let x; // Base x position of the axis, usually full width or 0
@@ -39,7 +38,7 @@
 <g transform={`translate(${xPos}, ${yPos})`}>
   {#each tickVals as tick, i}
     <g transform="translate(0, {$yScale(tick)})">
-      {#if gridlines !== false}
+      {#if showTickLines !== false}
         <line
           class={`stroke-foreground-weakest stroke-dasharray-2-3`}
           class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
@@ -47,16 +46,18 @@
           x2={lineLength ? lineLength * orientation : $width * orientation}
         />
       {/if}
-      <text
-        x={labelX * -orientation}
-        class="fill-foreground-weak text-xs"
-        dominant-baseline="middle"
-        style="
+      {#if showTickLabels}
+        <text
+          x={labelX * -orientation}
+          class="fill-foreground-weak text-xs"
+          dominant-baseline="middle"
+          style="
           text-anchor: {labelTextAnchor};
         "
-      >
-        {formatTick(tick)}
-      </text>
+        >
+          {formatTick(tick)}
+        </text>
+      {/if}
     </g>
   {/each}
   <g transform="translate({[0, $height]})rotate(-90)">

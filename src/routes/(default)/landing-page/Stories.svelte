@@ -5,7 +5,7 @@
   import { fetchData } from '$lib/api/api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { getContext } from 'svelte';
-  import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
+  //import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
 
   export let stories;
@@ -92,7 +92,7 @@
     props={{ currentStory }}
     {process}
   >
-    <LineTimeSeries showcase={true} {data} unit={currentStory.indicator.unit} />
+    <!-- <LineTimeSeries showcase={true} {data} unit={currentStory.indicator.unit} /> -->
   </LoadingWrapper>
   <div class="wrapper grid">
     <div class="stories-wrapper">

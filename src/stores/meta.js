@@ -82,7 +82,7 @@ export const INDICATORS = derived(page, ($page) => {
 
     return {
       ...indicator,
-      availableScenarios: availableScenarios.slice(0, i * 3 + 3),
+      availableScenarios, //availableScenarios.slice(0, i * 3 + 3),
       availableGeographies,
       unit,
     };

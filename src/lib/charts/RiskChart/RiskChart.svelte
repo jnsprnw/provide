@@ -39,7 +39,7 @@
     flatData={flatten(data)}
   >
     <Svg>
-      <AxisX gridlines={false} {padding} formatTick={formatTickX} />
+      <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
       <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
       <Message />
       <RiskLevels hatchingColor={$theme.color.foreground.weakest} />

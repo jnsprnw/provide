@@ -7,19 +7,15 @@
   import AxisY from './axes/AxisY.svelte';
   import { sortBy } from 'lodash-es';
   import MultipleAreaLayer from './layers/MultipleAreaLayer.svelte';
-  import { curveCardinal } from 'd3-shape';
 
   export let data = [];
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
-  export let yLabel;
   export let yDomain = undefined;
   export let ticksYHighlighted = [0];
   export let xTicks = 4;
   export let yTicks = 4;
-  export let showcase = false;
-  export let isSmall = false;
 
   const padding = showcase
     ? { top: 0, right: 0, bottom: 0, left: 0 }
@@ -51,22 +47,16 @@
     flatData={flatten(data)}
   >
     <Svg>
-      {#if !showcase}
-        <AxisX ticks={xTicks} />
-        <AxisY
-          {padding}
-          ticks={yTicks}
-          xTick={-3}
-          formatTick={formatTickY}
-          ticksHighlighted={ticksYHighlighted}
-        />
-      {/if}
-      <MultipleLineLayer
-        animate={false}
-        drawBackground={!showcase}
-        curve={showcase && curveCardinal}
+      <AxisX ticks={xTicks} />
+      <AxisY
+        {padding}
+        ticks={yTicks}
+        xTick={-3}
+        formatTick={formatTickY}
+        ticksHighlighted={ticksYHighlighted}
       />
-      {#if !isMultiLine && !showcase}
+      <MultipleLineLayer animate={false} />
+      {#if !isMultiLine}
         <MultipleAreaLayer color={data[0].color} />
       {/if}
     </Svg>

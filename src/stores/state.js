@@ -128,24 +128,23 @@ export const CURRENT_SCENARIOS_UID = (() => {
     set,
     toggle: (id, timeframe) =>
       update((selectedIds) => {
-        let nextIds;
+        const scenarios = getStore(DICTIONARY_SCENARIOS);
+        // Find current timeframe to see if the timeframe changed
+        const currentTimeframe = scenarios[selectedIds[0]].timeframe[1];
+        const timeframeChanged = currentTimeframe !== timeframe;
+        // If timeframe changed we want to remove all the old scenarios
+        if (timeframeChanged) return [id];
+
         // Check if the id is already in the array
         if (selectedIds.includes(id) && selectedIds.length > 1) {
           // Remove the id from the array
-          nextIds = selectedIds.filter((selectedId) => selectedId !== id);
+          return selectedIds.filter((selectedId) => selectedId !== id);
         } else if (!selectedIds.includes(id) && selectedIds.length < 3) {
           // Add the id to the array if the limit is not reached
-          nextIds = [...selectedIds, id];
+          return [...selectedIds, id];
         } else {
           return selectedIds;
         }
-        // Get all the scenarios that are available within the selected timeframe so we allow
-        // only selecting scenarios within the same timeframe
-        const scenarios = getStore(SCENARIOS)
-          .filter((s) => s.timeframe[1] === timeframe)
-          .map((s) => s.uid);
-
-        return nextIds.filter((uid) => scenarios.includes(uid));
       }),
   };
 })();

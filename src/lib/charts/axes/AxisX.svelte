@@ -4,7 +4,7 @@
   import { getContext } from 'svelte';
   const { width, xScale, yScale, height } = getContext('LayerCake');
 
-  export let gridlines = true;
+  export let showTickLines = true;
   export let gridClass = '';
   export let formatTick = (d) => formatValue(d, 'year');
   export let baseline = false;
@@ -67,7 +67,7 @@
 <g transform={`translate(${xPos}, ${yPos})`}>
   {#each visibleTicks as tick, i}
     <g class="" transform="translate({$xScale(tick)}, 0)">
-      {#if gridlines !== false}
+      {#if showTickLines !== false}
         <line
           class={`stroke-foreground-weakest stroke-dasharray-2-3`}
           class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
