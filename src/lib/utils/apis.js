@@ -54,13 +54,31 @@ export const loadMetaData = function (svelteFetch = fetch) {
         };
       }),
       scenarios: meta.scenarios.map((indicator) => {
-        const description = get(
-          descriptionScenarios.find((d) => d.attributes.UID === indicator.uid),
-          ['attributes', 'Description']
+        // Find the correct scenario in the list coming from Strapi
+        const currentScenario = descriptionScenarios.find(
+          (d) => d.attributes.UID === indicator.uid
         );
+        // Get the description from the Strapi scenario
+        const description = get(currentScenario, ['attributes', 'Description']);
+        // Get the characteristics from the Strapi scenario
+        const chararacteristics = get(currentScenario, [
+          'attributes',
+          'ScenarioCharacteristics',
+        ])
+          .map(({ Year: YearStr, Description: descriptionStr }) => {
+            const year = parseInt(YearStr);
+            // Check if year is valid and the description has any length
+            if (year && descriptionStr.length) {
+              return [year, descriptionStr];
+            } else {
+              return false;
+            }
+          })
+          .filter((d) => Boolean(d)); // Filter invalid entries
         return {
           ...indicator,
           description,
+          ...Object.fromEntries(chararacteristics),
         };
       }),
     });
