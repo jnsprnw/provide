@@ -13,9 +13,13 @@ export const GEOGRAPHIES = derived(page, ($page) => {
   const { geographyTypes, ...meta } = $page.data?.meta ?? {};
   if (geographyTypes.length) {
     const geographies = geographyTypes.reduce((acc, type) => {
+      const geographiesOfType = get(meta, type.uid, []).map((d) => ({
+        ...d,
+        geographyType: type.uid,
+      }));
       return {
         ...acc,
-        [type.uid]: get(meta, type.uid, []),
+        [type.uid]: geographiesOfType,
       };
     }, {});
     return geographies;
@@ -26,7 +30,7 @@ export const GEOGRAPHIES = derived(page, ($page) => {
 
 export const SCENARIOS = derived(page, ($page) => {
   return ($page.data?.meta?.scenarios ?? []).map((scenarioRaw) => {
-    const scenario = { ...scenarioRaw };
+    const scenario = { ...scenarioRaw, endYear: scenarioRaw.timeframe[1] };
     SCENARIO_DATA_KEYS.forEach((key) => {
       const { data, yearStart, yearStep, unit } = get(
         scenarioRaw,
@@ -61,7 +65,7 @@ export const INDICATORS = derived(page, ($page) => {
   const { indicators, units, sectors } = $page.data?.meta ?? {
     indicators: [],
   };
-  return indicators.map((indicator) => {
+  return indicators.map((indicator, i) => {
     const sector = sectors.find((s) => s.uid === indicator.sector);
     const unit = units.find((unit) => unit.uid === indicator.unit) || {
       uid: indicator.unit,
@@ -75,9 +79,10 @@ export const INDICATORS = derived(page, ($page) => {
       ...sector.availableScenarios,
       ...indicator.availableScenarios,
     ]);
+
     return {
       ...indicator,
-      availableScenarios,
+      availableScenarios: availableScenarios.slice(0, i * 3 + 3),
       availableGeographies,
       unit,
     };

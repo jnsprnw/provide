@@ -1,49 +1,48 @@
 <script>
   import Geographies from './Geographies.svelte';
   import {
-    CURRENT_GEOGRAPHY_TYPE_INDEX,
     CURRENT_GEOGRAPHY_UID,
     CURRENT_GEOGRAPHY,
-    CURRENT_GEOGRAPHIES,
+    AVAILABLE_GEOGOGRAPHIES,
   } from '$stores/state.js';
   import { GEOGRAPHY_TYPES } from '$stores/meta.js';
-  import {
-    Tab,
-    TabGroup,
-    TabList,
-    TabPanel,
-    TabPanels,
-  } from '@rgossiaux/svelte-headlessui';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
-  import InteractiveListItem from '$lib/controls/InteractiveListItem.svelte';
+  import Content from '$lib/controls/PopoverSelect/Content.svelte';
+  import Map from './Map.svelte';
+
+  const geographyTypes = $GEOGRAPHY_TYPES.filter(
+    (d) =>
+      $AVAILABLE_GEOGOGRAPHIES.filter(
+        (geography) => geography.geographyType === d.uid
+      ).length
+  );
+
+  let hoveredItem;
+
+  $: console.log($CURRENT_GEOGRAPHY_UID);
 </script>
 
-<PopoverSelect label="Geography" buttonLabel={$CURRENT_GEOGRAPHY.label}>
-  <TabGroup
-    vertical
-    class="flex"
-    bind:selectedIndex={$CURRENT_GEOGRAPHY_TYPE_INDEX}
+<PopoverSelect
+  label="Indicator"
+  buttonLabel={$CURRENT_GEOGRAPHY.label}
+  panelClass="w-screen max-w-3xl"
+>
+  <Content
+    filters={geographyTypes}
+    filterKey="sector"
+    filterLabel="Geography types"
+    currentUid={$CURRENT_GEOGRAPHY_UID}
+    items={$AVAILABLE_GEOGOGRAPHIES}
   >
-    <TabList class="flex items-stretch flex-col p-4">
-      {#each $GEOGRAPHY_TYPES as type}
-        <Tab class="flex items-stretch" let:selected>
-          <InteractiveListItem {...type} icon={type.emoji} {selected} />
-        </Tab>
-      {/each}
-    </TabList>
-    <TabPanels>
-      {#each $GEOGRAPHY_TYPES as { uid, label }}
-        <TabPanel class="flex bg-background-weaker">
-          {#if uid === 'admin0'}
-            <Geographies
-              items={$CURRENT_GEOGRAPHIES}
-              bind:current={$CURRENT_GEOGRAPHY_UID}
-            />
-          {:else}
-            Other geography: {label}
-          {/if}
-        </TabPanel>
-      {/each}
-    </TabPanels>
-  </TabGroup>
+    <div slot="items" let:items class="flex grid-flow-col">
+      <Geographies
+        {items}
+        bind:hoveredItem
+        bind:currentUid={$CURRENT_GEOGRAPHY_UID}
+      />
+      <div class="w-96 self-center grow">
+        <Map hovered={hoveredItem} selected={$CURRENT_GEOGRAPHY_UID} />
+      </div>
+    </div>
+  </Content>
 </PopoverSelect>

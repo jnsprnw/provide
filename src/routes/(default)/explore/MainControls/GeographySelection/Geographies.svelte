@@ -5,10 +5,10 @@
   import Fuse from 'fuse.js';
 
   import { sortBy } from 'lodash-es';
-  import Map from './Map.svelte';
 
   export let items;
-  export let current;
+  export let currentUid;
+  export let hoveredItem;
 
   const options = {
     includeScore: true,
@@ -19,7 +19,6 @@
   $: fuse = new Fuse(items, options);
 
   let term = '';
-  let hoveredItem;
 
   $: defaultResults = sortBy(
     items.map((d) => ({ item: d })),
@@ -54,7 +53,7 @@
                 [nextStart] = match.indices[i + 1]; // we use that start instead of the end of the string
               }
               // Now, we add this string unmarked to the label.
-              // We need to add 1 to the start-index if the current match was not at the beginning
+              // We need to add 1 to the start-index if the currentUid match was not at the beginning
               label += `${item.label.substring(end + 1, nextStart)}`;
             }
           }
@@ -69,18 +68,25 @@
   );
 </script>
 
-<div class="border-r border-foreground-weakest pb-0">
-  <div class="px-3">
-    <input type="text" bind:value={term} placeholder="Search for country…" />
+<div
+  class="border-r border-foreground-weakest pb-0 flex flex-col items-stretch"
+>
+  <div class="px-5 grow flex items-stretch my-4">
+    <input
+      type="text"
+      class="px-2 py-2 leading-8 border w-full"
+      bind:value={term}
+      placeholder="Search for country…"
+    />
   </div>
   <RadioGroup
-    value={current}
-    on:change={(e) => (current = e.detail)}
+    value={currentUid}
+    on:change={(e) => (currentUid = e.detail)}
     class="h-96 w-60"
   >
     {#key results.length}
       <VirtualList items={results} let:item>
-        <RadioGroupOption value={item.uid} let:checked class="px-3">
+        <RadioGroupOption value={item.uid} let:checked>
           <InteractiveListItem
             {...item}
             icon={item.emoji}
@@ -91,8 +97,4 @@
       </VirtualList>
     {/key}
   </RadioGroup>
-</div>
-
-<div class="w-96 self-center">
-  <Map hovered={hoveredItem} selected={current} />
 </div>

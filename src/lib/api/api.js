@@ -22,7 +22,7 @@ export const loadFromAPI = async function (url) {
     const data = await res.json();
     return data;
   } catch (e) {
-    return undefined;
+    return { data: null };
   }
 };
 

@@ -1,6 +1,6 @@
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
-import { get, keyBy, map, reduce } from 'lodash-es';
+import _, { get, keyBy, map, reduce } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 
 import {
@@ -8,63 +8,9 @@ import {
   DICTIONARY_INDICATORS,
   DICTIONARY_SCENARIOS,
   GEOGRAPHIES,
-  GEOGRAPHY_TYPES,
+  SCENARIOS,
   INDICATOR_PARAMETERS,
 } from './meta.js';
-
-/*
- * GEOGRAPHY STATE
- */
-export const CURRENT_GEOGRAPHY_TYPE_INDEX = writable(0);
-
-export const CURRENT_GEOGRAPHY_TYPE = derived(
-  [CURRENT_GEOGRAPHY_TYPE_INDEX, GEOGRAPHY_TYPES],
-  ([$index, $types]) => get($types, [$index])
-);
-
-// Geographies of the currently selected geography type tab
-export const CURRENT_GEOGRAPHIES = derived(
-  [GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE],
-  ([$geographies, $currentGeographyType]) => {
-    if ($currentGeographyType?.uid) {
-      const id = $currentGeographyType.uid;
-      if ($geographies && $geographies.hasOwnProperty(id)) {
-        return $geographies[id];
-      }
-    }
-  }
-);
-
-export const CURRENT_GEOGRAPHY_UID = writable('DEU');
-
-export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
-  // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
-  // it's value once CURRENT_GEOGRAPHY_UID changes
-  const geography = (getStore(CURRENT_GEOGRAPHIES) || []).find(
-    (geography) => geography?.uid === $uid
-  );
-  set(geography);
-});
-
-export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
-
-/*
- * SCENARIO STATE
- */
-export const CURRENT_SCENARIOS_UID = writable(['curpol']); // Currently selected scenarios (not hovered1)
-
-export const CURRENT_SCENARIOS = derived(
-  [CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME],
-  ([$uids, $scenarios, $theme]) =>
-    $uids.map((uid, i) => ({
-      ...$scenarios[uid],
-      color: $theme?.color?.scenarios[i],
-    }))
-);
-export const DICTIONARY_CURRENT_SCENARIOS = derived(
-  [CURRENT_SCENARIOS],
-  ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
-);
 
 /*
  * INDICATOR STATE
@@ -133,6 +79,110 @@ export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(
   CURRENT_INDICATOR_PARAMETERS,
   ($options) => {
     return $options.map((indicator) => get(indicator, 'uid'));
+  }
+);
+
+/*
+ * GEOGRAPHY STATE
+ */
+
+export const AVAILABLE_GEOGOGRAPHIES = derived(
+  [GEOGRAPHIES, CURRENT_INDICATOR],
+  ([$GEOGRAPHIES, $CURRENT_INDICATOR]) => {
+    return reduce(
+      $GEOGRAPHIES,
+      (acc, geographies) => {
+        const availableGeographies = geographies.filter((geography) =>
+          $CURRENT_INDICATOR.availableGeographies.includes(geography.uid)
+        );
+        return [...acc, ...availableGeographies];
+      },
+      []
+    );
+  }
+);
+
+export const CURRENT_GEOGRAPHY_UID = writable('DEU');
+
+export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
+  // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
+  // it's value once CURRENT_GEOGRAPHY_UID changes
+  const geography = (getStore(AVAILABLE_GEOGOGRAPHIES) || []).find(
+    (geography) => geography?.uid === $uid
+  );
+  set(geography);
+});
+
+export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
+
+/*
+ * SCENARIO STATE
+ */
+
+export const CURRENT_SCENARIOS_UID = (() => {
+  const { subscribe, set, update } = writable(['curpol']);
+
+  return {
+    subscribe,
+    update,
+    set,
+    toggle: (id, timeframe) =>
+      update((selectedIds) => {
+        let nextIds;
+        // Check if the id is already in the array
+        if (selectedIds.includes(id) && selectedIds.length > 1) {
+          // Remove the id from the array
+          nextIds = selectedIds.filter((selectedId) => selectedId !== id);
+        } else if (!selectedIds.includes(id) && selectedIds.length < 3) {
+          // Add the id to the array if the limit is not reached
+          nextIds = [...selectedIds, id];
+        } else {
+          return selectedIds;
+        }
+        // Get all the scenarios that are available within the selected timeframe so we allow
+        // only selecting scenarios within the same timeframe
+        const scenarios = getStore(SCENARIOS)
+          .filter((s) => s.timeframe[1] === timeframe)
+          .map((s) => s.uid);
+
+        return nextIds.filter((uid) => scenarios.includes(uid));
+      }),
+  };
+})();
+
+export const CURRENT_SCENARIOS = derived(
+  [CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME],
+  ([$uids, $scenarios, $theme]) =>
+    $uids.map((uid, i) => ({
+      ...$scenarios[uid],
+      color: $theme?.color?.scenarios[i],
+    }))
+);
+
+export const DICTIONARY_CURRENT_SCENARIOS = derived(
+  [CURRENT_SCENARIOS],
+  ([$currentScenarios]) => keyBy($currentScenarios, 'uid')
+);
+
+export const AVAILABLE_SCENARIOS = derived(
+  [SCENARIOS, CURRENT_INDICATOR],
+  ([$SCENARIOS, $CURRENT_INDICATOR]) => {
+    const availableScenarios = $SCENARIOS.filter((scenario) =>
+      $CURRENT_INDICATOR.availableScenarios.includes(scenario.uid)
+    );
+    return availableScenarios;
+  }
+);
+
+export const AVAILABLE_TIMEFRAMES = derived(
+  AVAILABLE_SCENARIOS,
+  ($AVAILABLE_SCENARIOS) => {
+    return _($AVAILABLE_SCENARIOS)
+      .map((s) => s.endYear)
+      .uniq()
+      .sort()
+      .map((uid) => ({ uid, label: uid }))
+      .value();
   }
 );
 
