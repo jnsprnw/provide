@@ -25,8 +25,6 @@
       color,
     };
   });
-
-  $: console.log(items, $data);
 </script>
 
 {#each items as { top, bottom, height, centerY, centerX, left, width, color }}

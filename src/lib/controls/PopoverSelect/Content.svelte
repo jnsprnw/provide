@@ -24,8 +24,6 @@
   $: availableItems = items.filter(
     (item) => item[filterKey] === currentFilterUid
   );
-
-  $: console.log(currentFilterUid);
 </script>
 
 {#if filters.length > 1}

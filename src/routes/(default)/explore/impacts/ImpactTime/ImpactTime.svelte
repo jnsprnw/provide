@@ -13,6 +13,7 @@
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
+  import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -44,13 +45,10 @@
       const indicatorData = data[$CURRENT_INDICATOR_UID] || [];
 
       return {
-        color: scenarios[i].color,
-        scenario: scenarios[i],
+        ...scenarios[i],
         yearStart,
         yearStep,
         parameters,
-        model,
-        source,
         values: indicatorData.map((values, i) => ({
           min: values[0],
           value: values[1],
@@ -93,10 +91,7 @@
   props={$TEMPLATE_PROPS}
 >
   <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-    <Chart
-      yLabel={`${props?.indicator?.label} ${props?.indicator?.unit?.label}`}
-      data={impactTime}
-      unit={props.indicator.unit.uid}
-    />
+    <ColorLegend items={impactTime} />
+    <Chart data={impactTime} unit={props.indicator.unit.uid} />
   </ChartFrame>
 </LoadingWrapper>

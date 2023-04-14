@@ -35,7 +35,7 @@
   $: endBoundsData = data.map((group) => {
     return {
       ...group,
-      id: group.scenario.uid,
+      uid: group.uid,
       ...group.values[group.values.length - 1],
     };
   });
@@ -75,7 +75,7 @@
   <div class="h-full {sideChartWidth}">
     <LayerCake
       padding={sideChartPadding}
-      x="id"
+      x="uid"
       y={yKey}
       z="color"
       {yDomain}

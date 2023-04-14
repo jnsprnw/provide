@@ -8,23 +8,27 @@
   const radius = 8;
 
   // Sort array to have active scenarios at top
-  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID).sort((a, b) => Boolean(a.color) - Boolean(b.color));
+  $: scenarios = $data
+    .filter((d) => d.uid !== UNAVOIDABLE_UID)
+    .sort((a, b) => Boolean(a.color) - Boolean(b.color));
 
-  $: nodes = scenarios.map(({ values, label: scenarioLabel, color }) => {
-    const isSelectedScenario = Boolean(color);
-    return values.map(({ year, value, formattedValue }) => {
-      return {
-        year,
-        value,
-        formattedValue,
-        scenario: scenarioLabel,
-        color,
-        isSelectedScenario,
-        radius: radius - (isSelectedScenario ? 0 : 2), // The scelected scenarios are slightly bigger
-        fy: isSelectedScenario ? $yScale(value) : undefined // Fix the y-position of selected scenarios
-      }
+  $: nodes = scenarios
+    .map(({ values, label: scenarioLabel, color }) => {
+      const isSelectedScenario = Boolean(color);
+      return values.map(({ year, value, formattedValue }) => {
+        return {
+          year,
+          value,
+          formattedValue,
+          scenario: scenarioLabel,
+          color,
+          isSelectedScenario,
+          radius: radius - (isSelectedScenario ? 0 : 2), // The scelected scenarios are slightly bigger
+          fy: isSelectedScenario ? $yScale(value) : undefined, // Fix the y-position of selected scenarios
+        };
+      });
     })
-  }).flat();
+    .flat();
 
   $: middle = $xScale.bandwidth() / 2;
 
@@ -45,7 +49,15 @@
     .stop();
 
   $: {
-    for (let i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+    for (
+      let i = 0,
+        n = Math.ceil(
+          Math.log(simulation.alphaMin()) /
+            Math.log(1 - simulation.alphaDecay())
+        );
+      i < n;
+      ++i
+    ) {
       simulation.tick();
     }
   }
@@ -54,7 +66,11 @@
 {#if $height > 0}
   <g>
     {#each simulation.nodes() as { x, y, color, isSelectedScenario, radius, scenario }}
-      <g style="transform: translate({x}px, {y}px);" class="transition-transform" class:opacity-70={!isSelectedScenario}>
+      <g
+        style="transform: translate({x}px, {y}px);"
+        class="transition-transform"
+        class:opacity-70={!isSelectedScenario}
+      >
         <circle
           class="opacity-50 stroke-[4px] stroke-background-base"
           r={radius}
@@ -64,7 +80,7 @@
           style={`fill: ${color};`}
           r={radius}
         >
-          <title>{ scenario }</title>
+          <title>{scenario}</title>
         </circle>
       </g>
     {/each}

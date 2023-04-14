@@ -28,7 +28,11 @@
   {#key geoData.length}
     {#each geoData as d, i}
       <div class="relative" style={`width: ${100 / geoData.length}%`}>
-        <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)}>
+        <MapProvider
+          bind:map={maps[i]}
+          bounds={bbox(geoShape)}
+          interactive={false}
+        >
           <DataSource data={masked}>
             <!-- <FillLayer
               before={null}

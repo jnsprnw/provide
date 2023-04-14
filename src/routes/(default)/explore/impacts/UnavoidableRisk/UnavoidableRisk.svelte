@@ -5,6 +5,8 @@
     CURRENT_GEOGRAPHY,
     CURRENT_INDICATOR_OPTION_VALUES,
     TEMPLATE_PROPS,
+    CURRENT_SCENARIOS,
+    AVAILABLE_SCENARIOS,
   } from '$stores/state.js';
   import { SCENARIOS } from '$stores/meta.js';
   import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
@@ -49,9 +51,10 @@
     const thresholdIndex = hasThresholds
       ? data.thresholds.indexOf(currentThreshold)
       : 0;
+    const mergedScenarios = [...scenarios, ...allScenarios];
     let processedScenarios = data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
-      const scenario = find([...scenarios, ...allScenarios], { uid: key });
+      const scenario = find(mergedScenarios, { uid: key });
       const values = data.years.map((year, yearIndex) => {
         const value = scenarioData[key][thresholdIndex][yearIndex];
         return {
@@ -103,6 +106,10 @@
     'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
   const description =
     'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
+  $: legendItems = [
+    ...$CURRENT_SCENARIOS,
+    { label: 'Other scenarios', uid: 'other' },
+  ];
 </script>
 
 <LoadingWrapper
@@ -113,8 +120,9 @@
   asyncProps={$UN_AVOIDABLE_RISK_DATA}
   props={{
     ...$TEMPLATE_PROPS,
-    allScenarios: $SCENARIOS,
+    allScenarios: $AVAILABLE_SCENARIOS,
     threshold: currentThreshold,
+    legendItems,
   }}
 >
   <ChartFrame {title} {description} templateProps={props}>
@@ -127,7 +135,7 @@
         />
       {/if}
     </div>
-    <ColorLegend scenarios={props.scenarios ?? []} />
+    <ColorLegend items={props.legendItems} />
     <figure class="aspect-video">
       <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
       <figcaption class="mt-2">
