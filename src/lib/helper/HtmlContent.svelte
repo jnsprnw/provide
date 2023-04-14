@@ -2,4 +2,8 @@
   export let content;
 </script>
 
-{#if content}{@html content}{/if}
+{#if content}
+<div class="html-content">
+  {@html content}
+</div>
+{/if}

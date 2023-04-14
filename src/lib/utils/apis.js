@@ -85,3 +85,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
     });
   });
 };
+
+export function trimLinebreakAtEnd(str) {
+  return str.replace(/\n|<br \/>$/g, '');
+}
