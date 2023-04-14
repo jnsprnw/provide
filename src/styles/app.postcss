@@ -40,3 +40,27 @@
     scroll-behavior: auto;
   }
 }
+
+.html-content {
+  p + p {
+    @apply mt-2;
+  }
+
+  a {
+    @apply border-b;
+    @apply border-theme-weaker;
+    @apply hover:border-theme-stronger;
+  }
+
+  ul {
+    @apply ml-2;
+    @apply my-2;
+    @apply list-disc;
+    @apply space-y-2;
+  }
+
+  li {
+    @apply ml-4;
+    @apply pl-2;
+  }
+}

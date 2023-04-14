@@ -1,4 +1,4 @@
-import { loadFromStrapi } from '$utils/apis.js';
+import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
 
@@ -19,7 +19,7 @@ export const load = async ({ fetch }) => {
       modelsIntro: parse(ModelsIntro || ''),
       models: Models.map(({ UID, Title, Description, Link, Label }) => {
         const title = Title.trim();
-        const description = Description.trim();
+        const description = trimLinebreakAtEnd(Description);
         if (!title.length || !description.length) {
           return false;
         }

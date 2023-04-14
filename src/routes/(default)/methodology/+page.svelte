@@ -50,11 +50,6 @@
     },
   ];
 
-  $: flatSections = sections.reduce(
-    (acc, item) => [...acc, item, ...item.sections],
-    []
-  );
-
   const query = 'waypoint';
 </script>
 
@@ -64,8 +59,13 @@
 
 <ScrollContent query={`.${query}`} let:index>
   <NestedNav slot="navigation" {sections} {index} />
-  <h2 class="text-5xl font-bold mb-14">Documentation</h2>
-  {#each flatSections as section}
-    <svelte:component this={section.component} {query} {...section} />
+  <h1 class="text-5xl font-bold mb-12">Documentation</h1>
+  {#each sections as section}
+    <section class="mb-8">
+      <svelte:component this={section.component} {query} {...section} />
+      {#each section.sections as part}
+      <svelte:component this={part.component} {query} {...part} />
+      {/each}
+    </section>
   {/each}
 </ScrollContent>
