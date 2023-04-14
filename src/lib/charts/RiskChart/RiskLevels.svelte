@@ -1,55 +1,72 @@
 <script>
   import { UNAVOIDABLE_UID } from '$src/config';
-  import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
+  import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
 
-  const { data, xScale, yScale, yGet, height, xGet } = getContext('LayerCake');
+  const { data, xScale, yGet, height, xGet, yScale } = getContext('LayerCake');
 
-  export let hatchingColor;
+  const radius = 8;
 
-  $: years = $xScale.domain();
+  // Sort array to have active scenarios at top
+  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID).sort((a, b) => Boolean(a.color) - Boolean(b.color));
 
-  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID);
-  $: unavoidable = $data.filter((d) => d.uid === UNAVOIDABLE_UID)[0];
+  $: nodes = scenarios.map(({ values, label: scenarioLabel, color }) => {
+    const isSelectedScenario = Boolean(color);
+    return values.map(({ year, value, formattedValue }) => {
+      return {
+        year,
+        value,
+        formattedValue,
+        scenario: scenarioLabel,
+        color,
+        isSelectedScenario,
+        radius: radius - (isSelectedScenario ? 0 : 2), // The scelected scenarios are slightly bigger
+        fy: isSelectedScenario ? $yScale(value) : undefined // Fix the y-position of selected scenarios
+      }
+    })
+  }).flat();
+
+  $: middle = $xScale.bandwidth() / 2;
+
+  $: simulation = forceSimulation(nodes)
+    .force(
+      'x',
+      forceX()
+        .x((d) => $xGet(d) + middle)
+        .strength(0.1)
+    )
+    .force(
+      'y',
+      forceY()
+        .y((d) => $yGet(d))
+        .strength(0.98)
+    )
+    .force('collide', forceCollide(radius + 1))
+    .stop();
+
+  $: {
+    for (let i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
+      simulation.tick();
+    }
+  }
 </script>
 
 {#if $height > 0}
-  <defs>
-    <Hatching color={hatchingColor} />
-  </defs>
   <g>
-    {#each years as year, yearIndex}
-      <rect
-        x={$xScale(year)}
-        y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
-        height={$height - $yGet(unavoidable.values[yearIndex])}
-        width={$xScale.bandwidth()}
-        fill="url(#hatching)"
-      />
-    {/each}
-    {#each scenarios as scenario}
-      {#each scenario.values as value}
-        <g transform={`translate(${$xGet(value)} ,${$yGet(value)})`}>
-          <line
-            x2={$xScale.bandwidth()}
-            class="line"
-            class:active={Boolean(scenario.color)}
-            style={`stroke: ${scenario.color};`}
-          />
-        </g>
-      {/each}
+    {#each simulation.nodes() as { x, y, color, isSelectedScenario, radius, scenario }}
+      <g style="transform: translate({x}px, {y}px);" class="transition-transform" class:opacity-70={!isSelectedScenario}>
+        <circle
+          class="opacity-50 stroke-[4px] stroke-background-base"
+          r={radius}
+        />
+        <circle
+          class:fill-background-weakest={!isSelectedScenario}
+          style={`fill: ${color};`}
+          r={radius}
+        >
+          <title>{ scenario }</title>
+        </circle>
+      </g>
     {/each}
   </g>
 {/if}
-
-<style lang="postcss">
-  .line {
-    stroke-width: 2;
-    stroke: var(--color-foreground-weakest);
-    shape-rendering: crispEdges;
-
-    &.active {
-      stroke-width: 4;
-    }
-  }
-</style>

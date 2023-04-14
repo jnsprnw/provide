@@ -1,14 +1,15 @@
 <script>
-  import { Html, LayerCake, Svg } from 'layercake';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import { formatValue } from '$lib/utils/formatting';
+  import { getContext } from 'svelte';
+  import { Html, LayerCake, Svg } from 'layercake';
+  import { scaleBand } from 'd3-scale';
   import AxisX from '../axes/AxisX.svelte';
   import AxisY from '../axes/AxisY.svelte';
   import Message from '../Message.svelte';
-  import { scaleBand } from 'd3-scale';
-  import RiskLevels from './RiskLevels.svelte';
-  import { getContext } from 'svelte';
   import RiskLabels from './RiskLabels.svelte';
+  import RiskLevels from './RiskLevels.svelte';
+  import RiskRanges from './RiskRanges.svelte';
 
   export let data;
   export let xKey = 'year';
@@ -40,9 +41,10 @@
   >
     <Svg>
       <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
-      <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
       <Message />
-      <RiskLevels hatchingColor={$theme.color.foreground.weakest} />
+      <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
+      <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+      <RiskLevels />
     </Svg>
     <Html>
       <div class="labels">

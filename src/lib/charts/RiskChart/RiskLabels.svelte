@@ -14,11 +14,13 @@
       label: 'Unavoidable risk even with the highest-ambition scenario',
       min: 0,
       max: unavoidableValue,
+      color: 'border-background-weaker'
     },
     {
       label: 'Avoidable risk through mitigation',
       min: unavoidableValue,
       max: avoidableValue,
+      color: 'border-background-weakest'
     },
   ].map((tick) => {
     const y1 = $yScale(tick.min);
@@ -35,12 +37,12 @@
   });
 </script>
 
-<div class="root">
-  {#each ticks as tick, i}
-    <div class="tick" style={`top: ${tick.y2}px; height: ${tick.height}px;`}>
+<div class="root ml-2">
+  {#each ticks as { label, y2, height, color }, index}
+    <div class={`tick border-l-4 ${color}`} style={`top: ${y2 - (index === 0 ? -1 : 0)}px; height: ${height - 1}px;`}>
       <div class="tick-domain" aria-hidden="true" />
-      <div class="tick-label">
-        {tick.label}
+      <div class="tick-label ml-2">
+        {label}
       </div>
     </div>
   {/each}

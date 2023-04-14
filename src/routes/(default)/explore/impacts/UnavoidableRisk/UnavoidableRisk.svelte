@@ -8,6 +8,7 @@
   } from '$stores/state.js';
   import { SCENARIOS } from '$stores/meta.js';
   import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
+  import RiskLegend from './ChartLegend.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import ChartInfo from './ChartInfo.svelte';
   import Select from '$lib/controls/Select/Select.svelte';
@@ -78,7 +79,7 @@
     });
 
     unavoidableValues.unshift({
-      year: "Today's risk",
+      year: "Today’s risk",
       value: data.today[thresholdIndex],
       formattedValue: formatValue(data.today[thresholdIndex], 'percent'),
     });
@@ -127,8 +128,12 @@
         />
       {/if}
     </div>
-    <div class="aspect-video">
+    <RiskLegend scenarios={props.scenarios ?? []} />
+    <figure class="aspect-video">
       <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
-    </div>
+      <figcaption class="mt-2">
+        <span class="text-xs text-foreground-weaker">To avoid overlapping of scenarios, the vertical and horizontal placement of each dot might not be perfectly correct.</span>
+      </figcaption>
+    </figure>
   </ChartFrame>
 </LoadingWrapper>
