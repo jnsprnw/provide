@@ -129,8 +129,11 @@
       {/if}
     </div>
     <RiskLegend scenarios={props.scenarios ?? []} />
-    <div class="aspect-video">
+    <figure class="aspect-video">
       <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
-    </div>
+      <figcaption class="mt-2">
+        <span class="text-xs text-foreground-weaker">To avoid overlapping of scenarios, the vertical and horizontal placement of each dot might not be perfectly correct.</span>
+      </figcaption>
+    </figure>
   </ChartFrame>
 </LoadingWrapper>
