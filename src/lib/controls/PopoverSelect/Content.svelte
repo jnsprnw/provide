@@ -9,19 +9,21 @@
   export let items;
   export let itemsLabel;
   export let currentUid;
+  export let currentFilterUid;
 
   $: current = items.find(
     (d) => d.uid === currentUid || currentUid.includes(d.uid)
   );
-  $: currentFilterUid = current[filterKey];
+  $: {
+    currentFilterUid = current[filterKey];
+  }
+
   let hoveredItem = null;
   $: detailsItem = items.find((d) => d.uid === hoveredItem) || current;
 
   $: availableItems = items.filter(
     (item) => item[filterKey] === currentFilterUid
   );
-
-  $: console.log(currentFilterUid);
 </script>
 
 {#if filters.length > 1}

@@ -3,7 +3,7 @@
   import { each, filter } from 'lodash-es';
 
   export let props; // Regular props/state that need to be kept in sync with the asyncProps
-  export let asyncProps; // Array or Dict of regular object that have a status property
+  export let asyncProps = []; // Array or Dict of regular object that have a status property
   export let process; // Function for data processing before props are passed to slot
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
@@ -31,7 +31,7 @@
   // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
   $: if (currentAsyncProps) isEmpty = false;
 
-  $: if (loadedData.length !== flatData.length) {
+  $: if (loadedData.length !== flatData.length || !flatData.length) {
     isLoading = true;
   } else {
     isLoading = false;

@@ -12,6 +12,7 @@
     (sector) =>
       $INDICATORS.filter((indicator) => indicator.sector === sector.uid).length
   );
+  let currentFilterUid;
 </script>
 
 <PopoverSelect
@@ -24,6 +25,7 @@
     filterKey="sector"
     filterLabel="Sectors"
     bind:currentUid={$CURRENT_INDICATOR_UID}
+    bind:currentFilterUid
     items={$INDICATORS}
     itemsLabel="Indicators"
   />
