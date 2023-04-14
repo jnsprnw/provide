@@ -61,10 +61,11 @@ export const loadMetaData = function (svelteFetch = fetch) {
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
         // Get the characteristics from the Strapi scenario
-        const chararacteristics = get(currentScenario, [
-          'attributes',
-          'ScenarioCharacteristics',
-        ])
+        const chararacteristics = get(
+          currentScenario,
+          ['attributes', 'ScenarioCharacteristics'],
+          []
+        )
           .map(({ Year: YearStr, Description: descriptionStr }) => {
             const year = parseInt(YearStr);
             // Check if year is valid and the description has any length
