@@ -4,10 +4,6 @@
   $: ({ text } = data);
 </script>
 
-<svelte:head>
-  <title>Contact</title>
-</svelte:head>
-
 <div class="contact-header content-header container">
   <div class="wrapper">
     <h1 class="title">Contact</h1>

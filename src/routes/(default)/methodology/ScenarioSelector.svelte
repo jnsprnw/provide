@@ -1,9 +1,9 @@
 <script>
   import { CURRENT_SCENARIOS_UID } from '$stores/state';
-
+  import { getContext } from 'svelte';
   export let slug;
-  export let query;
   export let scenarios;
+  const { query } = getContext('scrollContent');
 </script>
 
 <fieldset id={slug} class={`flex flex-col my-4 bg-background-weaker ${query}`}>

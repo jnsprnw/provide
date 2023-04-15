@@ -49,22 +49,16 @@
       sections: dataProcessing,
     },
   ];
-
-  const query = 'waypoint';
 </script>
 
-<svelte:head>
-  <title>Documentation</title>
-</svelte:head>
-
-<ScrollContent query={`.${query}`} let:index>
+<ScrollContent let:index>
   <NestedNav slot="navigation" {sections} {index} />
   <h1 class="text-5xl font-bold mb-12">Documentation</h1>
   {#each sections as section}
     <section class="mb-8">
-      <svelte:component this={section.component} {query} {...section} />
+      <svelte:component this={section.component} {...section} />
       {#each section.sections as part}
-        <svelte:component this={part.component} {query} {...part} />
+        <svelte:component this={part.component} {...part} />
       {/each}
     </section>
   {/each}

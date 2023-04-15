@@ -16,9 +16,9 @@
 
   let GEO_SHAPE_DATA = writable({});
 
-  const geographyTypes = $GEOGRAPHY_TYPES.filter(
+  const geographyTypes = ($GEOGRAPHY_TYPES ?? []).filter(
     (d) =>
-      $AVAILABLE_GEOGOGRAPHIES.filter(
+      ($AVAILABLE_GEOGOGRAPHIES ?? []).filter(
         (geography) => geography.geographyType === d.uid
       ).length
   );
@@ -37,7 +37,7 @@
 
 <PopoverSelect
   label="Indicator"
-  buttonLabel={$CURRENT_GEOGRAPHY.label}
+  buttonLabel={$CURRENT_GEOGRAPHY?.label}
   panelClass="w-screen max-w-3xl"
 >
   <Content

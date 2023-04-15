@@ -1,5 +1,6 @@
 <script>
   import NavLink from '$lib/helper/NavLink.svelte';
+  import { TITLE_PROJECT, TITLE_SITE } from '$config';
 
   const items = [
     { href: '/explore/impacts', label: 'Explore' },
@@ -16,8 +17,8 @@
       <h1 class="text-theme-base font-bold uppercase tracking-widest">
         <NavLink href="/">Provide</NavLink>
       </h1>
-      <span class="px-3 text-foreground-weakest">|</span>
-      <span class="text-foreground-weak">Climate Risk Dashboard</span>
+      <span class="px-3 text-foreground-weakest" role="presentation" aria-hidden="true">|</span>
+      <span class="text-foreground-weak">{ TITLE_SITE }</span>
     </div>
     <ul class="flex gap-x-5">
       {#each items as { label, href }}
@@ -49,8 +50,8 @@
       <h1 class="text-background-base font-bold uppercase tracking-widest">
         <NavLink href="/">Provide</NavLink>
       </h1>
-      <span class="px-3 text-foreground-weakest">|</span>
-      <span class="text-background-base/75">Climate Risk Dashboard</span>
+      <span class="px-3 text-foreground-weakest" role="presentation" aria-hidden="true">|</span>
+      <span class="text-background-base/75">{ TITLE_SITE }</span>
     </div>
     <ul class="flex gap-x-5">
       {#each items as { label, href }}

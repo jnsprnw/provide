@@ -4,10 +4,6 @@
   $: ({ sections } = data);
 </script>
 
-<svelte:head>
-  <title>About</title>
-</svelte:head>
-
 <div class="about-header content-header container">
   <div class="wrapper">
     <h1 class="title">About</h1>

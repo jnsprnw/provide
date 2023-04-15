@@ -1,5 +1,7 @@
-import { sveltekit } from '@sveltejs/kit/vite';
 import path from 'path';
+
+import { sveltekit } from '@sveltejs/kit/vite';
+
 //import removeConsole from "vite-plugin-svelte-console-remover";
 
 /** @type {import('vite').UserConfig} */
@@ -8,6 +10,7 @@ const config = {
   resolve: {
     alias: {
       $src: path.resolve('./src'),
+      $config: path.resolve('./src/config.js'),
       $styles: path.resolve('./src/styles'),
       $lib: path.resolve('./src/lib'),
       $utils: path.resolve('./src/lib/utils'),

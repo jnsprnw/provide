@@ -1,3 +1,6 @@
+export const TITLE_SITE = 'Climate Risk Dashboard';
+export const TITLE_PROJECT = 'PROVIDE';
+
 export const END_IMPACT_TIME = 'impact-time';
 export const END_IMPACT_TIME_ALL = 'impact-time-all';
 export const END_DISTRIBUTION = 'impact-time-distribution';

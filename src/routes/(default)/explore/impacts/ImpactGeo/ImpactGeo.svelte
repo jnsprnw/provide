@@ -36,8 +36,8 @@
     $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_GEO,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
+        geography: $CURRENT_GEOGRAPHY?.uid,
+        indicator: $CURRENT_INDICATOR?.uid,
         scenario,
         year,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
@@ -48,7 +48,7 @@
   $: fetchData(GEO_SHAPE_DATA, {
     endpoint: END_GEO_SHAPE,
     params: {
-      geography: $CURRENT_GEOGRAPHY.uid,
+      geography: $CURRENT_GEOGRAPHY?.uid,
     },
   });
 

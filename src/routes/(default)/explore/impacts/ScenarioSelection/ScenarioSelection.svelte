@@ -84,6 +84,16 @@
                 <p class="text-foreground-weak">
                   {renderedScenario.description || 'Description missing'}
                 </p>
+                {#if renderedScenario.chararacteristics.length}
+                <dl class="text-sm pt-4 border-t border-foreground-weaker mt-4 grid grid-cols-2 gap-x-4 gap-y-4">
+                  {#each renderedScenario.chararacteristics as [year, description]}
+                  <div class="flex flex-col gap-y-1">
+                    <dt class="block font-semibold ">Until <time datetime={year}>{ year }</time></dt>
+                    <dd><span class="text-foreground-weak">{ description }</span></dd>
+                  </div>
+                  {/each}
+                </dl>
+                {/if}
               </div>
             {/if}
           </div>
