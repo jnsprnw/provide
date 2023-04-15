@@ -17,20 +17,15 @@
 
   let IMPACT_TIME_DATA = writable([]);
 
-  export let currentScenariosUID;
-  export let currentGeographyUID;
-  export let currentIndicatorUID;
-  export let currentIndicatorOptionValues;
-
   $: fetchData(
     IMPACT_TIME_DATA,
-    (currentScenariosUID ?? $CURRENT_SCENARIOS_UID).map((scenario) => ({
+    $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_TIME,
       params: {
-        geography: (currentGeographyUID ?? $CURRENT_GEOGRAPHY?.uid),
-        indicator: (currentIndicatorUID ?? $CURRENT_INDICATOR?.uid),
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
         scenario,
-        ...(currentIndicatorOptionValues ?? $CURRENT_INDICATOR_OPTION_VALUES),
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     }))
   );
@@ -47,7 +42,7 @@
         [SOURCE]: source,
         parameters,
       } = datum.data;
-      const indicatorData = data[currentIndicatorUID ?? $CURRENT_INDICATOR_UID] || [];
+      const indicatorData = data[$CURRENT_INDICATOR_UID] || [];
 
       return {
         ...scenarios[i],
