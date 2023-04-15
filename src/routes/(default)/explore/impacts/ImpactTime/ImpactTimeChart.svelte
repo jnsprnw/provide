@@ -22,12 +22,13 @@
 
   const mainChartPadding = { top: 20, right: 0, bottom: 30, left: 40 };
   const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
+  $: isMultiLine = data.length > 1;
 
   $: flatData = data.reduce((memo, group) => {
     group.values.forEach(({ min, value, max, year }) => {
       memo.push({ year, uid: `${group.uid}-${year}-min`, value: min });
-      memo.push({ year, uid: `${group.uid}-${year}-mean`, value });
       memo.push({ year, uid: `${group.uid}-${year}-max`, value: max });
+      memo.push({ year, uid: `${group.uid}-${year}-mean`, value });
     });
     return memo;
   }, []);
@@ -43,7 +44,6 @@
   });
 
   $: yDomain = extent(flatData, (d) => d.value);
-  $: isMultiLine = data.length > 1;
   $: mainChartWidth = ['w-full', 'w-10/12', 'w-9/12'][data.length - 1];
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];
 </script>
