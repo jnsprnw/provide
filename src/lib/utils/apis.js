@@ -61,7 +61,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
         // Get the characteristics from the Strapi scenario
-        const chararacteristics = get(
+        const characteristics = get(
           currentScenario,
           ['attributes', 'ScenarioCharacteristics'],
           []
@@ -80,7 +80,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
         return {
           ...indicator,
           description,
-          chararacteristics,
+          characteristics,
         };
       }),
     });
