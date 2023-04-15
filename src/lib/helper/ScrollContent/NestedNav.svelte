@@ -20,7 +20,7 @@
         ...section,
         index: acc.counter,
         isActive: index === acc.counter++,
-        sections: section.sections.map((s) => ({
+        sections: (section?.sections ?? []).map((s) => ({
           ...s,
           index: acc.counter,
           isActive: index === acc.counter++,
@@ -61,15 +61,18 @@
   <ul>
     {#each processedSections as { title, slug, isActive, index, isOpen, sections, content }}
       {#if content || sections[0]?.content}
-        <li class="py-2 border-b border-foreground-weakest pr-1">
+        <li class="py-2 border-b border-foreground-weakest pr-1 last:border-b-0">
           <div class:text-theme-base={isActive} class="flex justify-between">
             <a class="font-bold text-lg" href={`#${slug}`}>{title}</a>
+            {#if sections.length}
             <button
               as="button"
               class:rotate-180={isOpen}
               on:click={() => toggleSection(index)}>▾</button
             >
+            {/if}
           </div>
+          {#if sections.length}
           <ul class:h-0={!isOpen} class="overflow-hidden">
             {#each sections as { slug, title, isActive }}
               <li
@@ -80,6 +83,7 @@
               </li>
             {/each}
           </ul>
+          {/if}
         </li>
       {/if}
     {/each}
