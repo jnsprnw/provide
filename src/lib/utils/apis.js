@@ -75,11 +75,12 @@ export const loadMetaData = function (svelteFetch = fetch) {
               return false;
             }
           })
-          .filter((d) => Boolean(d)); // Filter invalid entries
+          .filter((d) => Boolean(d)) // Filter invalid entries
+          .sort((a, b) => a[0] - b[0]);
         return {
           ...indicator,
           description,
-          ...Object.fromEntries(chararacteristics),
+          chararacteristics,
         };
       }),
     });
