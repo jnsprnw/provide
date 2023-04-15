@@ -8,12 +8,12 @@
     CURRENT_SCENARIOS_UID,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
-  import Chart from './Chart.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
+  import ImpactTimeChart from './ImpactTimeChart.svelte';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -22,8 +22,8 @@
     $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_TIME,
       params: {
-        geography: $CURRENT_GEOGRAPHY?.uid,
-        indicator: $CURRENT_INDICATOR?.uid,
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
         scenario,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
@@ -91,7 +91,7 @@
   props={$TEMPLATE_PROPS}
 >
   <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-    <ColorLegend items={impactTime} />
-    <Chart data={impactTime} unit={props.indicator.unit.uid} />
+    {#if impactTime.length > 1}<ColorLegend items={impactTime} />{/if}
+    <ImpactTimeChart data={impactTime} unit={props.indicator.unit.uid} />
   </ChartFrame>
 </LoadingWrapper>

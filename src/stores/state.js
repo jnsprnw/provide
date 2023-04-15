@@ -120,7 +120,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const CURRENT_SCENARIOS_UID = (() => {
-  const { subscribe, set, update } = writable(['curpol']);
+  const { subscribe, set, update } = writable(['curpol', 'gs']);
 
   return {
     subscribe,

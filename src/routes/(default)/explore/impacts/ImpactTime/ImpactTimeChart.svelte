@@ -32,6 +32,7 @@
   }, []);
 
   $: formatTickY = (d) => formatValue(d, unit);
+  $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
   $: endBoundsData = data.map((group) => {
     return {
       ...group,
@@ -92,7 +93,7 @@
           ticksHighlighted={ticksYHighlighted}
           showTickLabels={false}
         />
-        <BoxLayer />
+        <BoxLayer formatValue={formatValueY} />
       </Svg>
     </LayerCake>
   </div>
