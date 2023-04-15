@@ -1,12 +1,17 @@
 <script>
   import Scroller from '@sveltejs/svelte-scroller';
+  import { setContext } from 'svelte';
 
   export let sections = [];
-  export let query = 'section';
+  export let query = 'scroll-section';
   let index;
   let count;
   let offset;
   let progress;
+
+  setContext('scrollContent', {
+    query
+  });
 </script>
 
 <div class="grid grid-cols-12 gap-10 pt-8 mx-auto max-w-7xl px-6">
@@ -21,7 +26,7 @@
       bind:index
       bind:offset
       bind:progress
-      {query}
+      query={`.${query}`}
       threshold={0.01}
     >
       <div slot="foreground">
