@@ -13,6 +13,8 @@ import {
   SCENARIOS,
 } from './meta.js';
 
+export const IS_EMBEDED = writable(false);
+
 /*
  * INDICATOR STATE
  */
