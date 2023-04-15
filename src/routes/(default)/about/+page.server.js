@@ -10,10 +10,10 @@ export const load = async ({ fetch }) => {
   const title = generatePageTitle('About');
 
   return {
-    sections: Section.map((section) => ({
-      title: section.Title,
-      text: parse(section.Text || ''),
-      slug: kebabCase(section.Title),
+    content: Section.map(({ Title, Text }) => ({
+      title: Title,
+      content: parse(Text || ''),
+      slug: kebabCase(Title),
     })),
     title,
   };
