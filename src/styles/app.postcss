@@ -43,6 +43,14 @@
     @apply border-b;
     @apply border-theme-weaker;
     @apply hover:border-theme-stronger;
+
+    &.btn {
+      @apply border-b-0;
+      @apply p-2;
+      @apply bg-background-weakest;
+      @apply my-1;
+      @apply inline-block;
+    }
   }
 
   ul {
@@ -55,5 +63,26 @@
   li {
     @apply ml-4;
     @apply pl-2;
+  }
+
+  h1 {
+    @apply font-bold;
+    @apply text-2xl;
+    @apply mb-2;
+    @apply mt-4;
+  }
+
+  h2 {
+    @apply font-bold;
+    @apply text-2xl;
+    @apply mb-2;
+    @apply mt-4;
+  }
+
+  h3 {
+    @apply font-bold;
+    @apply text-xl;
+    @apply mb-2;
+    @apply mt-4;
   }
 }
