@@ -1,63 +1,41 @@
 <script>
   import { groups } from 'd3-array';
   import { keyBy } from 'lodash-es';
+  import SectionIntro from '../methodology/SectionIntro.svelte';
+  import TermSection from './TermSection.svelte';
+  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
+  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
 
   export let data;
-  $: ({ entries, categories } = data);
+  $: ({ entries, categories, content } = data);
 
   $: entriesByCategory = groups(entries, (d) => d.category);
   $: categoriesBySlug = keyBy(categories, 'slug');
+
+  $: sections = content.map((block) => {
+    return {
+      ...block,
+      component: SectionIntro,
+      content: '',
+      sections: block.sections.map(section => {
+        return {
+          ...section,
+          component: TermSection
+        }
+      })
+    }
+  })
 </script>
 
-<div class="glossary-header content-header container">
-  <div class="wrapper">
-    <h1 class="title">Glossary</h1>
-    <nav>
-      <ul class="nav-inpage subcategories">
-        {#each categories as category}
-          <li>
-            <a href={`#${category.slug}`} class="nav-headline-section"
-              >{category.label}</a
-            >
-          </li>
-        {/each}
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<div class="glossary-content container content-content">
-  <div class="wrapper content-layout">
-    {#each entriesByCategory as [category, list]}
-      <section>
-        <header>
-          <h2 id={category} class="headline-section">
-            {categoriesBySlug[category].label}
-          </h2>
-        </header>
-        <dl class="text">
-          {#each list as { title, uid, footnote, description, abbreviation }}
-            <dt id={uid} class="headline-paragraph">
-              <h3>{title}</h3>
-              {#if abbreviation}<abbr {title}>{abbreviation}</abbr>{/if}
-            </dt>
-            <dd>{@html description}</dd>
-            {#if footnote}<footer>
-                <a href={footnote} class="link"
-                  >More information about {title}</a
-                >
-              </footer>{/if}
-          {/each}
-        </dl>
-      </section>
-    {/each}
-  </div>
-</div>
-
-<style lang="postcss">
-  .section {
-    .topic {
-      grid-column: 1 / span 6;
-    }
-  }
-</style>
+<ScrollContent let:index>
+  <NestedNav slot="navigation" {sections} {index} />
+  <h1 class="text-5xl font-bold mb-12">Documentation</h1>
+  {#each sections as section}
+    <section class="mb-8">
+      <svelte:component this={section.component} {...section} />
+      {#each section.sections as part}
+        <svelte:component this={part.component} {...part} />
+      {/each}
+    </section>
+  {/each}
+</ScrollContent>
