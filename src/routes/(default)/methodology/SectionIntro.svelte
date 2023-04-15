@@ -2,7 +2,7 @@
   import HtmlContent from '$lib/helper/HtmlContent.svelte';
   import { getContext } from 'svelte';
   export let title;
-  export let content;
+  export let content = null;
   export let slug;
   const { query } = getContext('scrollContent');
 </script>
