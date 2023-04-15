@@ -1,7 +1,7 @@
 <script>
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
-  import SectionDefault from '$lib/helperContentPages/SectionDefault.svelte';
+  import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
   export let data;
 
   $: sections = data.content
