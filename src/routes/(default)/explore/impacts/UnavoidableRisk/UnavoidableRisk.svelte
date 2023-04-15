@@ -8,7 +8,6 @@
     CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
   } from '$stores/state.js';
-  import { SCENARIOS } from '$stores/meta.js';
   import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';

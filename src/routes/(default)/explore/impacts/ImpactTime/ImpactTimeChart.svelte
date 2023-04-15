@@ -1,5 +1,5 @@
 <script>
-  import { LayerCake, Svg } from 'layercake';
+  import { Html, LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
@@ -9,6 +9,7 @@
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
   import { extent, min } from 'd3-array';
   import { scaleBand } from 'd3-scale';
+  import ChartTooltips from '$lib/charts/tooltip/ChartTooltips.svelte';
 
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
@@ -24,9 +25,9 @@
 
   $: flatData = data.reduce((memo, group) => {
     group.values.forEach(({ min, value, max, year }) => {
-      memo.push({ year, value: min });
-      memo.push({ year, value });
-      memo.push({ year, value: max });
+      memo.push({ year, uid: `${group.uid}-${year}-min`, value: min });
+      memo.push({ year, uid: `${group.uid}-${year}-mean`, value });
+      memo.push({ year, uid: `${group.uid}-${year}-max`, value: max });
     });
     return memo;
   }, []);
@@ -56,6 +57,7 @@
       {yDomain}
       {data}
       {flatData}
+      let:data
     >
       <Svg>
         <AxisX ticks={xTicks} />
@@ -68,33 +70,38 @@
         />
         <MultipleLineLayer animate={false} />
         {#if !isMultiLine}
-          <MultipleAreaLayer color={data[0].color} />
+          <MultipleAreaLayer />
         {/if}
       </Svg>
+      <Html>
+        <ChartTooltips formatValue={formatTickY} />
+      </Html>
     </LayerCake>
   </div>
-  <div class="h-full {sideChartWidth}">
-    <LayerCake
-      padding={sideChartPadding}
-      x="uid"
-      y={yKey}
-      z="color"
-      {yDomain}
-      data={endBoundsData}
-      xScale={scaleBand()}
-    >
-      <Svg>
-        <AxisY
-          padding={sideChartPadding}
-          ticks={yTicks}
-          {yDomain}
-          xTick={-3}
-          formatTick={formatTickY}
-          ticksHighlighted={ticksYHighlighted}
-          showTickLabels={false}
-        />
-        <BoxLayer formatValue={formatValueY} />
-      </Svg>
-    </LayerCake>
-  </div>
+  {#if isMultiLine}
+    <div class="h-full {sideChartWidth}">
+      <LayerCake
+        padding={sideChartPadding}
+        x="uid"
+        y={yKey}
+        z="color"
+        {yDomain}
+        data={endBoundsData}
+        xScale={scaleBand()}
+      >
+        <Svg>
+          <AxisY
+            padding={sideChartPadding}
+            ticks={yTicks}
+            {yDomain}
+            xTick={-3}
+            formatTick={formatTickY}
+            ticksHighlighted={ticksYHighlighted}
+            showTickLabels={false}
+          />
+          <BoxLayer formatValue={formatValueY} />
+        </Svg>
+      </LayerCake>
+    </div>
+  {/if}
 </div>

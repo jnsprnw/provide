@@ -64,7 +64,7 @@
     <section class="mb-8">
       <svelte:component this={section.component} {query} {...section} />
       {#each section.sections as part}
-      <svelte:component this={part.component} {query} {...part} />
+        <svelte:component this={part.component} {query} {...part} />
       {/each}
     </section>
   {/each}
