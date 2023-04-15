@@ -9,10 +9,6 @@
   $: categoriesBySlug = keyBy(categories, 'slug');
 </script>
 
-<svelte:head>
-  <title>Glossary</title>
-</svelte:head>
-
 <div class="glossary-header content-header container">
   <div class="wrapper">
     <h1 class="title">Glossary</h1>

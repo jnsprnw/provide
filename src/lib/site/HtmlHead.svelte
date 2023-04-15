@@ -1,4 +1,6 @@
 <script>
+  import { page } from '$app/stores';
+  import { generatePageTitle } from '$utils/meta.js';
   const url = 'https://climate-risk-dashboard.climateanalytics.org/';
   const author =
     'PROVIDE consortium under direction of Climate Analytics with Jonas Parnow and Flavio Gortana';
@@ -6,11 +8,11 @@
     'climate impacts,climate change,climate modelling,climate scenarios,local impacts,temperature overshoot, adaptation, emissions pathways';
   const description =
     'Explore future impacts from climate change as the world warms.';
-  const title = 'Climate Risk Dashboard — PROVIDE';
+  $: title = $page.data.title ?? generatePageTitle();
 </script>
 
 <svelte:head>
-  <title>Provide Project</title>
+  <title>{ title }</title>
   <link rel="canonical" href="{url}/" />
   <meta name="author" content={author} />
   <meta name="description" content={description} />

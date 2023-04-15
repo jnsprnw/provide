@@ -1,4 +1,5 @@
 import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
+import { generatePageTitle } from '$utils/meta.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
 
@@ -14,7 +15,10 @@ export const load = async ({ fetch }) => {
     DataProcessingIntro,
   } = data.attributes;
 
+  const title = generatePageTitle('Documentation');
+
   return {
+    title,
     content: {
       modelsIntro: parse(ModelsIntro || ''),
       models: Models.map(({ UID, Title, Description, Link, Label }) => {

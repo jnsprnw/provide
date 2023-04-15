@@ -1,6 +1,7 @@
-import { parse } from 'marked';
-import _, { groupBy, kebabCase, sortBy } from 'lodash-es';
 import { loadFromStrapi } from '$utils/apis.js';
+import { generatePageTitle } from '$utils/meta.js';
+import _, { kebabCase, sortBy } from 'lodash-es';
+import { parse } from 'marked';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('glossaries', fetch);
@@ -25,8 +26,11 @@ export const load = async ({ fetch }) => {
     .map((d) => ({ label: d, slug: kebabCase(d) }))
     .value();
 
+  const title = generatePageTitle('Glossary');
+
   return {
     entries,
     categories,
+    title,
   };
 };

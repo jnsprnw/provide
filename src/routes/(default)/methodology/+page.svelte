@@ -53,10 +53,6 @@
   const query = 'waypoint';
 </script>
 
-<svelte:head>
-  <title>Documentation</title>
-</svelte:head>
-
 <ScrollContent query={`.${query}`} let:index>
   <NestedNav slot="navigation" {sections} {index} />
   <h1 class="text-5xl font-bold mb-12">Documentation</h1>
