@@ -8,8 +8,8 @@ import {
   DICTIONARY_INDICATORS,
   DICTIONARY_SCENARIOS,
   GEOGRAPHIES,
-  SCENARIOS,
   INDICATOR_PARAMETERS,
+  SCENARIOS,
 } from './meta.js';
 
 /*
@@ -19,7 +19,7 @@ export const CURRENT_INDICATOR_UID = writable('mean-temperature');
 
 export const CURRENT_INDICATOR = derived(
   [CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS],
-  ([$uid, $indicators]) => $indicators[$uid]
+  ([$uid, $indicators]) => get($indicators, $uid)
 );
 
 export const CURRENT_INDICATOR_UNIT = derived(CURRENT_INDICATOR, ($indicator) =>
@@ -35,12 +35,13 @@ export const CURRENT_INDICATOR_UNIT_UID = derived(
 export const CURRENT_INDICATOR_PARAMETERS = derived(
   [CURRENT_INDICATOR, INDICATOR_PARAMETERS],
   ([$indicator, $parameters]) => {
-    const indicatorParameters = map($indicator.parameters, ([def], key) =>
-      $parameters.find(({ uid }) => uid === key)
+    const indicatorParameters = map(
+      $indicator?.parameters ?? {},
+      ([def], key) => $parameters.find(({ uid }) => uid === key)
     );
 
     let defaultValues = reduce(
-      $indicator.parameters,
+      $indicator?.parameters ?? {},
       (acc, [def], key) => ({ ...acc, [key]: def }),
       {}
     );
@@ -167,7 +168,7 @@ export const AVAILABLE_SCENARIOS = derived(
   [SCENARIOS, CURRENT_INDICATOR],
   ([$SCENARIOS, $CURRENT_INDICATOR]) => {
     const availableScenarios = $SCENARIOS.filter((scenario) =>
-      $CURRENT_INDICATOR.availableScenarios.includes(scenario.uid)
+      get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid)
     );
     return availableScenarios;
   }

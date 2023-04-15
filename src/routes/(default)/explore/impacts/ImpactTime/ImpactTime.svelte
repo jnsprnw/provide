@@ -22,8 +22,8 @@
     $CURRENT_SCENARIOS_UID.map((scenario) => ({
       endpoint: END_IMPACT_TIME,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
+        geography: $CURRENT_GEOGRAPHY?.uid,
+        indicator: $CURRENT_INDICATOR?.uid,
         scenario,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },

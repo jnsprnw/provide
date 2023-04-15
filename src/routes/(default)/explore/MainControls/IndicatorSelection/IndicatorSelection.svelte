@@ -10,14 +10,14 @@
 
   $: sectors = $SECTORS.filter(
     (sector) =>
-      $INDICATORS.filter((indicator) => indicator.sector === sector.uid).length
+      ($INDICATORS ?? []).filter((indicator) => indicator.sector === sector.uid).length
   );
   let currentFilterUid;
 </script>
 
 <PopoverSelect
   label="Indicator"
-  buttonLabel={$CURRENT_INDICATOR.label}
+  buttonLabel={$CURRENT_INDICATOR?.label}
   panelClass="w-screen max-w-3xl"
 >
   <Content

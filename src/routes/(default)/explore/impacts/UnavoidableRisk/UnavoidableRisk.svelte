@@ -31,8 +31,8 @@
   $: fetchData(UN_AVOIDABLE_RISK_DATA, {
     endpoint: END_UN_AVOIDABLE_RISK,
     params: {
-      geography: $CURRENT_GEOGRAPHY.uid,
-      indicator: $CURRENT_INDICATOR.uid,
+      geography: $CURRENT_GEOGRAPHY?.uid,
+      indicator: $CURRENT_INDICATOR?.uid,
       ...$CURRENT_INDICATOR_OPTION_VALUES,
     },
   });
