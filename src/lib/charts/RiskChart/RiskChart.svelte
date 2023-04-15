@@ -22,49 +22,36 @@
   $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
 
   const padding = { top: 5, right: 0, bottom: 20, left: 0 };
-
-  const flatten = (data) =>
-    data.reduce((memo, group) => {
-      return memo.concat(group.values);
-    }, []);
+  $: flatData = data.reduce((memo, group) => {
+    return memo.concat(group.values);
+  }, []);
 </script>
 
-<div class="chart-container">
-  <LayerCake
-    {data}
-    x={xKey}
-    y={yKey}
-    {padding}
-    yDomain={[0, 1]}
-    xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
-    flatData={flatten(data)}
-  >
-    <Svg>
-      <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
-      <Message />
-      <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
-      <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
-      <RiskLevels />
-    </Svg>
-    <Html>
-      <div class="labels">
+<div class="h-full flex">
+  <div class="h-full w-8/12">
+    <LayerCake
+      {data}
+      x={xKey}
+      y={yKey}
+      {padding}
+      yDomain={[0, 1]}
+      xScale={scaleBand().paddingOuter(0.2).paddingInner(0.2)}
+      {flatData}
+    >
+      <Svg>
+        <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
+        <Message />
+        <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
+        <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+        <RiskLevels />
+      </Svg>
+    </LayerCake>
+  </div>
+  <div class="h-full w-4/12">
+    <LayerCake {padding} {data} x={xKey} y={yKey} yDomain={[0, 1]} {flatData}>
+      <Html>
         <RiskLabels />
-      </div>
-    </Html>
-  </LayerCake>
+      </Html>
+    </LayerCake>
+  </div>
 </div>
-
-<style lang="postcss">
-  .chart-container {
-    width: 75%;
-    height: 100%;
-  }
-
-  .labels {
-    position: absolute;
-    // Is contained within element that has 75% width of its parent but
-    // needs to fill up the remaining 25% hence -> (100 - 75)/75 = 35.7
-    width: 35.7%;
-    left: 100%;
-  }
-</style>

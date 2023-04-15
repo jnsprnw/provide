@@ -7,9 +7,10 @@
   import AxisY from '$lib/charts/axes/AxisY.svelte';
   import MultipleAreaLayer from '$lib/charts/layers/MultipleAreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
-  import { extent, min } from 'd3-array';
+  import { extent } from 'd3-array';
   import { scaleBand } from 'd3-scale';
-  import ChartTooltips from '$lib/charts/tooltip/ChartTooltips.svelte';
+  import ChartTooltips from './ChartTooltips.svelte';
+  import { MEAN_TEMPERATURE_UID } from '$config';
 
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
@@ -24,11 +25,15 @@
   const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
   $: isMultiLine = data.length > 1;
 
+  const formatGmt = (d) => formatValue(d, 'degrees-celsius');
+
   $: flatData = data.reduce((memo, group) => {
-    group.values.forEach(({ min, value, max, year }) => {
-      memo.push({ year, uid: `${group.uid}-${year}-min`, value: min });
-      memo.push({ year, uid: `${group.uid}-${year}-max`, value: max });
-      memo.push({ year, uid: `${group.uid}-${year}-mean`, value });
+    group.values.forEach(({ min, value, max, year }, i) => {
+      // Get global mean temperature of scenario in this year
+      const gmt = group[MEAN_TEMPERATURE_UID].data[i][1];
+      memo.push({ year, gmt, value: min, key: 'min' });
+      memo.push({ year, gmt, value: max, key: 'max' });
+      memo.push({ year, gmt, value, key: 'value' });
     });
     return memo;
   }, []);
@@ -42,6 +47,10 @@
       ...group.values[group.values.length - 1],
     };
   });
+
+  $: renderedDatapoints = isMultiLine
+    ? flatData.filter((d) => d.key === 'value')
+    : flatData;
 
   $: yDomain = extent(flatData, (d) => d.value);
   $: mainChartWidth = ['w-full', 'w-10/12', 'w-9/12'][data.length - 1];
@@ -74,7 +83,11 @@
         {/if}
       </Svg>
       <Html>
-        <ChartTooltips formatValue={formatTickY} />
+        <ChartTooltips
+          data={renderedDatapoints}
+          {formatGmt}
+          formatValue={formatTickY}
+        />
       </Html>
     </LayerCake>
   </div>

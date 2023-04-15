@@ -15,10 +15,12 @@
 </script>
 
 <div
-  class="absolute w-[30px] h-[30px] rounded-full"
+  class="absolute rounded-full"
   style={`
     left: ${x}px; 
-    top: ${y}px; 
+    top: ${y}px;
+    width: 25px;
+    height: 25px;
     transform: translate(-50%, -50%)`}
   use:tooltip={{ template, IS_ACTIVE }}
 />
