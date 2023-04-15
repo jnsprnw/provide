@@ -1,6 +1,7 @@
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import _, { get, keyBy, map, reduce } from 'lodash-es';
+import { stringify } from 'qs';
 import { derived, get as getStore, writable } from 'svelte/store';
 
 import {
@@ -217,4 +218,24 @@ export const TEMPLATE_PROPS = derived(
       indicatorUnit: $CURRENT_INDICATOR_UNIT,
     };
   }
+);
+export const URL = derived(
+  [
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_INDICATOR_UID,
+    CURRENT_SCENARIOS_UID,
+    CURRENT_INDICATOR_OPTION_VALUES,
+  ],
+  ([
+    $CURRENT_GEOGRAPHY,
+    $CURRENT_INDICATOR,
+    $CURRENT_SCENARIOS,
+    $CURRENT_INDICATOR_OPTION_VALUES,
+  ]) =>
+    stringify({
+      geography: $CURRENT_GEOGRAPHY,
+      indicator: $CURRENT_INDICATOR,
+      scenarios: $CURRENT_SCENARIOS,
+      ...$CURRENT_INDICATOR_OPTION_VALUES,
+    })
 );

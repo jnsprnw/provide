@@ -2,6 +2,7 @@
   import Menu from '$lib/controls/Menu/Menu.svelte';
   import Template from '$lib/helper/Template.svelte';
   import InfoButton from './InfoButton.svelte';
+  import { URL } from '$stores/state.js';
 
   export let title;
   export let description;
@@ -12,8 +13,8 @@
     { options: [{ label: 'Download data as CSV', href: '#' }] },
     {
       options: [
-        { label: 'Download graph as PNG', href: '#' },
-        { label: 'Download graph as PDF', href: '#' },
+        { label: 'Download graph as PNG', href: `http://localhost:5173/download/impact-time/?${$URL}&format=png` },
+        { label: 'Download graph as PDF', href: `http://localhost:5173/download/impact-time/?${$URL}&format=pdf` },
       ],
     },
   ];
