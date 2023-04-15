@@ -1,33 +1,21 @@
 <script>
-
-  import SectionIntro from '../methodology/SectionIntro.svelte';
+  import SectionHeadline from '$lib/helper/ContentPages/SectionHeadline.svelte';
   import TermSection from './TermSection.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
   export let data;
 
-  $: sections = data.content.map((block) => {
-    return {
-      ...block,
-      component: SectionIntro,
-      sections: block.sections.map(section => {
-        return {
-          ...section,
-          component: TermSection
-        }
-      })
-    }
-  })
+  $: sections = data.content;
 </script>
 
 <ScrollContent let:index>
   <NestedNav slot="navigation" {sections} {index} />
   <h1 class="text-5xl font-bold mb-12">Documentation</h1>
-  {#each sections as section}
+  {#each sections as { sections, title, slug }}
     <section class="mb-8">
-      <svelte:component this={section.component} {...section} />
-      {#each section.sections as part}
-        <svelte:component this={part.component} {...part} />
+      <SectionHeadline {title} {slug} />
+      {#each sections as { title, slug, content, footnote, abbreviation }}
+        <TermSection {title} {slug} {content} {footnote} {abbreviation} />
       {/each}
     </section>
   {/each}
