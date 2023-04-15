@@ -1,41 +1,23 @@
 <script>
+  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
+  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
+  import SectionIntro from '../methodology/SectionIntro.svelte';
   export let data;
 
-  $: ({ sections } = data);
+  $: ({ content } = data);
+
+  $: sections = content.map(section => ({
+    ...section,
+    component: SectionIntro
+  }))
 </script>
 
-<div class="about-header content-header container">
-  <div class="wrapper">
-    <h1 class="title">About</h1>
-    <nav>
-      <ul class="nav-inpage">
-        {#each sections as { slug, title }}
-          <li><a href={`#${slug}`}>{title}</a></li>
-        {/each}
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<div class="about-content content-content container">
-  <div class="wrapper content-layout">
-    {#each sections as { slug, title, text }}
-      <section>
-        <header>
-          <h2 id={slug} class="headline-section">{title}</h2>
-        </header>
-        <div class="text">
-          {@html text}
-        </div>
-      </section>
-    {/each}
-  </div>
-</div>
-
-<style lang="postcss">
-  .section {
-    .topic {
-      grid-column: 1 / span 6;
-    }
-  }
-</style>
+<ScrollContent let:index>
+  <NestedNav slot="navigation" {sections} {index} />
+  <h1 class="text-5xl font-bold mb-12">About</h1>
+  {#each sections as section}
+    <section class="mb-8">
+      <svelte:component this={section.component} {...section} />
+    </section>
+  {/each}
+</ScrollContent>
