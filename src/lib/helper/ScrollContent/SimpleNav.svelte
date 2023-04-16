@@ -1,21 +1,21 @@
 <script>
+  import { getContext } from 'svelte';
   export let sections = [];
-  export let index = 0;
+  const { index } = getContext('scrollContent');
 
-  $: navSections = sections.map((d, i) => ({
-    ...d,
-    isActive: index === i,
-  }));
+  $: console.log($index)
 </script>
 
-{#each navSections as { slug, title, disabled, description, isActive }}
+{#each sections as { slug, title, disabled, description }, i}
   {#if slug}
+    {@const isActive = $index === i}
     <a
       {disabled}
       href={`#${slug}`}
       class="inline-block w-48 pl-3 border-l-3"
       class:border-theme-base={isActive}
       class:border-transparent={!isActive}
+      aria-current={isActive ? 'step' : 'false'}
     >
       <div
         class="font-bold mb-1 -mt-1 leading-tight"
