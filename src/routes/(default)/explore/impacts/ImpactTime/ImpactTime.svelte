@@ -51,13 +51,18 @@
         yearStart,
         yearStep,
         parameters,
-        values: indicatorData.map((values, i) => ({
-          gmt: scenario[MEAN_TEMPERATURE_UID].data[i][1],
-          min: values[0],
-          value: values[1],
-          max: values[2],
-          year: yearStart + yearStep * i,
-        })),
+        values: indicatorData.map((values, i) => {
+          const gmt = scenario[MEAN_TEMPERATURE_UID].data[i][1];
+          const wlvl = Math.round(gmt / 0.5) * 0.5;
+          return {
+            gmt,
+            wlvl,
+            min: values[0],
+            value: values[1],
+            max: values[2],
+            year: yearStart + yearStep * i,
+          };
+        }),
       };
     });
 

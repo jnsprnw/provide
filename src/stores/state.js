@@ -3,6 +3,7 @@ import THEME from '$styles/theme-store.js';
 import _, { get, keyBy, map, reduce } from 'lodash-es';
 import { stringify } from 'qs';
 import { derived, get as getStore, writable } from 'svelte/store';
+import { interpolateLab, piecewise } from 'd3-interpolate';
 
 import {
   DICTIONARY_INDICATOR_PARAMETERS,
@@ -158,7 +159,17 @@ export const CURRENT_SCENARIOS = derived(
   ([$uids, $scenarios, $theme]) =>
     $uids.map((uid, i) => ({
       ...$scenarios[uid],
-      color: $theme?.color?.scenarios[i],
+      color: $theme.color.category.base[i],
+      colorInterpolator: piecewise(interpolateLab, [
+        $theme.color.category.weakest[i],
+        $theme.color.category.base[i],
+        $theme.color.category.strongest[i],
+      ]),
+      colorRange: [
+        $theme.color.category.weakest[i],
+        $theme.color.category.base[i],
+        $theme.color.category.strongest[i],
+      ],
     }))
 );
 

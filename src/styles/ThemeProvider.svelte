@@ -7,9 +7,9 @@
   import { setContext } from 'svelte';
   import { get } from 'lodash-es';
   import THEME from './theme-store.js';
-  import designTokens from './theme_new/json/global.json';
-  import designTokensLight from './theme_new/json/theme-light.json';
-  import designTokensDark from './theme_new/json/theme-dark.json';
+  import designTokens from './theme/json/global.json';
+  import designTokensLight from './theme/json/theme-light.json';
+  import designTokensDark from './theme/json/theme-dark.json';
 
   export let id;
 
@@ -48,8 +48,6 @@
       light: designTokensLight,
       dark: designTokensDark,
     }[id].color;
-
-    console.log(colors);
 
     const colorSteps = {
       sequential: [

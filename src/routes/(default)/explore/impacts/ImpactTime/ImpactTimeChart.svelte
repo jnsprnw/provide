@@ -7,8 +7,8 @@
   import AxisY from '$lib/charts/axes/AxisY.svelte';
   import AreaLayer from '$lib/charts/layers/AreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
-  import { extent, groups } from 'd3-array';
-  import { scaleBand } from 'd3-scale';
+  import { extent, groups, max, min, range } from 'd3-array';
+  import { scaleBand, scaleLinear, scaleSequential } from 'd3-scale';
   import ChartTooltips from './ChartTooltips.svelte';
 
   export let data = [];
@@ -45,22 +45,38 @@
     return memo;
   }, []);
 
-  $: lineData = data.reduce((memo, scenario) => {
-    let byGmt = groups(scenario.values, (d) => Math.round(d.gmt / 0.5) * 0.5);
-    byGmt = byGmt.map(([gmt, entries]) => entries);
-    memo.push(byGmt);
+  $: minWlvl = min(data, (scenario) => min(scenario.values, (d) => d.wlvl));
+  $: maxWlvl = max(data, (scenario) => max(scenario.values, (d) => d.wlvl));
+  $: wlvlExtent = [minWlvl, maxWlvl];
+  $: colorScales = data.map((scenario) =>
+    scaleSequential(scenario.colorInterpolator).domain(wlvlExtent)
+  );
+
+  $: lineData = data.reduce((memo, scenario, i) => {
+    const gmtSegments = scenario.values.reduce((memo, d) => {
+      const prevSegment = memo[memo.length - 1];
+      const prevWlvl = prevSegment?.wlvl;
+      if (prevWlvl !== d.wlvl || !prevSegment)
+        memo.push({ wlvl: d.wlvl, values: [d] });
+      if (prevSegment) prevSegment.values.push(d);
+      return memo;
+    }, []);
+
+    gmtSegments.forEach(({ wlvl, values }) =>
+      memo.push({ color: colorScales[i](wlvl), values })
+    );
     return memo;
   }, []);
 
-  $: console.log(lineData);
-
   $: areaData = data[0];
 
-  $: endBoundsData = data.map((group) => {
+  $: endBoundsData = data.map((scenario, i) => {
+    const entry = scenario.values[scenario.values.length - 1];
     return {
-      ...group,
-      uid: group.uid,
-      ...group.values[group.values.length - 1],
+      ...scenario,
+      uid: scenario.uid,
+      color: colorScales[i](entry.wlvl),
+      ...entry,
     };
   });
 
@@ -80,7 +96,7 @@
       x={xKey}
       y={yKey}
       {yDomain}
-      {data}
+      data={lineData}
       {flatData}
       let:data
     >
