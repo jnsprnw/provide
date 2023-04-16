@@ -1,44 +1,40 @@
 <script>
   import Scroller from '@sveltejs/svelte-scroller';
   import { setContext } from 'svelte';
+  import { writable } from 'svelte/store';
 
-  export let sections = [];
   export let query = 'scroll-section';
-  let index;
   let count;
   let offset;
   let progress;
 
+  let index = writable(0);
+
   setContext('scrollContent', {
-    query
+    query,
+    index
   });
+
+  $: console.log($index)
 </script>
 
 <div class="grid grid-cols-12 gap-10 pt-8 mx-auto max-w-7xl px-6">
   <div class="col-span-3">
     <div class="sticky top-0 z-[3]">
-      <slot name="navigation" {index} />
+      <slot name="navigation" />
     </div>
   </div>
-  <div class="col-span-9">
+  <div class="col-start-4 col-span-9">
     <Scroller
       bind:count
-      bind:index
+      bind:index={$index}
       bind:offset
       bind:progress
       query={`.${query}`}
-      threshold={0.01}
+      threshold={0.3}
     >
       <div slot="foreground">
-        <slot>
-          {#each sections as section}
-            {#if !section.disabled}
-              <section id={section.slug} class="mb-16">
-                <svelte:component this={section.component} {...section} />
-              </section>
-            {/if}
-          {/each}
-        </slot>
+        <slot />
       </div>
     </Scroller>
   </div>

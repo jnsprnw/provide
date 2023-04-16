@@ -51,8 +51,8 @@
   ];
 </script>
 
-<ScrollContent let:index>
-  <NestedNav slot="navigation" {sections} {index} />
+<ScrollContent>
+  <NestedNav slot="navigation" {sections} />
   <h1 class="text-5xl font-bold mb-12">Documentation</h1>
   {#each sections as section}
     <section class="mb-8">
