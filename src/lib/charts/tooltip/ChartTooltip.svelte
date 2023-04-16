@@ -6,12 +6,12 @@
   const { yGet, xGet } = getContext('LayerCake');
 
   export let data;
+  export let content;
 
   let IS_ACTIVE = writable(false);
 
   $: x = $xGet(data);
   $: y = $yGet(data);
-  let template;
 </script>
 
 <div
@@ -22,7 +22,7 @@
     width: 25px;
     height: 25px;
     transform: translate(-50%, -50%)`}
-  use:tooltip={{ template, IS_ACTIVE }}
+  use:tooltip={{ content, IS_ACTIVE, active: $IS_ACTIVE }}
 />
 
 {#if $IS_ACTIVE}
@@ -34,9 +34,3 @@
   transform: translate(-50%, -50%)`}
   />
 {/if}
-
-<div class="hidden">
-  <div bind:this={template}>
-    <slot />
-  </div>
-</div>

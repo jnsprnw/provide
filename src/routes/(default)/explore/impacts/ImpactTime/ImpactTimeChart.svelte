@@ -26,20 +26,26 @@
   $: isMultiLine = data.length > 1;
 
   const formatGmt = (d) => formatValue(d, 'degrees-celsius');
+  $: formatTickY = (d) => formatValue(d, unit);
+  $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
 
   $: flatData = data.reduce((memo, group) => {
-    group.values.forEach(({ min, value, max, year }, i) => {
+    group.values.forEach(({ year, ...d }, i) => {
       // Get global mean temperature of scenario in this year
       const gmt = group[MEAN_TEMPERATURE_UID].data[i][1];
-      memo.push({ year, gmt, value: min, key: 'min' });
-      memo.push({ year, gmt, value: max, key: 'max' });
-      memo.push({ year, gmt, value, key: 'value' });
+      ['min', 'max', 'value'].forEach((key) => {
+        memo.push({
+          year,
+          formattedGmt: formatGmt(gmt),
+          value: d[key],
+          formattedValue: formatTickY(d[key]),
+          key,
+        });
+      });
     });
     return memo;
   }, []);
 
-  $: formatTickY = (d) => formatValue(d, unit);
-  $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
   $: endBoundsData = data.map((group) => {
     return {
       ...group,

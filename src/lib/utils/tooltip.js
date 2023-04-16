@@ -25,7 +25,6 @@ export default function tooltip(node, params) {
       return params.content;
     },
   });
-
   return {
     update: ({ template, content }) => {
       instance.setContent(template ? template : content);
