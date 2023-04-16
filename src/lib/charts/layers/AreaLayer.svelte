@@ -1,11 +1,17 @@
 <script>
   import { getContext } from 'svelte';
   import { area } from 'd3-shape';
+
+  let chartData;
+  export { chartData as data };
   export let y0Key = 'min';
   export let y1Key = 'max';
   export let color;
 
   const { data, xGet, yScale } = getContext('LayerCake');
+
+  $: chartData = chartData || $data;
+  $: console.log(chartData);
 
   $: areaGen = area()
     .x((d) => $xGet(d))
@@ -13,10 +19,4 @@
     .y1((d) => $yScale(d[y1Key]));
 </script>
 
-<path class="path-area" d={areaGen($data)} fill={color} />
-
-<style>
-  .path-area {
-    opacity: 0.3;
-  }
-</style>
+<path class="path-area opacity-30" d={areaGen(chartData)} fill={color} />

@@ -14,6 +14,7 @@
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import ImpactTimeChart from './ImpactTimeChart.svelte';
+  import { MEAN_TEMPERATURE_UID } from '$config';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -43,13 +44,15 @@
         parameters,
       } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID] || [];
+      const scenario = scenarios[i];
 
       return {
-        ...scenarios[i],
+        ...scenario,
         yearStart,
         yearStep,
         parameters,
         values: indicatorData.map((values, i) => ({
+          gmt: scenario[MEAN_TEMPERATURE_UID].data[i][1],
           min: values[0],
           value: values[1],
           max: values[2],

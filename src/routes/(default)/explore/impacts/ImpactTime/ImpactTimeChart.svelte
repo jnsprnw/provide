@@ -5,12 +5,11 @@
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
   import AxisX from '$lib/charts/axes/AxisX.svelte';
   import AxisY from '$lib/charts/axes/AxisY.svelte';
-  import MultipleAreaLayer from '$lib/charts/layers/MultipleAreaLayer.svelte';
+  import AreaLayer from '$lib/charts/layers/AreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
-  import { extent } from 'd3-array';
+  import { extent, groups } from 'd3-array';
   import { scaleBand } from 'd3-scale';
   import ChartTooltips from './ChartTooltips.svelte';
-  import { MEAN_TEMPERATURE_UID } from '$config';
 
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
@@ -29,13 +28,13 @@
   $: formatTickY = (d) => formatValue(d, unit);
   $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
 
-  $: flatData = data.reduce((memo, group) => {
-    group.values.forEach(({ year, ...d }, i) => {
+  $: flatData = data.reduce((memo, scenario) => {
+    scenario.values.forEach(({ year, gmt, ...d }, i) => {
       // Get global mean temperature of scenario in this year
-      const gmt = group[MEAN_TEMPERATURE_UID].data[i][1];
       ['min', 'max', 'value'].forEach((key) => {
         memo.push({
           year,
+          color: scenario.color,
           formattedGmt: formatGmt(gmt),
           value: d[key],
           formattedValue: formatTickY(d[key]),
@@ -46,6 +45,17 @@
     return memo;
   }, []);
 
+  $: lineData = data.reduce((memo, scenario) => {
+    let byGmt = groups(scenario.values, (d) => Math.round(d.gmt / 0.5) * 0.5);
+    byGmt = byGmt.map(([gmt, entries]) => entries);
+    memo.push(byGmt);
+    return memo;
+  }, []);
+
+  $: console.log(lineData);
+
+  $: areaData = data[0];
+
   $: endBoundsData = data.map((group) => {
     return {
       ...group,
@@ -54,7 +64,7 @@
     };
   });
 
-  $: renderedDatapoints = isMultiLine
+  $: tooltipData = isMultiLine
     ? flatData.filter((d) => d.key === 'value')
     : flatData;
 
@@ -85,16 +95,10 @@
         />
         <MultipleLineLayer animate={false} />
         {#if !isMultiLine}
-          <MultipleAreaLayer />
+          <AreaLayer data={areaData.values} color={areaData.color} />
         {/if}
+        <ChartTooltips data={tooltipData} />
       </Svg>
-      <Html>
-        <ChartTooltips
-          data={renderedDatapoints}
-          {formatGmt}
-          formatValue={formatTickY}
-        />
-      </Html>
     </LayerCake>
   </div>
   {#if isMultiLine}
