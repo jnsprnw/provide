@@ -52,7 +52,10 @@
     scaleSequential(scenario.colorInterpolator).domain(wlvlExtent)
   );
 
+  // Data for the mean line
   $: lineData = data.reduce((memo, scenario, i) => {
+    // Groups scenario values by warming level but makes sure they overlap
+    // by one value and each change in warming level resuts in a new segment
     const gmtSegments = scenario.values.reduce((memo, d) => {
       const prevSegment = memo[memo.length - 1];
       const prevWlvl = prevSegment?.wlvl;
@@ -68,8 +71,10 @@
     return memo;
   }, []);
 
+  // Data for area chart
   $: areaData = data[0];
 
+  // Data for boxplots
   $: endBoundsData = data.map((scenario, i) => {
     const entry = scenario.values[scenario.values.length - 1];
     return {
@@ -80,6 +85,7 @@
     };
   });
 
+  // Data for generating tooltips
   $: tooltipData = isMultiLine
     ? flatData.filter((d) => d.key === 'value')
     : flatData;
