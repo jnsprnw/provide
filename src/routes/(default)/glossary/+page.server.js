@@ -1,36 +1,39 @@
 import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
-import _, { kebabCase, sortBy } from 'lodash-es';
+import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('glossaries', fetch);
-  let entries = data.map((d) => {
+  const entries = data.map((d) => {
     const { Title, Category, Link, UID, Description, Abbreviation } =
       d.attributes;
     return {
       title: Title,
-      category: kebabCase(Category),
+      category: Category,
       footnote: Link,
-      uid: UID || kebabCase(Title),
-      description: parse(Description),
+      slug: UID || kebabCase(Title),
+      content: parse(Description ?? ''),
       abbreviation: Abbreviation,
     };
   });
 
-  entries = sortBy(entries, 'title');
-
-  const categories = _(data)
-    .map('attributes.Category')
-    .uniq()
-    .map((d) => ({ label: d, slug: kebabCase(d) }))
-    .value();
+  const content = Object.entries(groupBy(entries, 'category')).map(
+    ([label, sections]) => {
+      return {
+        title: label,
+        slug: kebabCase(label),
+        sections,
+      };
+    }
+  );
 
   const title = generatePageTitle('Glossary');
 
   return {
-    entries,
-    categories,
+    entries: [],
+    categories: [],
     title,
+    content,
   };
 };
