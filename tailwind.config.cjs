@@ -17,6 +17,10 @@ module.exports = {
       borderWidth: {
         3: '3px',
       },
+      strokeWidth: {
+        3: '3px',
+        4: '4px',
+      },
       dashArray: {
         2: '2',
         '2-3': '2 3',
@@ -35,6 +39,12 @@ module.exports = {
         },
         '.text-anchor-middle': {
           'text-anchor': 'middle',
+        },
+        '.linejoin-round': {
+          'stroke-linejoin': 'round',
+        },
+        '.linecap-round': {
+          'stroke-linecap': 'round',
         },
       });
 

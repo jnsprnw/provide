@@ -165,11 +165,6 @@ export const CURRENT_SCENARIOS = derived(
         $theme.color.category.base[i],
         $theme.color.category.strongest[i],
       ]),
-      colorRange: [
-        $theme.color.category.weakest[i],
-        $theme.color.category.base[i],
-        $theme.color.category.strongest[i],
-      ],
     }))
 );
 

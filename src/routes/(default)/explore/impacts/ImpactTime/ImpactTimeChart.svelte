@@ -8,8 +8,9 @@
   import AreaLayer from '$lib/charts/layers/AreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
   import { extent, groups, max, min, range } from 'd3-array';
-  import { scaleBand, scaleLinear, scaleSequential } from 'd3-scale';
+  import { scaleBand, scaleSequential } from 'd3-scale';
   import ChartTooltips from './ChartTooltips.svelte';
+  import { flatMap } from 'lodash-es';
 
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
@@ -35,16 +36,14 @@
         memo.push({
           year,
           color: scenario.color,
-          formattedGmt: formatGmt(gmt),
           value: d[key],
-          formattedValue: formatTickY(d[key]),
-          key,
         });
       });
     });
     return memo;
   }, []);
 
+  // Calculate warming level extent to create color scale
   $: minWlvl = min(data, (scenario) => min(scenario.values, (d) => d.wlvl));
   $: maxWlvl = max(data, (scenario) => max(scenario.values, (d) => d.wlvl));
   $: wlvlExtent = [minWlvl, maxWlvl];
@@ -65,9 +64,10 @@
       return memo;
     }, []);
 
-    gmtSegments.forEach(({ wlvl, values }) =>
-      memo.push({ color: colorScales[i](wlvl), values })
-    );
+    gmtSegments.forEach(({ wlvl, values }) => {
+      const color = colorScales[i](wlvl);
+      memo.push({ color, values: values.map((d) => ({ ...d, color })) });
+    });
     return memo;
   }, []);
 
@@ -86,9 +86,13 @@
   });
 
   // Data for generating tooltips
-  $: tooltipData = isMultiLine
-    ? flatData.filter((d) => d.key === 'value')
-    : flatData;
+  $: tooltipData = (
+    isMultiLine ? flatMap(lineData, (d) => d.values) : flatData
+  ).map((d) => ({
+    ...d,
+    formattedValue: formatTickY(d.value),
+    formattedGmt: formatGmt(d.gmt),
+  }));
 
   $: yDomain = extent(flatData, (d) => d.value);
   $: mainChartWidth = ['w-full', 'w-10/12', 'w-9/12'][data.length - 1];
@@ -115,7 +119,7 @@
           formatTick={formatTickY}
           ticksHighlighted={ticksYHighlighted}
         />
-        <MultipleLineLayer animate={false} />
+        <MultipleLineLayer strokeWidth={4} animate={false} />
         {#if !isMultiLine}
           <AreaLayer data={areaData.values} color={areaData.color} />
         {/if}
