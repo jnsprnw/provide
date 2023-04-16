@@ -37,7 +37,7 @@
 </svelte:head>
 
 <ScrollContent let:query>
-  <nav slot="navigation" class="flex flex-col gap-10">
+  <nav slot="navigation" class="flex flex-col gap-10 pr-10">
     <ScenarioSelection />
     <SimpleNav {sections} />
   </nav>

@@ -29,7 +29,7 @@
       bind:offset
       bind:progress
       query={`.${query}`}
-      threshold={0.3}
+      threshold={0.1}
     >
       <div slot="foreground">
         <slot {query} />
