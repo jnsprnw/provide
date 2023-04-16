@@ -3776,12 +3776,12 @@
       "category": {
         "base": {
           "0": {
-            "value": "#C94C24",
+            "value": "#489AC6",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#C94C24",
+              "value": "#489AC6",
               "type": "color"
             },
             "name": "0",
@@ -3795,12 +3795,12 @@
             ]
           },
           "1": {
-            "value": "#58CBD3",
+            "value": "#8A973D",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#58CBD3",
+              "value": "#8A973D",
               "type": "color"
             },
             "name": "1",
@@ -3814,12 +3814,12 @@
             ]
           },
           "2": {
-            "value": "#F4BD49",
+            "value": "#CA7D34",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#F4BD49",
+              "value": "#CA7D34",
               "type": "color"
             },
             "name": "2",
@@ -3832,70 +3832,13 @@
               "2"
             ]
           },
-          "3": {
-            "value": "#FFA81B",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#FFA81B",
-              "type": "color"
-            },
-            "name": "3",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "base",
-              "3"
-            ]
-          },
-          "4": {
-            "value": "#51a27c",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#51a27c",
-              "type": "color"
-            },
-            "name": "4",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "base",
-              "4"
-            ]
-          },
-          "5": {
-            "value": "#9da61d",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#9da61d",
-              "type": "color"
-            },
-            "name": "5",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "base",
-              "5"
-            ]
-          },
           "99": {
-            "value": "#ffffff",
+            "value": "#A6ACB1",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#ffffff",
+              "value": "#A6ACB1",
               "type": "color"
             },
             "name": "99",
@@ -3911,12 +3854,12 @@
         },
         "weaker": {
           "0": {
-            "value": "#83bad9",
+            "value": "#8ACFFA",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#83bad9",
+              "value": "#8ACFFA",
               "type": "color"
             },
             "name": "0",
@@ -3930,12 +3873,12 @@
             ]
           },
           "1": {
-            "value": "#b386c8",
+            "value": "#C0CE6B",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#b386c8",
+              "value": "#C0CE6B",
               "type": "color"
             },
             "name": "1",
@@ -3949,12 +3892,12 @@
             ]
           },
           "2": {
-            "value": "#e38c7c",
+            "value": "#F5B985",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#e38c7c",
+              "value": "#F5B985",
               "type": "color"
             },
             "name": "2",
@@ -3967,70 +3910,13 @@
               "2"
             ]
           },
-          "3": {
-            "value": "#f8c975",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#f8c975",
-              "type": "color"
-            },
-            "name": "3",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "weaker",
-              "3"
-            ]
-          },
-          "4": {
-            "value": "#83c0a4",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#83c0a4",
-              "type": "color"
-            },
-            "name": "4",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "weaker",
-              "4"
-            ]
-          },
-          "5": {
-            "value": "#ced56d",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#ced56d",
-              "type": "color"
-            },
-            "name": "5",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "weaker",
-              "5"
-            ]
-          },
           "99": {
-            "value": "#ffffff",
+            "value": "#C1C7CC",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#ffffff",
+              "value": "#C1C7CC",
               "type": "color"
             },
             "name": "99",
@@ -4046,12 +3932,12 @@
         },
         "stronger": {
           "0": {
-            "value": "#0161a3",
+            "value": "#286485",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#0161a3",
+              "value": "#286485",
               "type": "color"
             },
             "name": "0",
@@ -4065,12 +3951,12 @@
             ]
           },
           "1": {
-            "value": "#492658",
+            "value": "#59641B",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#492658",
+              "value": "#59641B",
               "type": "color"
             },
             "name": "1",
@@ -4084,12 +3970,12 @@
             ]
           },
           "2": {
-            "value": "#a72817",
+            "value": "#88501A",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#a72817",
+              "value": "#88501A",
               "type": "color"
             },
             "name": "2",
@@ -4102,70 +3988,13 @@
               "2"
             ]
           },
-          "3": {
-            "value": "#b26d00",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#b26d00",
-              "type": "color"
-            },
-            "name": "3",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "stronger",
-              "3"
-            ]
-          },
-          "4": {
-            "value": "#0b5932",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#0b5932",
-              "type": "color"
-            },
-            "name": "4",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "stronger",
-              "4"
-            ]
-          },
-          "5": {
-            "value": "#565d00",
-            "type": "color",
-            "filePath": "01_intermediate/namespaced-theme-light.json",
-            "isSource": true,
-            "original": {
-              "value": "#565d00",
-              "type": "color"
-            },
-            "name": "5",
-            "attributes": {},
-            "path": [
-              "color",
-              "light",
-              "category",
-              "stronger",
-              "5"
-            ]
-          },
           "99": {
-            "value": "#ffffff",
+            "value": "#72787C",
             "type": "color",
             "filePath": "01_intermediate/namespaced-theme-light.json",
             "isSource": true,
             "original": {
-              "value": "#ffffff",
+              "value": "#72787C",
               "type": "color"
             },
             "name": "99",
@@ -4176,6 +4005,124 @@
               "category",
               "stronger",
               "99"
+            ]
+          }
+        },
+        "weakest": {
+          "0": {
+            "value": "#C8E7FD",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#C8E7FD",
+              "type": "color"
+            },
+            "name": "0",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "weakest",
+              "0"
+            ]
+          },
+          "1": {
+            "value": "#DCEB84",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#DCEB84",
+              "type": "color"
+            },
+            "name": "1",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "weakest",
+              "1"
+            ]
+          },
+          "2": {
+            "value": "#F9DDC5",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#F9DDC5",
+              "type": "color"
+            },
+            "name": "2",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "weakest",
+              "2"
+            ]
+          }
+        },
+        "strongest": {
+          "0": {
+            "value": "#123446",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#123446",
+              "type": "color"
+            },
+            "name": "0",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "strongest",
+              "0"
+            ]
+          },
+          "1": {
+            "value": "#2E340A",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#2E340A",
+              "type": "color"
+            },
+            "name": "1",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "strongest",
+              "1"
+            ]
+          },
+          "2": {
+            "value": "#482909",
+            "type": "color",
+            "filePath": "01_intermediate/namespaced-theme-light.json",
+            "isSource": true,
+            "original": {
+              "value": "#482909",
+              "type": "color"
+            },
+            "name": "2",
+            "attributes": {},
+            "path": [
+              "color",
+              "light",
+              "category",
+              "strongest",
+              "2"
             ]
           }
         }

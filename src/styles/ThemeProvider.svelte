@@ -49,7 +49,7 @@
       dark: designTokensDark,
     }[id].color;
 
-    // console.log(colors);
+    console.log(colors);
 
     const colorSteps = {
       sequential: [

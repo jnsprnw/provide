@@ -19,27 +19,24 @@
   --color-diverging-neutral: #dce0e3; /* Third step in the base diverging color scale, used for zero or data median. */
   --color-diverging-negative-2: #ffffff; /* First step in the based diverging color scale, used for the lowest (most negative) value.  */
   --color-diverging-negative-1: #ffffff; /* Second step in the base diverging color scale, used for values lower than zero (or data median). */
-  --color-category-stronger-99: #ffffff;
-  --color-category-stronger-5: #565d00;
-  --color-category-stronger-4: #0b5932;
-  --color-category-stronger-3: #b26d00;
-  --color-category-stronger-2: #a72817;
-  --color-category-stronger-1: #492658;
-  --color-category-stronger-0: #0161a3;
-  --color-category-weaker-99: #ffffff;
-  --color-category-weaker-5: #ced56d;
-  --color-category-weaker-4: #83c0a4;
-  --color-category-weaker-3: #f8c975;
-  --color-category-weaker-2: #e38c7c;
-  --color-category-weaker-1: #b386c8;
-  --color-category-weaker-0: #83bad9;
-  --color-category-base-99: #ffffff;
-  --color-category-base-5: #9da61d;
-  --color-category-base-4: #51a27c;
-  --color-category-base-3: #ffa81b;
-  --color-category-base-2: #f4bd49;
-  --color-category-base-1: #58cbd3;
-  --color-category-base-0: #c94c24;
+  --color-category-strongest-2: #482909;
+  --color-category-strongest-1: #2e340a;
+  --color-category-strongest-0: #123446;
+  --color-category-weakest-2: #f9ddc5;
+  --color-category-weakest-1: #dceb84;
+  --color-category-weakest-0: #c8e7fd;
+  --color-category-stronger-99: #72787c;
+  --color-category-stronger-2: #88501a;
+  --color-category-stronger-1: #59641b;
+  --color-category-stronger-0: #286485;
+  --color-category-weaker-99: #c1c7cc;
+  --color-category-weaker-2: #f5b985;
+  --color-category-weaker-1: #c0ce6b;
+  --color-category-weaker-0: #8acffa;
+  --color-category-base-99: #a6acb1;
+  --color-category-base-2: #ca7d34;
+  --color-category-base-1: #8a973d;
+  --color-category-base-0: #489ac6;
   --color-functional-link: #1c4c64; /* Used for links. */
   --color-functional-not-available: #b2b2b2; /* Used for visual marks (e.g. countries in maps) where data is missing from the dataset. */
   --color-functional-focus: #ffcb01; /* Used for author-driven accents of parts of charts, texts and other elements. */
