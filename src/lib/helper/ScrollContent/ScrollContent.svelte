@@ -12,10 +12,8 @@
 
   setContext('scrollContent', {
     query,
-    index
+    index,
   });
-
-  $: console.log($index)
 </script>
 
 <div class="grid grid-cols-12 gap-10 pt-8 mx-auto max-w-7xl px-6">
@@ -34,7 +32,7 @@
       threshold={0.3}
     >
       <div slot="foreground">
-        <slot />
+        <slot {query} />
       </div>
     </Scroller>
   </div>

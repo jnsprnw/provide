@@ -2,8 +2,6 @@
   import { getContext } from 'svelte';
   export let sections = [];
   const { index } = getContext('scrollContent');
-
-  $: console.log($index)
 </script>
 
 {#each sections as { slug, title, disabled, description }, i}

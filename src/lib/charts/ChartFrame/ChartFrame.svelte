@@ -13,19 +13,28 @@
     { options: [{ label: 'Download data as CSV', href: '#' }] },
     {
       options: [
-        { label: 'Download graph as PNG', href: `http://localhost:5173/download/impact-time/?${$URL}&format=png` },
-        { label: 'Download graph as PDF', href: `http://localhost:5173/download/impact-time/?${$URL}&format=pdf` },
+        {
+          label: 'Download graph as PNG',
+          href: `http://localhost:5173/download/impact-time/?${$URL}&format=png`,
+        },
+        {
+          label: 'Download graph as PDF',
+          href: `http://localhost:5173/download/impact-time/?${$URL}&format=pdf`,
+        },
       ],
     },
   ];
 </script>
 
-<figure class:aspect-video={$IS_EMBEDED} style:width={$IS_EMBEDED ? '1200px' : undefined}>
+<figure
+  class:aspect-video={$IS_EMBEDED}
+  style:width={$IS_EMBEDED ? '1200px' : undefined}
+>
   <header class="mb-4">
     <h3 class="font-bold text-2xl mb-3">
       <Template template={title} data={templateProps} />
     </h3>
-    <p class="max-w-xl">
+    <p class="max-w-2xl leading-relaxed mb-8">
       <Template template={description} data={templateProps} />
     </p>
 
@@ -33,13 +42,13 @@
   </header>
   <slot />
   {#if !$IS_EMBEDED}
-  <figcaption class="flex justify-end gap-4">
-    <InfoButton label="About the data" items={chartInfo} />
-    <Menu label="Download" options={downloadOptions} />
-  </figcaption>
+    <figcaption class="flex justify-end gap-4">
+      <InfoButton label="About the data" items={chartInfo} />
+      <Menu label="Download" options={downloadOptions} />
+    </figcaption>
   {:else}
-  <figcaption class="mt-4">
-    <span class="font-bold">Hier könnte ihre Werbung stehen.</span>
-  </figcaption>
+    <figcaption class="mt-4">
+      <span class="font-bold">Hier könnte ihre Werbung stehen.</span>
+    </figcaption>
   {/if}
 </figure>

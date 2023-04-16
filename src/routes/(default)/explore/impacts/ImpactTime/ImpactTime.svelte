@@ -12,7 +12,6 @@
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
-  import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import ImpactTimeChart from './ImpactTimeChart.svelte';
   import { MEAN_TEMPERATURE_UID } from '$config';
 
@@ -99,7 +98,6 @@
   props={$TEMPLATE_PROPS}
 >
   <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-    {#if impactTime.length > 1}<ColorLegend items={impactTime} />{/if}
     <ImpactTimeChart data={impactTime} unit={props.indicator.unit.uid} />
   </ChartFrame>
 </LoadingWrapper>

@@ -7,8 +7,6 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import Intro from './Intro.svelte';
 
-  let query;
-
   const sections = [
     { component: Intro },
     {
@@ -38,14 +36,18 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent bind:query>
+<ScrollContent let:query>
   <nav slot="navigation" class="flex flex-col gap-10">
     <ScenarioSelection />
     <SimpleNav {sections} />
   </nav>
   {#each sections as section}
     {#if !section.disabled}
-      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query}">
+      <section
+        id={section.slug}
+        name={section.slug}
+        class="scroll-mt-4 mb-16 {query}"
+      >
         <svelte:component this={section.component} {...section} />
       </section>
     {/if}

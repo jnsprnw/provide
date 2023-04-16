@@ -11,6 +11,8 @@
   import { scaleBand, scaleSequential } from 'd3-scale';
   import ChartTooltips from './ChartTooltips.svelte';
   import { flatMap } from 'lodash-es';
+  import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
+  import StrokeLegend from './StrokeLegend.svelte';
 
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
@@ -98,6 +100,15 @@
   $: mainChartWidth = ['w-full', 'w-10/12', 'w-9/12'][data.length - 1];
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];
 </script>
+
+<div
+  class="flex items-center"
+  class:justify-between={isMultiLine}
+  class:justify-end={!isMultiLine}
+>
+  {#if isMultiLine}<ColorLegend items={data} />{/if}
+  <StrokeLegend {colorScales} />
+</div>
 
 <div class="aspect-video flex">
   <div class:w-full={!isMultiLine} class="h-full {mainChartWidth}">
