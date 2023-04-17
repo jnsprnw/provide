@@ -16,9 +16,9 @@
 
   let GEO_SHAPE_DATA = writable({});
 
-  const geographyTypes = ($GEOGRAPHY_TYPES ?? []).filter(
+  $: geographyTypes = $GEOGRAPHY_TYPES.filter(
     (d) =>
-      ($AVAILABLE_GEOGOGRAPHIES ?? []).filter(
+      $AVAILABLE_GEOGOGRAPHIES.filter(
         (geography) => geography.geographyType === d.uid
       ).length
   );

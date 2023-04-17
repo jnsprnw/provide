@@ -26,7 +26,7 @@
   $: flatData = flattenData(asyncProps);
 
   $: loadedData = filter(flatData, (d) => d.status === STATUS_SUCCESS);
-  $: isFailed = filter(flatData, (d) => d.status === STATUS_FAILED).length;
+  $: isFailed = !!filter(flatData, (d) => d.status === STATUS_FAILED).length;
 
   // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
   $: if (currentAsyncProps) isEmpty = false;
@@ -37,7 +37,7 @@
     isLoading = false;
   }
 
-  $: if (!isLoading) {
+  $: if (!isLoading && !isFailed) {
     currentProps = props;
     currentAsyncProps = process
       ? { ...asyncProps, ...process(asyncProps, props) } // Make sure all props are part of the passed props, but allow for overwriting them

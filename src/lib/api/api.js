@@ -22,7 +22,7 @@ export const loadFromAPI = async function (url) {
     const data = await res.json();
     return data;
   } catch (e) {
-    return { data: null };
+    return null;
   }
 };
 
@@ -79,8 +79,8 @@ const fetchMultiple = (store, configs) => {
     if (typeof d.data?.then !== 'function') return;
     d.data.then((data) => {
       cache[d.url] = data
-        ? { status: STATUS_SUCCESS, data }
-        : { status: STATUS_FAILED, data };
+        ? { status: STATUS_SUCCESS, data, url: d.url }
+        : { status: STATUS_FAILED, data, url: d.url };
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -106,7 +106,9 @@ const fetchSingle = (store, { endpoint, params }) => {
     cache[url] = loadingData;
     store.set(loadingData);
     loadFromAPI(url).then((data) => {
-      cache[url] = { status: STATUS_SUCCESS, data };
+      cache[url] = data
+        ? { status: STATUS_SUCCESS, data }
+        : { status: STATUS_FAILED, data };
       store.update((d) => {
         if (d !== loadingData) return d;
         return cache[url];

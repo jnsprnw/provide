@@ -11,7 +11,6 @@
   const { data, xGet, yScale } = getContext('LayerCake');
 
   $: chartData = chartData || $data;
-  $: console.log(chartData);
 
   $: areaGen = area()
     .x((d) => $xGet(d))

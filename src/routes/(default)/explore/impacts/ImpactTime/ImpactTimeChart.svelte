@@ -32,11 +32,13 @@
   $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
 
   $: flatData = data.reduce((memo, scenario) => {
-    scenario.values.forEach(({ year, gmt, ...d }, i) => {
+    scenario.values.forEach(({ year, gmt, wlvl, ...d }, i) => {
       // Get global mean temperature of scenario in this year
       ['min', 'max', 'value'].forEach((key) => {
         memo.push({
           year,
+          gmt,
+          wlvl,
           color: scenario.color,
           value: d[key],
         });

@@ -10,7 +10,7 @@
 
 <ScrollContent>
   <NestedNav slot="navigation" {sections} />
-  <h1 class="text-5xl font-bold mb-12">Documentation</h1>
+  <h1 class="text-5xl font-bold mb-12">Glossary</h1>
   {#each sections as { sections, title, slug }}
     <section class="mb-8">
       <SectionHeadline {title} {slug} />

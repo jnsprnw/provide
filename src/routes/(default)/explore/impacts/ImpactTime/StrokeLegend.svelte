@@ -12,29 +12,31 @@
   $: spacing = height / colorScales.length;
 </script>
 
-<div class="flex items-center gap-3">
-  <div class="text-sm text-foreground-weak leading-4">
-    Global Mean Temperature
-  </div>
-  <div>
-    <svg {width} {height}>
-      {#each steps as step, i}
-        {#each colorScales as colorScale, j}
-          <line
-            x1={i * stepWidth}
-            x2={(i + 1) * stepWidth}
-            y1={j * spacing + strokeWidth}
-            y2={j * spacing + strokeWidth}
-            stroke={colorScale(step)}
-            class="stroke-3"
-          />
+{#if steps.length > 1}
+  <div class="flex items-center gap-3">
+    <div class="text-sm text-foreground-weak leading-4">
+      Global Mean Temperature
+    </div>
+    <div>
+      <svg {width} {height}>
+        {#each steps as step, i}
+          {#each colorScales as colorScale, j}
+            <line
+              x1={i * stepWidth}
+              x2={(i + 1) * stepWidth}
+              y1={j * spacing + strokeWidth}
+              y2={j * spacing + strokeWidth}
+              stroke={colorScale(step)}
+              class="stroke-3"
+            />
+          {/each}
         {/each}
-      {/each}
-    </svg>
-    <div class="flex justify-around">
-      {#each steps as step}
-        <span class="text-xs font-bold">{formatValue(step, 'degree')}</span>
-      {/each}
+      </svg>
+      <div class="flex justify-around">
+        {#each steps as step}
+          <span class="text-xs font-bold">{formatValue(step, 'degree')}</span>
+        {/each}
+      </div>
     </div>
   </div>
-</div>
+{/if}
