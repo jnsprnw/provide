@@ -13,7 +13,7 @@
       description: 'Select scenarios and explore impacts',
     },
     {
-      href: '/explore/scenarios',
+      href: '#',
       label: 'Emission Scenarios',
       description: 'Set an impact threshold and explore scenarios',
       disabled: true,
