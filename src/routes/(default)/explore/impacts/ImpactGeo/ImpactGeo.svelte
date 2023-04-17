@@ -10,6 +10,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     TEMPLATE_PROPS,
+    IS_COMBINATION_AVAILABLE,
   } from '$src/stores/state';
   import { END_GEO_SHAPE, END_IMPACT_GEO } from '$src/config.js';
   import { writable } from 'svelte/store';
@@ -31,26 +32,28 @@
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
 
-  $: fetchData(
-    IMPACT_GEO_DATA,
-    $CURRENT_SCENARIOS_UID.map((scenario) => ({
-      endpoint: END_IMPACT_GEO,
+  $: if ($IS_COMBINATION_AVAILABLE) {
+    fetchData(
+      IMPACT_GEO_DATA,
+      $CURRENT_SCENARIOS_UID.map((scenario) => ({
+        endpoint: END_IMPACT_GEO,
+        params: {
+          geography: $CURRENT_GEOGRAPHY?.uid,
+          indicator: $CURRENT_INDICATOR?.uid,
+          scenario,
+          year,
+          ...$CURRENT_INDICATOR_OPTION_VALUES,
+        },
+      }))
+    );
+
+    fetchData(GEO_SHAPE_DATA, {
+      endpoint: END_GEO_SHAPE,
       params: {
         geography: $CURRENT_GEOGRAPHY?.uid,
-        indicator: $CURRENT_INDICATOR?.uid,
-        scenario,
-        year,
-        ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
-    }))
-  );
-
-  $: fetchData(GEO_SHAPE_DATA, {
-    endpoint: END_GEO_SHAPE,
-    params: {
-      geography: $CURRENT_GEOGRAPHY?.uid,
-    },
-  });
+    });
+  }
 
   $: process = ({ data, shape }, { scenarios }) => {
     const isDoubleMap = data.length === 2;
@@ -157,24 +160,26 @@
     'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}} compared to the reference period {{indicatorOptions.reference.label}}.';
 </script>
 
-<LoadingWrapper
-  let:asyncProps
-  let:props
-  asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
-  props={{ ...$TEMPLATE_PROPS, year }}
-  {process}
-  let:isLoading
->
-  <ChartFrame
-    {title}
-    {description}
-    templateProps={props}
-    chartInfo={asyncProps.chartInfo}
+{#if $IS_COMBINATION_AVAILABLE}
+  <LoadingWrapper
+    let:asyncProps
+    let:props
+    asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
+    props={{ ...$TEMPLATE_PROPS, year }}
+    {process}
+    let:isLoading
   >
-    <svelte:fragment slot="controls">
-      <Controls scenarios={props.scenarios} bind:displayOption bind:year />
-    </svelte:fragment>
-    <Maps {...props} {...asyncProps} />
-  </ChartFrame>
-  <Spinner {isLoading} />
-</LoadingWrapper>
+    <ChartFrame
+      {title}
+      {description}
+      templateProps={props}
+      chartInfo={asyncProps.chartInfo}
+    >
+      <svelte:fragment slot="controls">
+        <Controls scenarios={props.scenarios} bind:displayOption bind:year />
+      </svelte:fragment>
+      <Maps {...props} {...asyncProps} />
+    </ChartFrame>
+    <Spinner {isLoading} />
+  </LoadingWrapper>
+{/if}

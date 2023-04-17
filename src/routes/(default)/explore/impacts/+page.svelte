@@ -6,15 +6,18 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import Intro from './Intro.svelte';
+  import { IS_COMBINATION_AVAILABLE } from '$stores/state';
+  import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
 
-  const sections = [
-    { component: Intro },
+  $: sections = [
+    { component: Intro, disabled: !$IS_COMBINATION_AVAILABLE },
     {
       slug: 'impact-time',
       title: 'Time',
       description:
         'How will the selected indicator unfold over the coming decades?',
       component: ImpactTime,
+      disabled: !$IS_COMBINATION_AVAILABLE,
     },
     {
       slug: 'impact-geo',
@@ -22,13 +25,16 @@
       description:
         'Where in the selected geography will impacts hit the hardest?',
       component: ImpactGeo,
+      disabled: !$IS_COMBINATION_AVAILABLE,
     },
     {
       slug: 'unavoidable-risk',
       title: 'Avoidable vs. Unavoidable Risks',
       description: 'How much impact can be avoided through mitigation?',
       component: UnAvoidableRisk,
+      disabled: !$IS_COMBINATION_AVAILABLE,
     },
+    { component: FallbackMessage, disabled: $IS_COMBINATION_AVAILABLE },
   ];
 </script>
 
@@ -36,7 +42,7 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent let:query>
+<ScrollContent let:query {sections}>
   <nav slot="navigation" class="flex flex-col gap-10 pr-10">
     <ScenarioSelection />
     <SimpleNav {sections} />

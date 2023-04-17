@@ -6,6 +6,7 @@
     TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
+    IS_COMBINATION_AVAILABLE,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -17,18 +18,19 @@
 
   let IMPACT_TIME_DATA = writable([]);
 
-  $: fetchData(
-    IMPACT_TIME_DATA,
-    $CURRENT_SCENARIOS_UID.map((scenario) => ({
-      endpoint: END_IMPACT_TIME,
-      params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
-        scenario,
-        ...$CURRENT_INDICATOR_OPTION_VALUES,
-      },
-    }))
-  );
+  $: $IS_COMBINATION_AVAILABLE &&
+    fetchData(
+      IMPACT_TIME_DATA,
+      $CURRENT_SCENARIOS_UID.map((scenario) => ({
+        endpoint: END_IMPACT_TIME,
+        params: {
+          geography: $CURRENT_GEOGRAPHY.uid,
+          indicator: $CURRENT_INDICATOR.uid,
+          scenario,
+          ...$CURRENT_INDICATOR_OPTION_VALUES,
+        },
+      }))
+    );
 
   $: process = ({ impactTimeData }, { scenarios }) => {
     const impactTime = impactTimeData.map((datum, i) => {
@@ -42,7 +44,7 @@
         [SOURCE]: source,
         parameters,
       } = datum.data;
-      const indicatorData = data[$CURRENT_INDICATOR_UID] || [];
+      const indicatorData = data[$CURRENT_INDICATOR_UID];
       const scenario = scenarios[i];
 
       return {
@@ -85,19 +87,21 @@
   const title = 'Development of {{indicator.label}} in {{geography.label}}';
 </script>
 
-<LoadingWrapper
-  {process}
-  let:asyncProps={{
-    impactTime,
-    chartInfo,
-  }}
-  let:props
-  asyncProps={{
-    impactTimeData: $IMPACT_TIME_DATA,
-  }}
-  props={$TEMPLATE_PROPS}
->
-  <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-    <ImpactTimeChart data={impactTime} unit={props.indicator.unit.uid} />
-  </ChartFrame>
-</LoadingWrapper>
+{#if $IS_COMBINATION_AVAILABLE}
+  <LoadingWrapper
+    {process}
+    let:asyncProps={{
+      impactTime,
+      chartInfo,
+    }}
+    let:props
+    asyncProps={{
+      impactTimeData: $IMPACT_TIME_DATA,
+    }}
+    props={$TEMPLATE_PROPS}
+  >
+    <ChartFrame {title} {description} templateProps={props} {chartInfo}>
+      <ImpactTimeChart data={impactTime} unit={props.indicator.unit.uid} />
+    </ChartFrame>
+  </LoadingWrapper>
+{/if}

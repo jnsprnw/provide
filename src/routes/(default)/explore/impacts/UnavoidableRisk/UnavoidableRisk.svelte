@@ -7,6 +7,7 @@
     TEMPLATE_PROPS,
     CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
+    IS_COMBINATION_AVAILABLE,
   } from '$stores/state.js';
   import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
@@ -28,28 +29,28 @@
   let currentThreshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
-  $: fetchData(UN_AVOIDABLE_RISK_DATA, {
-    endpoint: END_UN_AVOIDABLE_RISK,
-    params: {
-      geography: $CURRENT_GEOGRAPHY.uid,
-      indicator: $CURRENT_INDICATOR.uid,
-      ...$CURRENT_INDICATOR_OPTION_VALUES,
-    },
-  });
+  $: $IS_COMBINATION_AVAILABLE &&
+    fetchData(UN_AVOIDABLE_RISK_DATA, {
+      endpoint: END_UN_AVOIDABLE_RISK,
+      params: {
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
+      },
+    });
 
   $: process = ({ data }, { scenarios, allScenarios }) => {
-    const hasThresholds = !!data.thresholds.length;
+    const hasThresholds = data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
     }));
 
-    currentThreshold =
-      (hasThresholds && currentThreshold) || thresholds[0]?.value;
-
     const thresholdIndex = hasThresholds
-      ? data.thresholds.indexOf(currentThreshold)
+      ? data.thresholds.indexOf(data.defaultThreshold)
       : 0;
+    currentThreshold = data.thresholds[thresholdIndex];
+
     const mergedScenarios = [...scenarios, ...allScenarios];
     let processedScenarios = data.data.map((scenarioData) => {
       const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
@@ -111,38 +112,40 @@
   ];
 </script>
 
-<LoadingWrapper
-  let:props
-  let:asyncProps
-  let:isLoading
-  {process}
-  asyncProps={$UN_AVOIDABLE_RISK_DATA}
-  props={{
-    ...$TEMPLATE_PROPS,
-    allScenarios: $AVAILABLE_SCENARIOS,
-    threshold: currentThreshold,
-    legendItems,
-  }}
->
-  <ChartFrame {title} {description} templateProps={props}>
-    <div slot="controls">
-      {#if asyncProps.thresholds.length > 1}
-        <Select
-          label="Threshold"
-          options={asyncProps.thresholds}
-          bind:value={currentThreshold}
-        />
-      {/if}
-    </div>
-    <ColorLegend items={props.legendItems} />
-    <figure class="aspect-video">
-      <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
-      <figcaption class="mt-2">
-        <span class="text-xs text-foreground-weaker"
-          >To avoid overlapping of scenarios, the vertical and horizontal
-          placement of each dot might not be perfectly correct.</span
-        >
-      </figcaption>
-    </figure>
-  </ChartFrame>
-</LoadingWrapper>
+{#if $IS_COMBINATION_AVAILABLE}
+  <LoadingWrapper
+    let:props
+    let:asyncProps
+    let:isLoading
+    {process}
+    asyncProps={$UN_AVOIDABLE_RISK_DATA}
+    props={{
+      ...$TEMPLATE_PROPS,
+      allScenarios: $AVAILABLE_SCENARIOS,
+      threshold: currentThreshold,
+      legendItems,
+    }}
+  >
+    <ChartFrame {title} {description} templateProps={props}>
+      <div slot="controls">
+        {#if asyncProps.thresholds.length > 1}
+          <Select
+            label="Threshold"
+            options={asyncProps.thresholds}
+            bind:value={currentThreshold}
+          />
+        {/if}
+      </div>
+      <ColorLegend items={props.legendItems} />
+      <figure class="aspect-video">
+        <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
+        <figcaption class="mt-2">
+          <span class="text-xs text-foreground-weaker"
+            >To avoid overlapping of scenarios, the vertical and horizontal
+            placement of each dot might not be perfectly correct.</span
+          >
+        </figcaption>
+      </figure>
+    </ChartFrame>
+  </LoadingWrapper>
+{/if}

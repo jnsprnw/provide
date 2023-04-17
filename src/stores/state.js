@@ -1,6 +1,6 @@
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
-import _, { get, keyBy, map, reduce } from 'lodash-es';
+import _, { every, get, keyBy, map, reduce } from 'lodash-es';
 import { stringify } from 'qs';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { interpolateLab, piecewise } from 'd3-interpolate';
@@ -13,13 +13,18 @@ import {
   INDICATOR_PARAMETERS,
   SCENARIOS,
 } from './meta.js';
+import {
+  DEFAULT_GEOGRAPHY_UID,
+  DEFAULT_INDICATOR_UID,
+  DEFAULT_SCENARIOS_UID,
+} from '../config.js';
 
 export const IS_EMBEDED = writable(false);
 
 /*
  * INDICATOR STATE
  */
-export const CURRENT_INDICATOR_UID = writable('mean-temperature');
+export const CURRENT_INDICATOR_UID = writable(DEFAULT_INDICATOR_UID);
 
 export const CURRENT_INDICATOR = derived(
   [CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS],
@@ -107,7 +112,7 @@ export const AVAILABLE_GEOGOGRAPHIES = derived(
   }
 );
 
-export const CURRENT_GEOGRAPHY_UID = writable('DEU');
+export const CURRENT_GEOGRAPHY_UID = writable(DEFAULT_GEOGRAPHY_UID);
 
 export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
   // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
@@ -125,7 +130,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const CURRENT_SCENARIOS_UID = (() => {
-  const { subscribe, set, update } = writable(['curpol', 'gs']);
+  const { subscribe, set, update } = writable(DEFAULT_SCENARIOS_UID);
 
   return {
     subscribe,
@@ -201,6 +206,19 @@ export const ALL_PARAMETERS_SELECTED = derived(
   [CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR],
   ([geography, scenarios, indicator]) =>
     geography && scenarios.length && indicator
+);
+
+export const IS_COMBINATION_AVAILABLE = derived(
+  [CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID],
+  ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID, $CURRENT_SCENARIOS_UID]) => {
+    const geographyAvailable = $CURRENT_INDICATOR.availableGeographies.includes(
+      $CURRENT_GEOGRAPHY_UID
+    );
+    const scenariosAvailable = every($CURRENT_SCENARIOS_UID, (scenario) =>
+      $CURRENT_INDICATOR.availableScenarios.includes(scenario)
+    );
+    return geographyAvailable && scenariosAvailable;
+  }
 );
 
 export const TEMPLATE_PROPS = derived(

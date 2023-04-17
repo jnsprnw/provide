@@ -79,8 +79,8 @@ const fetchMultiple = (store, configs) => {
     if (typeof d.data?.then !== 'function') return;
     d.data.then((data) => {
       cache[d.url] = data
-        ? { status: STATUS_SUCCESS, data, url: d.url }
-        : { status: STATUS_FAILED, data, url: d.url };
+        ? { status: STATUS_SUCCESS, data }
+        : { status: STATUS_FAILED, data };
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
