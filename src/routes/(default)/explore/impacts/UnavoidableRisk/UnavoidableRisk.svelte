@@ -40,15 +40,20 @@
     });
 
   $: process = ({ data }, { scenarios, allScenarios }) => {
-    const hasThresholds = data.thresholds.length;
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
     }));
 
-    const thresholdIndex = hasThresholds
-      ? data.thresholds.indexOf(data.defaultThreshold)
-      : 0;
+    const hasThresholds = data.thresholds.length;
+    let thresholdIndex = data.thresholds.indexOf(currentThreshold);
+
+    if (thresholdIndex === -1) {
+      thresholdIndex = hasThresholds
+        ? data.thresholds.indexOf(data.defaultThreshold)
+        : 0;
+    }
+
     currentThreshold = data.thresholds[thresholdIndex];
 
     const mergedScenarios = [...scenarios, ...allScenarios];
