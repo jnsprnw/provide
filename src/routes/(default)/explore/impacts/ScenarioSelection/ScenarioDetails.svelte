@@ -14,7 +14,6 @@
         : values.map(({ year, value }) => ({ year, value })),
     };
   });
-  $: console.log(scenario);
 </script>
 
 <h3 class="text-lg font-bold">{scenario.label}</h3>

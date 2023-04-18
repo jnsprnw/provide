@@ -24,14 +24,14 @@
   $: masked = mask(geoShape);
 </script>
 
-<div class={`aspect-video bg-background-weaker flex cols-${geoData.length}`}>
+<div class={`aspect-[1.3] bg-background-weaker flex cols-${geoData.length}`}>
   {#key geoData.length}
     {#each geoData as d, i}
       <div class="relative" style={`width: ${100 / geoData.length}%`}>
         <MapProvider
           bind:map={maps[i]}
           bounds={bbox(geoShape)}
-          interactive={false}
+          interactive={true}
         >
           <DataSource data={masked}>
             <!-- <FillLayer
@@ -42,7 +42,7 @@
             <FillLayer
               before="water"
               id="mask-layer"
-              fillColor={$theme.color.background.base}
+              fillColor={$theme.color.background.weaker}
             />
           </DataSource>
           <DataSource data={d.data}>
