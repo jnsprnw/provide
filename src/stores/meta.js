@@ -32,20 +32,21 @@ export const SCENARIOS = derived(page, ($page) => {
   return ($page.data?.meta?.scenarios ?? []).map((scenarioRaw) => {
     const scenario = { ...scenarioRaw, endYear: scenarioRaw.timeframe[1] };
     SCENARIO_DATA_KEYS.forEach((key) => {
-      const { data, yearStart, yearStep, unit } = get(
-        scenarioRaw,
-        ['scenarioData', key],
-        {}
-      );
-      if (data && yearStart && yearStep) {
-        const datum = data.map((value, i) => ({
-          value,
-          year: yearStart + yearStep * i,
-        }));
-        scenario[key] = {
-          data: datum,
-          unit,
-        };
+      const { data, yearStart, yearStep, unit } = scenarioRaw[key];
+      // Some scenarios have no emissions data (data[0] = null)
+      if (data[0]) {
+        const seriesData = data.map((datum, i) => {
+          const hasRange = datum.length > 1;
+          return {
+            year: yearStart + yearStep * i,
+            value: hasRange ? datum[1] : datum,
+            min: hasRange && datum[0],
+            max: hasRange && datum[2],
+          };
+        });
+        scenario[key] = seriesData;
+      } else {
+        scenario[key] = null;
       }
     });
     return scenario;

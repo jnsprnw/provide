@@ -1,0 +1,41 @@
+<script>
+  import LineChart from '$lib/charts/CorridorChart.svelte';
+  import { MEAN_TEMPERATURE_UID } from '$config';
+
+  export let scenarios;
+  export let scenario;
+
+  $: chartData = scenarios.map((scenario) => {
+    const values = scenario[MEAN_TEMPERATURE_UID];
+    return {
+      ...scenario,
+      values: scenario.isHighlighted
+        ? values
+        : values.map(({ year, value }) => ({ year, value })),
+    };
+  });
+</script>
+
+<h3 class="text-lg font-bold">{scenario.label}</h3>
+<p class="text-foreground-weak">
+  {scenario.description || 'Description missing'}
+</p>
+{#if scenario.characteristics.length}
+  <dl
+    class="text-sm pt-4 border-t border-foreground-weaker mt-4 grid grid-cols-2 gap-x-4 gap-y-4"
+  >
+    {#each scenario.characteristics as { year, description }}
+      <div class="flex flex-col gap-y-1">
+        <dt class="block font-semibold">
+          Until <time datetime={year}>{year}</time>
+        </dt>
+        <dd>
+          <span class="text-foreground-weak">{description}</span>
+        </dd>
+      </div>
+    {/each}
+  </dl>
+  <div class="h-40">
+    <LineChart yDomain={[1, 3]} data={chartData} />
+  </div>
+{/if}

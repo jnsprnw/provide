@@ -9,19 +9,35 @@
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import _ from 'lodash-es';
   import CheckboxInput from '$lib/helper/CheckboxInput.svelte';
+  import Scenario from './Scenario.svelte';
 
-  let hoveredScenario;
-  $: renderedScenario = hoveredScenario || $CURRENT_SCENARIOS[0];
+  let hoveredScenarioUid;
+  let currentTimeframe;
 
   $: buttonLabel =
     $CURRENT_SCENARIOS.length > 1
       ? `${$CURRENT_SCENARIOS.length} scenarios selected`
       : $CURRENT_SCENARIOS[0].label;
 
-  $: scenarios = $AVAILABLE_SCENARIOS.map((scenario) => {
+  $: scenarios = $AVAILABLE_SCENARIOS.map((scenario, i) => {
     const current = $CURRENT_SCENARIOS.find((s) => s.uid === scenario.uid);
-    return { ...scenario, ...(current || {}), isSelected: !!current };
+    return {
+      ...scenario,
+      ...(current || {}),
+      isSelected: !!current,
+      isHighlighted: hoveredScenarioUid
+        ? hoveredScenarioUid === scenario.uid
+        : i === 0,
+    };
   });
+
+  $: chartScenarios = scenarios.filter(
+    (s) => s.timeframe[1] === currentTimeframe
+  );
+
+  $: renderedScenario = scenarios.find((s) => s.isHighlighted);
+
+  $: console.log(renderedScenario, hoveredScenarioUid, $CURRENT_SCENARIOS);
 </script>
 
 <div class="relative">
@@ -37,6 +53,7 @@
       filterKey="endYear"
       filterLabel="Timeframes"
       currentUid={$CURRENT_SCENARIOS_UID}
+      bind:currentFilterUid={currentTimeframe}
       items={scenarios}
     >
       <div slot="items" let:items let:currentFilterUid>
@@ -47,9 +64,9 @@
             >
               {#each items as scenario}
                 <label
-                  on:focus={() => (hoveredScenario = scenario)}
-                  on:mouseover={() => (hoveredScenario = scenario)}
-                  on:mouseleave={() => (hoveredScenario = null)}
+                  on:focus={() => (hoveredScenarioUid = scenario.uid)}
+                  on:mouseover={() => (hoveredScenarioUid = scenario.uid)}
+                  on:mouseleave={() => (hoveredScenarioUid = null)}
                   class="px-4 py-2 border-l-3"
                   class:bg-background-weaker={renderedScenario.uid ===
                     scenario.uid}
@@ -65,7 +82,7 @@
                         scenario.uid,
                         currentFilterUid
                       )}
-                    on:focus={() => (hoveredScenario = scenario)}
+                    on:focus={() => (hoveredScenarioUid = scenario)}
                   />
                   {scenario.label}
                   <span
@@ -79,29 +96,10 @@
 
           <div class="max-w-lg p-6">
             {#if renderedScenario}
-              <div>
-                <h3 class="text-lg font-bold">{renderedScenario.label}</h3>
-                <p class="text-foreground-weak">
-                  {renderedScenario.description || 'Description missing'}
-                </p>
-                {#if renderedScenario.characteristics.length}
-                  <dl
-                    class="text-sm pt-4 border-t border-foreground-weaker mt-4 grid grid-cols-2 gap-x-4 gap-y-4"
-                  >
-                    {#each renderedScenario.characteristics as { year, description }}
-                      <div class="flex flex-col gap-y-1">
-                        <dt class="block font-semibold">
-                          Until <time datetime={year}>{year}</time>
-                        </dt>
-                        <dd>
-                          <span class="text-foreground-weak">{description}</span
-                          >
-                        </dd>
-                      </div>
-                    {/each}
-                  </dl>
-                {/if}
-              </div>
+              <Scenario
+                scenario={renderedScenario}
+                scenarios={chartScenarios}
+              />
             {/if}
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { formatDefaultLocale, formatLocale } from 'd3-format';
+import { DEFAULT_FORMAT_UID } from '$src/config';
 
 export const NA_STRING = '—';
 export const FORMAT_CURRENCY = '$,.0f';
@@ -43,7 +44,7 @@ const suffixes = {
 
 export const formatValue = (
   d,
-  indicatorId,
+  indicatorId = DEFAULT_FORMAT_UID,
   { addSuffix } = { addSuffix: true }
 ) => {
   let indicator = indicatorId;

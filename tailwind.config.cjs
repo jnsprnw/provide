@@ -26,6 +26,19 @@ module.exports = {
         '2-3': '2 3',
         '1.5-3': '1.5 3',
       },
+      keyframes: {
+        'defer-visibility': {
+          '0%, 99%': {
+            opacity: 0,
+          },
+          '100%': {
+            opacity: 1,
+          },
+        },
+      },
+      animation: {
+        'defer-visibility': 'defer-visibility .5s',
+      },
     },
   },
   plugins: [

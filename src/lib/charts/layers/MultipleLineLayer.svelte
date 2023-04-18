@@ -16,9 +16,9 @@
 {#each $data as line, i}
   <path
     class={`path-line fill-none linejoin-round linecap-round`}
-    class:primary={line.color}
-    class:highlight={line.highlight}
     d={paths[i]}
-    style={`stroke: ${line.color}; stroke-width: ${strokeWidth}`}
+    style:stroke={line.color}
+    style:stroke-width={line.strokeWidth || strokeWidth}
+    style:opacity={line.opacity || 1}
   />
 {/each}

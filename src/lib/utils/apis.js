@@ -53,10 +53,10 @@ export const loadMetaData = function (svelteFetch = fetch) {
           description,
         };
       }),
-      scenarios: meta.scenarios.map((indicator) => {
+      scenarios: meta.scenarios.map((scenario) => {
         // Find the correct scenario in the list coming from Strapi
         const currentScenario = descriptionScenarios.find(
-          (d) => d.attributes.UID === indicator.uid
+          (d) => d.attributes.UID === scenario.uid
         );
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
@@ -77,7 +77,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
           .filter((d) => Boolean(d)) // Filter invalid entries
           .sort((a, b) => a.year - b.year);
         return {
-          ...indicator,
+          ...scenario,
           description,
           characteristics,
         };

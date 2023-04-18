@@ -184,6 +184,7 @@ export const AVAILABLE_SCENARIOS = derived(
     const availableScenarios = $SCENARIOS.filter((scenario) =>
       get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid)
     );
+
     return availableScenarios;
   }
 );

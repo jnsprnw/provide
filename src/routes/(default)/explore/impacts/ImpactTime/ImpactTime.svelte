@@ -53,7 +53,7 @@
         yearStep,
         parameters,
         values: indicatorData.map((values, i) => {
-          const gmt = scenario[MEAN_TEMPERATURE_UID].data[i][1];
+          const gmt = scenario[MEAN_TEMPERATURE_UID][i].value;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
           return {
             gmt,
