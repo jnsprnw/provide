@@ -94,7 +94,7 @@
             </fieldset>
           {/key}
 
-          <div class="max-w-lg p-6">
+          <div class="max-w-xl p-6 overflow-y-scroll">
             {#if renderedScenario}
               <Scenario
                 scenario={renderedScenario}

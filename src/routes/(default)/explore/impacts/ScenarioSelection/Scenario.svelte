@@ -35,7 +35,15 @@
       </div>
     {/each}
   </dl>
-  <div class="h-40">
-    <LineChart yDomain={[1, 3]} data={chartData} />
-  </div>
+  <figure class="pt-5 mt-5 border-t border-foreground-weaker">
+    <p class="text-sm font-bold">Global mean temperature in °C</p>
+    <div class="h-44">
+      <LineChart yDomain={[1, 3]} data={chartData} />
+    </div>
+    <figcaption class="text-sm text-foreground-weak">
+      Median lines correspond to best estimates. Learn more around uncertainties <a
+        href="#">here</a
+      >.
+    </figcaption>
+  </figure>
 {/if}
