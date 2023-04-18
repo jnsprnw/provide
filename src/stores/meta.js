@@ -30,7 +30,10 @@ export const GEOGRAPHIES = derived(page, ($page) => {
 
 export const SCENARIOS = derived(page, ($page) => {
   return ($page.data?.meta?.scenarios ?? []).map((scenarioRaw) => {
-    const scenario = { ...scenarioRaw, endYear: scenarioRaw.timeframe[1] };
+    const scenario = {
+      ...scenarioRaw,
+      endYear: scenarioRaw.timeframe[1],
+    };
     SCENARIO_DATA_KEYS.forEach((key) => {
       const { data, yearStart, yearStep, unit } = scenarioRaw[key];
       // Some scenarios have no emissions data (data[0] = null)

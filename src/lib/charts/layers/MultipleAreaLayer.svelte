@@ -14,7 +14,7 @@
     .y1((d) => $yScale(d[y1Key]));
 
   $: chartData = $data.filter(({ values }) =>
-    some(values, (d) => d !== undefined)
+    some(values, (d) => d.min !== undefined && d.max !== undefined)
   );
 </script>
 

@@ -2,6 +2,7 @@
   import InteractiveListItem from '$lib/controls/InteractiveListItem.svelte';
   import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
   import Tagline from '$lib/helper/Tagline.svelte';
+  import { onMount } from 'svelte';
 
   export let filters;
   export let filterKey;
@@ -14,9 +15,12 @@
   $: current = items.find(
     (d) => d.uid === currentUid || currentUid.includes(d.uid)
   );
-  $: {
+
+  // Since we don't have external state that keeps track of which filter was selected
+  // we defer the selected filter from the currently selected items
+  onMount(() => {
     currentFilterUid = current?.[filterKey] || filters[0].uid;
-  }
+  });
 
   let hoveredItem = null;
   $: detailsItem = items.find((d) => d.uid === hoveredItem) || current;
