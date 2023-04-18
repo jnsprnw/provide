@@ -9,7 +9,7 @@
     AVAILABLE_SCENARIOS,
     IS_COMBINATION_AVAILABLE,
   } from '$stores/state.js';
-  import RiskChart from '$lib/charts/RiskChart/RiskChart.svelte';
+  import UnavoidableRiskChart from './UnavoidableRiskChart/UnavoidableRiskChart.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Select from '$lib/controls/Select/Select.svelte';
@@ -143,7 +143,7 @@
       </div>
       <ColorLegend items={props.legendItems} />
       <figure class="aspect-video">
-        <RiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
+        <UnavoidableRiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
         <figcaption class="mt-2">
           <span class="text-xs text-foreground-weaker"
             >To avoid overlapping of scenarios, the vertical and horizontal

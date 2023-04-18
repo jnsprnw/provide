@@ -52,7 +52,7 @@
       <section
         id={section.slug}
         name={section.slug}
-        class="scroll-mt-4 mb-16 {query}"
+        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-foreground-weaker last:border-none"
       >
         <svelte:component this={section.component} {...section} />
       </section>

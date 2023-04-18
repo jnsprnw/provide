@@ -4,9 +4,9 @@
   import { getContext } from 'svelte';
   import { Html, LayerCake, Svg } from 'layercake';
   import { scaleBand } from 'd3-scale';
-  import AxisX from '../axes/AxisX.svelte';
-  import AxisY from '../axes/AxisY.svelte';
-  import Message from '../Message.svelte';
+  import AxisX from '$lib/charts/axes/AxisX.svelte';
+  import AxisY from '$lib/charts/axes/AxisY.svelte';
+  import Message from '$lib/charts/Message.svelte';
   import RiskLabels from './RiskLabels.svelte';
   import RiskLevels from './RiskLevels.svelte';
   import RiskRanges from './RiskRanges.svelte';

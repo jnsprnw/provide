@@ -1,5 +1,5 @@
 <script>
-  import { getContext, tick } from 'svelte';
+  import { getContext } from 'svelte';
   import { UNAVOIDABLE_UID } from '$src/config';
   import { max } from 'd3-array';
 
@@ -14,13 +14,13 @@
       label: 'Unavoidable risk even with the highest-ambition scenario',
       min: 0,
       max: unavoidableValue,
-      color: 'border-background-weaker'
+      color: 'border-background-weaker',
     },
     {
       label: 'Avoidable risk through mitigation',
       min: unavoidableValue,
       max: avoidableValue,
-      color: 'border-background-weakest'
+      color: 'border-background-weakest',
     },
   ].map((tick) => {
     const y1 = $yScale(tick.min);
@@ -39,7 +39,10 @@
 
 <div class="root ml-2">
   {#each ticks as { label, y2, height, color }, index}
-    <div class={`tick border-l-4 ${color}`} style={`top: ${y2 - (index === 0 ? -1 : 0)}px; height: ${height - 1}px;`}>
+    <div
+      class={`tick border-l-4 ${color}`}
+      style={`top: ${y2 - (index === 0 ? -1 : 0)}px; height: ${height - 1}px;`}
+    >
       <div class="tick-domain" aria-hidden="true" />
       <div class="tick-label ml-2">
         {label}

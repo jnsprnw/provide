@@ -66,17 +66,16 @@ export const loadMetaData = function (svelteFetch = fetch) {
           ['attributes', 'ScenarioCharacteristics'],
           []
         )
-          .map(({ Year: YearStr, Description: descriptionStr }) => {
-            const year = parseInt(YearStr);
+          .map(({ Year: year, Description: description }) => {
             // Check if year is valid and the description has any length
-            if (year && descriptionStr.length) {
-              return [year, descriptionStr];
+            if (year && description) {
+              return { year, description };
             } else {
               return false;
             }
           })
           .filter((d) => Boolean(d)) // Filter invalid entries
-          .sort((a, b) => a[0] - b[0]);
+          .sort((a, b) => a.year - b.year);
         return {
           ...indicator,
           description,
