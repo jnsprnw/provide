@@ -17,6 +17,19 @@
 </script>
 
 <h3 class="text-lg font-bold">{scenario.label}</h3>
+<div class="mb-4">
+  <p class="text-sm text-foreground-weak">
+    Source: <a
+      href={scenario.source.href}
+      target="_blank"
+      rel="noreferrer"
+      class="text-theme-base">{scenario.source.label}</a
+    >
+  </p>
+  <p class="text-sm text-foreground-weak mb-4">
+    Model: <span class="text-foreground-base">{scenario.model}</span>
+  </p>
+</div>
 <p class="text-foreground-weak">
   {scenario.description || 'Description missing'}
 </p>
