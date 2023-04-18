@@ -18,8 +18,10 @@ module.exports = {
         3: '3px',
       },
       strokeWidth: {
-        3: '3px',
-        4: '4px',
+        default: '1',
+        1: '1',
+        3: '3',
+        4: '4',
       },
       dashArray: {
         2: '2',

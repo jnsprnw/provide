@@ -27,18 +27,26 @@
   let currentFilterUid;
 
   $: currentFilterUid &&
-    fetchData(GEO_SHAPE_DATA, {
-      endpoint: END_GEO_SHAPE,
-      params: {
-        'geography-type': currentFilterUid,
+    fetchData(GEO_SHAPE_DATA, [
+      {
+        endpoint: END_GEO_SHAPE,
+        params: {
+          'geography-type': 'admin0',
+        },
       },
-    });
+      {
+        endpoint: END_GEO_SHAPE,
+        params: {
+          'geography-type': currentFilterUid,
+        },
+      },
+    ]);
 </script>
 
 <PopoverSelect
   label="Indicator"
   buttonLabel={$CURRENT_GEOGRAPHY?.label}
-  panelClass="w-screen max-w-3xl"
+  panelClass="w-screen max-w-4xl"
 >
   <Content
     filters={geographyTypes}
@@ -54,7 +62,7 @@
         bind:hoveredItem
         bind:currentUid={$CURRENT_GEOGRAPHY_UID}
       />
-      <div class="w-96 h-56 self-center grow">
+      <div class="w-full px-3">
         <LoadingWrapper
           let:asyncProps={{ geoShape }}
           asyncProps={{ geoShape: $GEO_SHAPE_DATA }}
@@ -62,7 +70,8 @@
         >
           <Map
             hovered={hoveredItem}
-            data={geoShape.data.data}
+            baseLayer={geoShape[0].data.data}
+            dataLayer={geoShape[1].data.data}
             selected={$CURRENT_GEOGRAPHY_UID}
           />
         </LoadingWrapper>

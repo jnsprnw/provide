@@ -157,7 +157,7 @@
     'Change in {{indicator.label}} in {{geography.label}} in {{year}}';
 
   const description =
-    'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}} compared to the reference period {{indicatorOptions.reference.label}}.';
+    'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}}.';
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}

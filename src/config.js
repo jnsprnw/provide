@@ -27,9 +27,9 @@ export const HOT_EXTREME_UID = 'hot-extreme';
 export const PRESENT_DAY_UID = 'present-day';
 export const UNAVOIDABLE_UID = 'unavoidable';
 
-export const DEFAULT_INDICATOR_UID = 'mean-temperature';
-export const DEFAULT_GEOGRAPHY_UID = 'DEU';
-export const DEFAULT_SCENARIOS_UID = ['curpol', 'gs'];
+export const DEFAULT_INDICATOR_UID = 'urban-daily-mean-max'; //'mean-temperature';
+export const DEFAULT_GEOGRAPHY_UID = 'berlin';
+export const DEFAULT_SCENARIOS_UID = ['ssp119']; //['curpol', 'gs'];
 
 // TODO: Not sure if this is the best place for these options since they are not global
 export const IMPACT_GEO_YEARS = [

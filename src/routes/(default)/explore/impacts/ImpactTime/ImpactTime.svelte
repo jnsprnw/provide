@@ -81,7 +81,7 @@
   };
 
   const description = `This graph shows how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
-  {{geography.label}} compared to the reference period {{indicatorOptions.reference.label}}, according to the selected scenario. The line indicates 
+  {{geography.label}}, according to the selected scenario. The line indicates 
   the median estimate for this scenario`;
 
   const title = 'Development of {{indicator.label}} in {{geography.label}}';

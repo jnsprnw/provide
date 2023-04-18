@@ -23,7 +23,7 @@
 
 {#each scenariosByCategory as category}
   {#if category.scenarios.length}
-    <Tagline class="px-4 mt-3">{category.label}</Tagline>
+    <Tagline class="px-4 mt-3 whitespace-nowrap">{category.label}</Tagline>
   {/if}
   {#each category.scenarios as scenario}
     <!-- svelte-ignore a11y-label-has-associated-control -->

@@ -6,8 +6,10 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import Intro from './Intro.svelte';
-  import { IS_COMBINATION_AVAILABLE } from '$stores/state';
+  import { IS_COMBINATION_AVAILABLE, CURRENT_INDICATOR } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
+
+  $: console.log($CURRENT_INDICATOR);
 
   $: sections = [
     { component: Intro, disabled: !$IS_COMBINATION_AVAILABLE },

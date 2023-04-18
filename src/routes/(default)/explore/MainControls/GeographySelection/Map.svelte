@@ -1,43 +1,64 @@
 <script>
-  import { get, isEmpty, map } from 'lodash-es';
-  import { geoPath, geoEqualEarth } from 'd3-geo';
+  import { geoPath, geoEqualEarth, geoArea, geoCentroid } from 'd3-geo';
   import { UID_WORLD } from '$src/config.js';
   import { rewind } from '$lib/utils/geo';
+  import { geoGraticule } from 'd3-geo';
+  import { point } from '@turf/helpers';
+  import { every } from 'lodash-es';
 
   export let hovered;
   export let selected;
-  export let data;
+  export let dataLayer;
+  export let baseLayer;
 
   // Default sizes. Will be changed later
   let width = 100;
   let height = 50;
 
-  $: rewoundData = rewind(data);
+  $: rewoundData = rewind(dataLayer);
+  $: rewoundBaseLayer = rewind(baseLayer);
 
-  // Aspect ratio is 1:1.5
-  const ratio = 2;
-
-  $: size = Math.min(width, height * ratio);
-
-  // Set the viewbox based on the size
-  $: viewBox = `0 0 ${size} ${size / ratio}`;
+  const graticuleGenerator = geoGraticule();
 
   $: projection = geoEqualEarth()
     .rotate([0, 0])
     .precision(0.1)
-    .fitSize([width, height], rewoundData);
+    .fitSize([width, height], graticuleGenerator.outline());
+
+  $: graticuleLines = graticuleGenerator.lines().map(project);
+  $: graticuleOutline = project(graticuleGenerator.outline());
 
   // Build map projection function
-  $: mapProjection = geoPath().projection(projection);
+  $: project = geoPath().pointRadius(2.5).projection(projection);
 
   // Loop over each country shape
-  $: countries = rewoundData.features.map((country, i) => ({
-    code: country.properties.uid,
-    d: mapProjection(country),
-  }));
+  $: dataLayerShapes = rewoundData.features.map((feature, i) => {
+    const area = project.area(feature);
+    let shape = feature;
+    if (area < 8) {
+      shape = point(geoCentroid(feature), feature.properties);
+    }
+    const { uid } = feature.properties;
 
-  $: selectedCountry = countries.find(({ code }) => code === selected);
-  $: hoveredCountry = countries.find(({ code }) => code === hovered);
+    if (uid === hovered || uid === selected) project.pointRadius(5);
+    else project.pointRadius(2.5);
+    return {
+      uid,
+      type: shape.geometry.type,
+      d: project(shape),
+    };
+  });
+
+  $: pointsOnly = every(dataLayerShapes, (d) => d.type === 'Point');
+
+  $: baseLayerShapes = rewoundBaseLayer.features.map((feature, i) => {
+    return {
+      d: project(feature),
+    };
+  });
+
+  $: selectedFeature = dataLayerShapes.find(({ uid }) => uid === selected);
+  $: hoveredFeature = dataLayerShapes.find(({ uid }) => uid === hovered);
 </script>
 
 <figure
@@ -49,35 +70,59 @@
   <svg
     {width}
     {height}
-    class="vis"
-    {viewBox}
-    preserveAspectRatio="xMinYMin meet"
+    class="vis overflow-visible"
     aria-describedby="map-description"
     role="group"
     fill="currentColor"
   >
     <g>
-      <g role="list">
-        {#each countries as country}
-          <path
-            d={country.d}
-            class="fill-background-weakest stroke-background-base stroke-[0.5]"
-            class:fill-theme-weaker={selected === UID_WORLD}
-            class:fill-theme-base={hovered === UID_WORLD}
-          />
-        {/each}
-      </g>
-      <g role="list">
-        {#if hoveredCountry}
-          <path d={hoveredCountry.d} class="fill-foreground-weaker" />
-        {/if}
-      </g>
-      <g role="list">
-        {#if selectedCountry}
-          <path d={selectedCountry.d} class="fill-theme-base" />
-        {/if}
-      </g>
+      {#each graticuleLines as line}
+        <path
+          d={line}
+          class="stroke-foreground-weakest fill-none stroke-[0.5]"
+        />
+      {/each}
     </g>
+    <g role="list">
+      {#each baseLayerShapes as shape}
+        <path
+          d={shape.d}
+          class="fill-background-weakest stroke-background-base stroke-[0.5]"
+        />
+      {/each}
+    </g>
+    <g role="list">
+      {#each dataLayerShapes as shape}
+        <path
+          d={shape.d}
+          class:fill-foreground-weaker={pointsOnly}
+          class:fill-background-weakest={!pointsOnly}
+          class="stroke-background-base stroke-[0.5]"
+          class:fill-theme-weaker={selected === UID_WORLD}
+          class:fill-theme-base={hovered === UID_WORLD}
+        />
+      {/each}
+    </g>
+    <g role="list">
+      {#if hoveredFeature}
+        <path
+          d={hoveredFeature.d}
+          class="fill-foreground-weak stroke-background-base stroke-1"
+        />
+      {/if}
+    </g>
+    <g role="list">
+      {#if selectedFeature}
+        <path
+          d={selectedFeature.d}
+          class="fill-theme-base stroke-background-base stroke-1"
+        />
+      {/if}
+    </g>
+    <path
+      d={graticuleOutline}
+      class="stroke-foreground-weak stroke-1 fill-none linejoin-round"
+    />
     <desc id="map-description">TODO</desc>
   </svg>
 </figure>
