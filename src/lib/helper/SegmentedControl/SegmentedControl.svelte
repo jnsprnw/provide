@@ -43,7 +43,7 @@
 </div>
 
 <style lang="postcss">
-  @import '../../../styles/global.scss';
+  /* @import '../../../styles/global.scss';
 
   .root {
     display: flex;
@@ -85,5 +85,5 @@
     color: var(--color-text-base);
     padding: 0.4em 0.3em;
     box-shadow: inset 0 -2px 0 var(--color-foreground-weakest);
-  }
+  } */
 </style>
