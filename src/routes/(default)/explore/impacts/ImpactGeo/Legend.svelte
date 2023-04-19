@@ -37,26 +37,36 @@
   })();
 </script>
 
-<div class="root">
-  <span class="tick-label">Below<br />{formatValue(domain[0], unit.uid)}</span>
+<div class="flex items-center">
+  <span class="text-xs text-foreground-weak leading-3 text-end"
+    >Below<br /><span class="text-foreground-base font-bold"
+      >{formatValue(domain[0], unit.uid)}</span
+    ></span
+  >
   <div
-    class="canvas-wrapper"
+    class="w-40 h-5 my-5 mx-1"
     bind:clientWidth={width}
     bind:clientHeight={height}
   >
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
-      <span style={`left: ${xScale(tick)}px;`} class="tick"
-        ><span class="tick-label">{formatValue(tick, unit.uid)}</span></span
+      <span
+        style={`left: ${xScale(tick)}px; top: ${-height / 2}px`}
+        class="absolute -translate-x-1/2"
+        ><span class="text-xs text-background-base font-bold"
+          >{formatValue(tick, unit.uid)}</span
+        ></span
       >
     </div>
   </div>
-  <span class="tick-label"
-    >Above<br />{formatValue(domain[domain.length - 1], unit.uid)}</span
+  <span class="text-xs text-foreground-weak leading-3"
+    >Above<br /><span class="text-foreground-base font-bold"
+      >{formatValue(domain[domain.length - 1], unit.uid)}</span
+    ></span
   >
 </div>
 
-<style lang="postcss">
+<!-- <style lang="postcss">
   .root {
     display: flex;
     align-items: center;
@@ -97,4 +107,4 @@
       text-align: right;
     }
   }
-</style>
+</style> -->
