@@ -1,11 +1,13 @@
 <script>
   import { formatValue } from '$lib/utils/formatting';
 
-  import { rgb } from 'd3-color';
+  import { rgb, hsl } from 'd3-color';
   import { scaleLinear } from 'd3-scale';
+  import { getContext } from 'svelte';
 
   export let scale;
   export let unit;
+  const theme = getContext('theme');
 
   let canvas;
   let width;
@@ -23,6 +25,15 @@
   $: colorScale = scaleLinear().domain(xRange).range(range);
   $: xScale = scaleLinear().domain(domain).range(xRange);
   $: tick = isSequential ? [domain[0] + domainDelta / 2] : [0];
+  $: tickX = xScale(tickX);
+  $: colorAtTick = colorScale(tickX);
+
+  function getContrastColor(background, color1, color2) {
+    const c1 = hsl(color1).l;
+    const c2 = hsl(color2).l;
+    const b = hsl(background).l;
+    return Math.abs(b - c1) > Math.abs(b - c2) ? color1 : color2;
+  }
 
   $: (async () => {
     if (canvas) {
@@ -30,11 +41,12 @@
       await ctx.clearRect(0, 0, width, height);
 
       for (let x = domain[0]; x < width; x++) {
-        ctx.fillStyle = rgb(colorScale(x)).hex();
+        ctx.fillStyle = colorScale(x);
         ctx.fillRect(x, 0, 1, height);
       }
     }
   })();
+  //
 </script>
 
 <div class="flex items-center">
@@ -44,18 +56,21 @@
     ></span
   >
   <div
-    class="w-40 h-5 my-5 mx-1"
+    class="w-40 h-5 my-5 mx-1.5"
     bind:clientWidth={width}
     bind:clientHeight={height}
   >
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
       <span
-        style={`left: ${xScale(tick)}px; top: ${-height / 2}px`}
-        class="absolute -translate-x-1/2"
-        ><span class="text-xs text-background-base font-bold"
-          >{formatValue(tick, unit.uid)}</span
-        ></span
+        style={`left: ${xScale(tick)}px;`}
+        style:color={getContrastColor(
+          colorAtTick,
+          $theme.color.background.base,
+          $theme.color.foreground.base
+        )}
+        class="absolute text-xs text-background-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
+        >{formatValue(tick, unit.uid)}</span
       >
     </div>
   </div>
@@ -65,46 +80,3 @@
     ></span
   >
 </div>
-
-<!-- <style lang="postcss">
-  .root {
-    display: flex;
-    align-items: center;
-  }
-  .canvas-wrapper {
-    height: 15px;
-    width: 250px;
-    margin: 0 var(--space-xxs);
-    position: relative;
-  }
-  .tick {
-    position: absolute;
-    top: 0;
-    font-size: var(--font-size-s);
-    height: 100%;
-
-    .tick-label {
-      transform: translate(-50%, 100%);
-      height: 100%;
-      display: inline-block;
-    }
-
-    &:before {
-      content: '';
-      left: 0.5px;
-      height: 100%;
-      border-right: 1px solid rgba(white, 0.6);
-      position: absolute;
-      top: 0;
-    }
-  }
-  .tick-label {
-    font-size: var(--font-size-s);
-    color: var(--color-text-weaker);
-    line-height: var(--font-line-height-tightest);
-
-    &:first-child {
-      text-align: right;
-    }
-  }
-</style> -->

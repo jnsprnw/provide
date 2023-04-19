@@ -31,6 +31,13 @@
     return id === 'light' ? c.l < 0.7 : c.l > 0.4;
   };
 
+  $: getContrastColor = (background, color1, color2) => {
+    const c1 = hsl(color).l;
+    const c2 = hsl(color).l;
+    const b = hsl(background).l;
+    return b - c1 > b - c2 ? color1 : color2;
+  };
+
   $: {
     if (!id) {
       if (browser) {

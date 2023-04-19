@@ -1,7 +1,6 @@
 <script>
   import mask from '@turf/mask';
   import syncMaps from '@mapbox/mapbox-gl-sync-move';
-  import FillLayer from '$lib/MapboxMap/FillLayer.svelte';
   import Legend from './Legend.svelte';
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
   import DataSource from '$lib/MapboxMap/DataSource.svelte';
