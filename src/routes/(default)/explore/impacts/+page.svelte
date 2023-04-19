@@ -9,8 +9,6 @@
   import { IS_COMBINATION_AVAILABLE, CURRENT_INDICATOR } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
 
-  $: console.log($CURRENT_INDICATOR);
-
   $: sections = [
     { component: Intro, disabled: !$IS_COMBINATION_AVAILABLE },
     {

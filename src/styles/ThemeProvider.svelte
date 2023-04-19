@@ -17,8 +17,8 @@
 
   $: mapStyle =
     id === 'light'
-      ? 'mapbox://styles/flaviogortana/cl441r0ed007014pl9ap5a52a'
-      : 'mapbox://styles/flaviogortana/cl441r0ed007014pl9ap5a52a';
+      ? import.meta.env.VITE_MAPBOX_STYLE_LIGHT
+      : import.meta.env.VITE_MAPBOX_STYLE_LIGHT;
 
   $: makeTextColor = (color, factor = 0.2) => {
     const c = hsl(color);

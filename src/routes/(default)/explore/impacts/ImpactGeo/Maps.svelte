@@ -7,6 +7,8 @@
   import DataSource from '$lib/MapboxMap/DataSource.svelte';
   import bbox from '@turf/bbox';
   import { getContext } from 'svelte';
+  import FilterLayer from '$lib/MapboxMap/FilterLayer.svelte';
+  import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
 
   export let geoData;
   export let geoShape;
@@ -41,14 +43,25 @@
               id="mask-layer"
               fillColor={$theme.color.background.weaker}
             /> -->
-            <FillLayer
-              before="water"
-              id="mask-layer"
-              fillColor={$theme.color.background.weaker}
+            <PolygonLayer
+              before="settlement-minor-label"
+              fillColor={$theme.color.background.base}
+              fill={true}
+              lineWidth={0.5}
+              lineColor={$theme.color.foreground.base}
             />
+            <PolygonLayer
+              before="settlement-minor-label"
+              lineWidth={3}
+              lineOffset={1.5}
+              lineOpacity={0.07}
+              lineColor={$theme.color.foreground.base}
+            />
+            <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+            <FilterLayer layer="settlement-major-label" geo={geoShape} />
           </DataSource>
           <DataSource data={d.data}>
-            <FillLayer before="mask-layer" />
+            <PolygonLayer fill={true} line={false} before="building" />
           </DataSource>
         </MapProvider>
         {#if d.label}

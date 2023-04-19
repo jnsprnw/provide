@@ -70,8 +70,8 @@
         >
           <Map
             hovered={hoveredItem}
-            baseLayer={geoShape[0].data.data}
-            dataLayer={geoShape[1].data.data}
+            baseLayer={geoShape[0].data}
+            dataLayer={geoShape[1].data.data || geoShape[1].data}
             selected={$CURRENT_GEOGRAPHY_UID}
           />
         </LoadingWrapper>
