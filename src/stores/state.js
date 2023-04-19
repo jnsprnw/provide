@@ -137,23 +137,33 @@ export const CURRENT_SCENARIOS_UID = (() => {
     update,
     set,
     toggle: (id, timeframe) =>
-      update((selectedIds) => {
+      update((selectedUids) => {
         const scenarios = getStore(DICTIONARY_SCENARIOS);
+        const availableScenarios = getStore(AVAILABLE_SCENARIOS);
+        const availableScenariosUids = availableScenarios.map((d) => d.uid);
+        // Make sure we only keep the scenarios that are actually available. Otherwise we might
+        // prevent the selection of a new scenario if the three selected are not available
+        const availableSelected = selectedUids.filter((uid) =>
+          availableScenariosUids.includes(uid)
+        );
         // Find current timeframe to see if the timeframe changed
-        const currentTimeframe = scenarios[selectedIds[0]].timeframe[1];
+        const currentTimeframe = scenarios[availableSelected[0]]?.timeframe[1];
         const timeframeChanged = currentTimeframe !== timeframe;
         // If timeframe changed we want to remove all the old scenarios
         if (timeframeChanged) return [id];
 
         // Check if the id is already in the array
-        if (selectedIds.includes(id) && selectedIds.length > 1) {
+        if (availableSelected.includes(id) && availableSelected.length > 1) {
           // Remove the id from the array
-          return selectedIds.filter((selectedId) => selectedId !== id);
-        } else if (!selectedIds.includes(id) && selectedIds.length < 3) {
+          return availableSelected.filter((selectedId) => selectedId !== id);
+        } else if (
+          !availableSelected.includes(id) &&
+          availableSelected.length < 3
+        ) {
           // Add the id to the array if the limit is not reached
-          return [...selectedIds, id];
+          return [...availableSelected, id];
         } else {
-          return selectedIds;
+          return availableSelected;
         }
       }),
   };

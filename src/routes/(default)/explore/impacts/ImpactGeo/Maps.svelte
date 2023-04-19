@@ -24,7 +24,9 @@
   $: masked = mask(geoShape);
 </script>
 
-<div class={`aspect-[1.3] bg-background-weaker flex cols-${geoData.length}`}>
+<Legend unit={indicator.unit} scale={colorScale} />
+
+<div class={`aspect-[1.3] flex gap-2 cols-${geoData.length}`}>
   {#key geoData.length}
     {#each geoData as d, i}
       <div class="relative" style={`width: ${100 / geoData.length}%`}>
@@ -59,8 +61,4 @@
       </div>
     {/each}
   {/key}
-</div>
-
-<div class="legend">
-  <Legend unit={indicator.unit} scale={colorScale} />
 </div>
