@@ -10,6 +10,7 @@
         {href}
         loc="location"
         let:isActive
+        {disabled}
         class="flex flex-col min-w-[200px] max-w-min pb-3"
         activeClass="border-b-4 border-theme-base"
       >

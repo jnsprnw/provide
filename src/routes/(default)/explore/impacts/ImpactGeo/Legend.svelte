@@ -56,7 +56,7 @@
     ></span
   >
   <div
-    class="w-40 h-5 my-5 mx-1.5"
+    class="w-40 h-[16px] my-5 mx-1.5"
     bind:clientWidth={width}
     bind:clientHeight={height}
   >
@@ -70,8 +70,12 @@
           $theme.color.foreground.base
         )}
         class="absolute text-xs text-background-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
-        >{formatValue(tick, unit.uid)}</span
-      >
+        >{formatValue(tick, unit.uid)}
+        <!-- <span
+          class="absolute bottom-0 w-[1px] bg-background-base/40 whitespace-nowrap left-1/2 inline-block h-full"
+        /></span
+      > -->
+      </span>
     </div>
   </div>
   <span class="text-xs text-foreground-weak leading-3"

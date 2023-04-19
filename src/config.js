@@ -36,6 +36,7 @@ export const DEFAULT_GEOGRAPHY_UID = 'DEU';
 export const DEFAULT_SCENARIOS_UID = ['curpol'];
 
 // TODO: Not sure if this is the best place for these options since they are not global
+export const DEFAULT_IMPACT_GEO_YEAR = '2030';
 export const IMPACT_GEO_YEARS = [
   {
     uid: '2030',
@@ -49,15 +50,23 @@ export const IMPACT_GEO_YEARS = [
     uid: '2100',
     label: '2100',
   },
+  {
+    uid: '2200',
+    label: '2200',
+  },
+  {
+    uid: '2300',
+    label: '2300',
+  },
 ];
 
 export const IMPACT_GEO_DISPLAY_OPTIONS = [
   {
     label: 'Difference',
-    value: 'difference',
+    uid: 'difference',
   },
   {
     label: 'Side by side',
-    value: 'side-by-side',
+    uid: 'side-by-side',
   },
 ];

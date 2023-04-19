@@ -16,6 +16,8 @@
 <a
   class={`${clazz} ${isActive && activeClass}`}
   {href}
+  class:pointer-events-none={disabled}
+  class:opacity-40={disabled}
   aria-current={ariaLabel}
   aria-disabled={disabled}><slot {isActive} /></a
 >

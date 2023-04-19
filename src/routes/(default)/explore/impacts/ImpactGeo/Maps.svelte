@@ -8,6 +8,7 @@
   import { getContext } from 'svelte';
   import FilterLayer from '$lib/MapboxMap/FilterLayer.svelte';
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
+  import InteractivityOverlay from './InteractivityOverlay.svelte';
 
   export let geoData;
   export let geoShape;
@@ -23,19 +24,20 @@
   }
 
   $: masked = mask(geoShape);
+  let interactive = false;
 </script>
 
-<Legend unit={indicator.unit} scale={colorScale} />
+<div class="flex items-center justify-end">
+  <Legend unit={indicator.unit} scale={colorScale} />
+</div>
 
-<div class={`aspect-[1.3] flex gap-2 cols-${geoData.length}`}>
+<div
+  class={`aspect-[1.3] flex gap-2 cols-${geoData.length} relative animate-defer-visibility`}
+>
   {#key geoData.length}
     {#each geoData as d, i}
       <div class="relative" style={`width: ${100 / geoData.length}%`}>
-        <MapProvider
-          bind:map={maps[i]}
-          bounds={bbox(geoShape)}
-          interactive={true}
-        >
+        <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive}>
           <DataSource data={masked}>
             <!-- <FillLayer
               before={null}
@@ -65,7 +67,7 @@
         </MapProvider>
         {#if d.label}
           <div
-            class="absolute top-3 left-3 bg-background-base text-sm text-foreground-weak"
+            class="absolute top-3 left-1/2 -translate-x-1/2 bg-background-base/70 px-2 rounded-full text-sm text-foreground-base whitespace-nowrap font-bold"
           >
             {d.label}
           </div>
@@ -73,4 +75,5 @@
       </div>
     {/each}
   {/key}
+  <InteractivityOverlay bind:interactive />
 </div>

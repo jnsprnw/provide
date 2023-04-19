@@ -21,7 +21,7 @@
 
   const theme = getContext('theme');
 
-  let ready = writable(false);
+  export let ready = writable(false);
   let mapReady = writable(false);
   let map = writable(null);
   let stylesReady = writable(false);
@@ -81,6 +81,20 @@
         $ready = true;
       }, 1000);
     }
+  }
+
+  $: if ($ready) {
+    [
+      'scrollZoom',
+      'boxZoom',
+      'dragRotate',
+      'dragPan',
+      'keyboard',
+      'doubleClickZoom',
+      'touchZoomRotate',
+    ].map((handler) =>
+      interactive ? $map[handler].enable() : $map[handler].disable()
+    );
   }
 
   // $: if (($ready, $stylesReady)) {

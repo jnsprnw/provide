@@ -8,8 +8,15 @@
     CURRENT_SCENARIOS_UID,
     TEMPLATE_PROPS,
     IS_COMBINATION_AVAILABLE,
+    CURRENT_SCENARIOS,
   } from '$src/stores/state';
-  import { END_GEO_SHAPE, END_IMPACT_GEO } from '$src/config.js';
+  import {
+    IMPACT_GEO_YEARS,
+    IMPACT_GEO_DISPLAY_OPTIONS,
+    END_GEO_SHAPE,
+    END_IMPACT_GEO,
+    DEFAULT_IMPACT_GEO_YEAR,
+  } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -24,10 +31,21 @@
   } from './utils.js';
 
   let displayOption = 'side-by-side';
-  let year = '2030';
+  let year = DEFAULT_IMPACT_GEO_YEAR;
 
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
+
+  $: {
+    // Reset year if the currently selected one is not available
+    year =
+      $CURRENT_SCENARIOS[0].timeframe[1] <= year
+        ? year
+        : DEFAULT_IMPACT_GEO_YEAR;
+  }
+  $: availableYears = IMPACT_GEO_YEARS.filter(
+    (year) => year.uid <= $CURRENT_SCENARIOS[0].timeframe[1]
+  );
 
   $: if ($IS_COMBINATION_AVAILABLE) {
     fetchData(
@@ -127,7 +145,13 @@
       chartInfo={asyncProps.chartInfo}
     >
       <svelte:fragment slot="controls">
-        <Controls scenarios={props.scenarios} bind:displayOption bind:year />
+        <Controls
+          scenarios={props.scenarios}
+          yearOptions={availableYears}
+          displayOptions={IMPACT_GEO_DISPLAY_OPTIONS}
+          bind:displayOption
+          bind:year
+        />
       </svelte:fragment>
       <Maps {...props} {...asyncProps} />
     </ChartFrame>

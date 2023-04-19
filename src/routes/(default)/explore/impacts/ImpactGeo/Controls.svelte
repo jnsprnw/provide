@@ -1,19 +1,22 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
-  import SegmentedControl from '$lib/helper/SegmentedControl/SegmentedControl.svelte';
-  import { IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS } from '$src/config.js';
+  import SegmentedControl from '$lib/controls/SegmentedControl/SegmentedControl.svelte';
 
   export let displayOption;
+  export let displayOptions;
+  export let yearOptions;
   export let scenarios;
   export let year;
 </script>
 
-<div class="flex gap-2">
+<div class="flex gap-6">
   {#if scenarios.length === 2}
-    <SegmentedControl
-      options={IMPACT_GEO_DISPLAY_OPTIONS}
-      bind:value={displayOption}
-    />
+    <SegmentedControl options={displayOptions} bind:value={displayOption} />
   {/if}
-  <Select options={IMPACT_GEO_YEARS} bind:value={year} label="Year" />
+  <Select
+    options={yearOptions}
+    bind:value={year}
+    label="Year"
+    borderColor="border-foreground-weakest"
+  />
 </div>

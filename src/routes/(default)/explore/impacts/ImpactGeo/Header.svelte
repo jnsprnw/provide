@@ -1,7 +1,7 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
-  import SegmentedControl from '$lib/helper/SegmentedControl/SegmentedControl.svelte';
+  import SegmentedControl from '$lib/controls/SegmentedControl/SegmentedControl.svelte';
   import ChartFacts from '$lib/helper/chart-description/ChartFacts.svelte';
   import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
   import SpatialResolutionList from '$lib/helper/chart-description/SpatialResolutionList.svelte';

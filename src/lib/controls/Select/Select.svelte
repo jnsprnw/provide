@@ -9,6 +9,9 @@
   export let value;
   export let label;
   export let uid;
+  export let borderColor = 'border-transparent';
+  export let backgroundColor = 'bg-transparent';
+  export let labelColor = 'text-theme-base';
 
   const dispatch = createEventDispatcher();
 
@@ -24,7 +27,7 @@
 <div class="flex gap-1 items-center">
   <label class="text-foreground-weak text-sm" for={selectId}>{label}</label>
   <select
-    class="p-0 text-sm bg-transparent text-theme-base font-bold"
+    class={`p-0 text-sm font-bold border py-1.5 px-5 after:content-['▾'] appearance-none ${backgroundColor} ${borderColor} ${labelColor}`}
     id={selectId}
     bind:value
     on:change={handleChange}
