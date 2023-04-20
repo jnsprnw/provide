@@ -4,6 +4,8 @@ Live **development** version: [`https://stellular-kashata-43537c.netlify.app/exp
 
 Live **production** version: [`https://sparkling-palmier-e94c2b.netlify.app/`](https://sparkling-palmier-e94c2b.netlify.app/).
 
+Live **staging** version: [`https://sprightly-lolly-2c7b5a.netlify.app`](https://sprightly-lolly-2c7b5a.netlify.app).
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:

@@ -1,19 +1,16 @@
 import preprocess from 'svelte-preprocess';
-// import adapter from "@sveltejs/adapter-auto";
-import adapter from '@sveltejs/adapter-static';
+
+import adapterNetlify from '@sveltejs/adapter-netlify';
+import adapterStatic from '@sveltejs/adapter-static';
+
+const isStatic = process.env.BUILD_ENV === 'static';
+const adapter = isStatic ? adapterStatic : adapterNetlify;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
   kit: {
     adapter: adapter(),
   },
-
-  vitePlugin: {
-    experimental: {
-      inspector: { toggleKeyCombo: 'alt-shift', holdMode: true },
-    },
-  },
-
   preprocess: [
     preprocess({
       postcss: true,
