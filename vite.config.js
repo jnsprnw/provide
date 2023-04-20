@@ -24,7 +24,7 @@ const config = {
   },
   build: {
     commonjsOptions: {
-      transformMixedEsModules: true,
+      transformMixedEsModules: true, // Used for squirelly. Solution for this https://github.com/squirrellyjs/squirrelly/issues/240#issuecomment-1484990567
     },
   },
 };
