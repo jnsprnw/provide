@@ -11,16 +11,14 @@
     interpolate: /\{\{(.+?)\}\}/g,
     evaluate: /\{\{=(.+?)\}\}/g,
   };
-
-  $: isEmbed = ($page.route.id || '').startsWith('/embed');
 </script>
 
 <HtmlHead />
 
 <ThemeProvider>
-  {#if !isEmbed}<Header />{/if}
+  <Header />
   <main>
     <slot />
   </main>
-  {#if !isEmbed}<Footer />{/if}
+  <Footer />
 </ThemeProvider>
