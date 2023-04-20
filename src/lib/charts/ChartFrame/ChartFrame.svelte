@@ -33,10 +33,10 @@
 >
   <header class="mb-4 max-w-2xl">
     <h3 class="font-bold text-2xl mb-2">
-      <Template template={title} data={templateProps} />
+      <!-- <Template template={title} data={templateProps} /> -->
     </h3>
     <p class="leading-relaxed mb-4">
-      <Template template={description} data={templateProps} />
+      <!-- <Template template={description} data={templateProps} /> -->
     </p>
     <slot name="controls" />
   </header>
