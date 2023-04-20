@@ -45,14 +45,15 @@
               fillColor={$theme.color.background.weaker}
             /> -->
             <PolygonLayer
-              before="settlement-minor-label"
-              fillColor={$theme.color.background.base}
+              before="ocean-fill"
+              fillColor={'#fafafa'}
               fill={true}
+              fillId="mask"
               lineWidth={0.5}
               lineColor={$theme.color.foreground.base}
             />
             <PolygonLayer
-              before="settlement-minor-label"
+              before="ocean-fill"
               lineWidth={3}
               lineOffset={1.5}
               lineOpacity={0.07}
@@ -62,7 +63,7 @@
             <FilterLayer layer="settlement-major-label" geo={geoShape} />
           </DataSource>
           <DataSource data={d.data}>
-            <PolygonLayer fill={true} line={false} before="building" />
+            <PolygonLayer fill={true} line={false} before="mask" />
           </DataSource>
         </MapProvider>
         {#if d.label}

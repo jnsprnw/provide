@@ -6,10 +6,17 @@
   export let geo;
 
   $: {
-    const prevFilters = $map
-      .getFilter(layer)
-      .filter((filter) => filter[0] !== 'within');
+    if ($map.getLayer(layer)) {
+      const prevFilters = $map
+        .getFilter(layer)
+        ?.filter((filter) => filter[0] !== 'within');
+      const nextFilter = prevFilters
+        ? [...prevFilters, ['within', geo]]
+        : ['within', geo];
 
-    $map.setFilter(layer, [...prevFilters, ['within', geo]]);
+      $map.setFilter(layer, nextFilter);
+    } else {
+      console.log(layer, 'layer not found');
+    }
   }
 </script>
