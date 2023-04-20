@@ -7,5 +7,5 @@
 </script>
 
 {#each data as d}
-  <TriggerPoints data={d} content={renderTemplate(tooltipTemplate, d)} />
+  <TriggerPoints data={d} content={`<strong>Test</strong>`} />
 {/each}
