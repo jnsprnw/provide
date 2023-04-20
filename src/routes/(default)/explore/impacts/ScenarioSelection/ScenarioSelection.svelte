@@ -7,7 +7,6 @@
   } from '$stores/state.js';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
-  import _ from 'lodash-es';
   import ScenarioDetails from './ScenarioDetails.svelte';
   import ScenarioList from './ScenarioList.svelte';
 
@@ -45,6 +44,7 @@
     panelClass="w-screen max-w-4xl"
     buttonClass="border border-foreground-weakest"
     size="md"
+    panelPlacement="right-start"
   >
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
@@ -54,6 +54,15 @@
       bind:currentFilterUid={currentTimeframe}
       items={scenarios}
     >
+      <a
+        slot="header-link"
+        class="text-sm text-theme-base font-bold flex gap-1.5 items-center"
+        href="/methodology#scenarios"
+        ><span
+          class="flex align-center justify-center w-5 h-5 rounded-full bg-theme-base text-background-base"
+          >?</span
+        >Which scenario should I select?</a
+      >
       <div slot="items" class="flex" let:items let:currentFilterUid>
         {#key currentFilterUid}
           <fieldset

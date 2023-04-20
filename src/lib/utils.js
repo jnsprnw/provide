@@ -1,5 +1,12 @@
 import { uniq } from 'lodash-es';
 
+export const formatReadableList = function (arr, key) {
+  const segments = formatObjArr(arr, key);
+  return segments
+    .map((s) => (s.type === 'element' ? s.value[key] : s.value))
+    .join('');
+};
+
 export const formatObjArr = function (arr, key) {
   const formatter = new Intl.ListFormat('en-GB', {
     style: 'long',

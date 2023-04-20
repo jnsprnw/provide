@@ -142,7 +142,7 @@
     <ChartFrame
       {title}
       {description}
-      templateProps={props}
+      templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
       {isLoading}
     >

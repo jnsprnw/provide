@@ -31,25 +31,30 @@
 </script>
 
 {#if filters.length > 1}
-  <div class="p-4 bg-background-weaker border-foreground-weakest">
-    <Tagline class="mb-2">{filterLabel}</Tagline>
-    <RadioGroup
-      value={currentFilterUid}
-      on:change={(e) => (currentFilterUid = e.detail)}
-      class="overflow-scroll flex gap-1.5 flex-wrap"
-    >
-      {#each filters as filter}
-        <RadioGroupOption value={filter.uid} let:checked>
-          <span
-            class="bg-background-base px-3 py-1 rounded-full inline-block"
-            class:bg-theme-base={checked}
-            class:text-background-base={checked}
-            class:text-theme-base={!checked}
-            class:font-bold={checked}>{filter.label}</span
-          >
-        </RadioGroupOption>
-      {/each}
-    </RadioGroup>
+  <div
+    class="p-4 bg-background-weaker border-foreground-weakest flex items-center justify-between"
+  >
+    <div>
+      <Tagline class="mb-2">{filterLabel}</Tagline>
+      <RadioGroup
+        value={currentFilterUid}
+        on:change={(e) => (currentFilterUid = e.detail)}
+        class="overflow-scroll flex gap-1.5 flex-wrap"
+      >
+        {#each filters as filter}
+          <RadioGroupOption value={filter.uid} let:checked>
+            <span
+              class="bg-background-base px-3 py-1 rounded-full inline-block"
+              class:bg-theme-base={checked}
+              class:text-background-base={checked}
+              class:text-theme-base={!checked}
+              class:font-bold={checked}>{filter.label}</span
+            >
+          </RadioGroupOption>
+        {/each}
+      </RadioGroup>
+    </div>
+    <slot name="header-link" />
   </div>
 {/if}
 <slot name="items" items={availableItems} {currentFilterUid}>

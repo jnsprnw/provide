@@ -18,6 +18,7 @@ import {
   DEFAULT_INDICATOR_UID,
   DEFAULT_SCENARIOS_UID,
 } from '../config.js';
+import { formatList, formatObjArr, formatReadableList } from '$lib/utils.js';
 
 export const IS_EMBEDED = writable(false);
 
@@ -248,6 +249,7 @@ export const TEMPLATE_PROPS = derived(
     $CURRENT_INDICATOR_UNIT,
   ]) => {
     return {
+      scenarioList: formatReadableList($CURRENT_SCENARIOS, 'label'),
       geography: $CURRENT_GEOGRAPHY,
       indicator: $CURRENT_INDICATOR,
       scenarios: $CURRENT_SCENARIOS,

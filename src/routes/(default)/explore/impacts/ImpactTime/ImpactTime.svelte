@@ -85,7 +85,9 @@
   {{geography.label}}, according to the selected scenario. The line indicates 
   the median estimate for this scenario`;
 
-  const title = 'Development of {{indicator.label}} in {{geography.label}}';
+  const title = 'Change in {{indicator.label}} in {{geography.label}}';
+
+  $: console.log($TEMPLATE_PROPS);
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
