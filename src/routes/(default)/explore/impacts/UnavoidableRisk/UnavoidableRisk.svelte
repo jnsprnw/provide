@@ -144,7 +144,7 @@
         {/if}
       </div>
       <ColorLegend items={props.legendItems} />
-      <figure class="aspect-video">
+      <figure class="aspect-[2.1]">
         <UnavoidableRiskChart
           {isLoading}
           {...props}
