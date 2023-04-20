@@ -21,6 +21,11 @@
 
 <div class="flex gap-4">
   {#each parameters as parameter}
-    <Select {...parameter} on:change={handleChange} />
+    <Select
+      {...parameter}
+      backgroundColor="bg-background-base"
+      borderColor="border-theme-base/5"
+      on:change={handleChange}
+    />
   {/each}
 </div>

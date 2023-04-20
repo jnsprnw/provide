@@ -44,9 +44,10 @@
 </script>
 
 <PopoverSelect
-  label="Indicator"
+  label="Geography"
   buttonLabel={$CURRENT_GEOGRAPHY?.label}
   panelClass="w-screen max-w-4xl"
+  buttonClass="border-theme-base/20 border"
 >
   <Content
     filters={geographyTypes}

@@ -23,7 +23,7 @@
       <div
         class:text-theme-base={option.uid === value}
         class:font-bold={option.uid === value}
-        class="cursor-pointer border px-4 py-2 border-foreground-weakest first:border-r-0 flex items-center"
+        class="cursor-pointer border px-3 py-1 border-foreground-weakest first:border-r-0 flex items-center first:rounded-l last:rounded-r"
       >
         <input
           type="radio"

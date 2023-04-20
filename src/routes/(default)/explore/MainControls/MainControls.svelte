@@ -4,8 +4,8 @@
   import IndicatorSelection from './IndicatorSelection/IndicatorSelection.svelte';
 </script>
 
-<div class="mb-16">
-  <div class="flex gap-4 mb-2">
+<div class="mb-16 pb-4 border-b border-foreground-weakest">
+  <div class="flex gap-4 mb-4">
     <div class="w-1/2">
       <IndicatorSelection />
     </div>

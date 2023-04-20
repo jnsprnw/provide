@@ -38,13 +38,13 @@
 
 <Popover class={`relative w-full ${clazz}`}>
   <label
-    class="uppercase text-xs tracking-widest text-foreground-weak pl-1 mb-1 inline-block"
+    class="uppercase text-xs tracking-widest font-bold text-foreground-weak pl-1 mb-2 inline-block"
     >{label}</label
   >
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full  bg-background-base justify-between text-theme-base ${classes.button} ${buttonClass}`}
+    class={`flex w-full rounded  bg-background-base justify-between text-theme-base ${classes.button} ${buttonClass}`}
   >
     <span class="font-bold">{buttonLabel}</span>
     <ExpandIcon isOpen={open} />
