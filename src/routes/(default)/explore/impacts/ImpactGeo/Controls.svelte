@@ -13,10 +13,5 @@
   {#if scenarios.length === 2}
     <SegmentedControl options={displayOptions} bind:value={displayOption} />
   {/if}
-  <Select
-    options={yearOptions}
-    bind:value={year}
-    label="Year"
-    borderColor="border-foreground-weakest"
-  />
+  <Select options={yearOptions} bind:value={year} label="Year" />
 </div>

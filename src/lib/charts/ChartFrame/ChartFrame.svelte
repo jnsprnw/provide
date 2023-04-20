@@ -31,14 +31,13 @@
   class:aspect-video={$IS_EMBEDED}
   style:width={$IS_EMBEDED ? '1200px' : undefined}
 >
-  <header class="mb-4">
-    <h3 class="font-bold text-2xl mb-3">
+  <header class="mb-4 max-w-2xl">
+    <h3 class="font-bold text-2xl mb-2">
       <Template template={title} data={templateProps} />
     </h3>
-    <p class="max-w-2xl leading-relaxed mb-8">
+    <p class="leading-relaxed mb-4">
       <Template template={description} data={templateProps} />
     </p>
-
     <slot name="controls" />
   </header>
   <div

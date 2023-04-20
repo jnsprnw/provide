@@ -58,22 +58,23 @@
     currentThreshold = data.thresholds[thresholdIndex];
 
     const mergedScenarios = [...scenarios, ...allScenarios];
-    let processedScenarios = data.data.map((scenarioData) => {
-      const key = Object.keys(scenarioData)[0]; // TODO: API datastructure has to be adjusted here
-      const scenario = find(mergedScenarios, { uid: key });
-      const values = data.years.map((year, yearIndex) => {
-        const value = scenarioData[key][thresholdIndex][yearIndex];
+    let processedScenarios = Object.entries(data.data).map(
+      ([uid, scenarioData]) => {
+        const scenario = find(mergedScenarios, { uid });
+        const values = data.years.map((year, yearIndex) => {
+          const value = scenarioData[thresholdIndex][yearIndex];
+          return {
+            year,
+            value,
+            formattedValue: formatValue(value, 'percent'),
+          };
+        });
         return {
-          year,
-          value,
-          formattedValue: formatValue(value, 'percent'),
+          ...scenario,
+          values,
         };
-      });
-      return {
-        ...scenario,
-        values,
-      };
-    });
+      }
+    );
 
     processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
@@ -133,7 +134,7 @@
     }}
   >
     <ChartFrame {title} {description} templateProps={props}>
-      <div slot="controls">
+      <div class="mb-10" slot="controls">
         {#if asyncProps.thresholds.length > 1}
           <Select
             label="Threshold"

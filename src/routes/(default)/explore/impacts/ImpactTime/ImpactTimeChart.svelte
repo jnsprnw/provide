@@ -112,7 +112,7 @@
   <StrokeLegend {colorScales} />
 </div>
 
-<div class="aspect-video flex animate-defer-visibility">
+<div class="aspect-[2] flex animate-defer-visibility">
   <div class:w-full={!isMultiLine} class="h-full {mainChartWidth}">
     <LayerCake
       padding={mainChartPadding}

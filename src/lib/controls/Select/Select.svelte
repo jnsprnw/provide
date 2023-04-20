@@ -10,7 +10,7 @@
   export let value;
   export let label;
   export let uid;
-  export let borderColor = 'border-transparent';
+  export let borderColor = 'border-foreground-weakest';
   export let backgroundColor = 'bg-transparent';
   export let labelColor = 'text-theme-base';
 
