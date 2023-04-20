@@ -1,6 +1,6 @@
 <script>
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import Spinner from '$lib/helper/Spinner.svelte';
+
   import {
     CURRENT_GEOGRAPHY,
     CURRENT_INDICATOR,
@@ -29,6 +29,7 @@
     calculateDifference,
     coordinatesToContours,
   } from './utils.js';
+  import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
   let displayOption = 'side-by-side';
   let year = DEFAULT_IMPACT_GEO_YEAR;
@@ -39,7 +40,7 @@
   $: {
     // Reset year if the currently selected one is not available
     year =
-      $CURRENT_SCENARIOS[0].timeframe[1] <= year
+      $CURRENT_SCENARIOS[0].timeframe[1] >= year
         ? year
         : DEFAULT_IMPACT_GEO_YEAR;
   }
@@ -143,6 +144,7 @@
       {description}
       templateProps={props}
       chartInfo={asyncProps.chartInfo}
+      {isLoading}
     >
       <svelte:fragment slot="controls">
         <Controls
@@ -155,6 +157,6 @@
       </svelte:fragment>
       <Maps {...props} {...asyncProps} />
     </ChartFrame>
-    <Spinner {isLoading} />
+    <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
 {/if}

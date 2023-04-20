@@ -47,9 +47,11 @@
 
 {#if isFailed}
   <slot name="failed"
-    ><div class="error-message">⚠️ Something went wrong here!</div></slot
+    ><div class="py-24 rounded-lg text-center text-lg font-bold">
+      ⚠️ Data could not be loaded
+    </div></slot
   >
-{:else if isEmpty && !renderWhileEmpty}
+{:else if isEmpty}
   <slot name="placeholder" />
 {:else}
   {#if isLoading}

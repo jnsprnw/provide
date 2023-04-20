@@ -15,6 +15,7 @@
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import ImpactTimeChart from './ImpactTimeChart.svelte';
   import { MEAN_TEMPERATURE_UID } from '$config';
+  import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -90,18 +91,24 @@
 {#if $IS_COMBINATION_AVAILABLE}
   <LoadingWrapper
     {process}
-    let:asyncProps={{
-      impactTime,
-      chartInfo,
-    }}
+    let:asyncProps
     let:props
     asyncProps={{
       impactTimeData: $IMPACT_TIME_DATA,
     }}
     props={$TEMPLATE_PROPS}
   >
-    <ChartFrame {title} {description} templateProps={props} {chartInfo}>
-      <ImpactTimeChart data={impactTime} unit={props.indicator.unit.uid} />
+    <ChartFrame
+      {title}
+      {description}
+      templateProps={props}
+      chartInfo={asyncProps.chartInfo}
+    >
+      <ImpactTimeChart
+        data={asyncProps.impactTime}
+        unit={props.indicator.unit.uid}
+      />
     </ChartFrame>
+    <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
 {/if}

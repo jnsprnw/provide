@@ -8,6 +8,7 @@
   export let description;
   export let templateProps;
   export let chartInfo = [];
+  export let isLoading;
 
   $: downloadOptions = [
     { options: [{ label: 'Download data as CSV', href: '#' }] },
@@ -40,7 +41,13 @@
 
     <slot name="controls" />
   </header>
-  <slot />
+  <div
+    class:opacity-40={isLoading}
+    class:animate-pulse={isLoading}
+    class:grayscale-80={isLoading}
+  >
+    <slot />
+  </div>
   {#if !$IS_EMBEDED}
     <figcaption class="flex justify-end gap-4">
       <InfoButton label="About the data" items={chartInfo} />

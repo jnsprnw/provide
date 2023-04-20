@@ -1,66 +1,32 @@
 <script>
-  export let isLoading;
+  export let isLoading = true;
+  const size = 30;
+  const stroke = 4;
+  const inner = size - stroke / 2;
 </script>
 
 {#if isLoading}
-  <div class="wrapper">
-    <div class="loader" />
-    <div class="label">Loading</div>
-  </div>
+  <svg
+    class="animate-spin overflow-visible"
+    viewBox="0 0 {size} {size}"
+    height={size}
+    w={size}
+  >
+    <circle
+      class="stroke-theme-weaker/20 fill-none"
+      r={inner / 2}
+      cx={size / 2}
+      cy={size / 2}
+      stroke-width={stroke}
+    />
+    <circle
+      class="stroke-theme-weaker fill-none"
+      r={inner / 2}
+      cx={size / 2}
+      cy={size / 2}
+      stroke-width={stroke}
+      stroke-dasharray={size * Math.PI}
+      stroke-dashoffset={((size * Math.PI) / 4) * 3}
+    />
+  </svg>
 {/if}
-
-<style>
-  .wrapper {
-    position: absolute;
-    z-index: 999;
-    top: var(--space-xs);
-    right: var(--space-xs);
-    margin: 0;
-    display: flex;
-    align-items: center;
-    width: auto;
-  }
-  .label {
-    font-size: var(--font-size-s);
-    color: var(--color-text-weaker);
-    margin-left: var(--space-xs);
-  }
-  .loader,
-  .loader:after {
-    border-radius: 50%;
-  }
-  .loader {
-    position: relative;
-    width: 18px;
-    height: 18px;
-    border-top: 3px solid var(--color-foreground-weakest);
-    border-right: 3px solid var(--color-foreground-weakest);
-    border-bottom: 3px solid var(--color-foreground-weakest);
-    border-left: 3px solid var(--color-brand-base);
-    -webkit-transform: translateZ(0);
-    -ms-transform: translateZ(0);
-    transform: translateZ(0);
-    -webkit-animation: load8 1.1s infinite linear;
-    animation: load8 1.1s infinite linear;
-  }
-  @-webkit-keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-  @keyframes load8 {
-    0% {
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      transform: rotate(360deg);
-    }
-  }
-</style>

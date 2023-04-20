@@ -25,6 +25,7 @@
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
+  import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
   let currentThreshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
@@ -143,7 +144,12 @@
       </div>
       <ColorLegend items={props.legendItems} />
       <figure class="aspect-video">
-        <UnavoidableRiskChart {isLoading} {...props} {...asyncProps} unit="percent" />
+        <UnavoidableRiskChart
+          {isLoading}
+          {...props}
+          {...asyncProps}
+          unit="percent"
+        />
         <figcaption class="mt-2">
           <span class="text-xs text-foreground-weaker"
             >To avoid overlapping of scenarios, the vertical and horizontal
@@ -152,5 +158,6 @@
         </figcaption>
       </figure>
     </ChartFrame>
+    <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
 {/if}
