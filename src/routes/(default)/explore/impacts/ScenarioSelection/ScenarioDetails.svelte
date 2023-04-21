@@ -36,8 +36,8 @@
 {#if scenario.characteristics.length}
   <div class="border-t border-foreground-weaker pt-4">
     <p class="text-sm mb-2 font-bold">Global mean temperature in °C</p>
-    <div class="flex gap-4">
-      <figure class="w-5/8">
+    <div class="grid grid-cols-8 gap-3">
+      <figure class="col-span-5">
         <div class="h-48 mb-2">
           <LineChart yDomain={[1, 3]} data={chartData} />
         </div>
@@ -57,7 +57,7 @@
           </dl>
         </figcaption>
       </figure>
-      <dl class="text-sm flex flex-col gap-3 w-3/8">
+      <dl class="text-sm flex flex-col gap-3 col-start-6 col-span-3">
         {#each scenario.characteristics as { year, description }}
           {#if year <= scenario.endYear}
             <div class="flex flex-col gap-y-1">
