@@ -16,6 +16,7 @@ const config = {
       $utils: path.resolve('./src/lib/utils'),
       $stores: path.resolve('./src/stores'),
       $helper: path.resolve('./src/lib/helper'),
+      $routes: path.resolve('./src/routes'),
     },
   },
   define: {
