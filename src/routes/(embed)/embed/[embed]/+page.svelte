@@ -8,7 +8,7 @@
 
   const embeds = {
     'impact-time': ImpactTime,
-    'impact-geography': ImpactGeo,
+    'impact-geo': ImpactGeo,
     'unavoidable-risk': UnavoidableRisk,
   };
 

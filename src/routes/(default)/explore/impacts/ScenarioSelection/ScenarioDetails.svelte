@@ -29,9 +29,6 @@
       href={scenario.source.href}
     />
   {/if}
-  {#if scenario.model}
-    <DefinitionItem term="Model" definition={scenario.model} />
-  {/if}
 </dl>
 {#if scenario.characteristics.length}
   <div class="border-t border-foreground-weaker pt-4">
