@@ -21,13 +21,14 @@
 
 {#if items.length}
   <Popover>
-    <PopoverButton use={[popperRef]} class="font-bold text-theme-base text-sm"
-      >{label}</PopoverButton
+    <PopoverButton
+      use={[popperRef]}
+      class="font-bold flex text-theme-base text-sm">{label}</PopoverButton
     >
 
     <PopoverPanel
       use={[[popperContent, popperOptions]]}
-      class="bg-background-base shadow-lg z-10 px-4 py-2"
+      class="bg-background-base shadow-xl z-10 px-4 py-2"
     >
       <dl>
         {#each items as item}

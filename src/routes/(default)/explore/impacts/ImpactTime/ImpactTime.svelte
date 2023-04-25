@@ -7,6 +7,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE,
+    URL_PARAMS,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -33,7 +34,7 @@
       }))
     );
 
-  $: process = ({ impactTimeData }, { scenarios }) => {
+  $: process = ({ impactTimeData }, { scenarios, downloadBaseParams }) => {
     const impactTime = impactTimeData.map((datum, i) => {
       const MODEL = KEY_MODEL;
       const SOURCE = KEY_SOURCE;
@@ -84,12 +85,30 @@
 
     const title = 'Change in {{indicator.label}} in {{geography.label}}';
 
+    const downloadParams = [
+      {
+        uid: 'scenario',
+        label: 'Scenario',
+        options: scenarios,
+      },
+      {
+        uid: 'format',
+        label: 'Format',
+        options: impactTimeData[0].data.formats.map((uid) => ({
+          label: uid,
+          uid,
+        })),
+      },
+    ];
+
     return {
       impactTime,
       title: impactTime[0].title || title,
       description: impactTime[0].description || description,
       hasSingleScenario,
       chartInfo,
+      downloadParams,
+      downloadBaseParams,
     };
   };
 </script>
@@ -102,13 +121,16 @@
     asyncProps={{
       impactTimeData: $IMPACT_TIME_DATA,
     }}
-    props={$TEMPLATE_PROPS}
+    props={{ ...$TEMPLATE_PROPS, downloadBaseParams: $URL_PARAMS }}
   >
     <ChartFrame
       title={asyncProps.title}
       description={asyncProps.description}
-      templateProps={props}
+      downloadBaseParams={asyncProps.downloadBaseParams}
+      downloadParams={asyncProps.downloadParams}
+      downloadEndpoint={END_IMPACT_TIME}
       chartInfo={asyncProps.chartInfo}
+      templateProps={props}
     >
       <ImpactTimeChart
         data={asyncProps.impactTime}

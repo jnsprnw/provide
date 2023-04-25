@@ -3,7 +3,7 @@
   import {
     Popover,
     PopoverButton,
-    PopoverPanel
+    PopoverPanel,
   } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
 
@@ -27,7 +27,7 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full rounded text-sm bg-background-base justify-between text-theme-base ${buttonClass}`}
+    class={`flex w-full text-sm text-theme-base ${buttonClass}`}
   >
     <span class="font-bold">{label}</span>
   </PopoverButton>

@@ -13,6 +13,7 @@ module.exports = {
       },
       boxShadow: {
         lg: '0 3px 15px -3px rgb(0 0 0 / 0.1), 0 1px 6px -4px rgb(0 0 0 / 0.1);',
+        xl: '0 5px 23px -5px rgb(0 0 0 / 0.1), 0 2px 10px -6px rgb(0 0 0 / 0.1);',
       },
       borderWidth: {
         3: '3px',

@@ -26,7 +26,7 @@
   >
   <MenuItems
     use={[[popperContent, popperOptions]]}
-    class="absolute z-10 bg-background-base shadow-lg"
+    class="absolute z-10 bg-background-base shadow-xl"
   >
     {#each options as option}
       {#if option.options}

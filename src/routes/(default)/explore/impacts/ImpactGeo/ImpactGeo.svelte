@@ -7,7 +7,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     TEMPLATE_PROPS,
-    URL_PROPS,
+    URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
     CURRENT_INDICATOR_OPTIONS,
@@ -73,7 +73,7 @@
     });
   }
 
-  $: process = ({ data, shape }, { scenarios, urlProps }) => {
+  $: process = ({ data, shape }, { scenarios, urlParams }) => {
     const showDifference = data.length === 2 && displayOption === 'difference';
     const isMultipMap = data.length > 1 && !showDifference;
 
@@ -140,7 +140,7 @@
     ];
 
     const downloadBaseParams = {
-      ...urlProps,
+      ...urlParams,
       year,
     };
 
@@ -163,7 +163,7 @@
     let:asyncProps
     let:props
     asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
-    props={{ ...$TEMPLATE_PROPS, year, urlProps: $URL_PROPS }}
+    props={{ ...$TEMPLATE_PROPS, year, urlParams: $URL_PARAMS }}
     {process}
     let:isLoading
   >

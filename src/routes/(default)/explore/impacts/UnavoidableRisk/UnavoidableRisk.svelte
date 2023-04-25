@@ -8,6 +8,7 @@
     CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
     IS_COMBINATION_AVAILABLE,
+    URL_PARAMS,
   } from '$stores/state.js';
   import UnavoidableRiskChart from './UnavoidableRiskChart/UnavoidableRiskChart.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
@@ -40,7 +41,7 @@
       },
     });
 
-  $: process = ({ data }, { scenarios, allScenarios }) => {
+  $: process = ({ data }, { scenarios, allScenarios, downloadBaseParams }) => {
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
@@ -104,6 +105,17 @@
     const description =
       'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
 
+    const downloadParams = [
+      {
+        uid: 'format',
+        label: 'Format',
+        options: (data.data.formats || ['csv']).map((uid) => ({
+          label: uid,
+          uid,
+        })),
+      },
+    ];
+
     return {
       ...data,
       thresholds,
@@ -113,6 +125,8 @@
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
       source: data[KEY_SOURCE],
+      downloadParams,
+      downloadBaseParams,
     };
   };
 
@@ -134,12 +148,16 @@
       allScenarios: $AVAILABLE_SCENARIOS,
       threshold: currentThreshold,
       legendItems,
+      downloadBaseParams: $URL_PARAMS,
     }}
   >
     <ChartFrame
       title={asyncProps.title}
       description={asyncProps.description}
       templateProps={props}
+      downloadBaseParams={asyncProps.downloadBaseParams}
+      downloadParams={asyncProps.downloadParams}
+      downloadEndpoint={END_UN_AVOIDABLE_RISK}
     >
       <div class="mb-10" slot="controls">
         {#if asyncProps.thresholds.length > 1}
