@@ -157,7 +157,7 @@
       templateProps={props}
       downloadBaseParams={asyncProps.downloadBaseParams}
       downloadParams={asyncProps.downloadParams}
-      downloadEndpoint={END_UN_AVOIDABLE_RISK}
+      chartUid={END_UN_AVOIDABLE_RISK}
     >
       <div class="mb-10" slot="controls">
         {#if asyncProps.thresholds.length > 1}

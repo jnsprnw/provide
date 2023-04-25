@@ -1,8 +1,6 @@
 <script>
-  import Menu from '$lib/controls/Menu/Menu.svelte';
   import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
   import PopoverButton from '$lib/controls/PopoverButton/PopoverButton.svelte';
-  import { map, sortBy } from 'lodash-es';
   import { stringify } from 'qs';
   import { writable } from 'svelte/store';
 
@@ -34,10 +32,10 @@
 
 {#if maxVersions > 1}
   <PopoverButton label="Download data">
-    <div class="max-w-xs px-4">
+    <div class="max-w-xs px-3 pb-3">
       {#each params as param}
         <div
-          class="py-2.5 grid grid-cols-7 gap-2 border-b items-center border-foreground-weakest last:border-none"
+          class="py-2.5 grid grid-cols-7 gap-2 border-t items-center border-foreground-weakest first:border-none"
         >
           <span class="col-span-2 text-foreground-weak text-sm"
             >{param.label}</span
@@ -56,9 +54,11 @@
           </div>
         </div>
       {/each}
-    </div>
-    <div class="bg-background-weaker text-center py-3">
-      <a href={url} class="text-theme-base font-bold" download>Download data</a>
+      <div class="bg-background-weaker text-center py-3">
+        <a href={url} class="text-theme-base font-bold text-sm" download
+          >Download data</a
+        >
+      </div>
     </div>
   </PopoverButton>
 {:else}

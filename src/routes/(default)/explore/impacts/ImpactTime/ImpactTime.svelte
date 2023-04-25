@@ -128,7 +128,7 @@
       description={asyncProps.description}
       downloadBaseParams={asyncProps.downloadBaseParams}
       downloadParams={asyncProps.downloadParams}
-      downloadEndpoint={END_IMPACT_TIME}
+      chartUid={END_IMPACT_TIME}
       chartInfo={asyncProps.chartInfo}
       templateProps={props}
     >

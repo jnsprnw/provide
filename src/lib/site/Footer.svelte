@@ -6,10 +6,10 @@
     </div>
     <nav class="text-theme-base">
       <ul>
-        <li><a href="/about">About</a></li>
-        <li><a href="/methodology">Methodology</a></li>
-        <li><a href="/glossary">Glossary</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a class="text-sm" href="/about">About</a></li>
+        <li><a class="text-sm" href="/methodology">Methodology</a></li>
+        <li><a class="text-sm" href="/glossary">Glossary</a></li>
+        <li><a class="text-sm" href="/contact">Contact</a></li>
       </ul>
     </nav>
   </div>

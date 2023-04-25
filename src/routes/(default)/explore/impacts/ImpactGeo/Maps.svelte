@@ -39,11 +39,6 @@
       <div class="relative" style={`width: ${100 / geoData.length}%`}>
         <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive}>
           <DataSource data={masked}>
-            <!-- <FillLayer
-              before={null}
-              id="mask-layer"
-              fillColor={$theme.color.background.weaker}
-            /> -->
             <PolygonLayer
               before="ocean-fill"
               fillColor={'#fafafa'}

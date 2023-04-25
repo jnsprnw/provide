@@ -23,7 +23,7 @@
   };
 </script>
 
-<Popover class={`relative w-full ${clazz}`}>
+<Popover class={`relative ${clazz}`}>
   <PopoverButton
     use={[popperRef]}
     let:open

@@ -7,7 +7,7 @@
   $: classes = {
     md: {
       group: 'gap-1.5',
-      button: 'px-3 py-1.5',
+      button: 'px-3 py-1.5 text-md',
     },
     sm: {
       group: 'gap-1',

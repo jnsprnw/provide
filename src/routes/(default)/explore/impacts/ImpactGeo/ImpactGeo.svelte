@@ -171,7 +171,7 @@
       title={asyncProps.title}
       description={asyncProps.description}
       downloadParams={asyncProps.downloadParams}
-      downloadEndpoint={END_IMPACT_GEO}
+      chartUid={END_IMPACT_GEO}
       downloadBaseParams={asyncProps.downloadBaseParams}
       templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
