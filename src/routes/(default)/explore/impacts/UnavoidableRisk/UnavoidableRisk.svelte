@@ -99,9 +99,16 @@
       values: unavoidableValues,
     });
 
+    const title =
+      'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
+    const description =
+      'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
+
     return {
       ...data,
       thresholds,
+      title: data.title || title,
+      description: data.description || description,
       data: processedScenarios,
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
@@ -109,10 +116,6 @@
     };
   };
 
-  const title =
-    'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
-  const description =
-    'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
   $: legendItems = [
     ...$CURRENT_SCENARIOS,
     { label: 'Other scenarios', uid: 'other' },
@@ -133,7 +136,11 @@
       legendItems,
     }}
   >
-    <ChartFrame {title} {description} templateProps={props}>
+    <ChartFrame
+      title={asyncProps.title}
+      description={asyncProps.description}
+      templateProps={props}
+    >
       <div class="mb-10" slot="controls">
         {#if asyncProps.thresholds.length > 1}
           <Select

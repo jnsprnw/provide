@@ -2,29 +2,33 @@
   import Menu from '$lib/controls/Menu/Menu.svelte';
   import Template from '$lib/helper/Template.svelte';
   import InfoButton from './InfoButton.svelte';
-  import { URL, IS_EMBEDED } from '$stores/state.js';
+  import { IS_EMBEDED } from '$stores/state.js';
+  import DataDownloadMenu from './DataDownloadMenu.svelte';
 
   export let title;
   export let description;
+  export let downloadBaseParams;
+  export let downloadParams;
+  export let downloadEndpoint;
   export let templateProps;
   export let chartInfo = [];
   export let isLoading;
 
-  $: downloadOptions = [
-    { options: [{ label: 'Download data as CSV', href: '#' }] },
-    {
-      options: [
-        {
-          label: 'Download graph as PNG',
-          href: `http://localhost:5173/download/impact-time/?${$URL}&format=png`,
-        },
-        {
-          label: 'Download graph as PDF',
-          href: `http://localhost:5173/download/impact-time/?${$URL}&format=pdf`,
-        },
-      ],
-    },
-  ];
+  // $: downloadOptions = [
+  //   { options: [{ label: 'Download data as CSV', href: '#' }] },
+  //   {
+  //     options: [
+  //       {
+  //         label: 'Download graph as PNG',
+  //         href: `http://localhost:5173/download/impact-time/?${$URL}&format=png`,
+  //       },
+  //       {
+  //         label: 'Download graph as PDF',
+  //         href: `http://localhost:5173/download/impact-time/?${$URL}&format=pdf`,
+  //       },
+  //     ],
+  //   },
+  // ];
 </script>
 
 <figure
@@ -50,7 +54,14 @@
   {#if !$IS_EMBEDED}
     <figcaption class="flex justify-end gap-4">
       <InfoButton label="About the data" items={chartInfo} />
-      <Menu label="Download" options={downloadOptions} />
+      {#if downloadBaseParams}
+        <DataDownloadMenu
+          endpoint={downloadEndpoint}
+          params={downloadParams}
+          baseParams={downloadBaseParams}
+        />
+      {/if}
+      <!-- <Menu label="Download" options={downloadOptions} /> -->
     </figcaption>
   {:else}
     <figcaption class="mt-4">

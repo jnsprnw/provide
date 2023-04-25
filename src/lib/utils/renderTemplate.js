@@ -5,8 +5,6 @@ _.templateSettings = {
   evaluate: /\{\{=(.+?)\}\}/g,
 };
 
-console.log(compile('ab {{a.b}}')({ a: { b: 2 } }));
-
 export default function renderTemplate(template, data) {
   try {
     return compile(template)(data);

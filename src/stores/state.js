@@ -258,23 +258,22 @@ export const TEMPLATE_PROPS = derived(
     };
   }
 );
-export const URL = derived(
+
+// Object holding the parameters that are needed in every data request
+// scenario are not included since scenarios are specified as individual requests
+export const URL_PROPS = derived(
   [
     CURRENT_GEOGRAPHY_UID,
     CURRENT_INDICATOR_UID,
-    CURRENT_SCENARIOS_UID,
     CURRENT_INDICATOR_OPTION_VALUES,
   ],
   ([
     $CURRENT_GEOGRAPHY,
     $CURRENT_INDICATOR,
-    $CURRENT_SCENARIOS,
     $CURRENT_INDICATOR_OPTION_VALUES,
-  ]) =>
-    stringify({
-      geography: $CURRENT_GEOGRAPHY,
-      indicator: $CURRENT_INDICATOR,
-      scenarios: $CURRENT_SCENARIOS,
-      ...$CURRENT_INDICATOR_OPTION_VALUES,
-    })
+  ]) => ({
+    geography: $CURRENT_GEOGRAPHY,
+    indicator: $CURRENT_INDICATOR,
+    ...$CURRENT_INDICATOR_OPTION_VALUES,
+  })
 );

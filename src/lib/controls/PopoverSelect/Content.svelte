@@ -3,6 +3,7 @@
   import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
   import Tagline from '$lib/helper/Tagline.svelte';
   import { onMount } from 'svelte';
+  import PillGroup from '../PillGroup/PillGroup.svelte';
 
   export let filters;
   export let filterKey;
@@ -36,23 +37,7 @@
   >
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
-      <RadioGroup
-        value={currentFilterUid}
-        on:change={(e) => (currentFilterUid = e.detail)}
-        class="overflow-scroll flex gap-1.5 flex-wrap"
-      >
-        {#each filters as filter}
-          <RadioGroupOption value={filter.uid} let:checked>
-            <span
-              class="bg-background-base px-3 py-1 rounded-full inline-block"
-              class:bg-theme-base={checked}
-              class:text-background-base={checked}
-              class:text-theme-base={!checked}
-              class:font-bold={checked}>{filter.label}</span
-            >
-          </RadioGroupOption>
-        {/each}
-      </RadioGroup>
+      <PillGroup bind:currentUid={currentFilterUid} options={filters} />
     </div>
     <slot name="header-link" />
   </div>

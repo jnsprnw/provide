@@ -78,14 +78,20 @@
       },
     ];
 
-    return { impactTime, hasSingleScenario, chartInfo };
-  };
-
-  const description = `This graph showes how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
+    const description = `This graph showes how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
   {{geography.label}}, according to the selected scenario. The line indicates 
   the median estimate for this scenario`;
 
-  const title = 'Change in {{indicator.label}} in {{geography.label}}';
+    const title = 'Change in {{indicator.label}} in {{geography.label}}';
+
+    return {
+      impactTime,
+      title: impactTime[0].title || title,
+      description: impactTime[0].description || description,
+      hasSingleScenario,
+      chartInfo,
+    };
+  };
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
@@ -99,8 +105,8 @@
     props={$TEMPLATE_PROPS}
   >
     <ChartFrame
-      {title}
-      {description}
+      title={asyncProps.title}
+      description={asyncProps.description}
       templateProps={props}
       chartInfo={asyncProps.chartInfo}
     >

@@ -7,8 +7,10 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     TEMPLATE_PROPS,
+    URL_PROPS,
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
+    CURRENT_INDICATOR_OPTIONS,
   } from '$src/stores/state';
   import {
     IMPACT_GEO_YEARS,
@@ -71,7 +73,7 @@
     });
   }
 
-  $: process = ({ data, shape }, { scenarios }) => {
+  $: process = ({ data, shape }, { scenarios, urlProps }) => {
     const showDifference = data.length === 2 && displayOption === 'difference';
     const isMultipMap = data.length > 1 && !showDifference;
 
@@ -96,7 +98,6 @@
                 resolution,
                 colorScale,
               });
-        console.timeEnd('contour');
         return {
           ...d,
           data: geoData,
@@ -114,20 +115,47 @@
       },
     ];
 
+    const title =
+      'Change in {{indicator.label}} in {{geography.label}} in {{year}}';
+
+    const description =
+      'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}}.';
+
+    const downloadParams = [
+      {
+        uid: 'scenario',
+        label: 'Scenario',
+        options: scenarios,
+      },
+      {
+        uid: 'resolution',
+        label: 'Resolution',
+        options: data[0].data.resolutions.map((uid) => ({ label: uid, uid })),
+      },
+      {
+        uid: 'format',
+        label: 'Format',
+        options: data[0].data.formats.map((uid) => ({ label: uid, uid })),
+      },
+    ];
+
+    const downloadBaseParams = {
+      ...urlProps,
+      year,
+    };
+
     return {
       showDifference,
       geoData,
       geoShape: shape.data.data.features[0],
+      title: data[0].data.title || title,
+      description: data[0].data.description || description,
       colorScale,
       chartInfo,
+      downloadBaseParams,
+      downloadParams,
     };
   };
-
-  const title =
-    'Change in {{indicator.label}} in {{geography.label}} in {{year}}';
-
-  const description =
-    'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}}.';
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
@@ -135,13 +163,16 @@
     let:asyncProps
     let:props
     asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
-    props={{ ...$TEMPLATE_PROPS, year }}
+    props={{ ...$TEMPLATE_PROPS, year, urlProps: $URL_PROPS }}
     {process}
     let:isLoading
   >
     <ChartFrame
-      {title}
-      {description}
+      title={asyncProps.title}
+      description={asyncProps.description}
+      downloadParams={asyncProps.downloadParams}
+      downloadEndpoint={END_IMPACT_GEO}
+      downloadBaseParams={asyncProps.downloadBaseParams}
       templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
       {isLoading}
