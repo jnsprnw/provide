@@ -1,7 +1,14 @@
 import { get } from 'lodash-es';
 
+// We use different locals to simulate different versions of the content.
+// Version 0: `en` and fallback version
+// Version 1: `en-EU`
+const localCode = import.meta.env.VITE_STRAPI_LOCALE ?? 'en';
+
 export const loadFromStrapi = function (path, fetch) {
-  const url = `https://provide-cms.herokuapp.com/api/${path}?populate=*`;
+  const url = `${
+    import.meta.env.VITE_HEROKU_URL
+  }/api/${path}?populate=*&locale=${localCode}`;
   return new Promise(async (resolve) => {
     try {
       const res = await fetch(url);
