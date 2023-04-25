@@ -1,6 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import { generatePageTitle } from '$utils/meta.js';
+  import { IS_STAGING_VERSION } from '$src/config.js';
   const url = 'https://climate-risk-dashboard.climateanalytics.org/';
   const author =
     'PROVIDE consortium under direction of Climate Analytics with Jonas Parnow and Flavio Gortana';
@@ -17,6 +18,8 @@
   <meta name="author" content={author} />
   <meta name="description" content={description} />
   <meta name="news_keywords" content={keywords} />
+
+  {#if IS_STAGING_VERSION}<meta name="robots" content="none, noimageindex, noarchive">{/if}
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
