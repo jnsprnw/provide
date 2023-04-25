@@ -1,5 +1,5 @@
 <script>
-  import { compile, render } from 'squirrelly';
+  import renderTemplate from '$lib/utils/renderTemplate';
 
   let clazz;
   export { clazz as class };
@@ -7,13 +7,10 @@
   export let data = {};
   export let el;
 
-  // For squirrelly every template parameter needs to be prefixed with `it.` so we do this here instead of doing it in the template everywhere
-  $: processedTemplate = template.replace(/\{\{/g, '{{it.');
-  $: compiledTemplate = compile(processedTemplate);
-
   let renderedTemplate;
+
   $: try {
-    renderedTemplate = render(compiledTemplate, data);
+    renderedTemplate = renderTemplate(template, data);
   } catch (e) {
     console.error(e);
     renderedTemplate = '';

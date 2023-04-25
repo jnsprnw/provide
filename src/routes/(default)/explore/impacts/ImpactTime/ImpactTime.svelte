@@ -81,13 +81,11 @@
     return { impactTime, hasSingleScenario, chartInfo };
   };
 
-  const description = `This graph shows how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
+  const description = `This graph showes how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
   {{geography.label}}, according to the selected scenario. The line indicates 
   the median estimate for this scenario`;
 
   const title = 'Change in {{indicator.label}} in {{geography.label}}';
-
-  $: console.log($TEMPLATE_PROPS);
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
