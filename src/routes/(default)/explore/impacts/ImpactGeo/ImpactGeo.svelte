@@ -10,7 +10,6 @@
     URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
-    CURRENT_INDICATOR_OPTIONS,
   } from '$src/stores/state';
   import {
     IMPACT_GEO_YEARS,
@@ -33,6 +32,8 @@
   } from './utils.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
+
+  export let title;
 
   let displayOption = 'side-by-side';
   let year = DEFAULT_IMPACT_GEO_YEAR;
@@ -173,6 +174,7 @@
   >
     <ChartFrame
       title={asyncProps.title}
+      tagline={title}
       description={asyncProps.description}
       downloadParams={asyncProps.downloadParams}
       chartUid={END_IMPACT_GEO}

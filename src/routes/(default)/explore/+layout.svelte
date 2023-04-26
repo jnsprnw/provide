@@ -14,7 +14,7 @@
     },
     {
       href: '#',
-      label: 'Emission Scenarios',
+      label: 'Emission scenarios',
       description: 'Set an impact threshold and explore scenarios',
       disabled: true,
     },

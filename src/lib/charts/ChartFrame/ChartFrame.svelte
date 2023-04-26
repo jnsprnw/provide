@@ -4,7 +4,9 @@
   import { IS_EMBEDED } from '$stores/state.js';
   import DataDownloadMenu from './DataDownloadMenu.svelte';
   import DownloadGraphMenu from './DownloadGraphMenu.svelte';
+  import Tagline from '$lib/helper/Tagline.svelte';
 
+  export let tagline;
   export let title;
   export let description;
   export let downloadBaseParams;
@@ -20,7 +22,8 @@
   style:width={$IS_EMBEDED ? '1200px' : undefined}
 >
   <header class="mb-4 max-w-2xl">
-    <h3 class="font-bold text-2xl mb-2">
+    <Tagline color="text-foreground-weak">{tagline}</Tagline>
+    <h3 class="font-bold text-2xl mb-3">
       <Template template={title} data={templateProps} />
     </h3>
     <p class="leading-relaxed mb-4">

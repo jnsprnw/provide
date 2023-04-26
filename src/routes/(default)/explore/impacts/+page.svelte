@@ -13,27 +13,39 @@
     { component: Intro, disabled: !$IS_COMBINATION_AVAILABLE },
     {
       slug: 'impact-time',
-      title: 'Time',
-      description:
-        'How will the selected indicator unfold over the coming decades?',
+      title: 'Timing',
+      description: 'How will this climate impact change?',
       component: ImpactTime,
       disabled: !$IS_COMBINATION_AVAILABLE,
     },
     {
       slug: 'impact-geo',
-      title: 'Geography',
-      description:
-        'Where in the selected geography will impacts hit the hardest?',
+      title: 'Location',
+      description: 'Where will impacts hit the hardest?',
       component: ImpactGeo,
       disabled: !$IS_COMBINATION_AVAILABLE,
     },
     {
       slug: 'unavoidable-risk',
-      title: 'Avoidable vs. Unavoidable Risks',
-      description: 'How much impact can be avoided through mitigation?',
+      title: 'Avoidable vs. unavoidable',
+      description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: !$IS_COMBINATION_AVAILABLE,
     },
+    // {
+    //   slug: 'unavoidable-risk',
+    //   title: 'Benefits of mitigation',
+    //   description: 'How could we benefit from accelerated emissions reductions?',
+    //   component: UnAvoidableRisk,
+    //   disabled: !$IS_COMBINATION_AVAILABLE,
+    // },
+    // {
+    //   slug: 'unavoidable-risk',
+    //   title: 'What can we reverse?',
+    //   description: 'How much damage could be reversed once it is done?',
+    //   component: UnAvoidableRisk,
+    //   disabled: !$IS_COMBINATION_AVAILABLE,
+    // },
     { component: FallbackMessage, disabled: $IS_COMBINATION_AVAILABLE },
   ];
 </script>

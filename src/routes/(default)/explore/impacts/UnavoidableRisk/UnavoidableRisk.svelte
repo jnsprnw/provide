@@ -31,6 +31,8 @@
   let currentThreshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
+  export let title;
+
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(UN_AVOIDABLE_RISK_DATA, {
       endpoint: END_UN_AVOIDABLE_RISK,
@@ -163,6 +165,7 @@
     }}
   >
     <ChartFrame
+      tagline={title}
       title={asyncProps.title}
       description={asyncProps.description}
       templateProps={props}

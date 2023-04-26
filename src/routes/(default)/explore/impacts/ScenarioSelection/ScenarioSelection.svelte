@@ -39,7 +39,7 @@
 
 <div class="relative">
   <PopoverSelect
-    label="Indicator"
+    label="Scenario"
     {buttonLabel}
     panelClass="max-w-4xl"
     buttonClass="border border-foreground-weakest"

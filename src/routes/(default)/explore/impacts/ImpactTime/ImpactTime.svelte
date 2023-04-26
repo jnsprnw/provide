@@ -20,6 +20,8 @@
 
   let IMPACT_TIME_DATA = writable([]);
 
+  export let title;
+
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(
       IMPACT_TIME_DATA,
@@ -127,6 +129,7 @@
   >
     <ChartFrame
       title={asyncProps.title}
+      tagline={title}
       description={asyncProps.description}
       downloadBaseParams={asyncProps.downloadBaseParams}
       downloadParams={asyncProps.downloadParams}
