@@ -41,7 +41,7 @@
   <PopoverSelect
     label="Indicator"
     {buttonLabel}
-    panelClass="w-screen max-w-4xl"
+    panelClass="max-w-4xl"
     buttonClass="border border-foreground-weakest"
     size="md"
     panelPlacement="right-start"
@@ -77,7 +77,7 @@
           </fieldset>
         {/key}
 
-        <div class="p-6 overflow-y-scroll">
+        <div class="p-6 overflow-y-scroll max-w-xl">
           {#if renderedScenario}
             <ScenarioDetails
               scenario={renderedScenario}
