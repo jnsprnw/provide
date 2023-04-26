@@ -53,7 +53,7 @@
         .y((d) => $yGet(d))
         .strength(0.98)
     )
-    .force('collide', forceCollide(radius + 1))
+    .force('collide', forceCollide(radius))
     .stop();
 
   $: {

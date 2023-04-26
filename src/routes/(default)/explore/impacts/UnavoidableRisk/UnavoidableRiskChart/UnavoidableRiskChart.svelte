@@ -40,9 +40,10 @@
     >
       <Svg>
         <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
-        <Message />
-        <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
         <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
+        <!-- <Message /> -->
+        <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
+
         <RiskLevels />
       </Svg>
     </LayerCake>

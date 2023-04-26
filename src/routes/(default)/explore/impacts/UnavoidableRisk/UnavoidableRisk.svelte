@@ -22,7 +22,7 @@
     KEY_MODEL,
     KEY_SOURCE,
   } from '$src/config.js';
-  import { sortBy, reverse, find } from 'lodash-es';
+  import { sortBy, reverse, find, uniqBy } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -57,11 +57,17 @@
     }
 
     currentThreshold = data.thresholds[thresholdIndex];
+    const timeframe = scenarios[0].timeframe[1];
+    const mergedScenarios = uniqBy(
+      [...scenarios, ...allScenarios],
+      'uid'
+    ).filter((s) => s.endYear === timeframe);
 
-    const mergedScenarios = [...scenarios, ...allScenarios];
-    let processedScenarios = Object.entries(data.data).map(
-      ([uid, scenarioData]) => {
+    console.log(mergedScenarios, timeframe);
+    let processedScenarios = Object.entries(data.data)
+      .map(([uid, scenarioData]) => {
         const scenario = find(mergedScenarios, { uid });
+        if (!scenario) return;
         const values = data.years.map((year, yearIndex) => {
           const value = scenarioData[thresholdIndex][yearIndex];
           return {
@@ -74,8 +80,8 @@
           ...scenario,
           values,
         };
-      }
-    );
+      })
+      .filter(Boolean);
 
     processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
