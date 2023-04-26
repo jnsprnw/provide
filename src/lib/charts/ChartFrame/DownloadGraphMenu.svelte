@@ -24,7 +24,7 @@
   );
 </script>
 
-<PopoverButton label="Download graph">
+<PopoverButton label="Download graph" isDropdown={true}>
   <div class="max-w-xs px-3 pb-3">
     <div class="py-2.5 grid grid-cols-7 gap-2 items-center">
       <span class="col-span-2 text-foreground-weak text-sm">Format</span>
