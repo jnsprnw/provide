@@ -26,7 +26,7 @@
           scenario,
           color,
           isSelectedScenario,
-          radius: radius - (isSelectedScenario ? 0 : 2), // The scelected scenarios are slightly bigger
+          radius: radius - (isSelectedScenario ? 0 : 3), // The scelected scenarios are slightly bigger
           fy: isSelectedScenario ? $yScale(value) : undefined, // Fix the y-position of selected scenarios
           tooltipContent: renderTemplate(tooltipTemplate, {
             year,
@@ -80,14 +80,13 @@
         class:opacity-80={!isSelectedScenario}
       >
         <circle
-          class:fill-background-weakest={!isSelectedScenario}
+          class:fill-theme-stronger={!isSelectedScenario}
           class="stroke-[1.5px] stroke-background-base"
-          style={`fill: ${color};`}
+          style:fill={color}
+          style:opacity={isSelectedScenario ? 1 : 0.3}
           r={radius}
           use:tooltip={{ content: tooltipContent }}
-        >
-          <title>{scenario}</title>
-        </circle>
+        />
       </g>
     {/each}
   </g>
