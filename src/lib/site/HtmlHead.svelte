@@ -21,8 +21,6 @@
 
   {#if IS_STAGING_VERSION}<meta name="robots" content="none, noimageindex, noarchive">{/if}
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <meta name="robots" content="max-image-preview:large" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content={author} />

@@ -5,6 +5,7 @@
     PopoverPanel,
   } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
+  import Chevron from '$lib/helper/icons/Chevron.svelte';
 
   export let label;
   export let items;
@@ -23,8 +24,10 @@
   <Popover>
     <PopoverButton
       use={[popperRef]}
-      class="font-bold flex text-theme-base text-sm">{label}</PopoverButton
-    >
+      class="font-bold flex text-theme-base hover:text-theme-stronger text-sm gap-x-1 items-center">
+      <span>{label}</span>
+      <Chevron class="pointer-events-none stroke-theme-base" />
+    </PopoverButton>
 
     <PopoverPanel
       use={[[popperContent, popperOptions]]}

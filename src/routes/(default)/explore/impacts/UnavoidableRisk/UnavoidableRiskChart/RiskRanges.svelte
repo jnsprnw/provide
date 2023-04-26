@@ -1,13 +1,10 @@
 <script>
   import { UNAVOIDABLE_UID } from '$src/config';
-  import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
   import { groupBy } from 'lodash-es';
   import { extent } from 'd3-array';
 
   const { data, xScale, yScale, yGet, height } = getContext('LayerCake');
-
-  export let hatchingColor;
 
   $: years = $xScale.domain();
 
@@ -35,10 +32,8 @@
   $: bandwidth = $xScale.bandwidth();
 </script>
 
-<!-- <defs>
-    <Hatching color={hatchingColor} />
-  </defs> -->
 <g>
+  <!-- Unavoidable risks -->
   <g>
     {#each years as year, yearIndex}
       <rect
@@ -46,18 +41,19 @@
         y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
         height={$height - $yGet(unavoidable.values[yearIndex])}
         width={bandwidth}
-        style:fill-opacity={0.3}
+        style:fill-opacity={0.5}
         class="fill-theme-stronger"
       />
     {/each}
   </g>
+  <!-- Avoidable risks -->
   <g>
     {#each scenariosRange as [year, min, max]}
       {@const y1 = $yScale(min)}
       {@const y2 = $yScale(max)}
       <g transform={`translate(${$xScale(year)} ,${$height - ($height - y2)})`}>
         <rect
-          style:fill-opacity={0.1}
+          style:fill-opacity={0.2}
           class="fill-theme-stronger"
           height={y1 - y2}
           width={bandwidth}

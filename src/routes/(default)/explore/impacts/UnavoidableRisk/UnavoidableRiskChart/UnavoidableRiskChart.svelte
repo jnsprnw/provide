@@ -1,7 +1,6 @@
 <script>
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import { formatValue } from '$lib/utils/formatting';
-  import { getContext } from 'svelte';
   import { Html, LayerCake, Svg } from 'layercake';
   import { scaleBand } from 'd3-scale';
   import AxisX from '$lib/charts/axes/AxisX.svelte';
@@ -15,8 +14,6 @@
   export let xKey = 'year';
   export let yKey = 'value';
   export let unit = DEFAULT_FORMAT_UID;
-
-  const theme = getContext('theme');
 
   $: formatTickY = (d) => formatValue(d, unit);
   $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
@@ -42,7 +39,7 @@
         <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
         <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
         <!-- <Message /> -->
-        <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
+        <RiskRanges />
 
         <RiskLevels />
       </Svg>

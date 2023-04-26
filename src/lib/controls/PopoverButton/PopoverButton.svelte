@@ -1,5 +1,5 @@
 <script>
-  import ExpandIcon from '$lib/helper/icons/Expand.svelte';
+  import Chevron from '$lib/helper/icons/Chevron.svelte';
   import {
     Popover,
     PopoverButton,
@@ -13,6 +13,7 @@
   export let panelPlacement = 'bottom-start';
   export let buttonClass;
   export let label;
+  export let isDropdown = false;
 
   const [popperRef, popperContent] = createPopperActions();
 
@@ -27,9 +28,10 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full text-sm text-theme-base ${buttonClass}`}
+    class={`flex gap-x-1 items-center w-full text-sm text-theme-base hover:text-theme-stronger ${buttonClass}`}
   >
     <span class="font-bold">{label}</span>
+    {#if isDropdown}<Chevron class="pointer-events-none stroke-theme-base" />{/if}
   </PopoverButton>
 
   <PopoverPanel

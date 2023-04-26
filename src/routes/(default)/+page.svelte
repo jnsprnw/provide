@@ -14,9 +14,3 @@
 <div class="mx-auto max-w-7xl px-6">
   <Entrypoints />
 </div>
-
-<style lang="postcss">
-  .paths {
-    margin: var(--space-l) 0;
-  }
-</style>
