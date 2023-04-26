@@ -42,7 +42,7 @@
         <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
         <AxisY formatTick={formatTickY} ticksHighlighted={[0, 1]} />
         <!-- <Message /> -->
-        <RiskRanges hatchingColor={$theme.color.foreground.weakest} />
+        <RiskRanges />
 
         <RiskLevels />
       </Svg>

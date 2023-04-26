@@ -1,13 +1,10 @@
 <script>
   import { UNAVOIDABLE_UID } from '$src/config';
-  import Hatching from '$lib/helper/Hatching.svelte';
   import { getContext } from 'svelte';
   import { groupBy } from 'lodash-es';
   import { extent } from 'd3-array';
 
   const { data, xScale, yScale, yGet, height } = getContext('LayerCake');
-
-  export let hatchingColor;
 
   $: years = $xScale.domain();
 
@@ -35,9 +32,6 @@
   $: bandwidth = $xScale.bandwidth();
 </script>
 
-<!-- <defs>
-    <Hatching color={hatchingColor} />
-  </defs> -->
 <g>
   <g>
     {#each years as year, yearIndex}
