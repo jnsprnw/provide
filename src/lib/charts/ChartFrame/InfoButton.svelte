@@ -33,8 +33,8 @@
       <dl>
         {#each items as item}
           <div class="flex text-sm py-1">
-            <dt class="font-bold mr-2">{item.label}</dt>
-            <dd class="min-w-10 text-foreground-weak">{item.value}</dd>
+            <dt class="text-foreground-weak mr-2">{item.label}</dt>
+            <dd class="min-w-10">{item.value}</dd>
           </div>
         {/each}
       </dl>

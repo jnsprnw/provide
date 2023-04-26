@@ -32,6 +32,7 @@
     coordinatesToContours,
   } from './utils.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
+  import { formatValue } from '$lib/utils/formatting';
 
   let displayOption = 'side-by-side';
   let year = DEFAULT_IMPACT_GEO_YEAR;
@@ -106,12 +107,15 @@
     );
 
     const { model, source, resolution } = data[0].data;
+    const formattedResolution = formatValue(resolution, 'degree', {
+      addSuffix: false,
+    });
     const chartInfo = [
       { label: 'Model', value: model },
       { label: 'Source', value: source },
       {
         label: 'Spatial resolution',
-        value: `${resolution} × ${resolution}°`,
+        value: `${formattedResolution} × ${formattedResolution}°`,
       },
     ];
 

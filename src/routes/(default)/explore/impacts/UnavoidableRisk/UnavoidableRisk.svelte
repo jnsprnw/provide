@@ -116,6 +116,11 @@
       },
     ];
 
+    const chartInfo = [
+      { label: 'Model', value: data.model },
+      { label: 'Source', value: data.source },
+    ];
+
     return {
       ...data,
       thresholds,
@@ -127,6 +132,7 @@
       source: data[KEY_SOURCE],
       downloadParams,
       downloadBaseParams,
+      chartInfo,
     };
   };
 
@@ -158,6 +164,7 @@
       downloadBaseParams={asyncProps.downloadBaseParams}
       downloadParams={asyncProps.downloadParams}
       chartUid={END_UN_AVOIDABLE_RISK}
+      chartInfo={asyncProps.chartInfo}
     >
       <div class="mb-10" slot="controls">
         {#if asyncProps.thresholds.length > 1}

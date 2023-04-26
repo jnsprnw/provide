@@ -17,6 +17,7 @@
   export let projection = 'mercator';
   export let interactive = true;
   export let bounds;
+  export let center;
   export let fitBoundsOptions;
 
   const theme = getContext('theme');
@@ -54,6 +55,7 @@
       attributionControl: false,
       minZoom: zoomRange[0] - 0.00000001,
       maxZoom: zoomRange[1],
+      center,
     });
 
     _map = $map;

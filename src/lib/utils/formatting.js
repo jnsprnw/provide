@@ -9,7 +9,7 @@ export const FORMAT_FLOAT = ',.1f';
 export const FORMAT_YEAR = '.0f';
 export const FORMAT_CELSIUS = '.1f';
 export const FORMAT_PERCENT = '.0%';
-export const FORMAT_DEGREE = '.1f';
+export const FORMAT_DEGREE = '.3~f';
 
 // the basic formatting function sued
 const f = formatLocale({
