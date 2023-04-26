@@ -9,7 +9,7 @@
 </script>
 
 <!-- <Stories {stories} /> -->
-<Globe />
+<Globe {stories} />
 
 <div class="mx-auto max-w-7xl px-6">
   <Entrypoints />

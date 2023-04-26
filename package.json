@@ -43,6 +43,7 @@
     "@sveltejs/svelte-scroller": "^2.0.7",
     "@sveltejs/svelte-virtual-list": "^3.0.1",
     "@turf/bbox": "^6.5.0",
+    "@turf/centroid": "^6.5.0",
     "@turf/difference": "^6.5.0",
     "@turf/helpers": "^6.5.0",
     "@turf/mask": "^6.5.0",

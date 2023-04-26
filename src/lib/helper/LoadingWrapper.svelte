@@ -64,12 +64,3 @@
     props={currentProps}
   />
 {/if}
-
-<style>
-  .error-message {
-    background: var(--color-background-stronger);
-    padding: var(--space-xl) 0;
-    border: 1px solid var(--color-foreground-weakest);
-    text-align: center;
-  }
-</style>

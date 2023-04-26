@@ -39,6 +39,8 @@
   $: _style = style || $theme.mapStyle;
   $: $map && mapReady && $map.setStyle(_style);
 
+  $: console.log(_style);
+
   let node;
   onMount(() => {
     $map = new mapboxgl.Map({
@@ -77,6 +79,10 @@
     $map.fitBounds(bounds, fitBoundsOptions || { padding: clientWidth / 20 });
   }
 
+  $: if ($ready && center) {
+    $map.flyTo({ center, speed: 0.25, curve: 1.2 });
+  }
+
   $: {
     if ($mapReady && $stylesReady) {
       setTimeout(() => {
@@ -98,14 +104,6 @@
       interactive ? $map[handler].enable() : $map[handler].disable()
     );
   }
-
-  // $: if (($ready, $stylesReady)) {
-  //   $map.setFilter('admin country', [
-  //     '!=',
-  //     ['index-of', 'DE', ['get', 'iso_3166_1']],
-  //     -1,
-  //   ]);
-  // }
 </script>
 
 <div
@@ -122,8 +120,5 @@
   .container {
     width: 100%;
     height: 100%;
-    &.globe {
-      aspect-ratio: 1;
-    }
   }
 </style>

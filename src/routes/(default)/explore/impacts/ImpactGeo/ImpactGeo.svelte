@@ -29,7 +29,7 @@
     coordinatesToRectGrid,
     calculateDifference,
     coordinatesToContours,
-  } from './utils.js';
+  } from '$utils/geo.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
 
@@ -87,7 +87,7 @@
           ...d.data,
         }));
 
-    const colorScale = getColorScale(renderedData);
+    const colorScale = getColorScale(renderedData.map((d) => d.data));
 
     const geoData = renderedData.map(
       ({ data, coordinatesOrigin: origin, resolution, ...d }) => {

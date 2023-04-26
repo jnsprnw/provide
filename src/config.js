@@ -29,13 +29,14 @@ export const HOT_EXTREME_UID = 'hot-extreme';
 export const PRESENT_DAY_UID = 'present-day';
 export const UNAVOIDABLE_UID = 'unavoidable';
 
-// export const DEFAULT_INDICATOR_UID = 'urban-daily-mean-max';
-// export const DEFAULT_GEOGRAPHY_UID = 'berlin';
-// export const DEFAULT_SCENARIOS_UID = ['ssp119'];
-
 export const DEFAULT_INDICATOR_UID = 'mean-temperature';
 export const DEFAULT_GEOGRAPHY_UID = 'DEU';
 export const DEFAULT_SCENARIOS_UID = ['curpol'];
+
+// Map colors...should come from tokens at some point
+export const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];
+export const NEGATIVE_RANGE = ['#437E8E', '#DACFBF'];
+export const DIVERGING_RANGE = ['#437E8E', '#F4E4D6', '#C91C1C'];
 
 // TODO: Not sure if this is the best place for these options since they are not global
 export const DEFAULT_IMPACT_GEO_YEAR = '2030';
