@@ -49,7 +49,7 @@
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
       filterKey="endYear"
-      filterLabel="Timeframes"
+      filterLabel="Pick a timeframe"
       currentUid={$CURRENT_SCENARIOS_UID}
       bind:currentFilterUid={currentTimeframe}
       items={scenarios}

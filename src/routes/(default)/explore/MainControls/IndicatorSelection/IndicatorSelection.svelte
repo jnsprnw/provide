@@ -25,7 +25,7 @@
   <Content
     filters={sectors}
     filterKey="sector"
-    filterLabel="Sectors"
+    filterLabel="Pick a sector"
     bind:currentUid={$CURRENT_INDICATOR_UID}
     bind:currentFilterUid
     items={$INDICATORS}

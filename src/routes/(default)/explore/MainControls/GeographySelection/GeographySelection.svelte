@@ -52,7 +52,7 @@
   <Content
     filters={geographyTypes}
     filterKey="geographyType"
-    filterLabel="Geography types"
+    filterLabel="Pick a location"
     currentUid={$CURRENT_GEOGRAPHY_UID}
     items={$AVAILABLE_GEOGOGRAPHIES}
     bind:currentFilterUid

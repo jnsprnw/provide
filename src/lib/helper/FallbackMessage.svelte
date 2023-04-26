@@ -13,7 +13,7 @@
 
 <div class="flex flex-col items-center justify-center py-24">
   <div class="text-xl font-bold mb-4">
-    There is no data for your current combination of parameters.
+    There is no data for your current selection.
   </div>
   <button
     class="text-theme-base"
@@ -21,6 +21,6 @@
       $CURRENT_INDICATOR_UID = DEFAULT_INDICATOR_UID;
       $CURRENT_GEOGRAPHY_UID = DEFAULT_GEOGRAPHY_UID;
       $CURRENT_SCENARIOS_UID = DEFAULT_SCENARIOS_UID;
-    }}>Reset parameters</button
+    }}>Reset</button
   >
 </div>

@@ -10,9 +10,9 @@
   export let currentFilterUid;
 
   const scenarioWarmingCategories = [
-    { uid: '1p5', label: '2050 warming around 1.5°C' },
-    { uid: 'medium', label: 'Medium 2050 warming' },
-    { uid: 'high', label: 'High 2050 warming' },
+    { uid: '1p5', label: 'Paris Agreement consistent up to 2050' },
+    { uid: 'medium', label: 'Temperature rise above 1.5°C' },
+    { uid: 'high', label: 'Temperature well above 1.5°C' },
   ];
 
   $: scenariosByCategory = scenarioWarmingCategories.map((category) => ({

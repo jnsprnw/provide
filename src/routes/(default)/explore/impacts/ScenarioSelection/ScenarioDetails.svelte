@@ -37,7 +37,7 @@
       {#if year <= scenario.endYear}
         <div class="flex flex-col gap-y-1 w-1/2">
           <dt class="block font-semibold">
-            Until <time datetime={year}>{year}</time>
+            Up until <time datetime={year}>{year}</time>
           </dt>
           <dd>
             <span class="text-foreground-weak">{description}</span>
@@ -56,9 +56,8 @@
     </div>
     <figcaption class="text-xs text-foreground-weak">
       <p class="mb-1">
-        Median lines correspond to best estimates. Learn more around
-        uncertainties <a href="#">here</a>
-        .
+        The lines in the graph represent best estimates. Learn more about
+        uncertainties <a href="/methodology">here</a>. .
       </p>
       <dl class="flex gap-4">
         <DefinitionItem term="Model" definition="FaIR v1.6.4" />
