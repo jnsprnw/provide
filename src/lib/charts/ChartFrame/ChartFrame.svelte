@@ -39,7 +39,7 @@
     <slot />
   </div>
   {#if !$IS_EMBEDED}
-    <figcaption class="flex justify-end gap-5 mt-2">
+    <figcaption class="flex justify-end items-center gap-5 mt-2">
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu embedUid={chartUid} graphParams={downloadBaseParams} />
       {#if downloadBaseParams}
