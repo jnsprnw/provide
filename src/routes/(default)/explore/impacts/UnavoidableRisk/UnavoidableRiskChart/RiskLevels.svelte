@@ -2,6 +2,9 @@
   import { UNAVOIDABLE_UID } from '$src/config';
   import { getContext } from 'svelte';
   import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
+  import tooltip from '$lib/utils/tooltip';
+  import tooltipTemplate from './tooltip-template.html?raw';
+  import renderTemplate from '$lib/utils/renderTemplate';
 
   const { data, xScale, yGet, height, xGet, yScale } = getContext('LayerCake');
 
@@ -13,18 +16,23 @@
     .sort((a, b) => Boolean(a.color) - Boolean(b.color));
 
   $: nodes = scenarios
-    .map(({ values, label: scenarioLabel, color }) => {
+    .map(({ values, label: scenario, color }) => {
       const isSelectedScenario = Boolean(color);
       return values.map(({ year, value, formattedValue }) => {
         return {
           year,
           value,
           formattedValue,
-          scenario: scenarioLabel,
+          scenario,
           color,
           isSelectedScenario,
           radius: radius - (isSelectedScenario ? 0 : 2), // The scelected scenarios are slightly bigger
           fy: isSelectedScenario ? $yScale(value) : undefined, // Fix the y-position of selected scenarios
+          tooltipContent: renderTemplate(tooltipTemplate, {
+            year,
+            formattedValue,
+            scenario,
+          }),
         };
       });
     })
@@ -65,20 +73,18 @@
 
 {#if $height > 0}
   <g>
-    {#each simulation.nodes() as { x, y, color, isSelectedScenario, radius, scenario }}
+    {#each simulation.nodes() as { x, y, color, isSelectedScenario, tooltipContent, radius, scenario }}
       <g
-        style="transform: translate({x}px, {y}px);"
+        style="transform: translate({x}px, {Math.min(y, $height)}px);"
         class="transition-transform"
-        class:opacity-70={!isSelectedScenario}
+        class:opacity-80={!isSelectedScenario}
       >
         <circle
-          class="opacity-50 stroke-[4px] stroke-background-base"
-          r={radius}
-        />
-        <circle
           class:fill-background-weakest={!isSelectedScenario}
+          class="stroke-[1.5px] stroke-background-base"
           style={`fill: ${color};`}
           r={radius}
+          use:tooltip={{ content: tooltipContent }}
         >
           <title>{scenario}</title>
         </circle>

@@ -46,7 +46,8 @@
         y={$height - ($height - $yGet(unavoidable.values[yearIndex]))}
         height={$height - $yGet(unavoidable.values[yearIndex])}
         width={bandwidth}
-        class="fill-background-weaker"
+        style:fill-opacity={0.3}
+        class="fill-theme-stronger"
       />
     {/each}
   </g>
@@ -56,7 +57,8 @@
       {@const y2 = $yScale(max)}
       <g transform={`translate(${$xScale(year)} ,${$height - ($height - y2)})`}>
         <rect
-          class="fill-background-weakest"
+          style:fill-opacity={0.1}
+          class="fill-theme-stronger"
           height={y1 - y2}
           width={bandwidth}
         />

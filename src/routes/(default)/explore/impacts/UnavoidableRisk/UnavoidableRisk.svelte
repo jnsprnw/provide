@@ -100,6 +100,8 @@
       values: unavoidableValues,
     });
 
+    console.log(data);
+
     const title =
       'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
     const description =
@@ -183,12 +185,12 @@
           {...asyncProps}
           unit="percent"
         />
-        <figcaption class="mt-2">
+        <!-- <figcaption class="mt-2">
           <span class="text-xs text-foreground-weaker"
             >To avoid overlapping of scenarios, the vertical and horizontal
             placement of each dot might not be perfectly correct.</span
           >
-        </figcaption>
+        </figcaption> -->
       </figure>
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
