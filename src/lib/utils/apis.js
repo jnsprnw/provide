@@ -35,6 +35,11 @@ export const loadFromAPI = async function (url, svelteFetch = fetch) {
   }
 };
 
+const labelsSingular = {
+  admin0: 'Country',
+  cities: 'City',
+};
+
 export const loadMetaData = function (svelteFetch = fetch) {
   return new Promise(async (resolve) => {
     const descriptionIndicators = await loadFromStrapi(
@@ -49,6 +54,10 @@ export const loadMetaData = function (svelteFetch = fetch) {
     );
     resolve({
       ...meta,
+      geographyTypes: meta.geographyTypes.map((g) => ({
+        ...g,
+        labelSingular: labelsSingular[g.uid],
+      })),
       indicators: meta.indicators.map((indicator) => {
         const description = get(
           descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),

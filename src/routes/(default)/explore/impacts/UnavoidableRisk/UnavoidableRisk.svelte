@@ -63,7 +63,6 @@
       'uid'
     ).filter((s) => s.endYear === timeframe);
 
-    console.log(mergedScenarios, timeframe);
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {
         const scenario = find(mergedScenarios, { uid });
@@ -105,8 +104,6 @@
       label: 'Unavoidable',
       values: unavoidableValues,
     });
-
-    console.log(data);
 
     const title =
       'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';

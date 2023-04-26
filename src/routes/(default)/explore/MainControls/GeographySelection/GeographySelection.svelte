@@ -57,10 +57,11 @@
     items={$AVAILABLE_GEOGOGRAPHIES}
     bind:currentFilterUid
   >
-    <div slot="items" let:items class="flex grid-flow-col">
+    <div slot="items" let:items let:currentFilterUid class="flex grid-flow-col">
       <Geographies
         {items}
         bind:hoveredItem
+        geographyType={geographyTypes.find((g) => g.uid === currentFilterUid)}
         bind:currentUid={$CURRENT_GEOGRAPHY_UID}
       />
       <div class="w-full px-3">

@@ -9,6 +9,9 @@
   export let items;
   export let currentUid;
   export let hoveredItem;
+  export let geographyType;
+
+  $: console.log(geographyType);
 
   const options = {
     includeScore: true,
@@ -76,7 +79,7 @@
       type="text"
       class="px-2 py-2 leading-8 border w-full"
       bind:value={term}
-      placeholder="Search for country…"
+      placeholder={`Search for ${geographyType?.labelSingular.toLowerCase()}…`}
     />
   </div>
   <RadioGroup
