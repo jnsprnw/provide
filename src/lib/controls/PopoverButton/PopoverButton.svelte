@@ -28,7 +28,7 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex gap-x-1 items-center w-full text-sm text-theme-base ${buttonClass}`}
+    class={`flex gap-x-1 items-center w-full text-sm text-theme-base hover:text-theme-stronger ${buttonClass}`}
   >
     <span class="font-bold">{label}</span>
     {#if isDropdown}<Chevron class="pointer-events-none stroke-theme-base" />{/if}
