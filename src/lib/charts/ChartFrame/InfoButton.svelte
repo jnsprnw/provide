@@ -24,7 +24,7 @@
   <Popover>
     <PopoverButton
       use={[popperRef]}
-      class="font-bold flex text-theme-base text-sm gap-1-2 items-center">
+      class="font-bold flex text-theme-base text-sm gap-x-1 items-center">
       <span>{label}</span>
       <Chevron class="pointer-events-none stroke-theme-base" />
     </PopoverButton>
