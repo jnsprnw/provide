@@ -3,6 +3,8 @@
   import { setContext } from 'svelte';
   import { writable } from 'svelte/store';
 
+  export let isFullWidth = false;
+
   export let query = 'scroll-section';
   export let sections;
 
@@ -35,7 +37,7 @@
         query={`.${query}`}
         threshold={0.1}
       >
-        <div slot="foreground">
+        <div slot="foreground" class={isFullWidth ? '' : 'mx-auto max-w-2xl'}>
           <slot {query} />
         </div>
       </Scroller>

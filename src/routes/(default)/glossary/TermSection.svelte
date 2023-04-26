@@ -15,5 +15,5 @@
 </header>
 <HtmlContent {content} />
 {#if footnote}<footer>
-  <a href={footnote} class="link">More information about {title}</a>
+  <a href={footnote} class="underline decoration-theme-weaker hover:decoration-theme-stronger mt-3 text-sm inline-block">More information about {title}</a>
 </footer>{/if}

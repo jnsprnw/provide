@@ -39,14 +39,22 @@ html {
   @apply max-w-3xl;
   @apply leading-relaxed;
 
+  p,
+  ul,
+  ol,
+  blockquote,
+  span {
+    @apply max-w-prose;
+  }
+
   p + p {
     @apply mt-2;
   }
 
   a {
-    @apply border-b;
-    @apply border-theme-weaker;
-    @apply hover:border-theme-stronger;
+    @apply underline;
+    @apply decoration-theme-weaker;
+    @apply hover:decoration-theme-stronger;
 
     &.btn {
       @apply border-b-0;
@@ -57,11 +65,15 @@ html {
     }
   }
 
+  img {
+    @apply my-4;
+  }
+
   ul {
     @apply ml-2;
     @apply my-2;
     @apply list-disc;
-    @apply space-y-2;
+    @apply space-y-1;
   }
 
   li {
@@ -90,7 +102,10 @@ html {
     @apply mt-4;
   }
 
-  img {
-    @apply my-4;
+  blockquote {
+    @apply p-4;
+    @apply bg-background-weaker;
+    @apply border-foreground-weakest;
+    @apply border;
   }
 }
