@@ -145,7 +145,7 @@
 
     const graphDownloadParams = {
       ...dataDownloadParams,
-      scenarios,
+      scenarios: scenarios.map((d) => d.uid),
     };
 
     return {

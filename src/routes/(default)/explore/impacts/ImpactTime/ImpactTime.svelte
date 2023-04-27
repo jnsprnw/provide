@@ -104,7 +104,10 @@
       },
     ];
 
-    const graphDownloadParams = { ...urlParams, scenarios };
+    const graphDownloadParams = {
+      ...urlParams,
+      scenarios: scenarios.map((d) => d.uid),
+    };
     return {
       impactTime,
       title: impactTime[0].title,

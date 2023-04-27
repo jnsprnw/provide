@@ -22,12 +22,12 @@
   );
 
   $: screenshotQuery = stringify({ format, width, url: graphUrl.href });
-  $: screenshotName = Object.values(graphParams).join('_');
+  $: screenshotName = Object.values(graphParams)
+    .join('_')
+    .replace(/\.|\/|\\|,/, '-');
   $: screenshotUrl = new URL(
     `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
   );
-
-  //$: console.log(graphParams, graphUrl.search);
 
   $: downloadImage = (url) => {
     loading = true;
@@ -38,7 +38,7 @@
       .then((blob) => {
         let blobUrl = window.URL.createObjectURL(blob);
         let a = document.createElement('a');
-        a.download = screenshotName.replace(/^.*[\\\/]/, '');
+        a.download = screenshotName;
         a.href = blobUrl;
         document.body.appendChild(a);
         a.click();

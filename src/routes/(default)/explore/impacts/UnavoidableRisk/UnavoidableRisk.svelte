@@ -119,7 +119,10 @@
     ];
 
     const dataDownloadParams = { ...urlParams, threshold };
-    const graphDownloadParams = { ...dataDownloadParams, scenarios };
+    const graphDownloadParams = {
+      ...dataDownloadParams,
+      scenarios: scenarios.map((d) => d.uid),
+    };
 
     const chartInfo = [
       { label: 'Model', value: data.model },

@@ -1,5 +1,5 @@
 import { browser } from '$app/environment';
-import { forEach } from 'lodash-es';
+import { filter, forEach } from 'lodash-es';
 import { parse } from 'qs';
 import {
   CURRENT_INDICATOR_UID,
@@ -14,8 +14,18 @@ const urlToStateMapping = {
   scenarios: CURRENT_SCENARIOS_UID,
 };
 
-export const parseUrlQuery = (url) =>
-  autoType(parse(url.search.replace(/^\?/, '')));
+export const parseUrlQuery = (url) => {
+  const params = parse(url.search.replace(/^\?/, ''));
+
+  // Filter out all values that are strings (not arrays) so we can pass them to autotype
+  const stringParams = Object.entries(params)
+    .filter(([key, value]) => typeof value === 'string')
+    .reduce((memo, [key, value]) => ({ ...memo, [key]: value }), {});
+  return {
+    ...params,
+    ...autoType(stringParams),
+  };
+};
 
 export function urlToState(currentUrl) {
   const url = new URL(currentUrl);
