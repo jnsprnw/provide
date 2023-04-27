@@ -14,7 +14,9 @@
     { uid: 'pdf', label: 'pdf' },
   ].map((d) => ({ ...d, disabled: !formats.includes(d.uid) }));
 
-  $: format = formats[0];
+  let format = formats[0];
+
+  $: console.log(formatOptions);
 
   let loading = false;
 
