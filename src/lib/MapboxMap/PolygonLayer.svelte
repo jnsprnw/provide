@@ -10,18 +10,17 @@
   const theme = getContext('theme');
 
   export let zoomRange = [0, 20];
-  export let selectedId = null;
   export let before = 'settlement-major-label';
 
   export let line = true;
-  export let lineId;
+  export let lineId = null;
   export let lineColor = ['coalesce', ['get', 'lineColor'], ['get', 'color']];
   export let lineWidth = 1;
   export let lineOpacity = ['coalesce', ['get', 'lineOpacity'], 1];
   export let lineOffset = 0;
 
   export let fill = false;
-  export let fillId;
+  export let fillId = null;
   export let fillColor = ['coalesce', ['get', 'fillColor'], ['get', 'color']];
   export let fillOpacity = [
     'coalesce',

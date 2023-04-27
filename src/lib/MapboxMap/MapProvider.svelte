@@ -58,6 +58,7 @@
       minZoom: zoomRange[0] - 0.00000001,
       maxZoom: zoomRange[1],
       center,
+      preserveDrawingBuffer: true,
     });
 
     _map = $map;

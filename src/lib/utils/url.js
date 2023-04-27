@@ -24,5 +24,6 @@ export function urlToState(currentUrl) {
     else url.searchParams.delete(key);
     store.set(param);
   });
-  if (browser) window.history.replaceState(null, null, url.href);
+  if (browser)
+    window.history.replaceState(window.history.state, null, url.href);
 }

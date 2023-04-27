@@ -20,4 +20,6 @@
   // });
 </script>
 
-<svelte:component this={component} />
+<div class="embed">
+  <svelte:component this={component} />
+</div>

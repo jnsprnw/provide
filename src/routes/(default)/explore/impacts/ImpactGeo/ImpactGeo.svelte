@@ -34,9 +34,9 @@
   import { formatValue } from '$lib/utils/formatting';
 
   export let title;
+  export let year = DEFAULT_IMPACT_GEO_YEAR;
 
   let displayOption = 'side-by-side';
-  let year = DEFAULT_IMPACT_GEO_YEAR;
 
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
