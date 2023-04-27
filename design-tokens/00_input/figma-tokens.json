@@ -876,6 +876,11 @@
         }
       },
       "theme": {
+        "weakest": {
+          "value": "#D5E1E8",
+          "type": "color",
+          "description": "Weaker version of theme color"
+        },
         "weaker": {
           "value": "#316F91",
           "type": "color",
@@ -888,6 +893,11 @@
         },
         "stronger": {
           "value": "#0E3950",
+          "type": "color",
+          "description": "Stronger version of theme color"
+        },
+        "strongest": {
+          "value": "#08202D",
           "type": "color",
           "description": "Stronger version of theme color"
         }
