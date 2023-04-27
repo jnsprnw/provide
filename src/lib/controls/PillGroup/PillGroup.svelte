@@ -22,12 +22,14 @@
   class="overflow-scroll flex flex-wrap {classes.group}"
 >
   {#each options as option}
-    <RadioGroupOption value={option.uid} let:checked>
+    <RadioGroupOption value={option.uid} let:checked disabled={option.disabled}>
       <span
         class="bg-background-base rounded-full inline-block {classes.button}"
         class:bg-theme-base={checked}
         class:text-background-base={checked}
         class:text-theme-base={!checked}
+        class:cursor-not-allowed={option.disabled}
+        class:opacity-50={option.disabled}
         class:font-bold={checked}>{option.label}</span
       >
     </RadioGroupOption>

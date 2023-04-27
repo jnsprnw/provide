@@ -12,6 +12,7 @@
   export let dataDownloadParams;
   export let dataDownloadOptions;
   export let graphDownloadParams;
+  export let graphDownloadSettings;
   export let chartUid;
   export let templateProps;
   export let chartInfo = [];
@@ -44,6 +45,7 @@
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu
         embedUid={chartUid}
+        {...graphDownloadSettings}
         graphParams={graphDownloadParams}
       />
       <DataDownloadMenu

@@ -7,12 +7,14 @@
   export let graphParams = {};
   export let width = 1000;
   export let embedUid;
+  export let formats = ['png', 'pdf'];
 
-  const formats = [
+  $: formatOptions = [
     { uid: 'png', label: 'png' },
     { uid: 'pdf', label: 'pdf' },
-  ];
-  let format = 'png';
+  ].map((d) => ({ ...d, disabled: !formats.includes(d.uid) }));
+
+  $: format = formats[0];
 
   let loading = false;
 
@@ -54,7 +56,7 @@
       <span class="col-span-2 text-foreground-weak text-sm">Format</span>
 
       <div class="col-span-5 col-start-3">
-        <PillGroup size="sm" options={formats} bind:currentUid={format} />
+        <PillGroup size="sm" options={formatOptions} bind:currentUid={format} />
       </div>
     </div>
     <button
