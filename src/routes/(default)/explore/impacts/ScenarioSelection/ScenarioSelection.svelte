@@ -26,7 +26,7 @@
       isSelected: !!current,
       isHighlighted: hoveredScenarioUid
         ? hoveredScenarioUid === scenario.uid
-        : i === 0,
+        : !!current,
     };
   });
 
@@ -37,7 +37,7 @@
   $: renderedScenario = scenarios.find((s) => s.isHighlighted);
 </script>
 
-<div class="relative">
+<div class="relative pr-8">
   <PopoverSelect
     label="Scenario"
     {buttonLabel}

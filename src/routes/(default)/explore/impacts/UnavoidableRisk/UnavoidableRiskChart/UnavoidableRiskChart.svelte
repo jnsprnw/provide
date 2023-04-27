@@ -18,7 +18,7 @@
   $: formatTickY = (d) => formatValue(d, unit);
   $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
 
-  const padding = { top: 5, right: 0, bottom: 20, left: 0 };
+  const padding = { top: 5, right: 0, bottom: 20, left: 40 };
   $: flatData = data.reduce((memo, group) => {
     return memo.concat(group.values);
   }, []);

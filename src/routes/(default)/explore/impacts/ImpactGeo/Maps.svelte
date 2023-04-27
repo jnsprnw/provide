@@ -25,6 +25,11 @@
 
   $: masked = mask(geoShape);
   let interactive = false;
+  $: aspectRatio = {
+    '1': 'aspect-[1.3]',
+    '2': 'aspect-[1.5]',
+    '3': 'aspect-[1.7]',
+  }[geoData.length];
 </script>
 
 <div class="flex items-center justify-end">
@@ -32,7 +37,7 @@
 </div>
 
 <div
-  class={`aspect-[1.3] flex gap-2 cols-${geoData.length} relative animate-defer-visibility`}
+  class={`${aspectRatio} flex gap-2 cols-${geoData.length} relative animate-defer-visibility`}
 >
   {#key geoData.length}
     {#each geoData as d, i}

@@ -9,6 +9,7 @@
 <span
   class:text-theme-base={selected}
   class:font-bold={selected}
+  class:border-r-3={selected}
   class="py-1 px-5 hover:bg-background-weaker whitespace-nowrap flex cursor-pointer gap-1 border-theme-base"
   on:focus={() => (hovered = uid)}
   on:mouseover={() => (hovered = uid)}

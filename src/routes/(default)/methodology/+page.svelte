@@ -32,12 +32,12 @@
       component: SectionIntro,
       content: scenariosIntro,
       sections: [
-        {
-          title: 'Scenario finder',
-          slug: 'scenario-finder',
-          component: ScenarioSelector,
-          scenarios: $SCENARIOS,
-        },
+        // {
+        //   title: 'Scenario finder',
+        //   slug: 'scenario-finder',
+        //   component: ScenarioSelector,
+        //   scenarios: $SCENARIOS,
+        // },
         ...scenarios.map((s) => ({ ...s, component: ScenarioSection })),
       ],
     },

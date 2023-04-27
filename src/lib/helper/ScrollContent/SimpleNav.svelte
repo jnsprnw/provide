@@ -12,7 +12,7 @@
       class:opacity-50={disabled}
       class:pointer-events-none={disabled}
       href={`#${slug}`}
-      class="inline-block w-48 pl-3 border-l-3"
+      class="inline-block py-3 pl-2 pr-12 border-r-3 hover:bg-background-weaker"
       class:border-theme-base={isActive}
       class:border-transparent={!isActive}
       aria-current={isActive ? 'step' : 'false'}

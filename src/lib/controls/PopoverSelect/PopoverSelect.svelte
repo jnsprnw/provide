@@ -44,10 +44,12 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full rounded  bg-background-base justify-between text-theme-base ${classes.button} ${buttonClass}`}
+    class={`flex w-full rounded  bg-background-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass}`}
   >
-    <span class="font-bold">{buttonLabel}</span>
-    <ExpandIcon isOpen={open} />
+    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis"
+      >{buttonLabel}</span
+    >
+    <ExpandIcon class="min-w-[20px] grow-1" isOpen={open} />
   </PopoverButton>
 
   <PopoverPanel
