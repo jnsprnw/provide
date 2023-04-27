@@ -28,7 +28,6 @@
     "postcss-nested": "^6.0.0",
     "postcss-scss": "^4.0.6",
     "sass": "^1.62.0",
-    "squirrelly": "^8.0.8",
     "svelte": "^3.48.0",
     "svelte-preprocess": "^5.0.3",
     "svelte-preprocess-import-assets": "^1.0.0",

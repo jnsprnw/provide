@@ -23,11 +23,6 @@ const config = {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
     __APP_NAME__: JSON.stringify(process.env.npm_package_name),
   },
-  build: {
-    commonjsOptions: {
-      transformMixedEsModules: true, // Used for squirelly. Solution for this https://github.com/squirrellyjs/squirrelly/issues/240#issuecomment-1484990567
-    },
-  },
 };
 
 export default config;
