@@ -67,15 +67,16 @@
 </script>
 
 <figure
-  class="h-[70vh] grid grid-cols-5 relative overflow-hidden bg-theme-stronger relative"
+  class="h-[70vh] grid grid-cols-5 overflow-hidden bg-theme-stronger relative"
 >
-  <div class="col-span-3 h-[130%] bg-theme-strongest">
+  <div class="col-span-3 row-start-1 col-start-1 h-[130%] bg-theme-strongest">
     <LoadingWrapper
       asyncProps={{ shape: $GEO_SHAPE, grid: $GEO_DATA }}
       {process}
       let:asyncProps
     >
       <MapProvider
+        interactive={false}
         projection="globe"
         style="mapbox://styles/climateanalytics/clgxes1uo00c301qy9m8ubl5e"
         center={asyncProps.center}
@@ -104,9 +105,12 @@
       </MapProvider>
     </LoadingWrapper>
   </div>
+  <div
+    class="col-span-3 row-start-1 col-start-1 z-10 h-1/2 self-end bg-gradient-to-t from-theme-stronger/60"
+  />
   <figcaption class="pl-8 col-span-2 self-center col-start-4">
     <p
-      class="text-3xl text-background-base font-bold max-w-md leading-normal mb-8"
+      class="text-3xl text-background-base font-bold max-w-md leading-snug mb-12"
     >
       How will {currentStory.indicator.label} in {currentStory.geography
         .emoji}&nbsp;{currentStory.geography.label} develop under a {currentStory
