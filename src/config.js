@@ -42,23 +42,23 @@ export const DIVERGING_RANGE = ['#437E8E', '#F4E4D6', '#C91C1C'];
 export const DEFAULT_IMPACT_GEO_YEAR = '2030';
 export const IMPACT_GEO_YEARS = [
   {
-    uid: '2030',
+    uid: 2030,
     label: '2030',
   },
   {
-    uid: '2050',
+    uid: 2050,
     label: '2050',
   },
   {
-    uid: '2100',
+    uid: 2100,
     label: '2100',
   },
   {
-    uid: '2200',
+    uid: 2200,
     label: '2200',
   },
   {
-    uid: '2300',
+    uid: 2300,
     label: '2300',
   },
 ];

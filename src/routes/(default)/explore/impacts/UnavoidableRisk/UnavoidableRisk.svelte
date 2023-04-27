@@ -28,7 +28,7 @@
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
-  let currentThreshold;
+  export let threshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
   export let title;
@@ -43,14 +43,14 @@
       },
     });
 
-  $: process = ({ data }, { scenarios, allScenarios, downloadBaseParams }) => {
+  $: process = ({ data }, { scenarios, allScenarios, urlParams }) => {
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
     }));
 
     const hasThresholds = data.thresholds.length;
-    let thresholdIndex = data.thresholds.indexOf(currentThreshold);
+    let thresholdIndex = data.thresholds.indexOf(threshold);
 
     if (thresholdIndex === -1) {
       thresholdIndex = hasThresholds
@@ -58,7 +58,9 @@
         : 0;
     }
 
-    currentThreshold = data.thresholds[thresholdIndex];
+    console.log(data.thresholds);
+
+    threshold = data.thresholds[thresholdIndex];
     const timeframe = scenarios[0].timeframe[1];
     const mergedScenarios = uniqBy(
       [...scenarios, ...allScenarios],
@@ -107,11 +109,6 @@
       values: unavoidableValues,
     });
 
-    const title =
-      'Avoidable and unavoidable change in {{indicator.label}} under different scenarios';
-    const description =
-      'This chart shows the risk of {{indicator.label}} in {{geography.label}} exceeding a threshold of {{threshold}} {{indicatorUnit.label}}. Each vertical bar represents a snapshot in a given year. The areas at the bottom shows the extent of the impact that is unavoidable. The area at the top shows what can still be avoided under each of the scenarios.';
-
     const downloadParams = [
       {
         uid: 'format',
@@ -123,6 +120,8 @@
       },
     ];
 
+    const downloadBaseParams = { ...urlParams, threshold };
+
     const chartInfo = [
       { label: 'Model', value: data.model },
       { label: 'Source', value: data.source },
@@ -131,8 +130,8 @@
     return {
       ...data,
       thresholds,
-      title: data.title || title,
-      description: data.description || description,
+      title: data.title,
+      description: data.description,
       data: processedScenarios,
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
@@ -159,9 +158,9 @@
     props={{
       ...$TEMPLATE_PROPS,
       allScenarios: $AVAILABLE_SCENARIOS,
-      threshold: currentThreshold,
+      threshold,
       legendItems,
-      downloadBaseParams: $URL_PARAMS,
+      urlParams: $URL_PARAMS,
     }}
   >
     <ChartFrame
@@ -179,7 +178,7 @@
           <Select
             label="Threshold"
             options={asyncProps.thresholds}
-            bind:value={currentThreshold}
+            bind:value={threshold}
           />
         {/if}
       </div>

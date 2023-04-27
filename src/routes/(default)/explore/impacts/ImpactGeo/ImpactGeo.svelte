@@ -35,8 +35,7 @@
 
   export let title;
   export let year = DEFAULT_IMPACT_GEO_YEAR;
-
-  let displayOption = 'side-by-side';
+  export let displayOption = 'side-by-side';
 
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
@@ -120,12 +119,6 @@
       },
     ];
 
-    const title =
-      'Change in {{indicator.label}} in {{geography.label}} in {{year}}';
-
-    const description =
-      'This map shows the change in {{indicator.label}} (expressed in {{indicator.unit.labelLong}}) in {{geography.label}} in {{year}}.';
-
     const downloadParams = [
       {
         uid: 'scenario',
@@ -146,6 +139,7 @@
 
     const downloadBaseParams = {
       ...urlParams,
+      displayOption,
       year,
     };
 
@@ -153,8 +147,8 @@
       showDifference,
       geoData,
       geoShape: shape.data.data.features[0],
-      title: data[0].data.title || title,
-      description: data[0].data.description || description,
+      title: data[0].data.title,
+      description: data[0].data.description,
       colorScale,
       chartInfo,
       downloadBaseParams,

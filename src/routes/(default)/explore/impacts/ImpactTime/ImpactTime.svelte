@@ -44,6 +44,8 @@
         yearStart,
         yearStep,
         data,
+        description,
+        title,
         [MODEL]: model,
         [SOURCE]: source,
         parameters,
@@ -58,6 +60,8 @@
         parameters,
         model,
         source,
+        description,
+        title,
         values: indicatorData.map((values, i) => {
           const gmt = scenario[MEAN_TEMPERATURE_UID][i].value;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
@@ -83,12 +87,6 @@
       },
     ];
 
-    const description = `This graph showes how changes in {{indicator.label}} (expressed in {{indicatorUnit.labelLong}}) will play out over time in 
-  {{geography.label}}, according to the selected scenario. The line indicates 
-  the median estimate for this scenario`;
-
-    const title = 'Change in {{indicator.label}} in {{geography.label}}';
-
     const downloadParams = [
       {
         uid: 'scenario',
@@ -107,8 +105,8 @@
 
     return {
       impactTime,
-      title: impactTime[0].title || title,
-      description: impactTime[0].description || description,
+      title: impactTime[0].title,
+      description: impactTime[0].description,
       hasSingleScenario,
       chartInfo,
       downloadParams,

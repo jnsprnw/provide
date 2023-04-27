@@ -1,6 +1,6 @@
 <script>
   import { page } from '$app/stores';
-  import { urlToState } from '$lib/utils/url';
+  import { parseUrlQuery, urlToState } from '$lib/utils/url';
   //import { onMount } from 'svelte';
   import ImpactTime from '$routes/(default)/explore/impacts/ImpactTime/ImpactTime.svelte';
   import ImpactGeo from '$routes/(default)/explore/impacts/ImpactGeo/ImpactGeo.svelte';
@@ -13,6 +13,7 @@
   };
 
   $: urlToState($page.url);
+  $: urlParams = parseUrlQuery($page.url);
   $: component = embeds[$page.params.embed];
 
   // onMount(async () => {
@@ -21,5 +22,5 @@
 </script>
 
 <div class="embed">
-  <svelte:component this={component} />
+  <svelte:component this={component} {...urlParams} />
 </div>

@@ -6,12 +6,16 @@ import {
   CURRENT_GEOGRAPHY_UID,
   CURRENT_SCENARIOS_UID,
 } from '$stores/state.js';
+import { autoType } from 'd3-dsv';
 
 const urlToStateMapping = {
   indicator: CURRENT_INDICATOR_UID,
   geography: CURRENT_GEOGRAPHY_UID,
   scenarios: CURRENT_SCENARIOS_UID,
 };
+
+export const parseUrlQuery = (url) =>
+  autoType(parse(url.search.replace(/^\?/, '')));
 
 export function urlToState(currentUrl) {
   const url = new URL(currentUrl);
