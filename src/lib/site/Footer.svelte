@@ -7,7 +7,7 @@
     <nav class="text-theme-base">
       <ul>
         <li><a class="text-sm" href="/about">About</a></li>
-        <li><a class="text-sm" href="/methodology">Methodology</a></li>
+        <li><a class="text-sm" href="/documentation">Methodology</a></li>
         <li><a class="text-sm" href="/glossary">Glossary</a></li>
         <li><a class="text-sm" href="/contact">Contact</a></li>
       </ul>

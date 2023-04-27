@@ -57,7 +57,10 @@
     <figcaption class="text-xs text-foreground-weak">
       <p class="mt-1 mb-2 text-foreground-weaker">
         The lines in the graph represent best estimates. Learn more about
-        uncertainties <a class="underline decoration-theme-weakest hover:decoration-theme-weaker" href="/methodology">here</a>.
+        uncertainties <a
+          class="underline decoration-theme-weakest hover:decoration-theme-weaker"
+          href="/documentation">here</a
+        >.
       </p>
       <dl class="flex gap-4">
         <DefinitionItem term="Model" definition="FaIR v1.6.4" />

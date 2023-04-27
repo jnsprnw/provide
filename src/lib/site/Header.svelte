@@ -5,7 +5,7 @@
   const items = [
     { href: '/explore/impacts', label: 'Explore' },
     { href: '/about', label: 'About' },
-    { href: '/methodology', label: 'Methodology' },
+    { href: '/documentation', label: 'Documentation' },
     { href: '/glossary', label: 'Glossary' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -17,8 +17,12 @@
       <h1 class="text-theme-base font-bold uppercase tracking-widest">
         <NavLink href="/">Provide</NavLink>
       </h1>
-      <span class="px-3 text-foreground-weakest" role="presentation" aria-hidden="true">|</span>
-      <span class="text-foreground-weak">{ TITLE_SITE }</span>
+      <span
+        class="px-3 text-foreground-weakest"
+        role="presentation"
+        aria-hidden="true">|</span
+      >
+      <span class="text-foreground-weak">{TITLE_SITE}</span>
     </div>
     <ul class="flex gap-x-5">
       {#each items as { label, href }}
@@ -38,7 +42,7 @@
   const items = [
     { href: '/explore/impacts', label: 'Explore' },
     { href: '/about', label: 'About' },
-    { href: '/methodology', label: 'Methodology' },
+    { href: '/documentation', label: 'Methodology' },
     { href: '/glossary', label: 'Glossary' },
     { href: '/contact', label: 'Contact' },
   ];

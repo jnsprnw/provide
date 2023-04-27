@@ -57,7 +57,7 @@
       <a
         slot="header-link"
         class="text-sm text-theme-base font-bold flex gap-1.5 items-center"
-        href="/methodology#scenarios"
+        href="/documentation#scenarios"
         ><span
           class="flex align-center justify-center text-xs w-4 h-4 rounded-full bg-theme-base text-background-base"
           >?</span
