@@ -24,9 +24,11 @@
   // });
 </script>
 
-<div class="embed p-6">
+<div class="embed p-6 pb-3">
   <svelte:component this={component} {...urlParams} />
-  <div class="text-sm text-foreground-weak">
+  <div
+    class="text-sm text-foreground-weak border-t border-foreground-weaker pt-2 mt-2"
+  >
     Visit <a class="text-theme-base" href={import.meta.env.VITE_APP_URL}
       >{import.meta.env.VITE_APP_URL.replace(/http(s)?:\/\//, '')}</a
     > for more information
