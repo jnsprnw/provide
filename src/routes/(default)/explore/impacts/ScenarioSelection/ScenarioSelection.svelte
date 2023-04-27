@@ -10,7 +10,12 @@
   import ScenarioDetails from './ScenarioDetails.svelte';
   import ScenarioList from './ScenarioList.svelte';
 
-  let hoveredScenarioUid;
+  function getFirstSelectedScenario() {
+    // TODO: Improve to get first scenario from first category
+    return $CURRENT_SCENARIOS[0]?.uid ?? null;
+  }
+
+  let hoveredScenarioUid = getFirstSelectedScenario();
   let currentTimeframe;
 
   $: buttonLabel =
@@ -37,7 +42,7 @@
   $: renderedScenario = scenarios.find((s) => s.isHighlighted);
 </script>
 
-<div class="relative">
+<div class="relative" on:mouseleave={() => (hoveredScenarioUid = getFirstSelectedScenario())}>
   <PopoverSelect
     label="Scenario"
     {buttonLabel}
