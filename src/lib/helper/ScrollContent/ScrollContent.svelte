@@ -7,6 +7,7 @@
 
   export let query = 'scroll-section';
   export let sections;
+  export let navContainerClass = '';
 
   let count;
   let offset;
@@ -23,7 +24,7 @@
 <!-- Required so scroller gets re executed when sections change -->
 {#key sections}
   <div class="grid grid-cols-12 gap-10 pt-8 mx-auto max-w-7xl px-6">
-    <div class="col-span-3">
+    <div class="col-span-3 {navContainerClass}">
       <div class="sticky top-0 z-[3]">
         <slot name="navigation" />
       </div>

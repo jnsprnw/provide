@@ -54,7 +54,12 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent let:query {sections} isFullWidth={true}>
+<ScrollContent
+  let:query
+  {sections}
+  isFullWidth={true}
+  navContainerClass="border-r border-foreground-weakest"
+>
   <nav slot="navigation" class="flex flex-col gap-10 pr-10">
     <ScenarioSelection />
     <SimpleNav {sections} />
