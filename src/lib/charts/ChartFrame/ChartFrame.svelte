@@ -22,7 +22,7 @@
   style:width={$IS_EMBEDED ? '1200px' : undefined}
 >
   <header class="mb-4 max-w-2xl">
-    <Tagline color="text-foreground-weak">{tagline}</Tagline>
+    {#if tagline}<Tagline color="text-foreground-weak">{tagline}</Tagline>{/if}
     <h3 class="font-bold text-2xl mb-3">
       <Template template={title} data={templateProps} />
     </h3>

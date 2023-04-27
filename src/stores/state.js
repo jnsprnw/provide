@@ -20,7 +20,12 @@ import {
 } from '../config.js';
 import { formatList, formatObjArr, formatReadableList } from '$lib/utils.js';
 
+// Set to true if is in embed mode e.g. if the url is /embed/something
 export const IS_EMBEDED = writable(false);
+
+// Set to true for generating screenshots when we don't want
+//to display controls n stuff, derived from &static=true url parameter
+export const IS_STATIC = writable(false);
 
 /*
  * INDICATOR STATE

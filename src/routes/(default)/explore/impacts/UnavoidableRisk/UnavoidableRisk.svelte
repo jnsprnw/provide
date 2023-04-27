@@ -183,7 +183,7 @@
         {/if}
       </div>
       <ColorLegend items={props.legendItems} />
-      <figure class="aspect-[2.1]">
+      <figure class="aspect-[2.5]">
         <UnavoidableRiskChart
           {isLoading}
           {...props}
