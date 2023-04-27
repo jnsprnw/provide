@@ -31,7 +31,7 @@
       on:focus={() => (hoveredScenarioUid = scenario.uid)}
       on:mouseover={() => (hoveredScenarioUid = scenario.uid)}
       on:mouseleave={() => (hoveredScenarioUid = null)}
-      class="pl-4 pr-2 py-1.5 border-l-3 whitespace-nowrap"
+      class="pl-4 pr-2 py-1.5 border-l-3 whitespace-nowrap grid grid-cols-[auto_1fr_auto] gap-x-2 items-center"
       class:bg-background-weaker={highlightedScenarioUid === scenario.uid}
       class:border-theme-base={scenario.isSelected}
       class:border-transparent={!scenario.isSelected}
