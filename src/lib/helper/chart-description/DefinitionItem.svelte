@@ -8,7 +8,7 @@
   <dt class="font-bold text-foreground-base">{term}</dt>
   {#if href}
     <dd>
-      <a {href} target="_blank" rel="noreferrer" class="text-theme-base"
+      <a {href} target="_blank" rel="noreferrer external" class="text-theme-base"
         >{definition}</a
       >
     </dd>

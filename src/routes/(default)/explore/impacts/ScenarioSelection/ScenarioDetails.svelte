@@ -37,7 +37,7 @@
       {#if year <= scenario.endYear}
         <div class="flex flex-col gap-y-1 w-1/2">
           <dt class="block font-semibold">
-            Up until <time datetime={year}>{year}</time>
+            Up to <time datetime={year}>{year}</time>
           </dt>
           <dd>
             <span class="text-foreground-weak">{description}</span>
@@ -55,9 +55,9 @@
       <LineChart yDomain={[1, 3]} data={chartData} />
     </div>
     <figcaption class="text-xs text-foreground-weak">
-      <p class="mb-1">
+      <p class="mt-1 mb-2 text-foreground-weaker">
         The lines in the graph represent best estimates. Learn more about
-        uncertainties <a href="/methodology">here</a>. .
+        uncertainties <a class="underline decoration-theme-weakest hover:decoration-theme-weaker" href="/methodology">here</a>.
       </p>
       <dl class="flex gap-4">
         <DefinitionItem term="Model" definition="FaIR v1.6.4" />
