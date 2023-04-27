@@ -39,7 +39,7 @@ export const NEGATIVE_RANGE = ['#437E8E', '#DACFBF'];
 export const DIVERGING_RANGE = ['#437E8E', '#F4E4D6', '#C91C1C'];
 
 // TODO: Not sure if this is the best place for these options since they are not global
-export const DEFAULT_IMPACT_GEO_YEAR = '2030';
+export const DEFAULT_IMPACT_GEO_YEAR = 2030;
 export const IMPACT_GEO_YEARS = [
   {
     uid: 2030,

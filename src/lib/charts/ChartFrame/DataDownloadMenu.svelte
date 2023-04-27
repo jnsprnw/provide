@@ -4,12 +4,12 @@
   import { stringify } from 'qs';
   import { writable } from 'svelte/store';
 
-  export let baseParams;
-  export let params = [];
+  export let params;
+  export let options = [];
   export let endpoint;
 
   let selectedParams = writable(
-    params.reduce(
+    options.reduce(
       (memo, param) => ({
         ...memo,
         [param.uid]: param.options[0].uid,
@@ -18,13 +18,13 @@
     )
   );
 
-  $: queryParameters = { ...baseParams, ...$selectedParams };
+  $: queryParameters = { ...params, ...$selectedParams };
   $: query = stringify(queryParameters);
   $: url = new URL(
     `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`
   );
 
-  $: maxVersions = params.reduce(
+  $: maxVersions = options.reduce(
     (memo, param) => param.options.length * memo,
     1
   );
@@ -33,7 +33,7 @@
 {#if maxVersions > 1}
   <PopoverButton label="Download data">
     <div class="max-w-xs px-3 pb-3">
-      {#each params as param}
+      {#each options as param}
         <div
           class="py-2.5 grid grid-cols-7 gap-2 border-t items-center border-foreground-weakest first:border-none"
         >

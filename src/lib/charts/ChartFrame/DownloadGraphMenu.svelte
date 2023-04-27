@@ -1,10 +1,11 @@
 <script>
   import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
   import PopoverButton from '$lib/controls/PopoverButton/PopoverButton.svelte';
+  import Spinner from '$lib/helper/Spinner.svelte';
   import { stringify } from 'qs';
 
   export let graphParams = {};
-  export let width = 1200;
+  export let width = 1000;
   export let embedUid;
 
   const formats = [
@@ -13,15 +14,38 @@
   ];
   let format = 'png';
 
-  $: graphQuery = stringify(graphParams);
+  let loading = false;
+
+  $: graphQuery = stringify({ ...graphParams, static: true });
   $: graphUrl = new URL(
     `${import.meta.env.VITE_APP_URL}/embed/${embedUid}/?${graphQuery}`
   );
 
   $: screenshotQuery = stringify({ format, width, url: graphUrl.href });
+  $: screenshotName = Object.values(graphParams).join('_');
   $: screenshotUrl = new URL(
     `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
   );
+
+  //$: console.log(graphParams, graphUrl.search);
+
+  $: downloadImage = (url) => {
+    loading = true;
+    fetch(screenshotUrl)
+      .then((response) => {
+        return response.blob();
+      })
+      .then((blob) => {
+        let blobUrl = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.download = screenshotName.replace(/^.*[\\\/]/, '');
+        a.href = blobUrl;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        loading = false;
+      });
+  };
 </script>
 
 <PopoverButton label="Download graph" isDropdown={true}>
@@ -33,10 +57,11 @@
         <PillGroup size="sm" options={formats} bind:currentUid={format} />
       </div>
     </div>
-    <div class="bg-background-weaker text-center py-2">
-      <a href={screenshotUrl} class="text-theme-base font-bold text-sm" download
-        >Download graph</a
-      >
-    </div>
+    <button
+      on:click={downloadImage}
+      class="bg-background-weaker w-full py-2 text-theme-base font-bold text-sm flex gap-3 items-center justify-center"
+      download
+      >{#if loading}<Spinner size={15} strokeWidth={2} />{/if} Download graph</button
+    >
   </div>
 </PopoverButton>

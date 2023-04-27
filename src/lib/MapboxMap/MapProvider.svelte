@@ -3,6 +3,7 @@
   import 'mapbox-gl/dist/mapbox-gl.css';
   import { getContext, setContext, onMount } from 'svelte';
   import { writable } from 'svelte/store';
+  import { IS_STATIC } from '$stores/state';
 
   let clazz;
   let _map;
@@ -39,7 +40,13 @@
   $: _style = style || $theme.mapStyle;
   $: $map && mapReady && $map.setStyle(_style);
 
-  $: console.log(_style);
+  // $: console.warn(
+  //   '===================================================================='
+  // );
+  // $: console.warn($IS_STATIC);
+  // $: console.warn(
+  //   '===================================================================='
+  // );
 
   let node;
   onMount(() => {
@@ -58,7 +65,7 @@
       minZoom: zoomRange[0] - 0.00000001,
       maxZoom: zoomRange[1],
       center,
-      preserveDrawingBuffer: true,
+      preserveDrawingBuffer: $IS_STATIC,
     });
 
     _map = $map;
@@ -108,7 +115,7 @@
 </script>
 
 <div
-  class="map container {projection} {clazz}"
+  class="map w-full h-full {projection} {clazz}"
   bind:clientWidth
   bind:this={node}
 >
@@ -116,10 +123,3 @@
     <slot />
   {/if}
 </div>
-
-<style lang="postcss">
-  .container {
-    width: 100%;
-    height: 100%;
-  }
-</style>

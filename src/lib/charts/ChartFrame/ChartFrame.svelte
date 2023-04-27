@@ -9,8 +9,9 @@
   export let tagline;
   export let title;
   export let description;
-  export let downloadBaseParams;
-  export let downloadParams;
+  export let dataDownloadParams;
+  export let dataDownloadOptions;
+  export let graphDownloadParams;
   export let chartUid;
   export let templateProps;
   export let chartInfo = [];
@@ -41,14 +42,15 @@
   {#if !$IS_EMBEDED}
     <figcaption class="flex justify-end items-center gap-4 mt-2">
       <InfoButton label="About the data" items={chartInfo} />
-      <DownloadGraphMenu embedUid={chartUid} graphParams={downloadBaseParams} />
-      {#if downloadBaseParams}
-        <DataDownloadMenu
-          endpoint={chartUid}
-          params={downloadParams}
-          baseParams={downloadBaseParams}
-        />
-      {/if}
+      <DownloadGraphMenu
+        embedUid={chartUid}
+        graphParams={graphDownloadParams}
+      />
+      <DataDownloadMenu
+        endpoint={chartUid}
+        options={dataDownloadOptions}
+        params={dataDownloadParams}
+      />
       <!-- <Menu label="Download" options={downloadOptions} /> -->
     </figcaption>
   {:else}

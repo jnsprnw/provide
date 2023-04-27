@@ -218,13 +218,6 @@ export const AVAILABLE_TIMEFRAMES = derived(
 );
 
 /* UTILITY N STUFF */
-// Utility boolean to see if all the main parameters are selected
-export const ALL_PARAMETERS_SELECTED = derived(
-  [CURRENT_GEOGRAPHY, CURRENT_SCENARIOS, CURRENT_INDICATOR],
-  ([geography, scenarios, indicator]) =>
-    geography && scenarios.length && indicator
-);
-
 export const IS_COMBINATION_AVAILABLE = derived(
   [CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID],
   ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID, $CURRENT_SCENARIOS_UID]) => {
@@ -264,9 +257,9 @@ export const TEMPLATE_PROPS = derived(
   }
 );
 
-// Object holding the parameters that are needed in every data request
+// Object holding the parameters that are needed in every data download request
 // scenario are not included since scenarios are specified as individual requests
-export const URL_PARAMS = derived(
+export const DOWNLOAD_URL_PARAMS = derived(
   [
     CURRENT_GEOGRAPHY_UID,
     CURRENT_INDICATOR_UID,
@@ -279,6 +272,27 @@ export const URL_PARAMS = derived(
   ]) => ({
     geography: $CURRENT_GEOGRAPHY,
     indicator: $CURRENT_INDICATOR,
+    ...$CURRENT_INDICATOR_OPTION_VALUES,
+  })
+);
+
+// Object holding the parameters that are needed in every graph download request
+export const GRAPH_URL_PARAMS = derived(
+  [
+    CURRENT_GEOGRAPHY_UID,
+    CURRENT_INDICATOR_UID,
+    CURRENT_SCENARIOS_UID,
+    CURRENT_INDICATOR_OPTION_VALUES,
+  ],
+  ([
+    $CURRENT_GEOGRAPHY,
+    $CURRENT_INDICATOR,
+    $CURRENT_SCENARIOS_UID,
+    $CURRENT_INDICATOR_OPTION_VALUES,
+  ]) => ({
+    geography: $CURRENT_GEOGRAPHY,
+    indicator: $CURRENT_INDICATOR,
+    scenarios: $CURRENT_SCENARIOS_UID,
     ...$CURRENT_INDICATOR_OPTION_VALUES,
   })
 );

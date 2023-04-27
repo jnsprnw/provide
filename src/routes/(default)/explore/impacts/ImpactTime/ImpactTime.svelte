@@ -7,7 +7,8 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE,
-    URL_PARAMS,
+    DOWNLOAD_URL_PARAMS,
+    GRAPH_URL_PARAMS,
   } from '$stores/state.js';
   import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -36,7 +37,7 @@
       }))
     );
 
-  $: process = ({ impactTimeData }, { scenarios, downloadBaseParams }) => {
+  $: process = ({ impactTimeData }, { scenarios, graphParams, urlParams }) => {
     const impactTime = impactTimeData.map((datum, i) => {
       const MODEL = KEY_MODEL;
       const SOURCE = KEY_SOURCE;
@@ -87,7 +88,7 @@
       },
     ];
 
-    const downloadParams = [
+    const dataDownloadOptions = [
       {
         uid: 'scenario',
         label: 'Scenario',
@@ -103,14 +104,16 @@
       },
     ];
 
+    const graphDownloadParams = { ...urlParams, scenarios };
     return {
       impactTime,
       title: impactTime[0].title,
       description: impactTime[0].description,
       hasSingleScenario,
       chartInfo,
-      downloadParams,
-      downloadBaseParams,
+      dataDownloadOptions,
+      dataDownloadParams: urlParams,
+      graphDownloadParams,
     };
   };
 </script>
@@ -123,14 +126,19 @@
     asyncProps={{
       impactTimeData: $IMPACT_TIME_DATA,
     }}
-    props={{ ...$TEMPLATE_PROPS, downloadBaseParams: $URL_PARAMS }}
+    props={{
+      ...$TEMPLATE_PROPS,
+      graphParams: $GRAPH_URL_PARAMS,
+      urlParams: $DOWNLOAD_URL_PARAMS,
+    }}
   >
     <ChartFrame
       title={asyncProps.title}
       tagline={title}
       description={asyncProps.description}
-      downloadBaseParams={asyncProps.downloadBaseParams}
-      downloadParams={asyncProps.downloadParams}
+      dataDownloadParams={asyncProps.dataDownloadParams}
+      dataDownloadOptions={asyncProps.dataDownloadOptions}
+      graphDownloadParams={asyncProps.graphDownloadParams}
       chartUid={END_IMPACT_TIME}
       chartInfo={asyncProps.chartInfo}
       templateProps={props}

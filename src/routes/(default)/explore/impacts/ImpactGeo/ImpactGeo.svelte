@@ -7,7 +7,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     TEMPLATE_PROPS,
-    URL_PARAMS,
+    DOWNLOAD_URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
   } from '$src/stores/state';
@@ -119,7 +119,7 @@
       },
     ];
 
-    const downloadParams = [
+    const dataDownloadOptions = [
       {
         uid: 'scenario',
         label: 'Scenario',
@@ -137,10 +137,15 @@
       },
     ];
 
-    const downloadBaseParams = {
+    const dataDownloadParams = {
       ...urlParams,
       displayOption,
       year,
+    };
+
+    const graphDownloadParams = {
+      ...dataDownloadParams,
+      scenarios,
     };
 
     return {
@@ -151,8 +156,9 @@
       description: data[0].data.description,
       colorScale,
       chartInfo,
-      downloadBaseParams,
-      downloadParams,
+      dataDownloadParams,
+      dataDownloadOptions,
+      graphDownloadParams,
     };
   };
 </script>
@@ -162,7 +168,7 @@
     let:asyncProps
     let:props
     asyncProps={{ data: $IMPACT_GEO_DATA, shape: $GEO_SHAPE_DATA }}
-    props={{ ...$TEMPLATE_PROPS, year, urlParams: $URL_PARAMS }}
+    props={{ ...$TEMPLATE_PROPS, year, urlParams: $DOWNLOAD_URL_PARAMS }}
     {process}
     let:isLoading
   >
@@ -170,9 +176,10 @@
       title={asyncProps.title}
       tagline={title}
       description={asyncProps.description}
-      downloadParams={asyncProps.downloadParams}
+      dataDownloadOptions={asyncProps.dataDownloadOptions}
+      dataDownloadParams={asyncProps.dataDownloadParams}
+      graphDownloadParams={asyncProps.graphDownloadParams}
       chartUid={END_IMPACT_GEO}
-      downloadBaseParams={asyncProps.downloadBaseParams}
       templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
       {isLoading}

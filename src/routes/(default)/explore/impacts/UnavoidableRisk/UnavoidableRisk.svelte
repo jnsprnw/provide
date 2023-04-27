@@ -8,7 +8,7 @@
     CURRENT_SCENARIOS,
     AVAILABLE_SCENARIOS,
     IS_COMBINATION_AVAILABLE,
-    URL_PARAMS,
+    DOWNLOAD_URL_PARAMS,
   } from '$stores/state.js';
   import UnavoidableRiskChart from './UnavoidableRiskChart/UnavoidableRiskChart.svelte';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
@@ -57,8 +57,6 @@
         ? data.thresholds.indexOf(data.defaultThreshold)
         : 0;
     }
-
-    console.log(data.thresholds);
 
     threshold = data.thresholds[thresholdIndex];
     const timeframe = scenarios[0].timeframe[1];
@@ -109,7 +107,7 @@
       values: unavoidableValues,
     });
 
-    const downloadParams = [
+    const dataDownloadOptions = [
       {
         uid: 'format',
         label: 'Format',
@@ -120,7 +118,8 @@
       },
     ];
 
-    const downloadBaseParams = { ...urlParams, threshold };
+    const dataDownloadParams = { ...urlParams, threshold };
+    const graphDownloadParams = { ...dataDownloadParams, scenarios };
 
     const chartInfo = [
       { label: 'Model', value: data.model },
@@ -136,8 +135,9 @@
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
       source: data[KEY_SOURCE],
-      downloadParams,
-      downloadBaseParams,
+      dataDownloadOptions,
+      dataDownloadParams,
+      graphDownloadParams,
       chartInfo,
     };
   };
@@ -160,7 +160,7 @@
       allScenarios: $AVAILABLE_SCENARIOS,
       threshold,
       legendItems,
-      urlParams: $URL_PARAMS,
+      urlParams: $DOWNLOAD_URL_PARAMS,
     }}
   >
     <ChartFrame
@@ -168,8 +168,9 @@
       title={asyncProps.title}
       description={asyncProps.description}
       templateProps={props}
-      downloadBaseParams={asyncProps.downloadBaseParams}
-      downloadParams={asyncProps.downloadParams}
+      dataDownloadParams={asyncProps.dataDownloadParams}
+      dataDownloadOptions={asyncProps.dataDownloadOptions}
+      graphDownloadParams={asyncProps.graphDownloadParams}
       chartUid={END_UN_AVOIDABLE_RISK}
       chartInfo={asyncProps.chartInfo}
     >

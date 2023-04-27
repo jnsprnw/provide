@@ -1,8 +1,9 @@
 <script>
   export let isLoading = true;
-  const size = 30;
-  const stroke = 4;
-  const inner = size - stroke / 2;
+  export let size = 30;
+  export let strokeWidth = 4;
+
+  const inner = size - strokeWidth / 2;
 </script>
 
 {#if isLoading}
@@ -17,14 +18,14 @@
       r={inner / 2}
       cx={size / 2}
       cy={size / 2}
-      stroke-width={stroke}
+      stroke-width={strokeWidth}
     />
     <circle
       class="stroke-theme-weaker fill-none"
       r={inner / 2}
       cx={size / 2}
       cy={size / 2}
-      stroke-width={stroke}
+      stroke-width={strokeWidth}
       stroke-dasharray={size * Math.PI}
       stroke-dashoffset={((size * Math.PI) / 4) * 3}
     />
