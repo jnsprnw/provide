@@ -40,7 +40,7 @@
     <slot />
   </div>
   {#if !$IS_STATIC}
-    <figcaption class="flex justify-end items-center gap-4 mt-2">
+    <figcaption class="flex justify-end items-center gap-4 mt-2 mb-2">
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu
         embedUid={chartUid}

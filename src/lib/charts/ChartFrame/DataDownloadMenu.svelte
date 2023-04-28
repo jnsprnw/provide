@@ -8,7 +8,7 @@
   export let options = [];
   export let endpoint;
 
-  let selectedParams = writable(
+  $: selectedParams = writable(
     options.reduce(
       (memo, param) => ({
         ...memo,

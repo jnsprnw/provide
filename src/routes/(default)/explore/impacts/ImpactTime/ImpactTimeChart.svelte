@@ -50,9 +50,8 @@
   // Calculate warming level extent to create color scale
   $: minWlvl = min(data, (scenario) => min(scenario.values, (d) => d.wlvl));
   $: maxWlvl = max(data, (scenario) => max(scenario.values, (d) => d.wlvl));
-  $: wlvlExtent = [minWlvl, maxWlvl];
   $: colorScales = data.map((scenario) =>
-    scaleSequential(scenario.colorInterpolator).domain(wlvlExtent)
+    scaleSequential(scenario.colorInterpolator).domain([minWlvl, 3])
   );
 
   // Data for the mean line

@@ -6,6 +6,7 @@
 
   export let graphParams = {};
   export let width = 1000;
+  export let processingIntensity = 1;
   export let embedUid;
   export let formats = ['png', 'pdf'];
 
@@ -23,7 +24,14 @@
     `${import.meta.env.VITE_APP_URL}/embed/${embedUid}/?${graphQuery}`
   );
 
-  $: screenshotQuery = stringify({ format, width, url: graphUrl.href });
+  //$: console.log(graphUrl.href, graphUrl.url, graphUrl.search);
+
+  $: screenshotQuery = stringify({
+    format,
+    width,
+    processingIntensity,
+    url: graphUrl.href,
+  });
   $: screenshotName = Object.values(graphParams)
     .join('_')
     .replace(/\.|\/|\\|,/, '-');
