@@ -20,7 +20,7 @@
   export let lineStart = 0; // If 0, tick line starts at zero position of the chart
   export let lineLength; // If positive, line extends to bottom, if negative extends to top. Default is -height
   export let orientation = 1; // 1 for left hand axis extending to right, -1 if other way around
-  export let textAnchor;
+  export let textAnchor = 'start';
 
   $: xPos = x ?? orientation === 1 ? 0 : $width;
   $: yPos = y ?? 0;

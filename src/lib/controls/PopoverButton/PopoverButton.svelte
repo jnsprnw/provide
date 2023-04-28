@@ -11,7 +11,7 @@
   export { clazz as class };
   export let panelClass;
   export let panelPlacement = 'bottom-start';
-  export let buttonClass;
+  export let buttonClass = '';
   export let label;
 
   const [popperRef, popperContent] = createPopperActions();

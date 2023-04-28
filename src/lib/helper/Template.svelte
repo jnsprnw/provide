@@ -1,11 +1,11 @@
 <script>
   import renderTemplate from '$lib/utils/renderTemplate';
 
-  let clazz;
+  let clazz = '';
   export { clazz as class };
   export let template = '';
   export let data = {};
-  export let el;
+  export let el = undefined;
 
   let renderedTemplate;
 

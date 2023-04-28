@@ -1,6 +1,5 @@
 <script>
-  import { browser } from '$app/environment';
-  // import { preferredThemeId } from "$state/Responsiveness.js";
+  // import { browser } from '$app/environment';
   import { scaleOrdinal } from 'd3-scale';
   import { interpolateLab, piecewise } from 'd3-interpolate';
   import { hsl } from 'd3-color';
@@ -9,52 +8,56 @@
   import THEME from './theme-store.js';
   import designTokens from './theme/json/global.json';
   import designTokensLight from './theme/json/theme-light.json';
-  import designTokensDark from './theme/json/theme-dark.json';
+  // import designTokensDark from './theme/json/theme-dark.json';
 
-  export let id;
+  export let id = 'light';
 
   setContext('theme', THEME);
 
-  $: mapStyle =
-    id === 'light'
-      ? import.meta.env.VITE_MAPBOX_STYLE_LIGHT
-      : import.meta.env.VITE_MAPBOX_STYLE_LIGHT;
+  $: mapStyle = import.meta.env.VITE_MAPBOX_STYLE_LIGHT;
+  // $: mapStyle =
+  //   id === 'light'
+  //     ? import.meta.env.VITE_MAPBOX_STYLE_LIGHT
+  //     : import.meta.env.VITE_MAPBOX_STYLE_LIGHT;
+  
 
   $: makeTextColor = (color, factor = 0.2) => {
     const c = hsl(color);
-    c.l = id === 'light' ? factor : 1 - factor * 0.5;
+    c.l = id === factor // 'light' ? factor : 1 - factor * 0.5;
     return c;
   };
 
   $: hasContrastToBackground = (color) => {
     const c = hsl(color);
-    return id === 'light' ? c.l < 0.7 : c.l > 0.4;
+    return id === c.l < 0.7 // 'light' ? c.l < 0.7 : c.l > 0.4;
   };
 
-  $: getContrastColor = (background, color1, color2) => {
-    const c1 = hsl(color).l;
-    const c2 = hsl(color).l;
-    const b = hsl(background).l;
-    return b - c1 > b - c2 ? color1 : color2;
-  };
+  // $: getContrastColor = (background, color1, color2) => {
+  //   const c1 = hsl(color).l;
+  //   const c2 = hsl(color).l;
+  //   const b = hsl(background).l;
+  //   return b - c1 > b - c2 ? color1 : color2;
+  // };
+
+  // $: {
+  //   if (!id) {
+  //     if (browser) {
+  //       id = window.matchMedia('(prefers-color-scheme: dark)').matches
+  //         ? 'dark'
+  //         : 'light';
+  //     } else {
+  //       id = 'light';
+  //     }
+  //   }
+  // }
 
   $: {
-    if (!id) {
-      if (browser) {
-        id = window.matchMedia('(prefers-color-scheme: dark)').matches
-          ? 'dark'
-          : 'light';
-      } else {
-        id = 'light';
-      }
-    }
-  }
+    // const colors = {
+    //   light: designTokensLight,
+    //   dark: designTokensDark,
+    // }[id].color;
 
-  $: {
-    const colors = {
-      light: designTokensLight,
-      dark: designTokensDark,
-    }[id].color;
+    const colors = designTokensLight.color;
 
     const colorSteps = {
       sequential: [
@@ -131,16 +134,11 @@
       },
     };
   }
+
 </script>
 
 <div
   class="theme-{id}"
-  style="
-    display: contents;
-  "
->
+  style="display: contents;">
   <slot />
 </div>
-
-<style>
-</style>
