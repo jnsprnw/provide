@@ -3,6 +3,6 @@
   import ThemeProvider from '$styles/ThemeProvider.svelte';
 </script>
 
-<ThemeProvider>
+<ThemeProvider id="light">
   <slot />
 </ThemeProvider>

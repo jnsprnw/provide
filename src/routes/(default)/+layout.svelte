@@ -14,7 +14,7 @@
 
 <HtmlHead />
 
-<ThemeProvider>
+<ThemeProvider id="light">
   <Header />
   <main>
     <slot />
