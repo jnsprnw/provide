@@ -28,7 +28,7 @@
 <div class="embed p-6 pb-0">
   <svelte:component this={component} {...urlParams} />
   <div
-    class="flex justify-between text-sm text-foreground-weak border-t border-foreground-weak pt-3 pb-4 mt-6"
+    class="flex justify-between text-sm text-foreground-weak border-t border-foreground-weak pt-3 pb-4"
   >
     <Logo size="sm" />
     <div>
