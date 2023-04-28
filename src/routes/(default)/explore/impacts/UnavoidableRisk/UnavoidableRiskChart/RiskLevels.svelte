@@ -16,10 +16,11 @@
     .sort((a, b) => Boolean(a.color) - Boolean(b.color));
 
   $: nodes = scenarios
-    .map(({ values, label: scenario, color }) => {
+    .map(({ values, uid, label: scenario, color }) => {
       const isSelectedScenario = Boolean(color);
       return values.map(({ year, value, formattedValue }) => {
         return {
+          uid,
           year,
           value,
           formattedValue,
@@ -55,7 +56,12 @@
         .y((d) => $yGet(d))
         .strength(0.98)
     )
-    .force('collide', forceCollide().radius(d => d.radius + 1.5).iterations(3))
+    .force(
+      'collide',
+      forceCollide()
+        .radius((d) => d.radius + 1.5)
+        .iterations(3)
+    )
     .stop();
 
   $: {
@@ -75,23 +81,25 @@
 
 {#if $height > 0}
   <g>
-    {#each simulation.nodes() as { x, y, color, isSelectedScenario, tooltipContent, radius, scenario }}
-      <g
-        style="transform: translate({x}px, {Math.min(y, $height)}px);"
-        class="transition-transform"
-        class:opacity-80={!isSelectedScenario}
-      >
-        <circle
-          class:fill-theme-stronger={!isSelectedScenario}
-          class:stroke-[1.5px]={isSelectedScenario}
-          class:stroke-[1px]={!isSelectedScenario}
-          class="stroke-background-base"
-          style:fill={color}
-          style:opacity={isSelectedScenario ? 1 : 0.4}
-          r={radius}
-          use:tooltip={{ content: tooltipContent }}
-        />
-      </g>
+    {#each simulation.nodes() as { x, y, uid, color, isSelectedScenario, tooltipContent, radius, scenario }}
+      {#key uid}
+        <g
+          style="transform: translate({x}px, {Math.min(y, $height)}px);"
+          class="transition-transform"
+          class:opacity-80={!isSelectedScenario}
+        >
+          <circle
+            class:fill-theme-stronger={!isSelectedScenario}
+            class:stroke-[1.5px]={isSelectedScenario}
+            class:stroke-[1px]={!isSelectedScenario}
+            class="stroke-background-base"
+            style:fill={color}
+            style:opacity={isSelectedScenario ? 1 : 0.4}
+            r={radius}
+            use:tooltip={{ content: tooltipContent }}
+          />
+        </g>
+      {/key}
     {/each}
   </g>
 {/if}

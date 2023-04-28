@@ -154,6 +154,8 @@
     ...$CURRENT_SCENARIOS,
     { label: 'Other scenarios', uid: 'other' },
   ];
+
+  //$: console.log(legendItems, $CURRENT_SCENARIOS);
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
@@ -191,7 +193,7 @@
           />
         {/if}
       </div>
-      <ColorLegend items={props.legendItems} />
+      <ColorLegend items={props.legendItems} id={1} />
       <figure class="aspect-[2.5]">
         <UnavoidableRiskChart
           {isLoading}

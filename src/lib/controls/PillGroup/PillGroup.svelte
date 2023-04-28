@@ -22,9 +22,14 @@
   class="flex flex-wrap {classes.group}"
 >
   {#each options as option}
-    <RadioGroupOption value={option.uid} let:checked disabled={option.disabled}>
+    <RadioGroupOption
+      value={option.uid}
+      let:checked
+      disabled={option.disabled}
+      class="whitespace-nowrap overflow-hidden rounded-full bg-background-base"
+    >
       <span
-        class="bg-background-base rounded-full inline-block {classes.button}"
+        class="w-full overflow-hidden text-ellipsis block {classes.button}"
         class:bg-theme-base={checked}
         class:text-background-base={checked}
         class:text-theme-base={!checked}
