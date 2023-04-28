@@ -37,7 +37,7 @@
   $: renderedScenario = scenarios.find((s) => s.isHighlighted);
 </script>
 
-<div class="relative pr-8">
+<div class="relative pr-6 lg:pr-10">
   <PopoverSelect
     label="Scenario"
     {buttonLabel}
