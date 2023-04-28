@@ -20,13 +20,6 @@
 
   $: sections = [
     {
-      slug: 'models',
-      title: 'Models',
-      component: SectionIntro,
-      content: modelsIntro,
-      sections: models.map((m) => ({ ...m, component: ModelSection })),
-    },
-    {
       slug: 'scenarios',
       title: 'Scenarios',
       component: SectionIntro,
@@ -40,6 +33,13 @@
         // },
         ...scenarios.map((s) => ({ ...s, component: ScenarioSection })),
       ],
+    },
+    {
+      slug: 'models',
+      title: 'Models',
+      component: SectionIntro,
+      content: modelsIntro,
+      sections: models.map((m) => ({ ...m, component: ModelSection })),
     },
     {
       slug: 'data-processing',
