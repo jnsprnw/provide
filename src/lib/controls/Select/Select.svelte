@@ -23,10 +23,6 @@
 
   $: selectId = uid || `select-${instance}`;
 
-  $: currentOption = options.find((d) => d.uid === value || d.value === value);
-
-  $: console.log(value, options);
-
   instance++;
 </script>
 

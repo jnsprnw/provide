@@ -60,6 +60,7 @@
 
     threshold = data.thresholds[thresholdIndex];
     const timeframe = scenarios[0].timeframe[1];
+
     const mergedScenarios = uniqBy(
       [...scenarios, ...allScenarios],
       'uid'
@@ -69,14 +70,16 @@
       .map(([uid, scenarioData]) => {
         const scenario = find(mergedScenarios, { uid });
         if (!scenario) return;
-        const values = data.years.map((year, yearIndex) => {
-          const value = scenarioData[thresholdIndex][yearIndex];
-          return {
-            year,
-            value,
-            formattedValue: formatValue(value, 'percent'),
-          };
-        });
+        const values = data.years
+          .filter((y) => y <= timeframe)
+          .map((year, yearIndex) => {
+            const value = scenarioData[thresholdIndex][yearIndex];
+            return {
+              year,
+              value,
+              formattedValue: formatValue(value, 'percent'),
+            };
+          });
         return {
           ...scenario,
           values,
@@ -86,14 +89,16 @@
 
     processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
-    const unavoidableValues = data.years.map((year, yearIndex) => {
-      const value = min(processedScenarios, (d) => d.values[yearIndex].value);
-      return {
-        year,
-        value,
-        formattedValue: formatValue(value, 'percent'),
-      };
-    });
+    const unavoidableValues = data.years
+      .filter((y) => y <= timeframe)
+      .map((year, yearIndex) => {
+        const value = min(processedScenarios, (d) => d.values[yearIndex].value);
+        return {
+          year,
+          value,
+          formattedValue: formatValue(value, 'percent'),
+        };
+      });
 
     unavoidableValues.unshift({
       year: 'Today’s risk',
