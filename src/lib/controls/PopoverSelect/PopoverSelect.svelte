@@ -29,7 +29,7 @@
 
   const [popperRef, popperContent] = createPopperActions();
 
-  const popperOptions = {
+  $: popperOptions = {
     placement: panelPlacement,
     strategy: 'fixed',
     modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],

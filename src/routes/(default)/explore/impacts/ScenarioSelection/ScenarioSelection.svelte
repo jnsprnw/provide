@@ -12,6 +12,7 @@
 
   let hoveredScenarioUid;
   let currentTimeframe;
+  let windowWidth;
 
   $: buttonLabel =
     $CURRENT_SCENARIOS.length > 1
@@ -37,14 +38,16 @@
   $: renderedScenario = scenarios.find((s) => s.isHighlighted);
 </script>
 
-<div class="relative pr-6 lg:pr-10">
+<svelte:window bind:innerWidth={windowWidth}/>
+
+<div class="relative md:pr-6 lg:pr-10">
   <PopoverSelect
     label="Scenario"
     {buttonLabel}
-    panelClass="max-w-4xl"
+    panelClass="w-screen-p max-w-4xl"
     buttonClass="border border-foreground-weakest"
     size="md"
-    panelPlacement="right-start"
+    panelPlacement={windowWidth > 1200 ? "right-start" : "bottom-start"}
   >
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
@@ -63,10 +66,10 @@
           >?</span
         >Which scenario should I select?</a
       >
-      <div slot="items" class="flex" let:items let:currentFilterUid>
+      <div slot="items" class="grid grid-cols-1 md:grid-cols-[auto_1fr]" let:items let:currentFilterUid>
         {#key currentFilterUid}
           <fieldset
-            class="flex flex-col min-w-min border-r border-foreground-weakest py-2"
+            class="flex flex-col min-w-min md:border-r border-foreground-weakest py-2"
           >
             <ScenarioList
               highlightedScenarioUid={renderedScenario.uid}
@@ -77,7 +80,7 @@
           </fieldset>
         {/key}
 
-        <div class="p-6 overflow-y-scroll max-w-xl">
+        <div class="p-6 overflow-y-scroll max-w-xl hidden md:block">
           {#if renderedScenario}
             <ScenarioDetails
               scenario={renderedScenario}
