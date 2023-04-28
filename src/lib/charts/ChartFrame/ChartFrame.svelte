@@ -5,6 +5,8 @@
   import DataDownloadMenu from './DataDownloadMenu.svelte';
   import DownloadGraphMenu from './DownloadGraphMenu.svelte';
   import Tagline from '$lib/helper/Tagline.svelte';
+  import { IS_STATIC } from '$stores/state';
+  import InfoList from './InfoList.svelte';
 
   export let tagline;
   export let title;
@@ -19,10 +21,7 @@
   export let isLoading;
 </script>
 
-<figure
-  class:aspect-video={$IS_EMBEDED}
-  style:width={$IS_EMBEDED ? '1200px' : undefined}
->
+<figure>
   <header class="mb-4 max-w-2xl">
     {#if tagline}<Tagline color="text-foreground-weak">{tagline}</Tagline>{/if}
     <h3 class="font-bold text-2xl mb-3">
@@ -40,7 +39,7 @@
   >
     <slot />
   </div>
-  {#if !$IS_EMBEDED}
+  {#if !$IS_STATIC}
     <figcaption class="flex justify-end items-center gap-4 mt-2">
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu
@@ -53,11 +52,8 @@
         options={dataDownloadOptions}
         params={dataDownloadParams}
       />
-      <!-- <Menu label="Download" options={downloadOptions} /> -->
     </figcaption>
   {:else}
-    <figcaption class="mt-4">
-      <span class="font-bold">Hier könnte ihre Werbung stehen.</span>
-    </figcaption>
+    <InfoList items={chartInfo} />
   {/if}
 </figure>

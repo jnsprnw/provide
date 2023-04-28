@@ -16,8 +16,6 @@
 
   let format = formats[0];
 
-  $: console.log(formatOptions);
-
   let loading = false;
 
   $: graphQuery = stringify({ ...graphParams, static: true });
