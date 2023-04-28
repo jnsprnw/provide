@@ -1,6 +1,6 @@
 <script>
   let clazz;
-  export let isOpen;
+  export let isOpen = false;
   export { clazz as class };
 </script>
 
