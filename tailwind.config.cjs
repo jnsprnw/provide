@@ -48,6 +48,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('@thoughtbot/tailwindcss-aria-attributes'),
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       addUtilities({
         '.text-anchor-start': {

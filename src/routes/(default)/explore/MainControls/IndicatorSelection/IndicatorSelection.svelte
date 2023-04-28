@@ -19,7 +19,7 @@
 <PopoverSelect
   label="Indicator"
   buttonLabel={$CURRENT_INDICATOR?.label}
-  buttonClass="border-theme-base/20 border"
+  buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
   panelClass="w-screen-p max-w-3xl"
 >
   <Content

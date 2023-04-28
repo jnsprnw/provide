@@ -47,7 +47,7 @@
   label="Geography"
   buttonLabel={$CURRENT_GEOGRAPHY?.label}
   panelClass="w-screen-p max-w-4xl"
-  buttonClass="border-theme-base/20 border"
+  buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
 >
   <Content
     filters={geographyTypes}

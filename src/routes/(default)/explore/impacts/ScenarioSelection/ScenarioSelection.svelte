@@ -45,7 +45,7 @@
     label="Scenario"
     {buttonLabel}
     panelClass="w-screen-p max-w-4xl"
-    buttonClass="border border-foreground-weakest"
+    buttonClass="border border-foreground-weakest aria-expanded:border-foreground-weaker"
     size="md"
     panelPlacement={windowWidth > 1200 ? "right-start" : "bottom-start"}
   >
