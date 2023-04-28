@@ -1,18 +1,23 @@
 import { browser } from '$app/environment';
-import { filter, forEach } from 'lodash-es';
-import { parse } from 'qs';
 import {
-  CURRENT_INDICATOR_UID,
   CURRENT_GEOGRAPHY_UID,
+  CURRENT_INDICATOR_OPTION_VALUES,
+  CURRENT_INDICATOR_UID,
   CURRENT_SCENARIOS_UID,
 } from '$stores/state.js';
 import { autoType } from 'd3-dsv';
+import { parse } from 'qs';
 
-const urlToStateMapping = {
-  indicator: CURRENT_INDICATOR_UID,
-  geography: CURRENT_GEOGRAPHY_UID,
-  scenarios: CURRENT_SCENARIOS_UID,
-};
+const urlToStateMapping = [
+  { key: 'indicator', store: CURRENT_INDICATOR_UID },
+  { key: 'geography', store: CURRENT_GEOGRAPHY_UID },
+  { key: 'scenarios', store: CURRENT_SCENARIOS_UID },
+  {
+    key: ['time', 'reference', 'spatial'],
+    store: CURRENT_INDICATOR_OPTION_VALUES,
+    mode: 'merge',
+  },
+];
 
 export const parseUrlQuery = (url) => {
   const params = parse(url.search.replace(/^\?/, ''));
@@ -27,16 +32,42 @@ export const parseUrlQuery = (url) => {
   };
 };
 
+function removeParamFromURL(param, key, url) {
+  if (Array.isArray(param)) {
+    param.forEach((p, i) => url.searchParams.delete(`${key}[${i}]`));
+  } else {
+    url.searchParams.delete(key);
+  }
+}
+
+function changeStoreToValue(store, value, mode) {
+  if (mode === 'merge') {
+    store.update((d) => ({ ...d, ...value }));
+  } else {
+    store.set(value);
+  }
+}
+
 export function urlToState(currentUrl) {
   const url = new URL(currentUrl);
   const params = parse(url.search.replace(/^\?/, ''));
-  forEach(urlToStateMapping, (store, key) => {
-    const param = params[key];
-    if (!param) return;
-    if (Array.isArray(param))
-      param.forEach((p, i) => url.searchParams.delete(`${key}[${i}]`));
-    else url.searchParams.delete(key);
-    store.set(param);
+  urlToStateMapping.forEach(({ store, key, mode }) => {
+    let param;
+    if (Array.isArray(key)) {
+      const obj = {};
+      key.forEach((k) => {
+        param = params[k];
+        if (!param) return;
+        removeParamFromURL(param, k, url);
+        obj[k] = param;
+      });
+      changeStoreToValue(store, obj, mode);
+    } else {
+      param = params[key];
+      if (!param) return;
+      removeParamFromURL(param, key, url);
+      changeStoreToValue(store, param);
+    }
   });
   if (browser)
     window.history.replaceState(window.history.state, null, url.href);
