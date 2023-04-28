@@ -26,7 +26,7 @@
           scenario,
           color,
           isSelectedScenario,
-          radius: radius - (isSelectedScenario ? 0 : 3), // The scelected scenarios are slightly bigger
+          radius: radius - (isSelectedScenario ? 0 : 4), // The scelected scenarios are slightly bigger
           fy: isSelectedScenario ? $yScale(value) : undefined, // Fix the y-position of selected scenarios
           tooltipContent: renderTemplate(tooltipTemplate, {
             year,
@@ -41,11 +41,13 @@
   $: middle = $xScale.bandwidth() / 2;
 
   $: simulation = forceSimulation(nodes)
+    .velocityDecay(0.1)
+    .alphaTarget(0.3)
     .force(
       'x',
       forceX()
         .x((d) => $xGet(d) + middle)
-        .strength(0.1)
+        .strength(0.2)
     )
     .force(
       'y',
@@ -53,7 +55,7 @@
         .y((d) => $yGet(d))
         .strength(0.98)
     )
-    .force('collide', forceCollide(radius))
+    .force('collide', forceCollide().radius(d => d.radius + 1.5).iterations(3))
     .stop();
 
   $: {
@@ -81,9 +83,11 @@
       >
         <circle
           class:fill-theme-stronger={!isSelectedScenario}
-          class="stroke-[1.5px] stroke-background-base"
+          class:stroke-[1.5px]={isSelectedScenario}
+          class:stroke-[1px]={!isSelectedScenario}
+          class="stroke-background-base"
           style:fill={color}
-          style:opacity={isSelectedScenario ? 1 : 0.3}
+          style:opacity={isSelectedScenario ? 1 : 0.4}
           r={radius}
           use:tooltip={{ content: tooltipContent }}
         />
