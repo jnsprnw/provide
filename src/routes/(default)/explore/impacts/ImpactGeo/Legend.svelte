@@ -1,5 +1,5 @@
 <script>
-  import { formatValue } from '$lib/utils/formatting';
+  import { formatValue, formatRange } from '$lib/utils/formatting';
 
   import { rgb, hsl } from 'd3-color';
   import { scaleLinear } from 'd3-scale';
@@ -46,13 +46,14 @@
       }
     }
   })();
-  //
+  
+  $: ([min, middle, max] = formatRange([domain.at(0), tick, domain.at(-1)], unit.uid).values)
 </script>
 
 <div class="flex items-center">
   <span class="text-xs text-foreground-weak leading-3 text-end"
     >Below<br /><span class="text-foreground-base font-bold"
-      >{formatValue(domain[0], unit.uid)}</span
+      >{min}</span
     ></span
   >
   <div
@@ -70,7 +71,7 @@
           $theme.color.foreground.base
         )}
         class="absolute text-xs text-background-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
-        >{formatValue(tick, unit.uid)}
+        >{middle}
         <!-- <span
           class="absolute bottom-0 w-[1px] bg-background-base/40 whitespace-nowrap left-1/2 inline-block h-full"
         /></span
@@ -80,7 +81,7 @@
   </div>
   <span class="text-xs text-foreground-weak leading-3"
     >Above<br /><span class="text-foreground-base font-bold"
-      >{formatValue(domain[domain.length - 1], unit.uid)}</span
+      >{max}</span
     ></span
   >
 </div>

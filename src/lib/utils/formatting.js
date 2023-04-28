@@ -1,5 +1,5 @@
-import { formatDefaultLocale, formatLocale } from 'd3-format';
 import { DEFAULT_FORMAT_UID } from '$src/config';
+import { formatDefaultLocale, formatLocale } from 'd3-format';
 
 export const NA_STRING = '—';
 export const FORMAT_CURRENCY = '$,.0f';
@@ -10,6 +10,9 @@ export const FORMAT_YEAR = '.0f';
 export const FORMAT_CELSIUS = '.1f';
 export const FORMAT_PERCENT = '.0%';
 export const FORMAT_DEGREE = '.3~f';
+
+export const FORMAT_PERCENT_DECIMALS = (d = 0) => f(`.${d}%`);
+export const FORMAT_DEFAULT_DECIMALS = (d = 1) => f(`.${d}f`);
 
 // the basic formatting function sued
 const f = formatLocale({
@@ -43,17 +46,44 @@ const suffixes = {
 };
 
 export const formatValue = (
-  d,
+  value,
   indicatorId = DEFAULT_FORMAT_UID,
-  { addSuffix } = { addSuffix: true }
+  { addSuffix = true, formatter: customFormatter = undefined } = {}
 ) => {
-  let indicator = indicatorId;
-  if (indicator === 'celsius') {
-    // Fixed for now. TODO
-    indicator = 'degrees-celsius';
-  }
-  const formatter = indicatorFormats[indicator] || indicatorFormats['default'];
-  const value = formatter(d);
-  const suffix = addSuffix && suffixes[indicator];
-  return suffix ? value + suffix : value;
+  const formatter =
+    customFormatter ||
+    indicatorFormats[indicatorId] ||
+    indicatorFormats['default'];
+  const str = formatter(value);
+  const suffix = addSuffix && suffixes[indicatorId];
+  return suffix ? str + suffix : str;
 };
+
+function getFormatter(unit, decimals) {
+  switch (unit) {
+    case 'percent':
+      return FORMAT_PERCENT_DECIMALS(decimals);
+    default:
+      return FORMAT_DEFAULT_DECIMALS(decimals);
+  }
+}
+
+export function formatRange(range, unit, minDecimals = 0) {
+  // This function formats a range of values with all resulting strings to be unique
+  const decimalsMax = 4;
+  let decimals = minDecimals;
+  let formatter = getFormatter(unit, decimals);
+  let values = range.map((d) => formatValue(d, unit, { formatter }));
+  while (
+    values.some((value, index) => values.indexOf(value) !== index) && // Check if values have any dublicates
+    decimals < decimalsMax
+  ) {
+    decimals += 1;
+    formatter = getFormatter(unit, decimals);
+    values = range.map((d) => formatValue(d, unit, { formatter })); // Reformat values with one more decimal
+  }
+  return {
+    decimals,
+    values,
+  };
+}
