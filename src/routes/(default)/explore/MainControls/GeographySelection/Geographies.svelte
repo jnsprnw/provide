@@ -11,8 +11,6 @@
   export let hoveredItem;
   export let geographyType;
 
-  $: console.log(geographyType);
-
   const options = {
     includeScore: true,
     keys: ['label', 'uid'],

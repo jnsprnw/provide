@@ -24,7 +24,7 @@
     `${import.meta.env.VITE_APP_URL}/embed/${embedUid}/?${graphQuery}`
   );
 
-  //$: console.log(graphUrl.href, graphUrl.url, graphUrl.search);
+  $: console.log(graphUrl.href, graphUrl.url, graphUrl.search);
 
   $: screenshotQuery = stringify({
     format,
@@ -34,7 +34,7 @@
   });
   $: screenshotName = Object.values(graphParams)
     .join('_')
-    .replace(/\.|\/|\\|,/, '-');
+    .replace(/\.|\/|\\|,/g, '-');
   $: screenshotUrl = new URL(
     `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
   );

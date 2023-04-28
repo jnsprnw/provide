@@ -28,7 +28,6 @@
   let map = writable(null);
   let stylesReady = writable(false);
   let clientWidth;
-  let clientHeight;
 
   setContext('mapbox', {
     map,
@@ -39,14 +38,6 @@
 
   $: _style = style || $theme.mapStyle;
   $: $map && mapReady && $map.setStyle(_style);
-
-  // $: console.warn(
-  //   '===================================================================='
-  // );
-  // $: console.warn($IS_STATIC);
-  // $: console.warn(
-  //   '===================================================================='
-  // );
 
   let node;
   onMount(() => {

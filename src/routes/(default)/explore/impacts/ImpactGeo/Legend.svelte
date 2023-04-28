@@ -46,15 +46,16 @@
       }
     }
   })();
-  
-  $: ([min, middle, max] = formatRange([domain.at(0), tick, domain.at(-1)], unit.uid).values)
+
+  $: [min, middle, max] = formatRange(
+    [domain[0], tick, domain[domain.length - 1]],
+    unit.uid
+  ).values;
 </script>
 
 <div class="flex items-center">
   <span class="text-xs text-foreground-weak leading-3 text-end"
-    >Below<br /><span class="text-foreground-base font-bold"
-      >{min}</span
-    ></span
+    >Below<br /><span class="text-foreground-base font-bold">{min}</span></span
   >
   <div
     class="w-40 h-[16px] my-5 mx-1.5"
@@ -80,8 +81,6 @@
     </div>
   </div>
   <span class="text-xs text-foreground-weak leading-3"
-    >Above<br /><span class="text-foreground-base font-bold"
-      >{max}</span
-    ></span
+    >Above<br /><span class="text-foreground-base font-bold">{max}</span></span
   >
 </div>

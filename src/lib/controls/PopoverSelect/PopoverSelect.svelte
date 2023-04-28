@@ -54,7 +54,7 @@
 
   <PopoverPanel
     use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-background-base rounded border-theme-base/20 border shadow-xl z-50 relative`}
+    class={`${panelClass} bg-background-base rounded overflow-hidden border-theme-base/20 border shadow-xl z-50 relative`}
     let:open
   >
     <slot />

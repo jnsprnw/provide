@@ -10,6 +10,7 @@ specifiers:
   '@sveltejs/kit': ^1.15.9
   '@sveltejs/svelte-scroller': ^2.0.7
   '@sveltejs/svelte-virtual-list': ^3.0.1
+  '@thoughtbot/tailwindcss-aria-attributes': ^0.2.0
   '@turf/bbox': ^6.5.0
   '@turf/centroid': ^6.5.0
   '@turf/difference': ^6.5.0
@@ -92,6 +93,7 @@ devDependencies:
   '@sveltejs/adapter-netlify': 2.0.4_@sveltejs+kit@1.15.9
   '@sveltejs/adapter-static': 2.0.2_@sveltejs+kit@1.15.9
   '@sveltejs/kit': 1.15.9_svelte@3.55.1+vite@4.3.3
+  '@thoughtbot/tailwindcss-aria-attributes': 0.2.0
   autoprefixer: 10.4.13_postcss@8.4.23
   install: 0.13.0
   marked: 4.2.12
@@ -747,6 +749,10 @@ packages:
       vitefu: 0.2.4_vite@4.3.3
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /@thoughtbot/tailwindcss-aria-attributes/0.2.0:
+    resolution: {integrity: sha512-//4JaxWfNvz6K8b9NcwZP0h3lwH24ds318Z3g/TCgsus+VkkWovXTCd1SqRZ6Zg5T0WhtyeZ2Z8VNpFugVr6oQ==}
     dev: true
 
   /@turf/bbox/6.5.0:
