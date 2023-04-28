@@ -42,9 +42,13 @@ module.exports = {
       animation: {
         'defer-visibility': 'defer-visibility .5s',
       },
+      width: {
+        'screen-p': 'calc(100vw - 3rem)',
+      },
     },
   },
   plugins: [
+    require('@thoughtbot/tailwindcss-aria-attributes'),
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       addUtilities({
         '.text-anchor-start': {

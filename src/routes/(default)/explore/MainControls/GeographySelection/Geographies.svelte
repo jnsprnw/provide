@@ -72,7 +72,7 @@
 </script>
 
 <div
-  class="border-r border-foreground-weakest pb-0 flex flex-col items-stretch"
+  class="md:border-r border-foreground-weakest pb-0 flex flex-col items-stretch"
 >
   <div class="px-5 grow flex items-stretch my-4">
     <input
@@ -85,7 +85,7 @@
   <RadioGroup
     value={currentUid}
     on:change={(e) => (currentUid = e.detail)}
-    class="h-96 w-60"
+    class="h-96 w-full"
   >
     {#key results.length}
       <VirtualList items={results} let:item>

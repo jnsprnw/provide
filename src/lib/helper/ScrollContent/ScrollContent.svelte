@@ -23,13 +23,13 @@
 
 <!-- Required so scroller gets re executed when sections change -->
 {#key sections}
-  <div class="grid grid-cols-12 gap-10 mx-auto max-w-7xl px-6">
-    <div class="col-span-3 pt-8 {navContainerClass}">
+  <div class="grid grid-rows-[auto_auto] grid-cols-1 md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr] md:grid-rows-1 gap-10 md:gap-6 lg:gap-10 mx-auto max-w-7xl px-6">
+    <div class="pt-8 {navContainerClass}">
       <div class="sticky top-8 z-[3]">
         <slot name="navigation" />
       </div>
     </div>
-    <div class="col-start-4 col-span-9 pt-8">
+    <div class="md:pt-8">
       <Scroller
         bind:count
         bind:index={$index}

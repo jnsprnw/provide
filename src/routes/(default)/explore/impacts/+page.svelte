@@ -58,7 +58,7 @@
   let:query
   {sections}
   isFullWidth={true}
-  navContainerClass="border-r border-foreground-weaker"
+  navContainerClass="md:border-r border-foreground-weaker"
 >
   <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />

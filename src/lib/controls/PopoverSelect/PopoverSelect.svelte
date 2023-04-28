@@ -29,7 +29,7 @@
 
   const [popperRef, popperContent] = createPopperActions();
 
-  const popperOptions = {
+  $: popperOptions = {
     placement: panelPlacement,
     strategy: 'fixed',
     modifiers: [{ name: 'offset', options: { offset: [0, 10] } }],
@@ -37,14 +37,14 @@
 </script>
 
 <Popover class={`relative w-full ${clazz}`}>
-  <label
+  <span
     class="uppercase text-xs tracking-widest font-bold text-foreground-weak pl-1 mb-2 inline-block"
-    >{label}</label
+    >{label}</span
   >
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full rounded  bg-background-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass}`}
+    class={`flex w-full rounded bg-background-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass} transition-colors`}
   >
     <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis"
       >{buttonLabel}</span
@@ -54,7 +54,7 @@
 
   <PopoverPanel
     use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-background-base shadow-xl z-50 relative`}
+    class={`${panelClass} bg-background-base rounded border-theme-base/20 border shadow-xl z-50 relative`}
     let:open
   >
     <slot />

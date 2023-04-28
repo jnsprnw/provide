@@ -46,8 +46,8 @@
 <PopoverSelect
   label="Geography"
   buttonLabel={$CURRENT_GEOGRAPHY?.label}
-  panelClass="w-screen max-w-4xl"
-  buttonClass="border-theme-base/20 border"
+  panelClass="w-screen-p max-w-4xl"
+  buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
 >
   <Content
     filters={geographyTypes}
@@ -57,14 +57,14 @@
     items={$AVAILABLE_GEOGOGRAPHIES}
     bind:currentFilterUid
   >
-    <div slot="items" let:items let:currentFilterUid class="flex grid-flow-col">
+    <div slot="items" let:items let:currentFilterUid class="grid grid-cols-1 md:grid-cols-[1.5fr_3fr] lg:grid-cols-[1fr_3fr]">
       <Geographies
         {items}
         bind:hoveredItem
         geographyType={geographyTypes.find((g) => g.uid === currentFilterUid)}
         bind:currentUid={$CURRENT_GEOGRAPHY_UID}
       />
-      <div class="w-full px-3">
+      <div class="px-3 hidden md:block">
         <LoadingWrapper
           let:asyncProps={{ geoShape }}
           asyncProps={{ geoShape: $GEO_SHAPE_DATA }}

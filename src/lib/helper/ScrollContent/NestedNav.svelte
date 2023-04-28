@@ -58,7 +58,7 @@
   };
 </script>
 
-<nav class="flex flex-col gap-10">
+<nav class="md:flex-col gap-10 hidden md:flex">
   <ul data-index={$index}>
     {#each processedSections as { title, slug, isActive, index, isOpen, sections, content }}
       {#if content || sections[0]?.content}
