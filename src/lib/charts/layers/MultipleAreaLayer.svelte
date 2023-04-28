@@ -24,6 +24,6 @@
 
 <style>
   .path-area {
-    opacity: 0.3;
+    opacity: 0.2;
   }
 </style>

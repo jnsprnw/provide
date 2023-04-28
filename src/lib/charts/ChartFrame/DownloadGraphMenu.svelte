@@ -24,8 +24,6 @@
     `${import.meta.env.VITE_APP_URL}/embed/${embedUid}/?${graphQuery}`
   );
 
-  $: console.log(graphUrl.href, graphUrl.url, graphUrl.search);
-
   $: screenshotQuery = stringify({
     format,
     width,

@@ -112,8 +112,6 @@
       values: unavoidableValues,
     });
 
-    console.log(processedScenarios);
-
     const dataDownloadOptions = [
       {
         uid: 'format',

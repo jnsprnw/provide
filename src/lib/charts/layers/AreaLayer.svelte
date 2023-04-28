@@ -18,4 +18,4 @@
     .y1((d) => $yScale(d[y1Key]));
 </script>
 
-<path class="path-area opacity-30" d={areaGen(chartData)} fill={color} />
+<path class="path-area opacity-20" d={areaGen(chartData)} fill={color} />

@@ -19,7 +19,7 @@
 
   $: theme = getContext('theme');
 
-  const padding = { top: 10, right: 0, bottom: 20, left: 30 };
+  const padding = { top: 10, right: 0, bottom: 18, left: 30 };
 
   $: flatData = data
     .reduce((memo, group) => {
@@ -37,7 +37,8 @@
     let color = series.isHighlighted
       ? $theme.color.foreground.weak
       : $theme.color.foreground.weaker;
-    let opacity = series.isHighlighted ? 1 : 0.5;
+    let opacity = series.color ? 0.7 : 0.3;
+    opacity = series.isHighlighted ? 1 : opacity;
     return {
       ...series,
       color: series.color || color,

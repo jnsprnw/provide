@@ -21,24 +21,25 @@
 
   $: scenarios = $AVAILABLE_SCENARIOS.map((scenario, i) => {
     const current = $CURRENT_SCENARIOS.find((s) => s.uid === scenario.uid);
+    const currentIndex = $CURRENT_SCENARIOS.indexOf(current);
     return {
       ...scenario,
       ...(current || {}),
       isSelected: !!current,
       isHighlighted: hoveredScenarioUid
         ? hoveredScenarioUid === scenario.uid
-        : !!current,
+        : currentIndex === 0,
     };
   });
 
-  $: chartScenarios = scenarios.filter(
-    (s) => s.timeframe[1] === currentTimeframe
-  );
+  $: chartScenarios = scenarios.filter((s) => s.endYear === currentTimeframe);
 
-  $: renderedScenario = scenarios.find((s) => s.isHighlighted);
+  $: renderedScenario = scenarios.find(
+    (s) => s.isHighlighted && s.endYear === currentTimeframe
+  );
 </script>
 
-<svelte:window bind:innerWidth={windowWidth}/>
+<svelte:window bind:innerWidth={windowWidth} />
 
 <div class="relative md:pr-6 lg:pr-10">
   <PopoverSelect
@@ -47,7 +48,7 @@
     panelClass="w-screen-p max-w-4xl"
     buttonClass="border border-foreground-weakest aria-expanded:border-foreground-weaker"
     size="md"
-    panelPlacement={windowWidth > 1200 ? "right-start" : "bottom-start"}
+    panelPlacement={windowWidth > 1200 ? 'right-start' : 'bottom-start'}
   >
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
@@ -66,13 +67,18 @@
           >?</span
         >Which scenario should I select?</a
       >
-      <div slot="items" class="grid grid-cols-1 md:grid-cols-[auto_1fr]" let:items let:currentFilterUid>
+      <div
+        slot="items"
+        class="grid grid-cols-1 md:grid-cols-[auto_1fr]"
+        let:items
+        let:currentFilterUid
+      >
         {#key currentFilterUid}
           <fieldset
             class="flex flex-col min-w-min md:border-r border-foreground-weakest py-2"
           >
             <ScenarioList
-              highlightedScenarioUid={renderedScenario.uid}
+              highlightedScenarioUid={renderedScenario?.uid}
               bind:hoveredScenarioUid
               scenarios={items}
               {currentFilterUid}
@@ -80,12 +86,18 @@
           </fieldset>
         {/key}
 
-        <div class="p-6 overflow-y-scroll max-w-xl hidden md:block">
+        <div class="p-6 hidden md:block">
           {#if renderedScenario}
             <ScenarioDetails
               scenario={renderedScenario}
               scenarios={chartScenarios}
             />
+          {:else}
+            <div
+              class="p-4 flex items-center rounded text-foreground-weak justify-center min-h-[60vh]"
+            >
+              Hover over a scenario to view details
+            </div>
           {/if}
         </div>
       </div>

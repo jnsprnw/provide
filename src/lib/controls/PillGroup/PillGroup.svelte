@@ -19,7 +19,7 @@
 <RadioGroup
   value={currentUid}
   on:change={(e) => (currentUid = e.detail)}
-  class="overflow-scroll flex flex-wrap {classes.group}"
+  class="flex flex-wrap {classes.group}"
 >
   {#each options as option}
     <RadioGroupOption value={option.uid} let:checked disabled={option.disabled}>

@@ -11,7 +11,7 @@
   } from '$stores/state';
 </script>
 
-<div class="flex flex-col items-center justify-center py-24">
+<div class="flex flex-col items-center justify-center py-24 min-h-[70vh]">
   <div class="text-xl font-bold mb-4">
     There is no data for your current selection.
   </div>

@@ -1,7 +1,6 @@
 <script>
   import { CURRENT_SCENARIOS_UID } from '$stores/state.js';
   import CheckboxInput from '$lib/helper/CheckboxInput.svelte';
-  import { groupBy } from 'lodash-es';
   import Tagline from '$lib/helper/Tagline.svelte';
 
   export let scenarios;
