@@ -1,10 +1,15 @@
+import { formatReadableList } from '$lib/utils.js';
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
-import _, { every, get, keyBy, map, reduce } from 'lodash-es';
-import { stringify } from 'qs';
-import { derived, get as getStore, writable } from 'svelte/store';
 import { interpolateLab, piecewise } from 'd3-interpolate';
+import _, { every, get, keyBy, map, reduce } from 'lodash-es';
+import { derived, get as getStore, writable } from 'svelte/store';
 
+import {
+  DEFAULT_GEOGRAPHY_UID,
+  DEFAULT_INDICATOR_UID,
+  DEFAULT_SCENARIOS_UID,
+} from '../config.js';
 import {
   DICTIONARY_INDICATOR_PARAMETERS,
   DICTIONARY_INDICATORS,
@@ -13,12 +18,6 @@ import {
   INDICATOR_PARAMETERS,
   SCENARIOS,
 } from './meta.js';
-import {
-  DEFAULT_GEOGRAPHY_UID,
-  DEFAULT_INDICATOR_UID,
-  DEFAULT_SCENARIOS_UID,
-} from '../config.js';
-import { formatList, formatObjArr, formatReadableList } from '$lib/utils.js';
 
 // Set to true if is in embed mode e.g. if the url is /embed/something
 export const IS_EMBEDED = writable(false);
