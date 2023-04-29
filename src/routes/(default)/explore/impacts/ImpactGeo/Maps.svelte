@@ -9,6 +9,7 @@
   import FilterLayer from '$lib/MapboxMap/FilterLayer.svelte';
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
   import InteractivityOverlay from './InteractivityOverlay.svelte';
+  import { median } from 'd3-array';
 
   export let geoData;
   export let geoShape;
@@ -30,19 +31,62 @@
     '2': 'aspect-[1.5]',
     '3': 'aspect-[1.7]',
   }[geoData.length];
+
+  $: domainMedian = median(colorScale.domain());
+  $: mediumColor = colorScale(domainMedian);
+
+  $: paint = [
+    'settlement-minor-label',
+    'settlement-major-label',
+    'settlement-subdivision-label',
+    'airport-label',
+    'water-point-label',
+    'water-line-label',
+    'natural-point-label',
+    'natural-line-label',
+    'waterway-label',
+    'road-label-simple',
+  ].map((uid) => {
+    return {
+      uid,
+      properties: [
+        {
+          uid: 'text-halo-color',
+          value: mediumColor,
+        },
+        {
+          uid: 'text-color',
+          value: '#ffffff',
+        },
+      ],
+    };
+  });
 </script>
 
-<div class="flex items-center justify-end">
-  <Legend unit={indicator.unit} scale={colorScale} />
-</div>
-
 <div
-  class={`${aspectRatio} flex gap-2 cols-${geoData.length} relative animate-defer-visibility`}
+  class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}
 >
+  <div
+    class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-background-base z-10 shadow-sm rounded-sm"
+  >
+    <Legend unit={indicator.unit} scale={colorScale} />
+  </div>
   {#key geoData.length}
     {#each geoData as d, i}
-      <div class="relative" style={`width: ${100 / geoData.length}%`}>
-        <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive}>
+      <div
+        class:rounded-l={geoData.length === 1 || i === 0}
+        class:rounded-r={geoData.length === 1 || i === geoData.length - 1}
+        class:border-r-0={geoData.length > 1 && i !== geoData.length - 1}
+        class="relative border border-foreground-weakest overflow-hidden"
+        style={`width: ${100 / geoData.length}%`}
+      >
+        <MapProvider
+          bind:map={maps[i]}
+          bounds={bbox(geoShape)}
+          {interactive}
+          {paint}
+          hideLogo={i > 0}
+        >
           <DataSource data={masked}>
             <PolygonLayer
               before="ocean-fill"

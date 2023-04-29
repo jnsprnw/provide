@@ -20,6 +20,8 @@
   export let bounds;
   export let center;
   export let fitBoundsOptions;
+  export let paint;
+  export let hideLogo = false;
 
   const theme = getContext('theme');
 
@@ -103,10 +105,19 @@
       interactive ? $map[handler].enable() : $map[handler].disable()
     );
   }
+
+  $: if ($ready && paint) {
+    paint.forEach((layer) =>
+      layer.properties.forEach((property) => {
+        $map.setPaintProperty(layer.uid, property.uid, property.value);
+      })
+    );
+  }
 </script>
 
 <div
-  class="map w-full h-full {projection} {clazz}"
+  class:hide-logo={hideLogo}
+  class="map w-full h-full hide-logo {projection} {clazz}"
   bind:clientWidth
   bind:this={node}
 >
@@ -114,3 +125,9 @@
     <slot />
   {/if}
 </div>
+
+<style>
+  :global(.hide-logo .mapboxgl-ctrl-logo) {
+    opacity: 0;
+  }
+</style>

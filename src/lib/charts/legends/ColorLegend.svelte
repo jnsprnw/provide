@@ -1,8 +1,6 @@
 <script>
   export let items;
   export let id;
-
-  $: id === 1 && console.log(items);
 </script>
 
 <dl class="flex flex-wrap gap-x-4 my-4">

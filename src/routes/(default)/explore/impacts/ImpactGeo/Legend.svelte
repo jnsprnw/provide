@@ -58,7 +58,7 @@
     >Below<br /><span class="text-foreground-base font-bold">{min}</span></span
   >
   <div
-    class="w-40 h-[16px] my-5 mx-1.5"
+    class="w-40 h-[20px] mx-2"
     bind:clientWidth={width}
     bind:clientHeight={height}
   >
@@ -73,10 +73,6 @@
         )}
         class="absolute text-xs text-background-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
         >{middle}
-        <!-- <span
-          class="absolute bottom-0 w-[1px] bg-background-base/40 whitespace-nowrap left-1/2 inline-block h-full"
-        /></span
-      > -->
       </span>
     </div>
   </div>

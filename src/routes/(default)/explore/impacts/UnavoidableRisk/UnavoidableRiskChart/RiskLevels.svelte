@@ -82,6 +82,7 @@
 {#if $height > 0}
   <g>
     {#each simulation.nodes() as { x, y, uid, color, isSelectedScenario, tooltipContent, radius, scenario }}
+      <!-- For some reason the updating of the color causes issues if no key block is added -->
       {#key uid}
         <g
           style="transform: translate({x}px, {Math.min(y, $height)}px);"
@@ -97,6 +98,7 @@
             style:opacity={isSelectedScenario ? 1 : 0.4}
             r={radius}
             use:tooltip={{ content: tooltipContent }}
+            title={scenario}
           />
         </g>
       {/key}

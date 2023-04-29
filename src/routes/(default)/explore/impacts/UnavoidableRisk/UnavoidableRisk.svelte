@@ -33,6 +33,8 @@
 
   export let title;
 
+  $: console.log($CURRENT_INDICATOR_OPTION_VALUES);
+
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(UN_AVOIDABLE_RISK_DATA, {
       endpoint: END_UN_AVOIDABLE_RISK,
