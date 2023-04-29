@@ -67,6 +67,8 @@
       $mapReady = true;
     });
 
+    $map.on('zoomend', () => {});
+
     $map.on('styledata', () => {
       $stylesReady = true;
     });

@@ -179,7 +179,10 @@
       dataDownloadOptions={asyncProps.dataDownloadOptions}
       dataDownloadParams={asyncProps.dataDownloadParams}
       graphDownloadParams={asyncProps.graphDownloadParams}
-      graphDownloadSettings={{ formats: ['png'], processingIntensity: 4 }}
+      graphDownloadSettings={{
+        formats: ['png'],
+        processingIntensity: asyncProps.geoData.length * 4,
+      }}
       chartUid={END_IMPACT_GEO}
       templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
