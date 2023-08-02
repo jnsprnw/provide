@@ -22,7 +22,7 @@
   let IMPACT_TIME_DATA = writable([]);
 
   export let title;
-  // test comment
+
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(
       IMPACT_TIME_DATA,
