@@ -42,3 +42,5 @@ Folders containing multiple components or other files get a kebap case name e.g.
 These naming rules don't apply to the `routes` folder.
 
 ## Styling
+
+## Update
