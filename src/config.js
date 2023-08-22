@@ -1,3 +1,13 @@
+console.log(
+  `VITE_MAPBOX_ACCESS_TOKEN: ${import.meta.env.VITE_MAPBOX_ACCESS_TOKEN}\n`,
+  `VITE_MAPBOX_STYLE_LIGHT: ${import.meta.env.VITE_MAPBOX_STYLE_LIGHT}\n`,
+  `VITE_DATA_API_URL: ${import.meta.env.VITE_DATA_API_URL}\n`,
+  `VITE_STRAPI_LOCALE: ${import.meta.env.VITE_STRAPI_LOCALE}\n`,
+  `VITE_HEROKU_URL: ${import.meta.env.VITE_HEROKU_URL}\n`,
+  `VITE_SCREENSHOT_URL: ${import.meta.env.VITE_SCREENSHOT_URL}\n`,
+  `VITE_APP_URL: ${import.meta.env.VITE_APP_URL}\n`
+);
+
 export const TITLE_SITE = 'Climate Risk Dashboard';
 export const TITLE_PROJECT = 'PROVIDE';
 
