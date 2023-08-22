@@ -15,8 +15,6 @@
 
   const theme = getContext('theme');
 
-  $: console.log($theme);
-
   let currentIndex = 0;
   $: currentStory = stories[currentIndex];
 
