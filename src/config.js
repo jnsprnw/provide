@@ -1,21 +1,21 @@
 console.log(
-  `VITE_MAPBOX_ACCESS_TOKEN: ${import.meta.env.VITE_MAPBOX_ACCESS_TOKEN.split(
+  `VITE_MAPBOX_ACCESS_TOKEN: ${import.meta.env.VITE_MAPBOX_ACCESS_TOKEN?.split(
     ''
   ).join('')}\n`,
-  `VITE_MAPBOX_STYLE_LIGHT: ${import.meta.env.VITE_MAPBOX_STYLE_LIGHT.split(
+  `VITE_MAPBOX_STYLE_LIGHT: ${import.meta.env.VITE_MAPBOX_STYLE_LIGHT?.split(
     ''
   ).join('')}\n`,
-  `VITE_DATA_API_URL: ${import.meta.env.VITE_DATA_API_URL.split('').join(
+  `VITE_DATA_API_URL: ${import.meta.env.VITE_DATA_API_URL?.split('').join(
     ''
   )}\n`,
-  `VITE_STRAPI_LOCALE: ${import.meta.env.VITE_STRAPI_LOCALE.split('').join(
+  `VITE_STRAPI_LOCALE: ${import.meta.env.VITE_STRAPI_LOCALE?.split('').join(
     ''
   )}\n`,
-  `VITE_HEROKU_URL: ${import.meta.env.VITE_HEROKU_URL.split('').join('')}\n`,
-  `VITE_SCREENSHOT_URL: ${import.meta.env.VITE_SCREENSHOT_URL.split('').join(
+  `VITE_HEROKU_URL: ${import.meta.env.VITE_HEROKU_URL?.split('').join('')}\n`,
+  `VITE_SCREENSHOT_URL: ${import.meta.env.VITE_SCREENSHOT_URL?.split('').join(
     ''
   )}\n`,
-  `VITE_APP_URL: ${import.meta.env.VITE_APP_URL.split('').join('')}\n`
+  `VITE_APP_URL: ${import.meta.env.VITE_APP_URL?.split('').join('')}\n`
 );
 
 export const TITLE_SITE = 'Climate Risk Dashboard';
