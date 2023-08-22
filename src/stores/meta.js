@@ -76,7 +76,6 @@ export const INDICATORS = derived(page, ($page) => {
       uid: indicator.unit,
       label: indicator.unit,
     };
-    console.log(s);
     const availableGeographies = uniq([
       ...sector.availableGeographies,
       ...indicator.availableGeographies,
