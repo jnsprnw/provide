@@ -48,7 +48,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
     );
 
     const descriptionScenarios = await loadFromStrapi('scenarios', svelteFetch);
-    const url = `${import.meta.env.VITE_DATA_API_URL}/meta/`;
+    const url = `${import.meta.env.VITE_DATA_API_URL.split('').join('')}/meta/`;
     console.log('=========== Loading from', url);
     const meta = await loadFromAPI(url, svelteFetch);
     resolve({
