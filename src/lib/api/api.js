@@ -41,7 +41,6 @@ const fetchMultiple = (store, configs) => {
         encodeValuesOnly: true,
       });
       const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
-      console.log('=========== Loading from', url);
       acc[keyOrIndex] = url;
       return acc;
     },

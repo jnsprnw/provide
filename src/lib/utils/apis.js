@@ -48,10 +48,9 @@ export const loadMetaData = function (svelteFetch = fetch) {
     );
 
     const descriptionScenarios = await loadFromStrapi('scenarios', svelteFetch);
-    const meta = await loadFromAPI(
-      `${import.meta.env.VITE_DATA_API_URL}/meta/`,
-      svelteFetch
-    );
+    const url = `${import.meta.env.VITE_DATA_API_URL}/meta/`;
+    console.log('=========== Loading from', url);
+    const meta = await loadFromAPI(url, svelteFetch);
     resolve({
       ...meta,
       geographyTypes: meta.geographyTypes.map((g) => ({
