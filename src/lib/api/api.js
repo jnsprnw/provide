@@ -47,6 +47,8 @@ const fetchMultiple = (store, configs) => {
     isObject ? {} : []
   );
 
+  console.log(urls);
+
   // Create array or object containing either cached data or empty objects
   const initialData = reduce(
     configs,
@@ -99,6 +101,7 @@ const fetchSingle = (store, { endpoint, params }) => {
   });
   const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
   const cached = cache[url];
+
   if (cached) {
     store.set(cached);
   } else {

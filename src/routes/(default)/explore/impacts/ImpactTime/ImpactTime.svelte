@@ -37,7 +37,7 @@
       }))
     );
 
-  $: process = ({ impactTimeData }, { scenarios, graphParams, urlParams }) => {
+  $: process = ({ impactTimeData }, { scenarios, urlParams }) => {
     const impactTime = impactTimeData.map((datum, i) => {
       const MODEL = KEY_MODEL;
       const SOURCE = KEY_SOURCE;
@@ -53,6 +53,8 @@
       } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
       const scenario = scenarios[i];
+
+      console.log(scenario);
 
       return {
         ...scenario,
