@@ -28,6 +28,7 @@ export const load = async ({ fetch }) => {
       const scenarios = compact(
         scenarioList.map((uid) => find(get(meta, 'scenarios', []), { uid }))
       ).slice(0, 3);
+
       if (geography && indicator && scenarios.length) {
         const query = qs.stringify(
           {
