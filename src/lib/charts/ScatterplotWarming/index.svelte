@@ -21,14 +21,7 @@
   $: formatTickX = (d) => formatValue(d, unitX);
   $: formatTickY = (d) => formatValue(d, unitY);
 
-  //$: console.log({ unitX, formatTickX }, formatTickX(0.5))
-
   $: sortedData = sortBy(data, ['highlight', 'isSelected']);
-  // This sorting is somewhat buggy.
-  // $: sortedData = data.slice(0).sort((a, b) =>
-  //   // First sort by `highlight`, then by `color`
-  //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
-  // );
   export let hoveredSector;
 </script>
 
