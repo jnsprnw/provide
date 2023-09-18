@@ -23,7 +23,8 @@
         </span>
         <span
           class:text-theme-weaker={isActive}
-          class="w-full text-foreground-weak text-sm sm:text-base">{description}</span
+          class="w-full text-contour-weak text-sm sm:text-base"
+          >{description}</span
         >
       </NavLink>
     </li>

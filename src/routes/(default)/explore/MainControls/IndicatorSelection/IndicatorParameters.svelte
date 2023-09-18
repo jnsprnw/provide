@@ -23,7 +23,7 @@
   {#each parameters as parameter}
     <Select
       {...parameter}
-      backgroundColor="bg-background-base"
+      backgroundColor="bg-surface-base"
       borderColor="border-theme-base/5"
       on:change={handleChange}
     />

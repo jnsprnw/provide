@@ -35,8 +35,8 @@
   $: formatTickY = (d) => formatValue(d, unit);
   $: chartData = sortBy(data, ['isHighlighted', 'isSelected']).map((series) => {
     let color = series.isHighlighted
-      ? $theme.color.foreground.weak
-      : $theme.color.foreground.weaker;
+      ? $theme.color.contour.weak
+      : $theme.color.contour.weaker;
     let opacity = series.color ? 0.7 : 0.3;
     opacity = series.isHighlighted ? 1 : opacity;
     return {

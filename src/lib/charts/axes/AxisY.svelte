@@ -32,7 +32,7 @@
 {#if axisLabel || showLabel}
   <text
     transform={`translate(0, ${-padding.top + 9})`}
-    class="text-xs fill-foreground-weak">{axisLabel}</text
+    class="text-xs fill-contour-weak">{axisLabel}</text
   >
 {/if}
 <g transform={`translate(${xPos}, ${yPos})`}>
@@ -40,8 +40,8 @@
     <g transform="translate(0, {$yScale(tick)})">
       {#if showTickLines !== false}
         <line
-          class={`stroke-foreground-weakest stroke-dasharray-2-3`}
-          class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
+          class={`stroke-contour-weakest stroke-dasharray-2-3`}
+          class:stroke-contour-weaker={ticksHighlighted.includes(tick)}
           x1={lineStart}
           x2={lineLength ? lineLength * orientation : $width * orientation}
         />
@@ -49,7 +49,7 @@
       {#if showTickLabels}
         <text
           x={labelX * -orientation}
-          class="fill-foreground-weak text-xs"
+          class="fill-contour-weak text-xs"
           dominant-baseline="middle"
           style="
           text-anchor: {labelTextAnchor};

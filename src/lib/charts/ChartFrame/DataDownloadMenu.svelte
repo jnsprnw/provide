@@ -35,10 +35,9 @@
     <div class="max-w-xs px-3 pb-3">
       {#each options as param}
         <div
-          class="py-2.5 grid grid-cols-7 gap-2 border-t items-center border-foreground-weakest first:border-none"
+          class="py-2.5 grid grid-cols-7 gap-2 border-t items-center border-contour-weakest first:border-none"
         >
-          <span class="col-span-2 text-foreground-weak text-sm"
-            >{param.label}</span
+          <span class="col-span-2 text-contour-weak text-sm">{param.label}</span
           >
 
           <div class="col-span-5 col-start-3">
@@ -54,7 +53,7 @@
           </div>
         </div>
       {/each}
-      <div class="bg-background-weaker text-center py-3">
+      <div class="bg-surface-weaker text-center py-3">
         <a href={url} class="text-theme-base font-bold text-sm" download
           >Download data</a
         >

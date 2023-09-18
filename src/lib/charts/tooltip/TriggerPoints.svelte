@@ -24,7 +24,7 @@
   {#if $IS_ACTIVE}
     <circle
       fill={data.color}
-      class="pointer-events-none stroke-2 stroke-background-base"
+      class="pointer-events-none stroke-2 stroke-surface-base"
       r={5}
     />
   {/if}

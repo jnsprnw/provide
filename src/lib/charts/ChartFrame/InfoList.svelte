@@ -8,7 +8,7 @@
     {#each items as item}
       <div class="flex text-sm">
         <dt class="font-bold mr-1">{item.label}</dt>
-        <dd class="min-w-10 text-foreground-weak">{item.value}</dd>
+        <dd class="min-w-10 text-contour-weak">{item.value}</dd>
       </div>
     {/each}
   </dl>

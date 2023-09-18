@@ -83,18 +83,18 @@
         <DataSource data={asyncProps.mask}>
           <PolygonLayer
             before="ocean-fill"
-            fillColor={$theme.color.background.base}
+            fillColor={$theme.color.surface.base}
             fill={true}
             fillId="mask"
             lineWidth={0.5}
-            lineColor={$theme.color.foreground.base}
+            lineColor={$theme.color.contour.base}
           />
           <PolygonLayer
             before="ocean-fill"
             lineWidth={3}
             lineOffset={1.5}
             lineOpacity={0.07}
-            lineColor={$theme.color.foreground.base}
+            lineColor={$theme.color.contour.base}
           />
         </DataSource>
         <DataSource data={asyncProps.data}>
@@ -107,16 +107,14 @@
     class="col-span-3 row-start-1 col-start-1 z-10 h-1/2 self-end bg-gradient-to-t from-theme-stronger/60"
   />
   <figcaption class="pl-8 col-span-2 self-center col-start-4">
-    <p
-      class="text-3xl text-background-base font-bold max-w-md leading-snug mb-12"
-    >
+    <p class="text-3xl text-surface-base font-bold max-w-md leading-snug mb-12">
       How will {currentStory.indicator.label} in {currentStory.geography
         .emoji}&nbsp;{currentStory.geography.label} develop under a {currentStory
         .scenarios[0].label} scenario?
     </p>
     <a
       href={currentStory.url}
-      class="bg-background-base text-lg border text-theme-base rounded px-5 py-3"
+      class="bg-surface-base text-lg border text-theme-base rounded px-5 py-3"
       >Find out more</a
     >
   </figcaption>

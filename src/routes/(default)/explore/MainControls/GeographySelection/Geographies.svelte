@@ -70,7 +70,7 @@
 </script>
 
 <div
-  class="md:border-r border-foreground-weakest pb-0 flex flex-col items-stretch"
+  class="md:border-r border-contour-weakest pb-0 flex flex-col items-stretch"
 >
   <div class="px-5 grow flex items-stretch my-4">
     <input

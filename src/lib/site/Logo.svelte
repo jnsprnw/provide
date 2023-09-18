@@ -13,8 +13,8 @@
   <h1 class="text-theme-base font-bold uppercase tracking-widest">
     {TITLE_PROJECT}
   </h1>
-  <span class="text-foreground-weakest" role="presentation" aria-hidden="true"
+  <span class="text-contour-weakest" role="presentation" aria-hidden="true"
     >|</span
   >
-  <span class="text-foreground-weak">{TITLE_SITE}</span>
+  <span class="text-contour-weak">{TITLE_SITE}</span>
 </div>

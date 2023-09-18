@@ -14,7 +14,7 @@
 
 {#if steps.length > 1}
   <div class="flex items-center gap-3">
-    <div class="text-sm text-foreground-weak leading-4">
+    <div class="text-sm text-contour-weak leading-4">
       Global Mean Temperature
     </div>
     <div>

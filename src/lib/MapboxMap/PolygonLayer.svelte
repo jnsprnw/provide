@@ -37,7 +37,7 @@
   export let labelHaloColor = [
     'coalesce',
     ['get', 'fillColor'],
-    $theme.color.background.base,
+    $theme.color.surface.base,
   ];
   export let labelHaloOpacity = 1;
   export let labelHaloWidth = 1;

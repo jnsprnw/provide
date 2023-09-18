@@ -44,21 +44,22 @@ $extra-wide: 1700px !default;
 }
 
 @mixin tab-focus() {
-  &:not([aria-selected="true"]):not(.tile--is-selected) {
-    background-color: var(--color-background-stronger);
+  &:not([aria-selected='true']):not(.tile--is-selected) {
+    background-color: var(--color-surface-stronger);
     outline: none;
   }
 }
 
 @mixin input-field() {
   display: block;
-  border: 1px solid var(--color-foreground-weaker);
+  border: 1px solid var(--color-contour-weaker);
   border-radius: var(--radius-interactive-l);
   transition: border-color var(--transition-duration-base) ease-out;
   padding: var(--space-xxs);
 
-  &:hover, &:not(:placeholder-shown) {
-    border-color: var(--color-foreground-base);
+  &:hover,
+  &:not(:placeholder-shown) {
+    border-color: var(--color-contour-base);
   }
 
   &:focus {
@@ -76,7 +77,8 @@ $extra-wide: 1700px !default;
   border: 1px solid transparent;
   background-color: transparent;
   border-radius: var(--radius-interactive-l);
-  transition: background-color var(--transition-duration-base) ease-out, border-color var(--transition-duration-base) ease-out;
+  transition: background-color var(--transition-duration-base) ease-out,
+    border-color var(--transition-duration-base) ease-out;
   padding: var(--space-xxs);
   cursor: pointer;
 
@@ -87,11 +89,14 @@ $extra-wide: 1700px !default;
     transition: color var(--transition-duration-base) ease-out;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     @include tab-focus();
   }
 
-  &[aria-selected="true"], &.tile--is-selected, &.radio-button--is-selected {
+  &[aria-selected='true'],
+  &.tile--is-selected,
+  &.radio-button--is-selected {
     border-color: var(--color-functional-accent);
 
     span {
@@ -100,11 +105,12 @@ $extra-wide: 1700px !default;
     }
   }
 
-  &[aria-disabled="true"],
-  &[aria-disabled="true"]:hover,
+  &[aria-disabled='true'],
+  &[aria-disabled='true']:hover,
   &.tile--disabled,
   &.tile--disabled:hover {
-    &, div {
+    &,
+    div {
       cursor: not-allowed;
       background-color: transparent !important;
 
@@ -146,7 +152,7 @@ $extra-wide: 1700px !default;
   grid-template-columns: 1fr 3fr;
   gap: var(--space-xl) var(--space-xl);
   margin-top: var(--space-l);
-  // border-bottom: 1px solid var(--color-foreground-weakest);
+  // border-bottom: 1px solid var(--color-contour-weakest);
 
   .intro {
     grid-column: 1 / span 2;
@@ -156,14 +162,16 @@ $extra-wide: 1700px !default;
 }
 
 @mixin tab-nav-wrapper {
-  border-bottom: 1px solid var(--color-foreground-weaker); // TODO
+  border-bottom: 1px solid var(--color-contour-weaker); // TODO
 
   ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-    column-gap: var(--space-l); // TODO: Different spacing for Explore Navigation and Impacts Navigation
+    column-gap: var(
+      --space-l
+    ); // TODO: Different spacing for Explore Navigation and Impacts Navigation
   }
 }
 
@@ -183,7 +191,8 @@ $extra-wide: 1700px !default;
     cursor: pointer;
   }
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     .link {
       color: var(--color-text-base);
     }
@@ -204,7 +213,8 @@ $extra-wide: 1700px !default;
   &.tile--disabled,
   &.tile--disabled:hover,
   &.disabled, // Used in LinkList
-  &.disabled:hover { // Used in LinkList
+  &.disabled:hover {
+    // Used in LinkList
     background-color: transparent !important;
     border-bottom-color: transparent;
 

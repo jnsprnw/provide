@@ -69,8 +69,8 @@
     <g class="" transform="translate({$xScale(tick)}, 0)">
       {#if showTickLines !== false}
         <line
-          class={`stroke-foreground-weakest stroke-dasharray-2-3`}
-          class:stroke-foreground-weaker={ticksHighlighted.includes(tick)}
+          class={`stroke-contour-weakest stroke-dasharray-2-3`}
+          class:stroke-contour-weaker={ticksHighlighted.includes(tick)}
           y1={lineStart}
           y2={lineLength ?? -$height}
         />
@@ -79,7 +79,7 @@
         x={isBandwidth ? $xScale.bandwidth() / 2 : 0}
         y={labelOffset + labelY}
         text-anchor={textAnchor(i)}
-        class="fill-foreground-weak text-xs"
+        class="fill-contour-weak text-xs"
       >
         {formatTick(tick)}
       </text>

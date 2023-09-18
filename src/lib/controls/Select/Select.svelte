@@ -11,7 +11,7 @@
   export let value;
   export let label;
   export let uid;
-  export let borderColor = 'border-foreground-weakest';
+  export let borderColor = 'border-contour-weakest';
   export let backgroundColor = 'bg-transparent';
   export let labelColor = 'text-theme-base';
 
@@ -28,7 +28,7 @@
 
 {#if !$IS_STATIC}
   <div class="flex gap-2 items-center">
-    <label class="text-foreground-weak text-sm" for={selectId}>{label}</label>
+    <label class="text-contour-weak text-sm" for={selectId}>{label}</label>
     <div class={`border rounded overflow-hidden flex relative ${borderColor}`}>
       <select
         class={`py-1.5 pl-2 pr-8 text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}

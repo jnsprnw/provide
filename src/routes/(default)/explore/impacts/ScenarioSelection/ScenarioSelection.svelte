@@ -46,7 +46,7 @@
     label="Scenario"
     {buttonLabel}
     panelClass="w-screen-p max-w-4xl"
-    buttonClass="border border-foreground-weakest aria-expanded:border-foreground-weaker"
+    buttonClass="border border-contour-weakest aria-expanded:border-contour-weaker"
     size="md"
     panelPlacement={windowWidth > 1200 ? 'right-start' : 'bottom-start'}
   >
@@ -63,7 +63,7 @@
         class="text-sm text-theme-base font-bold flex gap-1.5 items-center"
         href="/documentation#scenarios"
         ><span
-          class="flex align-center justify-center text-xs w-4 h-4 rounded-full bg-theme-base text-background-base"
+          class="flex align-center justify-center text-xs w-4 h-4 rounded-full bg-theme-base text-surface-base"
           >?</span
         >Which scenario should I select?</a
       >
@@ -75,7 +75,7 @@
       >
         {#key currentFilterUid}
           <fieldset
-            class="flex flex-col min-w-min md:border-r border-foreground-weakest py-2"
+            class="flex flex-col min-w-min md:border-r border-contour-weakest py-2"
           >
             <ScenarioList
               highlightedScenarioUid={renderedScenario?.uid}
@@ -94,7 +94,7 @@
             />
           {:else}
             <div
-              class="p-4 flex items-center rounded text-foreground-weak justify-center min-h-[60vh]"
+              class="p-4 flex items-center rounded text-contour-weak justify-center min-h-[60vh]"
             >
               Hover over a scenario to view details
             </div>

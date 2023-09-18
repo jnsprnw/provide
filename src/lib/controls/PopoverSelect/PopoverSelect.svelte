@@ -38,13 +38,13 @@
 
 <Popover class={`relative w-full ${clazz}`}>
   <span
-    class="uppercase text-xs tracking-widest font-bold text-foreground-weak pl-1 mb-2 inline-block"
+    class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block"
     >{label}</span
   >
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full rounded bg-background-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass} transition-colors`}
+    class={`flex w-full rounded bg-surface-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass} transition-colors`}
   >
     <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis"
       >{buttonLabel}</span
@@ -54,7 +54,7 @@
 
   <PopoverPanel
     use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-background-base rounded overflow-hidden border-theme-base/20 border shadow-xl z-50 relative`}
+    class={`${panelClass} bg-surface-base rounded overflow-hidden border-theme-base/20 border shadow-xl z-50 relative`}
     let:open
   >
     <slot />

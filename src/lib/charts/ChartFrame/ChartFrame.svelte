@@ -23,7 +23,7 @@
 
 <figure>
   <header class="mb-4 max-w-2xl">
-    {#if tagline}<Tagline color="text-foreground-weak">{tagline}</Tagline>{/if}
+    {#if tagline}<Tagline color="text-contour-weak">{tagline}</Tagline>{/if}
     <h3 class="font-bold text-2xl mb-3">
       <Template template={title} data={templateProps} />
     </h3>

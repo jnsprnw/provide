@@ -13,7 +13,7 @@
             title={label}
             style:width="10px"
             style:height="14px"
-            class="block bg-background-weakest"
+            class="block bg-surface-weakest"
             style:background-color={color}
           />
         </dt>

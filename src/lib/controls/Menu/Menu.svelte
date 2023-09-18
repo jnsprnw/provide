@@ -26,16 +26,16 @@
   >
   <MenuItems
     use={[[popperContent, popperOptions]]}
-    class="absolute z-10 bg-background-base shadow-xl"
+    class="absolute z-10 bg-surface-base shadow-xl"
   >
     {#each options as option}
       {#if option.options}
         <div
-          class="flex flex-col items-stretch [&:not(:last-child)]:border-b border-foreground-weakest"
+          class="flex flex-col items-stretch [&:not(:last-child)]:border-b border-contour-weakest"
         >
           {#each option.options as option}
             <MenuItem
-              class="px-4 py-2 hover:bg-background-weaker  text-sm inline-block"
+              class="px-4 py-2 hover:bg-surface-weaker  text-sm inline-block"
               href={option.href}
             >
               {option.label}

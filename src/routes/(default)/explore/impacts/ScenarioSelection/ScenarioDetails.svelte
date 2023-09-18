@@ -18,7 +18,7 @@
 </script>
 
 <h3 class="text-lg mb-2 font-bold">{scenario.label}</h3>
-<p class="text-foreground-weak mb-5">
+<p class="text-contour-weak mb-5">
   {scenario.description || 'Description missing'}
 </p>
 <dl class="flex gap-4 mb-5">
@@ -32,7 +32,7 @@
 </dl>
 
 {#if scenario.characteristics.length}
-  <dl class="text-sm flex gap-3 py-4 border-t border-foreground-weaker">
+  <dl class="text-sm flex gap-3 py-4 border-t border-contour-weaker">
     {#each scenario.characteristics as { year, description }}
       {#if year <= scenario.endYear}
         <div class="flex flex-col gap-y-1 w-1/2">
@@ -40,7 +40,7 @@
             Up to <time datetime={year}>{year}</time>
           </dt>
           <dd>
-            <span class="text-foreground-weak">{description}</span>
+            <span class="text-contour-weak">{description}</span>
           </dd>
         </div>
       {/if}
@@ -48,14 +48,14 @@
   </dl>
 {/if}
 
-<div class="border-t border-foreground-weaker pt-4">
+<div class="border-t border-contour-weaker pt-4">
   <p class="text-sm mb-2 font-bold">Global mean temperature in °C</p>
   <figure class="">
     <div class="h-48 mb-2">
       <LineChart yDomain={[1, 3]} data={chartData} />
     </div>
-    <figcaption class="text-xs text-foreground-weak">
-      <p class="mt-1 mb-2 text-foreground-weaker">
+    <figcaption class="text-xs text-contour-weak">
+      <p class="mt-1 mb-2 text-contour-weaker">
         The lines in the graph represent best estimates. Learn more about
         uncertainties <a
           class="underline decoration-theme-weakest hover:decoration-theme-weaker"

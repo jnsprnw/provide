@@ -60,7 +60,7 @@
     <Svg>
       <AxisX showTickLines={false} ticks={5} />
       <AxisY showTickLines={false} ticks={4} formatTick={formatTickY} />
-      <LineLayer color={$theme.color.background.base} strokeWidth={5} />
+      <LineLayer color={$theme.color.surface.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>
   </LayerCake>

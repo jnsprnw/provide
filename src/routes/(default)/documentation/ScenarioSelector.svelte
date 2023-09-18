@@ -6,7 +6,7 @@
   const { query } = getContext('scrollContent');
 </script>
 
-<fieldset id={slug} class={`flex flex-col my-4 bg-background-weaker ${query}`}>
+<fieldset id={slug} class={`flex flex-col my-4 bg-surface-weaker ${query}`}>
   {#each scenarios as scenario}
     <label class="py-1">
       <input

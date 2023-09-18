@@ -15,7 +15,7 @@
   .banner {
     padding: var(--space-xxs) var(--space-s) var(--space-xs);
     background: var(--color-functional-warn);
-    //color: var(--color-background-base);
+    //color: var(--color-surface-base);
     text-align: center;
   }
 

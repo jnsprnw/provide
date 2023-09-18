@@ -84,7 +84,7 @@
   );
 </script>
 
-<div class="bg-background-weaker">
+<div class="bg-surface-weaker">
   <LoadingWrapper
     let:asyncProps={{ data }}
     let:props={{ currentStory }}
@@ -129,7 +129,7 @@
 
 <style lang="postcss">
   .stories {
-    background-color: var(--color-background-stronger);
+    background-color: var(--color-surface-stronger);
     width: 100%;
     position: relative;
   }
@@ -159,7 +159,7 @@
         color: var(--color-font-base);
         font-size: var(--font-size-xl);
         font-weight: var(--font-font-weight-regular);
-        background-color: var(--color-background-base);
+        background-color: var(--color-surface-base);
         padding: var(--space-l);
         margin: var(--space-xl) var(--space-m) var(--space-xxl);
         border-radius: var(--radius-interactive-l);
@@ -198,7 +198,7 @@
 
     button {
       border: none;
-      background-color: var(--color-foreground-weaker);
+      background-color: var(--color-contour-weaker);
       width: var(--space-xs);
       height: var(--space-xs);
       border-radius: 50%;
@@ -210,11 +210,11 @@
 
       &:hover,
       &:focus {
-        background-color: var(--color-foreground-base);
+        background-color: var(--color-contour-base);
       }
 
       &.active {
-        background-color: var(--color-foreground-base);
+        background-color: var(--color-contour-base);
         transform: scale3d(1.3, 1.3, 1.3);
       }
     }

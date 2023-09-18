@@ -34,12 +34,12 @@
   .dot {
     pointer-events: none;
     stroke-width: 2px;
-    fill: var(--color-foreground-weaker);
-    stroke: var(--color-background-base);
+    fill: var(--color-contour-weaker);
+    stroke: var(--color-surface-base);
     stroke-opacity: 0.75;
 
     &.highlight {
-      fill: var(--color-foreground-base);
+      fill: var(--color-contour-base);
     }
   }
 </style>

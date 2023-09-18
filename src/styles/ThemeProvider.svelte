@@ -50,14 +50,11 @@
   // }
 
   $: {
-    const colors = designTokensLight.color;
-
     $THEME = {
       id: id,
-      ...designTokens,
       mapStyle,
       color: {
-        ...colors,
+        ...designTokensLight,
         makeTextColor,
         hasContrastToBackground,
         get: (d) => get(colors, d) || d,

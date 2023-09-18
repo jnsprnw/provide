@@ -57,12 +57,12 @@
   --color-text-stronger: #ffffff; /* Stronger text color for maximum background contrast. */
   --color-text-base: #dddddd;
   --color-text-weaker: #aaaaaa;
-  --color-foreground-weakest: #777777;
-  --color-foreground-weaker: #aaaaaa;
-  --color-foreground-base: #eeeeee;
-  --color-background-weakest: #666666;
-  --color-background-weaker: #303030; /* slightly shaded background */
-  --color-background-base: #202020;
+  --color-contour-weakest: #777777;
+  --color-contour-weaker: #aaaaaa;
+  --color-contour-base: #eeeeee;
+  --color-surface-weakest: #666666;
+  --color-surface-weaker: #303030; /* slightly shaded background */
+  --color-surface-base: #202020;
   --color-blend-mode-max: lighten;
   --color-blend-mode-additive: screen;
   --color-meta-label: Dark;

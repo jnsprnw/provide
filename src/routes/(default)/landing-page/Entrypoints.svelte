@@ -3,7 +3,7 @@
 </script>
 
 <header
-  class="border-b border-b-foreground-weaker py-20 justify-center flex-col max-w-5xl mx-auto mb-20 gap-x-12 grid md:grid-cols-2"
+  class="border-b border-b-contour-weaker py-20 justify-center flex-col max-w-5xl mx-auto mb-20 gap-x-12 grid md:grid-cols-2"
 >
   <div>
     <span class="block font-bold text-2xl mb-3">How to start?</span>
@@ -22,7 +22,7 @@
         corresponding impacts
       </span>
     </div>
-    <figure class="bg-background-weaker px-8 py-16 my-4">
+    <figure class="bg-surface-weaker px-8 py-16 my-4">
       <img
         src="/img/impacts.png"
         alt="One scenario and many resulting impacts"
@@ -41,7 +41,7 @@
         the threshold won't be exceeded
       </span>
     </div>
-    <figure class="bg-background-weaker px-8 py-16 my-4">
+    <figure class="bg-surface-weaker px-8 py-16 my-4">
       <img
         src="/img/emission-scenarios.png"
         alt="Many compatible scenarios and one impact threshold"

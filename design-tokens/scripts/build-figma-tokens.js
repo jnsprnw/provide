@@ -11,7 +11,9 @@ modes.forEach((mode) => {
   const tokensProcessed = tokens.variables.reduce((acc, variable) => {
     const value = variable.resolvedValuesByMode[mode.id];
     const rgbString = ['r', 'g', 'b', 'a']
-      .map((key) => Math.round(value.resolvedValue[key] * 100))
+      .map((key) =>
+        Math.round(value.resolvedValue[key] * (key === 'a' ? 100 : 255))
+      )
       .join(',');
     const color = `rgba(${rgbString})`;
     _.set(acc, variable.name.replace(/\//g, '.'), color);

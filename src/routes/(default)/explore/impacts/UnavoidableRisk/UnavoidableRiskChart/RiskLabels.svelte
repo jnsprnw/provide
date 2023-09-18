@@ -43,7 +43,7 @@
       class={`absolute flex items-center border-l-4 ${color}`}
       style={`top: ${y2 - (index === 0 ? -1 : 0)}px; height: ${height}px;`}
     >
-      <div class="tick-label pl-3 text-sm text-foreground-weak leading-tight">
+      <div class="tick-label pl-3 text-sm text-contour-weak leading-tight">
         {label}
       </div>
     </div>

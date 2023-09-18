@@ -67,7 +67,7 @@
   class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}
 >
   <div
-    class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-background-base z-10 shadow-sm rounded-sm"
+    class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm"
   >
     <Legend unit={indicator.unit} scale={colorScale} />
   </div>
@@ -77,7 +77,7 @@
         class:rounded-l={geoData.length === 1 || i === 0}
         class:rounded-r={geoData.length === 1 || i === geoData.length - 1}
         class:border-r-0={geoData.length > 1 && i !== geoData.length - 1}
-        class="relative border border-foreground-weakest overflow-hidden"
+        class="relative border border-contour-weakest overflow-hidden"
         style={`width: ${100 / geoData.length}%`}
       >
         <MapProvider
@@ -94,14 +94,14 @@
               fill={true}
               fillId="mask"
               lineWidth={0.5}
-              lineColor={$theme.color.foreground.base}
+              lineColor={$theme.color.contour.base}
             />
             <PolygonLayer
               before="ocean-fill"
               lineWidth={3}
               lineOffset={1.5}
               lineOpacity={0.07}
-              lineColor={$theme.color.foreground.base}
+              lineColor={$theme.color.contour.base}
             />
             <FilterLayer layer="settlement-minor-label" geo={geoShape} />
             <FilterLayer layer="settlement-major-label" geo={geoShape} />
@@ -112,7 +112,7 @@
         </MapProvider>
         {#if d.label}
           <div
-            class="absolute top-3 left-1/2 -translate-x-1/2 bg-background-base/70 px-2 rounded-full text-sm text-foreground-base whitespace-nowrap font-bold"
+            class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold"
           >
             {d.label}
           </div>

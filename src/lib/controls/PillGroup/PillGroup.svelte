@@ -26,12 +26,12 @@
       value={option.uid}
       let:checked
       disabled={option.disabled}
-      class="whitespace-nowrap overflow-hidden rounded-full bg-background-base"
+      class="whitespace-nowrap overflow-hidden rounded-full bg-surface-base"
     >
       <span
         class="w-full overflow-hidden text-ellipsis block {classes.button}"
         class:bg-theme-base={checked}
-        class:text-background-base={checked}
+        class:text-surface-base={checked}
         class:text-theme-base={!checked}
         class:cursor-not-allowed={option.disabled}
         class:opacity-50={option.disabled}

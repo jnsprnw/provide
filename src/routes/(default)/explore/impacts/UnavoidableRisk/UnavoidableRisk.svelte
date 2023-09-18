@@ -202,7 +202,7 @@
           unit="percent"
         />
         <!-- <figcaption class="mt-2">
-          <span class="text-xs text-foreground-weaker"
+          <span class="text-xs text-contour-weaker"
             >To avoid overlapping of scenarios, the vertical and horizontal
             placement of each dot might not be perfectly correct.</span
           >

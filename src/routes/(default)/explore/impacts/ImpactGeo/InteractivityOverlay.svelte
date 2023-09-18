@@ -8,7 +8,7 @@
   >
     <button
       on:click={() => (interactive = true)}
-      class="text-background-base px-6 py-3 bg-black/60 rounded-full"
+      class="text-surface-base px-6 py-3 bg-black/60 rounded-full"
     >
       Click to make map interactive
     </button>
@@ -16,7 +16,7 @@
   <!-- {:else}
   <button
     on:click={() => (interactive = false)}
-    class="absolute top-0 right-0 text-background-base px-3 py-1 bg-black/60 rounded-full"
+    class="absolute top-0 right-0 text-surface-base px-3 py-1 bg-black/60 rounded-full"
   >
     Static
   </button> -->

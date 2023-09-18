@@ -77,17 +77,14 @@
   >
     <g>
       {#each graticuleLines as line}
-        <path
-          d={line}
-          class="stroke-foreground-weakest fill-none stroke-[0.5]"
-        />
+        <path d={line} class="stroke-contour-weakest fill-none stroke-[0.5]" />
       {/each}
     </g>
     <g role="list">
       {#each baseLayerShapes as shape}
         <path
           d={shape.d}
-          class="fill-background-weakest stroke-background-base stroke-[0.5]"
+          class="fill-surface-weakest stroke-surface-base stroke-[0.5]"
         />
       {/each}
     </g>
@@ -95,9 +92,9 @@
       {#each dataLayerShapes as shape}
         <path
           d={shape.d}
-          class:fill-foreground-weaker={pointsOnly}
-          class:fill-background-weakest={!pointsOnly}
-          class="stroke-background-base stroke-[0.5]"
+          class:fill-contour-weaker={pointsOnly}
+          class:fill-surface-weakest={!pointsOnly}
+          class="stroke-surface-base stroke-[0.5]"
           class:fill-theme-weaker={selected === UID_WORLD}
           class:fill-theme-base={hovered === UID_WORLD}
         />
@@ -107,7 +104,7 @@
       {#if hoveredFeature}
         <path
           d={hoveredFeature.d}
-          class="fill-foreground-weak stroke-background-base stroke-1"
+          class="fill-contour-weak stroke-surface-base stroke-1"
         />
       {/if}
     </g>
@@ -115,13 +112,13 @@
       {#if selectedFeature}
         <path
           d={selectedFeature.d}
-          class="fill-theme-base stroke-background-base stroke-1"
+          class="fill-theme-base stroke-surface-base stroke-1"
         />
       {/if}
     </g>
     <path
       d={graticuleOutline}
-      class="stroke-foreground-weak stroke-1 fill-none linejoin-round"
+      class="stroke-contour-weak stroke-1 fill-none linejoin-round"
     />
     <desc id="map-description">TODO</desc>
   </svg>

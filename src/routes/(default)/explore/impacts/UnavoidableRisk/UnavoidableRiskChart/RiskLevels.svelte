@@ -93,7 +93,7 @@
             class:fill-theme-stronger={!isSelectedScenario}
             class:stroke-[1.5px]={isSelectedScenario}
             class:stroke-[1px]={!isSelectedScenario}
-            class="stroke-background-base"
+            class="stroke-surface-base"
             style:fill={color}
             style:opacity={isSelectedScenario ? 1 : 0.4}
             r={radius}

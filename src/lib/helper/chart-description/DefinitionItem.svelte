@@ -4,12 +4,15 @@
   export let href;
 </script>
 
-<div class="text-xs text-foreground-weak flex gap-1">
-  <dt class="font-bold text-foreground-base">{term}</dt>
+<div class="text-xs text-contour-weak flex gap-1">
+  <dt class="font-bold text-contour-base">{term}</dt>
   {#if href}
     <dd>
-      <a {href} target="_blank" rel="noreferrer external" class="text-theme-base"
-        >{definition}</a
+      <a
+        {href}
+        target="_blank"
+        rel="noreferrer external"
+        class="text-theme-base">{definition}</a
       >
     </dd>
   {:else}

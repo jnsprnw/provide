@@ -54,8 +54,8 @@
 </script>
 
 <div class="flex items-center">
-  <span class="text-xs text-foreground-weak leading-3 text-end"
-    >Below<br /><span class="text-foreground-base font-bold">{min}</span></span
+  <span class="text-xs text-contour-weak leading-3 text-end"
+    >Below<br /><span class="text-contour-base font-bold">{min}</span></span
   >
   <div
     class="w-40 h-[20px] mx-2"
@@ -68,15 +68,15 @@
         style={`left: ${xScale(tick)}px;`}
         style:color={getContrastColor(
           colorAtTick,
-          $theme.color.background.base,
-          $theme.color.foreground.base
+          $theme.color.surface.base,
+          $theme.color.contour.base
         )}
-        class="absolute text-xs text-background-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute text-xs text-surface-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
         >{middle}
       </span>
     </div>
   </div>
-  <span class="text-xs text-foreground-weak leading-3"
-    >Above<br /><span class="text-foreground-base font-bold">{max}</span></span
+  <span class="text-xs text-contour-weak leading-3"
+    >Above<br /><span class="text-contour-base font-bold">{max}</span></span
   >
 </div>

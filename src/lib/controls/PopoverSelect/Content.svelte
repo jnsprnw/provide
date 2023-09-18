@@ -33,7 +33,7 @@
 
 {#if filters.length > 1}
   <div
-    class="p-4 bg-background-weaker border-foreground-weakest flex items-center justify-between"
+    class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between"
   >
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
@@ -44,7 +44,7 @@
 {/if}
 <slot name="items" items={availableItems} {currentFilterUid}>
   <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] min-h-[20rem]">
-    <div class="md:border-r border-foreground-weakest">
+    <div class="md:border-r border-contour-weakest">
       {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline
         >{/if}
       <RadioGroup value={currentUid} on:change={(e) => (currentUid = e.detail)}>
@@ -62,7 +62,7 @@
 
     <div class="p-4 hidden md:block">
       <h3 class="font-bold mb-2">{detailsItem.label}</h3>
-      <p class="text-foreground-weak">{detailsItem.description || ''}</p>
+      <p class="text-contour-weak">{detailsItem.description || ''}</p>
     </div>
   </div>
 </slot>

@@ -58,7 +58,7 @@
   let:query
   {sections}
   isFullWidth={true}
-  navContainerClass="md:border-r border-foreground-weaker"
+  navContainerClass="md:border-r border-contour-weaker"
 >
   <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />
@@ -69,7 +69,7 @@
       <section
         id={section.slug}
         name={section.slug}
-        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-foreground-weaker last:border-none"
+        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none"
       >
         <svelte:component this={section.component} {...section} />
       </section>

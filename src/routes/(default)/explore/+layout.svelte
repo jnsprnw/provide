@@ -21,7 +21,7 @@
   ];
 </script>
 
-<nav class="bg-background-weaker">
+<nav class="bg-surface-weaker">
   <div class="mx-auto max-w-7xl px-6 pt-8">
     <MainControls />
     <BigTabs {tabs} />
