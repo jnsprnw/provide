@@ -6,8 +6,7 @@
   import { setContext } from 'svelte';
   import { get } from 'lodash-es';
   import THEME from './theme-store.js';
-  import designTokens from './theme/json/global.json';
-  import designTokensLight from './theme/json/theme-light.json';
+  import designTokensLight from './theme/color-tokens-light.json';
   // import designTokensDark from './theme/json/theme-dark.json';
 
   export let id = 'light';
@@ -19,17 +18,16 @@
   //   id === 'light'
   //     ? import.meta.env.VITE_MAPBOX_STYLE_LIGHT
   //     : import.meta.env.VITE_MAPBOX_STYLE_LIGHT;
-  
 
   $: makeTextColor = (color, factor = 0.2) => {
     const c = hsl(color);
-    c.l = id === factor // 'light' ? factor : 1 - factor * 0.5;
+    c.l = id === factor; // 'light' ? factor : 1 - factor * 0.5;
     return c;
   };
 
   $: hasContrastToBackground = (color) => {
     const c = hsl(color);
-    return id === c.l < 0.7 // 'light' ? c.l < 0.7 : c.l > 0.4;
+    return id === c.l < 0.7; // 'light' ? c.l < 0.7 : c.l > 0.4;
   };
 
   // $: getContrastColor = (background, color1, color2) => {
@@ -52,62 +50,7 @@
   // }
 
   $: {
-    // const colors = {
-    //   light: designTokensLight,
-    //   dark: designTokensDark,
-    // }[id].color;
-
     const colors = designTokensLight.color;
-
-    const colorSteps = {
-      sequential: [
-        colors.sequential['0'],
-        colors.sequential['1'],
-        colors.sequential['2'],
-        colors.sequential['3'],
-      ],
-
-      diverging: [
-        colors.diverging.negative['2'],
-        colors.diverging.negative['1'],
-        colors.diverging.neutral,
-        colors.diverging.positive['1'],
-        colors.diverging.positive['2'],
-      ],
-
-      categorical: [
-        colors.category.base['0'],
-        colors.category.base['1'],
-        colors.category.base['2'],
-        colors.category.base['3'],
-        colors.category.base['4'],
-        colors.category.base['5'],
-      ],
-
-      'categorical-stronger': [
-        colors.category.stronger['0'],
-        colors.category.stronger['1'],
-        colors.category.stronger['2'],
-        colors.category.stronger['3'],
-        colors.category.stronger['4'],
-        colors.category.stronger['5'],
-      ],
-
-      'categorical-weaker': [
-        colors.category.weaker['0'],
-        colors.category.weaker['1'],
-        colors.category.weaker['2'],
-        colors.category.weaker['3'],
-        colors.category.weaker['4'],
-        colors.category.stronger['5'],
-      ],
-    };
-
-    const scenarios = [
-      colors.category.base[0],
-      colors.category.base[1],
-      colors.category.base[2],
-    ];
 
     $THEME = {
       id: id,
@@ -117,28 +60,12 @@
         ...colors,
         makeTextColor,
         hasContrastToBackground,
-        steps: colorSteps,
-        scenarios,
         get: (d) => get(colors, d) || d,
-        scales: {
-          sequential: piecewise(interpolateLab, colorSteps.sequential),
-          diverging: piecewise(interpolateLab, colorSteps.diverging),
-          categorical: scaleOrdinal().range(colorSteps.categorical),
-          'categorical-stronger': scaleOrdinal().range(
-            colorSteps['categorical-stronger']
-          ),
-          'categorical-weaker': scaleOrdinal().range(
-            colorSteps['categorical-weaker']
-          ),
-        },
       },
     };
   }
-
 </script>
 
-<div
-  class="theme-{id}"
-  style="display: contents;">
+<div class="theme-{id}" style="display: contents;">
   <slot />
 </div>

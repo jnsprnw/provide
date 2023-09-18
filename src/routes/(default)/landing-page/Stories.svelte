@@ -20,7 +20,7 @@
     const story = get(stories, currentStoryID);
     story.scenarios = story.scenarios.map((scenario, i) => ({
       ...scenario,
-      color: $theme.color.scenarios[i],
+      color: $theme.color.category[i],
     }));
     return story;
   })();
