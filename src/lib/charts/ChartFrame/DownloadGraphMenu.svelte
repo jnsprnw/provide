@@ -3,6 +3,7 @@
   import PopoverButton from '$lib/controls/PopoverButton/PopoverButton.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
   import { stringify } from 'qs';
+  import { onMount } from 'svelte';
 
   export let graphParams = {};
   export let width = 1000;
@@ -20,24 +21,27 @@
   let loading = false;
 
   $: graphQuery = stringify({ ...graphParams, static: true });
-  $: graphUrl = new URL(
-    `${import.meta.env.VITE_APP_URL}/embed/${embedUid}/?${graphQuery}`
-  );
 
-  $: screenshotQuery = stringify({
-    format,
-    width,
-    processingIntensity,
-    url: graphUrl.href,
-  });
-  $: screenshotName = Object.values(graphParams)
-    .join('_')
-    .replace(/\.|\/|\\|,/g, '-');
-  $: screenshotUrl = new URL(
-    `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
-  );
+  let host;
 
-  $: downloadImage = (url) => {
+  onMount(() => (host = location.host));
+
+  $: downloadImage = () => {
+    const graphUrl = new URL(`${host}/embed/${embedUid}/?${graphQuery}`);
+
+    const screenshotQuery = stringify({
+      format,
+      width,
+      processingIntensity,
+      url: graphUrl.href,
+    });
+    const screenshotName = Object.values(graphParams)
+      .join('_')
+      .replace(/\.|\/|\\|,/g, '-');
+    const screenshotUrl = new URL(
+      `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
+    );
+
     loading = true;
     fetch(screenshotUrl)
       .then((response) => {

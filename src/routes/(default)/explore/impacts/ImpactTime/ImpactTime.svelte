@@ -54,8 +54,6 @@
       const indicatorData = data[$CURRENT_INDICATOR_UID];
       const scenario = scenarios[i];
 
-      console.log(scenario);
-
       return {
         ...scenario,
         yearStart,
