@@ -1,12 +1,10 @@
 <script>
   // import { browser } from '$app/environment';
-  import { scaleOrdinal } from 'd3-scale';
-  import { interpolateLab, piecewise } from 'd3-interpolate';
   import { hsl } from 'd3-color';
   import { setContext } from 'svelte';
   import { get } from 'lodash-es';
   import THEME from './theme-store.js';
-  import designTokensLight from './theme/color-tokens-light.json';
+  import designTokensLight from './color-tokens-light.json';
   // import designTokensDark from './theme/json/theme-dark.json';
 
   export let id = 'light';

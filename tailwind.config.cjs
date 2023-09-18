@@ -1,4 +1,4 @@
-const themeLight = require('./src/styles/theme/color-tokens-light.json');
+const themeLight = require('./src/styles/color-tokens-light.json');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {

@@ -2,7 +2,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 const tokens = JSON.parse(
-  fs.readFileSync('../00_input/color-tokens.json', 'utf-8')
+  fs.readFileSync('./00_input/Color tokens.json', 'utf-8')
 );
 
 const modes = Object.entries(tokens.modes).map(([id, name]) => ({ id, name }));
@@ -21,7 +21,7 @@ modes.forEach((mode) => {
   }, {});
 
   fs.writeFileSync(
-    `../../src/styles/theme/color-tokens-${mode.name}.json`,
+    `../src/styles/color-tokens-${mode.name}.json`,
     JSON.stringify(tokensProcessed)
   );
 });
