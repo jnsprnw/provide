@@ -90,8 +90,6 @@
 </div>
 
 <style lang="postcss">
-  //@import '../../../../styles/global.scss';
-
   .header {
     //margin-bottom: var(--space-s);
     align-items: end;

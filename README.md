@@ -46,3 +46,29 @@ Folders that contain one primary svelte component are named after this component
 Folders containing multiple components or other files get a kebap case name e.g. `explore-impacts/`.
 
 These naming rules don't apply to the `routes` folder.
+
+## Folder structure
+
+```
+data // Temporäre Datenablage
+  impact-time.json
+  emojis-countries.json
+
+lib
+  api
+  explore-impacts //Components für die Explore-Impacts Seite
+  utils
+  helper //Allgemeine Components. Z.B. Tabs und Icons
+  faq //Components für die FAQ-Seite
+
+routes //Einzelne Seiten
+  api //SvelteKit API Anfragen für einzelne Seiten
+  explore
+  impacts
+  scenarios
+
+stores
+  store.js //Allgemeiner Store
+  meta.js //Store für alle Meta daten
+store-utilities.js //Funktionen für den Storer
+```
