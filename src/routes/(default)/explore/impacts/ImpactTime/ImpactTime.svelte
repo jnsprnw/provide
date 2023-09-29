@@ -66,12 +66,13 @@
         values: indicatorData.map((values, i) => {
           const gmt = scenario[MEAN_TEMPERATURE_UID][i].value;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
+          const [min, value, max] = values.sort(); // This values are not always in the correct order of min, average (?), max.
           return {
             gmt,
             wlvl,
-            min: values[0],
-            value: values[1],
-            max: values[2],
+            min,
+            value,
+            max,
             year: yearStart + yearStep * i,
           };
         }),
