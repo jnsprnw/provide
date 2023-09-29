@@ -20,6 +20,7 @@
   <div class="border-contour-weakest border-t py-3">
     <div class="text-sm mx-auto max-w-7xl px-6 flex justify-between">
       <span class="text-contour-weak">Climate Analytics 2023</span>
+      <span class="text-contour-weak">Version {__APP_VERSION__}</span>
     </div>
   </div>
 </footer>
