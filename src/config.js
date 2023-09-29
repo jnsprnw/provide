@@ -1,6 +1,20 @@
 export const TITLE_SITE = 'Climate Risk Dashboard';
 export const TITLE_PROJECT = 'PROVIDE';
 
+export const ANCHOR_DOCS_SCENARIOS = 'scenarios';
+export const ANCHOR_DOCS_MODELS = 'models';
+export const ANCHOR_DOCS_DATA_PROCESSING = 'data-processing';
+
+export const PATH_DOCUMENTATION = 'documentation';
+export const PATH_GLOSSARY = 'glossary';
+export const PATH_CONTACT = 'contact';
+export const PATH_ABOUT = 'about';
+
+export const LABEL_DOCUMENTATION = 'Methodology';
+export const LABEL_GLOSSARY = 'Glossary';
+export const LABEL_CONTACT = 'Contact';
+export const LABEL_ABOUT = 'About';
+
 // TODO: Should be handled through env variables
 export const IS_STAGING_VERSION = true;
 

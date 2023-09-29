@@ -6,6 +6,7 @@
     AVAILABLE_TIMEFRAMES,
     IS_COMBINATION_AVAILABLE_SCENARIO
   } from '$stores/state.js';
+  import { ANCHOR_DOCS_SCENARIOS, PATH_DOCUMENTATION } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import ScenarioDetails from './ScenarioDetails.svelte';
@@ -67,7 +68,7 @@
       <a
         slot="header-link"
         class="text-sm text-theme-base font-bold flex gap-1.5 items-center"
-        href="/documentation#scenarios"
+        href={`/${PATH_DOCUMENTATION}#${ANCHOR_DOCS_SCENARIOS}`}
         ><span
           class="flex align-center justify-center text-xs w-4 h-4 rounded-full bg-theme-base text-surface-base"
           >?</span

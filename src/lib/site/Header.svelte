@@ -1,13 +1,14 @@
 <script>
+  import { LABEL_DOCUMENTATION, LABEL_GLOSSARY, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_GLOSSARY, PATH_DOCUMENTATION } from '$config';
   import NavLink from '$lib/helper/NavLink.svelte';
   import Logo from './Logo.svelte';
 
   const items = [
     { href: '/explore/impacts', label: 'Explore' },
-    { href: '/about', label: 'About' },
-    { href: '/documentation', label: 'Documentation' },
-    { href: '/glossary', label: 'Glossary' },
-    { href: '/contact', label: 'Contact' },
+    { href: `/${PATH_ABOUT}`, label: LABEL_ABOUT },
+    { href: `/${PATH_DOCUMENTATION}`, label: LABEL_DOCUMENTATION },
+    { href: `/${PATH_GLOSSARY}`, label: LABEL_GLOSSARY },
+    { href: `/${PATH_CONTACT}`, label: LABEL_CONTACT },
   ];
 </script>
 

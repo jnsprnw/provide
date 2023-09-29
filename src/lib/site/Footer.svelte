@@ -1,15 +1,19 @@
+<script>
+  import { LABEL_DOCUMENTATION, LABEL_GLOSSARY, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_GLOSSARY, PATH_DOCUMENTATION, TITLE_SITE, TITLE_PROJECT } from '$config';
+</script>
+
 <footer class="bg-surface-weaker">
   <div class="mx-auto max-w-7xl py-10 px-6 flex justify-between">
     <div class="flex gap-3">
-      <strong class="uppercase leading-relaxed text-theme-base">Provide</strong>
-      <span class="text-contour-weak">Climate Risk Dashboard</span>
+      <strong class="uppercase leading-relaxed text-theme-base">{ TITLE_PROJECT }</strong>
+      <span class="text-contour-weak">{ TITLE_SITE }</span>
     </div>
     <nav class="text-theme-base">
       <ul>
-        <li><a class="text-sm" href="/about">About</a></li>
-        <li><a class="text-sm" href="/documentation">Methodology</a></li>
-        <li><a class="text-sm" href="/glossary">Glossary</a></li>
-        <li><a class="text-sm" href="/contact">Contact</a></li>
+        <li><a class="text-sm" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
+        <li><a class="text-sm" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
+        <li><a class="text-sm" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
+        <li><a class="text-sm" href="/{PATH_CONTACT}">{LABEL_CONTACT}</a></li>
       </ul>
     </nav>
   </div>

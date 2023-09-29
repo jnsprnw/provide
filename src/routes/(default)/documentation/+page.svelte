@@ -4,6 +4,7 @@
   import SectionIntro from './SectionIntro.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
+  import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING } from '$config';
   import { SCENARIOS } from '$stores/meta';
   import ScenarioSelector from './ScenarioSelector.svelte';
 
@@ -20,7 +21,7 @@
 
   $: sections = [
     {
-      slug: 'scenarios',
+      slug: ANCHOR_DOCS_SCENARIOS,
       title: 'Scenarios',
       component: SectionIntro,
       content: scenariosIntro,
@@ -35,14 +36,14 @@
       ],
     },
     {
-      slug: 'models',
+      slug: ANCHOR_DOCS_MODELS,
       title: 'Models',
       component: SectionIntro,
       content: modelsIntro,
       sections: models.map((m) => ({ ...m, component: ModelSection })),
     },
     {
-      slug: 'data-processing',
+      slug: ANCHOR_DOCS_DATA_PROCESSING,
       title: 'Data processing',
       component: SectionIntro,
       content: dataProcessingIntro,

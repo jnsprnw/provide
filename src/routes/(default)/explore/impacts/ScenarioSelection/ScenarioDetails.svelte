@@ -1,6 +1,6 @@
 <script>
   import LineChart from '$lib/charts/CorridorChart.svelte';
-  import { MEAN_TEMPERATURE_UID } from '$config';
+  import { MEAN_TEMPERATURE_UID, PATH_DOCUMENTATION } from '$config';
   import DefinitionItem from '$lib/helper/chart-description/DefinitionItem.svelte';
 
   export let scenarios;
@@ -59,7 +59,7 @@
         The lines in the graph represent best estimates. Learn more about
         uncertainties <a
           class="underline decoration-theme-weakest hover:decoration-theme-weaker"
-          href="/documentation">here</a
+          href="/{PATH_DOCUMENTATION}">here</a
         >.
       </p>
       <dl class="flex gap-4">
