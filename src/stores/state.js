@@ -217,17 +217,21 @@ export const AVAILABLE_TIMEFRAMES = derived(
 );
 
 /* UTILITY N STUFF */
+export const IS_COMBINATION_AVAILABLE_GEOGRAPHY = derived(
+  [CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID],
+  ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID]) => $CURRENT_INDICATOR.availableGeographies.includes($CURRENT_GEOGRAPHY_UID)
+);
+
+export const IS_COMBINATION_AVAILABLE_SCENARIO = derived(
+  [CURRENT_INDICATOR, CURRENT_SCENARIOS_UID],
+  ([$CURRENT_INDICATOR, $CURRENT_SCENARIOS_UID]) => every($CURRENT_SCENARIOS_UID, (scenario) =>
+    $CURRENT_INDICATOR.availableScenarios.includes(scenario)
+  )
+);
+
 export const IS_COMBINATION_AVAILABLE = derived(
-  [CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID, CURRENT_SCENARIOS_UID],
-  ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID, $CURRENT_SCENARIOS_UID]) => {
-    const geographyAvailable = $CURRENT_INDICATOR.availableGeographies.includes(
-      $CURRENT_GEOGRAPHY_UID
-    );
-    const scenariosAvailable = every($CURRENT_SCENARIOS_UID, (scenario) =>
-      $CURRENT_INDICATOR.availableScenarios.includes(scenario)
-    );
-    return geographyAvailable && scenariosAvailable;
-  }
+  [IS_COMBINATION_AVAILABLE_GEOGRAPHY, IS_COMBINATION_AVAILABLE_SCENARIO],
+  ([$geographyAvailable, $scenariosAvailable]) => $geographyAvailable && $scenariosAvailable
 );
 
 export const TEMPLATE_PROPS = derived(

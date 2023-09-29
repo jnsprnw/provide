@@ -8,15 +8,27 @@
     CURRENT_GEOGRAPHY_UID,
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
+    IS_COMBINATION_AVAILABLE_GEOGRAPHY,
+    IS_COMBINATION_AVAILABLE_SCENARIO
   } from '$stores/state';
+  $: unavailableItems = [
+      [$IS_COMBINATION_AVAILABLE_GEOGRAPHY, 'geography'],
+      [$IS_COMBINATION_AVAILABLE_SCENARIO, 'scenario']
+    ]
+    .filter(([isAvailable]) => !isAvailable)
+    .map(([isAvailable, label]) => label);
+  const listFormat = new Intl.ListFormat('en', { style: 'long', type: 'conjunction' });
 </script>
 
-<div class="flex flex-col items-center justify-center py-24 min-h-[70vh]">
-  <div class="text-xl font-bold mb-4">
+<div class="flex flex-col gap-y-2 items-center justify-center py-24 min-h-[70vh]" role="alert">
+  <strong class="text-xl font-bold">
     There is no data for your current selection.
-  </div>
+  </strong>
+  {#if unavailableItems.length}
+  <span class="text-contour-weaker">The selected {listFormat.format(unavailableItems)} is not available in this combination.</span>
+  {/if}
   <button
-    class="text-theme-base"
+    class="text-theme-base mt-4"
     on:click={() => {
       $CURRENT_INDICATOR_UID = DEFAULT_INDICATOR_UID;
       $CURRENT_GEOGRAPHY_UID = DEFAULT_GEOGRAPHY_UID;
