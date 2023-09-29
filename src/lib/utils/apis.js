@@ -3,22 +3,27 @@ import { get } from 'lodash-es';
 // We use different locals to simulate different versions of the content.
 // Version 0: `en` and fallback version
 // Version 1: `en-EU`
-const localCode = import.meta.env.VITE_STRAPI_LOCALE ?? 'en';
+const ENV_CONTENT_LOCALE = import.meta.env.VITE_STRAPI_LOCALE;
+const localCode = ENV_CONTENT_LOCALE ?? 'en';
+const ENV_URL_CONTENT = import.meta.env.VITE_HEROKU_URL;
+const ENV_URL_DATA = import.meta.env.VITE_DATA_API_URL;
 
 export const loadFromStrapi = function (path, fetch) {
-  const url = `${
-    import.meta.env.VITE_HEROKU_URL
-  }/api/${path}?populate=*&locale=${localCode}`;
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     try {
+      if (typeof ENV_URL_CONTENT === 'undefined') {
+        reject(new Error('Content URL is not defined. Check environment variables.'));
+      }
+      if (typeof ENV_CONTENT_LOCALE === 'undefined') {
+        console.warn(`Content version variable in undefined. Fallback version is used.`);
+      }
+      const url = `${ENV_URL_CONTENT}/api/${path}?populate=*&locale=${localCode}`;
       const res = await fetch(url);
       const data = await res.json();
       resolve(data.data);
     } catch (e) {
-      console.log('Failed to fetch ', url);
-      console.log(e);
-      const res = await loadFromStrapi(path, fetch);
-      resolve(res);
+      console.warn(`Failed to fetch url ${url} with error ${e}.`);
+      reject(new Error('Failed to fetch.'));
     }
   });
 };
@@ -41,14 +46,15 @@ const labelsSingular = {
 };
 
 export const loadMetaData = function (svelteFetch = fetch) {
-  return new Promise(async (resolve) => {
-    const descriptionIndicators = await loadFromStrapi(
-      'indicators',
-      svelteFetch
-    );
-
+  return new Promise(async (resolve, reject) => {
+    if (typeof ENV_URL_DATA === 'undefined') {
+      return reject(new Error('Data URL is not defined. Check environment variables.'));
+    }
+    const descriptionIndicators = await loadFromStrapi('indicators', svelteFetch);
     const descriptionScenarios = await loadFromStrapi('scenarios', svelteFetch);
-    const url = `${import.meta.env.VITE_DATA_API_URL.split('').join('')}/meta/`;
+    const availableIndicators = descriptionIndicators.map(({ attributes }) => attributes.UID);
+
+    const url = `${ENV_URL_DATA.split('').join('')}/meta/`;
     const meta = await loadFromAPI(url, svelteFetch);
     resolve({
       ...meta,
@@ -61,6 +67,10 @@ export const loadMetaData = function (svelteFetch = fetch) {
           descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),
           ['attributes', 'Description']
         );
+        if (typeof description === 'undefined') {
+          console.warn(`Indicator description for ${indicator.uid} could not be found.`);
+          console.warn(`These descriptions are available: ${availableIndicators.join(', ')}`);
+        }
 
         return {
           ...indicator,
@@ -72,14 +82,13 @@ export const loadMetaData = function (svelteFetch = fetch) {
         const currentScenario = descriptionScenarios.find(
           (d) => d.attributes.UID === scenario.uid
         );
+        if (typeof currentScenario === 'undefined') {
+          console.warn(`Scenario could not be found. This may be caused by a mismatch of the content versions.`)
+        }
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
         // Get the characteristics from the Strapi scenario
-        const characteristics = get(
-          currentScenario,
-          ['attributes', 'ScenarioCharacteristics'],
-          []
-        )
+        const characteristics = get(currentScenario, ['attributes', 'ScenarioCharacteristics'], [])
           .map(({ Year: year, Description: description }) => {
             // Check if year is valid and the description has any length
             if (year && description) {
