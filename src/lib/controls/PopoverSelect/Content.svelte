@@ -47,7 +47,7 @@
     <div class="md:border-r border-contour-weakest">
       {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline
         >{/if}
-      <RadioGroup value={currentUid} on:change={(e) => (currentUid = e.detail)}>
+      <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
         {#each availableItems as item}
           <RadioGroupOption value={item.uid} let:checked>
             <InteractiveListItem

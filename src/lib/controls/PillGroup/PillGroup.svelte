@@ -17,7 +17,7 @@
 </script>
 
 <RadioGroup
-  value={currentUid}
+  bind:value={currentUid}
   on:change={(e) => (currentUid = e.detail)}
   class="flex flex-wrap {classes.group}"
 >
