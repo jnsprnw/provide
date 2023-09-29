@@ -9,11 +9,12 @@
     CURRENT_INDICATOR_UID,
     CURRENT_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE_GEOGRAPHY,
-    IS_COMBINATION_AVAILABLE_SCENARIO
+    IS_COMBINATION_AVAILABLE_SCENARIO,
+    CURRENT_SCENARIOS
   } from '$stores/state';
   $: unavailableItems = [
       [$IS_COMBINATION_AVAILABLE_GEOGRAPHY, 'geography'],
-      [$IS_COMBINATION_AVAILABLE_SCENARIO, 'scenario']
+      [$IS_COMBINATION_AVAILABLE_SCENARIO, $CURRENT_SCENARIOS.length > 1 ? 'scenario(s)' : 'scenario']
     ]
     .filter(([isAvailable]) => !isAvailable)
     .map(([isAvailable, label]) => label);
@@ -25,7 +26,7 @@
     There is no data for your current selection.
   </strong>
   {#if unavailableItems.length}
-  <span class="text-contour-weaker">The selected {listFormat.format(unavailableItems)} is not available in this combination.</span>
+  <span class="text-contour-weaker">The selected {listFormat.format(unavailableItems)} {unavailableItems.length > 1 ? 'are' : 'is'} not available in this combination.</span>
   {/if}
   <button
     class="text-theme-base mt-4"
