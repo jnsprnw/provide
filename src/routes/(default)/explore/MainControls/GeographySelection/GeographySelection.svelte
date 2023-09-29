@@ -4,6 +4,7 @@
     CURRENT_GEOGRAPHY_UID,
     CURRENT_GEOGRAPHY,
     AVAILABLE_GEOGOGRAPHIES,
+    IS_COMBINATION_AVAILABLE_GEOGRAPHY
   } from '$stores/state.js';
   import { END_GEO_SHAPE } from '$src/config.js';
   import { writable } from 'svelte/store';
@@ -15,6 +16,11 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
 
   let GEO_SHAPE_DATA = writable({});
+
+  $: buttonLabel =
+    $IS_COMBINATION_AVAILABLE_GEOGRAPHY ?
+      $CURRENT_GEOGRAPHY?.label
+      : `Unavailable geography selected`
 
   $: geographyTypes = $GEOGRAPHY_TYPES.filter(
     (d) =>
@@ -45,9 +51,10 @@
 
 <PopoverSelect
   label="Geography"
-  buttonLabel={$CURRENT_GEOGRAPHY?.label}
+  buttonLabel={buttonLabel}
   panelClass="w-screen-p max-w-4xl"
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
+  hasWarning={!$IS_COMBINATION_AVAILABLE_GEOGRAPHY}
 >
   <Content
     filters={geographyTypes}

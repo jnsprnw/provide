@@ -15,6 +15,7 @@
   export let label;
   export let buttonLabel;
   export let size = 'xl';
+  export let hasWarning = false;
 
   const sizeClasses = {
     xl: {
@@ -44,12 +45,17 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    class={`flex w-full rounded bg-surface-base justify-between text-theme-base overflow-hidden ${classes.button} ${buttonClass} transition-colors`}
+    class={[
+      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors',
+      classes.button,
+      buttonClass,
+      hasWarning ? 'border-red-300 text-red-400' : 'text-theme-base' // TODO: Define global warning classes
+      ].join(' ')}
   >
-    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis"
+    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis text-current"
       >{buttonLabel}</span
     >
-    <ExpandIcon class="min-w-[20px] grow-1" isOpen={open} />
+    <ExpandIcon class="min-w-[20px] grow-1 stroke-current" isOpen={open} />
   </PopoverButton>
 
   <PopoverPanel

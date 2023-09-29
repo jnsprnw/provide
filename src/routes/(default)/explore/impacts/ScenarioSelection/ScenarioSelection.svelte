@@ -4,6 +4,7 @@
     CURRENT_SCENARIOS_UID,
     AVAILABLE_SCENARIOS,
     AVAILABLE_TIMEFRAMES,
+    IS_COMBINATION_AVAILABLE_SCENARIO
   } from '$stores/state.js';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
@@ -14,10 +15,14 @@
   let currentTimeframe;
   let windowWidth;
 
+  $: multipleScenariosSelected = $CURRENT_SCENARIOS.length > 1
+
   $: buttonLabel =
-    $CURRENT_SCENARIOS.length > 1
-      ? `${$CURRENT_SCENARIOS.length} scenarios selected`
-      : $CURRENT_SCENARIOS[0].label;
+    $IS_COMBINATION_AVAILABLE_SCENARIO ?
+      multipleScenariosSelected
+        ? `${$CURRENT_SCENARIOS.length} scenarios selected`
+        : $CURRENT_SCENARIOS[0].label
+    : `Unavailable scenario${multipleScenariosSelected ? 's' : ''} selected`
 
   $: scenarios = $AVAILABLE_SCENARIOS.map((scenario, i) => {
     const current = $CURRENT_SCENARIOS.find((s) => s.uid === scenario.uid);
@@ -41,12 +46,13 @@
 
 <svelte:window bind:innerWidth={windowWidth} />
 
-<div class="relative md:pr-6 lg:pr-10">
+<div class="relative md:pr-6 lg:pr-10 max-w-xs">
   <PopoverSelect
     label="Scenario"
     {buttonLabel}
     panelClass="w-screen-p max-w-4xl"
-    buttonClass="border border-contour-weakest aria-expanded:border-contour-weaker"
+    buttonClass={`border border-contour-weakest aria-expanded:border-contour-weaker`}
+    hasWarning={!$IS_COMBINATION_AVAILABLE_SCENARIO}
     size="md"
     panelPlacement={windowWidth > 1200 ? 'right-start' : 'bottom-start'}
   >
