@@ -2,6 +2,7 @@ import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
+import { LABEL_EXPLAINERS } from '$config';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('glossaries', fetch);
@@ -28,7 +29,7 @@ export const load = async ({ fetch }) => {
     }
   );
 
-  const title = generatePageTitle('Glossary');
+  const title = generatePageTitle(LABEL_EXPLAINERS);
 
   return {
     entries: [],

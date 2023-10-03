@@ -2,6 +2,7 @@ import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
+import { LABEL_DOCUMENTATION } from '$config'
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('technical-documentation', fetch);
@@ -15,7 +16,7 @@ export const load = async ({ fetch }) => {
     DataProcessingIntro,
   } = data.attributes;
 
-  const title = generatePageTitle('Documentation');
+  const title = generatePageTitle(LABEL_DOCUMENTATION);
 
   return {
     title,
