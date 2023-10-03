@@ -3,9 +3,26 @@
   import TermSection from './TermSection.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
+  import Scenarios from './Scenarios.svelte';
+  import ScenariosIntro from './ScenariosIntro.svelte';
   export let data;
 
-  $: sections = data.content;
+  // $: sections = data.content;
+
+  $: sections = [
+    {
+      slug: 'scenarios',
+      title: 'Scenarios',
+      component: ScenariosIntro,
+      sections: [{ component: Scenarios }]
+    },
+    ...data.content.map(({ title, slug, sections }) => ({
+      slug,
+      title,
+      component: SectionHeadline,
+      sections: sections.map((s) => ({ ...s, component: TermSection }))
+    }))
+  ];
 </script>
 
 <nav class="bg-surface-weaker">
@@ -17,12 +34,11 @@
 
 <ScrollContent>
   <NestedNav slot="navigation" {sections} />
-  <h1 class="text-5xl font-bold mb-12">Glossary</h1>
-  {#each sections as { sections, title, slug }}
+  {#each sections as section}
     <section class="mb-8">
-      <SectionHeadline {title} {slug} />
-      {#each sections as { title, slug, content, footnote, abbreviation }}
-        <TermSection {title} {slug} {content} {footnote} {abbreviation} />
+      <svelte:component this={section.component} {...section} />
+      {#each section.sections as part}
+        <svelte:component this={part.component} {...part} />
       {/each}
     </section>
   {/each}
