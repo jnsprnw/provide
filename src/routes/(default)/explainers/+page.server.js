@@ -4,11 +4,12 @@ import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
 import { LABEL_EXPLAINERS } from '$config';
 
-export const load = async ({ fetch }) => {
+export const load = async ({ fetch, parent }) => {
+  const { meta } = await parent();
+  console.log({ meta });
   const data = await loadFromStrapi('glossaries', fetch);
   const entries = data.map((d) => {
-    const { Title, Category, Link, UID, Description, Abbreviation } =
-      d.attributes;
+    const { Title, Category, Link, UID, Description, Abbreviation } = d.attributes;
     return {
       title: Title,
       category: Category,
@@ -19,15 +20,13 @@ export const load = async ({ fetch }) => {
     };
   });
 
-  const content = Object.entries(groupBy(entries, 'category')).map(
-    ([label, sections]) => {
-      return {
-        title: label,
-        slug: kebabCase(label),
-        sections,
-      };
-    }
-  );
+  const content = Object.entries(groupBy(entries, 'category')).map(([label, sections]) => {
+    return {
+      title: label,
+      slug: kebabCase(label),
+      sections,
+    };
+  });
 
   const title = generatePageTitle(LABEL_EXPLAINERS);
 
@@ -36,5 +35,6 @@ export const load = async ({ fetch }) => {
     categories: [],
     title,
     content,
+    scenarios: meta.scenarios,
   };
 };
