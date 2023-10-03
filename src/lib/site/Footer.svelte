@@ -1,5 +1,5 @@
 <script>
-  import { LABEL_DOCUMENTATION, LABEL_GLOSSARY, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_GLOSSARY, PATH_DOCUMENTATION, TITLE_SITE, TITLE_PROJECT } from '$config';
+  import { LABEL_DOCUMENTATION, LABEL_EXPLAINER, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_EXPLAINER, PATH_DOCUMENTATION, TITLE_SITE, TITLE_PROJECT } from '$config';
 </script>
 
 <footer class="bg-surface-weaker">
@@ -12,7 +12,7 @@
       <ul>
         <li><a class="text-sm" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
         <li><a class="text-sm" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
-        <li><a class="text-sm" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
+        <li><a class="text-sm" href="/{PATH_EXPLAINER}">{LABEL_EXPLAINER}</a></li>
         <li><a class="text-sm" href="/{PATH_CONTACT}">{LABEL_CONTACT}</a></li>
       </ul>
     </nav>

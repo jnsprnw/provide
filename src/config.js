@@ -6,12 +6,12 @@ export const ANCHOR_DOCS_MODELS = 'models';
 export const ANCHOR_DOCS_DATA_PROCESSING = 'data-processing';
 
 export const PATH_DOCUMENTATION = 'documentation';
-export const PATH_GLOSSARY = 'glossary';
+export const PATH_EXPLAINER = 'explainer';
 export const PATH_CONTACT = 'contact';
 export const PATH_ABOUT = 'about';
 
 export const LABEL_DOCUMENTATION = 'Methodology';
-export const LABEL_GLOSSARY = 'Glossary';
+export const LABEL_EXPLAINER = 'Explainer';
 export const LABEL_CONTACT = 'Contact';
 export const LABEL_ABOUT = 'About';
 

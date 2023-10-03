@@ -1,5 +1,5 @@
 <script>
-  import { LABEL_DOCUMENTATION, LABEL_GLOSSARY, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_GLOSSARY, PATH_DOCUMENTATION } from '$config';
+  import { LABEL_DOCUMENTATION, LABEL_EXPLAINER, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_EXPLAINER, PATH_DOCUMENTATION } from '$config';
   import NavLink from '$lib/helper/NavLink.svelte';
   import Logo from './Logo.svelte';
 
@@ -7,7 +7,7 @@
     { href: '/explore/impacts', label: 'Explore' },
     { href: `/${PATH_ABOUT}`, label: LABEL_ABOUT },
     { href: `/${PATH_DOCUMENTATION}`, label: LABEL_DOCUMENTATION },
-    { href: `/${PATH_GLOSSARY}`, label: LABEL_GLOSSARY },
+    { href: `/${PATH_EXPLAINER}`, label: LABEL_EXPLAINER },
     { href: `/${PATH_CONTACT}`, label: LABEL_CONTACT },
   ];
 </script>
