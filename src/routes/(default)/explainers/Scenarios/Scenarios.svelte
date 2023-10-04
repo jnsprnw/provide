@@ -1,5 +1,6 @@
 <script>
   import Presets from './Presets.svelte';
+  import CrossLink from './CrossLink.svelte';
   import Table from './Table/Table.svelte';
   import { writable } from 'svelte/store';
 
@@ -12,6 +13,8 @@
   }
 </script>
 
-<h2>Scenarios list</h2>
-<Presets bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} />
-<Table {scenarios} bind:selectedScenarios={$selectedScenarios} />
+<div class="flex flex-col gap-y-5">
+  <Presets bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} />
+  <Table {scenarios} bind:selectedScenarios={$selectedScenarios} />
+  <CrossLink selectedScenarios={$selectedScenarios} />
+</div>

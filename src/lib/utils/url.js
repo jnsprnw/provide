@@ -1,12 +1,7 @@
 import { browser } from '$app/environment';
-import {
-  CURRENT_GEOGRAPHY_UID,
-  CURRENT_INDICATOR_OPTION_VALUES,
-  CURRENT_INDICATOR_UID,
-  CURRENT_SCENARIOS_UID,
-} from '$stores/state.js';
+import { CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR_UID, CURRENT_SCENARIOS_UID } from '$stores/state.js';
 import { autoType } from 'd3-dsv';
-import { parse } from 'qs';
+import { parse, stringify } from 'qs';
 
 const urlToStateMapping = [
   { key: 'indicator', store: CURRENT_INDICATOR_UID },
@@ -69,6 +64,19 @@ export function urlToState(currentUrl) {
       changeStoreToValue(store, param);
     }
   });
-  if (browser)
-    window.history.replaceState(window.history.state, null, url.href);
+  if (browser) window.history.replaceState(window.history.state, null, url.href);
+}
+
+export function buildURL(type = 'impacts', { indicator, geography, scenarios } = {}) {
+  const query = stringify(
+    {
+      indicator: indicator,
+      geography: geography,
+      scenarios: scenarios,
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+  return `/explore/${type}?${query}`;
 }
