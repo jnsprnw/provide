@@ -2,9 +2,18 @@
   import Presets from './Presets.svelte';
   import CrossLink from './CrossLink.svelte';
   import Table from './Table/Table.svelte';
+  import Tagline from '$lib/helper/Tagline.svelte';
+  import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
   import { writable } from 'svelte/store';
+  import _ from 'lodash-es';
 
   export let scenarios;
+  export let selectableTimeframes;
+  export let defaultTimeframe;
+
+  const filterLabel = 'Pick a timeframe';
+
+  $: selectedTimeframe = defaultTimeframe;
 
   const selectedScenarios = writable([]);
 
@@ -14,7 +23,11 @@
 </script>
 
 <div class="flex flex-col gap-y-5">
-  <Presets bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} />
-  <Table {scenarios} bind:selectedScenarios={$selectedScenarios} />
+  <div>
+    <Tagline class="mb-2">{filterLabel}</Tagline>
+    <PillGroup bind:currentUid={selectedTimeframe} options={selectableTimeframes} />
+  </div>
+  <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} />
+  <Table {selectedTimeframe} {scenarios} bind:selectedScenarios={$selectedScenarios} />
   <CrossLink selectedScenarios={$selectedScenarios} />
 </div>

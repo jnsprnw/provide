@@ -1,11 +1,13 @@
 <script>
   export let scenarios;
   export let selectedScenarios = [];
+  export let selectedTimeframe;
+  import { extractTimeframe } from '$utils/meta.js';
 </script>
 
 <div role="treegrid" class="max-w-full overflow-x-scroll" aria-rowcount={scenarios.length}>
   <div role="rowgroup" class="grid max-w-full">
-    {#each scenarios as scenario, i}
+    {#each scenarios.filter((s) => extractTimeframe(s) === selectedTimeframe) as scenario, i}
       {@const isSelected = selectedScenarios.includes(scenario.uid)}
       <button role="row" aria-rowindex={i} class="max-w-full text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker">
         <label for={scenario.uid} class="grid justify-start max-w-full grid-flow-col">

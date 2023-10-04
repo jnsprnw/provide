@@ -12,7 +12,7 @@
       slug: 'scenarios',
       title: 'Scenarios',
       component: ScenariosIntro,
-      sections: [{ component: Scenarios, scenarios: data.scenarios }],
+      sections: [{ component: Scenarios, scenarios: data.scenarios, selectableTimeframes: data.selectableTimeframes, defaultTimeframe: data.defaultTimeframe }],
     },
     ...data.content.map(({ title, slug, sections }) => ({
       slug,
