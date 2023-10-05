@@ -31,7 +31,7 @@
         params: {
           geography: $CURRENT_GEOGRAPHY.uid,
           indicator: $CURRENT_INDICATOR.uid,
-          scenario,
+          scenarios: scenario,
           ...$CURRENT_INDICATOR_OPTION_VALUES,
         },
       }))
@@ -41,16 +41,7 @@
     const impactTime = impactTimeData.map((datum, i) => {
       const MODEL = KEY_MODEL;
       const SOURCE = KEY_SOURCE;
-      const {
-        yearStart,
-        yearStep,
-        data,
-        description,
-        title,
-        [MODEL]: model,
-        [SOURCE]: source,
-        parameters,
-      } = datum.data;
+      const { yearStart, yearStep, data, description, title, [MODEL]: model, [SOURCE]: source, parameters } = datum.data;
       const indicatorData = data[$CURRENT_INDICATOR_UID];
       const scenario = scenarios[i];
 
@@ -147,10 +138,7 @@
       chartInfo={asyncProps.chartInfo}
       templateProps={props}
     >
-      <ImpactTimeChart
-        data={asyncProps.impactTime}
-        unit={props.indicator.unit.uid}
-      />
+      <ImpactTimeChart data={asyncProps.impactTime} unit={props.indicator.unit.uid} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
