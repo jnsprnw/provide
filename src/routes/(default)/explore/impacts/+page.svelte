@@ -54,23 +54,14 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent
-  let:query
-  {sections}
-  isFullWidth={true}
-  navContainerClass="md:border-r border-contour-weaker"
->
+<ScrollContent let:query {sections} isFullWidth={true} navContainerClass="md:border-r border-contour-weaker">
   <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />
     <SimpleNav {sections} />
   </nav>
   {#each sections as section}
     {#if !section.disabled}
-      <section
-        id={section.slug}
-        name={section.slug}
-        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none"
-      >
+      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
         <svelte:component this={section.component} {...section} />
       </section>
     {/if}

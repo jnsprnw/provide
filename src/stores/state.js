@@ -178,6 +178,10 @@ export const TEMPLATE_PROPS = derived(
   }
 );
 
+// export const URL_CURRENT = derived([CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_UID, CURRENT_INDICATOR_OPTION_VALUES], ([$CURRENT_GEOGRAPHY, $CURRENT_INDICATOR, $CURRENT_INDICATOR_OPTION_VALUES]) => {
+//   return $CURRENT_INDICATOR; // buildURL('impacts', { indicator: $CURRENT_INDICATOR, geography: $CURRENT_GEOGRAPHY });
+// });
+
 // Object holding the parameters that are needed in every data download request
 // scenario are not included since scenarios are specified as individual requests
 export const DOWNLOAD_URL_PARAMS = derived(

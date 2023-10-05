@@ -67,16 +67,21 @@ export function urlToState(currentUrl) {
   if (browser) window.history.replaceState(window.history.state, null, url.href);
 }
 
-export function buildURL(type = 'impacts', { indicator, geography, scenarios } = {}) {
-  const query = stringify(
-    {
-      indicator: indicator,
-      geography: geography,
-      scenarios: scenarios,
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
+export function buildURL(type = 'impacts', { indicator, geography, scenarios, time, reference, spatial } = {}) {
+  let obj;
+  if (type === 'impacts') {
+    obj = {
+      indicator,
+      geography,
+      scenarios: scenarios.sort(),
+      time,
+      reference,
+      spatial,
+    };
+  }
+  // TODO: Other type
+  const query = stringify(obj, {
+    encodeValuesOnly: true,
+  });
   return `/explore/${type}?${query}`;
 }

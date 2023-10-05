@@ -5,19 +5,13 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
   import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING } from '$config';
+  import PageIntro from '$lib/site/PageIntro.svelte';
   import { SCENARIOS } from '$stores/meta';
   import ScenarioSelector from './ScenarioSelector.svelte';
 
   export let data;
 
-  $: ({
-    modelsIntro,
-    models,
-    scenarios,
-    scenariosIntro,
-    dataProcessing,
-    dataProcessingIntro,
-  } = data.content);
+  $: ({ modelsIntro, models, scenarios, scenariosIntro, dataProcessing, dataProcessingIntro } = data.content);
 
   $: sections = [
     {
@@ -52,9 +46,15 @@
   ];
 </script>
 
+<PageIntro>
+  <div class="flex flex-col gap-y-3.5">
+    <h1 class="text-4xl font-bold">Documentation</h1>
+    <p class="max-w-xl">How do you avoid important climate impact thresholds in your city? Understand the risks and make your city more resilient to the impacts of climate change.</p>
+  </div>
+</PageIntro>
+
 <ScrollContent>
   <NestedNav slot="navigation" {sections} />
-  <h1 class="text-5xl font-bold mb-12">Documentation</h1>
   {#each sections as section}
     <section class="mb-8">
       <svelte:component this={section.component} {...section} />
