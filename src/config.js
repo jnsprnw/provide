@@ -35,6 +35,8 @@ export const KEY_SOURCE = 'source';
 export const KEY_LABEL = 'label';
 export const KEY_LABEL_LONG = 'labelLong';
 
+export const KEY_CHARACTERISTICS = 'keyCharacteristics';
+
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
 export const EMISSIONS_UID = 'emissions';
 export const UNAVOIDABLE_UID = 'unavoidable';
