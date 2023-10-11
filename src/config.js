@@ -37,6 +37,10 @@ export const KEY_LABEL_LONG = 'labelLong';
 
 export const KEY_CHARACTERISTICS = 'keyCharacteristics';
 
+export const LOCALSTORE_INDICATOR = 'indicator';
+export const LOCALSTORE_GEOGRAPHY = 'geography';
+export const LOCALSTORE_SCENARIOS = 'scenarios';
+
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
 export const EMISSIONS_UID = 'emissions';
 export const UNAVOIDABLE_UID = 'unavoidable';

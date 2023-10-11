@@ -4,8 +4,9 @@ import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
+import { browser } from '$app/environment';
 
-import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS } from '../config.js';
+import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
 
 // Set to true if is in embed mode e.g. if the url is /embed/something
@@ -15,10 +16,23 @@ export const IS_EMBEDED = writable(false);
 //to display controls n stuff, derived from &static=true url parameter
 export const IS_STATIC = writable(false);
 
+function getLocalStorage(key, defaultValue) {
+  return browser ? window.localStorage.getItem(key) ?? defaultValue : defaultValue;
+}
+
+function setLocalStorage(key, value) {
+  if (browser) {
+    window.localStorage.setItem(key, value);
+  }
+}
+
 /*
  * INDICATOR STATE
  */
-export const CURRENT_INDICATOR_UID = writable(DEFAULT_INDICATOR_UID);
+export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICATOR, DEFAULT_INDICATOR_UID));
+CURRENT_INDICATOR_UID.subscribe((value) => {
+  setLocalStorage(LOCALSTORE_INDICATOR, value);
+});
 
 export const CURRENT_INDICATOR = derived([CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS], ([$uid, $indicators]) => get($indicators, $uid));
 
@@ -75,7 +89,10 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_INDICATOR],
   );
 });
 
-export const CURRENT_GEOGRAPHY_UID = writable(DEFAULT_GEOGRAPHY_UID);
+export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
+CURRENT_GEOGRAPHY_UID.subscribe((value) => {
+  setLocalStorage(LOCALSTORE_GEOGRAPHY, value);
+});
 
 export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
   // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
@@ -91,7 +108,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const CURRENT_SCENARIOS_UID = (() => {
-  const { subscribe, set, update } = writable(DEFAULT_SCENARIOS_UID);
+  const { subscribe, set, update } = writable(getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID));
 
   return {
     subscribe,
@@ -124,6 +141,9 @@ export const CURRENT_SCENARIOS_UID = (() => {
       }),
   };
 })();
+CURRENT_SCENARIOS_UID.subscribe((value) => {
+  setLocalStorage(LOCALSTORE_SCENARIOS, value);
+});
 
 export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME], ([$uids, $scenarios, $theme]) =>
   $uids.map((uid, i) => ({
