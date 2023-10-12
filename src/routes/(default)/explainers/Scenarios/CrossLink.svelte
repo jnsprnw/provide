@@ -7,7 +7,7 @@
   $: tooManyScenariosSelected = selectedScenarios.length > MAX_NUMBER_SELECTABLE_SCENARIOS;
   $: isDisabled = noScenarioSelected || tooManyScenariosSelected;
 
-  $: url = buildURL('impacts', { scenarios: selectedScenarios });
+  $: url = buildURL('impacts', { scenarios: selectedScenarios.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS) });
 </script>
 
 <!-- We keep this because we remove href (https://www.scottohara.me/blog/2021/05/28/disabled-links.html) -->
