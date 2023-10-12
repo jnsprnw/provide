@@ -1,6 +1,7 @@
 <script>
   import Presets from './Presets.svelte';
   import CrossLink from './CrossLink.svelte';
+  import Warning from './Warning.svelte';
   import Table from './Table/Table.svelte';
   import Tagline from '$lib/helper/Tagline.svelte';
   import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
@@ -30,5 +31,8 @@
   </div>
   <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} {scenarioPresets} />
   <Table {selectedTimeframe} {scenarios} bind:selectedScenarios={$selectedScenarios} />
-  <CrossLink selectedScenarios={$selectedScenarios} />
+  <footer class="flex gap-x-6">
+    <Warning selectedScenarios={$selectedScenarios} />
+    <CrossLink selectedScenarios={$selectedScenarios} />
+  </footer>
 </div>
