@@ -171,9 +171,7 @@ export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCEN
 export const DICTIONARY_CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS], ([$currentScenarios]) => keyBy($currentScenarios, 'uid'));
 
 export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SCENARIOS, $CURRENT_INDICATOR]) => {
-  const availableScenarios = $SCENARIOS.filter((scenario) => get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid));
-
-  return availableScenarios;
+  return $SCENARIOS.filter((scenario) => get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid));
 });
 
 export const AVAILABLE_TIMEFRAMES = derived(AVAILABLE_SCENARIOS, ($AVAILABLE_SCENARIOS) => {
