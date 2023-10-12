@@ -2,13 +2,26 @@ import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
-import { LABEL_EXPLAINERS } from '$config';
+import { LABEL_EXPLAINERS, KEY_SCENARIOPRESET_UID } from '$config';
 import { extractTimeframe } from '$utils/meta.js';
 import _ from 'lodash-es';
 
+function processScenarioPresets(list) {
+  return list.map((preset) => {
+    const { Description, Scenarios, Timeframe, Title } = preset.attributes;
+    return {
+      [KEY_SCENARIOPRESET_UID]: kebabCase(Title),
+      description: Description ?? '',
+      scenarios: (Scenarios?.data ?? []).map(({ attributes }) => attributes.UID),
+      timeframe: parseInt(Timeframe.slice(1)),
+      title: Title,
+    };
+  });
+}
+
 export const load = async ({ fetch, parent }) => {
   const { meta } = await parent();
-  console.log({ meta });
+
   const data = await loadFromStrapi('glossaries', fetch);
   const entries = data.map((d) => {
     const { Title, Category, Link, UID, Description, Abbreviation } = d.attributes;
@@ -32,6 +45,11 @@ export const load = async ({ fetch, parent }) => {
 
   const title = generatePageTitle(LABEL_EXPLAINERS);
 
+  // Scenario Presets
+  const scenarioPresetsRaw = await loadFromStrapi('scenario-presets', fetch);
+  const scenarioPresets = processScenarioPresets(scenarioPresetsRaw);
+
+  // Selectable timeframes
   const selectableTimeframes = _(meta.scenarios)
     .map(extractTimeframe)
     .uniq()
@@ -49,5 +67,6 @@ export const load = async ({ fetch, parent }) => {
     scenarios: meta.scenarios,
     selectableTimeframes,
     defaultTimeframe,
+    scenarioPresets,
   };
 };

@@ -35,6 +35,8 @@ export const KEY_SOURCE = 'source';
 export const KEY_LABEL = 'label';
 export const KEY_LABEL_LONG = 'labelLong';
 
+export const KEY_SCENARIOPRESET_UID = 'uid';
+
 export const KEY_CHARACTERISTICS = 'keyCharacteristics';
 
 export const LOCALSTORE_INDICATOR = 'indicator';

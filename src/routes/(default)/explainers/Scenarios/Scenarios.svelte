@@ -10,6 +10,7 @@
   export let scenarios;
   export let selectableTimeframes;
   export let defaultTimeframe;
+  export let scenarioPresets;
 
   const filterLabel = 'Pick a timeframe';
 
@@ -27,7 +28,7 @@
     <Tagline class="mb-2">{filterLabel}</Tagline>
     <PillGroup bind:currentUid={selectedTimeframe} options={selectableTimeframes} />
   </div>
-  <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} />
+  <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} {scenarioPresets} />
   <Table {selectedTimeframe} {scenarios} bind:selectedScenarios={$selectedScenarios} />
   <CrossLink selectedScenarios={$selectedScenarios} />
 </div>

@@ -8,12 +8,14 @@
   import PageIntro from '$lib/site/PageIntro.svelte';
   export let data;
 
+  $: ({ scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets } = data);
+
   $: sections = [
     {
       slug: 'scenarios',
       title: 'Scenarios',
       component: ScenariosIntro,
-      sections: [{ component: Scenarios, scenarios: data.scenarios, selectableTimeframes: data.selectableTimeframes, defaultTimeframe: data.defaultTimeframe }],
+      sections: [{ component: Scenarios, scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets }],
     },
     ...data.content.map(({ title, slug, sections }) => ({
       slug,
