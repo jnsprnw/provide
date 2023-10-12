@@ -1,4 +1,5 @@
 import { get } from 'lodash-es';
+import { KEY_CHARACTERISTICS } from '$config';
 
 // We use different locals to simulate different versions of the content.
 // Version 0: `en` and fallback version
@@ -99,10 +100,12 @@ export const loadMetaData = function (svelteFetch = fetch) {
           })
           .filter((d) => Boolean(d)) // Filter invalid entries
           .sort((a, b) => a.year - b.year);
+
         return {
           ...scenario,
           description,
           characteristics,
+          [KEY_CHARACTERISTICS]: scenario.characteristics // TODO: This should replace characteristics. We wait until the new scenario selector is implemented.
         };
       }),
     });
