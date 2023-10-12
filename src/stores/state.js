@@ -111,16 +111,19 @@ export const CURRENT_SCENARIOS_UID = (() => {
         // If timeframe changed we want to remove all the old scenarios
         if (timeframeChanged) return [id];
 
+        // The default list
+        let updatedList = availableSelected;
         // Check if the id is already in the array
         if (availableSelected.includes(id) && availableSelected.length > 1) {
           // Remove the id from the array
-          return availableSelected.filter((selectedId) => selectedId !== id);
+          updatedList = availableSelected.filter((selectedId) => selectedId !== id);
         } else if (!availableSelected.includes(id) && availableSelected.length < MAX_NUMBER_SELECTABLE_SCENARIOS) {
           // Add the id to the array if the limit is not reached
-          return [...availableSelected, id];
-        } else {
-          return availableSelected;
+          updatedList = [...availableSelected, id];
         }
+        // Sort the list of ids.
+        // This allows to potentially reduce the number of requests because the same order can be handled by the cache.
+        return updatedList.sort();
       }),
   };
 })();
