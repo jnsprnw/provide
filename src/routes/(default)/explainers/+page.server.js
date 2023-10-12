@@ -13,7 +13,7 @@ function processScenarioPresets(list) {
       [KEY_SCENARIOPRESET_UID]: kebabCase(Title),
       description: Description ?? '',
       scenarios: (Scenarios?.data ?? []).map(({ attributes }) => attributes.UID),
-      timeframe: parseInt(Timeframe.slice(1)),
+      timeframe: parseInt(Timeframe.slice(1)), // Note: this needs to be the same variable type as the selectable timeframe uids.
       title: Title,
     };
   });
@@ -54,7 +54,7 @@ export const load = async ({ fetch, parent }) => {
     .map(extractTimeframe)
     .uniq()
     .sort()
-    .map((uid) => ({ uid, label: uid }))
+    .map((uid) => ({ uid: parseInt(uid), label: uid })) // The uid should already be a int, but let’s make sure. Note: This needs to be the same type as the scenario presets’ timeframe
     .value();
 
   const defaultTimeframe = selectableTimeframes[0].uid;
