@@ -16,10 +16,21 @@ export const IS_EMBEDED = writable(false);
 //to display controls n stuff, derived from &static=true url parameter
 export const IS_STATIC = writable(false);
 
+/**
+ * Get a value from localstorage if not running on the server.
+ * Uses the passed default value if localstorage is not available or empty.
+ * @param {string} key - The location in the localstorage
+ * @param {string} defaultValue - The fallback value
+ */
 function getLocalStorage(key, defaultValue) {
   return browser ? window.localStorage.getItem(key) ?? defaultValue : defaultValue;
 }
 
+/**
+ * Stores a value in localstorage if not running not on the server
+ * @param {string} key - The location in the localstorage
+ * @param {string} value - The value to store
+ */
 function setLocalStorage(key, value) {
   if (browser) {
     window.localStorage.setItem(key, value);
