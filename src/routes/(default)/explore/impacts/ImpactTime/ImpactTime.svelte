@@ -26,24 +26,25 @@
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(
       IMPACT_TIME_DATA,
-      $CURRENT_SCENARIOS_UID.map((scenario) => ({
+      {
         endpoint: END_IMPACT_TIME,
         params: {
           geography: $CURRENT_GEOGRAPHY.uid,
           indicator: $CURRENT_INDICATOR.uid,
-          scenarios: scenario,
+          scenarios: $CURRENT_SCENARIOS_UID,
           ...$CURRENT_INDICATOR_OPTION_VALUES,
         },
-      }))
+      }
     );
 
   $: process = ({ impactTimeData }, { scenarios, urlParams }) => {
-    const impactTime = impactTimeData.map((datum, i) => {
-      const MODEL = KEY_MODEL;
-      const SOURCE = KEY_SOURCE;
-      const { yearStart, yearStep, data, description, title, [MODEL]: model, [SOURCE]: source, parameters } = datum.data;
-      const indicatorData = data[$CURRENT_INDICATOR_UID];
-      const scenario = scenarios[i];
+    const MODEL = KEY_MODEL;
+    const SOURCE = KEY_SOURCE;
+    const { yearStart, yearStep, data, description, title, [MODEL]: model, [SOURCE]: source, parameters } = impactTimeData.data;
+
+
+    const impactTime = scenarios.map((scenario, i) => {
+      const scenarioData = data[scenario.uid];
 
       return {
         ...scenario,
@@ -54,7 +55,7 @@
         source,
         description,
         title,
-        values: indicatorData.map((values, i) => {
+        values: scenarioData.map((values, i) => {
           const gmt = scenario[MEAN_TEMPERATURE_UID][i].value;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
           const [min, value, max] = values.sort(); // This values are not always in the correct order of min, average (?), max.
@@ -80,6 +81,8 @@
       },
     ];
 
+    console.log(impactTime);
+
     const dataDownloadOptions = [
       {
         uid: 'scenario',
@@ -89,7 +92,7 @@
       {
         uid: 'format',
         label: 'Format',
-        options: impactTimeData[0].data.formats.map((uid) => ({
+        options: (data.formats || ["json"]).map((uid) => ({
           label: uid,
           uid,
         })),
