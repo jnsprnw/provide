@@ -5,6 +5,7 @@ import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
+import { extractTimeframesFromScenarios } from '$lib/utils.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
@@ -176,12 +177,7 @@ export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SC
 });
 
 export const AVAILABLE_TIMEFRAMES = derived(AVAILABLE_SCENARIOS, ($AVAILABLE_SCENARIOS) => {
-  return _($AVAILABLE_SCENARIOS)
-    .map((s) => s.endYear)
-    .uniq()
-    .sort()
-    .map((uid) => ({ uid, label: uid }))
-    .value();
+  return extractTimeframesFromScenarios($AVAILABLE_SCENARIOS);
 });
 
 /* UTILITY N STUFF */

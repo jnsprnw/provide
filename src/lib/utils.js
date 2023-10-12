@@ -1,10 +1,8 @@
-import { uniq } from 'lodash-es';
+import _, { uniq } from 'lodash-es';
 
 export const formatReadableList = function (arr, key) {
   const segments = formatObjArr(arr, key);
-  return segments
-    .map((s) => (s.type === 'element' ? s.value[key] : s.value))
-    .join('');
+  return segments.map((s) => (s.type === 'element' ? s.value[key] : s.value)).join('');
 };
 
 export const formatObjArr = function (arr, key) {
@@ -19,10 +17,7 @@ export const formatObjArr = function (arr, key) {
   return list.map((obj) => {
     return {
       ...obj,
-      value:
-        obj.type === 'literal'
-          ? obj.value
-          : arr.find((d) => d[key] === obj.value),
+      value: obj.type === 'literal' ? obj.value : arr.find((d) => d[key] === obj.value),
     };
   });
 };
@@ -42,3 +37,12 @@ export const formatList = function (_arr = []) {
     length: list.length,
   };
 };
+
+export function extractTimeframesFromScenarios(list) {
+  return _(list)
+    .map((s) => s.endYear)
+    .uniq()
+    .sort()
+    .map((uid) => ({ uid: parseInt(uid), label: uid }))
+    .value();
+}
