@@ -23,8 +23,8 @@ export const IS_STATIC = writable(false);
  * @param {string} key - The location in the localstorage
  * @param {string} defaultValue - The fallback value
  */
-function getLocalStorage(key, defaultValue) {
-  return browser ? window.localStorage.getItem(key) ?? defaultValue : defaultValue;
+function getLocalStorage(key, defaultValue, process = (v) => v) {
+  return process(browser ? window.localStorage.getItem(key) ?? defaultValue : defaultValue);
 }
 
 /**
@@ -120,7 +120,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const CURRENT_SCENARIOS_UID = (() => {
-  const { subscribe, set, update } = writable(getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID));
+  const { subscribe, set, update } = writable(getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID, (v) => (Array.isArray(v) ? v : DEFAULT_SCENARIOS_UID)));
 
   return {
     subscribe,
