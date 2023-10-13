@@ -92,7 +92,7 @@
       {
         uid: 'format',
         label: 'Format',
-        options: (data.formats || ["json"]).map((uid) => ({
+        options: data.formats.map((uid) => ({
           label: uid,
           uid,
         })),

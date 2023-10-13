@@ -7,7 +7,6 @@
   export let process; // Function for data processing before props are passed to slot
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
-  export let renderWhileEmpty = false; // If set to true, slot component has to know how to deal with unloaded data
   export let isFailed = false;
 
   let currentProps;
