@@ -58,6 +58,7 @@
         endpoint: END_IMPACT_GEO,
         params: {
           geography: $CURRENT_GEOGRAPHY.uid,
+          "geography-type": $CURRENT_GEOGRAPHY.geographyType,
           indicator: $CURRENT_INDICATOR.uid,
           scenario,
           year,
