@@ -81,8 +81,6 @@
       },
     ];
 
-    console.log(impactTime);
-
     const dataDownloadOptions = [
       {
         uid: 'scenario',
@@ -92,7 +90,7 @@
       {
         uid: 'format',
         label: 'Format',
-        options: data.formats.map((uid) => ({
+        options: (data.formats || ["csv"]).map((uid) => ({
           label: uid,
           uid,
         })),
