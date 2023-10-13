@@ -5,5 +5,5 @@ export function generatePageTitle(title_page) {
 }
 
 export function extractTimeframe(scenario) {
-  return scenario.timeframe[1];
+  return scenario.endYear ?? scenario.timeframe[1]; // TODO: This will not be needed when the API provides the correct data
 }
