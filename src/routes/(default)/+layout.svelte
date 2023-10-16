@@ -1,5 +1,6 @@
 <script>
   import '$styles/app.postcss';
+  import 'tippy.js/dist/svg-arrow.css';
   import ThemeProvider from '$styles/ThemeProvider.svelte';
   import Header from '$lib/site/Header.svelte';
   import HtmlHead from '$lib/site/HtmlHead.svelte';

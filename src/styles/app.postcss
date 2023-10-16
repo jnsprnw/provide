@@ -96,3 +96,29 @@ html {
     @apply border;
   }
 }
+
+:root {
+  --tooltip-color: theme(colors.theme.stronger);
+}
+
+.tippy-box[data-theme~='tomato'] {
+  background: var(--tooltip-color);
+  @apply text-surface-base text-xs font-normal px-3 py-1.5 rounded tracking-wide;
+}
+.tippy-box[data-theme~='tomato'] {
+  background: var(--tooltip-color) !important;
+  border: var(--tooltip-color) !important;
+}
+
+.tippy-box[data-theme~='tomato'][data-placement^='top'] > .tippy-arrow::before {
+  border-top-color: var(--tooltip-color);
+}
+.tippy-box[data-theme~='tomato'][data-placement^='bottom'] > .tippy-arrow::before {
+  border-bottom-color: var(--tooltip-color);
+}
+.tippy-box[data-theme~='tomato'][data-placement^='left'] > .tippy-arrow::before {
+  border-left-color: var(--tooltip-color);
+}
+.tippy-box[data-theme~='tomato'][data-placement^='right'] > .tippy-arrow::before {
+  border-right-color: var(--tooltip-color);
+}

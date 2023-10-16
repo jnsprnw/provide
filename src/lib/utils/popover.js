@@ -11,6 +11,7 @@ export default function popover(node, params) {
     interactive: params.interactive || false,
     placement: params.placement || 'top',
     duration: params.duration || 0,
+    arrow: false,
     onShow() {
       // await tick
       ACTIVE_POPOVER.set(params.uid);
