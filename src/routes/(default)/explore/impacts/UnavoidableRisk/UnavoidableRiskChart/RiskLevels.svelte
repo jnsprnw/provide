@@ -2,8 +2,8 @@
   import { UNAVOIDABLE_UID } from '$src/config';
   import { getContext } from 'svelte';
   import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
-  import tooltip from '$lib/utils/tooltip';
-  import tooltipTemplate from './tooltip-template.html?raw';
+  import popover from '$lib/utils/popover';
+  import popoverTemplate from './popover-template.html?raw';
   import renderTemplate from '$lib/utils/renderTemplate';
 
   const { data, xScale, yGet, height, xGet, yScale } = getContext('LayerCake');
@@ -11,9 +11,7 @@
   const radius = 8;
 
   // Sort array to have active scenarios at top
-  $: scenarios = $data
-    .filter((d) => d.uid !== UNAVOIDABLE_UID)
-    .sort((a, b) => Boolean(a.color) - Boolean(b.color));
+  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID).sort((a, b) => Boolean(a.color) - Boolean(b.color));
 
   $: nodes = scenarios
     .map(({ values, uid, label: scenario, color }) => {
@@ -29,7 +27,7 @@
           isSelectedScenario,
           radius: radius - (isSelectedScenario ? 0 : 4), // The scelected scenarios are slightly bigger
           fy: isSelectedScenario ? $yScale(value) : undefined, // Fix the y-position of selected scenarios
-          tooltipContent: renderTemplate(tooltipTemplate, {
+          popoverContent: renderTemplate(popoverTemplate, {
             year,
             formattedValue,
             scenario,
@@ -65,15 +63,7 @@
     .stop();
 
   $: {
-    for (
-      let i = 0,
-        n = Math.ceil(
-          Math.log(simulation.alphaMin()) /
-            Math.log(1 - simulation.alphaDecay())
-        );
-      i < n;
-      ++i
-    ) {
+    for (let i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
       simulation.tick();
     }
   }
@@ -81,14 +71,10 @@
 
 {#if $height > 0}
   <g>
-    {#each simulation.nodes() as { x, y, uid, color, isSelectedScenario, tooltipContent, radius, scenario }}
+    {#each simulation.nodes() as { x, y, uid, color, isSelectedScenario, popoverContent, radius, scenario }}
       <!-- For some reason the updating of the color causes issues if no key block is added -->
       {#key uid}
-        <g
-          style="transform: translate({x}px, {Math.min(y, $height)}px);"
-          class="transition-transform"
-          class:opacity-80={!isSelectedScenario}
-        >
+        <g style="transform: translate({x}px, {Math.min(y, $height)}px);" class="transition-transform" class:opacity-80={!isSelectedScenario}>
           <circle
             class:fill-theme-stronger={!isSelectedScenario}
             class:stroke-[1.5px]={isSelectedScenario}
@@ -97,7 +83,7 @@
             style:fill={color}
             style:opacity={isSelectedScenario ? 1 : 0.4}
             r={radius}
-            use:tooltip={{ content: tooltipContent }}
+            use:popover={{ content: popoverContent }}
             title={scenario}
           />
         </g>

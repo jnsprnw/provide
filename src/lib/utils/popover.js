@@ -1,9 +1,9 @@
 import { writable } from 'svelte/store';
 import tippy from 'tippy.js';
 
-export const ACTIVE_TOOLTIP = writable(null);
+export const ACTIVE_POPOVER = writable(null);
 
-export default function tooltip(node, params) {
+export default function popover(node, params) {
   const instance = tippy(node, {
     theme: 'light-border',
     allowHTML: true,
@@ -11,14 +11,13 @@ export default function tooltip(node, params) {
     interactive: params.interactive || false,
     placement: params.placement || 'top',
     duration: params.duration || 0,
-    //content: params.content,
     onShow() {
       // await tick
-      ACTIVE_TOOLTIP.set(params.uid);
+      ACTIVE_POPOVER.set(params.uid);
       params.IS_ACTIVE?.set(true);
     },
-    onHide(instance) {
-      ACTIVE_TOOLTIP.set(null);
+    onHide() {
+      ACTIVE_POPOVER.set(null);
       params.IS_ACTIVE?.set(false);
     },
     content() {
