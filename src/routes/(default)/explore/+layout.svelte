@@ -6,9 +6,16 @@
   import PageIntro from '$lib/site/PageIntro.svelte';
   import Link from './Link/Link.svelte';
 
+  import { GEOGRAPHIES_IN_AVOIDING_IMPACTS } from '$config';
+  import { CURRENT_GEOGRAPHY } from '$stores/state.js';
+
   $: urlToState($page.url);
 
-  const tabs = [
+  $: ({ geographyType } = $CURRENT_GEOGRAPHY ?? {});
+
+  $: isAvoidingImpactsAvailable = GEOGRAPHIES_IN_AVOIDING_IMPACTS.includes(geographyType);
+
+  $: tabs = [
     {
       href: '/explore/impacts',
       label: 'Future impacts',
@@ -17,10 +24,11 @@
         'Explore how different levels of climate action will lead to different climate impacts for countries, cities, and more. See where risk escalates and under what conditions impacts could be avoided.',
     },
     {
-      href: '#',
+      href: '/explore/avoid',
       label: 'Avoiding impacts',
       description: 'Set an impact threshold and explore scenarios',
-      disabled: true,
+      disabled: !isAvoidingImpactsAvailable,
+      tooltip: !isAvoidingImpactsAvailable ? 'This module is only available for specific geographies' : undefined,
       intro:
         'Explore how different levels of climate action will lead to different climate impacts for countries, cities, and more. See where risk escalates and under what conditions impacts could be avoided.',
     },
