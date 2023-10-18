@@ -9,9 +9,10 @@
   export let filterKey;
   export let filterLabel;
   export let items;
-  export let itemsLabel;
+  export let itemsLabel = undefined;
   export let currentUid; // Either string or array of strings
   export let currentFilterUid;
+  export let disabledMessage = undefined;
 
   $: current = items.find((d) => d.uid === currentUid || currentUid.includes(d.uid));
 
@@ -31,19 +32,39 @@
   <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
-      <PillGroup bind:currentUid={currentFilterUid} options={filters} />
+      <PillGroup
+        bind:currentUid={currentFilterUid}
+        options={filters}
+        {disabledMessage}
+      />
     </div>
     <slot name="header-link" />
   </div>
 {/if}
-<slot name="items" items={availableItems} {currentFilterUid}>
+<slot
+  name="items"
+  items={availableItems}
+  {currentFilterUid}
+>
   <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] min-h-[20rem]">
     <div class="md:border-r border-contour-weakest">
       {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline>{/if}
-      <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
-        {#each availableItems as item}
-          <RadioGroupOption value={item.uid} let:checked>
-            <InteractiveListItem {...item} bind:hovered={hoveredItem} selected={checked} />
+      <RadioGroup
+        bind:value={currentUid}
+        on:change={(e) => (currentUid = e.detail)}
+      >
+        {#each availableItems as { icon, uid, label }}
+          <RadioGroupOption
+            value={uid}
+            let:checked
+          >
+            <InteractiveListItem
+              {icon}
+              {uid}
+              {label}
+              bind:hovered={hoveredItem}
+              selected={checked}
+            />
           </RadioGroupOption>
         {/each}
       </RadioGroup>
