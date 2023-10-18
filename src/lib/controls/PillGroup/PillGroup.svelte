@@ -1,8 +1,10 @@
 <script>
   import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
+  import tooltip from '$lib/utils/tooltip';
   export let currentUid;
   export let options;
   export let size = 'md';
+  export let disabledMessage = 'Option not available';
 
   $: classes = {
     md: {
@@ -21,22 +23,26 @@
   on:change={(e) => (currentUid = e.detail)}
   class="flex flex-wrap {classes.group}"
 >
-  {#each options as option}
+  {#each options as { uid, disabled, label }}
     <RadioGroupOption
-      value={option.uid}
+      value={uid}
       let:checked
-      disabled={option.disabled}
-      class="whitespace-nowrap overflow-hidden rounded-full bg-surface-base"
+      {disabled}
+      class="whitespace-nowrap overflow-hidden rounded-full"
     >
       <span
-        class="w-full overflow-hidden text-ellipsis block {classes.button}"
+        use:tooltip={{ content: disabled ? disabledMessage : undefined }}
+        class="w-full overflow-hidden text-ellipsis block transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
-        class:cursor-not-allowed={option.disabled}
-        class:opacity-50={option.disabled}
-        class:font-bold={checked}>{option.label}</span
+        class:cursor-not-allowed={disabled}
+        class:opacity-50={disabled}
+        class:font-bold={checked}
+        class:hover:bg-surface-base={!disabled && !checked}
       >
+        {label}
+      </span>
     </RadioGroupOption>
   {/each}
 </RadioGroup>
