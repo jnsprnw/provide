@@ -2,9 +2,9 @@
   import { STATUS_FAILED, STATUS_SUCCESS } from '$src/config.js';
   import { each, filter } from 'lodash-es';
 
-  export let props; // Regular props/state that need to be kept in sync with the asyncProps
-  export let asyncProps = []; // Array or Dict of regular object that have a status property
-  export let process; // Function for data processing before props are passed to slot
+  export let props = {}; // Regular props/state that need to be kept in sync with the asyncProps
+  export let asyncProps = {}; // Array or Dict of regular object that have a status property
+  export let process = (d) => d; // Function for data processing before props are passed to slot
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
   export let isFailed = false;
@@ -45,11 +45,7 @@
 </script>
 
 {#if isFailed}
-  <slot name="failed"
-    ><div class="py-24 rounded-lg text-center text-lg font-bold">
-      ⚠️ Data could not be loaded
-    </div></slot
-  >
+  <slot name="failed"><div class="py-24 rounded-lg text-center text-lg font-bold">⚠️ Data could not be loaded</div></slot>
 {:else if isEmpty}
   <slot name="placeholder" />
 {:else}
