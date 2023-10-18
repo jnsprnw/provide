@@ -4,7 +4,7 @@ import { get, keyBy, uniq } from 'lodash-es';
 import { derived } from 'svelte/store';
 
 // META DATA (This will only be set once on load and won't change again)
-export const GEOGRAPHY_TYPES = derived(page, ($page) => $page.data?.meta?.geographyTypes ?? {});
+export const GEOGRAPHY_TYPES = derived(page, ($page) => $page.data?.meta?.geographyTypes ?? []);
 
 export const GEOGRAPHIES = derived(page, ($page) => {
   const { geographyTypes, ...meta } = $page.data?.meta ?? {};
