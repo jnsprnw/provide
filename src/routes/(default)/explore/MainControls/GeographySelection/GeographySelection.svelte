@@ -13,6 +13,7 @@
 
   let GEO_SHAPE_DATA = writable({});
 
+  // If the currently selected geography is available, the label is displayed. Otherwise a error message.
   $: buttonLabel = $IS_COMBINATION_AVAILABLE_GEOGRAPHY ? $CURRENT_GEOGRAPHY?.label : `Unavailable geography selected`;
 
   $: geographyTypes = sortBy(
