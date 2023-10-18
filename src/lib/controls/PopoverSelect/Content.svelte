@@ -13,9 +13,7 @@
   export let currentUid; // Either string or array of strings
   export let currentFilterUid;
 
-  $: current = items.find(
-    (d) => d.uid === currentUid || currentUid.includes(d.uid)
-  );
+  $: current = items.find((d) => d.uid === currentUid || currentUid.includes(d.uid));
 
   // Since we don't have external state that keeps track of which filter was selected
   // we defer the selected filter from the currently selected items
@@ -26,15 +24,11 @@
   let hoveredItem = null;
   $: detailsItem = items.find((d) => d.uid === hoveredItem) || current;
 
-  $: availableItems = items.filter(
-    (item) => item[filterKey] === currentFilterUid
-  );
+  $: availableItems = items.filter((item) => item[filterKey] === currentFilterUid);
 </script>
 
 {#if filters.length > 1}
-  <div
-    class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between"
-  >
+  <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
       <PillGroup bind:currentUid={currentFilterUid} options={filters} />
@@ -45,16 +39,11 @@
 <slot name="items" items={availableItems} {currentFilterUid}>
   <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] min-h-[20rem]">
     <div class="md:border-r border-contour-weakest">
-      {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline
-        >{/if}
+      {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline>{/if}
       <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
         {#each availableItems as item}
           <RadioGroupOption value={item.uid} let:checked>
-            <InteractiveListItem
-              {...item}
-              bind:hovered={hoveredItem}
-              selected={checked}
-            />
+            <InteractiveListItem {...item} bind:hovered={hoveredItem} selected={checked} />
           </RadioGroupOption>
         {/each}
       </RadioGroup>
