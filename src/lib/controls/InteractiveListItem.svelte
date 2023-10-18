@@ -7,14 +7,19 @@
 </script>
 
 <span
+  role="button"
+  tabindex="0"
   class:text-theme-base={selected}
-  class:font-bold={selected}
   class:border-r-3={selected}
-  class="py-1 px-5 hover:bg-surface-weaker whitespace-nowrap flex cursor-pointer gap-1 border-theme-base"
+  class="py-1 px-5 hover:bg-surface-weaker focus:bg-surface-weaker whitespace-nowrap flex cursor-pointer gap-1 border-theme-base"
   on:focus={() => (hovered = uid)}
   on:mouseover={() => (hovered = uid)}
   on:mouseleave={() => (hovered = null)}
+  on:blur={() => (hovered = null)}
 >
   {#if icon}<span>{icon}</span>{/if}
-  <span>{@html label}</span>
+  <span
+    class:font-bold={selected}
+    class="truncate">{@html label}</span
+  >
 </span>
