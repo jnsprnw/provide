@@ -1,9 +1,6 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
-  import {
-    CURRENT_INDICATOR_PARAMETERS,
-    CURRENT_INDICATOR_OPTION_VALUES,
-  } from '$stores/state.js';
+  import { CURRENT_INDICATOR_PARAMETERS, CURRENT_INDICATOR_OPTION_VALUES } from '$stores/state.js';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
     .map((parameter) => ({
@@ -23,8 +20,7 @@
   {#each parameters as parameter}
     <Select
       {...parameter}
-      backgroundColor="bg-surface-base"
-      borderColor="border-theme-base/5"
+      labelColor="text-theme-base"
       on:change={handleChange}
     />
   {/each}

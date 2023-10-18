@@ -11,7 +11,6 @@
   export let value;
   export let label;
   export let uid;
-  export let borderColor = 'border-contour-weakest';
   export let backgroundColor = 'bg-transparent';
   export let labelColor = 'text-theme-base';
 
@@ -32,7 +31,7 @@
       class="text-text-weaker text-sm"
       for={selectId}>{label}</label
     >
-    <div class={`border rounded overflow-hidden flex gap-x-1 ${borderColor}`}>
+    <div class={`border rounded overflow-hidden flex gap-x-1 border-0`}>
       <select
         class={`py-1.5 text-right text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}
         id={selectId}
