@@ -27,23 +27,24 @@
 </script>
 
 {#if !$IS_STATIC}
-  <div class="flex gap-2 items-center">
-    <label class="text-contour-weak text-sm" for={selectId}>{label}</label>
-    <div class={`border rounded overflow-hidden flex relative ${borderColor}`}>
+  <div class="flex gap-2 items-center font-normal">
+    <label
+      class="text-text-weaker text-sm"
+      for={selectId}>{label}</label
+    >
+    <div class={`border rounded overflow-hidden flex gap-x-1 ${borderColor}`}>
       <select
-        class={`py-1.5 pl-2 pr-8 text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}
+        class={`py-1.5 text-right text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}
         id={selectId}
         bind:value
         on:change={handleChange}
       >
         {#each options as option}
-          <option value={option.uid || option.value}
-            >{option[KEY_LABEL_LONG] || option[KEY_LABEL]}</option
-          >
+          <option value={option.uid || option.value}>{option[KEY_LABEL_LONG] || option[KEY_LABEL]}</option>
         {/each}
       </select>
 
-      <Chevron class="absolute right-1 pointer-events-none stroke-theme-base" />
+      <Chevron class="pointer-events-none stroke-theme-base" />
     </div>
   </div>
 {/if}
