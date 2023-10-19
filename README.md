@@ -2,6 +2,17 @@
 
 ## Links
 
+Current **development** version 2.3 (on Provide Netlify):
+[https://phase-2-3--hilarious-treacle-096169.netlify.app/explore/impacts](https://phase-2-3--hilarious-treacle-096169.netlify.app/explore/impacts)
+
+Previous **development** version 2.0 (on Provide Netliy):
+[https://phase-2--hilarious-treacle-096169.netlify.app/](https://phase-2--hilarious-treacle-096169.netlify.app/)
+
+Previous **production** version (on Provide Netlify):
+[https://chimerical-baklava-ad903f.netlify.app](https://chimerical-baklava-ad903f.netlify.app)
+
+### Old versions
+
 Live **development** version: [`https://stellular-kashata-43537c.netlify.app/explore/impacts`](https://stellular-kashata-43537c.netlify.app/explore/impacts).
 
 Live **production** version: [`https://sparkling-palmier-e94c2b.netlify.app/`](https://sparkling-palmier-e94c2b.netlify.app/).
