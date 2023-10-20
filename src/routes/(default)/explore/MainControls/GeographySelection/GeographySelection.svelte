@@ -1,11 +1,11 @@
 <script>
   import Geographies from './Geographies.svelte';
-  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, AVAILABLE_GEOGOGRAPHIES, IS_COMBINATION_AVAILABLE_GEOGRAPHY } from '$stores/state.js';
+  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, AVAILABLE_GEOGOGRAPHIES, IS_COMBINATION_AVAILABLE_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
   import { END_GEO_SHAPE } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import { sortBy } from 'lodash-es';
-  import { GEOGRAPHY_TYPES } from '$stores/meta.js';
+  import { GEOGRAPHY_TYPES, GEOGRAPHIES } from '$stores/meta.js';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import Map from './Map.svelte';
@@ -14,7 +14,7 @@
   let GEO_SHAPE_DATA = writable({});
 
   // If the currently selected geography is available, the label is displayed. Otherwise a error message.
-  $: buttonLabel = $IS_COMBINATION_AVAILABLE_GEOGRAPHY ? $CURRENT_GEOGRAPHY?.label : `Unavailable geography selected`;
+  $: buttonLabel = $CURRENT_GEOGRAPHY?.label;
 
   $: geographyTypes = sortBy(
     $GEOGRAPHY_TYPES.map((t) => ({ ...t, disabled: !t.availableIndicators.length })), // The disabled attribute is used to disable the option
@@ -22,7 +22,13 @@
   );
 
   let hoveredItem;
-  let currentFilterUid;
+  let currentFilterUid = $CURRENT_GEOGRAPHY_TYPE.uid; // This stores the currently displayed geography type
+
+  $: selectableGeographies = $GEOGRAPHIES[currentFilterUid] ?? [];
+
+  $: console.log('geographySelection', { currentFilterUid });
+
+  $: console.log({ $AVAILABLE_GEOGOGRAPHIES, $CURRENT_GEOGRAPHY_TYPE });
 
   $: currentFilterUid &&
     fetchData(GEO_SHAPE_DATA, [
@@ -46,7 +52,6 @@
   {buttonLabel}
   panelClass="w-screen-p max-w-4xl"
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
-  hasWarning={!$IS_COMBINATION_AVAILABLE_GEOGRAPHY}
 >
   <Content
     filters={geographyTypes}
@@ -54,7 +59,7 @@
     filterLabel="Pick a location"
     disabledMessage="Geography type not yet available"
     currentUid={$CURRENT_GEOGRAPHY_UID}
-    items={$AVAILABLE_GEOGOGRAPHIES}
+    items={selectableGeographies}
     bind:currentFilterUid
   >
     <div
@@ -66,7 +71,7 @@
       <Geographies
         {items}
         bind:hoveredItem
-        geographyType={geographyTypes.find((g) => g.uid === currentFilterUid)}
+        geographyType={geographyTypes.find(({ uid }) => uid === currentFilterUid)}
         bind:currentUid={$CURRENT_GEOGRAPHY_UID}
       />
       <div class="px-3 hidden md:block">

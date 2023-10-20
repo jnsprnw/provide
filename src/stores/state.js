@@ -2,10 +2,11 @@ import { formatReadableList } from '$lib/utils.js';
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
-import _, { every, get, keyBy, map, reduce } from 'lodash-es';
+import _, { every, get, keyBy, map, reduce, without } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { extractTimeframesFromScenarios } from '$lib/utils.js';
+import { GEOGRAPHY_TYPES, INDICATORS, SECTORS } from '$stores/meta.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
@@ -14,7 +15,7 @@ import { DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCEN
 export const IS_EMBEDED = writable(false);
 
 // Set to true for generating screenshots when we don't want
-//to display controls n stuff, derived from &static=true url parameter
+// to display controls n stuff, derived from &static=true url parameter
 export const IS_STATIC = writable(false);
 
 /**
@@ -39,11 +40,100 @@ function setLocalStorage(key, value) {
 }
 
 /*
+ * GEOGRAPHY STATE
+ */
+
+export const AVAILABLE_GEOGRAPHY_TYPES = derived(GEOGRAPHY_TYPES, ($types) => {
+  return $types.filter(({ availableIndicators }) => availableIndicators.length);
+});
+
+export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
+CURRENT_GEOGRAPHY_UID.subscribe((value) => {
+  setLocalStorage(LOCALSTORE_GEOGRAPHY, value);
+});
+
+export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, AVAILABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $geographyTypes, $geographies], set) => {
+  let geography;
+  $geographyTypes.every(({ uid: type }) => {
+    const list = $geographies[type];
+    if (typeof list === 'undefined') {
+      console.warn(`Invalid geography type ${type}. Could not find any geographies.`);
+    }
+    geography = (list ?? []).find(({ uid }) => uid === $uid);
+    if (geography) {
+      return false; // A geography was found so we quit the loop
+    }
+    return true;
+  });
+  if (typeof geography === 'undefined') {
+    console.warn(`Could not find any geography from uid ${$uid}. Will reset to default.`); // TDOO
+  }
+  set(geography);
+});
+
+export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, AVAILABLE_GEOGRAPHY_TYPES], ([$currentGeography, $geographyTypes]) => {
+  const { geographyType: uid } = $currentGeography;
+  if (typeof uid === 'undefined') {
+    console.warn(`Could not determin geography type from current geography.`);
+  }
+  const geographyType = $geographyTypes.find((type) => type.uid === uid);
+  if (typeof geographyType === 'undefined') {
+    console.warn(`Could not find any geography type for uid ${uid}.`);
+  }
+  return geographyType;
+});
+
+export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE], ([$geographies, $currentGeographyType]) => {
+  const { uid } = $currentGeographyType;
+  const geographies = $geographies[uid];
+  if (typeof geographies === 'undefined') {
+    console.warn(`Could not find any geographies for type ${uid}.`);
+  }
+  return geographies ?? [];
+});
+
+export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
+
+/*
  * INDICATOR STATE
  */
+
+export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
+  const list = get($type, 'availableIndicators', []);
+  const indicators = $indicators.filter(({ uid }) => list.includes(uid));
+  if (indicators.length !== list.length) {
+    const ids = indicators.map(({ uid }) => uid);
+    const missing = without(list, ...ids);
+    console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
+  }
+  return indicators;
+});
+
+export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$sectors, $indicators]) => {
+  return $sectors.map(({ uid, label }) => {
+    const indicators = $indicators.filter(({ sector: sectorUID }) => sectorUID === uid);
+    return {
+      label: indicators.length ? `${label} (${indicators.length})` : label,
+      uid,
+      indicators,
+      amount: indicators.length,
+      disabled: !indicators.length,
+    };
+  });
+});
+
 export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICATOR, DEFAULT_INDICATOR_UID));
-CURRENT_INDICATOR_UID.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_INDICATOR, value);
+
+export const CURRENT_INDICATOR_CHECK = derived([CURRENT_INDICATOR_UID, AVAILABLE_INDICATORS], ([$uid, $indicators]) => {
+  const isValidIndicator = $indicators.map(({ uid }) => uid).includes($uid);
+  console.log('CURRENT_INDICATOR_CHECK', { $uid, isValidIndicator, $indicators });
+  if (isValidIndicator) {
+    // Only save to localstorage if valid indicator
+    setLocalStorage(LOCALSTORE_INDICATOR, $uid);
+  } else {
+    setLocalStorage(LOCALSTORE_INDICATOR, undefined);
+  }
+  return isValidIndicator;
 });
 
 export const CURRENT_INDICATOR = derived([CURRENT_INDICATOR_UID, DICTIONARY_INDICATORS], ([$uid, $indicators]) => get($indicators, $uid));
@@ -85,35 +175,6 @@ export const CURRENT_INDICATOR_OPTIONS = derived([CURRENT_INDICATOR_OPTION_VALUE
 export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(CURRENT_INDICATOR_PARAMETERS, ($options) => {
   return $options.map((indicator) => get(indicator, 'uid'));
 });
-
-/*
- * GEOGRAPHY STATE
- */
-
-export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_INDICATOR], ([$GEOGRAPHIES, $CURRENT_INDICATOR]) => {
-  return reduce(
-    $GEOGRAPHIES,
-    (acc, geographies) => {
-      const availableGeographies = geographies.filter((geography) => $CURRENT_INDICATOR.availableGeographies.includes(geography.uid));
-      return [...acc, ...availableGeographies];
-    },
-    []
-  );
-});
-
-export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
-CURRENT_GEOGRAPHY_UID.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_GEOGRAPHY, value);
-});
-
-export const CURRENT_GEOGRAPHY = derived(CURRENT_GEOGRAPHY_UID, ($uid, set) => {
-  // We don't want this store to update when CURRENT_GEOGRAPHIES changes, so we only get
-  // it's value once CURRENT_GEOGRAPHY_UID changes
-  const geography = (getStore(AVAILABLE_GEOGOGRAPHIES) || []).find((geography) => geography?.uid === $uid);
-  set(geography);
-});
-
-export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
 
 /*
  * SCENARIO STATE
@@ -180,7 +241,7 @@ export const AVAILABLE_TIMEFRAMES = derived(AVAILABLE_SCENARIOS, ($AVAILABLE_SCE
 
 /* UTILITY N STUFF */
 export const IS_COMBINATION_AVAILABLE_GEOGRAPHY = derived([CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID], ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID]) =>
-  $CURRENT_INDICATOR.availableGeographies.includes($CURRENT_GEOGRAPHY_UID)
+  ($CURRENT_INDICATOR?.availableGeographies ?? []).includes($CURRENT_GEOGRAPHY_UID)
 );
 
 export const IS_COMBINATION_AVAILABLE_SCENARIO = derived([CURRENT_INDICATOR, CURRENT_SCENARIOS_UID], ([$CURRENT_INDICATOR, $CURRENT_SCENARIOS_UID]) =>

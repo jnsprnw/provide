@@ -5,7 +5,7 @@
 
   import { sortBy } from 'lodash-es';
 
-  export let items;
+  export let items = [];
   export let currentUid;
   export let hoveredItem;
   export let geographyType;
@@ -15,6 +15,8 @@
     keys: ['label', 'uid'],
     includeMatches: true,
   };
+
+  $: geographyTypeLabel = geographyType?.labelSingular.toLowerCase() ?? currentUid;
 
   $: fuse = new Fuse(items, options);
 
@@ -72,7 +74,7 @@
       type="text"
       class="px-2 py-2 leading-8 border w-full"
       bind:value={term}
-      placeholder={`Search for ${geographyType?.labelSingular.toLowerCase()}…`}
+      placeholder={`Search for ${geographyTypeLabel}…`}
     />
   </div>
   <RadioGroup
@@ -81,20 +83,27 @@
     class="h-96 w-64 w-full overflow-y-scroll overflow-x-hidden"
   >
     {#key results.length}
-      {#each results as { icon, uid, label, emoji }}
-        <RadioGroupOption
-          value={uid}
-          let:checked
+      {#if results.length}
+        {#each results as { icon, uid, label, emoji }}
+          <RadioGroupOption
+            value={uid}
+            let:checked
+          >
+            <InteractiveListItem
+              icon={icon ?? emoji}
+              {label}
+              {uid}
+              selected={checked}
+              bind:hovered={hoveredItem}
+            />
+          </RadioGroupOption>
+        {/each}
+      {:else}
+        <span
+          class="text-xs py-1 px-5 block text-text-weaker"
+          role="status">Could not find any geographies for this type.</span
         >
-          <InteractiveListItem
-            icon={icon ?? emoji}
-            {label}
-            {uid}
-            selected={checked}
-            bind:hovered={hoveredItem}
-          />
-        </RadioGroupOption>
-      {/each}
+      {/if}
     {/key}
   </RadioGroup>
 </div>

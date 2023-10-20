@@ -7,6 +7,7 @@ import { derived } from 'svelte/store';
 export const GEOGRAPHY_TYPES = derived(page, ($page) => $page.data?.meta?.geographyTypes ?? []);
 
 export const GEOGRAPHIES = derived(page, ($page) => {
+  // Extract the geography types and its data from the data provided by the load function
   const { geographyTypes, ...meta } = $page.data?.meta ?? {};
   if (geographyTypes.length) {
     const geographies = geographyTypes.map(({ uid }) => {

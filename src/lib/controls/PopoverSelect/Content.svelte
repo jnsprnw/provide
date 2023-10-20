@@ -8,7 +8,7 @@
   export let filters;
   export let filterKey;
   export let filterLabel;
-  export let items;
+  export let items = [];
   export let itemsLabel = undefined;
   export let currentUid; // Either string or array of strings
   export let currentFilterUid;
@@ -19,7 +19,7 @@
   // Since we don't have external state that keeps track of which filter was selected
   // we defer the selected filter from the currently selected items
   onMount(() => {
-    currentFilterUid = current?.[filterKey] || filters[0].uid;
+    currentFilterUid = currentFilterUid ?? (current?.[filterKey] || filters[0].uid);
   });
 
   let hoveredItem = null;
@@ -53,26 +53,34 @@
         bind:value={currentUid}
         on:change={(e) => (currentUid = e.detail)}
       >
-        {#each availableItems as { icon, uid, label }}
-          <RadioGroupOption
-            value={uid}
-            let:checked
+        {#if availableItems.length}
+          {#each availableItems as { icon, uid, label }}
+            <RadioGroupOption
+              value={uid}
+              let:checked
+            >
+              <InteractiveListItem
+                {icon}
+                {uid}
+                {label}
+                bind:hovered={hoveredItem}
+                selected={checked}
+              />
+            </RadioGroupOption>
+          {/each}
+        {:else}
+          <span
+            class="text-xs py-1 px-5 block text-text-weaker"
+            role="status">No indicators are available for this sector and geography.</span
           >
-            <InteractiveListItem
-              {icon}
-              {uid}
-              {label}
-              bind:hovered={hoveredItem}
-              selected={checked}
-            />
-          </RadioGroupOption>
-        {/each}
+        {/if}
       </RadioGroup>
     </div>
-
-    <div class="p-4 hidden md:block">
-      <h3 class="font-bold mb-2">{detailsItem.label}</h3>
-      <p class="text-contour-weak">{detailsItem.description || ''}</p>
-    </div>
+    {#if detailsItem}
+      <div class="p-4 hidden md:block">
+        <h3 class="font-bold mb-2">{detailsItem.label}</h3>
+        <p class="text-contour-weak">{detailsItem.description || ''}</p>
+      </div>
+    {/if}
   </div>
 </slot>
