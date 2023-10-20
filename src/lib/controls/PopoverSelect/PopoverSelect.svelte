@@ -1,10 +1,6 @@
 <script>
   import ExpandIcon from '$lib/helper/icons/Expand.svelte';
-  import {
-    Popover,
-    PopoverButton,
-    PopoverPanel,
-  } from '@rgossiaux/svelte-headlessui';
+  import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
 
   let clazz;
@@ -38,10 +34,7 @@
 </script>
 
 <Popover class={`relative w-full ${clazz}`}>
-  <span
-    class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block"
-    >{label}</span
-  >
+  <span class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block">{label}</span>
   <PopoverButton
     use={[popperRef]}
     let:open
@@ -49,13 +42,14 @@
       'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors',
       classes.button,
       buttonClass,
-      hasWarning ? 'border-red-300 text-red-400' : 'text-theme-base' // TODO: Define global warning classes
-      ].join(' ')}
+      hasWarning ? 'border-red-300 text-red-400' : 'text-theme-base', // TODO: Define global warning classes
+    ].join(' ')}
   >
-    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis text-current"
-      >{buttonLabel}</span
-    >
-    <ExpandIcon class="min-w-[20px] grow-1 stroke-current" isOpen={open} />
+    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis text-current">{buttonLabel}</span>
+    <ExpandIcon
+      class="min-w-[20px] grow-1 stroke-current"
+      isOpen={open}
+    />
   </PopoverButton>
 
   <PopoverPanel
