@@ -1,7 +1,9 @@
 import { loadMetaData } from '$utils/apis.js';
-export const load = async ({ fetch }) => {
+
+/** @type {import('./$types').LayoutServerLoad} */
+export async function load({ fetch }) {
   const meta = await loadMetaData(fetch);
   return {
     meta,
   };
-};
+}

@@ -6,7 +6,7 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     TEMPLATE_PROPS,
     CURRENT_SCENARIOS,
-    AVAILABLE_SCENARIOS,
+    SELECTABLE_SCENARIOS,
     IS_COMBINATION_AVAILABLE,
     DOWNLOAD_URL_PARAMS,
   } from '$stores/state.js';
@@ -16,12 +16,7 @@
   import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import {
-    END_UN_AVOIDABLE_RISK,
-    UNAVOIDABLE_UID,
-    KEY_MODEL,
-    KEY_SOURCE,
-  } from '$src/config.js';
+  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import { sortBy, reverse, find, uniqBy } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
@@ -53,18 +48,13 @@
     let thresholdIndex = data.thresholds.indexOf(threshold);
 
     if (thresholdIndex === -1) {
-      thresholdIndex = hasThresholds
-        ? data.thresholds.indexOf(data.defaultThreshold)
-        : 0;
+      thresholdIndex = hasThresholds ? data.thresholds.indexOf(data.defaultThreshold) : 0;
     }
 
     threshold = data.thresholds[thresholdIndex];
     const timeframe = scenarios[0].timeframe[1];
 
-    const mergedScenarios = uniqBy(
-      [...scenarios, ...allScenarios],
-      'uid'
-    ).filter((s) => s.endYear === timeframe);
+    const mergedScenarios = uniqBy([...scenarios, ...allScenarios], 'uid').filter((s) => s.endYear === timeframe);
 
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {
@@ -150,10 +140,7 @@
     };
   };
 
-  $: legendItems = [
-    ...$CURRENT_SCENARIOS,
-    { label: 'Other scenarios', uid: 'other' },
-  ];
+  $: legendItems = [...$CURRENT_SCENARIOS, { label: 'Other scenarios', uid: 'other' }];
 
   //$: console.log(legendItems, $CURRENT_SCENARIOS);
 </script>
@@ -167,7 +154,7 @@
     asyncProps={$UN_AVOIDABLE_RISK_DATA}
     props={{
       ...$TEMPLATE_PROPS,
-      allScenarios: $AVAILABLE_SCENARIOS,
+      allScenarios: $SELECTABLE_SCENARIOS,
       threshold,
       legendItems,
       urlParams: $DOWNLOAD_URL_PARAMS,
@@ -184,7 +171,10 @@
       chartUid={END_UN_AVOIDABLE_RISK}
       chartInfo={asyncProps.chartInfo}
     >
-      <div class="mb-10" slot="controls">
+      <div
+        class="mb-10"
+        slot="controls"
+      >
         {#if asyncProps.thresholds.length > 1}
           <Select
             label="Threshold"
@@ -193,7 +183,10 @@
           />
         {/if}
       </div>
-      <ColorLegend items={props.legendItems} id={1} />
+      <ColorLegend
+        items={props.legendItems}
+        id={1}
+      />
       <figure class="aspect-[2.5]">
         <UnavoidableRiskChart
           {isLoading}

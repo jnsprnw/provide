@@ -14,18 +14,37 @@
   export let currentFilterUid;
   export let disabledMessage = undefined;
 
-  $: current = items.find((d) => d.uid === currentUid || currentUid.includes(d.uid));
+  $: current = items.find((d) => d.uid === currentUid || (currentUid ?? []).includes(d.uid));
 
   // Since we don't have external state that keeps track of which filter was selected
   // we defer the selected filter from the currently selected items
   onMount(() => {
-    currentFilterUid = currentFilterUid ?? (current?.[filterKey] || filters[0].uid);
+    console.log('mount', { currentFilterUid });
+    if (!currentFilterUid) {
+      console.log('Content', { currentFilterUid });
+      if (current) {
+        console.log('Content, has current', { current });
+        currentFilterUid = current[filterKey];
+      }
+      if ((current && !currentFilterUid) || !current) {
+        console.log('Content, no current', { current, currentFilterUid });
+        currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
+        console.log('Content, after current', { currentFilterUid });
+      }
+    }
+    // currentFilterUid = currentFilterUid ?? (current?.[filterKey] || filters[0].uid);
+    console.log({ currentFilterUid });
   });
 
   let hoveredItem = null;
   $: detailsItem = items.find((d) => d.uid === hoveredItem) || current;
 
+  // $: console.log({ detailsItem });
+
   $: availableItems = items.filter((item) => item[filterKey] === currentFilterUid);
+  $: console.log({ availableItems });
+
+  $: console.log({ currentFilterUid });
 </script>
 
 {#if filters.length > 1}

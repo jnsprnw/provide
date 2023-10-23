@@ -1,10 +1,10 @@
 <script>
-  import { AVAILABLE_SCENARIOS, CURRENT_GEOGRAPHY, CURRENT_INDICATOR } from '$stores/state.js';
+  import { SELECTABLE_SCENARIOS, CURRENT_GEOGRAPHY, CURRENT_INDICATOR } from '$stores/state.js';
   import { groupBy } from 'lodash-es';
 
   export let selectedScenarios;
 
-  $: availableScenarioUIDs = $AVAILABLE_SCENARIOS.map(({ uid }) => uid);
+  $: availableScenarioUIDs = $SELECTABLE_SCENARIOS.map(({ uid }) => uid);
 
   $: scenarioGroups = groupBy(selectedScenarios, (scenario) => availableScenarioUIDs.includes(scenario));
   $: amountAvailable = scenarioGroups[true]?.length ?? 0;

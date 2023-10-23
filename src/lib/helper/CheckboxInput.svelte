@@ -4,6 +4,7 @@
   export let uid;
   export let checked;
   export let value;
+  export let disabled;
 
   const dispatch = createEventDispatcher();
   let ref;
@@ -25,4 +26,6 @@
   {checked}
   {...$$restProps}
   on:change={handleChange}
+  aria-disabled={disabled}
+  {disabled}
 />

@@ -1,6 +1,6 @@
 import { page } from '$app/stores';
 import { SCENARIO_DATA_KEYS } from '$src/config.js';
-import { get, keyBy, uniq } from 'lodash-es';
+import { get, keyBy, uniq, without } from 'lodash-es';
 import { derived } from 'svelte/store';
 
 // META DATA (This will only be set once on load and won't change again)
@@ -61,18 +61,18 @@ export const INDICATORS = derived(page, ($page) => {
   const { indicators, units, sectors } = $page.data?.meta ?? {
     indicators: [],
   };
-  return indicators.map((indicator, i) => {
+  return indicators.map((indicator) => {
     const sector = sectors.find((s) => s.uid === indicator.sector);
     const unit = units.find((unit) => unit.uid === indicator.unit) || {
       uid: indicator.unit,
       label: indicator.unit,
     };
     const availableGeographies = uniq([...sector.availableGeographies, ...indicator.availableGeographies]);
-    const availableScenarios = uniq([...sector.availableScenarios, ...indicator.availableScenarios]);
+    const availableScenarios = without(uniq([...sector.availableScenarios, ...indicator.availableScenarios]), ...(indicator.excludedScenarios ?? []));
 
     return {
       ...indicator,
-      availableScenarios, //availableScenarios.slice(0, i * 3 + 3),
+      availableScenarios,
       availableGeographies,
       unit,
     };

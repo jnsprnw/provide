@@ -49,7 +49,7 @@ export const UNAVOIDABLE_UID = 'unavoidable';
 
 export const SCENARIO_DATA_KEYS = [EMISSIONS_UID, MEAN_TEMPERATURE_UID];
 
-export const DEFAULT_INDICATOR_UID = MEAN_TEMPERATURE_UID;
+export const DEFAULT_INDICATOR_UID = MEAN_TEMPERATURE_UID; // TODO: Not used.
 export const DEFAULT_GEOGRAPHY_UID = 'DEU';
 export const DEFAULT_SCENARIOS_UID = ['curpol'];
 export const DEFAULT_FORMAT_UID = 'float';

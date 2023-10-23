@@ -38,11 +38,14 @@ export const formatList = function (_arr = []) {
   };
 };
 
-export function extractTimeframesFromScenarios(list) {
-  return _(list)
+export function extractTimeframesFromScenarios(available, selectable) {
+  // console.log({ available, selectable });
+  const valid = uniq(selectable.map((s) => s.endYear));
+
+  return _(available)
     .map((s) => s.endYear)
     .uniq()
     .sort()
-    .map((uid) => ({ uid: parseInt(uid), label: uid }))
+    .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))
     .value();
 }

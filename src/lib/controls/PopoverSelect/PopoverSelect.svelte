@@ -11,7 +11,9 @@
   export let label;
   export let buttonLabel;
   export let size = 'xl';
-  export let hasWarning = false;
+  export let warning = undefined;
+  export let placeholder = undefined;
+  export let disabled = undefined;
 
   const sizeClasses = {
     xl: {
@@ -38,14 +40,20 @@
   <PopoverButton
     use={[popperRef]}
     let:open
+    aria-invalid={Boolean(warning)}
+    aria-disabled={Boolean(disabled)}
+    disabled={Boolean(disabled)}
     class={[
-      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors',
+      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors aria-expanded:border-theme-base/60 aria-invalid:border-red-300 text-theme-base aria-invalid:text-red-300 aria-disabled:cursor-not-allowed',
       classes.button,
       buttonClass,
-      hasWarning ? 'border-red-300 text-red-400' : 'text-theme-base', // TODO: Define global warning classes
+      placeholder || disabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
     ].join(' ')}
   >
-    <span class="font-bold whitespace-nowrap overflow-hidden text-ellipsis text-current">{buttonLabel}</span>
+    <span
+      class="whitespace-nowrap overflow-hidden text-ellipsis text-current"
+      class:font-bold={!placeholder}>{disabled ?? warning ?? placeholder ?? buttonLabel}</span
+    >
     <ExpandIcon
       class="min-w-[20px] grow-1 stroke-current"
       isOpen={open}

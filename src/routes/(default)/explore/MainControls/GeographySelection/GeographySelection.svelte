@@ -1,6 +1,6 @@
 <script>
   import Geographies from './Geographies.svelte';
-  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, AVAILABLE_GEOGOGRAPHIES, IS_COMBINATION_AVAILABLE_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
+  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
   import { END_GEO_SHAPE } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -26,9 +26,9 @@
 
   $: selectableGeographies = $GEOGRAPHIES[currentFilterUid] ?? [];
 
-  $: console.log('geographySelection', { currentFilterUid });
+  // $: console.log('geographySelection', { currentFilterUid });
 
-  $: console.log({ $AVAILABLE_GEOGOGRAPHIES, $CURRENT_GEOGRAPHY_TYPE });
+  // $: console.log({ $AVAILABLE_GEOGOGRAPHIES, $CURRENT_GEOGRAPHY_TYPE });
 
   $: currentFilterUid &&
     fetchData(GEO_SHAPE_DATA, [

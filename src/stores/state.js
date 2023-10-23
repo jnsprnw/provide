@@ -2,7 +2,7 @@ import { formatReadableList } from '$lib/utils.js';
 import { DEFAULT_FORMAT_UID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
-import _, { every, get, keyBy, map, reduce, without } from 'lodash-es';
+import _, { every, get, keyBy, map, reduce, without, isEqual } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { extractTimeframesFromScenarios } from '$lib/utils.js';
@@ -25,7 +25,11 @@ export const IS_STATIC = writable(false);
  * @param {string} defaultValue - The fallback value
  */
 function getLocalStorage(key, defaultValue, process = (v) => v) {
-  return process(browser ? window.localStorage.getItem(key) ?? defaultValue : defaultValue);
+  let local = browser ? window.localStorage.getItem(key) : defaultValue;
+  if (local === 'undefined') {
+    local = undefined;
+  }
+  return process(local ?? defaultValue);
 }
 
 /**
@@ -35,7 +39,11 @@ function getLocalStorage(key, defaultValue, process = (v) => v) {
  */
 function setLocalStorage(key, value) {
   if (browser) {
-    window.localStorage.setItem(key, value);
+    if (Boolean(value)) {
+      window.localStorage.setItem(key, value);
+    } else {
+      localStorage.removeItem(key);
+    }
   }
 }
 
@@ -44,7 +52,9 @@ function setLocalStorage(key, value) {
  */
 
 export const AVAILABLE_GEOGRAPHY_TYPES = derived(GEOGRAPHY_TYPES, ($types) => {
-  return $types.filter(({ availableIndicators }) => availableIndicators.length);
+  const types = $types.filter(({ availableIndicators }) => availableIndicators.length);
+  console.log('AVAILABLE_GEOGRAPHY_TYPES', { types });
+  return types;
 });
 
 export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
@@ -68,6 +78,7 @@ export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, AVAILABLE_GEOGR
   if (typeof geography === 'undefined') {
     console.warn(`Could not find any geography from uid ${$uid}. Will reset to default.`); // TDOO
   }
+  console.log('CURRENT_GEOGRAPHY', { geography });
   set(geography);
 });
 
@@ -80,6 +91,7 @@ export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, AVAILABLE_GEOG
   if (typeof geographyType === 'undefined') {
     console.warn(`Could not find any geography type for uid ${uid}.`);
   }
+  console.log('CURRENT_GEOGRAPHY_TYPE', { geographyType });
   return geographyType;
 });
 
@@ -89,6 +101,7 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_T
   if (typeof geographies === 'undefined') {
     console.warn(`Could not find any geographies for type ${uid}.`);
   }
+  console.log('AVAILABLE_GEOGOGRAPHIES', { geographies });
   return geographies ?? [];
 });
 
@@ -99,6 +112,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
+  console.log({ $indicators });
   const list = get($type, 'availableIndicators', []);
   const indicators = $indicators.filter(({ uid }) => list.includes(uid));
   if (indicators.length !== list.length) {
@@ -106,6 +120,7 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE]
     const missing = without(list, ...ids);
     console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
+  console.log('AVAILABLE_INDICATORS', { indicators });
   return indicators;
 });
 
@@ -122,11 +137,24 @@ export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$se
   });
 });
 
-export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICATOR, DEFAULT_INDICATOR_UID));
+export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICATOR, undefined));
+// export const CURRENT_INDICATOR_UID = derived([CURRENT_INDICATOR_STRING, INDICATORS], ([$str, $indicators]) => {
+//   console.log('CURRENT_INDICATOR_UID', { $str, $indicators });
+//   const validIndicators = $indicators.map(({ uid }) => uid);
+//   return validIndicators.includes($str) ? $str : undefined;
+// });
+export const IS_EMPTY_INDICATOR = derived(CURRENT_INDICATOR_UID, ($uid) => {
+  console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
+  return !Boolean($uid);
+});
 
-export const CURRENT_INDICATOR_CHECK = derived([CURRENT_INDICATOR_UID, AVAILABLE_INDICATORS], ([$uid, $indicators]) => {
-  const isValidIndicator = $indicators.map(({ uid }) => uid).includes($uid);
-  console.log('CURRENT_INDICATOR_CHECK', { $uid, isValidIndicator, $indicators });
+export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID, INDICATORS, AVAILABLE_INDICATORS], ([$uid, $allIndicators, $validIndicators]) => {
+  if (typeof $uid === 'undefined') {
+    setLocalStorage(LOCALSTORE_INDICATOR, undefined);
+    return true;
+  }
+  const isValidIndicator = $validIndicators.map(({ uid }) => uid).includes($uid);
+  console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
   if (isValidIndicator) {
     // Only save to localstorage if valid indicator
     setLocalStorage(LOCALSTORE_INDICATOR, $uid);
@@ -190,7 +218,7 @@ export const CURRENT_SCENARIOS_UID = (() => {
     toggle: (id, timeframe) =>
       update((selectedUids) => {
         const scenarios = getStore(DICTIONARY_SCENARIOS);
-        const availableScenarios = getStore(AVAILABLE_SCENARIOS);
+        const availableScenarios = getStore(SELECTABLE_SCENARIOS);
         const availableScenariosUids = availableScenarios.map((d) => d.uid);
         // Make sure we only keep the scenarios that are actually available. Otherwise we might
         // prevent the selection of a new scenario if the three selected are not available
@@ -232,25 +260,54 @@ export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCEN
 export const DICTIONARY_CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS], ([$currentScenarios]) => keyBy($currentScenarios, 'uid'));
 
 export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SCENARIOS, $CURRENT_INDICATOR]) => {
-  return $SCENARIOS.filter((scenario) => get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid));
+  console.log('AVAILABLE_SCENARIOS', { $SCENARIOS });
+  return $SCENARIOS.map((scenario) => {
+    return {
+      ...scenario,
+      disabled: !get($CURRENT_INDICATOR, 'availableScenarios', []).includes(scenario.uid),
+    };
+  });
 });
 
-export const AVAILABLE_TIMEFRAMES = derived(AVAILABLE_SCENARIOS, ($AVAILABLE_SCENARIOS) => {
-  return extractTimeframesFromScenarios($AVAILABLE_SCENARIOS);
+export const SELECTABLE_SCENARIOS = derived([AVAILABLE_SCENARIOS], ([$scenarios]) => {
+  // console.log('SELECTABLE_SCENARIOS', { $scenarios });
+  return $scenarios.filter(({ disabled }) => !disabled);
+});
+SELECTABLE_SCENARIOS.subscribe((value) => {
+  // console.log('SELECTABLE_SCENARIOS', { value });
+  if (value.length) {
+    // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
+    const selectableScenarios = value.map(({ uid }) => uid);
+    console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
+    const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
+    const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
+    console.log({ validScenarios, currentScenarios });
+    if (!isEqual(validScenarios, currentScenarios)) {
+      console.log(`INVALID SCENARIO FOUND.`);
+      CURRENT_SCENARIOS_UID.set(validScenarios);
+    }
+  }
+});
+
+export const SELECTABLE_SCENARIOS_UID = derived(SELECTABLE_SCENARIOS, ($scenarios) => $scenarios.map(({ uid }) => uid));
+
+export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCENARIOS], ([$available, $selectable]) => {
+  return extractTimeframesFromScenarios($available ?? [], $selectable ?? []);
 });
 
 /* UTILITY N STUFF */
-export const IS_COMBINATION_AVAILABLE_GEOGRAPHY = derived([CURRENT_INDICATOR, CURRENT_GEOGRAPHY_UID], ([$CURRENT_INDICATOR, $CURRENT_GEOGRAPHY_UID]) =>
-  ($CURRENT_INDICATOR?.availableGeographies ?? []).includes($CURRENT_GEOGRAPHY_UID)
-);
+export const IS_EMPTY_SCENARIO = derived(CURRENT_SCENARIOS_UID, ($scenarios) => !$scenarios.length);
 
-export const IS_COMBINATION_AVAILABLE_SCENARIO = derived([CURRENT_INDICATOR, CURRENT_SCENARIOS_UID], ([$CURRENT_INDICATOR, $CURRENT_SCENARIOS_UID]) =>
-  every($CURRENT_SCENARIOS_UID, (scenario) => $CURRENT_INDICATOR.availableScenarios.includes(scenario))
+export const IS_EMPTY_SELECTION = derived([IS_EMPTY_INDICATOR, IS_EMPTY_SCENARIO], ([$indicator, $scenario]) => $indicator || $scenario);
+
+export const IS_COMBINATION_AVAILABLE_SCENARIO = derived(
+  [SELECTABLE_SCENARIOS_UID, CURRENT_SCENARIOS_UID],
+  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) => $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
 );
 
 export const IS_COMBINATION_AVAILABLE = derived(
-  [IS_COMBINATION_AVAILABLE_GEOGRAPHY, IS_COMBINATION_AVAILABLE_SCENARIO],
-  ([$geographyAvailable, $scenariosAvailable]) => $geographyAvailable && $scenariosAvailable
+  [IS_COMBINATION_AVAILABLE_INDICATOR, IS_COMBINATION_AVAILABLE_SCENARIO],
+  ([$indicatorAvailable, $scenariosAvailable]) => $indicatorAvailable && $scenariosAvailable
 );
 
 export const TEMPLATE_PROPS = derived(

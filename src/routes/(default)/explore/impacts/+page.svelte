@@ -6,8 +6,10 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import Intro from './Intro.svelte';
-  import { IS_COMBINATION_AVAILABLE, CURRENT_INDICATOR } from '$stores/state';
+  import { IS_COMBINATION_AVAILABLE, CURRENT_INDICATOR, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
+
+  $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
   $: sections = [
     { component: Intro, disabled: !$IS_COMBINATION_AVAILABLE },
@@ -16,7 +18,7 @@
       title: 'Timing',
       description: 'How will this climate impact change?',
       component: ImpactTime,
-      disabled: !$IS_COMBINATION_AVAILABLE,
+      disabled: !isValidSelection,
     },
     // {
     //   slug: 'impact-geo',
@@ -46,7 +48,7 @@
     //   component: UnAvoidableRisk,
     //   disabled: !$IS_COMBINATION_AVAILABLE,
     // },
-    { component: FallbackMessage, disabled: $IS_COMBINATION_AVAILABLE },
+    { component: FallbackMessage, disabled: isValidSelection },
   ];
 </script>
 
@@ -54,15 +56,30 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent let:query {sections} isFullWidth={true} navContainerClass="md:border-r border-contour-weaker">
-  <nav slot="navigation" class="flex flex-col gap-4">
+<ScrollContent
+  let:query
+  {sections}
+  isFullWidth={true}
+  navContainerClass="md:border-r border-contour-weaker"
+>
+  <nav
+    slot="navigation"
+    class="flex flex-col gap-4"
+  >
     <ScenarioSelection />
     <SimpleNav {sections} />
   </nav>
   {#each sections as section}
     {#if !section.disabled}
-      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
-        <svelte:component this={section.component} {...section} />
+      <section
+        id={section.slug}
+        name={section.slug}
+        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none"
+      >
+        <svelte:component
+          this={section.component}
+          {...section}
+        />
       </section>
     {/if}
   {/each}
