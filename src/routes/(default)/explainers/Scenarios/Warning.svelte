@@ -12,8 +12,8 @@
 </script>
 
 <div class="flex flex-col gap-y-5 text-xs">
-  Current geography: {JSON.stringify($CURRENT_GEOGRAPHY.label)}<br />
-  Current indicator: {JSON.stringify($CURRENT_INDICATOR.label)}<br />
+  Current geography: {JSON.stringify($CURRENT_GEOGRAPHY?.label)}<br />
+  Current indicator: {JSON.stringify($CURRENT_INDICATOR?.label)}<br />
   Available scenarios: {amountAvailable}<br />
   Un-Available scenarios: {amountUnAvailable}
 </div>
