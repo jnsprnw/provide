@@ -208,7 +208,18 @@ export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(CURRENT_INDICATOR_PARAM
  */
 
 export const CURRENT_SCENARIOS_UID = (() => {
-  const { subscribe, set, update } = writable(getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID, (v) => (Array.isArray(v) ? v : DEFAULT_SCENARIOS_UID)));
+  const { subscribe, set, update } = writable(
+    getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID, (v) => {
+      let value;
+      try {
+        value = JSON.parse(v);
+      } catch (e) {
+        console.log('CURRENT_SCENARIOS_UID default scenarios', v, e);
+        value = DEFAULT_SCENARIOS_UID;
+      }
+      return value;
+    })
+  );
 
   return {
     subscribe,
@@ -245,7 +256,7 @@ export const CURRENT_SCENARIOS_UID = (() => {
   };
 })();
 CURRENT_SCENARIOS_UID.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_SCENARIOS, value);
+  setLocalStorage(LOCALSTORE_SCENARIOS, JSON.stringify(value));
 });
 
 if (browser) {
