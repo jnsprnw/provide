@@ -2,24 +2,16 @@
   import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID } from '$src/config';
   import {
     IS_EMPTY_INDICATOR,
-    CURRENT_GEOGRAPHY_UID,
-    CURRENT_INDICATOR_UID,
-    CURRENT_SCENARIOS_UID,
+    // CURRENT_GEOGRAPHY_UID,
+    // CURRENT_INDICATOR_UID,
+    // CURRENT_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE_INDICATOR,
     IS_COMBINATION_AVAILABLE_SCENARIO,
     CURRENT_SCENARIOS,
-    SELECTABLE_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE,
     IS_EMPTY_SELECTION,
     IS_EMPTY_SCENARIO,
   } from '$stores/state';
-
-  $: emptyItems = [
-    [$IS_EMPTY_INDICATOR, 'indicator'],
-    [$IS_EMPTY_SCENARIO, 'one or more scenarios'],
-  ]
-    .filter(([isAvailable]) => !isAvailable)
-    .map(([_, label]) => label);
 
   $: unavailableItems = [
     [$IS_COMBINATION_AVAILABLE_INDICATOR, 'indicator'],

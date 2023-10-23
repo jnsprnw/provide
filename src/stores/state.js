@@ -6,10 +6,9 @@ import _, { every, get, keyBy, map, reduce, without, isEqual } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { extractTimeframesFromScenarios } from '$lib/utils.js';
-import { GEOGRAPHY_TYPES, INDICATORS, SECTORS } from '$stores/meta.js';
 
-import { DEFAULT_GEOGRAPHY_UID, DEFAULT_INDICATOR_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
-import { DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
+import { DEFAULT_GEOGRAPHY_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
+import { GEOGRAPHY_TYPES, INDICATORS, SECTORS, DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
 
 // Set to true if is in embed mode e.g. if the url is /embed/something
 export const IS_EMBEDED = writable(false);

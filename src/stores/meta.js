@@ -31,7 +31,7 @@ export const SCENARIOS = derived(page, ($page) => {
       endYear: scenarioRaw.timeframe[1],
     };
     SCENARIO_DATA_KEYS.forEach((key) => {
-      const { data, yearStart, yearStep, unit } = scenarioRaw[key];
+      const { data, yearStart, yearStep } = scenarioRaw[key];
       // Some scenarios have no emissions data (data[0] = null)
       if (data) {
         const seriesData = data.map((datum, i) => {
