@@ -1,5 +1,14 @@
 <script>
-  import { AVAILABLE_SCENARIOS, CURRENT_SCENARIOS, CURRENT_SCENARIOS_UID, IS_EMPTY_INDICATOR, SELECTABLE_SCENARIOS, AVAILABLE_TIMEFRAMES, IS_COMBINATION_AVAILABLE_SCENARIO } from '$stores/state.js';
+  import {
+    AVAILABLE_SCENARIOS,
+    CURRENT_SCENARIOS,
+    CURRENT_SCENARIOS_UID,
+    IS_EMPTY_INDICATOR,
+    SELECTABLE_SCENARIOS,
+    AVAILABLE_TIMEFRAMES,
+    IS_COMBINATION_AVAILABLE_SCENARIO,
+    IS_COMBINATION_AVAILABLE_INDICATOR,
+  } from '$stores/state.js';
   import { ANCHOR_DOCS_SCENARIOS, PATH_DOCUMENTATION } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
@@ -45,7 +54,7 @@
     size="md"
     panelPlacement={'right-start'}
     class=""
-    disabled={$IS_EMPTY_INDICATOR ? 'Select an indicator first' : undefined}
+    disabled={$IS_EMPTY_INDICATOR ? 'Select an indicator first' : !$IS_COMBINATION_AVAILABLE_INDICATOR ? 'Select a valid indicator first' : undefined}
   >
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
