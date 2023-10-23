@@ -248,6 +248,22 @@ CURRENT_SCENARIOS_UID.subscribe((value) => {
   setLocalStorage(LOCALSTORE_SCENARIOS, value);
 });
 
+CURRENT_INDICATOR.subscribe((indicator) => {
+  // console.log('SELECTABLE_SCENARIOS', { indicator });
+  const selectableScenarios = indicator?.availableScenarios ?? [];
+  if (selectableScenarios.length) {
+    // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
+    console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
+    const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
+    const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
+    console.log({ validScenarios, currentScenarios });
+    if (!isEqual(validScenarios, currentScenarios)) {
+      console.log(`INVALID SCENARIO FOUND.`);
+      CURRENT_SCENARIOS_UID.set(validScenarios);
+    }
+  }
+});
+
 export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME], ([$uids, $scenarios, $theme]) =>
   $uids.map((uid, i) => ({
     ...$scenarios[uid],
@@ -271,21 +287,6 @@ export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SC
 export const SELECTABLE_SCENARIOS = derived([AVAILABLE_SCENARIOS], ([$scenarios]) => {
   // console.log('SELECTABLE_SCENARIOS', { $scenarios });
   return $scenarios.filter(({ disabled }) => !disabled);
-});
-SELECTABLE_SCENARIOS.subscribe((value) => {
-  // console.log('SELECTABLE_SCENARIOS', { value });
-  if (value.length) {
-    // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
-    const selectableScenarios = value.map(({ uid }) => uid);
-    console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
-    const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
-    const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
-    console.log({ validScenarios, currentScenarios });
-    if (!isEqual(validScenarios, currentScenarios)) {
-      console.log(`INVALID SCENARIO FOUND.`);
-      CURRENT_SCENARIOS_UID.set(validScenarios);
-    }
-  }
 });
 
 export const SELECTABLE_SCENARIOS_UID = derived(SELECTABLE_SCENARIOS, ($scenarios) => $scenarios.map(({ uid }) => uid));
