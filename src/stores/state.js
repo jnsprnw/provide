@@ -248,21 +248,26 @@ CURRENT_SCENARIOS_UID.subscribe((value) => {
   setLocalStorage(LOCALSTORE_SCENARIOS, value);
 });
 
-CURRENT_INDICATOR.subscribe((indicator) => {
-  // console.log('SELECTABLE_SCENARIOS', { indicator });
-  const selectableScenarios = indicator?.availableScenarios ?? [];
-  if (selectableScenarios.length) {
-    // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
-    console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
-    const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
-    const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
-    console.log({ validScenarios, currentScenarios });
-    if (!isEqual(validScenarios, currentScenarios)) {
-      console.log(`INVALID SCENARIO FOUND.`);
-      CURRENT_SCENARIOS_UID.set(validScenarios);
+if (browser) {
+  // This is necessary since CURRENT_INDICATOR depends on the page store (some levels down)
+  // Because of this, we can not subscribe to it.
+  // More information here: https://kit.svelte.dev/docs/state-management#avoid-shared-state-on-the-server
+  CURRENT_INDICATOR.subscribe((indicator) => {
+    // console.log('SELECTABLE_SCENARIOS', { indicator });
+    const selectableScenarios = indicator?.availableScenarios ?? [];
+    if (selectableScenarios.length) {
+      // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
+      console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
+      const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
+      const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
+      console.log({ validScenarios, currentScenarios });
+      if (!isEqual(validScenarios, currentScenarios)) {
+        console.log(`INVALID SCENARIO FOUND.`);
+        CURRENT_SCENARIOS_UID.set(validScenarios);
+      }
     }
-  }
-});
+  });
+}
 
 export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME], ([$uids, $scenarios, $theme]) =>
   $uids.map((uid, i) => ({
