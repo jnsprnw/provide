@@ -2,6 +2,7 @@
   import { getContext } from 'svelte';
   export let sections = [];
   const { index } = getContext('scrollContent');
+  // role="link" -> https://www.scottohara.me/blog/2021/05/28/disabled-links.html
 </script>
 
 {#each sections as { slug, title, disabled, description }, i}
@@ -11,7 +12,8 @@
       class:cursor-not-allowed={disabled}
       class:opacity-50={disabled}
       class:pointer-events-none={disabled}
-      href={`#${slug}`}
+      role="link"
+      href={disabled ? undefined : `#${slug}`}
       class="hidden md:inline-block py-3 pl-2 pr-6 lg:pr-12 border-r-3 hover:bg-surface-weaker"
       class:border-theme-base={isActive}
       class:border-transparent={!isActive}
