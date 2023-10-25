@@ -11,10 +11,6 @@
 
   $: console.log(scenariosListed);
 
-  function onlyUnique(value, index, array) {
-    return array.indexOf(value) === index;
-  }
-
   function checkContrastRatio(color) {
     return chroma.contrast(color, 'black') > 4.5;
   }
