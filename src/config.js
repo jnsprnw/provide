@@ -37,7 +37,7 @@ export const KEY_LABEL_LONG = 'labelLong';
 
 export const KEY_SCENARIOPRESET_UID = 'uid';
 
-export const KEY_CHARACTERISTICS = 'keyCharacteristics';
+export const KEY_CHARACTERISTICS = 'characteristics';
 
 export const LOCALSTORE_INDICATOR = 'indicator';
 export const LOCALSTORE_GEOGRAPHY = 'geography';
