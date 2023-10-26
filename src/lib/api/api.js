@@ -80,9 +80,7 @@ const fetchMultiple = (store, configs) => {
   forEach(initialData, (d, keyOrIndex) => {
     if (typeof d.data?.then !== 'function') return;
     d.data.then((data) => {
-      cache[d.url] = data
-        ? { status: STATUS_SUCCESS, data }
-        : { status: STATUS_FAILED, data };
+      cache[d.url] = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -100,6 +98,7 @@ const fetchSingle = (store, { endpoint, params }) => {
     encodeValuesOnly: true,
   });
   const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
+  console.log({ url });
   const cached = cache[url];
 
   if (cached) {
@@ -109,9 +108,8 @@ const fetchSingle = (store, { endpoint, params }) => {
     cache[url] = loadingData;
     store.set(loadingData);
     loadFromAPI(url).then((data) => {
-      cache[url] = data
-        ? { status: STATUS_SUCCESS, data }
-        : { status: STATUS_FAILED, data };
+      console.log({ data });
+      cache[url] = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
       store.update((d) => {
         if (d !== loadingData) return d;
         return cache[url];

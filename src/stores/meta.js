@@ -92,3 +92,11 @@ export const UNITS = derived(page, ($page) => {
     return {};
   }
 });
+
+export const LIKELIHOODS = derived(page, ($page) => {
+  return $page.data?.meta?.likelihoods ?? [];
+});
+
+export const STUDY_LOCATIONS = derived(page, ($page) => {
+  return $page.data?.meta?.studyLocations ?? [];
+});

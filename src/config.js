@@ -24,6 +24,7 @@ export const END_DISTRIBUTION = 'impact-time-distribution';
 export const END_UN_AVOIDABLE_RISK = 'unavoidable-risk';
 export const END_IMPACT_GEO = 'impact-geo';
 export const END_GEO_SHAPE = 'geo-shape';
+export const END_AVOIDING_IMPACTS = 'avoiding-impacts';
 
 export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCESS = 'success';
