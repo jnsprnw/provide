@@ -92,7 +92,7 @@ export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOG
   });
   if (typeof geography === 'undefined') {
     console.warn(`Could not find any geography from uid ${$uid}. Will reset to default.`); // TDOO
-    setLocalStorage(LOCALSTORE_GEOGRAPHY, undefined);
+    CURRENT_GEOGRAPHY_UID.set(undefined);
   }
   // console.log('CURRENT_GEOGRAPHY', { geography });
   set(geography);

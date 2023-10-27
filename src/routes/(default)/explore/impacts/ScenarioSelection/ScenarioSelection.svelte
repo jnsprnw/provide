@@ -8,12 +8,14 @@
     AVAILABLE_TIMEFRAMES,
     IS_COMBINATION_AVAILABLE_SCENARIO,
     IS_COMBINATION_AVAILABLE_INDICATOR,
+    IS_EMPTY_GEOGRAPHY,
   } from '$stores/state.js';
   import { ANCHOR_DOCS_SCENARIOS, PATH_DOCUMENTATION } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import ScenarioDetails from './ScenarioDetails.svelte';
   import ScenarioList from './ScenarioList.svelte';
+  import { derived } from 'svelte/store';
 
   let hoveredScenarioUid;
   let currentTimeframe;
@@ -39,6 +41,19 @@
   $: chartScenarios = scenarios.filter((s) => s.endYear === currentTimeframe);
 
   $: renderedScenario = scenarios.find((s) => s.isHighlighted && s.endYear === currentTimeframe);
+
+  const DISABLED = derived([IS_EMPTY_GEOGRAPHY, IS_EMPTY_INDICATOR, IS_COMBINATION_AVAILABLE_INDICATOR], ([$isEmptyGeography, $isEmptyIndicator, $isAvailableIndicator]) => {
+    if ($isEmptyGeography) {
+      return 'Select a geography first';
+    }
+    if ($isEmptyIndicator) {
+      return 'Select an indicator first';
+    }
+    if (!$isAvailableIndicator) {
+      return 'Select a valid indicator first';
+    }
+    return undefined;
+  });
 </script>
 
 <svelte:window bind:innerWidth={windowWidth} />
@@ -54,7 +69,7 @@
     size="md"
     panelPlacement={'right-start'}
     class=""
-    disabled={$IS_EMPTY_INDICATOR ? 'Select an indicator first' : !$IS_COMBINATION_AVAILABLE_INDICATOR ? 'Select a valid indicator first' : undefined}
+    disabled={$DISABLED}
   >
     <Content
       filters={$AVAILABLE_TIMEFRAMES}
