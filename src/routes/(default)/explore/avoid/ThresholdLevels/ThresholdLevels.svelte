@@ -6,7 +6,7 @@
     TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
-    IS_COMBINATION_AVAILABLE,
+    IS_COMBINATION_AVAILABLE_INDICATOR,
     DOWNLOAD_URL_PARAMS,
     GRAPH_URL_PARAMS,
   } from '$stores/state.js';
@@ -30,7 +30,7 @@
 
   // https://provide-api-staging.climateanalytics.org/api/avoiding-impacts/?indicator=urbclim-T2M-dayover25&level_of_impact=140&certainty_level=likely&geography=lisbon
 
-  $: $IS_COMBINATION_AVAILABLE &&
+  $: $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(THRESHOLD_LEVELS_DATA, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
@@ -42,7 +42,7 @@
       },
     });
 
-  $: console.log({ $IS_COMBINATION_AVAILABLE });
+  $: console.log({ $IS_COMBINATION_AVAILABLE_INDICATOR });
   $: console.log({ $THRESHOLD_LEVELS_DATA });
   $: console.log({ $CURRENT_INDICATOR_OPTION_VALUES });
   $: console.log({ $CURRENT_GEOGRAPHY });
