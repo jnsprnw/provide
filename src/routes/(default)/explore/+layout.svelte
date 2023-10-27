@@ -6,14 +6,14 @@
   import PageIntro from '$lib/site/PageIntro.svelte';
   import Link from './Link/Link.svelte';
 
-  import { GEOGRAPHIES_IN_AVOIDING_IMPACTS } from '$config';
+  import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state.js';
 
   $: urlToState($page.url);
 
   $: ({ geographyType } = $CURRENT_GEOGRAPHY ?? {});
 
-  $: isAvoidingImpactsAvailable = GEOGRAPHIES_IN_AVOIDING_IMPACTS.includes(geographyType);
+  $: isAvoidingImpactsAvailable = GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(geographyType);
 
   $: tabs = [
     {

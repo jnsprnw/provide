@@ -55,7 +55,7 @@ export const DEFAULT_GEOGRAPHY_UID = 'DEU';
 export const DEFAULT_SCENARIOS_UID = ['curpol'];
 export const DEFAULT_FORMAT_UID = 'float';
 
-export const GEOGRAPHIES_IN_AVOIDING_IMPACTS = ['cities']; // Which geographies are allowed for avoiding impacts?
+export const GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS = ['cities']; // Which geographies are allowed for avoiding impacts?
 
 // Map colors...should come from tokens at some point
 export const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];

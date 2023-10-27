@@ -47,19 +47,17 @@
   $: console.log({ currentFilterUid });
 </script>
 
-{#if filters.length > 1}
-  <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
-    <div>
-      <Tagline class="mb-2">{filterLabel}</Tagline>
-      <PillGroup
-        bind:currentUid={currentFilterUid}
-        options={filters}
-        {disabledMessage}
-      />
-    </div>
-    <slot name="header-link" />
+<div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
+  <div>
+    <Tagline class="mb-2">{filterLabel}</Tagline>
+    <PillGroup
+      bind:currentUid={currentFilterUid}
+      options={filters}
+      {disabledMessage}
+    />
   </div>
-{/if}
+  <slot name="header-link" />
+</div>
 <slot
   name="items"
   items={availableItems}

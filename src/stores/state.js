@@ -1,5 +1,5 @@
 import { formatReadableList } from '$lib/utils.js';
-import { DEFAULT_FORMAT_UID } from '$src/config.js';
+import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce, without, isEqual } from 'lodash-es';
@@ -46,14 +46,30 @@ function setLocalStorage(key, value) {
   }
 }
 
+export const CURRENT_PAGE = writable('/');
+
 /*
  * GEOGRAPHY STATE
  */
 
-export const AVAILABLE_GEOGRAPHY_TYPES = derived(GEOGRAPHY_TYPES, ($types) => {
-  const types = $types.filter(({ availableIndicators }) => availableIndicators.length);
-  console.log('AVAILABLE_GEOGRAPHY_TYPES', { types });
+export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE], ([$types, $currentPage]) => {
+  let types = $types;
+  if ($currentPage === 'avoid') {
+    types = types.map((t) => {
+      const disabled = t.disabled ? t.disabled : !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
+      const tooltip = t.disabled ? 'Geography type is not available' : disabled ? 'Geography type is not available in this modus' : undefined;
+      return {
+        ...t,
+        disabled,
+        tooltip,
+      };
+    });
+  }
   return types;
+});
+
+export const SELECTABLE_GEOGRAPHY_TYPES = derived(AVAILABLE_GEOGRAPHY_TYPES, ($types) => {
+  return $types.filter(({ disabled }) => !disabled);
 });
 
 export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
@@ -61,7 +77,7 @@ CURRENT_GEOGRAPHY_UID.subscribe((value) => {
   setLocalStorage(LOCALSTORE_GEOGRAPHY, value);
 });
 
-export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, AVAILABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $geographyTypes, $geographies], set) => {
+export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $geographyTypes, $geographies], set) => {
   let geography;
   $geographyTypes.every(({ uid: type }) => {
     const list = $geographies[type];
@@ -76,12 +92,22 @@ export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, AVAILABLE_GEOGR
   });
   if (typeof geography === 'undefined') {
     console.warn(`Could not find any geography from uid ${$uid}. Will reset to default.`); // TDOO
+    setLocalStorage(LOCALSTORE_GEOGRAPHY, undefined);
   }
-  console.log('CURRENT_GEOGRAPHY', { geography });
+  // console.log('CURRENT_GEOGRAPHY', { geography });
   set(geography);
 });
 
-export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, AVAILABLE_GEOGRAPHY_TYPES], ([$currentGeography, $geographyTypes]) => {
+export const IS_EMPTY_GEOGRAPHY = derived(CURRENT_GEOGRAPHY, ($geography) => {
+  // console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
+  return !Boolean($geography);
+});
+
+export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, SELECTABLE_GEOGRAPHY_TYPES], ([$currentGeography, $geographyTypes]) => {
+  if (typeof $currentGeography === 'undefined') {
+    // This can happen if the user has a geography in localstorage and than visits the avoiding impacts page that does not have all geographies available.
+    return undefined;
+  }
   const { geographyType: uid } = $currentGeography;
   if (typeof uid === 'undefined') {
     console.warn(`Could not determin geography type from current geography.`);
@@ -90,7 +116,7 @@ export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, AVAILABLE_GEOG
   if (typeof geographyType === 'undefined') {
     console.warn(`Could not find any geography type for uid ${uid}.`);
   }
-  console.log('CURRENT_GEOGRAPHY_TYPE', { geographyType });
+  // console.log('CURRENT_GEOGRAPHY_TYPE', { geographyType });
   return geographyType;
 });
 
@@ -100,7 +126,7 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_T
   if (typeof geographies === 'undefined') {
     console.warn(`Could not find any geographies for type ${uid}.`);
   }
-  console.log('AVAILABLE_GEOGOGRAPHIES', { geographies });
+  // console.log('AVAILABLE_GEOGOGRAPHIES', { geographies });
   return geographies ?? [];
 });
 
@@ -111,7 +137,7 @@ export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
  */
 
 export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
-  console.log({ $indicators });
+  // console.log({ $indicators });
   const list = get($type, 'availableIndicators', []);
   const indicators = $indicators.filter(({ uid }) => list.includes(uid));
   if (indicators.length !== list.length) {
@@ -119,7 +145,7 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE]
     const missing = without(list, ...ids);
     console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
-  console.log('AVAILABLE_INDICATORS', { indicators });
+  // console.log('AVAILABLE_INDICATORS', { indicators });
   return indicators;
 });
 
@@ -143,7 +169,7 @@ export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICAT
 //   return validIndicators.includes($str) ? $str : undefined;
 // });
 export const IS_EMPTY_INDICATOR = derived(CURRENT_INDICATOR_UID, ($uid) => {
-  console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
+  // console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
   return !Boolean($uid);
 });
 
@@ -153,7 +179,7 @@ export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID
     return true;
   }
   const isValidIndicator = $validIndicators.map(({ uid }) => uid).includes($uid);
-  console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
+  // console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
   if (isValidIndicator) {
     // Only save to localstorage if valid indicator
     setLocalStorage(LOCALSTORE_INDICATOR, $uid);

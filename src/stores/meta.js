@@ -1,10 +1,20 @@
 import { page } from '$app/stores';
 import { SCENARIO_DATA_KEYS } from '$src/config.js';
-import { get, keyBy, uniq, without } from 'lodash-es';
+import { get, keyBy, uniq, without, sortBy } from 'lodash-es';
 import { derived } from 'svelte/store';
 
 // META DATA (This will only be set once on load and won't change again)
-export const GEOGRAPHY_TYPES = derived(page, ($page) => $page.data?.meta?.geographyTypes ?? []);
+export const GEOGRAPHY_TYPES = derived(page, ($page) =>
+  sortBy(
+    ($page.data?.meta?.geographyTypes ?? []).map((t) => ({ ...t, disabled: !(t.isAvailable && t.availableIndicators.length) })),
+    [
+      (t) => t.disabled, // This sorts the available types first
+      (t) => t.availableIndicators.length,
+      (t) => t.order,
+      (t) => t.label,
+    ]
+  )
+);
 
 export const GEOGRAPHIES = derived(page, ($page) => {
   // Extract the geography types and its data from the data provided by the load function

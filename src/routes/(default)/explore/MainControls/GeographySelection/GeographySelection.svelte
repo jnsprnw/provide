@@ -1,11 +1,10 @@
 <script>
   import Geographies from './Geographies.svelte';
-  import { CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
+  import { AVAILABLE_GEOGRAPHY_TYPES, IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
   import { END_GEO_SHAPE } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
-  import { sortBy } from 'lodash-es';
-  import { GEOGRAPHY_TYPES, GEOGRAPHIES } from '$stores/meta.js';
+  import { GEOGRAPHIES } from '$stores/meta.js';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import Map from './Map.svelte';
@@ -16,13 +15,10 @@
   // If the currently selected geography is available, the label is displayed. Otherwise a error message.
   $: buttonLabel = $CURRENT_GEOGRAPHY?.label;
 
-  $: geographyTypes = sortBy(
-    $GEOGRAPHY_TYPES.map((t) => ({ ...t, disabled: !(t.isAvailable && t.availableIndicators.length) })), // The disabled attribute is used to disable the option
-    (t) => t.disabled // This sorts the available types first
-  );
+  $: geographyTypes = $AVAILABLE_GEOGRAPHY_TYPES;
 
   let hoveredItem;
-  let currentFilterUid = $CURRENT_GEOGRAPHY_TYPE.uid; // This stores the currently displayed geography type
+  let currentFilterUid = $CURRENT_GEOGRAPHY_TYPE?.uid; // This stores the currently displayed geography type
 
   $: selectableGeographies = $GEOGRAPHIES[currentFilterUid] ?? [];
 
@@ -48,12 +44,12 @@
   {buttonLabel}
   panelClass="w-screen-p max-w-4xl"
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
+  placeholder={$IS_EMPTY_GEOGRAPHY ? 'Select a geography' : undefined}
 >
   <Content
     filters={geographyTypes}
     filterKey="geographyType"
     filterLabel="Pick a location"
-    disabledMessage="Geography type is not yet available"
     currentUid={$CURRENT_GEOGRAPHY_UID}
     items={selectableGeographies}
     bind:currentFilterUid
