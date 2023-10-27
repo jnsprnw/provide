@@ -57,12 +57,20 @@ export const loadMetaData = function (svelteFetch = fetch) {
 
     const url = `${ENV_URL_DATA.split('').join('')}/meta/`;
     const meta = await loadFromAPI(url, svelteFetch);
+
     resolve({
       ...meta,
-      geographyTypes: meta.geographyTypes.map((g) => ({
-        ...g,
-        labelSingular: labelsSingular[g.uid],
-      })),
+      geographyTypes: meta.geographyTypes.map((g) => {
+        let labelSingular = g['labelSingular'] ?? labelsSingular[g.uid];
+        if (typeof labelSingular === 'undefined') {
+          console.warn(`labelSingular for ${g.uid} was not defined.`);
+          labelSingular = g.label;
+        }
+        return {
+          ...g,
+          labelSingular,
+        };
+      }),
       indicators: meta.indicators.map((indicator) => {
         const description = get(
           descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),
@@ -80,11 +88,9 @@ export const loadMetaData = function (svelteFetch = fetch) {
       }),
       scenarios: meta.scenarios.map((scenario) => {
         // Find the correct scenario in the list coming from Strapi
-        const currentScenario = descriptionScenarios.find(
-          (d) => d.attributes.UID === scenario.uid
-        );
+        const currentScenario = descriptionScenarios.find((d) => d.attributes.UID === scenario.uid);
         if (typeof currentScenario === 'undefined') {
-          console.warn(`Scenario could not be found. This may be caused by a mismatch of the content versions.`)
+          console.warn(`Scenario could not be found. This may be caused by a mismatch of the content versions.`);
         }
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
@@ -105,7 +111,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
           ...scenario,
           description,
           characteristics,
-          [KEY_CHARACTERISTICS]: scenario.characteristics // TODO: This should replace characteristics. We wait until the new scenario selector is implemented.
+          [KEY_CHARACTERISTICS]: scenario.characteristics, // TODO: This should replace characteristics. We wait until the new scenario selector is implemented.
         };
       }),
     });
