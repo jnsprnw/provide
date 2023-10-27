@@ -17,18 +17,14 @@
   $: buttonLabel = $CURRENT_GEOGRAPHY?.label;
 
   $: geographyTypes = sortBy(
-    $GEOGRAPHY_TYPES.map((t) => ({ ...t, disabled: !t.availableIndicators.length })), // The disabled attribute is used to disable the option
-    (t) => !Boolean(t.availableIndicators) // This sorts the available types first
+    $GEOGRAPHY_TYPES.map((t) => ({ ...t, disabled: !(t.isAvailable && t.availableIndicators.length) })), // The disabled attribute is used to disable the option
+    (t) => t.disabled // This sorts the available types first
   );
 
   let hoveredItem;
   let currentFilterUid = $CURRENT_GEOGRAPHY_TYPE.uid; // This stores the currently displayed geography type
 
   $: selectableGeographies = $GEOGRAPHIES[currentFilterUid] ?? [];
-
-  // $: console.log('geographySelection', { currentFilterUid });
-
-  // $: console.log({ $AVAILABLE_GEOGOGRAPHIES, $CURRENT_GEOGRAPHY_TYPE });
 
   $: currentFilterUid &&
     fetchData(GEO_SHAPE_DATA, [
@@ -57,7 +53,7 @@
     filters={geographyTypes}
     filterKey="geographyType"
     filterLabel="Pick a location"
-    disabledMessage="Geography type not yet available"
+    disabledMessage="Geography type is not yet available"
     currentUid={$CURRENT_GEOGRAPHY_UID}
     items={selectableGeographies}
     bind:currentFilterUid
