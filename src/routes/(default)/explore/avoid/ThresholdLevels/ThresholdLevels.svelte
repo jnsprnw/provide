@@ -9,6 +9,7 @@
     IS_COMBINATION_AVAILABLE_INDICATOR,
     DOWNLOAD_URL_PARAMS,
     GRAPH_URL_PARAMS,
+    IS_EMPTY_INDICATOR,
   } from '$stores/state.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -30,7 +31,8 @@
 
   // https://provide-api-staging.climateanalytics.org/api/avoiding-impacts/?indicator=urbclim-T2M-dayover25&level_of_impact=140&certainty_level=likely&geography=lisbon
 
-  $: $IS_COMBINATION_AVAILABLE_INDICATOR &&
+  $: !$IS_EMPTY_INDICATOR &&
+    $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(THRESHOLD_LEVELS_DATA, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
