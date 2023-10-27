@@ -13,7 +13,7 @@
 
   $: ({ geographyType } = $CURRENT_GEOGRAPHY ?? {});
 
-  $: isAvoidingImpactsAvailable = GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(geographyType);
+  $: isAvoidingImpactsAvailable = !geographyType || GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(geographyType);
 
   $: tabs = [
     {
