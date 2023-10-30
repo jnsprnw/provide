@@ -5,6 +5,7 @@ import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce, without, isEqual } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
+import { getLocalStorage, setLocalStorage } from './utils.js';
 import { extractTimeframesFromScenarios } from '$lib/utils.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
@@ -16,35 +17,6 @@ export const IS_EMBEDED = writable(false);
 // Set to true for generating screenshots when we don't want
 // to display controls n stuff, derived from &static=true url parameter
 export const IS_STATIC = writable(false);
-
-/**
- * Get a value from localstorage if not running on the server.
- * Uses the passed default value if localstorage is not available or empty.
- * @param {string} key - The location in the localstorage
- * @param {string} defaultValue - The fallback value
- */
-function getLocalStorage(key, defaultValue, process = (v) => v) {
-  let local = browser ? window.localStorage.getItem(key) : defaultValue;
-  if (local === 'undefined') {
-    local = undefined;
-  }
-  return process(local ?? defaultValue);
-}
-
-/**
- * Stores a value in localstorage if not running not on the server
- * @param {string} key - The location in the localstorage
- * @param {string} value - The value to store
- */
-function setLocalStorage(key, value) {
-  if (browser) {
-    if (Boolean(value)) {
-      window.localStorage.setItem(key, value);
-    } else {
-      localStorage.removeItem(key);
-    }
-  }
-}
 
 export const CURRENT_PAGE = writable('/');
 

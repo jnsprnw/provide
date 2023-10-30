@@ -43,6 +43,8 @@ export const KEY_CHARACTERISTICS = 'characteristics';
 export const LOCALSTORE_INDICATOR = 'indicator';
 export const LOCALSTORE_GEOGRAPHY = 'geography';
 export const LOCALSTORE_SCENARIOS = 'scenarios';
+export const LOCALSTORE_LIKELIHOOD = 'likelihood';
+export const LOCALSTORE_STUDY_LOCATION = 'study_location';
 
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
 export const EMISSIONS_UID = 'emissions';
