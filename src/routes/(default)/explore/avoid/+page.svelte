@@ -5,8 +5,8 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
-  import LikelihoodLevels from './LikelihoodLevels/LikelihoodLevels.svelte';
-  import StudyLocations from './StudyLocations/StudyLocations.svelte';
+  import LikelihoodLevels from './Selection/LikelihoodLevels/LikelihoodLevels.svelte';
+  import StudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
