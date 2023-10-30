@@ -1,12 +1,13 @@
 <script>
   import ThresholdLevels from './ThresholdLevels/ThresholdLevels.svelte';
+  import StudyLocations from './StudyLocations/StudyLocations.svelte';
   import CurrentStatus from './CurrentStatus/CurrentStatus.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
-  import LikelihoodLevels from './Selection/LikelihoodLevels/LikelihoodLevels.svelte';
-  import StudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
+  import SelectionCertaintyLevels from './Selection/CertaintyLevels/CertaintyLevels.svelte';
+  import SelectionStudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
@@ -16,6 +17,12 @@
       title: 'Threshold levels',
       description: 'Lorem ipsum dolor dolor dolor',
       component: ThresholdLevels,
+    },
+    {
+      slug: 'locations',
+      title: 'Locations',
+      description: 'Lorem ipsum dolor dolor dolor',
+      component: StudyLocations,
     },
   ];
 </script>
@@ -35,8 +42,8 @@
     class="flex flex-col gap-4"
   >
     <CurrentStatus />
-    <LikelihoodLevels />
-    <StudyLocations />
+    <SelectionCertaintyLevels />
+    <SelectionStudyLocations />
     <SimpleNav {sections} />
   </aside>
   {#each sections as section}

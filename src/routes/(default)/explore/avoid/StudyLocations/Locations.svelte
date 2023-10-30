@@ -1,5 +1,10 @@
 <script>
+  import { STUDY_LOCATIONS } from '$stores/meta.js';
   export let data;
+
+  $: list = $STUDY_LOCATIONS.map((uid) => {});
+
+  $: console.log({ data });
 </script>
 
 <table>

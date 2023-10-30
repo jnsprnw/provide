@@ -3,14 +3,14 @@
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import { LIKELIHOODS } from '$stores/meta.js';
   import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
-  import LikelihoodsList from './LikelihoodsList.svelte';
+  import CertaintyLevelsList from './CertaintyLevelsList.svelte';
 
   $: buttonLabel = $LIKELIHOODS.find(({ uid }) => uid === $SELECTED_LIKELIHOOD_LEVEL)?.label;
 </script>
 
 <section class="mr-2">
   <PopoverSelect
-    label="Likelihood"
+    label="Certainty Levels"
     {buttonLabel}
     buttonClass={`border border-contour-weakest aria-expanded:border-contour-weaker `}
     size="md"
@@ -26,7 +26,7 @@
         class="grid grid-cols-1"
         let:items
       >
-        <LikelihoodsList
+        <CertaintyLevelsList
           {items}
           bind:selected={$SELECTED_LIKELIHOOD_LEVEL}
         />

@@ -1,25 +1,12 @@
 <script>
-  import {
-    CURRENT_INDICATOR,
-    CURRENT_INDICATOR_UID,
-    CURRENT_GEOGRAPHY,
-    TEMPLATE_PROPS,
-    CURRENT_INDICATOR_OPTION_VALUES,
-    CURRENT_SCENARIOS_UID,
-    IS_COMBINATION_AVAILABLE_INDICATOR,
-    DOWNLOAD_URL_PARAMS,
-    GRAPH_URL_PARAMS,
-    IS_EMPTY_INDICATOR,
-  } from '$stores/state.js';
+  import { CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
-  import { MEAN_TEMPERATURE_UID } from '$config';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
-  import Locations from './Locations.svelte';
   import Text from './Text.svelte';
 
   let THRESHOLD_LEVELS_DATA = writable([]);
@@ -76,7 +63,6 @@
       {geography}
       {level_of_impact}
     />
-    <Locations data={asyncProps.thresholdLevelsData} />
   </ChartFrame>
   <LoadingPlaceholder slot="placeholder" />
 </LoadingWrapper>
