@@ -1,9 +1,9 @@
 <script>
   import { CURRENT_INDICATOR } from '$stores/state.js';
-  import { SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
+  import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   export let data;
   export let geography;
-  export let certainty_level;
+  $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
   export let level_of_impact;
 
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
@@ -23,7 +23,7 @@
 
 <pre class="text-xs font-mono bg-gray-100 rounded p-1">
 geography: <strong>{geography}</strong> // Fixed at the moment
-certainty_level: <strong>{certainty_level}</strong> // Fixed at the moment
+certainty_level: <strong>{certainty_level}</strong>
 level_of_impact: <strong>{level_of_impact}</strong> // Fixed at the moment
 labelWithinSentence: <strong>{labelWithinSentence}</strong>
 unit: <strong>{unit}</strong>

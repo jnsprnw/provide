@@ -1,16 +1,36 @@
 <script>
+  import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
+  import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import { LIKELIHOODS } from '$stores/meta.js';
+  import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
+  import LikelihoodsList from './LikelihoodsList.svelte';
+
+  $: buttonLabel = $LIKELIHOODS.find(({ uid }) => uid === $SELECTED_LIKELIHOOD_LEVEL)?.label;
 </script>
 
-<section>
-  <strong class="text-text-weaker text-sm">Likelihodd levels</strong>
-
-  <ul class="flex gap-y-1 flex-col mr-2">
-    {#each $LIKELIHOODS as { uid, label, value }}
-      <li class="flex gap-y-2 flex-row justify-between">
-        <strong class="text-xs font-bold">{label}</strong>
-        <pre class="text-xs font-mono bg-gray-100 rounded p-1">{value}</pre>
-      </li>
-    {/each}
-  </ul>
+<section class="mr-2">
+  <PopoverSelect
+    label="Likelihood"
+    {buttonLabel}
+    buttonClass={`border border-contour-weakest aria-expanded:border-contour-weaker `}
+    size="md"
+    panelPlacement={'bottom-start'}
+    class=""
+  >
+    <Content
+      currentUid={$SELECTED_LIKELIHOOD_LEVEL}
+      items={$LIKELIHOODS}
+    >
+      <div
+        slot="items"
+        class="grid grid-cols-1"
+        let:items
+      >
+        <LikelihoodsList
+          {items}
+          bind:selected={$SELECTED_LIKELIHOOD_LEVEL}
+        />
+      </div>
+    </Content>
+  </PopoverSelect>
 </section>

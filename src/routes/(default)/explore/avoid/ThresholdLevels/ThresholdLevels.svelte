@@ -11,6 +11,7 @@
     GRAPH_URL_PARAMS,
     IS_EMPTY_INDICATOR,
   } from '$stores/state.js';
+  import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
@@ -25,7 +26,6 @@
 
   export let title;
 
-  const certainty_level = 'likely';
   const level_of_impact = 140;
   const geography = 'lisbon';
 
@@ -39,7 +39,7 @@
         geography, // $CURRENT_GEOGRAPHY.uid,
         indicator: $CURRENT_INDICATOR.uid,
         level_of_impact,
-        certainty_level,
+        certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
         // ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });
@@ -83,7 +83,6 @@
       data={asyncProps.thresholdLevelsData}
       {geography}
       {level_of_impact}
-      {certainty_level}
     />
     <Locations data={asyncProps.thresholdLevelsData} />
   </ChartFrame>
