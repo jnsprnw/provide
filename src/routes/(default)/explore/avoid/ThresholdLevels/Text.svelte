@@ -1,5 +1,6 @@
 <script>
   import { CURRENT_INDICATOR } from '$stores/state.js';
+  import { SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
   export let data;
   export let geography;
   export let certainty_level;
@@ -8,7 +9,7 @@
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
 
   const scenario = 'curpol';
-  const studyLocation = 'urban-cool-spot';
+  $: studyLocation = $SELECTED_STUDY_LOCATION;
   const isWholeUrbanArea = false;
   const thresholdText = undefined;
   const remainingBudget = undefined;
@@ -29,7 +30,7 @@ unit: <strong>{unit}</strong>
 isCountable: <strong>{isCountable}</strong>
 direction: <strong>{direction}</strong>
 scenario: <strong>{scenario}</strong> // Fixed at the moment
-studyLocation: <strong>{studyLocation}</strong> // Fixed at the moment
+studyLocation: <strong>{studyLocation}</strong>
 avoidable: <strong>{avoidable}</strong>
 global_mean_temperature: <strong>{global_mean_temperature}</strong>
 likely: <strong>{likely}</strong>

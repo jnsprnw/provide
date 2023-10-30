@@ -5,7 +5,7 @@
   import { onMount } from 'svelte';
   import PillGroup from '../PillGroup/PillGroup.svelte';
 
-  export let filters;
+  export let filters = undefined;
   export let filterKey;
   export let filterLabel;
   export let items = [];
@@ -19,21 +19,22 @@
   // Since we don't have external state that keeps track of which filter was selected
   // we defer the selected filter from the currently selected items
   onMount(() => {
-    console.log('mount', { currentFilterUid });
-    if (!currentFilterUid) {
-      console.log('Content', { currentFilterUid });
-      if (current) {
-        console.log('Content, has current', { current });
-        currentFilterUid = current[filterKey];
-      }
-      if ((current && !currentFilterUid) || !current) {
-        console.log('Content, no current', { current, currentFilterUid });
-        currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
-        console.log('Content, after current', { currentFilterUid });
+    if (typeof filters !== 'undefined') {
+      // Some basic drop downs like the location selection don’t have filters
+      if (!currentFilterUid) {
+        // If the current currentFilterUid (sector, timeframe, …) is not set
+        if (current) {
+          // If there is a currently selected item (indicator, …)
+          // We try to get the currentFilterUid from that item from the filter key
+          currentFilterUid = current[filterKey];
+        }
+        if ((current && !currentFilterUid) || !current) {
+          // For some reason, the above did not work and we still could not find the currentFilterUid
+          // We loop through the list of filters and select the first one that is not disabled
+          currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
+        }
       }
     }
-    // currentFilterUid = currentFilterUid ?? (current?.[filterKey] || filters[0].uid);
-    console.log({ currentFilterUid });
   });
 
   let hoveredItem = null;
@@ -47,17 +48,19 @@
   $: console.log({ currentFilterUid });
 </script>
 
-<div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
-  <div>
-    <Tagline class="mb-2">{filterLabel}</Tagline>
-    <PillGroup
-      bind:currentUid={currentFilterUid}
-      options={filters}
-      {disabledMessage}
-    />
+{#if filters}
+  <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
+    <div>
+      <Tagline class="mb-2">{filterLabel}</Tagline>
+      <PillGroup
+        bind:currentUid={currentFilterUid}
+        options={filters}
+        {disabledMessage}
+      />
+    </div>
+    <slot name="header-link" />
   </div>
-  <slot name="header-link" />
-</div>
+{/if}
 <slot
   name="items"
   items={availableItems}
