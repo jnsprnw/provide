@@ -29,8 +29,6 @@
   const level_of_impact = 140;
   const geography = 'lisbon';
 
-  // https://provide-api-staging.climateanalytics.org/api/avoiding-impacts/?indicator=urbclim-T2M-dayover25&level_of_impact=140&certainty_level=likely&geography=lisbon
-
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(THRESHOLD_LEVELS_DATA, {
@@ -44,18 +42,12 @@
       },
     });
 
-  $: console.log({ $IS_COMBINATION_AVAILABLE_INDICATOR });
-  $: console.log({ $THRESHOLD_LEVELS_DATA });
-  $: console.log({ $CURRENT_INDICATOR_OPTION_VALUES });
-  $: console.log({ $CURRENT_GEOGRAPHY });
-  $: console.log({ $CURRENT_INDICATOR });
-
   $: process = ({ thresholdLevelsData }, { scenarios, urlParams }) => {
     const { yearStart, yearStep, data, description, title, [KEY_MODEL]: model, [KEY_SOURCE]: source, parameters } = thresholdLevelsData.data;
 
     return {
       thresholdLevels: thresholdLevelsData,
-      title: 'Lorem ipsum title',
+      title: 'When will the impact level be exceeded?',
       description: 'lorem ipsum description',
     };
   };
