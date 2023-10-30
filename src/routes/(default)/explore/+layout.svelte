@@ -4,7 +4,7 @@
   import { urlToState } from '$utils/url';
   import BigTabs from '$lib/helper/BigTabs.svelte';
   import PageIntro from '$lib/site/PageIntro.svelte';
-  import Link from './Link/Link.svelte';
+  import ShareLink from './ShareLink/ShareLink.svelte';
 
   import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state.js';
@@ -48,7 +48,7 @@
       <p class="mt-3.5 max-w-xl">{currentIntro}</p>
       <div class="flex justify-between">
         <span>Learn more about X</span>
-        <Link />
+        <ShareLink />
       </div>
     </div>
   {/if}
