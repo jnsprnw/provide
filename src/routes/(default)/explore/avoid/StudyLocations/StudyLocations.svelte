@@ -3,16 +3,15 @@
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import { STUDY_LOCATIONS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
-  import Locations from './Locations.svelte';
+  import LocationsList from './LocationsList.svelte';
 
   $: buttonLabel = $STUDY_LOCATIONS.find(({ uid }) => uid === $SELECTED_STUDY_LOCATION)?.label;
 </script>
 
-<section class="relative md:pr-6 lg:pr-10 max-w-xs">
+<section class="mr-2">
   <PopoverSelect
     label="Location"
     {buttonLabel}
-    panelClass="max-w-4xl"
     buttonClass={`border border-contour-weakest aria-expanded:border-contour-weaker `}
     size="md"
     panelPlacement={'bottom-start'}
@@ -27,7 +26,7 @@
         class="grid grid-cols-1"
         let:items
       >
-        <Locations
+        <LocationsList
           {items}
           bind:selected={$SELECTED_STUDY_LOCATION}
         />

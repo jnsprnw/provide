@@ -3,7 +3,7 @@
 
   export let items;
 
-  export let selected = 'startup';
+  export let selected;
 </script>
 
 <RadioGroup
