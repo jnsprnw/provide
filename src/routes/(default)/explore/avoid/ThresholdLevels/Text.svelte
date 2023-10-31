@@ -10,15 +10,15 @@
 
   const scenario = 'curpol';
   $: studyLocation = $SELECTED_STUDY_LOCATION;
-  const isWholeUrbanArea = false;
+  $: isWholeUrbanArea = studyLocation === 'city-average';
   const thresholdText = undefined;
   const remainingBudget = undefined;
 
   $: console.log({ data, unit });
 
-  $: datum = data.data.scenarios.find(({ uid }) => uid === scenario).study_locations.find(({ uid }) => uid === studyLocation);
+  $: datum = data.data.study_locations[studyLocation];
 
-  $: ({ avoidable, global_mean_temperature, likely, year } = datum);
+  $: ({ budget, gmt, isAvoidable, isPossible } = datum);
 </script>
 
 <pre class="text-xs font-mono bg-gray-100 rounded p-1">
@@ -29,19 +29,18 @@ labelWithinSentence: <strong>{labelWithinSentence}</strong>
 unit: <strong>{unit}</strong>
 isCountable: <strong>{isCountable}</strong>
 direction: <strong>{direction}</strong>
-scenario: <strong>{scenario}</strong> // Fixed at the moment
 studyLocation: <strong>{studyLocation}</strong>
-avoidable: <strong>{avoidable}</strong>
-global_mean_temperature: <strong>{global_mean_temperature}</strong>
-likely: <strong>{likely}</strong>
-year: <strong>{year}</strong>
+isAvoidable: <strong>{isAvoidable}</strong>
+gmt: <strong>{gmt}</strong>
+isPossible: <strong>{isPossible}</strong>
+budget: <strong>{budget}</strong>
 isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
 thresholdText: <strong>{thresholdText}</strong>
 remainingBudget: <strong>{remainingBudget}</strong>
 </pre>
 
 <p class="my-4">
-  {#if avoidable}
+  {#if isAvoidable}
     It is
   {:else}
     Due to current climate change, it is already
@@ -71,11 +70,17 @@ remainingBudget: <strong>{remainingBudget}</strong>
   {:else}
     {unit.labelLong}
   {/if}
-  {#if !avoidable && likely}
+  {#if !isAvoidable && isPossible}
     . Try changing the impact level or check out the ”Unavoidable impacts graph“ below to see which levels of impact can still be avoided.
-  {:else if avoidable && !likely}
+  {:else if isAvoidable && !isPossible}
     . Try changing the impact level or check out the ”Unavoidable impacts graph“ below in order to see which levels of impact are likely to occur.
   {:else}
     unless global warming is kept below <strong>{thresholdText}°C</strong>. This implies a median remaining global carbon budget of <strong>{remainingBudget}</strong> Gt CO₂ eq. until 2100.
   {/if}
 </p>
+
+<ul class="my-4">
+  {#each Object.entries(datum.scenarios) as [scenario, { year }]}
+    <li><strong>{scenario}</strong>: <span>{year}</span></li>
+  {/each}
+</ul>
