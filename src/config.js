@@ -45,6 +45,7 @@ export const LOCALSTORE_GEOGRAPHY = 'geography';
 export const LOCALSTORE_SCENARIOS = 'scenarios';
 export const LOCALSTORE_LIKELIHOOD = 'likelihood';
 export const LOCALSTORE_STUDY_LOCATION = 'study_location';
+export const LOCALSTORE_PARAMETERS = 'parameters';
 
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
 export const EMISSIONS_UID = 'emissions';

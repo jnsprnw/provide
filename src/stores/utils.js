@@ -28,3 +28,15 @@ export function setLocalStorage(key, value) {
     }
   }
 }
+
+export function getAllLocalStorage() {
+  const list = [];
+  if (browser) {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i);
+      const value = window.localStorage.getItem(key);
+      list.push([key, value]);
+    }
+  }
+  return list;
+}
