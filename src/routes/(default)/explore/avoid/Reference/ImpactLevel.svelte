@@ -7,6 +7,8 @@
     return [Math.floor(arr[0]), Math.ceil(arr[1])];
   }
 
+  $: ({ step } = data.impact_levels);
+
   $: [min, max] = roundArray(data.impact_levels.range_of_interest);
   $: average = Math.floor(mean([min, max]));
 
@@ -16,7 +18,7 @@
 </script>
 
 <div class="mr-2">
-  <span class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block">Level of Impact ({$LEVEL_OF_IMPACT})</span>
+  <span class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block">Level of Impact ({$LEVEL_OF_IMPACT} / {step})</span>
 
   <div class="flex justify-between text-xs">
     <span>{min}</span>
@@ -29,6 +31,6 @@
     {min}
     {max}
     bind:value={$LEVEL_OF_IMPACT}
-    step="1"
+    step={step ?? 1}
   />
 </div>
