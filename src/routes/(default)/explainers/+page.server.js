@@ -6,13 +6,17 @@ import { LABEL_EXPLAINERS, KEY_SCENARIOPRESET_UID } from '$config';
 import { extractTimeframe } from '$utils/meta.js';
 import _ from 'lodash-es';
 
+function filterUniqueObjects(value, index, array) {
+  return array.indexOf(value) === index;
+}
+
 function processScenarioPresets(list) {
   return list.map((preset) => {
     const { Description, Scenarios, Timeframe, Title } = preset.attributes;
     return {
       [KEY_SCENARIOPRESET_UID]: kebabCase(Title),
       description: Description ?? '',
-      scenarios: (Scenarios?.data ?? []).map(({ attributes }) => attributes.UID),
+      scenarios: (Scenarios?.data ?? []).map(({ attributes }) => attributes.UID).filter(filterUniqueObjects),
       timeframe: parseInt(Timeframe.slice(1)), // Note: this needs to be the same variable type as the selectable timeframe uids.
       title: Title,
     };
