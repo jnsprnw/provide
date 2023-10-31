@@ -1,7 +1,7 @@
 <script>
   import ThresholdLevels from './ThresholdLevels/ThresholdLevels.svelte';
   import StudyLocations from './StudyLocations/StudyLocations.svelte';
-  import CurrentStatus from './CurrentStatus/CurrentStatus.svelte';
+  import Reference from './Reference/Reference.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
@@ -46,7 +46,7 @@
     slot="navigation"
     class="flex flex-col gap-4"
   >
-    <CurrentStatus />
+    <Reference />
     <SelectionCertaintyLevels />
     <SelectionStudyLocations />
     <SimpleNav {sections} />

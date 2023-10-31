@@ -11,7 +11,7 @@
     GRAPH_URL_PARAMS,
     IS_EMPTY_INDICATOR,
   } from '$stores/state.js';
-  import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
+  import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
@@ -33,7 +33,7 @@
       params: {
         geography, // $CURRENT_GEOGRAPHY.uid,
         indicator: $CURRENT_INDICATOR.uid,
-        level_of_impact,
+        level_of_impact: $LEVEL_OF_IMPACT,
         certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
         // ...$CURRENT_INDICATOR_OPTION_VALUES,
       },

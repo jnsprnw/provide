@@ -1,10 +1,10 @@
 <script>
   import { CURRENT_INDICATOR } from '$stores/state.js';
-  import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
+  import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
   export let data;
   export let geography;
   $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
-  export let level_of_impact;
+  $: level_of_impact = $LEVEL_OF_IMPACT;
 
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
 
@@ -21,10 +21,11 @@
   $: ({ budget, gmt, isAvoidable, isPossible } = datum);
 </script>
 
+<!--
 <pre class="text-xs font-mono bg-gray-100 rounded p-1">
 geography: <strong>{geography}</strong> // Fixed at the moment
 certainty_level: <strong>{certainty_level}</strong>
-level_of_impact: <strong>{level_of_impact}</strong> // Fixed at the moment
+level_of_impact: <strong>{level_of_impact}</strong>
 labelWithinSentence: <strong>{labelWithinSentence}</strong>
 unit: <strong>{unit}</strong>
 isCountable: <strong>{isCountable}</strong>
@@ -38,6 +39,7 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
 thresholdText: <strong>{thresholdText}</strong>
 remainingBudget: <strong>{remainingBudget}</strong>
 </pre>
+-->
 
 <p class="my-4">
   {#if isAvoidable}

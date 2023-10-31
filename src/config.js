@@ -25,6 +25,7 @@ export const END_UN_AVOIDABLE_RISK = 'unavoidable-risk';
 export const END_IMPACT_GEO = 'impact-geo';
 export const END_GEO_SHAPE = 'geo-shape';
 export const END_AVOIDING_IMPACTS = 'avoiding-impacts';
+export const END_AVOIDING_REFERENCE = 'avoiding-reference';
 
 export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCESS = 'success';
@@ -45,6 +46,7 @@ export const LOCALSTORE_GEOGRAPHY = 'geography';
 export const LOCALSTORE_SCENARIOS = 'scenarios';
 export const LOCALSTORE_LIKELIHOOD = 'likelihood';
 export const LOCALSTORE_STUDY_LOCATION = 'study_location';
+export const LOCALSTORE_LEVEL_OF_IMACT = 'level_of_impact';
 export const LOCALSTORE_PARAMETERS = 'parameters';
 
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
