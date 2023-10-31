@@ -40,10 +40,20 @@
   }
 </script>
 
-<RadioGroup bind:value={$currentPreset} class="my-6 grid gap-x-2.5" style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length}, minmax(0, 1fr));">
-  {#each scenarioPresetsForCurrentTimeframe as { PRESET_ID: value, description, title }}
-    <RadioGroupOption {value} let:checked>
-      <div class:bg-surface-weaker={checked} class="grid hover:bg-surface-weaker/50 grid-rows-[auto_1fr] h-full gap-y-1 px-2.5 py-2">
+<RadioGroup
+  bind:value={$currentPreset}
+  class="my-6 grid gap-x-2.5"
+  style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length}, minmax(0, 1fr));"
+>
+  {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
+    <RadioGroupOption
+      {value}
+      let:checked
+    >
+      <div
+        class:bg-surface-weaker={checked}
+        class="grid hover:bg-surface-weaker/50 grid-rows-[auto_1fr] h-full gap-y-1 px-2.5 py-2"
+      >
         <span class="text-sm text-theme-base font-bold">{title}</span>
         <span class="text-xs">{description}</span>
       </div>
