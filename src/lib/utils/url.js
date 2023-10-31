@@ -83,5 +83,5 @@ export function buildURL(type = 'impacts', { indicator, geography, scenarios, ti
   const query = stringify(obj, {
     encodeValuesOnly: true,
   });
-  return `/explore/${type}?${query}`;
+  return `?${query}`;
 }
