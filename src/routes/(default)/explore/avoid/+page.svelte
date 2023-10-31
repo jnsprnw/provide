@@ -8,8 +8,11 @@
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
   import SelectionCertaintyLevels from './Selection/CertaintyLevels/CertaintyLevels.svelte';
   import SelectionStudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
+  import { writable } from 'svelte/store';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
+
+  let THRESHOLD_LEVELS_DATA = writable({});
 
   $: sections = [
     {
@@ -17,12 +20,14 @@
       title: 'Threshold levels',
       description: 'Lorem ipsum dolor dolor dolor',
       component: ThresholdLevels,
+      store: THRESHOLD_LEVELS_DATA,
     },
     {
       slug: 'locations',
       title: 'Locations',
       description: 'Lorem ipsum dolor dolor dolor',
       component: StudyLocations,
+      store: THRESHOLD_LEVELS_DATA,
     },
   ];
 </script>

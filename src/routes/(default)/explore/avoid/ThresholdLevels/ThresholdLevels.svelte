@@ -9,7 +9,7 @@
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import Text from './Text.svelte';
 
-  let THRESHOLD_LEVELS_DATA = writable([]);
+  export let store;
 
   export let title;
 
@@ -18,7 +18,7 @@
 
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
-    fetchData(THRESHOLD_LEVELS_DATA, {
+    fetchData(store, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
         geography, // $CURRENT_GEOGRAPHY.uid,
@@ -45,7 +45,7 @@
   let:asyncProps
   let:props
   asyncProps={{
-    thresholdLevelsData: $THRESHOLD_LEVELS_DATA,
+    thresholdLevelsData: $store,
   }}
   props={{
     ...$TEMPLATE_PROPS,

@@ -2,7 +2,22 @@
   import { STUDY_LOCATIONS } from '$stores/meta.js';
   export let data;
 
-  $: list = $STUDY_LOCATIONS.map((uid) => {});
+  const SCENARIOS = ['curpol', 'gs', 'sp'];
+
+  $: list = $STUDY_LOCATIONS.map(({ uid, label }) => {
+    const datum = data.data.study_locations[uid];
+    const { gmt, budget, lat, lng } = datum;
+
+    return {
+      label,
+      uid,
+      gmt,
+      budget,
+      lat,
+      lng,
+      scenarios: Object.fromEntries(SCENARIOS.map((uid) => [uid, datum.scenarios[uid]])),
+    };
+  });
 
   $: console.log({ data });
 </script>
@@ -10,38 +25,36 @@
 <table>
   <thead>
     <tr>
-      <th> Scenario </th>
       <th> Study location </th>
-      <th> Year </th>
-      <th> likely </th>
-      <th> temperature </th>
-      <th> avoidable </th>
+      <th> Coordinates </th>
+      <th> GMT </th>
+      <th> Buget </th>
+      {#each SCENARIOS as scenario}
+        <th> {scenario} </th>
+      {/each}
     </tr>
   </thead>
   <tbody>
-    {#each data.data.scenarios as { study_locations, uid }}
-      {#each study_locations as { avoidable, global_mean_temperature, likely, year, uid: location }}
-        <tr>
+    {#each list as { label, uid, lat, lng, gmt, budget, scenarios }}
+      <tr>
+        <td>
+          {label} / {uid}
+        </td>
+        <td>
+          {lat} / {lng}
+        </td>
+        <td>
+          {gmt}
+        </td>
+        <td>
+          {budget}
+        </td>
+        {#each Object.values(scenarios) as values}
           <td>
-            {uid}
+            {values.year} / {values.isAvoidable}
           </td>
-          <td>
-            {location}
-          </td>
-          <td>
-            {year}
-          </td>
-          <td>
-            {likely}
-          </td>
-          <td>
-            {global_mean_temperature}
-          </td>
-          <td>
-            {avoidable}
-          </td>
-        </tr>
-      {/each}
+        {/each}
+      </tr>
     {/each}
   </tbody>
 </table>

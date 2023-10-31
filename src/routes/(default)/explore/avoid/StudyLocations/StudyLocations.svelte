@@ -14,13 +14,12 @@
   import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import Locations from './Locations.svelte';
 
-  let THRESHOLD_LEVELS_DATA = writable([]);
+  export let store;
 
   export let title;
 
@@ -29,7 +28,7 @@
 
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
-    fetchData(THRESHOLD_LEVELS_DATA, {
+    fetchData(store, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
         geography, // $CURRENT_GEOGRAPHY.uid,
@@ -56,7 +55,7 @@
   let:asyncProps
   let:props
   asyncProps={{
-    thresholdLevelsData: $THRESHOLD_LEVELS_DATA,
+    thresholdLevelsData: $store,
   }}
   props={{
     ...$TEMPLATE_PROPS,
