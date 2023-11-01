@@ -24,27 +24,27 @@
   export let title;
   // test comment - test update
   $: $IS_COMBINATION_AVAILABLE &&
-    fetchData(
-      IMPACT_TIME_DATA,
-      {
-        endpoint: END_IMPACT_TIME,
-        params: {
-          geography: $CURRENT_GEOGRAPHY.uid,
-          indicator: $CURRENT_INDICATOR.uid,
-          scenarios: $CURRENT_SCENARIOS_UID,
-          ...$CURRENT_INDICATOR_OPTION_VALUES,
-        },
-      }
-    );
+    fetchData(IMPACT_TIME_DATA, {
+      endpoint: END_IMPACT_TIME,
+      params: {
+        geography: $CURRENT_GEOGRAPHY.uid,
+        indicator: $CURRENT_INDICATOR.uid,
+        scenarios: $CURRENT_SCENARIOS_UID,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
+      },
+    });
 
   $: process = ({ impactTimeData }, { scenarios, urlParams }) => {
     const MODEL = KEY_MODEL;
     const SOURCE = KEY_SOURCE;
     const { yearStart, yearStep, data, description, title, [MODEL]: model, [SOURCE]: source, parameters } = impactTimeData.data;
 
-
     const impactTime = scenarios.map((scenario, i) => {
       const scenarioData = data[scenario.uid];
+      console.log({ scenarioData, scenario });
+      if (scenarioData.length !== scenario[MEAN_TEMPERATURE_UID].length) {
+        console.warn(`Scenario data length does not match ${MEAN_TEMPERATURE_UID} length.`);
+      }
 
       return {
         ...scenario,
@@ -56,7 +56,7 @@
         description,
         title,
         values: scenarioData.map((values, i) => {
-          const gmt = scenario[MEAN_TEMPERATURE_UID][i].value;
+          const gmt = scenario[MEAN_TEMPERATURE_UID][i]?.value ?? 0;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
           const [min, value, max] = values.sort(); // This values are not always in the correct order of min, average (?), max.
           return {
@@ -90,7 +90,7 @@
       {
         uid: 'format',
         label: 'Format',
-        options: (data.formats || ["csv"]).map((uid) => ({
+        options: (data.formats || ['csv']).map((uid) => ({
           label: uid,
           uid,
         })),
@@ -139,7 +139,10 @@
       chartInfo={asyncProps.chartInfo}
       templateProps={props}
     >
-      <ImpactTimeChart data={asyncProps.impactTime} unit={props.indicator.unit.uid} />
+      <ImpactTimeChart
+        data={asyncProps.impactTime}
+        unit={props.indicator.unit.uid}
+      />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
