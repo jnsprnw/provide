@@ -1,22 +1,39 @@
 <script>
-  import { CURRENT_INDICATOR } from '$stores/state.js';
+  import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY } from '$stores/state.js';
+  import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
+  import THEME from '$styles/theme-store.js';
   export let data;
-  export let geography;
   $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
   $: level_of_impact = $LEVEL_OF_IMPACT;
+
+  $: geography = $CURRENT_GEOGRAPHY.label;
+  $: studyLocation = $STUDY_LOCATIONS.find(({ uid }) => uid === $SELECTED_STUDY_LOCATION)?.label;
 
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
 
   const scenario = 'curpol';
-  $: studyLocation = $SELECTED_STUDY_LOCATION;
+  // $: studyLocation = $SELECTED_STUDY_LOCATION;
   $: isWholeUrbanArea = studyLocation === 'city-average';
   const thresholdText = undefined;
   const remainingBudget = undefined;
 
   $: console.log({ data, unit });
 
-  $: datum = data.data.study_locations[studyLocation];
+  $: datum = data.data.study_locations[$SELECTED_STUDY_LOCATION];
+
+  $: scenarios = Object.entries(datum.scenarios).map(([uid, scenario], i) => {
+    const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
+    return {
+      uid,
+      ...scenario,
+      label,
+      color: $THEME.color.category.base[i],
+    };
+  });
+
+  $: possibleScenarios = scenarios.filter(({ year }) => year !== null);
+  $: impossibleScenarios = scenarios.filter(({ year }) => year === null);
 
   $: ({ budget, gmt, isAvoidable, isPossible } = datum);
 </script>
@@ -41,7 +58,7 @@ remainingBudget: <strong>{remainingBudget}</strong>
 </pre>
 -->
 
-<p class="my-4">
+<p class="my-4 text-lg">
   {#if isAvoidable}
     It is
   {:else}
@@ -66,7 +83,7 @@ remainingBudget: <strong>{remainingBudget}</strong>
   {:else}
     under
   {/if}
-  {level_of_impact}
+  <strong>{level_of_impact}</strong>
   {#if isCountable}
     {labelWithinSentence}
   {:else}
@@ -81,8 +98,24 @@ remainingBudget: <strong>{remainingBudget}</strong>
   {/if}
 </p>
 
-<ul class="my-4">
-  {#each Object.entries(datum.scenarios) as [scenario, { year }]}
-    <li><strong>{scenario}</strong>: <span>{year}</span></li>
-  {/each}
-</ul>
+<p class="text-base">These levels will be reached</p>
+{#if possibleScenarios.length}
+  <ul class="my-3">
+    {#each possibleScenarios as { label, year, color }}
+      <li class="text-lg">in {year} under the <strong style="color: {color};">{label}</strong> scenario</li>
+    {/each}
+  </ul>
+{:else}
+  <p class="my-3 text-lg">under no scenario</p>
+{/if}
+
+<p class="text-base">but it is not likely that they will be reached</p>
+{#if impossibleScenarios.length}
+  <ul class="my-3">
+    {#each impossibleScenarios as { label, color }}
+      <li class="text-lg">under the <strong style="color: {color};">{label}</strong></li>
+    {/each}
+  </ul>
+{:else}
+  <p class="my-3 text-lg">under any scenario</p>
+{/if}

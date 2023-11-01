@@ -60,7 +60,6 @@
   >
     <Text
       data={asyncProps.thresholdLevelsData}
-      {geography}
       {level_of_impact}
     />
   </ChartFrame>
