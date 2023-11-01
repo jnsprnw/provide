@@ -1,8 +1,9 @@
 <script>
   import { STUDY_LOCATIONS } from '$stores/meta.js';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
+  import { formatValue } from '$lib/utils/formatting';
+  import THEME from '$styles/theme-store.js';
   export let data;
-
-  const SCENARIOS = ['curpol', 'gs', 'sp'];
 
   $: list = $STUDY_LOCATIONS.map(({ uid, label }) => {
     const datum = data.data.study_locations[uid];
@@ -15,7 +16,9 @@
       budget,
       lat,
       lng,
-      scenarios: Object.fromEntries(SCENARIOS.map((uid) => [uid, datum.scenarios[uid]])),
+      scenarios: Object.fromEntries(
+        SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => [uid, { values: datum.scenarios[uid], full: $THEME.color.category.base[i], half: $THEME.color.category.weakest[i] }])
+      ),
     };
   });
 
@@ -24,34 +27,33 @@
 
 <table>
   <thead>
-    <tr>
+    <tr class="text-text-weaker text-sm text-left">
       <th> Study location </th>
-      <th> Coordinates </th>
-      <th> GMT </th>
-      <th> Buget </th>
-      {#each SCENARIOS as scenario}
-        <th> {scenario} </th>
-      {/each}
+      <th> <span class="mx-2">GMT</span> </th>
+      <th> <span class="mx-2">CO₂ budget</span> </th>
+      <th colspan={SCENARIOS_IN_AVOIDING_IMPACTS.length}> <span class="mx-2">At what year in scenario…</span> </th>
     </tr>
   </thead>
   <tbody>
     {#each list as { label, uid, lat, lng, gmt, budget, scenarios }}
       <tr>
-        <td>
-          {label} / {uid}
+        <td class="py-1">
+          {label}
         </td>
         <td>
-          {lat} / {lng}
+          <span class="mx-2">{formatValue(gmt, 'degrees-celsius')}</span>
         </td>
         <td>
-          {gmt}
+          <span class="mx-2">{budget ?? '—'}</span>
         </td>
-        <td>
-          {budget}
-        </td>
-        {#each Object.values(scenarios) as values}
+        {#each Object.values(scenarios) as { values, full, half }}
           <td>
-            {values.year} / {values.isAvoidable}
+            <div
+              class="rounded-full bg-current mx-2 px-2"
+              style="color: {values.isAvoidable ? full : half};"
+            >
+              <span class="text-white text-center block">{values.year ?? 'N/A'}</span>
+            </div>
           </td>
         {/each}
       </tr>

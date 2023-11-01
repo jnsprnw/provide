@@ -3,6 +3,7 @@
   import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
   export let data;
   $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
   $: level_of_impact = $LEVEL_OF_IMPACT;
@@ -22,7 +23,8 @@
 
   $: datum = data.data.study_locations[$SELECTED_STUDY_LOCATION];
 
-  $: scenarios = Object.entries(datum.scenarios).map(([uid, scenario], i) => {
+  $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
+    const scenario = datum.scenarios[uid];
     const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
     return {
       uid,
@@ -102,7 +104,7 @@ remainingBudget: <strong>{remainingBudget}</strong>
 {#if possibleScenarios.length}
   <ul class="my-3">
     {#each possibleScenarios as { label, year, color }}
-      <li class="text-lg">in {year} under the <strong style="color: {color};">{label}</strong> scenario</li>
+      <li class="text-lg">in <strong>{year}</strong> under the <strong style="color: {color};">{label}</strong> scenario</li>
     {/each}
   </ul>
 {:else}
