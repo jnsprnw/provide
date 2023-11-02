@@ -10,7 +10,7 @@
   $: path = line().x($xGet).y($yGet);
   $: curve && path.curve(curve);
 
-  $: paths = $data.map(({ values, uid, color, strokeWidth: sw, opacity }) => ({ d: path(values), uid, color, strokeWidth: sw || strokeWidth, opacity }));
+  $: paths = $data.map(({ values, uid, color, strokeWidth: sw, opacity, isSelected }) => ({ d: path(values), uid, color, strokeWidth: sw || strokeWidth, opacity, isSelected }));
 </script>
 
 <g>
