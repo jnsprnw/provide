@@ -27,11 +27,23 @@
 <div class="flex flex-col gap-y-5">
   <div>
     <Tagline class="mb-2">{filterLabel}</Tagline>
-    <PillGroup bind:currentUid={selectedTimeframe} options={selectableTimeframes} />
+    <PillGroup
+      bind:currentUid={selectedTimeframe}
+      options={selectableTimeframes}
+    />
   </div>
-  <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} {scenarioPresets} />
-  <Table {selectedTimeframe} {scenarios} bind:selectedScenarios={$selectedScenarios} />
-  <footer class="flex gap-x-6">
+  <Presets
+    {selectedTimeframe}
+    bind:selectedScenarios={$selectedScenarios}
+    on:selection={handlePreset}
+    {scenarioPresets}
+  />
+  <Table
+    {selectedTimeframe}
+    {scenarios}
+    bind:selectedScenarios={$selectedScenarios}
+  />
+  <footer class="grid gap-x-6 grid-cols-2">
     <Warning selectedScenarios={$selectedScenarios} />
     <CrossLink selectedScenarios={$selectedScenarios} />
   </footer>

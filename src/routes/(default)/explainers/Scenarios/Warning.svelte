@@ -11,9 +11,12 @@
   $: amountUnAvailable = scenarioGroups[false]?.length ?? 0;
 </script>
 
-<div class="flex flex-col gap-y-5 text-xs">
-  Current geography: {JSON.stringify($CURRENT_GEOGRAPHY?.label)}<br />
-  Current indicator: {JSON.stringify($CURRENT_INDICATOR?.label)}<br />
-  Available scenarios: {amountAvailable}<br />
-  Un-Available scenarios: {amountUnAvailable}
-</div>
+{#if amountUnAvailable}
+  <div class="flex flex-col gap-y-5 text-xs">
+    <span>
+      <strong>{amountUnAvailable}</strong> of your {selectedScenarios.length} selected scenarios {amountUnAvailable == 1 ? 'is' : 'are'} not available for your current indicator (<strong
+        >{$CURRENT_INDICATOR?.label}</strong
+      >) and geography (<strong>{$CURRENT_GEOGRAPHY?.label}</strong>) selection in the explorer.
+    </span>
+  </div>
+{/if}
