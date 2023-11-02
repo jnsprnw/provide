@@ -9,8 +9,9 @@
   import { writable } from 'svelte/store';
   import { extractTimeframe } from '$utils/meta.js';
   import THEME from '$styles/theme-store.js';
-  import { MAX_NUMBER_SELECTABLE_SCENARIOS } from '$config';
+  import { MAX_NUMBER_SELECTABLE_SCENARIOS, MEAN_TEMPERATURE_UID, EMISSIONS_UID, PATH_DOCUMENTATION } from '$config';
   import _ from 'lodash-es';
+  import DefinitionItem from '$lib/helper/chart-description/DefinitionItem.svelte';
 
   export let scenarios;
   export let selectableTimeframes;
@@ -60,5 +61,54 @@
     <Warning selectedScenarios={$selectedScenarios} />
     <CrossLink selectedScenarios={$selectedScenarios} />
   </footer>
-  <Chart scenarios={scenariosListed} />
+  <div class="grid gap-x-6 grid-cols-2">
+    <Chart
+      scenarios={scenariosListed}
+      variable={MEAN_TEMPERATURE_UID}
+      title="Global mean temperature in °C"
+      yDomain={[1, null]}
+    >
+      <p class="mt-1 mb-2 text-contour-weaker">
+        The lines in the graph represent best estimates. Learn more about uncertainties <a
+          class="underline decoration-theme-weakest hover:decoration-theme-weaker"
+          href="/{PATH_DOCUMENTATION}">here</a
+        >.
+      </p>
+      <dl class="flex gap-4">
+        <DefinitionItem
+          term="Model"
+          definition="FaIR v1.6.4"
+        />
+        <DefinitionItem
+          term="Source"
+          definition="Lamboll et al., 2022"
+          href="https://essopenarchive.org/doi/full/10.1002/essoar.10511875.1"
+        />
+      </dl>
+    </Chart>
+    <Chart
+      scenarios={scenariosListed}
+      variable={EMISSIONS_UID}
+      title="Global emissions in CO₂"
+      yDomain={[null, null]}
+    >
+      <p class="mt-1 mb-2 text-contour-weaker">
+        The lines in the graph represent best estimates. Learn more about uncertainties <a
+          class="underline decoration-theme-weakest hover:decoration-theme-weaker"
+          href="/{PATH_DOCUMENTATION}">here</a
+        >.
+      </p>
+      <dl class="flex gap-4">
+        <DefinitionItem
+          term="Model"
+          definition="unknown"
+        />
+        <DefinitionItem
+          term="Source"
+          definition="unknown"
+          href="https://essopenarchive.org/doi/full/10.1002/essoar.10511875.1"
+        />
+      </dl>
+    </Chart>
+  </div>
 </div>
