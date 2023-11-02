@@ -1,5 +1,5 @@
 import { get } from 'lodash-es';
-import { KEY_CHARACTERISTICS } from '$config';
+import { KEY_CHARACTERISTICS, KEY_SCENARIO_YEAR_DESCRIPTION } from '$config';
 
 // We use different locals to simulate different versions of the content.
 // Version 0: `en` and fallback version
@@ -95,7 +95,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
         // Get the description from the Strapi scenario
         const description = get(currentScenario, ['attributes', 'Description']);
         // Get the characteristics from the Strapi scenario
-        const characteristics = get(currentScenario, ['attributes', 'ScenarioCharacteristics'], [])
+        const descriptionYears = get(currentScenario, ['attributes', 'ScenarioCharacteristics'], [])
           .map(({ Year: year, Description: description }) => {
             // Check if year is valid and the description has any length
             if (year && description) {
@@ -110,8 +110,8 @@ export const loadMetaData = function (svelteFetch = fetch) {
         return {
           ...scenario,
           description,
-          characteristics,
-          [KEY_CHARACTERISTICS]: scenario.characteristics, // TODO: This should replace characteristics. We wait until the new scenario selector is implemented.
+          [KEY_SCENARIO_YEAR_DESCRIPTION]: descriptionYears,
+          [KEY_CHARACTERISTICS]: scenario.characteristics,
         };
       }),
     });
