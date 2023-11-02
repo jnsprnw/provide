@@ -18,13 +18,13 @@
       component: ImpactTime,
       disabled: !isValidSelection,
     },
-    // {
-    //   slug: 'impact-geo',
-    //   title: 'Location',
-    //   description: 'Where will impacts hit the hardest?',
-    //   component: ImpactGeo,
-    //   disabled: !$IS_COMBINATION_AVAILABLE,
-    // },
+    {
+      slug: 'impact-geo',
+      title: 'Location',
+      description: 'Where will impacts hit the hardest?',
+      component: ImpactGeo,
+      disabled: !$IS_COMBINATION_AVAILABLE,
+    },
     // {
     //   slug: 'unavoidable-risk',
     //   title: 'Avoidable vs. unavoidable',
