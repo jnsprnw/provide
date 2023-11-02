@@ -10,15 +10,39 @@
   $: path = line().x($xGet).y($yGet);
   $: curve && path.curve(curve);
 
-  $: paths = $data.map((line) => path(line.values));
+  $: paths = $data.map(({ values, uid, color, strokeWidth: sw, opacity }) => ({ d: path(values), uid, color, strokeWidth: sw || strokeWidth, opacity }));
 </script>
 
-{#each $data as line, i}
-  <path
-    class={`path-line fill-none linejoin-round linecap-round`}
-    d={paths[i]}
-    style:stroke={line.color}
-    style:stroke-width={line.strokeWidth || strokeWidth}
-    style:opacity={line.opacity || 1}
-  />
-{/each}
+<g>
+  {#each paths.filter(({ isSelected }) => !isSelected) as { d, color, strokeWidth, opacity }}
+    <path
+      class={`path-line fill-none linejoin-round linecap-round`}
+      {d}
+      style:stroke={color}
+      style:stroke-width={strokeWidth || strokeWidth}
+      style:opacity={opacity || 1}
+    />
+  {/each}
+</g>
+<g>
+  {#each paths.filter(({ isSelected }) => isSelected) as { d, strokeWidth }}
+    <path
+      class={`path-line fill-none linejoin-round linecap-round`}
+      {d}
+      style:stroke="#fff"
+      style:stroke-width={strokeWidth + 2}
+      style:opacity={1}
+    />
+  {/each}
+</g>
+<g>
+  {#each paths.filter(({ isSelected }) => isSelected) as { d, color, strokeWidth }}
+    <path
+      class={`path-line fill-none linejoin-round linecap-round`}
+      {d}
+      style:stroke={color}
+      style:stroke-width={strokeWidth}
+      style:opacity={1}
+    />
+  {/each}
+</g>

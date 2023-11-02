@@ -1,5 +1,5 @@
 import { page } from '$app/stores';
-import { SCENARIO_DATA_KEYS } from '$src/config.js';
+import { SCENARIO_DATA_KEYS } from '$config';
 import { get, keyBy, uniq, without, sortBy } from 'lodash-es';
 import { derived } from 'svelte/store';
 
@@ -35,32 +35,7 @@ export const GEOGRAPHIES = derived(page, ($page) => {
 });
 
 export const SCENARIOS = derived(page, ($page) => {
-  const scenarios = ($page.data?.meta?.scenarios ?? []).map((scenarioRaw) => {
-    const scenario = {
-      ...scenarioRaw,
-      endYear: scenarioRaw.timeframe[1],
-    };
-    SCENARIO_DATA_KEYS.forEach((key) => {
-      const { data, yearStart, yearStep } = scenarioRaw[key];
-      // Some scenarios have no emissions data (data[0] = null)
-      if (data) {
-        const seriesData = data.map((datum, i) => {
-          const hasRange = datum.length > 1;
-          return {
-            year: yearStart + yearStep * i,
-            value: hasRange ? datum[1] : datum,
-            min: hasRange && datum[0],
-            max: hasRange && datum[2],
-          };
-        });
-        scenario[key] = seriesData;
-      } else {
-        scenario[key] = null;
-      }
-    });
-    return scenario;
-  });
-  return scenarios;
+  return $page.data?.meta?.scenarios ?? [];
 });
 
 export const DICTIONARY_SCENARIOS = derived(SCENARIOS, ($scenarios) => keyBy($scenarios, 'uid'));

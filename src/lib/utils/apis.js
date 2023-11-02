@@ -1,5 +1,5 @@
 import { get } from 'lodash-es';
-import { KEY_CHARACTERISTICS, KEY_SCENARIO_YEAR_DESCRIPTION } from '$config';
+import { KEY_CHARACTERISTICS, KEY_SCENARIO_YEAR_DESCRIPTION, SCENARIO_DATA_KEYS } from '$config';
 
 // We use different locals to simulate different versions of the content.
 // Version 0: `en` and fallback version
@@ -107,11 +107,39 @@ export const loadMetaData = function (svelteFetch = fetch) {
           .filter((d) => Boolean(d)) // Filter invalid entries
           .sort((a, b) => a.year - b.year);
 
+        const timelineData = Object.fromEntries(
+          SCENARIO_DATA_KEYS.map((key) => {
+            const { data, yearStart, yearStep } = scenario[key];
+            // Some scenarios have no emissions data (data[0] = null)
+            if (data) {
+              const seriesData = data.map((datum, i) => {
+                const hasRange = datum.length > 1;
+                const obj = {
+                  year: yearStart + yearStep * i,
+                  value: datum,
+                };
+                if (hasRange) {
+                  obj['value'] = datum[1];
+                  obj['min'] = datum[0];
+                  obj['max'] = datum[2];
+                }
+
+                return obj;
+              });
+              return [key, seriesData];
+            } else {
+              return [key, null];
+            }
+          })
+        );
+
         return {
           ...scenario,
           description,
+          ...timelineData,
           [KEY_SCENARIO_YEAR_DESCRIPTION]: descriptionYears,
           [KEY_CHARACTERISTICS]: scenario.characteristics,
+          endYear: scenario.timeframe[1],
         };
       }),
     });

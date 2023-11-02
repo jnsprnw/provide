@@ -1,17 +1,12 @@
 <script>
-  export let scenarios;
-  export let selectedScenarios = [];
-  export let selectedTimeframe;
-  import { extractTimeframe } from '$utils/meta.js';
   import { KEY_CHARACTERISTICS } from '$config';
   import chroma from 'chroma-js';
   import { extent } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
   import THEME from '$styles/theme-store.js';
 
-  $: scenariosListed = scenarios.filter((s) => extractTimeframe(s) === selectedTimeframe);
-
-  $: console.log(scenariosListed);
+  export let scenariosListed = [];
+  export let selectedScenarios = [];
 
   function checkContrastRatio(color) {
     return chroma.contrast(color, 'black') > 4.5;
@@ -48,7 +43,7 @@
 <div
   role="treegrid"
   class="max-w-full overflow-x-scroll"
-  aria-rowcount={scenarios.length}
+  aria-rowcount={scenariosListed.length}
 >
   <div
     role="rowgroup"

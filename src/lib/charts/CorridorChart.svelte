@@ -34,10 +34,8 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
   $: chartData = sortBy(data, ['isHighlighted', 'isSelected']).map((series) => {
-    let color = series.isHighlighted
-      ? $theme.color.contour.weak
-      : $theme.color.contour.weaker;
-    let opacity = series.color ? 0.7 : 0.3;
+    let color = series.isHighlighted ? $theme.color.contour.weak : $theme.color.contour.weaker;
+    let opacity = series.color ? 0.9 : 0.3;
     opacity = series.isHighlighted ? 1 : opacity;
     return {
       ...series,
@@ -48,9 +46,20 @@
 </script>
 
 <div class="w-full h-full animate-defer-visibility overflow-hidden">
-  <LayerCake {padding} x={xKey} y={yKey} {yDomain} data={chartData} {flatData}>
+  <LayerCake
+    {padding}
+    x={xKey}
+    y={yKey}
+    {yDomain}
+    data={chartData}
+    {flatData}
+  >
     <Svg>
-      <AxisX snapTicks={true} showTickLines={false} ticks={xTicks} />
+      <AxisX
+        snapTicks={true}
+        showTickLines={false}
+        ticks={xTicks}
+      />
       <AxisY
         {padding}
         ticks={yTicks}
