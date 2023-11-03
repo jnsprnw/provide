@@ -1,14 +1,26 @@
 <script>
-  import { STUDY_LOCATIONS } from '$stores/meta.js';
+  import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
   import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
+  import tooltip from '$lib/utils/tooltip';
   import { formatValue } from '$lib/utils/formatting';
   import THEME from '$styles/theme-store.js';
   export let data;
 
+  $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
+    const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
+    return {
+      uid,
+      label,
+      color: $THEME.color.category.base[i],
+      full: $THEME.color.category.base[i],
+      half: $THEME.color.category.weakest[i],
+    };
+  });
+
   $: list = $STUDY_LOCATIONS.map(({ uid, label }) => {
     const datum = data.data.study_locations[uid];
     const { gmt, budget, lat, lng } = datum;
-
+    console.log({ datum });
     return {
       label,
       uid,
@@ -16,13 +28,11 @@
       budget,
       lat,
       lng,
-      scenarios: Object.fromEntries(
-        SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => [uid, { values: datum.scenarios[uid], full: $THEME.color.category.base[i], half: $THEME.color.category.weakest[i] }])
-      ),
+      scenarios: Object.fromEntries(scenarios.map((s) => [s.uid, { ...s, ...datum.scenarios[s.uid] }])),
     };
   });
 
-  $: console.log({ data });
+  $: console.log({ list });
 </script>
 
 <table>
@@ -46,13 +56,16 @@
         <td>
           <span class="mx-2">{budget ?? '—'}</span>
         </td>
-        {#each Object.values(scenarios) as { values, full, half }}
+        {#each Object.values(scenarios) as { full, half, isAvoidable, year, label: labelScenario }}
           <td>
             <div
               class="rounded-full bg-current mx-2 px-2"
-              style="color: {values.isAvoidable ? full : half};"
+              style="color: {isAvoidable ? full : half};"
             >
-              <span class="text-white text-center block">{values.year ?? 'N/A'}</span>
+              <span
+                class="text-white text-center block"
+                use:tooltip={{ content: `Something happens in ${labelScenario} in ${label}` }}>{year ?? 'N/A'}</span
+              >
             </div>
           </td>
         {/each}
