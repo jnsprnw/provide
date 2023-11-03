@@ -1,5 +1,5 @@
 import { page } from '$app/stores';
-import { SCENARIO_DATA_KEYS } from '$config';
+import { UID_STUDY_LOCATION_AVERAGE } from '$config';
 import { get, keyBy, uniq, without, sortBy } from 'lodash-es';
 import { derived } from 'svelte/store';
 
@@ -83,5 +83,15 @@ export const LIKELIHOODS = derived(page, ($page) => {
 });
 
 export const STUDY_LOCATIONS = derived(page, ($page) => {
-  return $page.data?.meta?.studyLocations ?? [];
+  return sortBy(
+    ($page.data?.meta?.studyLocations ?? []).map((location, i) => {
+      const isAverage = location.uid === UID_STUDY_LOCATION_AVERAGE;
+      return {
+        ...location,
+        order: location.order ?? i,
+        isAverage,
+      };
+    }),
+    ['order']
+  );
 });

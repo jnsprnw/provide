@@ -11,13 +11,16 @@
     GRAPH_URL_PARAMS,
     IS_EMPTY_INDICATOR,
   } from '$stores/state.js';
-  import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
-  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
+  import { STUDY_LOCATIONS } from '$stores/meta.js';
+  import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL, SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
+  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE, UID_STUDY_LOCATION_AVERAGE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import Locations from './Locations.svelte';
+  import Map from './Map.svelte';
+  import { sortBy } from 'lodash-es';
 
   export let store;
   export let title;
@@ -38,10 +41,26 @@
     });
 
   $: process = ({ thresholdLevelsData }, { scenarios, urlParams }) => {
-    const { yearStart, yearStep, data, description, title, [KEY_MODEL]: model, [KEY_SOURCE]: source, parameters } = thresholdLevelsData.data;
+    const studyLocations = $STUDY_LOCATIONS.map(({ uid, label, order, isAverage }) => {
+      const datum = thresholdLevelsData.data.study_locations[uid];
+      const { gmt, budget, lat, lng } = datum;
+      const isSelected = $SELECTED_STUDY_LOCATION === uid;
+      return {
+        order,
+        label,
+        uid,
+        gmt,
+        budget,
+        lat,
+        lng,
+        isSelected,
+        isAverage,
+        scenarios: datum.scenarios,
+      };
+    });
 
     return {
-      thresholdLevels: thresholdLevelsData,
+      studyLocations,
       title: 'How does this vary across the urban environment?',
       description: 'lorem ipsum description',
     };
@@ -66,7 +85,10 @@
     chartUid={END_AVOIDING_IMPACTS}
     templateProps={props}
   >
-    <Locations data={asyncProps.thresholdLevelsData} />
+    <div class="grid gap-x-2 grid-cols-2">
+      <Map studyLocations={asyncProps.studyLocations} />
+      <Locations studyLocations={asyncProps.studyLocations} />
+    </div>
   </ChartFrame>
   <LoadingPlaceholder slot="placeholder" />
 </LoadingWrapper>

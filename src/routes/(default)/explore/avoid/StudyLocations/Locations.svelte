@@ -1,12 +1,10 @@
 <script>
-  import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
-  import { SCENARIOS_IN_AVOIDING_IMPACTS, UID_STUDY_LOCATION_AVERAGE } from '$config';
-  import { SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
+  import { SCENARIOS } from '$stores/meta.js';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
   import tooltip from '$lib/utils/tooltip';
   import { formatValue } from '$lib/utils/formatting';
-  import { sortBy } from 'lodash-es';
   import THEME from '$styles/theme-store.js';
-  export let data;
+  export let studyLocations;
 
   $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
     const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
@@ -19,27 +17,12 @@
     };
   });
 
-  $: list = sortBy(
-    $STUDY_LOCATIONS.map(({ uid, label, order }, i) => {
-      const datum = data.data.study_locations[uid];
-      const { gmt, budget, lat, lng } = datum;
-      const isSelected = $SELECTED_STUDY_LOCATION === uid;
-      const isAverage = uid === UID_STUDY_LOCATION_AVERAGE;
-      return {
-        order: order ?? i,
-        label,
-        uid,
-        gmt,
-        budget,
-        lat,
-        lng,
-        isSelected,
-        isAverage,
-        scenarios: Object.fromEntries(scenarios.map((s) => [s.uid, { ...s, ...datum.scenarios[s.uid] }])),
-      };
-    }),
-    ['order']
-  );
+  $: list = studyLocations.map((location) => {
+    return {
+      ...location,
+      scenarios: Object.fromEntries(scenarios.map((s) => [s.uid, { ...s, ...location.scenarios[s.uid] }])),
+    };
+  });
 </script>
 
 <table>
@@ -57,7 +40,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each list as { label, uid, lat, lng, gmt, budget, scenarios, isSelected, isAverage }, i}
+    {#each list as { label, uid, lat, lng, gmt, budget, scenarios, isSelected, isAverage, order }}
       <tr
         class:bg-surface-weaker={isSelected}
         class="border-b border-contour-weakest text-sm"
@@ -66,7 +49,7 @@
           {#if !isAverage}
             <i
               class="not-italic rounded-full bg bg-contour-base p-1 text-white text-xs font-bold w-4 h-4 overflow-hidden text-center inline-flex items-center content-center justify-center leading-none"
-              >{i}</i
+              >{order}</i
             >{/if}
           <span class:font-bold={isSelected}>{label}</span>
         </td>
