@@ -62,7 +62,7 @@ export const DEFAULT_SCENARIOS_UID = ['curpol'];
 export const DEFAULT_FORMAT_UID = 'float';
 
 export const GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS = ['cities']; // Which geographies are allowed for avoiding impacts?
-export const SCENARIOS_IN_AVOIDING_IMPACTS = ['curpol', 'gs', 'sp'];
+export const SCENARIOS_IN_AVOIDING_IMPACTS = ['gs', 'sp', 'curpol']; // This order also corresponds to the colors set in the design token’s categories
 
 // Map colors...should come from tokens at some point
 export const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];
