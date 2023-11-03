@@ -35,7 +35,6 @@
     return {
       thresholdLevels: thresholdLevelsData,
       title: 'When will the impact level be exceeded?',
-      description: 'lorem ipsum description',
     };
   };
 </script>
