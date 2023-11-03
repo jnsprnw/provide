@@ -4,6 +4,7 @@
   import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
   import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
+  import { formatValue } from '$lib/utils/formatting';
   import Interactive from './Interactive.svelte';
   import Important from './Important.svelte';
   export let data;
@@ -80,10 +81,10 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
         <Interactive>{labelWithinSentence}</Interactive>
       {/if}
       {direction ? 'over' : 'under'}
-      <Interactive>{level_of_impact}</Interactive>
+      <Interactive>{formatValue(level_of_impact, unit.uid)}</Interactive>
       {#if isCountable}
         <Interactive>{labelWithinSentence}</Interactive>
-      {:else}
+      {:else if unit.uid !== 'degrees-celsius'}
         {unit.labelLong}
       {/if}
       {#if isAvoidable && isPossible}
