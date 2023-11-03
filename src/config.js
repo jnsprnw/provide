@@ -50,6 +50,8 @@ export const LOCALSTORE_STUDY_LOCATION = 'study_location';
 export const LOCALSTORE_LEVEL_OF_IMACT = 'level_of_impact';
 export const LOCALSTORE_PARAMETERS = 'parameters';
 
+export const UID_STUDY_LOCATION_AVERAGE = 'city-average';
+
 export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
 export const EMISSIONS_UID = 'emissions';
 export const UNAVOIDABLE_UID = 'unavoidable';

@@ -3,7 +3,7 @@
   import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
-  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS, UID_STUDY_LOCATION_AVERAGE } from '$config';
   import { formatValue } from '$lib/utils/formatting';
   import Interactive from './Interactive.svelte';
   import Important from './Important.svelte';
@@ -17,7 +17,7 @@
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
 
   // $: studyLocation = $SELECTED_STUDY_LOCATION;
-  $: isWholeUrbanArea = studyLocation === 'city average';
+  $: isWholeUrbanArea = $SELECTED_STUDY_LOCATION === UID_STUDY_LOCATION_AVERAGE;
 
   $: console.log({ data, unit });
 
