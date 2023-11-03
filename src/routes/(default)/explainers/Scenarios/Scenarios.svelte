@@ -89,7 +89,7 @@
     <Chart
       scenarios={scenariosListed}
       variable={EMISSIONS_UID}
-      title="Global emissions in CO₂"
+      title="Global greenhouse gas emissions in GtCO₂eq/yr"
       yDomain={[null, null]}
     >
       <p class="mt-1 mb-2 text-contour-weaker">
@@ -101,11 +101,11 @@
       <dl class="flex gap-4">
         <DefinitionItem
           term="Model"
-          definition="unknown"
+          definition="FaIR v1.6.4"
         />
         <DefinitionItem
           term="Source"
-          definition="unknown"
+          definition="Lamboll et al., 2022"
           href="https://essopenarchive.org/doi/full/10.1002/essoar.10511875.1"
         />
       </dl>
