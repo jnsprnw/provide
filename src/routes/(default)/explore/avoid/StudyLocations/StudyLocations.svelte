@@ -20,10 +20,8 @@
   import Locations from './Locations.svelte';
 
   export let store;
-
   export let title;
 
-  const level_of_impact = 140;
   const geography = 'lisbon';
 
   $: !$IS_EMPTY_INDICATOR &&
