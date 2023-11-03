@@ -11,14 +11,14 @@ const ENV_URL_DATA = import.meta.env.VITE_DATA_API_URL;
 
 export const loadFromStrapi = function (path, fetch) {
   return new Promise(async (resolve, reject) => {
+    if (typeof ENV_URL_CONTENT === 'undefined') {
+      reject(new Error('Content URL is not defined. Check environment variables.'));
+    }
+    if (typeof ENV_CONTENT_LOCALE === 'undefined') {
+      console.warn(`Content version variable in undefined. Fallback version is used.`);
+    }
+    const url = `${ENV_URL_CONTENT}/api/${path}?populate=*&locale=${localCode}`;
     try {
-      if (typeof ENV_URL_CONTENT === 'undefined') {
-        reject(new Error('Content URL is not defined. Check environment variables.'));
-      }
-      if (typeof ENV_CONTENT_LOCALE === 'undefined') {
-        console.warn(`Content version variable in undefined. Fallback version is used.`);
-      }
-      const url = `${ENV_URL_CONTENT}/api/${path}?populate=*&locale=${localCode}`;
       const res = await fetch(url);
       const data = await res.json();
       resolve(data.data);
