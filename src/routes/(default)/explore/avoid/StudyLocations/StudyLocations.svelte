@@ -20,7 +20,6 @@
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import Locations from './Locations.svelte';
   import Map from './Map.svelte';
-  import { sortBy } from 'lodash-es';
 
   export let store;
   export let title;

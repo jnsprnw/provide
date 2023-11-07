@@ -40,17 +40,19 @@
     </tr>
   </thead>
   <tbody>
-    {#each list as { label, uid, lat, lng, gmt, budget, scenarios, isSelected, isAverage, order }}
+    {#each list as { label, gmt, budget, scenarios, isSelected, isAverage, order }}
       <tr
         class:bg-surface-weaker={isSelected}
         class="border-b border-contour-weakest text-sm"
       >
         <td class="py-2 flex items-center gap-x-2 pl-2 min-w-[180px]">
           {#if !isAverage}
-            <i
-              class="not-italic rounded-full bg bg-contour-base p-1 text-white text-xs font-bold w-4 h-4 overflow-hidden text-center inline-flex items-center content-center justify-center leading-none"
-              class:bg-theme-base={isSelected}>{order}</i
-            >{/if}
+            <div
+              class="rounded-full bg bg-contour-base p-1 w-4 h-4 overflow-hidden text-center inline-flex items-center content-center justify-center"
+              class:bg-theme-base={isSelected}
+            >
+              <i class="not-italic leading-none pt-0.5 text-white text-xs font-normal">{order}</i>
+            </div>{/if}
           <span
             class:font-bold={isSelected}
             class:text-theme-base={isSelected}>{label}</span

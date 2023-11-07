@@ -8,7 +8,7 @@
   import { onDestroy } from 'svelte';
 
   const beforeFallback = 'settlement-major-label';
-  const theme = getContext('theme');
+  // const theme = getContext('theme');
 
   const { map, source } = getContext('mapbox');
 
@@ -29,7 +29,7 @@
         source,
         layout: {},
         paint: {
-          'circle-color': '#000',
+          'circle-color': ['case', ['boolean', ['get', 'isSelected'], false], $THEME.color.theme.base, $THEME.color.contour.base],
           'circle-radius': 10,
         },
       },

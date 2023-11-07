@@ -7,13 +7,11 @@
 
   import bbox from '@turf/bbox';
 
-  $: locations = studyLocations.filter(({ isAverage }) => !isAverage).map(({ lat, lng, order }) => ({ lat, lng, order }));
+  $: locations = studyLocations.filter(({ isAverage }) => !isAverage).map(({ lat, lng, order, isSelected }) => ({ lat, lng, order, isSelected }));
 
-  $: collection = featureCollection(locations.map(({ lat, lng, order }) => point([lng, lat], { name: order })));
+  $: collection = featureCollection(locations.map(({ lat, lng, order, isSelected }) => point([lng, lat], { name: order, isSelected })));
 
   $: bounds = bbox(collection);
-
-  $: console.log({ collection, bounds });
 
   $: paint = [
     'settlement-minor-label',
