@@ -58,7 +58,9 @@
         values: scenarioData.map((values, i) => {
           const gmt = scenario[MEAN_TEMPERATURE_UID][i]?.value ?? 0;
           const wlvl = Math.round(gmt / 0.5) * 0.5;
-          const [min, value, max] = values.sort(); // This values are not always in the correct order of min, average (?), max.
+          // This values are not always in the correct order of min, average (?), max.
+          // https://stackoverflow.com/a/7000895/2314684
+          const [min, value, max] = values.sort((a, b) => a - b);
           return {
             gmt,
             wlvl,
