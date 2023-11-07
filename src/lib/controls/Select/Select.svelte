@@ -31,9 +31,9 @@
       class="text-text-weaker text-sm"
       for={selectId}>{label}</label
     >
-    <div class={`border rounded overflow-hidden flex gap-x-1 border-0`}>
+    <div class={`rounded overflow-hidden flex gap-x-1 border-0`}>
       <select
-        class={`py-1.5 text-right text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}
+        class={`py-1.5 px-2 pr-4 text-right text-sm font-bold appearance-none ${backgroundColor} ${labelColor}`}
         id={selectId}
         bind:value
         on:change={handleChange}
@@ -42,8 +42,7 @@
           <option value={option.uid || option.value}>{option[KEY_LABEL_LONG] || option[KEY_LABEL]}</option>
         {/each}
       </select>
-
-      <Chevron class="pointer-events-none stroke-theme-base" />
+      <Chevron class="-ml-5 pointer-events-none stroke-theme-base" />
     </div>
   </div>
 {/if}
