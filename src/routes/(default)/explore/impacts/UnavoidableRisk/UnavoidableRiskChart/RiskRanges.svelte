@@ -8,10 +8,10 @@
 
   $: years = $xScale.domain();
 
+  $: console.log({ years });
+
   // Sort array to have active scenarios at top
-  $: scenarios = $data
-    .filter((d) => d.uid !== UNAVOIDABLE_UID)
-    .sort((a, b) => Boolean(a.color) - Boolean(b.color));
+  $: scenarios = $data.filter((d) => d.uid !== UNAVOIDABLE_UID).sort((a, b) => Boolean(a.color) - Boolean(b.color));
   $: unavoidable = $data.filter((d) => d.uid === UNAVOIDABLE_UID)[0];
 
   function getRangeByYear(scenarios) {

@@ -16,8 +16,8 @@
   import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
-  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
-  import { sortBy, reverse, find, uniqBy } from 'lodash-es';
+  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME } from '$src/config.js';
+  import { sortBy, reverse, find, uniqBy, without } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -52,24 +52,25 @@
     }
 
     threshold = data.thresholds[thresholdIndex];
-    const timeframe = scenarios[0].timeframe[1];
 
-    const mergedScenarios = uniqBy([...scenarios, ...allScenarios], 'uid').filter((s) => s.endYear === timeframe);
+    const timeframe = scenarios[0][KEY_SCENARIO_TIMEFRAME];
+
+    const validYears = data.years.filter((y) => y <= timeframe);
+
+    const mergedScenarios = uniqBy([...scenarios, ...allScenarios], 'uid').filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
 
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {
         const scenario = find(mergedScenarios, { uid });
         if (!scenario) return;
-        const values = data.years
-          .filter((y) => y <= timeframe)
-          .map((year, yearIndex) => {
-            const value = scenarioData[thresholdIndex][yearIndex];
-            return {
-              year,
-              value,
-              formattedValue: formatValue(value, 'percent'),
-            };
-          });
+        const values = validYears.map((year, yearIndex) => {
+          const value = scenarioData[thresholdIndex][yearIndex];
+          return {
+            year,
+            value,
+            formattedValue: formatValue(value, 'percent'),
+          };
+        });
         return {
           ...scenario,
           values,
@@ -79,22 +80,22 @@
 
     processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
-    const unavoidableValues = data.years
-      .filter((y) => y <= timeframe)
-      .map((year, yearIndex) => {
-        const value = min(processedScenarios, (d) => d.values[yearIndex].value);
-        return {
-          year,
-          value,
-          formattedValue: formatValue(value, 'percent'),
-        };
-      });
+    const unavoidableValues = validYears.map((year, yearIndex) => {
+      const value = min(processedScenarios, (d) => d.values[yearIndex].value);
+      return {
+        year,
+        value,
+        formattedValue: formatValue(value, 'percent'),
+      };
+    });
 
     unavoidableValues.unshift({
       year: 'Today’s risk',
       value: data.today[thresholdIndex],
       formattedValue: formatValue(data.today[thresholdIndex], 'percent'),
     });
+
+    const xDomain = unavoidableValues.map(({ year }) => year);
 
     processedScenarios.unshift({
       uid: UNAVOIDABLE_UID,
@@ -124,6 +125,16 @@
       { label: 'Source', value: data.source },
     ];
 
+    // The endpoint might not always return data for all scenarios
+    const includedScenarios = Object.keys(data.data);
+    const legendItems = [...$CURRENT_SCENARIOS.filter(({ uid }) => includedScenarios.includes(uid))];
+
+    // Checking if there are more scenarios than the selected ones included
+    const hasOtherScenarios = without(includedScenarios, ...$CURRENT_SCENARIOS.map(({ uid }) => uid)).length;
+    if (hasOtherScenarios) {
+      legendItems.push({ label: 'Other scenarios', uid: 'other' });
+    }
+
     return {
       ...data,
       thresholds,
@@ -137,26 +148,23 @@
       dataDownloadParams,
       graphDownloadParams,
       chartInfo,
+      xDomain,
+      legendItems,
     };
   };
-
-  $: legendItems = [...$CURRENT_SCENARIOS, { label: 'Other scenarios', uid: 'other' }];
-
-  //$: console.log(legendItems, $CURRENT_SCENARIOS);
 </script>
 
 {#if $IS_COMBINATION_AVAILABLE}
   <LoadingWrapper
     let:props
-    let:asyncProps
     let:isLoading
+    let:asyncProps
     {process}
     asyncProps={$UN_AVOIDABLE_RISK_DATA}
     props={{
       ...$TEMPLATE_PROPS,
       allScenarios: $SELECTABLE_SCENARIOS,
       threshold,
-      legendItems,
       urlParams: $DOWNLOAD_URL_PARAMS,
     }}
   >
@@ -170,9 +178,10 @@
       graphDownloadParams={asyncProps.graphDownloadParams}
       chartUid={END_UN_AVOIDABLE_RISK}
       chartInfo={asyncProps.chartInfo}
+      {isLoading}
     >
       <div
-        class="mb-10"
+        class="mb-6"
         slot="controls"
       >
         {#if asyncProps.thresholds.length > 1}
@@ -184,22 +193,17 @@
         {/if}
       </div>
       <ColorLegend
-        items={props.legendItems}
+        items={asyncProps.legendItems}
         id={1}
       />
       <figure class="aspect-[2.5]">
         <UnavoidableRiskChart
-          {isLoading}
-          {...props}
-          {...asyncProps}
-          unit="percent"
+          xDomain={asyncProps.xDomain}
+          data={asyncProps.data}
         />
-        <!-- <figcaption class="mt-2">
-          <span class="text-xs text-contour-weaker"
-            >To avoid overlapping of scenarios, the vertical and horizontal
-            placement of each dot might not be perfectly correct.</span
-          >
-        </figcaption> -->
+        <figcaption class="mt-2">
+          <span class="text-xs text-contour-weaker">To avoid overlapping scenarios, the vertical and horizontal placement of each dot may not be perfectly correct.</span>
+        </figcaption>
       </figure>
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />

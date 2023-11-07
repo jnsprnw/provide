@@ -8,7 +8,7 @@ export default function popover(node, params) {
 
   const instance = tippy(node, {
     theme: 'dark',
-    allowHTML: false,
+    allowHTML: params.allowHTML ?? false,
     content: params.content,
     arrow: roundArrow,
     offset: [0, 10],

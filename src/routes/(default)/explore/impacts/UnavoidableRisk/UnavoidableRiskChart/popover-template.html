@@ -1,9 +1,4 @@
-<div class="bg-surface-base p-3 shadow-md">
-  <div class="text-sm text-contour-weak border-b border-contour-weakest pb-1">
-    {{scenario}}
-  </div>
-  <div class="flex gap-2 items-end justify-between text-lg pt-1">
-    <span class="font-bold">{{formattedValue}}</span
-    ><span class="text-contour-weaker text-md">{{year}}</span>
-  </div>
+<div class="flex flex-col">
+  <strong class="text-sm pb-1 font-bold">{{scenario}}</strong>
+  <span class="text-xs font-normal">{{formattedValue}} in {{year}} </span>
 </div>

@@ -25,13 +25,13 @@
       component: ImpactGeo,
       disabled: !$IS_COMBINATION_AVAILABLE,
     },
-    // {
-    //   slug: 'unavoidable-risk',
-    //   title: 'Avoidable vs. unavoidable',
-    //   description: 'What can be avoided through emissions reductions?',
-    //   component: UnAvoidableRisk,
-    //   disabled: !$IS_COMBINATION_AVAILABLE,
-    // },
+    {
+      slug: 'unavoidable-risk',
+      title: 'Avoidable vs. unavoidable',
+      description: 'What can be avoided through emissions reductions?',
+      component: UnAvoidableRisk,
+      disabled: !$IS_COMBINATION_AVAILABLE,
+    },
     // {
     //   slug: 'unavoidable-risk',
     //   title: 'Benefits of mitigation',

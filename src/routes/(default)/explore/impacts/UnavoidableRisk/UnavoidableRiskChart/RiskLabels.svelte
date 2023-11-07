@@ -1,10 +1,13 @@
 <script>
   import { getContext } from 'svelte';
   import { UNAVOIDABLE_UID } from '$src/config';
+  import { formatValue } from '$lib/utils/formatting';
   import { max } from 'd3-array';
 
   const { data, yScale } = getContext('LayerCake');
   $: unavoidable = $data.find((d) => d.uid === UNAVOIDABLE_UID);
+
+  $: lastYear = unavoidable.values[unavoidable.values.length - 1].year;
 
   $: unavoidableValue = unavoidable.values[unavoidable.values.length - 1].value;
   $: avoidableValue = max($data, (d) => d.values[d.values.length - 1].value);
@@ -14,13 +17,15 @@
       label: 'Unavoidable risk, even in a highest ambition scenario',
       min: 0,
       max: unavoidableValue,
-      color: 'border-theme-stronger/30',
+      color: 'border-theme-stronger/50',
+      hasRange: unavoidableValue > 0,
     },
     {
       label: 'Avoidable risk',
       min: unavoidableValue,
       max: avoidableValue,
-      color: 'border-theme-stronger/10',
+      color: 'border-theme-stronger/20',
+      hasRange: unavoidableValue !== avoidableValue,
     },
   ].map((tick) => {
     const y1 = $yScale(tick.min);
@@ -38,13 +43,17 @@
 </script>
 
 <div class="ml-2 w-full">
-  {#each ticks as { label, y2, height, color }, index}
+  {#each ticks as { label, y2, height, color, min, max, hasRange }, index}
     <div
       class={`absolute flex items-center border-l-4 ${color}`}
       style={`top: ${y2 - (index === 0 ? -1 : 0)}px; height: ${height}px;`}
     >
-      <div class="tick-label pl-3 text-sm text-contour-weak leading-tight">
-        {label}
+      <div class="tick-label pl-3 leading-tight flex flex-col">
+        <span
+          class="text-sm text-contour-weak leading-[1.1]"
+          class:text-contour-weakest={!hasRange}>{label}</span
+        >
+        {#if hasRange}<span class="text-xs text-contour-weaker">{formatValue(min * 100, 'percent-in-range')}–{formatValue(max, 'percent')} in {lastYear}</span>{/if}
       </div>
     </div>
   {/each}

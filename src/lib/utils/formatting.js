@@ -31,6 +31,7 @@ const indicatorFormats = {
   currency: f(FORMAT_CURRENCY),
   float: f(FORMAT_FLOAT),
   percent: f(FORMAT_PERCENT),
+  'percent-in-range': f('.0f'),
   year: f(FORMAT_YEAR),
   'degrees-celsius': f(FORMAT_CELSIUS),
   'gigaton-co2eq-year': f(FORMAT_EMISSION),
@@ -45,15 +46,8 @@ const suffixes = {
   degree: ' °',
 };
 
-export const formatValue = (
-  value,
-  indicatorId = DEFAULT_FORMAT_UID,
-  { addSuffix = true, formatter: customFormatter = undefined } = {}
-) => {
-  const formatter =
-    customFormatter ||
-    indicatorFormats[indicatorId] ||
-    indicatorFormats['default'];
+export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined } = {}) => {
+  const formatter = customFormatter || indicatorFormats[indicatorId] || indicatorFormats['default'];
   const str = formatter(value);
   const suffix = addSuffix && suffixes[indicatorId];
   return suffix ? str + suffix : str;
