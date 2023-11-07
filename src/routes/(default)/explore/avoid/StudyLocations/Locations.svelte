@@ -49,9 +49,12 @@
           {#if !isAverage}
             <i
               class="not-italic rounded-full bg bg-contour-base p-1 text-white text-xs font-bold w-4 h-4 overflow-hidden text-center inline-flex items-center content-center justify-center leading-none"
-              >{order}</i
+              class:bg-theme-base={isSelected}>{order}</i
             >{/if}
-          <span class:font-bold={isSelected}>{label}</span>
+          <span
+            class:font-bold={isSelected}
+            class:text-theme-base={isSelected}>{label}</span
+          >
         </td>
         <td>
           <span
@@ -73,7 +76,7 @@
             >
               <span
                 class="text-white text-center block text-sm"
-                use:tooltip={{ content: `Something happens in ${labelScenario} in ${label}` }}>{year ?? 'N/A'}</span
+                use:tooltip={{ content: `Something happens in ${labelScenario} in ${label} at year ${year}. It is ${isAvoidable ? '' : 'not'} avoidable` }}>{year ?? 'N/A'}</span
               >
             </div>
           </td>
