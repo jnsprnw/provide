@@ -8,7 +8,7 @@
   $: buttonLabel = $STUDY_LOCATIONS.find(({ uid }) => uid === $SELECTED_STUDY_LOCATION)?.label;
 </script>
 
-<section class="mr-2">
+<section>
   <PopoverSelect
     label="Location"
     {buttonLabel}

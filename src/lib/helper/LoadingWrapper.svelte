@@ -8,6 +8,8 @@
   export let isEmpty = true; // true only on first load if no data is loaded yet
   export let isLoading; // true if no data or only partial data is loaded yet
   export let isFailed = false;
+  export let warningSizeSmall = false;
+  export let warningBackground = true;
 
   let currentProps;
   let currentAsyncProps; // Always holds previous props and only gets updated once all data is loaded
@@ -47,12 +49,24 @@
 {#if isFailed}
   <slot name="failed">
     <div
-      class="text-center py-36 flex flex-col bg-surface-weaker border border-surface-weakest rounded-sm"
+      class="text-center py-36 px-2 flex flex-col gap-y-2 border-surface-weakest rounded-sm"
+      class:bg-surface-weaker={warningBackground}
+      class:border={warningBackground}
+      class:py-8={warningSizeSmall}
       role="alert"
     >
-      <span class="text-lg font-bold">⚠️ Data could not be loaded for this graph</span>
-      <span class="text-sm">This is probably because the data is not available for this selection.</span>
-      <span class="text-sm">Try another combination of geography, indicator and scenarios.</span>
+      <span
+        class="text-lg font-bold"
+        class:text-base={warningSizeSmall}>⚠️ Data could not be loaded for this graph</span
+      >
+      <div
+        class="flex-col text-sm"
+        class:flex={!warningSizeSmall}
+        class:text-xs={warningSizeSmall}
+      >
+        <span>This is probably because the data is not available for this selection.</span>
+        <span>Try another combination of geography, indicator and scenarios.</span>
+      </div>
     </div>
   </slot>
 {:else if isEmpty}

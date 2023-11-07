@@ -1,11 +1,11 @@
 <script>
   import ImpactTime from './ImpactTime/ImpactTime.svelte';
   import ImpactGeo from './ImpactGeo/ImpactGeo.svelte';
-  import UnAvoidableRisk from './UnavoidableRisk/UnavoidableRisk.svelte';
+  import UnAvoidableRisk from '../UnavoidableRisk/UnavoidableRisk.svelte';
   import ScenarioSelection from './ScenarioSelection/ScenarioSelection.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
-  import { IS_COMBINATION_AVAILABLE, CURRENT_INDICATOR, IS_EMPTY_SELECTION } from '$stores/state';
+  import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;

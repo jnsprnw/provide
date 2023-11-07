@@ -8,7 +8,7 @@
   $: buttonLabel = $LIKELIHOODS.find(({ uid }) => uid === $SELECTED_LIKELIHOOD_LEVEL)?.label;
 </script>
 
-<section class="mr-2">
+<section>
   <PopoverSelect
     label="Certainty Levels"
     {buttonLabel}

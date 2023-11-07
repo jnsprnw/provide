@@ -38,6 +38,8 @@
   props={{
     ...$TEMPLATE_PROPS,
   }}
+  warningSizeSmall={true}
+  warningBackground={false}
 >
   <Text data={asyncProps.avoidingReferenceData} />
   <ImpactLevel data={asyncProps.avoidingReferenceData} />

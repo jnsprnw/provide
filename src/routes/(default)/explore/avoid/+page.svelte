@@ -46,9 +46,11 @@
     slot="navigation"
     class="flex flex-col gap-4"
   >
-    <Reference />
-    <SelectionCertaintyLevels />
-    <SelectionStudyLocations />
+    <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col">
+      <Reference />
+      <SelectionCertaintyLevels />
+      <SelectionStudyLocations />
+    </div>
     <SimpleNav {sections} />
   </aside>
   {#each sections as section}
