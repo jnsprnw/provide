@@ -1,10 +1,13 @@
 <script>
   import ThresholdLevels from './ThresholdLevels/ThresholdLevels.svelte';
   import StudyLocations from './StudyLocations/StudyLocations.svelte';
+  import UnAvoidableRisk from '../UnavoidableRisk/UnavoidableRisk.svelte';
   import Reference from './Reference/Reference.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
-  import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
+  import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION, SELECTABLE_SCENARIOS } from '$stores/state';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS, KEY_SCENARIO_TIMEFRAME } from '$config';
+  import THEME from '$styles/theme-store.js';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
   import SelectionCertaintyLevels from './Selection/CertaintyLevels/CertaintyLevels.svelte';
   import SelectionStudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
@@ -13,6 +16,10 @@
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
   let THRESHOLD_LEVELS_DATA = writable({});
+
+  $: currentScenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid) => $SELECTABLE_SCENARIOS.find((scenario) => scenario.uid === uid))
+    .filter(Boolean)
+    .map(({ uid, label, [KEY_SCENARIO_TIMEFRAME]: timeframe }, i) => ({ uid, label, [KEY_SCENARIO_TIMEFRAME]: timeframe, color: $THEME.color.category.base[i] }));
 
   $: sections = [
     {
@@ -28,6 +35,14 @@
       description: 'Lorem ipsum dolor dolor dolor',
       component: StudyLocations,
       store: THRESHOLD_LEVELS_DATA,
+    },
+    {
+      slug: 'unavoidable-risk',
+      title: 'Avoidable vs. unavoidable',
+      description: 'What can be avoided through emissions reductions?',
+      component: UnAvoidableRisk,
+      disabled: !$IS_COMBINATION_AVAILABLE,
+      currentScenarios: currentScenarios,
     },
   ];
 </script>

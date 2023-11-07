@@ -19,7 +19,7 @@
   // $: studyLocation = $SELECTED_STUDY_LOCATION;
   $: isWholeUrbanArea = $SELECTED_STUDY_LOCATION === UID_STUDY_LOCATION_AVERAGE;
 
-  $: console.log({ data, unit });
+  // $: console.log({ data, unit });
 
   $: datum = data.data.study_locations[$SELECTED_STUDY_LOCATION];
 

@@ -28,6 +28,19 @@
 
   export let title;
 
+  /** @type {Array} A list of currently selected scenarios.
+  This is nesecssary because of the two modes: The user can select scenarios in Future Impacts. In this case we use the  */
+  export let currentScenarios = [];
+
+  $: currentSelectedScenarios = (Array.isArray(currentScenarios) && currentScenarios.length ? currentScenarios : $CURRENT_SCENARIOS).map(
+    ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe }) => ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe })
+  );
+
+  $: console.log({ currentSelectedScenarios });
+
+  $: console.log({ currentScenarios });
+  $: console.log({ $CURRENT_SCENARIOS });
+
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(UN_AVOIDABLE_RISK_DATA, {
       endpoint: END_UN_AVOIDABLE_RISK,
@@ -38,7 +51,7 @@
       },
     });
 
-  $: process = ({ data }, { scenarios, allScenarios, urlParams }) => {
+  $: process = ({ data }, { selectedScenarios, urlParams }) => {
     const thresholds = data.thresholds.map((value) => ({
       label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
       value,
@@ -53,11 +66,11 @@
 
     threshold = data.thresholds[thresholdIndex];
 
-    const timeframe = scenarios[0][KEY_SCENARIO_TIMEFRAME];
+    const timeframe = selectedScenarios[0][KEY_SCENARIO_TIMEFRAME];
 
     const validYears = data.years.filter((y) => y <= timeframe);
 
-    const mergedScenarios = uniqBy([...scenarios, ...allScenarios], 'uid').filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
+    const mergedScenarios = selectedScenarios.filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
 
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {
@@ -117,7 +130,7 @@
     const dataDownloadParams = { ...urlParams, threshold };
     const graphDownloadParams = {
       ...dataDownloadParams,
-      scenarios: scenarios.map((d) => d.uid),
+      scenarios: selectedScenarios.map((d) => d.uid),
     };
 
     const chartInfo = [
@@ -127,10 +140,10 @@
 
     // The endpoint might not always return data for all scenarios
     const includedScenarios = Object.keys(data.data);
-    const legendItems = [...$CURRENT_SCENARIOS.filter(({ uid }) => includedScenarios.includes(uid))];
+    const legendItems = [...currentSelectedScenarios.filter(({ uid }) => includedScenarios.includes(uid))];
 
     // Checking if there are more scenarios than the selected ones included
-    const hasOtherScenarios = without(includedScenarios, ...$CURRENT_SCENARIOS.map(({ uid }) => uid)).length;
+    const hasOtherScenarios = without(includedScenarios, ...currentSelectedScenarios.map(({ uid }) => uid)).length;
     if (hasOtherScenarios) {
       legendItems.push({ label: 'Other scenarios', uid: 'other' });
     }
@@ -163,7 +176,7 @@
     asyncProps={$UN_AVOIDABLE_RISK_DATA}
     props={{
       ...$TEMPLATE_PROPS,
-      allScenarios: $SELECTABLE_SCENARIOS,
+      selectedScenarios: currentSelectedScenarios,
       threshold,
       urlParams: $DOWNLOAD_URL_PARAMS,
     }}
@@ -181,7 +194,7 @@
       {isLoading}
     >
       <div
-        class="mb-6"
+        class="0"
         slot="controls"
       >
         {#if asyncProps.thresholds.length > 1}
@@ -200,6 +213,7 @@
         <UnavoidableRiskChart
           xDomain={asyncProps.xDomain}
           data={asyncProps.data}
+          currentScenarios={currentSelectedScenarios}
         />
         <figcaption class="mt-2">
           <span class="text-xs text-contour-weaker">To avoid overlapping scenarios, the vertical and horizontal placement of each dot may not be perfectly correct.</span>

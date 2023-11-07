@@ -10,6 +10,7 @@
 
   export let data;
   export let xDomain;
+  export let currentScenarios;
 
   const unit = 'percent';
   const xKey = 'year';
@@ -48,7 +49,7 @@
           ticksHighlighted={yDomain}
         />
         <RiskRanges />
-        <RiskLevels />
+        <RiskLevels {currentScenarios} />
       </Svg>
     </LayerCake>
   </div>
