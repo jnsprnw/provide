@@ -45,7 +45,16 @@
 </script>
 
 {#if isFailed}
-  <slot name="failed"><div class="py-24 rounded-lg text-center text-lg font-bold">⚠️ Data could not be loaded</div></slot>
+  <slot name="failed">
+    <div
+      class="text-center py-36 flex flex-col bg-surface-weaker border border-surface-weakest rounded-sm"
+      role="alert"
+    >
+      <span class="text-lg font-bold">⚠️ Data could not be loaded for this graph</span>
+      <span class="text-sm">This is probably because the data is not available for this selection.</span>
+      <span class="text-sm">Try another combination of geography, indicator and scenarios.</span>
+    </div>
+  </slot>
 {:else if isEmpty}
   <slot name="placeholder" />
 {:else}
