@@ -1,4 +1,5 @@
 import tippy from 'tippy.js';
+import { roundArrow } from 'tippy.js';
 
 export default function popover(node, params) {
   if (params.content) {
@@ -6,11 +7,11 @@ export default function popover(node, params) {
   }
 
   const instance = tippy(node, {
-    theme: 'tomato',
+    theme: 'dark',
     allowHTML: false,
     content: params.content,
-    arrow: false,
-    offset: [0, 5],
+    arrow: roundArrow,
+    offset: [0, 10],
     duration: [300, 0],
   });
 
