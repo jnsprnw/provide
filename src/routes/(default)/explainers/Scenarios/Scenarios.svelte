@@ -55,6 +55,7 @@
   />
   <Table
     {scenariosListed}
+    {selectedTimeframe}
     bind:selectedScenarios={$selectedScenarios}
   />
   <footer class="grid gap-x-6 grid-cols-2">

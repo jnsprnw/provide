@@ -7,26 +7,42 @@
 
   export let scenariosListed = [];
   export let selectedScenarios = [];
+  export let selectedTimeframe;
 
   function checkContrastRatio(color) {
     return chroma.contrast(color, 'black') > 4.5;
   }
 
-  const COLUMNS = [
-    ['Peak GMT', 'gmtPeak', ([value, year]) => `${value} in ${year}`, ([v]) => v],
-    ['2100 GMT', 'gmt2100', (value) => formatValue(value, 'degrees-celsius')],
-    ['Cooling rate after peak', 'coolingAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')} / decade`],
-    ['2050 emissions', 'emissions2050', (value) => `${formatValue(value, 'integer')} GtCO₂`],
-    ['2100 emissions', 'emissions2100', (value) => `${formatValue(value, 'integer')} GtCO₂`],
-    ['Timing of NZ CO2', 'timingNZCO2', (value) => value],
-    ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
-    ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent')],
-    ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent')],
-    ['Likelihood PW < 3°C', 'likelihood3', (value) => formatValue(value, 'percent')],
-  ];
+  // The columns are described in arrays with the following function:
+  // Label
+  // Access key in the scenario characteristics
+  // Formatting function. In some cases it is in degrees or a value in a year. The fallback is a simple return of the value
+  // The output of the function is used for the coloring. The fallback is a simple return of the value
+  const COLUMNS = {
+    2100: [
+      ['Peak GMT', 'gmtPeak', ([value, year]) => `${formatValue(value, 'degrees-celsius')} in ${year}`, ([v]) => v + v * Math.random()],
+      ['2100 GMT', 'gmt2100', (value) => formatValue(value, 'degrees-celsius'), (v) => v + v * Math.random()],
+      ['Cooling rate after peak', 'coolingRateAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')} / decade`, (v) => v + v * Math.random()],
+      ['2050 emissions', 'emissions2050', (value) => `${formatValue(value, 'integer')} GtCO₂`, (v) => v + v * Math.random()],
+      ['2100 emissions', 'emissions2100', (value) => `${formatValue(value, 'integer')} GtCO₂`, (v) => v + v * Math.random()],
+      ['Timing of NZ CO2', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
+      ['Timing of NZ GHG', 'timingNZGHG', (value) => value, (v) => v + v * Math.random()],
+      ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
+      ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
+      ['Likelihood PW < 3°C', 'likelihood3', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
+    ],
+    2300: [
+      ['Peak GMT', 'gmtPeak', ([value, year]) => `${formatValue(value, 'degrees-celsius')} in ${year}`, ([v]) => v + v * Math.random()],
+      ['2100 GMT', 'gmt2100', (value) => formatValue(value, 'degrees-celsius'), (v) => v + v * Math.random()],
+      ['2300 GMT', 'gmt2300', (value) => formatValue(value, 'degrees-celsius'), (v) => v + v * Math.random()],
+      ['Cooling rate after peak', 'coolingAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')} / decade`, (v) => v + v * Math.random()],
+      ['Timing of NZ CO2', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
+      ['Timing of NZ GHG', 'timingNZGHG', (value) => value, (v) => v + v * Math.random()],
+    ],
+  };
 
   // Get the values for each key and create color scales for each.
-  $: tableColumns = COLUMNS.map(([label, key, formatting = (d) => d, get = (d) => d]) => {
+  $: tableColumns = COLUMNS[selectedTimeframe].map(([label, key, formatting = (d) => d, get = (d) => d]) => {
     const values = scenariosListed.map((s) => get(s[KEY_CHARACTERISTICS][key]));
     const domain = extent(values);
     const scale = chroma.scale(['#fafa6e', '#2A4858']).domain(domain).mode('lch'); // TODO: Change colors.
