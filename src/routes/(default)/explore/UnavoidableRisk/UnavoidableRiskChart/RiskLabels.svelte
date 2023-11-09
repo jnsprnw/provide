@@ -10,7 +10,7 @@
   $: lastYear = unavoidable.values[unavoidable.values.length - 1].year;
 
   $: unavoidableValue = unavoidable.values[unavoidable.values.length - 1].value;
-  $: avoidableValue = max($data, (d) => d.values[d.values.length - 1].value);
+  $: avoidableValue = max($data, (d) => d.values[d.values.length - 1]?.value);
 
   $: ticks = [
     {
