@@ -54,7 +54,7 @@ export const LOCALSTORE_PARAMETERS = 'parameters';
 
 export const UID_STUDY_LOCATION_AVERAGE = 'city-average';
 
-export const MEAN_TEMPERATURE_UID = 'terclim-mean-temperature';
+export const MEAN_TEMPERATURE_UID = 'gmt';
 export const EMISSIONS_UID = 'emissions';
 export const UNAVOIDABLE_UID = 'unavoidable';
 

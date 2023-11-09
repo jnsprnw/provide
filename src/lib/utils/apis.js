@@ -109,6 +109,10 @@ export const loadMetaData = function (svelteFetch = fetch) {
 
         const timelineData = Object.fromEntries(
           SCENARIO_DATA_KEYS.map((key) => {
+            if (!scenario.hasOwnProperty(key)) {
+              console.warn(`${key} is missing in scenario meta data.`);
+              return [key, null];
+            }
             const { data, yearStart, yearStep } = scenario[key];
             // Some scenarios have no emissions data (data[0] = null)
             if (data) {
@@ -128,6 +132,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
               });
               return [key, seriesData];
             } else {
+              console.warn(`${key} has no data in scenario meta data.`);
               return [key, null];
             }
           })
@@ -139,7 +144,6 @@ export const loadMetaData = function (svelteFetch = fetch) {
           ...timelineData,
           [KEY_SCENARIO_YEAR_DESCRIPTION]: descriptionYears,
           [KEY_CHARACTERISTICS]: scenario.characteristics,
-          endYear: scenario.timeframe[1],
         };
       }),
     });
