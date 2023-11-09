@@ -11,25 +11,15 @@
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
   } from '$src/stores/state';
-  import {
-    IMPACT_GEO_YEARS,
-    IMPACT_GEO_DISPLAY_OPTIONS,
-    END_GEO_SHAPE,
-    END_IMPACT_GEO,
-    DEFAULT_IMPACT_GEO_YEAR,
-  } from '$src/config.js';
+  import { IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS, END_GEO_SHAPE, END_IMPACT_GEO, DEFAULT_IMPACT_GEO_YEAR } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
+  import { extractTimeframe } from '$utils/meta.js';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
 
   import Controls from './Controls.svelte';
   import Maps from './Maps.svelte';
-  import {
-    getColorScale,
-    coordinatesToRectGrid,
-    calculateDifference,
-    coordinatesToContours,
-  } from '$utils/geo.js';
+  import { getColorScale, coordinatesToRectGrid, calculateDifference, coordinatesToContours } from '$utils/geo.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
 
@@ -42,14 +32,9 @@
 
   $: {
     // Reset year if the currently selected one is not available
-    year =
-      $CURRENT_SCENARIOS[0].timeframe[1] >= year
-        ? year
-        : DEFAULT_IMPACT_GEO_YEAR;
+    year = extractTimeframe($CURRENT_SCENARIOS[0]) >= year ? year : DEFAULT_IMPACT_GEO_YEAR;
   }
-  $: availableYears = IMPACT_GEO_YEARS.filter(
-    (year) => year.uid <= $CURRENT_SCENARIOS[0].timeframe[1]
-  );
+  $: availableYears = IMPACT_GEO_YEARS.filter((year) => year.uid <= extractTimeframe($CURRENT_SCENARIOS[0]));
 
   $: if ($IS_COMBINATION_AVAILABLE) {
     fetchData(
@@ -58,7 +43,7 @@
         endpoint: END_IMPACT_GEO,
         params: {
           geography: $CURRENT_GEOGRAPHY.uid,
-          "geography-type": $CURRENT_GEOGRAPHY.geographyType,
+          'geography-type': $CURRENT_GEOGRAPHY.geographyType,
           indicator: $CURRENT_INDICATOR.uid,
           scenario,
           year,
@@ -89,23 +74,21 @@
 
     const colorScale = getColorScale(renderedData.map((d) => d.data));
 
-    const geoData = renderedData.map(
-      ({ data, coordinatesOrigin: origin, resolution, ...d }) => {
-        const cellCount = data.length * data[0].length;
-        const geoData =
-          cellCount > 10000
-            ? coordinatesToContours(data, { resolution, origin, colorScale })
-            : coordinatesToRectGrid(data, {
-                origin,
-                resolution,
-                colorScale,
-              });
-        return {
-          ...d,
-          data: geoData,
-        };
-      }
-    );
+    const geoData = renderedData.map(({ data, coordinatesOrigin: origin, resolution, ...d }) => {
+      const cellCount = data.length * data[0].length;
+      const geoData =
+        cellCount > 10000
+          ? coordinatesToContours(data, { resolution, origin, colorScale })
+          : coordinatesToRectGrid(data, {
+              origin,
+              resolution,
+              colorScale,
+            });
+      return {
+        ...d,
+        data: geoData,
+      };
+    });
 
     const { model, source, resolution } = data[0].data;
     const formattedResolution = formatValue(resolution, 'degree', {
@@ -198,7 +181,10 @@
           bind:year
         />
       </svelte:fragment>
-      <Maps {...props} {...asyncProps} />
+      <Maps
+        {...props}
+        {...asyncProps}
+      />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
