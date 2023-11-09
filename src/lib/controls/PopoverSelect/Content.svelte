@@ -14,6 +14,8 @@
   export let currentFilterUid;
   export let disabledMessage = undefined;
 
+  let hoveredItem = null;
+
   $: current = items.find((d) => d.uid === currentUid || (currentUid ?? []).includes(d.uid));
 
   // Since we don't have external state that keeps track of which filter was selected
@@ -33,19 +35,16 @@
           // We loop through the list of filters and select the first one that is not disabled
           currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
         }
+        if (!currentFilterUid) {
+          console.warn(`Could not find any item in list of filters.`);
+        }
       }
     }
   });
 
-  let hoveredItem = null;
   $: detailsItem = items.find((d) => d.uid === hoveredItem) || current;
 
-  // $: console.log({ detailsItem });
-
-  $: availableItems = items.filter((item) => item[filterKey] === currentFilterUid);
-  $: console.log({ availableItems });
-
-  $: console.log({ currentFilterUid });
+  $: availableItems = currentFilterUid ? items.filter((item) => item[filterKey] === currentFilterUid) : items;
 </script>
 
 {#if filters}
