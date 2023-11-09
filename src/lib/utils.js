@@ -1,4 +1,5 @@
 import _, { uniq } from 'lodash-es';
+import { extractTimeframe } from '$utils/meta.js';
 
 export const formatReadableList = function (arr, key) {
   const segments = formatObjArr(arr, key);
@@ -43,7 +44,7 @@ export function extractTimeframesFromScenarios(available, selectable) {
   const valid = uniq(selectable.map((s) => s.endYear));
 
   return _(available)
-    .map((s) => s.endYear)
+    .map((s) => extractTimeframe(s))
     .uniq()
     .sort()
     .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))
