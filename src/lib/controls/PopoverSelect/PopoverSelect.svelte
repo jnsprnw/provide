@@ -3,11 +3,9 @@
   import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
 
-  let clazz;
-  export { clazz as class };
-  export let panelClass;
+  export let panelClass = '';
   export let panelPlacement = 'bottom-start';
-  export let buttonClass;
+  export let buttonClass = '';
   export let label;
   export let buttonLabel;
   export let size = 'xl';
@@ -35,7 +33,7 @@
   };
 </script>
 
-<Popover class={`relative w-full ${clazz}`}>
+<Popover class={`relative w-full ${$$restProps.class}`}>
   <span class="uppercase text-xs tracking-widest font-bold text-contour-weak pl-1 mb-2 inline-block">{label}</span>
   <PopoverButton
     use={[popperRef]}
