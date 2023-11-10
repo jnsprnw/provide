@@ -16,6 +16,7 @@
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
   let THRESHOLD_LEVELS_DATA = writable({});
+  let REFERENCE_STORE = writable({});
 
   $: currentScenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid) => $SELECTABLE_SCENARIOS.find((scenario) => scenario.uid === uid))
     .filter(Boolean)
@@ -27,6 +28,7 @@
       title: 'Threshold levels',
       description: 'Lorem ipsum dolor dolor dolor',
       component: ThresholdLevels,
+      disabled: false,
       props: {
         store: THRESHOLD_LEVELS_DATA,
       },
@@ -36,6 +38,7 @@
       title: 'Locations',
       description: 'Lorem ipsum dolor dolor dolor',
       component: StudyLocations,
+      disabled: false,
       props: {
         store: THRESHOLD_LEVELS_DATA,
       },
@@ -45,7 +48,7 @@
       title: 'Avoidable vs. unavoidable',
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
-      disabled: !$IS_COMBINATION_AVAILABLE,
+      disabled: false,
       props: {
         currentScenarios: currentScenarios,
       },
@@ -67,8 +70,8 @@
     slot="navigation"
     class="flex flex-col gap-4"
   >
-    <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col pr-6 lg:pr-12">
-      <Reference />
+    <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col gap-y-6 pr-6 lg:pr-12">
+      <Reference store={REFERENCE_STORE} />
       <SelectionCertaintyLevels />
       <SelectionStudyLocations />
     </div>
