@@ -2,7 +2,7 @@ import { formatReadableList } from '$lib/utils.js';
 import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
-import _, { every, get, keyBy, map, reduce, without, isEqual } from 'lodash-es';
+import _, { every, get, keyBy, map, reduce, without, isEqual, isString } from 'lodash-es';
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { getLocalStorage, setLocalStorage, getAllLocalStorage } from './utils.js';
@@ -141,10 +141,11 @@ export const IS_EMPTY_INDICATOR = derived(CURRENT_INDICATOR_UID, ($uid) => {
   return !Boolean($uid);
 });
 
-export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID, INDICATORS, AVAILABLE_INDICATORS], ([$uid, $allIndicators, $validIndicators]) => {
+export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID, AVAILABLE_INDICATORS], ([$uid, $validIndicators]) => {
+  // This checks if the currently selected indicator is valid given the list of valid indicators
   if (typeof $uid === 'undefined') {
     setLocalStorage(LOCALSTORE_INDICATOR, undefined);
-    return true;
+    return false;
   }
   const isValidIndicator = $validIndicators.map(({ uid }) => uid).includes($uid);
   // console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
@@ -253,13 +254,15 @@ export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(CURRENT_INDICATOR_PARAM
 export const CURRENT_SCENARIOS_UID = (() => {
   const { subscribe, set, update } = writable(
     getLocalStorage(LOCALSTORE_SCENARIOS, DEFAULT_SCENARIOS_UID, (v) => {
-      let value;
-      try {
-        value = JSON.parse(v);
-      } catch (e) {
-        console.log('CURRENT_SCENARIOS_UID default scenarios', v, e);
-        value = DEFAULT_SCENARIOS_UID;
+      let value = DEFAULT_SCENARIOS_UID;
+      if (Boolean(v) && isString(value) && value.trim() !== '') {
+        try {
+          value = JSON.parse(v);
+        } catch (e) {
+          console.log('Error loading current scenarios from localstore:', e);
+        }
       }
+
       return value;
     })
   );
@@ -311,7 +314,7 @@ if (browser) {
     const selectableScenarios = indicator?.availableScenarios ?? [];
     if (selectableScenarios.length) {
       // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
-      console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
+      // console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
       const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
       const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
       console.log({ validScenarios, currentScenarios });
@@ -334,7 +337,7 @@ export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCEN
 export const DICTIONARY_CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS], ([$currentScenarios]) => keyBy($currentScenarios, 'uid'));
 
 export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SCENARIOS, $CURRENT_INDICATOR]) => {
-  console.log('AVAILABLE_SCENARIOS', { $SCENARIOS });
+  // console.log('AVAILABLE_SCENARIOS', { $SCENARIOS });
   return $SCENARIOS.map((scenario) => {
     return {
       ...scenario,
