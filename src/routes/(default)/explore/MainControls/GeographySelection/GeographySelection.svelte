@@ -12,7 +12,7 @@
 
   let GEO_SHAPE_DATA = writable({});
 
-  // If the currently selected geography is available, the label is displayed. Otherwise a error message.
+  // If the currently selected geography is available, the label is displayed. Otherwise an error message.
   $: buttonLabel = $CURRENT_GEOGRAPHY?.label;
 
   $: geographyTypes = $AVAILABLE_GEOGRAPHY_TYPES;
