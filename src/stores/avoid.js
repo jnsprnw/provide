@@ -12,7 +12,7 @@ SELECTED_STUDY_LOCATION.subscribe((value) => {
   setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
 });
 
-export const LEVEL_OF_IMPACT = writable(getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, 1));
+export const LEVEL_OF_IMPACT = writable(getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, undefined));
 LEVEL_OF_IMPACT.subscribe((value) => {
   setLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, value);
 });
