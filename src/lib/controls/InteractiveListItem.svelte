@@ -16,6 +16,7 @@
   on:mouseover={() => (hovered = uid)}
   on:mouseleave={() => (hovered = null)}
   on:blur={() => (hovered = null)}
+  data-uid={uid}
 >
   {#if icon}<span>{icon}</span>{/if}
   <span
