@@ -36,10 +36,10 @@
     ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe }) => ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe })
   );
 
-  $: console.log({ currentSelectedScenarios });
+  // $: console.log({ currentSelectedScenarios });
 
-  $: console.log({ currentScenarios });
-  $: console.log({ $CURRENT_SCENARIOS });
+  // $: console.log({ currentScenarios });
+  // $: console.log({ $CURRENT_SCENARIOS });
 
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(UN_AVOIDABLE_RISK_DATA, {
