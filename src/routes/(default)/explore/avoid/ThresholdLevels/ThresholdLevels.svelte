@@ -9,10 +9,8 @@
   import Text from './Text.svelte';
 
   export let store;
-
   export let title;
 
-  const level_of_impact = 140;
   const geography = 'lisbon';
 
   $: !$IS_EMPTY_INDICATOR &&
@@ -56,10 +54,7 @@
     chartUid={END_AVOIDING_IMPACTS}
     templateProps={props}
   >
-    <Text
-      data={asyncProps.thresholdLevelsData}
-      {level_of_impact}
-    />
+    <Text data={asyncProps.thresholdLevelsData} />
   </ChartFrame>
   <LoadingPlaceholder slot="placeholder" />
 </LoadingWrapper>
