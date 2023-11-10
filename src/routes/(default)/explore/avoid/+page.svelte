@@ -27,14 +27,18 @@
       title: 'Threshold levels',
       description: 'Lorem ipsum dolor dolor dolor',
       component: ThresholdLevels,
-      store: THRESHOLD_LEVELS_DATA,
+      props: {
+        store: THRESHOLD_LEVELS_DATA,
+      },
     },
     {
       slug: 'locations',
       title: 'Locations',
       description: 'Lorem ipsum dolor dolor dolor',
       component: StudyLocations,
-      store: THRESHOLD_LEVELS_DATA,
+      props: {
+        store: THRESHOLD_LEVELS_DATA,
+      },
     },
     {
       slug: 'unavoidable-risk',
@@ -42,7 +46,9 @@
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: !$IS_COMBINATION_AVAILABLE,
-      currentScenarios: currentScenarios,
+      props: {
+        currentScenarios: currentScenarios,
+      },
     },
   ];
 </script>
@@ -77,7 +83,8 @@
       >
         <svelte:component
           this={section.component}
-          {...section}
+          title={section.title}
+          {...section.props}
         />
       </section>
     {/if}
