@@ -145,7 +145,7 @@ export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID
   // This checks if the currently selected indicator is valid given the list of valid indicators
   if (typeof $uid === 'undefined') {
     setLocalStorage(LOCALSTORE_INDICATOR, undefined);
-    return false;
+    return false; // TODO: Check what to do here.
   }
   const isValidIndicator = $validIndicators.map(({ uid }) => uid).includes($uid);
   // console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
@@ -317,7 +317,7 @@ if (browser) {
       // console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
       const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
       const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
-      console.log({ validScenarios, currentScenarios });
+      // console.log({ validScenarios, currentScenarios });
       if (!isEqual(validScenarios, currentScenarios)) {
         console.log(`INVALID SCENARIO FOUND.`);
         CURRENT_SCENARIOS_UID.set(validScenarios);
