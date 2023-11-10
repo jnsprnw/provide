@@ -7,6 +7,7 @@ import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { getLocalStorage, setLocalStorage, getAllLocalStorage } from './utils.js';
 import { extractTimeframesFromScenarios } from '$lib/utils.js';
+import { extractTimeframe } from '$utils/meta.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { GEOGRAPHY_TYPES, INDICATORS, SECTORS, DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
@@ -280,7 +281,7 @@ export const CURRENT_SCENARIOS_UID = (() => {
         // prevent the selection of a new scenario if the three selected are not available
         const availableSelected = selectedUids.filter((uid) => availableScenariosUids.includes(uid));
         // Find current timeframe to see if the timeframe changed
-        const currentTimeframe = scenarios[availableSelected[0]]?.timeframe[1];
+        const currentTimeframe = extractTimeframe(scenarios[availableSelected[0]]);
         const timeframeChanged = currentTimeframe !== timeframe;
         // If timeframe changed we want to remove all the old scenarios
         if (timeframeChanged) return [id];
