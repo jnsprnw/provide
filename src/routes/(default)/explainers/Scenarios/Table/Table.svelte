@@ -1,7 +1,7 @@
 <script>
   import { KEY_CHARACTERISTICS } from '$config';
   import chroma from 'chroma-js';
-  import { extent } from 'd3-array';
+  import { extent, max, sum } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
   import THEME from '$styles/theme-store.js';
 
@@ -9,8 +9,13 @@
   export let selectedScenarios = [];
   export let selectedTimeframe;
 
-  function checkContrastRatio(color) {
-    return chroma.contrast(color, 'black') > 4.5;
+  function hasBlackMoreContrast(color) {
+    return chroma.contrast(color, 'black') > chroma.contrast(color, 'white');
+  }
+
+  function parseTailwindColor(rgbaStr) {
+    const parts = rgbaStr.replace('rgba(', '').replace(')', '').split(',');
+    return chroma([parts[0], parts[1], parts[2], parseInt(parts[3]) / 100]).hex();
   }
 
   // The columns are described in arrays with the following function:
@@ -25,7 +30,7 @@
       ['Cooling rate after peak', 'coolingRateAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')} / decade`, (v) => v + v * Math.random()],
       ['2050 emissions', 'emissions2050', (value) => `${formatValue(value, 'integer')} GtCO₂`, (v) => v + v * Math.random()],
       ['2100 emissions', 'emissions2100', (value) => `${formatValue(value, 'integer')} GtCO₂`, (v) => v + v * Math.random()],
-      ['Timing of NZ CO2', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
+      ['Timing of NZ CO₂', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
       ['Timing of NZ GHG', 'timingNZGHG', (value) => value, (v) => v + v * Math.random()],
       ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
       ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
@@ -45,7 +50,10 @@
   $: tableColumns = COLUMNS[selectedTimeframe].map(([label, key, formatting = (d) => d, get = (d) => d]) => {
     const values = scenariosListed.map((s) => get(s[KEY_CHARACTERISTICS][key]));
     const domain = extent(values);
-    const scale = chroma.scale(['#fafa6e', '#2A4858']).domain(domain).mode('lch'); // TODO: Change colors.
+    const scale = chroma
+      .scale([parseTailwindColor($THEME.color.surface.weakest), parseTailwindColor($THEME.color.theme.base)])
+      .domain(domain)
+      .mode('lch'); // TODO: Change colors.
     return {
       key,
       scale,
@@ -54,84 +62,154 @@
       get,
     };
   });
+
+  $: scenarios = scenariosListed.map((scenario, i) => {
+    const { uid, label } = scenario;
+    const isSelected = selectedScenarios.includes(uid);
+    const scenarioSelectedIndex = selectedScenarios.indexOf(uid);
+    const hasBorderBottom = i !== scenariosListed.length - 1;
+    const borderColorLeft = isSelected ? $THEME.color.category.base[scenarioSelectedIndex] : 'transparent';
+    const values = tableColumns.map(({ key, scale, formatting, get }) => {
+      const label = formatting(scenario[KEY_CHARACTERISTICS][key]);
+      const value = get(scenario[KEY_CHARACTERISTICS][key]);
+      const bg = value ? scale(value).hex() : 'transparent';
+      const useBlackFont = value ? hasBlackMoreContrast(bg) : true;
+      return {
+        label,
+        value,
+        bg,
+        useBlackFont,
+      };
+    });
+    return {
+      i,
+      uid,
+      label,
+      borderColorLeft,
+      hasBorderBottom,
+      values,
+    };
+  });
+
+  $: maxWidth = tableColumns
+    .map((_, i) => {
+      const length = Math.max(9 * max(scenarios.map(({ values }) => values[i]?.label?.length ?? 0)), 80);
+      return `${length}px`;
+    })
+    .join(' ');
+
+  let widthTable = 0;
+  let heightColumns = [];
+  let widthColumns = 0;
+  let table;
+  let sleft = 0;
 </script>
 
-<div
-  role="treegrid"
-  class="max-w-full overflow-x-scroll"
-  aria-rowcount={scenariosListed.length}
->
+<div class="relative">
   <div
-    role="rowgroup"
-    class="grid max-w-full"
+    role="treegrid"
+    class="max-w-full overflow-x-scroll table-test"
+    bind:clientWidth={widthTable}
+    aria-rowcount={scenariosListed.length}
+    bind:this={table}
+    on:scroll={() => (sleft = table.scrollLeft)}
   >
     <div
-      role="row"
-      class="grid justify-start max-w-full grid-flow-col"
-      style="grid-template-columns: 250px repeat({tableColumns.length}, minmax(120px, 1fr));"
+      role="rowgroup"
+      class="grid max-w-full"
     >
       <div
-        role="gridcell"
-        class="sticky left-0 bg-white px-4 text-xs"
+        role="row"
+        class="grid justify-start max-w-full grid-flow-col"
+        style="grid-template-columns: 250px {maxWidth};"
       >
-        Scenario
-      </div>
-      {#each tableColumns as { label }}
         <div
           role="gridcell"
-          class="text-xs min-w-[120px] text-center px-1"
+          class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3"
         >
-          {label}
+          Scenario
         </div>
+        {#each tableColumns as { label }}
+          <div
+            role="gridcell"
+            class="text-xs px-1 border-b-contour-weakest border-b flex items-end justify-center text-center leading-tight py-3"
+          >
+            {label}
+          </div>
+        {/each}
+      </div>
+    </div>
+    <div
+      role="rowgroup"
+      class="grid max-w-full relative"
+    >
+      {#each scenarios as { i, uid, label, values, borderColorLeft }}
+        <button
+          role="row"
+          aria-rowindex={i}
+          class:border-b={i !== scenariosListed.length - 1}
+          class="max-w-full border-b-contour-weakest text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker"
+          bind:clientWidth={widthColumns}
+          bind:clientHeight={heightColumns[i]}
+        >
+          <label
+            for={uid}
+            class="grid justify-start max-w-full grid-flow-col"
+            style="grid-template-columns: 250px {maxWidth};"
+          >
+            <div
+              style="border-left-color: {borderColorLeft}"
+              class="py-2 border-l-4 border-current px-3 text-left whitespace-nowrap sticky left-0 bg-current flex items-center gap-x-1.5"
+              role="gridcell"
+            >
+              <input
+                tabindex="-1"
+                id={uid}
+                type="checkbox"
+                name="scenarios"
+                value={uid}
+                bind:group={selectedScenarios}
+              />
+              <span class="text-sm font-bold inline-block text-gray-800 overflow-hidden text-ellipsis">{label}</span>
+            </div>
+            {#each values as { label, bg, useBlackFont }}
+              <span
+                role="gridcell"
+                class="py-3 flex items-center justify-end px-3 text-xs"
+                style="background-color: {bg}; color: {useBlackFont ? '#000' : '#fff'};">{label ?? '—'}</span
+              >
+            {/each}
+          </label>
+        </button>
       {/each}
     </div>
   </div>
-  <div
-    role="rowgroup"
-    class="grid max-w-full"
-  >
-    {#each scenariosListed as scenario, i}
-      {@const isSelected = selectedScenarios.includes(scenario.uid)}
-      {@const scenarioSelectedIndex = selectedScenarios.indexOf(scenario.uid)}
-      <button
-        role="row"
-        aria-rowindex={i}
-        class:border-b={i !== scenariosListed.length - 1}
-        class="max-w-full border-b-contour-weakest text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker"
-      >
-        <label
-          for={scenario.uid}
-          class="grid justify-start max-w-full grid-flow-col"
-          style="grid-template-columns: 250px repeat({tableColumns.length}, minmax(120px, 1fr));"
-        >
-          <div
-            style="border-left-color: {isSelected ? $THEME.color.category.base[scenarioSelectedIndex] : 'transparent'}"
-            class="py-2 border-l-4 border-current px-3 text-left whitespace-nowrap sticky left-0 bg-current flex gap-x-1.5"
-            role="gridcell"
-          >
-            <input
-              tabindex="-1"
-              id={scenario.uid}
-              type="checkbox"
-              name="scenarios"
-              value={scenario.uid}
-              bind:group={selectedScenarios}
-            />
-            <span class="text-sm font-bold inline-block text-gray-800 overflow-hidden text-ellipsis">{scenario.label}</span>
-          </div>
-          {#each tableColumns as { key, scale, formatting, get }}
-            {@const label = formatting(scenario[KEY_CHARACTERISTICS][key])}
-            {@const value = get(scenario[KEY_CHARACTERISTICS][key])}
-            {@const bg = value ? scale(value) : 'transparent'}
-            {@const hasContrast = value ? checkContrastRatio(bg) : true}
-            <span
-              role="gridcell"
-              class="flex items-center justify-end px-6 text-xs"
-              style="background-color: {bg}; color: {hasContrast ? '#000' : '#fff'};">{label ?? '—'}</span
-            >
-          {/each}
-        </label>
-      </button>
-    {/each}
-  </div>
+  <i
+    class="block absolute left-[250px] bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
+    class:opacity-100={sleft > 10}
+    style="top: {0}px; height: calc(100%);"
+  ></i>
+  <i
+    class="block absolute right-0 bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
+    class:opacity-100={sleft < widthColumns - widthTable - 10}
+    style="top: {0}px; height: calc(100%);"
+  ></i>
 </div>
+
+<style>
+  .table-test::before {
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .table-test::after {
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+</style>
