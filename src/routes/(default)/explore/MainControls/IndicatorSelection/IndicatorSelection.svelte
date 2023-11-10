@@ -37,7 +37,7 @@
 
   // $: console.log({ selectableIndicators });
   //
-  $: console.log({ $SELECTABLE_SECTORS });
+  // $: console.log({ $SELECTABLE_SECTORS });
 </script>
 
 <PopoverSelect
