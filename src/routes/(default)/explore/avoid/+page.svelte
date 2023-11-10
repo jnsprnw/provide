@@ -55,13 +55,13 @@
   let:query
   {sections}
   isFullWidth={true}
-  navContainerClass="md:border-r border-contour-weaker"
+  hasActiveScetionBar={true}
 >
   <aside
     slot="navigation"
     class="flex flex-col gap-4"
   >
-    <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col">
+    <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col pr-6 lg:pr-12">
       <Reference />
       <SelectionCertaintyLevels />
       <SelectionStudyLocations />

@@ -33,13 +33,22 @@
   </div>
 </PageIntro>
 
-<ScrollContent>
-  <NestedNav slot="navigation" {sections} />
+<ScrollContent isFullWidth={true}>
+  <NestedNav
+    slot="navigation"
+    {sections}
+  />
   {#each sections as section}
     <section class="mb-8">
-      <svelte:component this={section.component} {...section} />
+      <svelte:component
+        this={section.component}
+        {...section}
+      />
       {#each section.sections as part}
-        <svelte:component this={part.component} {...part} />
+        <svelte:component
+          this={part.component}
+          {...part}
+        />
       {/each}
     </section>
   {/each}

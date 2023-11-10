@@ -16,7 +16,7 @@
   });
 </script>
 
-<div class="border-t border-contour-weaker pt-4">
+<div>
   <p class="text-sm mb-2 font-bold">{title}</p>
   <figure>
     <div class="h-48 mb-2">

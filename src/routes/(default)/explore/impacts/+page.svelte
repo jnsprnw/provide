@@ -58,7 +58,7 @@
   let:query
   {sections}
   isFullWidth={true}
-  navContainerClass="md:border-r border-contour-weaker"
+  hasActiveScetionBar={true}
 >
   <nav
     slot="navigation"

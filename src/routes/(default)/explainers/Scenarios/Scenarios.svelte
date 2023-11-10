@@ -39,7 +39,7 @@
   }
 </script>
 
-<div class="flex flex-col gap-y-5">
+<div class="flex flex-col gap-y-10 mt-10 pt-10 border-t border-t-contour-weakest">
   <div>
     <Tagline class="mb-2">Pick a timeframe</Tagline>
     <PillGroup
@@ -47,12 +47,14 @@
       options={selectableTimeframes}
     />
   </div>
+
   <Presets
     {selectedTimeframe}
     bind:selectedScenarios={$selectedScenarios}
     on:selection={handlePreset}
     {scenarioPresets}
   />
+
   <Table
     {scenariosListed}
     {selectedTimeframe}
