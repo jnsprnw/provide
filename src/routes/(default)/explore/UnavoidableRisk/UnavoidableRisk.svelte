@@ -23,7 +23,7 @@
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
-  export let threshold;
+  let threshold;
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
   export let title;
