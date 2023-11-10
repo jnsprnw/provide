@@ -1,5 +1,6 @@
 <script>
   import { STATUS_FAILED, STATUS_SUCCESS } from '$src/config.js';
+  import Message from '$lib/helper/Message.svelte';
   import { each, filter } from 'lodash-es';
 
   export let props = {}; // Regular props/state that need to be kept in sync with the asyncProps
@@ -10,6 +11,7 @@
   export let isFailed = false;
   export let warningSizeSmall = false;
   export let warningBackground = true;
+  export let isDebug = false;
 
   let currentProps;
   let currentAsyncProps; // Always holds previous props and only gets updated once all data is loaded
@@ -48,26 +50,15 @@
 
 {#if isFailed}
   <slot name="failed">
-    <div
-      class="text-center py-36 px-2 flex flex-col gap-y-2 border-surface-weakest rounded-sm"
-      class:bg-surface-weaker={warningBackground}
-      class:border={warningBackground}
-      class:py-8={warningSizeSmall}
-      role="alert"
+    <Message
+      {warningBackground}
+      {warningSizeSmall}
+      warningSign={true}
+      headline="Data could not be loaded for this graph"
     >
-      <span
-        class="text-lg font-bold"
-        class:text-base={warningSizeSmall}>⚠️ Data could not be loaded for this graph</span
-      >
-      <div
-        class="flex-col text-sm"
-        class:flex={!warningSizeSmall}
-        class:text-xs={warningSizeSmall}
-      >
-        <span>This is probably because the data is not available for this selection.</span>
-        <span>Try another combination of geography, indicator and scenarios.</span>
-      </div>
-    </div>
+      <span>This is probably because the data is not available for this selection.</span>
+      <span>Try another combination of geography, indicator and scenarios.</span>
+    </Message>
   </slot>
 {:else if isEmpty}
   <slot name="placeholder" />
@@ -81,4 +72,12 @@
     asyncProps={currentAsyncProps}
     props={currentProps}
   />
+{/if}
+{#if isDebug}
+  loadedData: {loadedData.length}<br />
+  flatData: {JSON.stringify(flatData)}<br />
+  asyncProps: {JSON.stringify(asyncProps)}<br />
+  flatData: {flatData.length}<br />
+  isFailed: {isFailed}<br />
+  isLoading: {isLoading}
 {/if}
