@@ -61,9 +61,13 @@ export const loadMetaData = function (svelteFetch = fetch) {
     resolve({
       ...meta,
       geographyTypes: meta.geographyTypes.map((g) => {
-        let labelSingular = g['labelSingular'] ?? labelsSingular[g.uid];
+        let labelSingular = g['labelSingular'];
         if (typeof labelSingular === 'undefined') {
-          console.warn(`labelSingular for ${g.uid} was not defined.`);
+          console.warn(`labelSingular for ${g.uid} was not defined. Will use predefined.`);
+          labelSingular = labelsSingular[g.uid];
+        }
+        if (typeof labelSingular === 'undefined') {
+          console.warn(`labelSingular for ${g.uid} was not defined. Will use regular label.`);
           labelSingular = g.label;
         }
         return {
@@ -123,6 +127,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
                   value: datum,
                 };
                 if (hasRange) {
+                  // Some scenario data (gmt) has a range
                   obj['value'] = datum[1];
                   obj['min'] = datum[0];
                   obj['max'] = datum[2];
@@ -132,7 +137,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
               });
               return [key, seriesData];
             } else {
-              console.warn(`${key} has no data in scenario meta data.`);
+              console.warn(`${scenario.uid} has no data for ${key} in scenario meta data.`);
               return [key, null];
             }
           })
