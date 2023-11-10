@@ -8,6 +8,7 @@
   import Interactive from './Interactive.svelte';
   import Important from './Important.svelte';
   export let data;
+
   $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
   $: level_of_impact = $LEVEL_OF_IMPACT;
 
