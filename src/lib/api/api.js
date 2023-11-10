@@ -27,11 +27,11 @@ export const loadFromAPI = async function (url) {
     const data = await res.json();
     if (data.message) {
       console.warn(`Request failed with message: ${data.message}`);
-      return null;
+      return { status: STATUS_FAILED, message: data.message };
     }
-    return data;
+    return { status: STATUS_SUCCESS, data };
   } catch (e) {
-    return null;
+    return { status: STATUS_SUCCESS, message: e };
   }
 };
 
@@ -71,7 +71,8 @@ const fetchMultiple = (store, configs) => {
         const loadingData = {
           url,
           status: STATUS_LOADING,
-          data: loadFromAPI(url),
+          loading: loadFromAPI(url),
+          data: null,
         };
         cache[url] = loadingData;
         acc[keyOrIndex] = loadingData;
@@ -87,9 +88,9 @@ const fetchMultiple = (store, configs) => {
   // Go through initial data and check if there is a pending promise
   // If promise is present, update data on resolve
   forEach(initialData, (d, keyOrIndex) => {
-    if (typeof d.data?.then !== 'function') return;
-    d.data.then((data) => {
-      cache[d.url] = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
+    if (typeof d.loading?.then !== 'function') return;
+    d.loading.then((res) => {
+      cache[d.url] = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -120,11 +121,12 @@ const fetchSingle = (store, { endpoint, params }) => {
     cache[url] = loadingData;
     store.set(loadingData);
     // console.log('starting to load', get(store));
-    loadFromAPI(url).then((data) => {
+    loadFromAPI(url).then((res) => {
       // console.log({ data });
       // console.log(`Loading finished for ${id}.`);
       // console.log({ endpoint, data }, { id });
-      const currentData = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
+      // console.log({ res, endpoint });
+      const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
       // console.log(`Setting the cache for ${url}`);
       cache[url] = currentData;
       // console.log(cache[url]);

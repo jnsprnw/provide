@@ -6,6 +6,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Lato', 'sans-serif'],
+      mono: ['ui-monospace', 'Cascadia Code', 'Source Code Pro', 'Menlo', 'Consolas', 'DejaVu Sans Mono', 'monospace'],
     },
     extend: {
       colors: {
