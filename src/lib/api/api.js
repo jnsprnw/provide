@@ -2,6 +2,7 @@ import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
 import qs from 'qs';
 import { forEach, reduce } from 'lodash-es';
 import { browser } from '$app/environment';
+// import { get } from 'svelte/store';
 
 /*
  * These functions are intended to dynamically load data from the client upon user interaction
@@ -19,7 +20,15 @@ export const loadFromAPI = async function (url) {
   if (!browser) return new Promise((res) => res);
   try {
     const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
+    if (res.status != 200) {
+      console.warn(`Request failed with status code: ${res.status}`);
+      return null;
+    }
     const data = await res.json();
+    if (data.message) {
+      console.warn(`Request failed with message: ${data.message}`);
+      return null;
+    }
     return data;
   } catch (e) {
     return null;
@@ -94,26 +103,42 @@ const fetchMultiple = (store, configs) => {
 };
 
 const fetchSingle = (store, { endpoint, params }) => {
+  // console.log(`Fetching single ${endpoint}`, get(store), { id });
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
   });
   const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
-  console.log({ url });
+  // console.log({ url });
   const cached = cache[url];
 
   if (cached) {
     store.set(cached);
+    // console.log('in cache', get(store));
   } else {
-    const loadingData = { status: STATUS_LOADING, data: {} };
+    // console.log('not in cache');
+    const loadingData = { status: STATUS_LOADING, data: null };
     cache[url] = loadingData;
     store.set(loadingData);
+    // console.log('starting to load', get(store));
     loadFromAPI(url).then((data) => {
-      console.log({ data });
-      cache[url] = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
+      // console.log({ data });
+      // console.log(`Loading finished for ${id}.`);
+      // console.log({ endpoint, data }, { id });
+      const currentData = data ? { status: STATUS_SUCCESS, data } : { status: STATUS_FAILED, data };
+      // console.log(`Setting the cache for ${url}`);
+      cache[url] = currentData;
+      // console.log(cache[url]);
+      // store.set(cache[url]);
+      // console.log('store', get(store), { id });
       store.update((d) => {
+        // console.log({ d }, currentData, currentData === cache[url]);
         if (d !== loadingData) return d;
-        return cache[url];
+        // console.log(`Is loading state`);
+        return currentData;
       });
+      // store.set(currentData);
+      // store.set('test');
+      // console.log('store', get(store), { id });
     });
   }
 };
