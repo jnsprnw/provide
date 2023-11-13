@@ -1,7 +1,7 @@
 <script>
   export let term;
   export let definition;
-  export let href;
+  export let href = undefined;
 </script>
 
 <div class="text-xs text-contour-weak flex gap-1">
