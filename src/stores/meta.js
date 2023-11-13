@@ -83,7 +83,7 @@ export const LIKELIHOODS = derived(page, ($page) => {
 });
 
 export const STUDY_LOCATIONS = derived(page, ($page) => {
-  return sortBy(
+  const locations = sortBy(
     ($page.data?.meta?.studyLocations ?? []).map((location, i) => {
       const isAverage = location.uid === UID_STUDY_LOCATION_AVERAGE;
       return {
@@ -94,4 +94,7 @@ export const STUDY_LOCATIONS = derived(page, ($page) => {
     }),
     ['order']
   );
+  // In order to number the values correctly (without the city average and starting from 1), we need to create a new
+  let o = 1;
+  return locations.map((location) => ({ ...location, order: location.uid === UID_STUDY_LOCATION_AVERAGE ? 0 : o++ }));
 });
