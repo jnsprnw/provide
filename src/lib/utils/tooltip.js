@@ -12,7 +12,8 @@ export default function popover(node, params) {
     content: params.content,
     arrow: roundArrow,
     offset: [0, 10],
-    duration: [300, 0],
+    duration: params.duration ?? [300, 0],
+    delay: params.delay ?? 0,
   });
 
   if (typeof params.content === 'undefined') {

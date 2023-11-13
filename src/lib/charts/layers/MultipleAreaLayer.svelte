@@ -13,17 +13,14 @@
     .y0((d) => $yScale(d[y0Key]))
     .y1((d) => $yScale(d[y1Key]));
 
-  $: chartData = $data.filter(({ values }) =>
-    some(values, (d) => d.min !== undefined && d.max !== undefined)
-  );
+  $: chartData = $data.filter(({ values }) => some(values, (d) => d.min !== undefined && d.max !== undefined));
 </script>
 
 {#each chartData as d}
-  <path class="path-area" d={areaGen(d.values)} fill={d.color} />
+  <path
+    class:opacity-20={d.isSelected}
+    class:opacity-10={!d.isSelected}
+    d={areaGen(d.values)}
+    fill={d.range}
+  />
 {/each}
-
-<style>
-  .path-area {
-    opacity: 0.2;
-  }
-</style>

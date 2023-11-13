@@ -108,6 +108,7 @@
             <ScenarioDetails
               scenario={renderedScenario}
               scenarios={chartScenarios}
+              {currentFilterUid}
             />
           {:else}
             <div class="p-4 flex items-center rounded text-contour-weak justify-center min-h-[60vh]">Hover over a scenario to view details</div>

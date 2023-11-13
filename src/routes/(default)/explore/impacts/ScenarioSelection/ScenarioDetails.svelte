@@ -5,6 +5,12 @@
 
   export let scenarios;
   export let scenario;
+  export let currentFilterUid;
+
+  $: chartDomain = {
+    2100: [1, 3],
+    2300: [0, 4],
+  }[currentFilterUid] ?? [1, 3];
 
   $: chartData = scenarios.map((scenario) => {
     const values = scenario[MEAN_TEMPERATURE_UID];
@@ -16,15 +22,21 @@
 </script>
 
 <h3 class="text-lg mb-2 font-bold">{scenario.label}</h3>
-<p class="text-contour-weak mb-5">
+<p class="text-contour-weak mb-5 min-h-[100px]">
   {scenario.description || 'Description missing'}
 </p>
-<dl class="flex gap-4 mb-5">
+<dl class="flex gap-4 mb-5 justify-between">
   {#if scenario.source}
     <DefinitionItem
-      term="Scenario origin"
+      term="Scenario origin:"
       definition={scenario.source.label}
       href={scenario.source.href}
+    />
+  {/if}
+  {#if scenario.isPrimary}
+    <DefinitionItem
+      term="Scenario type:"
+      definition="Primary scenario"
     />
   {/if}
 </dl>
@@ -37,7 +49,7 @@
           <dt class="block font-semibold">
             Up to <time datetime={year}>{year}</time>
           </dt>
-          <dd>
+          <dd class="min-h-[100px]">
             <span class="text-contour-weak">{description}</span>
           </dd>
         </div>
@@ -48,10 +60,10 @@
 
 <div class="border-t border-contour-weaker pt-4">
   <p class="text-sm mb-2 font-bold">Global mean temperature in °C</p>
-  <figure class="">
+  <figure>
     <div class="h-48 mb-2">
       <LineChart
-        yDomain={[1, 3]}
+        yDomain={chartDomain}
         data={chartData}
       />
     </div>

@@ -34,12 +34,13 @@
 
   $: formatTickY = (d) => formatValue(d, unit);
   $: chartData = sortBy(data, ['isHighlighted', 'isSelected']).map((series) => {
-    let color = series.isHighlighted ? $theme.color.contour.weak : $theme.color.contour.weaker;
+    let color = series.isHighlighted ? $theme.color.contour.weaker : $theme.color.contour.weaker;
     let opacity = series.color ? 0.9 : 0.3;
     opacity = series.isHighlighted ? 1 : opacity;
     return {
       ...series,
       color: series.color || color,
+      range: series.color || $theme.color.contour.weaker,
       opacity,
     };
   });
@@ -67,8 +68,8 @@
         formatTick={formatTickY}
         ticksHighlighted={ticksYHighlighted}
       />
-      <MultipleLineLayer strokeWidth={2.5} />
       <MultipleAreaLayer />
+      <MultipleLineLayer strokeWidth={2.5} />
     </Svg>
   </LayerCake>
 </div>
