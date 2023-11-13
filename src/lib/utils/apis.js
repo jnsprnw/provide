@@ -41,6 +41,7 @@ export const loadFromAPI = async function (url, svelteFetch = fetch) {
   }
 };
 
+// This is only used as a backup.
 const labelsSingular = {
   admin0: 'Country',
   cities: 'City',
@@ -61,6 +62,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
     resolve({
       ...meta,
       geographyTypes: meta.geographyTypes.map((g) => {
+        // Trying to find a singluar label of the geography
         let labelSingular = g['labelSingular'];
         if (typeof labelSingular === 'undefined') {
           console.warn(`labelSingular for ${g.uid} was not defined. Will use predefined.`);

@@ -12,6 +12,7 @@
   export let warning = undefined;
   export let placeholder = undefined;
   export let disabled = undefined;
+  export let category = undefined;
 
   const sizeClasses = {
     xl: {
@@ -49,9 +50,18 @@
     ].join(' ')}
   >
     <span
-      class="whitespace-nowrap overflow-hidden text-ellipsis text-current"
-      class:font-bold={!placeholder}>{disabled ?? warning ?? placeholder ?? buttonLabel}</span
+      class="whitespace-nowrap overflow-hidden text-ellipsis text-current flex gap-x-2 items-end"
+      class:font-bold={!placeholder}
     >
+      {#if disabled || warning || placeholder}
+        <span class="leading-none">{disabled ?? warning ?? placeholder}</span>
+      {:else}
+        {#if category}
+          <span class="text-theme-weaker text-sm leading-none pb-0.5 font-normal">{category}</span>
+        {/if}
+        <span class="leading-none">{buttonLabel}</span>
+      {/if}
+    </span>
     <ExpandIcon
       class="min-w-[20px] grow-1 stroke-current"
       isOpen={open}
