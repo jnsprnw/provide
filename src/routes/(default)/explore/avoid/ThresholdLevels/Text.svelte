@@ -1,7 +1,7 @@
 <script>
   import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY } from '$stores/state.js';
   import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
-  import { SELECTED_STUDY_LOCATION, SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
+  import { SELECTED_STUDY_LOCATION, LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL_LABEL } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
   import { SCENARIOS_IN_AVOIDING_IMPACTS, UID_STUDY_LOCATION_AVERAGE } from '$config';
   import { formatValue } from '$lib/utils/formatting';
@@ -9,7 +9,7 @@
   import Important from './Important.svelte';
   export let data;
 
-  $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL;
+  $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL_LABEL;
   $: level_of_impact = $LEVEL_OF_IMPACT;
 
   $: geography = $CURRENT_GEOGRAPHY.label;

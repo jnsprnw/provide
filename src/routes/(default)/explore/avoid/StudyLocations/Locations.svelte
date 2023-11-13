@@ -1,9 +1,12 @@
 <script>
   import { SCENARIOS } from '$stores/meta.js';
   import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
+  import { SELECTED_LIKELIHOOD_LEVEL_LABEL } from '$stores/avoid.js';
   import tooltip from '$lib/utils/tooltip';
   import { formatValue } from '$lib/utils/formatting';
   import THEME from '$styles/theme-store.js';
+  import { isNull } from 'lodash-es';
+
   export let studyLocations;
 
   $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
@@ -23,6 +26,20 @@
       scenarios: Object.fromEntries(scenarios.map((s) => [s.uid, { ...s, ...location.scenarios[s.uid] }])),
     };
   });
+
+  function generateTooltipText(isAvoidable, year, scenario, likelihood) {
+    const isPossible = !isNull(year);
+    if (isPossible && isAvoidable) {
+      return `For this location, it is ${likelihood} that the selected level of impact would be reached in ${year} under the ${scenario}.`;
+    }
+    if (!isPossible && isAvoidable) {
+      return `For this location, it is not ${likelihood} that the selected level of impact would be reached under ${scenario}.`;
+    }
+    if (!isPossible && !isAvoidable) {
+      return `For this location, the selected level of impact is already ${likelihood} in current climate.`;
+    }
+    console.warn(`This combination of isPossible and isAvoidable should not occur. (${isPossible}, ${isAvoidable}, ${year}, ${scenario})`);
+  }
 </script>
 
 <table>
@@ -78,7 +95,7 @@
             >
               <span
                 class="text-white text-center block text-sm"
-                use:tooltip={{ content: `Something happens in ${labelScenario} in ${label} at year ${year}. It is ${isAvoidable ? '' : 'not'} avoidable` }}>{year ?? 'N/A'}</span
+                use:tooltip={{ content: generateTooltipText(isAvoidable, year, labelScenario, $SELECTED_LIKELIHOOD_LEVEL_LABEL) }}>{year ?? 'N/A'}</span
               >
             </div>
           </td>
