@@ -24,14 +24,12 @@
   export let store;
   export let title;
 
-  const geography = 'lisbon';
-
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(store, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
-        geography, // $CURRENT_GEOGRAPHY.uid,
+        geography: $CURRENT_GEOGRAPHY.uid,
         indicator: $CURRENT_INDICATOR.uid,
         level_of_impact: $LEVEL_OF_IMPACT,
         certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
