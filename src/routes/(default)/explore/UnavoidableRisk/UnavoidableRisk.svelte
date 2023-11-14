@@ -23,23 +23,22 @@
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
-  let threshold;
+  let threshold; // This holds the selected threshold
   let UN_AVOIDABLE_RISK_DATA = writable({});
 
   export let title;
 
   /** @type {Array} A list of currently selected scenarios.
-  This is nesecssary because of the two modes: The user can select scenarios in Future Impacts. In this case we use the  */
+  This is nesecssary because of the two modes: The user can select scenarios in Future Impacts.
+  In this case we use the list given by the state with the selected scenarios.
+  In the Avoiding Impacts mode, we display the default list of scenarios. */
   export let currentScenarios = [];
 
+  // This checks if the passed list of scenarios is valid. If yes, it uses it, otherwise it falls back to the list in the state.
   $: currentSelectedScenarios = (Array.isArray(currentScenarios) && currentScenarios.length ? currentScenarios : $CURRENT_SCENARIOS).map(
+    // We just need a small set of attributes
     ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe }) => ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe })
   );
-
-  // $: console.log({ currentSelectedScenarios });
-
-  // $: console.log({ currentScenarios });
-  // $: console.log({ $CURRENT_SCENARIOS });
 
   $: $IS_COMBINATION_AVAILABLE &&
     fetchData(UN_AVOIDABLE_RISK_DATA, {
@@ -51,30 +50,43 @@
       },
     });
 
-  $: process = ({ data }, { selectedScenarios, urlParams }) => {
+  $: process = ({ data }, { selectedScenarios, urlParams, allScenarios }) => {
+    // This creates the list of thresholds
     const thresholds = data.thresholds.map((value) => ({
-      label: formatValue(value, $CURRENT_INDICATOR_UNIT_UID),
+      label: `${formatValue(value, $CURRENT_INDICATOR_UNIT_UID)} (${value})`,
       value,
     }));
 
     const hasThresholds = data.thresholds.length;
-    let thresholdIndex = data.thresholds.indexOf(threshold);
+    let thresholdIndex = data.thresholds.indexOf(threshold); // Get the index of the currently selected threshold
 
+    // If the currently selected threshold does not exist is the list of possible thresholds
     if (thresholdIndex === -1) {
-      thresholdIndex = hasThresholds ? data.thresholds.indexOf(data.defaultThreshold) : 0;
+      // If no thresholds are present, we use 0
+      // If thresholds are present, we try to use the default threshold. If this is not present, we fallback to 0
+      thresholdIndex = hasThresholds ? data.thresholds.indexOf(data.defaultThreshold) || 0 : 0;
     }
 
-    threshold = data.thresholds[thresholdIndex];
+    // We use the index to find the threshold, but fallback to 0
+    threshold = data.thresholds[thresholdIndex] ?? 0;
 
+    // The timeframe is determined by the first selected scenario, because the selected scenarios must have the same timeframe
     const timeframe = selectedScenarios[0][KEY_SCENARIO_TIMEFRAME];
 
+    // We filter out unused years
     const validYears = data.years.filter((y) => y <= timeframe);
 
-    const mergedScenarios = selectedScenarios.filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
+    // We display all scenarios in this timeframe
+    // For this, we merge the selected and all scenarios together
+    // This is because the selected scenarios have the assigned colors included
+    // That’s why we spread them first in the new array
+    const mergedScenarios = uniqBy([...selectedScenarios, ...allScenarios], 'uid').filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
 
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {
+        // Find the current scenario in the list of valid scenarios
         const scenario = find(mergedScenarios, { uid });
+        // If the scenario is not present (probably because the timeframe is different), we skip/remove it
         if (!scenario) return;
         const values = validYears.map((year, yearIndex) => {
           const value = scenarioData[thresholdIndex][yearIndex];
@@ -91,6 +103,7 @@
       })
       .filter(Boolean);
 
+    // The selected scenarios (the ones with a color) should come first. We don’t need a more refined sorting here, as the dots don’t overlay
     processedScenarios = reverse(sortBy(processedScenarios, 'color'));
 
     const unavoidableValues = validYears.map((year, yearIndex) => {
@@ -176,6 +189,7 @@
     asyncProps={$UN_AVOIDABLE_RISK_DATA}
     props={{
       ...$TEMPLATE_PROPS,
+      allScenarios: $SELECTABLE_SCENARIOS,
       selectedScenarios: currentSelectedScenarios,
       threshold,
       urlParams: $DOWNLOAD_URL_PARAMS,
