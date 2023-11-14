@@ -41,6 +41,7 @@
     let:open
     aria-invalid={Boolean(warning)}
     aria-disabled={Boolean(disabled)}
+    aria-label={disabled ?? warning ?? placeholder ?? `${category ? `${category}:` : ''}${buttonLabel}`}
     disabled={Boolean(disabled)}
     class={[
       'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors aria-expanded:border-theme-base/60 aria-invalid:border-red-300 text-theme-base aria-invalid:text-red-300 aria-disabled:cursor-not-allowed',
@@ -50,16 +51,18 @@
     ].join(' ')}
   >
     <span
-      class="whitespace-nowrap overflow-hidden text-ellipsis text-current flex gap-x-2 items-end"
+      class="flex items-center whitespace-nowrap overflow-hidden text-ellipsis"
       class:font-bold={!placeholder}
     >
       {#if disabled || warning || placeholder}
-        <span class="leading-none">{disabled ?? warning ?? placeholder}</span>
-      {:else}
-        {#if category}
+        <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{disabled ?? warning ?? placeholder}</span>
+      {:else if category}
+        <div class="flex items-end gap-x-2">
           <span class="text-theme-weaker text-sm leading-none pb-0.5 font-normal">{category}</span>
-        {/if}
-        <span class="leading-none">{buttonLabel}</span>
+          <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{buttonLabel}</span>
+        </div>
+      {:else}
+        <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{buttonLabel}</span>
       {/if}
     </span>
     <ExpandIcon
