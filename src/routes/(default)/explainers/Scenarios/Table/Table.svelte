@@ -49,8 +49,14 @@
     ],
   };
 
+  $: titleWidth =
+    {
+      2100: 250,
+      2300: 300,
+    }[selectedTimeframe] ?? 250;
+
   // Get the values for each key and create color scales for each.
-  $: tableColumns = COLUMNS[selectedTimeframe].map(([label, key, formatting = (d) => d, get = (d) => d]) => {
+  $: tableColumns = (COLUMNS[selectedTimeframe] ?? []).map(([label, key, formatting = (d) => d, get = (d) => d]) => {
     const values = scenariosListed.map((s) => get(s[KEY_CHARACTERISTICS][key]));
     const domain = extent(values);
     const scale = chroma
@@ -103,13 +109,13 @@
     })
     .join(' ');
 
-  // With of the columns without the static part
+  // Width of the columns without the static part
   let widthColumns = 0;
 </script>
 
 <SideScrollIndicator
   widthOfContent={widthColumns}
-  distanceLeft={250}
+  distanceLeft={titleWidth}
   distanceRight={0}
 >
   <div
@@ -123,7 +129,7 @@
       <div
         role="row"
         class="grid justify-start max-w-full grid-flow-col"
-        style="grid-template-columns: 250px {maxWidth};"
+        style="grid-template-columns: {titleWidth}px {maxWidth};"
       >
         <div
           role="gridcell"
@@ -156,7 +162,7 @@
           <label
             for={uid}
             class="grid justify-start max-w-full grid-flow-col"
-            style="grid-template-columns: 250px {maxWidth};"
+            style="grid-template-columns: {titleWidth}px {maxWidth};"
           >
             <div
               style="border-left-color: {borderColorLeft}"
@@ -177,7 +183,7 @@
               >
               <Info {description} />
 
-              {#if !isPrimary}
+              {#if isPrimary}
                 <Primary />
               {/if}
             </div>
