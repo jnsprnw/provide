@@ -5,6 +5,7 @@
   import { formatValue } from '$lib/utils/formatting';
   import Primary from '$lib/helper/icons/Primary.svelte';
   import Info from '$lib/helper/icons/Info.svelte';
+  import SideScrollIndicator from '$lib/helper/SideScrollIndicator.svelte';
   import THEME from '$styles/theme-store.js';
 
   export let scenariosListed = [];
@@ -102,24 +103,18 @@
     })
     .join(' ');
 
-  // Width of the whole table
-  let widthTable = 0;
   // With of the columns without the static part
   let widthColumns = 0;
-  // Ref to the table
-  let table;
-  // Scroll position to the left
-  let sleft = 0;
 </script>
 
-<div class="relative">
+<SideScrollIndicator
+  widthOfContent={widthColumns}
+  distanceLeft={250}
+  distanceRight={0}
+>
   <div
     role="treegrid"
-    class="max-w-full overflow-x-scroll table-test"
-    bind:clientWidth={widthTable}
     aria-rowcount={scenariosListed.length}
-    bind:this={table}
-    on:scroll={() => (sleft = table.scrollLeft)}
   >
     <div
       role="rowgroup"
@@ -198,32 +193,4 @@
       {/each}
     </div>
   </div>
-  <i
-    class="block absolute left-[250px] bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
-    class:opacity-100={sleft > 10}
-    style="top: {0}px; height: calc(100%);"
-  ></i>
-  <i
-    class="block absolute right-0 bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
-    class:opacity-100={sleft < widthColumns - widthTable - 10}
-    style="top: {0}px; height: calc(100%);"
-  ></i>
-</div>
-
-<style>
-  .table-test::before {
-    width: 10px;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  .table-test::after {
-    width: 10px;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-</style>
+</SideScrollIndicator>
