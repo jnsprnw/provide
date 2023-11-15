@@ -49,6 +49,7 @@ module.exports = {
     },
   },
   plugins: [
+    require('tailwind-scrollbar-hide'),
     require('@thoughtbot/tailwindcss-aria-attributes'),
     plugin(function ({ addUtilities, matchUtilities, theme }) {
       addUtilities({

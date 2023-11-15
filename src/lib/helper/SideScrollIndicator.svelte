@@ -17,7 +17,7 @@
 
 <div class="relative">
   <div
-    class="max-w-full overflow-x-scroll"
+    class="w-full overflow-x-scroll scrollbar-hide"
     bind:clientWidth={widthOfWrapper}
     bind:this={table}
     on:scroll={() => (sleft = table.scrollLeft)}
