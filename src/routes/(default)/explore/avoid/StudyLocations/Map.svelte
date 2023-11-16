@@ -12,36 +12,13 @@
   $: collection = featureCollection(locations.map(({ lat, lng, order, isSelected }) => point([lng, lat], { name: order, isSelected })));
 
   $: bounds = bbox(collection);
-
-  $: paint = [
-    'settlement-minor-label',
-    'settlement-major-label',
-    'settlement-subdivision-label',
-    'airport-label',
-    'water-point-label',
-    'water-line-label',
-    'natural-point-label',
-    'natural-line-label',
-    'waterway-label',
-    'road-label-simple',
-  ].map((uid) => {
-    return {
-      uid,
-      properties: [
-        {
-          uid: 'text-color',
-          value: '#222',
-        },
-      ],
-    };
-  });
 </script>
 
-<div class="relative border border-contour-weakest overflow-hidden">
+<div class="relative border border-contour-weakest overflow-hidden aspect-square h-full">
   <MapProvider
+    style="mapbox://styles/climateanalytics/clp1bo67901bb01pbhz5ahyi0"
     {bounds}
     interactive={false}
-    {paint}
     hideLogo={false}
   >
     <DataSource data={collection}>
