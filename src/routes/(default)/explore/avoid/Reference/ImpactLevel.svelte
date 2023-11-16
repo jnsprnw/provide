@@ -39,7 +39,7 @@
   <div class="font-bold text-text-weaker mb-2 flex justify-between">
     <span class="uppercase text-xs tracking-widest">Level of Impact</span>
     <span class="text-xs text-theme-base">
-      {formatValue($LEVEL_OF_IMPACT_ARRAY[0], unit.uid)}
+      {$LEVEL_OF_IMPACT_ARRAY[0]}
       {#if unit.uid !== 'degrees-celsius'}
         {unit.label}
       {/if}
