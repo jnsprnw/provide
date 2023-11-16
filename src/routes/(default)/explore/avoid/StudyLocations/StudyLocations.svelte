@@ -82,7 +82,7 @@
     chartUid={END_AVOIDING_IMPACTS}
     templateProps={props}
   >
-    <div class="grid gap-x-2 grid-cols-[1fr_auto]">
+    <div class="grid gap-x-2 grid-cols-[1fr_auto] items-start">
       <Map studyLocations={asyncProps.studyLocations} />
       <Locations studyLocations={asyncProps.studyLocations} />
     </div>
