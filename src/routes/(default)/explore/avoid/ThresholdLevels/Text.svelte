@@ -82,7 +82,7 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
         <Interactive>{labelWithinSentence}</Interactive>
       {/if}
       {direction ? 'over' : 'under'}
-      <Interactive>{formatValue(level_of_impact, unit.uid)}</Interactive>
+      <Interactive>{level_of_impact}</Interactive>
       {#if isCountable}
         <Interactive>{labelWithinSentence}</Interactive>
       {:else if unit.uid !== 'degrees-celsius'}
