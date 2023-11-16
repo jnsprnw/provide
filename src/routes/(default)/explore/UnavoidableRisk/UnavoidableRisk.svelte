@@ -221,7 +221,7 @@
       </div>
       <ColorLegend
         items={asyncProps.legendItems}
-        id={1}
+        class="my-4"
       />
       <figure class="aspect-[2.5]">
         <UnavoidableRiskChart

@@ -1,13 +1,16 @@
 <script>
   export let items;
-  export let id;
+  export let textSize = 'text-sm';
 </script>
 
-<dl class="flex flex-wrap gap-x-4 my-4">
+<dl class="flex flex-wrap gap-x-4 ${$$restProps.class}">
   {#each items as { label, color, uid }}
     <!-- For some reason the updating of the color causes issues if no key block is added -->
     {#key uid}
-      <div class="flex gap-x-1.5 items-center" id={uid}>
+      <div
+        class="flex gap-x-1.5 items-center"
+        id={uid}
+      >
         <dt>
           <i
             title={label}
@@ -17,7 +20,7 @@
             style:background-color={color}
           />
         </dt>
-        <dd><span class="font-bold text-sm">{label}</span></dd>
+        <dd><span class="font-bold {textSize}">{label}</span></dd>
       </div>
     {/key}
   {/each}
