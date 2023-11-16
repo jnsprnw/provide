@@ -14,12 +14,12 @@
   $: bounds = bbox(collection);
 </script>
 
-<div class="relative border border-contour-weakest overflow-hidden aspect-square h-full">
+<div class="relative border border-contour-weakest overflow-hidden aspect-square h-[370px]">
   <MapProvider
-    style="mapbox://styles/climateanalytics/clp1bo67901bb01pbhz5ahyi0"
+    style={import.meta.env.VITE_MAPBOX_STYLE_STUDY_LOCATIONS}
     {bounds}
     interactive={false}
-    hideLogo={false}
+    hideLogo={true}
   >
     <DataSource data={collection}>
       <DotLayer />
