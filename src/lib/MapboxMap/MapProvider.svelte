@@ -5,7 +5,7 @@
   import { writable } from 'svelte/store';
   import { IS_STATIC } from '$stores/state';
 
-  let clazz;
+  let clazz = '';
   let _map;
   export { clazz as class };
   export let zoomRange = [1, 12];
@@ -18,8 +18,9 @@
   export let projection = 'mercator';
   export let interactive = true;
   export let bounds;
-  export let center;
-  export let fitBoundsOptions;
+  export let center = undefined;
+  export let fitBoundsOptions = undefined;
+  export let fitBoundsExtent = 20;
   export let paint = [];
   export let hideLogo = false;
 
@@ -52,7 +53,7 @@
       zoom,
       bearing,
       bounds,
-      fitBoundsOptions: fitBoundsOptions || { padding: clientWidth / 20 },
+      fitBoundsOptions: fitBoundsOptions || { padding: clientWidth / fitBoundsExtent },
       interactive,
       attributionControl: false,
       minZoom: zoomRange[0] - 0.00000001,
@@ -79,7 +80,7 @@
   });
 
   $: if ($ready && bounds) {
-    $map.fitBounds(bounds, fitBoundsOptions || { padding: clientWidth / 20 });
+    $map.fitBounds(bounds, fitBoundsOptions || { padding: clientWidth / fitBoundsExtent });
   }
 
   $: if ($ready && center) {
