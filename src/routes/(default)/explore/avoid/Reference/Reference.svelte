@@ -28,39 +28,42 @@
   };
 </script>
 
-{#if !$IS_EMPTY_INDICATOR && $IS_COMBINATION_AVAILABLE_INDICATOR}
-  <LoadingWrapper
-    {process}
-    let:asyncProps={{ data }}
-    let:props
-    asyncProps={{
-      data: $store,
-    }}
-    props={{
-      ...$TEMPLATE_PROPS,
-    }}
-    warningSizeSmall={true}
-    warningBackground={false}
-    isDebug={false}
-  >
-    <Text {data} />
-    <ImpactLevel {data} />
-    <LoadingPlaceholder slot="placeholder" />
-  </LoadingWrapper>
-{:else if $IS_EMPTY_INDICATOR}
-  <Message
-    warningBackground={false}
-    warningSizeSmall={true}
-    headline="No indicator selected"
-  >
-    <span>Select an indicator from the dropdown at the top of this page.</span>
-  </Message>
-{:else}
-  <Message
-    warningBackground={false}
-    warningSizeSmall={true}
-    headline="Combination not available"
-  >
-    <span>Select an indicator from the dropdown at the top of this page.</span>
-  </Message>
-{/if}
+<div class="flex flex-col gap-y-6 min-h-[240px]">
+  {#if !$IS_EMPTY_INDICATOR && $IS_COMBINATION_AVAILABLE_INDICATOR}
+    <LoadingWrapper
+      {process}
+      let:asyncProps={{ data }}
+      let:props
+      asyncProps={{
+        data: $store,
+      }}
+      props={{
+        ...$TEMPLATE_PROPS,
+      }}
+      warningSizeSmall={true}
+      warningBackground={false}
+      isDebug={false}
+    >
+      <Text {data} />
+      <ImpactLevel {data} />
+
+      <LoadingPlaceholder slot="placeholder" />
+    </LoadingWrapper>
+  {:else if $IS_EMPTY_INDICATOR}
+    <Message
+      warningBackground={false}
+      warningSizeSmall={true}
+      headline="No indicator selected"
+    >
+      <span>Select an indicator from the dropdown at the top of this page.</span>
+    </Message>
+  {:else}
+    <Message
+      warningBackground={false}
+      warningSizeSmall={true}
+      headline="Combination not available"
+    >
+      <span>Select an indicator from the dropdown at the top of this page.</span>
+    </Message>
+  {/if}
+</div>
