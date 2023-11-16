@@ -1,14 +1,9 @@
-<script context="module">
-  let instance = 0;
-</script>
-
 <script>
   import THEME from '$styles/theme-store.js';
   import { getContext } from 'svelte';
   import { onDestroy } from 'svelte';
 
   const beforeFallback = 'settlement-major-label';
-  // const theme = getContext('theme');
 
   const { map, source } = getContext('mapbox');
 
@@ -31,6 +26,9 @@
         paint: {
           'circle-color': ['case', ['boolean', ['get', 'isSelected'], false], $THEME.color.theme.base, $THEME.color.contour.base],
           'circle-radius': 10,
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 1,
+          'circle-stroke-opacity': 1,
         },
       },
       getBeforeId(before)
