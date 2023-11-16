@@ -1,5 +1,6 @@
 import { writable, derived } from 'svelte/store';
 import { getLocalStorage, setLocalStorage } from './utils.js';
+import { isString } from 'lodash-es';
 import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT } from '$config';
 import { LIKELIHOODS } from './meta.js';
 
@@ -22,7 +23,24 @@ SELECTED_STUDY_LOCATION.subscribe((value) => {
   setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
 });
 
-export const LEVEL_OF_IMPACT = writable(getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, undefined));
-LEVEL_OF_IMPACT.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, value);
+export const LEVEL_OF_IMPACT_ARRAY = writable(
+  getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, [], (v) => {
+    let value = [];
+    if (Boolean(v) && isString(value) && value.trim() !== '') {
+      try {
+        const json = JSON.parse(v);
+        if (Array.isArray(json) && json.length === 1) {
+          value = json;
+        }
+      } catch (e) {
+        console.log('Error loading current scenarios from localstore:', e);
+      }
+    }
+    return value;
+  })
+);
+LEVEL_OF_IMPACT_ARRAY.subscribe((value) => {
+  setLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, JSON.stringify(value));
 });
+
+export const LEVEL_OF_IMPACT = derived(LEVEL_OF_IMPACT_ARRAY, ($arr) => $arr[0]);
