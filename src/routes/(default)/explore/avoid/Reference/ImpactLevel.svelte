@@ -1,5 +1,4 @@
 <script>
-  import { mean } from 'lodash-es';
   import { LEVEL_OF_IMPACT_ARRAY } from '$stores/avoid.js';
   import { CURRENT_INDICATOR } from '$stores/state.js';
   import { formatValue } from '$lib/utils/formatting';
@@ -8,27 +7,31 @@
 
   export let data;
 
-  $: ({ step } = data.impact_levels);
-
   $: ({ unit } = $CURRENT_INDICATOR);
 
+  // The step size of the slider
+  $: ({ step } = data.impact_levels);
+  // The range of interest
   $: [min, max] = data.impact_levels.range_of_interest;
+  // The range of total possible values
   $: [totalMin, totalMax] = data.impact_levels.total;
 
+  // This is used to calculate the range of interest position
   $: scaleX = scaleLinear().domain(data.impact_levels.total).range([0, 100]);
 
   $: ({
     elements: { root, thumb },
   } = createSlider({
-    defaultValue: [min],
+    defaultValue: [min], // This has to be an array because of MeltUI’s workings
     min: totalMin,
     max: totalMax,
     step: step,
     value: LEVEL_OF_IMPACT_ARRAY,
   }));
 
+  // This is triggered everytime the min value changes.
   $: {
-    LEVEL_OF_IMPACT_ARRAY.set([min]);
+    LEVEL_OF_IMPACT_ARRAY.set([min]); // This has to be an array because of MeltUI’s workings
   }
 </script>
 
@@ -43,7 +46,7 @@
     </span>
   </div>
 
-  <div class="">
+  <div>
     <span
       use:melt={$root}
       class="relative flex h-[20px] w-full items-center"
@@ -52,6 +55,7 @@
       <span
         class="absolute block h-[7px] bg-theme-base"
         style="left: {scaleX(min)}%; width: {scaleX(max) - scaleX(min)}%;"
+        title="Range of interest"
       ></span>
       <span
         use:melt={$thumb()}
