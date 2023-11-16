@@ -13,8 +13,9 @@
 <div>
   <strong>What level of impact should be avoided?</strong>
   <p class="text-text-weaker text-sm mr-2">
-    Over the {reference.label} period, in {$CURRENT_GEOGRAPHY.label} the {labelWithinSentence} was on average <strong>{formatValue(average_value, unit.uid)}</strong>, and reached a maximum of
-    <strong>{formatValue(max.value, unit.uid)}</strong>
-    in {max.year}.
+    Over the {reference.label} period, in {$CURRENT_GEOGRAPHY.label} the {labelWithinSentence} was on average <strong>{average_value}</strong>{#if parseInt(max.year) > 0}, and reached a maximum of
+      <strong>{formatValue(max.value, unit.uid)}</strong>
+      in {max.year}
+    {/if}.
   </p>
 </div>
