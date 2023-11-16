@@ -88,13 +88,13 @@ export const STUDY_LOCATIONS = derived(page, ($page) => {
       const isAverage = location.uid === UID_STUDY_LOCATION_AVERAGE;
       return {
         ...location,
-        order: location.order ?? i,
+        order: location.order ?? 9999 + i, // We use the assigned number or a very big one
         isAverage,
       };
     }),
     ['order']
   );
-  // In order to number the values correctly (without the city average and starting from 1), we need to create a new
+  // In order to number the values correctly (without the city average and starting from 1), we loop over the list and give each location a new order number
   let o = 1;
   return locations.map((location) => ({ ...location, order: location.uid === UID_STUDY_LOCATION_AVERAGE ? 0 : o++ }));
 });
