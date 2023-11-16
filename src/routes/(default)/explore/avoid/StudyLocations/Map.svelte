@@ -20,6 +20,7 @@
     {bounds}
     interactive={false}
     hideLogo={true}
+    fitBoundsExtent={5}
   >
     <DataSource data={collection}>
       <DotLayer />
