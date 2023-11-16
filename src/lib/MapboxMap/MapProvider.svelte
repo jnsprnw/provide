@@ -20,7 +20,7 @@
   export let bounds;
   export let center;
   export let fitBoundsOptions;
-  export let paint;
+  export let paint = [];
   export let hideLogo = false;
 
   const theme = getContext('theme');
@@ -95,17 +95,7 @@
   }
 
   $: if ($ready) {
-    [
-      'scrollZoom',
-      'boxZoom',
-      'dragRotate',
-      'dragPan',
-      'keyboard',
-      'doubleClickZoom',
-      'touchZoomRotate',
-    ].map((handler) =>
-      interactive ? $map[handler].enable() : $map[handler].disable()
-    );
+    ['scrollZoom', 'boxZoom', 'dragRotate', 'dragPan', 'keyboard', 'doubleClickZoom', 'touchZoomRotate'].map((handler) => (interactive ? $map[handler].enable() : $map[handler].disable()));
   }
 
   $: if ($ready && paint) {
