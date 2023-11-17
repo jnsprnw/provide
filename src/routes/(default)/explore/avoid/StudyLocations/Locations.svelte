@@ -29,13 +29,13 @@
 
   function generateTooltipText(isAvoidable, isPossible, year, scenario, likelihood) {
     if (isPossible && isAvoidable) {
-      return `For this location, there is a ${likelihood} probability that the selected level of impact will be reached in ${year} under the scenario ${scenario}.`;
+      return `For this location, there is a ${likelihood} chance that the selected level of impact will be reached in ${year} in the scenario ${scenario}.`;
     }
     if (!isPossible && isAvoidable) {
-      return `For this location, the probability that the selected level of impact will be reached stays below ${likelihood} until 2100 under the scenario ${scenario}.`;
+      return `For this location, the probability that the selected level of impact will be reached stays below ${likelihood} up to 2100 in the scenario ${scenario}.`;
     }
-    if (!isPossible && !isAvoidable) {
-      return `For this location, there is already an at least ${likelihood} chance of getting the selected level of impact in the current climate.`;
+    if (isPossible && !isAvoidable) {
+      return `For this location, there is already at least a ${likelihood} chance of getting the selected level of impact in today’s climate.`;
     }
     console.warn(`This combination of isPossible (${isPossible}) and isAvoidable (${isAvoidable}) should not occur. (Year: ${year}, scenario: ${scenario})`);
   }
