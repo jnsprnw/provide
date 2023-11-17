@@ -46,7 +46,7 @@
 
 {#if scenarioPresetsForCurrentTimeframe.length}
   <div>
-    <Tagline class="mb-2">Scenario Presets</Tagline>
+    <Tagline class="mb-2">Scenarios: learn about scenarios and what they can be used for.</Tagline>
     <RadioGroup bind:value={$currentPreset}>
       <SideScrollIndicator
         widthOfContent={widthContent}
