@@ -3,7 +3,7 @@
   export let fullHeight;
   export let hasNoRange;
   export let differentYears;
-  export let index;
+  export let onlyMaxValue = false;
   export let latest;
   export let label;
   export let text;
@@ -22,9 +22,10 @@
       class:text-contour-weaker={!latest}>{label}</span
     >
     {#if latest}
-      <span class="text-xs {text} leading-none pt-1"
-        >{formatValue(latest.range[0] * 100, 'percent-in-range')}–{formatValue(latest.range[1], 'percent')} in <span class:font-bold={differentYears}>{latest.year}</span></span
-      >
+      <span class="text-xs {text} leading-none pt-1">
+        {#if !onlyMaxValue}Between {formatValue(latest.range[0] * 100, 'percent-in-range')} and
+        {/if}{formatValue(latest.range[1], 'percent')} in <span class:font-bold={differentYears}>{latest.year}</span>
+      </span>
     {/if}
   </div>
 </div>

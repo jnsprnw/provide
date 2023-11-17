@@ -68,7 +68,7 @@
         : undefined,
     },
     {
-      label: 'Avoidable risk',
+      label: 'Avoidable risk i.e. what we can avoid through mitigation action',
       labelFallback: 'No avoidable risk in any year',
       min: lastYearUnavoidableValue,
       max: lastYearAvoidableValue,
@@ -133,13 +133,13 @@
     {fullHeight}
     hasNoRange={ticks[0].hasNoRange && ticks[1].max > 0.8}
     {differentYears}
-    index={ticks[0].index}
     latest={ticks[0].latest}
     label={ticks[0].label}
     text={ticks[0].text}
     alignment={ticks[1].max > 0.5 ? 'items-end' : 'items-start'}
     y={0}
     left={ticks[1].min < 0.2 && ticks[1].max > 0.5 ? 10 : 0}
+    onlyMaxValue={true}
   />
   <!-- Avoidable risk -->
   <Bar
@@ -155,7 +155,6 @@
     fullHeight={ticks[1].height}
     hasNoRange={ticks[1].hasNoRange && ticks[0].max > 0.8}
     {differentYears}
-    index={ticks[1].index}
     latest={ticks[1].latest}
     label={ticks[1].label}
     text={ticks[1].text}
