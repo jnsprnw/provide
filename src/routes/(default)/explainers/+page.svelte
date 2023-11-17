@@ -29,7 +29,7 @@
 <PageIntro>
   <div class="flex flex-col gap-y-3.5">
     <h1 class="text-4xl font-bold">Explainers</h1>
-    <p class="max-w-xl">How do you avoid important climate impact thresholds in your city? Understand the risks and make your city more resilient to the impacts of climate change.</p>
+    <p class="max-w-xl">Learn more about key concepts in the Climate risk dashboard.</p>
   </div>
 </PageIntro>
 
