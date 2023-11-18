@@ -38,9 +38,7 @@
     const screenshotName = Object.values(graphParams)
       .join('_')
       .replace(/\.|\/|\\|,/g, '-');
-    const screenshotUrl = new URL(
-      `${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`
-    );
+    const screenshotUrl = new URL(`${import.meta.env.VITE_SCREENSHOT_URL}?${screenshotQuery}`);
 
     loading = true;
     fetch(screenshotUrl)
@@ -60,20 +58,27 @@
   };
 </script>
 
-<PopoverButton label="Download graph" isDropdown={true}>
+<PopoverButton label="Download graph">
   <div class="max-w-xs px-3 pb-3">
     <div class="py-2.5 grid grid-cols-7 gap-2 items-center">
       <span class="col-span-2 text-contour-weak text-sm">Format</span>
 
       <div class="col-span-5 col-start-3">
-        <PillGroup size="sm" options={formatOptions} bind:currentUid={format} />
+        <PillGroup
+          size="sm"
+          options={formatOptions}
+          bind:currentUid={format}
+        />
       </div>
     </div>
     <button
       on:click={downloadImage}
       class="bg-surface-weaker w-full py-2 text-theme-base font-bold text-sm flex gap-3 items-center justify-center"
       download
-      >{#if loading}<Spinner size={15} strokeWidth={2} />{/if} Download graph</button
+      >{#if loading}<Spinner
+          size={15}
+          strokeWidth={2}
+        />{/if} Download graph</button
     >
   </div>
 </PopoverButton>

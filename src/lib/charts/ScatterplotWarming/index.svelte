@@ -37,7 +37,6 @@
   >
     <Svg>
       <AxisX
-        {padding}
         formatTick={formatTickX}
         ticks={[-0.5, 0, 1.2]}
         gridClass="chart-gridline--invert"
@@ -49,8 +48,14 @@
         gridClass="chart-gridline--invert"
       />
       <Sectors bind:hoveredSector />
-      <AxisXLabel {padding} label="Warming between 2050 and 2100" />
-      <AxisYLabel {padding} label="Warming in 2050" />
+      <AxisXLabel
+        {padding}
+        label="Warming between 2050 and 2100"
+      />
+      <AxisYLabel
+        {padding}
+        label="Warming in 2050"
+      />
       <Dots />
     </Svg>
   </LayerCake>

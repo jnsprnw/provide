@@ -1,15 +1,11 @@
 <script>
   import Chevron from '$lib/helper/icons/Chevron.svelte';
-  import {
-    Popover,
-    PopoverButton,
-    PopoverPanel,
-  } from '@rgossiaux/svelte-headlessui';
+  import { Popover, PopoverButton, PopoverPanel } from '@rgossiaux/svelte-headlessui';
   import { createPopperActions } from 'svelte-popperjs';
 
-  let clazz;
+  let clazz = undefined;
   export { clazz as class };
-  export let panelClass;
+  export let panelClass = undefined;
   export let panelPlacement = 'bottom-start';
   export let buttonClass = '';
   export let label;
