@@ -18,7 +18,7 @@
   $: geographyTypes = $AVAILABLE_GEOGRAPHY_TYPES;
 
   let hoveredItem;
-  let currentFilterUid;
+  let currentFilterUid = $CURRENT_GEOGRAPHY_TYPE?.uid; // This stores the currently displayed geography type
 
   // currentFilterUid gets updated by the Content component
   $: selectableGeographies = $GEOGRAPHIES[currentFilterUid] ?? [];
