@@ -259,6 +259,7 @@ export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATO
       options = optionsAvailableForIndicator.map(option => ({ label: option, uid: option }));
     }
     return {
+      uid: key,
       label: parameter?.label ?? key, // Use the key if no label is present
       options
     }
