@@ -51,19 +51,22 @@
     {#each scenariosRange as [year, min, max]}
       {@const y1 = $yScale(min)}
       {@const y2 = $yScale(max)}
+      {@const heightBar = y1 - y2}
+      {#if heightBar > 0}
       <g transform={`translate(${$xScale(year)} ,${$height - ($height - y2)})`}>
         <rect
           style:fill-opacity={0.2}
           class="fill-theme-stronger"
-          height={y1 - y2}
+          height={heightBar}
           width={bandwidth}
         />
         <line
-          transform={`translate(0 ,${y1 - y2})`}
+          transform={`translate(0 ,${heightBar})`}
           x2={bandwidth}
           class="stroke-white stroke-2"
         />
       </g>
+      {/if}
     {/each}
   </g>
 </g>

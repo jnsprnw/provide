@@ -103,6 +103,7 @@
       label: hasNoRange ? tick.labelFallback : tick.label,
       min,
       max,
+      latest: hasNoRange ? { range: [0, 0], year: lastYear } : tick.latest
       // top,
       // centerY,
     };
@@ -112,54 +113,69 @@
 
   $: differentYears = ticks[0].latest?.year !== ticks[1].latest?.year && typeof ticks[0].latest?.year !== 'undefined' && typeof ticks[1].latest?.year !== 'undefined';
 
-  $: console.log({ differentYears }, ticks[0].latest?.year, ticks[1].latest?.year);
-  $: console.log({ fullHeight });
+  // $: console.log({ differentYears }, ticks[0].latest?.year, ticks[1].latest?.year);
+  // $: console.log({ fullHeight });
 
   $: sameYearGap = differentYears ? 0 : 1; // This gets added and subtracted from the bar size to have a small gap if the years are the same.
+
+  $: ([unavoidableTick, avoidableTick] = ticks);
+
+  function calculatePositions(ticks) {
+    const [unavoidableTick, avoidableTick] = ticks;
+    const unavoidableLeft = avoidableTick.min < 0.2 && avoidableTick.max > 0.5 ? 10 : 0;
+    const unavoidableAlignment = unavoidableTick.hasNoRange && !avoidableTick.hasNoRange ? 'items-start' : 'items-end';
+    const avoidableAlignment = avoidableTick.max > 0.5 ? 'items-start' : 'items-end';
+    return {
+      left: [unavoidableLeft, 0],
+      alignment: [unavoidableAlignment, avoidableAlignment]
+    }
+  }
+
+  $: positions = calculatePositions(ticks)
+
+  $: bothNoRange = unavoidableTick.hasNoRange && avoidableTick.hasNoRange;
+
+  let avoidableHeight;
 </script>
 
 <div class="ml-2 w-full relative">
   <!-- Unavoidable risk -->
   <Bar
-    color={ticks[0].bar}
-    baseY={ticks[0].baseY}
-    y2={ticks[0].y2 + sameYearGap}
-    totalHeight={ticks[0].height}
-    {differentYears}
-    hasNoRange={ticks[0].hasNoRange}
-    index={0}
+    color={unavoidableTick.bar}
+    y2={unavoidableTick.y2 + sameYearGap}
+    totalHeight={unavoidableTick.height}
+    hasNoRange={unavoidableTick.hasNoRange}
   />
   <Label
-    {fullHeight}
-    hasNoRange={ticks[0].hasNoRange && ticks[1].max > 0.8}
+    fullHeight={avoidableTick.max < 0.5 && !unavoidableTick.hasNoRange ? fullHeight - avoidableHeight - 20 : fullHeight}
+    hasNoRange={unavoidableTick.hasNoRange && avoidableTick.max > 0.8}
     {differentYears}
-    latest={ticks[0].latest}
-    label={ticks[0].label}
-    text={ticks[0].text}
-    alignment={ticks[1].max > 0.5 ? 'items-end' : 'items-start'}
+    latest={unavoidableTick.latest}
+    label={unavoidableTick.label}
+    text={unavoidableTick.text}
+    alignment={positions.alignment[0]}
     y={0}
-    left={ticks[1].min < 0.2 && ticks[1].max > 0.5 ? 10 : 0}
-    onlyMaxValue={true}
+    left={positions.left[0]}
+    displayRange={false}
   />
   <!-- Avoidable risk -->
   <Bar
-    color={ticks[1].bar}
-    baseY={ticks[1].baseY}
-    y2={ticks[1].y2}
-    totalHeight={ticks[1].height - sameYearGap}
-    {differentYears}
-    hasNoRange={ticks[1].hasNoRange}
-    index={1}
+    color={avoidableTick.bar}
+    y2={avoidableTick.y2}
+    totalHeight={avoidableTick.height - sameYearGap}
+    hasNoRange={avoidableTick.hasNoRange}
+    left={differentYears ? 10 : 0}
   />
   <Label
-    fullHeight={ticks[1].height}
-    hasNoRange={ticks[1].hasNoRange && ticks[0].max > 0.8}
+    bind:height={avoidableHeight}
+    fullHeight={avoidableTick.height}
+    hasNoRange={avoidableTick.hasNoRange}
     {differentYears}
-    latest={ticks[1].latest}
-    label={ticks[1].label}
-    text={ticks[1].text}
-    alignment={ticks[1].max > 0.5 ? 'items-start' : 'items-end'}
-    y={ticks[1].y2}
+    latest={avoidableTick.latest}
+    label={avoidableTick.label}
+    text={avoidableTick.text}
+    alignment={positions.alignment[1]}
+    y={avoidableTick.y2}
     left={differentYears ? 10 : 0}
   />
 </div>
