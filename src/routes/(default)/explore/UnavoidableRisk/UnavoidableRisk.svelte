@@ -19,12 +19,12 @@
   import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME } from '$src/config.js';
   import { sortBy, reverse, find, uniqBy, without } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
-  import { writable } from 'svelte/store';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
 
+  // For some very strange reason the store needs to be passed as a prop. It does not update when it is defined inside this component.
+  export let store;
   let threshold; // This holds the selected threshold
-  let UN_AVOIDABLE_RISK_DATA = writable({});
 
   export let title;
 
@@ -41,7 +41,7 @@
   );
 
   $: $IS_COMBINATION_AVAILABLE &&
-    fetchData(UN_AVOIDABLE_RISK_DATA, {
+    fetchData(store, {
       endpoint: END_UN_AVOIDABLE_RISK,
       params: {
         geography: $CURRENT_GEOGRAPHY.uid,
@@ -186,7 +186,7 @@
     let:isLoading
     let:asyncProps
     {process}
-    asyncProps={$UN_AVOIDABLE_RISK_DATA}
+    asyncProps={$store}
     props={{
       ...$TEMPLATE_PROPS,
       allScenarios: $SELECTABLE_SCENARIOS,

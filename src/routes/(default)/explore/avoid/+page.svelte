@@ -15,8 +15,10 @@
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
+  // For some very strange reason the stores need to be passed as a prop to the chart. They do not update when they are defined inside the components.
   let THRESHOLD_LEVELS_DATA = writable({});
   let REFERENCE_STORE = writable({});
+  let UNAVOIDABLE_RISK_STORE = writable({});
 
   $: currentScenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid) => $SELECTABLE_SCENARIOS.find((scenario) => scenario.uid === uid))
     .filter(Boolean)
@@ -50,6 +52,7 @@
       component: UnAvoidableRisk,
       disabled: false,
       props: {
+        store: UNAVOIDABLE_RISK_STORE,
         currentScenarios: currentScenarios,
       },
     },

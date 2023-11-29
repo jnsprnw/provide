@@ -7,8 +7,10 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
+  import { writable } from 'svelte/store';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
+  let UNAVOIDABLE_RISK_STORE = writable({}); // For some very strange reason the store needs to be passed as a prop to the chart. It does not update when it is defined inside the component.
 
   $: sections = [
     {
@@ -31,6 +33,9 @@
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: !$IS_COMBINATION_AVAILABLE,
+      props: {
+        store: UNAVOIDABLE_RISK_STORE,
+      },
     },
     // {
     //   slug: 'unavoidable-risk',
@@ -76,7 +81,8 @@
       >
         <svelte:component
           this={section.component}
-          {...section}
+          title={section.title}
+          {...section.props}
         />
       </section>
     {/if}
