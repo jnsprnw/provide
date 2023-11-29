@@ -239,11 +239,32 @@ CURRENT_INDICATOR_OPTION_VALUES.subscribe((obj) => {
 });
 
 // Array of available parameters for currently selected indicator
+// This list is based on the current indicator and the generally available parameters
 export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATOR_PARAMETERS], ([$indicator, $parameters]) => {
   // This builds a list of all indicator parameter (with label, uid and options) that are available for this indicator
-  const indicatorParameters = map($indicator?.parameters ?? {}, (_, key) => $parameters.find(({ uid }) => uid === key));
+  // It is based on the parameters provided by the indicator
+  // And then enriched by the label and options labels provided by the meta endpoint
+  const indicatorParameters = map($indicator?.parameters ?? {}, (optionsAvailableForIndicator, key) => {
+    // Search for the parameter in the list from the meta endpoint
+    const parameter = $parameters.find(({ uid }) => uid === key);
+    let options = [];
+    // If this parameter is present in the meta endpoint
+    if (parameter && parameter.hasOwnProperty('options') && Array.isArray(parameter.options)) {
+      // Not all options are available for each indicator. So we need to filter out some options.
+      options = parameter.options.filter(({ uid }) => optionsAvailableForIndicator.includes(uid))
+    } else {
+      // If the indicator is not present in the meta endpoint, we can still use it by creating options manually
+      console.warn(`Indicator has parameter ${key} that is not defined in meta configuration.`);
+      // Both label and uid is the same here
+      options = optionsAvailableForIndicator.map(option => ({ label: option, uid: option }));
+    }
+    return {
+      label: parameter?.label ?? key, // Use the key if no label is present
+      options
+    }
+  });
 
-  // This build a list of default values for this indicator by taking the first value from the possible options
+  // This builds a list of default values for this indicator by taking the first value from the possible options
   let defaultValues = reduce($indicator?.parameters ?? {}, (acc, [def], key) => ({ ...acc, [key]: def }), {});
 
   // Updating the current option selection with the default values, in case they were not present for the previous indicator
