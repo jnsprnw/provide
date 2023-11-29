@@ -30,100 +30,147 @@ export const CURRENT_PAGE = writable('/');
 * @type {Readable<Object[]>}
 */
 export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE], ([$types, $currentPage]) => {
-  // Generally we allow all types that are listed in the meta endpoint
-  let types = $types;
-  if ($currentPage === PATH_AVOID) {
-    types = types.map((t) => {
-      const disabled = t.disabled ? t.disabled : !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
-      const tooltip = t.disabled ? 'Geography type is not available' : disabled ? 'Geography type is not available in this modus' : undefined;
-      return {
-        ...t,
-        disabled,
-        tooltip,
-      };
-    });
-  }
-  return types;
+  return $types.map((t) => {
+    // It could be disabled by the meta endpoint
+    const disabledByEndpoint = t.disabled;
+    // By default no type is disabled
+    let disabledByMode = false;
+    // Check specifically for the avoid mode
+    if ($currentPage === PATH_AVOID) {
+      // Check if the type is present in the list of allowed types
+      disabledByMode = !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
+    }
+    // The tooltip is different if the type is disabled by the endpoint of specifically by this mode (avoid)
+    const tooltip = disabledByEndpoint ? 'Geography type is not available' : disabledByMode ? 'Geography type is not available in this modus' : undefined;
+    return {
+      ...t,
+      disabled: disabledByEndpoint ? true : disabledByMode,
+      tooltip,
+    };
+  });
 });
 
+/**
+* Derived store that filters the disabled geography types
+* @type {Readable<Object[]>}
+*/
 export const SELECTABLE_GEOGRAPHY_TYPES = derived(AVAILABLE_GEOGRAPHY_TYPES, ($types) => {
   return $types.filter(({ disabled }) => !disabled);
 });
 
+/**
+* Writable store that holds the uid of the currently selected geography.
+* Upon loading it checks the localstore. If fallbacks to a default value.
+* @type {Writable<number>}
+*/
 export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
+// Listen to the store to update the localstorage on change.
 CURRENT_GEOGRAPHY_UID.subscribe((value) => {
   setLocalStorage(LOCALSTORE_GEOGRAPHY, value);
 });
 
-export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $geographyTypes, $geographies], set) => {
+/**
+* Derived store that filters the disabled geography types
+* @type {Readable<Object|undefined>}
+*/
+export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $selectableGeographyTypes, $geographies], set) => {
   let geography;
-  $geographyTypes.every(({ uid: type }) => {
+  // This loops over every selectable geography type and searches for the currently selected geography uid
+  // We use the `every` loop to quit if we found it
+  $selectableGeographyTypes.every(({ uid: type }) => {
+    // Get the list of geographies for this type
     const list = $geographies[type];
     if (typeof list === 'undefined') {
-      console.warn(`Invalid geography type ${type}. Could not find any geographies.`);
+      console.warn(`Geography type ${type} from meta does not match. Could not find any geographies.`);
     }
+    // Check if the currently selected uid can be found in the
     geography = (list ?? []).find(({ uid }) => uid === $uid);
     if (geography) {
       return false; // A geography was found so we quit the loop
     }
-    return true;
+    return true; // Return true to continue the loop
   });
+  // If the geography could not be found
   if (typeof geography === 'undefined') {
-    console.warn(`Could not find any geography from uid ${$uid}. Will reset to default.`); // TDOO
-    CURRENT_GEOGRAPHY_UID.set(undefined);
+    console.warn(`Could not find any geography from uid ‘${$uid}’ given the current set of geography types.`);
+    if (typeof $uid !== 'undefined') {
+      // Set the geography uid to undefined to reset the selection
+      CURRENT_GEOGRAPHY_UID.set(undefined);
+    }
   }
-  // console.log('CURRENT_GEOGRAPHY', { geography });
+  // Set the geography. This can also be undefined if no geography was found.
   set(geography);
 });
 
+/**
+* Derived store that checks if a geography is selected
+* @type {Readable<Boolean>}
+*/
 export const IS_EMPTY_GEOGRAPHY = derived(CURRENT_GEOGRAPHY, ($geography) => {
-  // console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
   return !Boolean($geography);
 });
 
+/**
+* Derived store that holds the current geography type
+* @type {Readable<Object|undefined>}
+*/
 export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, SELECTABLE_GEOGRAPHY_TYPES], ([$currentGeography, $geographyTypes]) => {
   if (typeof $currentGeography === 'undefined') {
-    // This can happen if the user has a geography in localstorage and than visits the avoiding impacts page that does not have all geographies available.
+    // This can happen for example if the user
+    // - has a geography in localstorage and than visits the avoiding impacts page that does not have all geographies available.
+    // - has selected an invalid geography through links
     return undefined;
   }
   const { geographyType: uid } = $currentGeography;
   if (typeof uid === 'undefined') {
-    console.warn(`Could not determin geography type from current geography.`);
+    // If – for some reason – the geography has no geography type
+    console.warn(`Could not determine geography type from current geography.`);
+    return undefined;
   }
   const geographyType = $geographyTypes.find((type) => type.uid === uid);
   if (typeof geographyType === 'undefined') {
+    // If the geography types do not include the current geography
     console.warn(`Could not find any geography type for uid ${uid}.`);
+    return undefined;
   }
-  // console.log('CURRENT_GEOGRAPHY_TYPE', { geographyType });
   return geographyType;
 });
 
+/**
+* Derived store that lists the available geographies
+* @type {Readable<Object[]>}
+*/
 export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE], ([$geographies, $currentGeographyType]) => {
   const { uid } = $currentGeographyType;
   const geographies = $geographies[uid];
   if (typeof geographies === 'undefined') {
     console.warn(`Could not find any geographies for type ${uid}.`);
   }
-  // console.log('AVAILABLE_GEOGOGRAPHIES', { geographies });
   return geographies ?? [];
 });
-
-export const CURRENT_IMPACT_GEO_YEAR_UID = writable('2030');
 
 /*
  * INDICATOR STATE
  */
 
+/**
+* Derived store that holds a list of available indicators based on the geography type
+* @type {Readable<Object[]>}
+*/
 export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
-  // console.log({ $indicators });
+  // Geography types have specific indicators available
   const list = get($type, 'availableIndicators', []);
+  // Filter the list of indicators if they are included for the current geography
   const indicators = $indicators.filter(({ uid }) => list.includes(uid));
+
+  // The list of indicators should match the list of available indicators
   if (indicators.length !== list.length) {
-    const ids = indicators.map(({ uid }) => uid);
-    const missing = without(list, ...ids);
+    // If this is not the case, some indicators that are present in the list of the geography type are not actually available
+    // There is nothing wrong about this per se. But it can still be an mistake that the lists are outdated.
+    const missing = without(list, ...indicators.map(({ uid }) => uid));
     console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
-  // console.log('AVAILABLE_INDICATORS', { indicators });
+
   return indicators;
 });
 
