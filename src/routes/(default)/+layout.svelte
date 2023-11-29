@@ -10,7 +10,7 @@
   import { page } from '$app/stores';
 
   page.subscribe((v) => {
-    if (v.hasOwnProperty('url') && v.url.hasOwnProperty('pathname')) {
+    if (v.hasOwnProperty('url') && 'pathname' in v.url) {
       const path = v.url.pathname.split('/');
       CURRENT_PAGE.set(path[path.length - 1]); // /explore/avoid -> avoid
     }
