@@ -23,21 +23,18 @@
   onMount(() => {
     if (typeof filters !== 'undefined') {
       // Some basic drop downs like the location selection don’t have filters
+      if (current) {
+        // If there is a currently selected item (indicator, …)
+        // We try to get the currentFilterUid from that item from the filter key
+        currentFilterUid = current[filterKey];
+      }
+      if ((current && !currentFilterUid) || !current) {
+        // For some reason, the above did not work and we still could not find the currentFilterUid
+        // We loop through the list of filters and select the first one that is not disabled
+        currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
+      }
       if (!currentFilterUid) {
-        // If the current currentFilterUid (sector, timeframe, …) is not set
-        if (current) {
-          // If there is a currently selected item (indicator, …)
-          // We try to get the currentFilterUid from that item from the filter key
-          currentFilterUid = current[filterKey];
-        }
-        if ((current && !currentFilterUid) || !current) {
-          // For some reason, the above did not work and we still could not find the currentFilterUid
-          // We loop through the list of filters and select the first one that is not disabled
-          currentFilterUid = filters.find(({ disabled }) => !disabled)?.uid;
-        }
-        if (!currentFilterUid) {
-          console.warn(`Could not find any item in list of filters.`);
-        }
+        console.warn(`Could not find any item in list of filters.`);
       }
     }
   });
