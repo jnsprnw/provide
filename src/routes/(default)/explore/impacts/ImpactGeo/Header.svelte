@@ -12,7 +12,7 @@
     KEY_MODEL,
     KEY_SOURCE,
   } from '$src/config.js';
-  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$stores/state.js';
+  import { CURRENT_IMPACT_GEO_YEAR_UID } from '$stores/impact.js';
 
   export let currentGeography;
   export let currentIndicator;
