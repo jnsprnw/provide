@@ -9,10 +9,15 @@
   export let label;
   export let buttonLabel;
   export let size = 'xl';
+  /** @type {String|undefined} Holds a warning text that is conditionally displayed */
   export let warning = undefined;
+  /** @type {String|undefined} Holds a palceholder text that is conditionally displayed */
   export let placeholder = undefined;
+  /** @type {string|undefined} Holds a disabled text that is conditionally displayed. This can happen if the user needs to select another option first */
   export let disabled = undefined;
   export let category = undefined;
+
+  $: isDisabled = Boolean(disabled);
 
   const sizeClasses = {
     xl: {
@@ -39,15 +44,15 @@
   <PopoverButton
     use={[popperRef]}
     let:open
-    aria-invalid={Boolean(warning)}
-    aria-disabled={Boolean(disabled)}
+    aria-invalid={!isDisabled && Boolean(warning)}
+    aria-disabled={isDisabled}
     aria-label={disabled ?? warning ?? placeholder ?? `${category ? `${category}:` : ''}${buttonLabel}`}
-    disabled={Boolean(disabled)}
+    disabled={isDisabled}
     class={[
       'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors aria-expanded:border-theme-base/60 aria-invalid:border-red-300 text-theme-base aria-invalid:text-red-300 aria-disabled:cursor-not-allowed',
       classes.button,
       buttonClass,
-      placeholder || disabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
+      placeholder || isDisabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
     ].join(' ')}
   >
     <span
