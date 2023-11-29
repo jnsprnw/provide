@@ -1,7 +1,7 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
   import { sortBy } from 'lodash-es';
-  import { CURRENT_INDICATOR_PARAMETERS, CURRENT_INDICATOR_OPTION_VALUES } from '$stores/state.js';
+  import { CURRENT_INDICATOR_PARAMETERS, CURRENT_INDICATOR_OPTION_VALUES, IS_COMBINATION_AVAILABLE_INDICATOR } from '$stores/state.js';
   import { KEY_PARAMETER_INDICATOR_VALUE } from '$config';
 
   $: parameters = $CURRENT_INDICATOR_PARAMETERS
@@ -25,6 +25,7 @@
 <div class="flex gap-4" id="indicator-parameters">
   {#each parametersSorted as parameter}
     <Select
+      disabled={!$IS_COMBINATION_AVAILABLE_INDICATOR}
       {...parameter}
       labelColor="text-theme-base"
       on:change={handleChange}
