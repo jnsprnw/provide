@@ -178,11 +178,12 @@ export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$se
   return $sectors.map(({ uid, label }) => {
     const indicators = $indicators.filter(({ sector: sectorUID }) => sectorUID === uid);
     return {
-      label: indicators.length ? `${label} (${indicators.length})` : label,
+      label,
       uid,
       indicators,
       amount: indicators.length,
       disabled: !indicators.length,
+      count: indicators.length
     };
   });
 });

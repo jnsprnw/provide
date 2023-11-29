@@ -23,16 +23,16 @@
   on:change={(e) => (currentUid = e.detail)}
   class="flex flex-wrap {classes.group}"
 >
-  {#each options as { uid, disabled, label, tooltip: individualDisabledMessage }}
+  {#each options as { uid, disabled, label, tooltip: individualDisabledMessage, count }}
     <RadioGroupOption
       value={uid}
       let:checked
       {disabled}
       class="whitespace-nowrap overflow-hidden rounded-full"
     >
-      <span
+      <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
-        class="w-full overflow-hidden text-ellipsis block transition-colors {classes.button}"
+        class="w-full flex gap-x-3 py-2.5 pl-5 pr-4 leading-none overflow-hidden text-ellipsis items-start transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
@@ -41,8 +41,9 @@
         class:font-bold={checked}
         class:hover:bg-surface-base={!disabled && !checked}
       >
-        {label}
-      </span>
+        <span>{label}</span>
+        {#if count}<small class="text-xs">{count}</small>{/if}
+      </div>
     </RadioGroupOption>
   {/each}
 </RadioGroup>
