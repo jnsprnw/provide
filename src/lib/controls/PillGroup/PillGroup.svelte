@@ -32,7 +32,7 @@
     >
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
-        class="w-full flex gap-x-3 py-2.5 pl-5 pr-4 leading-none overflow-hidden text-ellipsis items-start transition-colors {classes.button}"
+        class="w-full flex gap-x-3 py-2.5 pl-5 pr-4 leading-none overflow-hidden text-ellipsis items-center transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
@@ -42,7 +42,7 @@
         class:hover:bg-surface-base={!disabled && !checked}
       >
         <span>{label}</span>
-        {#if count}<small class="text-xs">{count}</small>{/if}
+        {#if count}<small class="text-xs font-normal">{count}</small>{/if}
       </div>
     </RadioGroupOption>
   {/each}
