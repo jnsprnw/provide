@@ -9,11 +9,15 @@ export const PATH_DOCUMENTATION = 'documentation';
 export const PATH_EXPLAINERS = 'explainers';
 export const PATH_CONTACT = 'contact';
 export const PATH_ABOUT = 'about';
+export const PATH_AVOID = 'avoid';
+export const PATH_IMPACT = 'impacts';
+export const PATH_EXPLORE = 'explore';
 
 export const LABEL_DOCUMENTATION = 'Methodology';
 export const LABEL_EXPLAINERS = 'Explainers';
 export const LABEL_CONTACT = 'Contact';
 export const LABEL_ABOUT = 'About';
+export const LABEL_EXPLORE = 'Explore';
 
 // TODO: Should be handled through env variables
 export const IS_STAGING_VERSION = true;

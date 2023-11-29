@@ -1,5 +1,5 @@
 import { formatReadableList } from '$lib/utils.js';
-import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS } from '$src/config.js';
+import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS, PATH_AVOID } from '$src/config.js';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce, without, isEqual, isString } from 'lodash-es';
@@ -23,11 +23,16 @@ export const CURRENT_PAGE = writable('/');
 
 /*
  * GEOGRAPHY STATE
- */
+*/
 
+/**
+* Derived store that uses the list of geography types defined in the meta store and the current page to determine the list of available types
+* @type {Readable<Object[]>}
+*/
 export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE], ([$types, $currentPage]) => {
+  // Generally we allow all types that are listed in the meta endpoint
   let types = $types;
-  if ($currentPage === 'avoid') {
+  if ($currentPage === PATH_AVOID) {
     types = types.map((t) => {
       const disabled = t.disabled ? t.disabled : !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
       const tooltip = t.disabled ? 'Geography type is not available' : disabled ? 'Geography type is not available in this modus' : undefined;

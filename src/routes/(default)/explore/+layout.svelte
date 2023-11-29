@@ -6,7 +6,7 @@
   import PageIntro from '$lib/site/PageIntro.svelte';
   import ShareLink from './ShareLink/ShareLink.svelte';
 
-  import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS } from '$config';
+  import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, PATH_AVOID, PATH_IMPACT, PATH_EXPLORE } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state.js';
 
   $: urlToState($page.url);
@@ -17,14 +17,14 @@
 
   $: tabs = [
     {
-      href: '/explore/impacts',
+      href: `/${PATH_EXPLORE}/${PATH_IMPACT}`,
       label: 'Future impacts',
       description: 'Select scenarios and explore impacts',
       intro:
         'Explore how different levels of climate action will lead to different climate impacts for countries, cities, and more. See where risk escalates and under what conditions impacts could be avoided.',
     },
     {
-      href: '/explore/avoid',
+      href: `/${PATH_EXPLORE}/${PATH_AVOID}`,
       label: 'Avoiding impacts',
       description: 'Set an impact threshold and explore scenarios',
       disabled: !isAvoidingImpactsAvailable,

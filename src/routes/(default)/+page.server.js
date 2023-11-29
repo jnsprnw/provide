@@ -1,3 +1,4 @@
+import { PATH_EXPLORE } from '$config';
 import { loadFromStrapi, loadMetaData } from '$utils/apis.js';
 import { get, find, compact, uniq } from 'lodash-es';
 import qs from 'qs';
@@ -44,7 +45,7 @@ export const load = async ({ fetch }) => {
           geography,
           indicator,
           scenarios,
-          url: `explore/${Type}?${query}`,
+          url: `${PATH_EXPLORE}/${Type}?${query}`,
         };
       } else {
         return false;

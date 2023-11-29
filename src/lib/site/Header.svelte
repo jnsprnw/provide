@@ -1,10 +1,10 @@
 <script>
-  import { LABEL_DOCUMENTATION, LABEL_EXPLAINERS, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_EXPLAINERS, PATH_DOCUMENTATION } from '$config';
+  import { LABEL_EXPLORE, PATH_EXPLORE, PATH_IMPACT, LABEL_DOCUMENTATION, LABEL_EXPLAINERS, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_EXPLAINERS, PATH_DOCUMENTATION } from '$config';
   import NavLink from '$lib/helper/NavLink.svelte';
   import Logo from './Logo.svelte';
 
   const items = [
-    { href: '/explore/impacts', label: 'Explore' },
+    { href: `/${PATH_EXPLORE}/${PATH_IMPACT}`, label: LABEL_EXPLORE },
     { href: `/${PATH_ABOUT}`, label: LABEL_ABOUT },
     { href: `/${PATH_DOCUMENTATION}`, label: LABEL_DOCUMENTATION },
     { href: `/${PATH_EXPLAINERS}`, label: LABEL_EXPLAINERS },

@@ -1,5 +1,6 @@
 <script>
   import { CURRENT_SCENARIOS_UID } from '$stores/state';
+  import { PATH_IMPACT, PATH_EXPLORE } from '$config';
   import { getContext } from 'svelte';
   export let slug;
   export let scenarios;
@@ -18,5 +19,5 @@
       {scenario.label}
     </label>
   {/each}
-  <a href="/explore/impacts">View in Explorer</a>
+  <a href={`/${PATH_EXPLORE}/${PATH_IMPACT}`}>View in Explorer</a>
 </fieldset>
