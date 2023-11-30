@@ -133,8 +133,6 @@
 
   $: positions = calculatePositions(ticks)
 
-  $: bothNoRange = unavoidableTick.hasNoRange && avoidableTick.hasNoRange;
-
   let avoidableHeight;
 </script>
 
