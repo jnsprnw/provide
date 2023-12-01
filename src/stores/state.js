@@ -74,32 +74,36 @@ CURRENT_GEOGRAPHY_UID.subscribe((value) => {
 * @type {Readable<Object|undefined>}
 */
 export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $selectableGeographyTypes, $geographies], set) => {
-  let geography;
-  // This loops over every selectable geography type and searches for the currently selected geography uid
-  // We use the `every` loop to quit if we found it
-  $selectableGeographyTypes.every(({ uid: type }) => {
-    // Get the list of geographies for this type
-    const list = $geographies[type];
-    if (typeof list === 'undefined') {
-      console.warn(`Geography type ${type} from meta does not match. Could not find any geographies.`);
+  if (typeof $uid === 'undefined') {
+    set(undefined);
+  } else {
+    let geography;
+    // This loops over every selectable geography type and searches for the currently selected geography uid
+    // We use the `every` loop to quit if we found it
+    $selectableGeographyTypes.every(({ uid: type }) => {
+      // Get the list of geographies for this type
+      const list = $geographies[type];
+      if (typeof list === 'undefined') {
+        console.warn(`Geography type ${type} from meta does not match. Could not find any geographies.`);
+      }
+      // Check if the currently selected uid can be found in the
+      geography = (list ?? []).find(({ uid }) => uid === $uid);
+      if (geography) {
+        return false; // A geography was found so we quit the loop
+      }
+      return true; // Return true to continue the loop
+    });
+    // If the geography could not be found
+    if (typeof geography === 'undefined') {
+      console.warn(`Could not find any geography from uid ‘${$uid}’ given the current set of geography types.`);
+      if (typeof $uid !== 'undefined') {
+        // Set the geography uid to undefined to reset the selection
+        CURRENT_GEOGRAPHY_UID.set(undefined);
+      }
     }
-    // Check if the currently selected uid can be found in the
-    geography = (list ?? []).find(({ uid }) => uid === $uid);
-    if (geography) {
-      return false; // A geography was found so we quit the loop
-    }
-    return true; // Return true to continue the loop
-  });
-  // If the geography could not be found
-  if (typeof geography === 'undefined') {
-    console.warn(`Could not find any geography from uid ‘${$uid}’ given the current set of geography types.`);
-    if (typeof $uid !== 'undefined') {
-      // Set the geography uid to undefined to reset the selection
-      CURRENT_GEOGRAPHY_UID.set(undefined);
-    }
+    // Set the geography. This can also be undefined if no geography was found.
+    set(geography);
   }
-  // Set the geography. This can also be undefined if no geography was found.
-  set(geography);
 });
 
 /**
