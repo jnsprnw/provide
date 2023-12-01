@@ -12,7 +12,7 @@
       class:cursor-not-allowed={disabled}
       class:opacity-50={disabled}
       class:pointer-events-none={disabled}
-      role="link"
+      role={disabled ? 'link' : undefined}
       href={disabled ? undefined : `#${slug}`}
       class="hidden md:inline-block py-3 pl-2 pr-6 lg:pr-12 border-r-3 hover:bg-surface-weaker"
       class:border-theme-base={isActive}

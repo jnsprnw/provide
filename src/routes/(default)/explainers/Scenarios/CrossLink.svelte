@@ -15,7 +15,7 @@
 
 <!-- We keep this because we remove href (https://www.scottohara.me/blog/2021/05/28/disabled-links.html) -->
 <a
-  role="link"
+  role={isDisabled ? 'link' : undefined}
   aria-disabled={String(isDisabled)}
   class:text-theme-weaker={isDisabled}
   class:pointer-events-none={isDisabled}

@@ -17,7 +17,7 @@
 <a
   class={`${$$restProps.class || ''} ${isActive && activeClass}`}
   href={isDisabled ? undefined : href}
-  role="link"
+  role={disabled ? 'link' : undefined}
   class:opacity-40={isDisabled}
   class:cursor-not-allowed={isDisabled}
   aria-current={ariaLabel}
