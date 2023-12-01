@@ -10,7 +10,7 @@
 
 <section>
   <PopoverSelect
-    label="Certainty Levels"
+    label="Probability"
     {buttonLabel}
     buttonClass={`border border-contour-weakest aria-expanded:border-contour-weaker `}
     size="md"
