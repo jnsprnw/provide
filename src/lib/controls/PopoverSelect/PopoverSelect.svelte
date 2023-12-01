@@ -57,7 +57,7 @@
   >
     <span
       class="flex items-center whitespace-nowrap overflow-hidden text-ellipsis"
-      class:font-bold={!placeholder}
+      class:font-bold={!placeholder && !disabled}
     >
       {#if disabled || warning || placeholder}
         <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{disabled ?? warning ?? placeholder}</span>
