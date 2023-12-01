@@ -33,7 +33,7 @@
         indicator: $CURRENT_INDICATOR.uid,
         level_of_impact: $LEVEL_OF_IMPACT,
         certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
-        // ...$CURRENT_INDICATOR_OPTION_VALUES,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });
 

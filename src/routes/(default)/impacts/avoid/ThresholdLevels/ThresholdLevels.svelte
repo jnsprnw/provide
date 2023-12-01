@@ -1,5 +1,5 @@
 <script>
-  import { CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR, CURRENT_GEOGRAPHY } from '$stores/state.js';
+  import { CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES } from '$stores/state.js';
   import { SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -20,7 +20,7 @@
         indicator: $CURRENT_INDICATOR.uid,
         level_of_impact: $LEVEL_OF_IMPACT,
         certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
-        // ...$CURRENT_INDICATOR_OPTION_VALUES,
+        ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });
 
