@@ -49,7 +49,7 @@
     aria-label={disabled ?? warning ?? placeholder ?? `${category ? `${category}:` : ''}${buttonLabel}`}
     disabled={isDisabled}
     class={[
-      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors hover:border-theme-base/40 aria-expanded:border-theme-base/60 aria-invalid:border-red-300 text-theme-base aria-invalid:text-red-300 aria-disabled:cursor-not-allowed',
+      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors hover:border-theme-base/40 aria-expanded:border-theme-base/60 aria-invalid:border-rose-300 text-theme-base aria-invalid:text-rose-400 aria-disabled:cursor-not-allowed',
       classes.button,
       buttonClass,
       placeholder || isDisabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
