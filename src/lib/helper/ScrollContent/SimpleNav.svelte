@@ -21,13 +21,13 @@
     >
       <div
         class="font-bold mb-1 -mt-1 leading-tight"
-        class:text-theme-base={isActive}
+        class:text-theme-base={isActive && !disabled}
       >
         {title}
       </div>
       <div
         class="text-contour-weak leading-tight text-sm -mb-1"
-        class:text-theme-weaker={isActive}
+        class:text-theme-weaker={isActive && !disabled}
       >
         {description}
       </div>
