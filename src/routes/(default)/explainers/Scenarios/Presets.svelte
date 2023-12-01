@@ -58,7 +58,7 @@
           style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);"
           bind:clientWidth={widthContent}
         >
-          {#each [...scenarioPresetsForCurrentTimeframe, ...scenarioPresetsForCurrentTimeframe] as { uid: value, description, title }}
+          {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
             <RadioGroupOption
               {value}
               let:checked
