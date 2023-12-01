@@ -1,5 +1,5 @@
 <script>
-  import { IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
+  import { CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { END_AVOIDING_REFERENCE } from '$src/config.js';
