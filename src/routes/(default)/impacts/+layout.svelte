@@ -25,12 +25,12 @@
     },
     {
       href: `/${PATH_EXPLORE}/${PATH_AVOID}`,
-      label: 'Avoiding impacts',
+      label: 'Avoiding future impacts',
       description: 'Set an impact threshold and explore scenarios',
       disabled: !isAvoidingImpactsAvailable,
       tooltip: !isAvoidingImpactsAvailable ? 'This module is only available for specific geographies' : undefined,
       intro:
-        'Explore how different levels of climate action will lead to different climate impacts for countries, cities, and more. See where risk escalates and under what conditions impacts could be avoided.',
+        'Explore which scenarios minimise the risk from certain impacts. Understand the likelihood of exceeding the impact levels you would like to avoid.',
     },
   ];
 
