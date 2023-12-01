@@ -8,6 +8,7 @@
     IS_COMBINATION_AVAILABLE,
     IS_EMPTY_SELECTION,
     IS_EMPTY_SCENARIO,
+    IS_EMPTY_GEOGRAPHY
   } from '$stores/state';
 
   $: unavailableItems = [
@@ -21,7 +22,11 @@
 </script>
 
 {#if $IS_EMPTY_SELECTION}
-  {#if $IS_EMPTY_INDICATOR}
+  {#if $IS_EMPTY_GEOGRAPHY}
+  <Message headline="No geography selected">
+    <span>Select a geography from the dropdown at the top of this page.</span>
+  </Message>
+  {:else if $IS_EMPTY_INDICATOR}
     <Message headline="No indicator selected">
       <span>Select an indicator from the dropdown at the top of this page.</span>
     </Message>
