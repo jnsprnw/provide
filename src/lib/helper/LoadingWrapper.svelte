@@ -78,11 +78,3 @@
     props={currentProps}
   />
 {/if}
-{#if isDebug}
-  loadedData: {loadedData.length}<br />
-  flatData: {JSON.stringify(flatData)}<br />
-  asyncProps: {JSON.stringify(asyncProps)}<br />
-  flatData: {flatData.length}<br />
-  isFailed: {isFailed}<br />
-  isLoading: {isLoading}
-{/if}
