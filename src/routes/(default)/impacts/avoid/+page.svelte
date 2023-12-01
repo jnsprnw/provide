@@ -47,7 +47,7 @@
     },
     {
       slug: 'unavoidable-risk',
-      title: 'Avoidable vs. unavoidable',
+      title: '(Un)avoidable risk',
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: false,

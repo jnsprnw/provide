@@ -213,7 +213,7 @@
       >
         {#if asyncProps.thresholds.length > 1}
           <Select
-            label="Threshold"
+            label="Impact level"
             options={asyncProps.thresholds}
             bind:value={threshold}
           />
