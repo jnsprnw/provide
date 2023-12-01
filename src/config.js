@@ -5,13 +5,14 @@ export const ANCHOR_DOCS_SCENARIOS = 'scenarios';
 export const ANCHOR_DOCS_MODELS = 'models';
 export const ANCHOR_DOCS_DATA_PROCESSING = 'data-processing';
 
+// NOTE: You also need to change the corresponding folder name!
 export const PATH_DOCUMENTATION = 'documentation';
 export const PATH_EXPLAINERS = 'explainers';
 export const PATH_CONTACT = 'contact';
 export const PATH_ABOUT = 'about';
+export const PATH_EXPLORE = 'impacts';
 export const PATH_AVOID = 'avoid';
-export const PATH_IMPACT = 'impacts';
-export const PATH_EXPLORE = 'explore';
+export const PATH_IMPACT = 'explore';
 
 export const LABEL_DOCUMENTATION = 'Methodology';
 export const LABEL_EXPLAINERS = 'Explainers';

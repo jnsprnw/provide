@@ -1,7 +1,6 @@
 <script>
   import { getContext } from 'svelte';
   import { UNAVOIDABLE_UID } from '$src/config';
-  import { formatValue } from '$lib/utils/formatting';
   import { extent, max } from 'd3-array';
   import { groupBy } from 'lodash-es';
   import Bar from './Bar.svelte';
@@ -38,16 +37,10 @@
   $: lastYearUnavoidableValue = lastItem.value;
   $: lastYearAvoidableValue = max($data, (d) => d.values[d.values.length - 1]?.value);
 
-  $: console.log({ $data }, unavoidable.values.length, unavoidable.values);
-
   $: lastYearWithAvoidableRisk = unavoidable.values.findLast(({ value }, i) => value < max($data, (d) => d.values[i]?.value));
-
-  $: console.log({ lastYearWithAvoidableRisk }, 'here', { scenariosRange });
 
   $: latestAvoidable = scenariosRange.findLast(({ hasAvoidable }) => hasAvoidable);
   $: latestUnavoidable = scenariosRange.findLast(({ hasUnavoidable }) => hasUnavoidable);
-
-  $: console.log({ latestAvoidable, latestUnavoidable });
 
   $: ticks = [
     {
