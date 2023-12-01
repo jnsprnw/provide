@@ -1,5 +1,5 @@
 <script>
-  import { CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
+  import { IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { END_AVOIDING_REFERENCE } from '$src/config.js';
@@ -10,7 +10,7 @@
 
   export let store;
 
-  $: !$IS_EMPTY_INDICATOR &&
+  $: !$IS_EMPTY_GEOGRAPHY && !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(store, {
       endpoint: END_AVOIDING_REFERENCE,
@@ -29,7 +29,7 @@
 </script>
 
 <div class="flex flex-col gap-y-6 min-h-[240px]">
-  {#if !$IS_EMPTY_INDICATOR && $IS_COMBINATION_AVAILABLE_INDICATOR}
+  {#if !$IS_EMPTY_GEOGRAPHY && !$IS_EMPTY_INDICATOR && $IS_COMBINATION_AVAILABLE_INDICATOR}
     <LoadingWrapper
       {process}
       let:asyncProps={{ data }}
@@ -49,6 +49,14 @@
 
       <LoadingPlaceholder slot="placeholder" />
     </LoadingWrapper>
+  {:else if $IS_EMPTY_GEOGRAPHY}
+    <Message
+    warningBackground={false}
+    warningSizeSmall={true}
+    headline="No geography selected"
+    >
+    <span>Select a geography from the dropdown at the top of this page.</span>
+    </Message>
   {:else if $IS_EMPTY_INDICATOR}
     <Message
       warningBackground={false}
