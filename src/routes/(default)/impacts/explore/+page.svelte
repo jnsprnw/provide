@@ -25,14 +25,14 @@
       title: 'Location',
       description: 'Where will impacts hit the hardest?',
       component: ImpactGeo,
-      disabled: !$IS_COMBINATION_AVAILABLE,
+      disabled: !isValidSelection,
     },
     {
       slug: 'unavoidable-risk',
       title: '(Un)avoidable risk',
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
-      disabled: !$IS_COMBINATION_AVAILABLE,
+      disabled: !isValidSelection,
       props: {
         store: UNAVOIDABLE_RISK_STORE,
       },

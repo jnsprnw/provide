@@ -10,6 +10,7 @@
     IS_EMPTY_SCENARIO,
     IS_EMPTY_GEOGRAPHY
   } from '$stores/state';
+  import { IS_INVALID_AVOID_PARAMETERS } from '$stores/avoid.js';
 
   $: unavailableItems = [
     [$IS_COMBINATION_AVAILABLE_INDICATOR, 'indicator'],
@@ -40,5 +41,13 @@
     {#if unavailableItems.length}
       <span class="text-contour-weaker">The selected {listFormat.format(unavailableItems)} {unavailableItems.length > 1 ? 'are' : 'is'} not available in this combination.</span>
     {/if}
+  </Message>
+{:else if $IS_INVALID_AVOID_PARAMETERS}
+  <Message headline="No parameters selected">
+    <span>Select parameter from the left hand side of this page.</span>
+  </Message>
+{:else}
+  <Message headline="Some parameters are missing">
+    <span>This should not happen. Please get in contact with us.</span>
   </Message>
 {/if}

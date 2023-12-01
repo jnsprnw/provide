@@ -1,12 +1,35 @@
-import { writable, derived } from 'svelte/store';
+import { writable, derived, get } from 'svelte/store';
 import { getLocalStorage, setLocalStorage } from './utils.js';
 import { isString } from 'lodash-es';
-import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT } from '$config';
-import { LIKELIHOODS } from './meta.js';
+import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT, PATH_AVOID } from '$config';
+import { CURRENT_PAGE } from '$stores/state';
+import { LIKELIHOODS, STUDY_LOCATIONS } from './meta.js';
+
+function checkValidValue(list, value) {
+  if (list.length && list.findIndex(({ uid }) => uid === value) === -1) {
+    return false;
+  }
+  return true;
+}
+
+function checkValidLikelihood(list, value = get(SELECTED_LIKELIHOOD_LEVEL)) {
+  const isValid = checkValidValue(list, value);
+  if (!isValid) {
+    const newValue = list[0]?.uid;
+    SELECTED_LIKELIHOOD_LEVEL.set(newValue);
+    console.warn(`Likelihood level has an invalid value. Will reset to default value ${newValue}.`);
+  }
+  return isValid;
+}
 
 export const SELECTED_LIKELIHOOD_LEVEL = writable(getLocalStorage(LOCALSTORE_LIKELIHOOD, 'likely'));
 SELECTED_LIKELIHOOD_LEVEL.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_LIKELIHOOD, value);
+  if (checkValidLikelihood(get(LIKELIHOODS), value)) {
+    setLocalStorage(LOCALSTORE_LIKELIHOOD, value);
+  }
+});
+LIKELIHOODS.subscribe((list) => {
+  checkValidLikelihood(list);
 });
 
 export const SELECTED_LIKELIHOOD_LEVEL_LABEL = derived([SELECTED_LIKELIHOOD_LEVEL, LIKELIHOODS], ([$current, $all]) => {
@@ -18,9 +41,25 @@ export const SELECTED_LIKELIHOOD_LEVEL_LABEL = derived([SELECTED_LIKELIHOOD_LEVE
   }
 });
 
-export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'urban-hot-spot')); // TODO: Change default to average
+function checkValidStudyLocation(list, value = get(SELECTED_STUDY_LOCATION)) {
+  const isValid = checkValidValue(list, value);
+  if (!isValid) {
+    const newValue = list[0]?.uid;
+    SELECTED_STUDY_LOCATION.set(newValue);
+    console.warn(`Study location has an invalid value. Will reset to default value ${newValue}.`);
+    return false;
+  }
+  return isValid;
+}
+
+export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'city-average')); // TODO: Change default to average
 SELECTED_STUDY_LOCATION.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
+  if (checkValidStudyLocation(get(STUDY_LOCATIONS), value)) {
+    setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
+  }
+});
+STUDY_LOCATIONS.subscribe((list) => {
+  checkValidStudyLocation(list);
 });
 
 export const LEVEL_OF_IMPACT_ARRAY = writable(
@@ -44,3 +83,10 @@ LEVEL_OF_IMPACT_ARRAY.subscribe((value) => {
 });
 
 export const LEVEL_OF_IMPACT = derived(LEVEL_OF_IMPACT_ARRAY, ($arr) => $arr[0]);
+
+export const IS_EMPTY_LEVEL_OF_IMPACT = derived(LEVEL_OF_IMPACT, ($value) => typeof $value === 'undefined');
+export const IS_EMPTY_LIKELIHOOD_LEVEL = derived(SELECTED_LIKELIHOOD_LEVEL, ($value) => !Boolean($value));
+
+export const IS_INVALID_AVOID_PARAMETERS = derived([CURRENT_PAGE, IS_EMPTY_LEVEL_OF_IMPACT, IS_EMPTY_LIKELIHOOD_LEVEL], ([$page, $impact, $likelihood]) => {
+  return $page === PATH_AVOID && ($impact || $likelihood);
+})
