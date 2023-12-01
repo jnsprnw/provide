@@ -403,7 +403,7 @@ if (browser) {
 }
 
 export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCENARIOS, THEME], ([$uids, $scenarios, $theme]) =>
-  $uids.map((uid, i) => ({
+  ($uids ?? []).map((uid, i) => ({
     ...$scenarios[uid],
     color: $theme.color.category.base[i],
     colorInterpolator: piecewise(interpolateLab, [$theme.color.category.weakest[i], $theme.color.category.base[i], $theme.color.category.strongest[i]]),
@@ -434,13 +434,13 @@ export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCE
 });
 
 /* UTILITY N STUFF */
-export const IS_EMPTY_SCENARIO = derived(CURRENT_SCENARIOS_UID, ($scenarios) => !$scenarios.length);
+export const IS_EMPTY_SCENARIO = derived(CURRENT_SCENARIOS_UID, ($scenarios) => !Array.isArray($scenarios) || !$scenarios.length);
 
-export const IS_EMPTY_SELECTION = derived([IS_EMPTY_INDICATOR, IS_EMPTY_SCENARIO], ([$indicator, $scenario]) => $indicator || $scenario);
+export const IS_EMPTY_SELECTION = derived([IS_EMPTY_GEOGRAPHY, IS_EMPTY_INDICATOR, IS_EMPTY_SCENARIO], ([$geography, $indicator, $scenario]) => $geography || $indicator || $scenario);
 
 export const IS_COMBINATION_AVAILABLE_SCENARIO = derived(
   [SELECTABLE_SCENARIOS_UID, CURRENT_SCENARIOS_UID],
-  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) => $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
+  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) => Array.isArray($CURRENT_SCENARIOS_UID) && $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
 );
 
 export const IS_COMBINATION_AVAILABLE = derived(
