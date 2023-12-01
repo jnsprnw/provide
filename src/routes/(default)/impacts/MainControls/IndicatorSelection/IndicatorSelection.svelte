@@ -19,7 +19,7 @@
   buttonLabel={$CURRENT_INDICATOR?.label}
   buttonClass="border-theme-base/20 border"
   panelClass="w-screen-p max-w-3xl"
-  warning={!$IS_COMBINATION_AVAILABLE_INDICATOR ? 'Selected indicator is not available for this geography' : undefined}
+  warning={!$IS_EMPTY_INDICATOR && !$IS_COMBINATION_AVAILABLE_INDICATOR ? 'Selected indicator is not available for this geography' : undefined}
   disabled={$DISABLED}
   placeholder={$IS_EMPTY_INDICATOR ? 'Select an indicator' : undefined}
 >
