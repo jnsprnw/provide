@@ -86,35 +86,26 @@
   ].map((tick) => {
     const min = tick.latest?.range[0] ?? tick.baseY;
     const max = tick.latest?.range[1] ?? tick.baseY;
-    // const baseY = $yScale(tick.baseY);
     const y1 = $yScale(min);
     const y2 = $yScale(max);
     const height = Math.max(y1 - y2, 0);
     const hasNoRange = typeof tick.latest === 'undefined';
-    // const top = tick.baseY ? baseY : baseY - height;
-    // const centerY = y1 - height / 2;
     return {
       ...tick,
       y1,
       y2,
-      // baseY,
       height,
       hasNoRange,
       label: hasNoRange ? tick.labelFallback : tick.label,
       min,
       max,
       latest: hasNoRange ? { range: [0, 0], year: lastYear } : tick.latest
-      // top,
-      // centerY,
     };
   });
 
   $: fullHeight = $yScale.range()[0];
 
   $: differentYears = ticks[0].latest?.year !== ticks[1].latest?.year && typeof ticks[0].latest?.year !== 'undefined' && typeof ticks[1].latest?.year !== 'undefined';
-
-  // $: console.log({ differentYears }, ticks[0].latest?.year, ticks[1].latest?.year);
-  // $: console.log({ fullHeight });
 
   $: sameYearGap = differentYears ? 0 : 1; // This gets added and subtracted from the bar size to have a small gap if the years are the same.
 
