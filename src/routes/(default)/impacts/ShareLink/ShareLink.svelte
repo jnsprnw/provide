@@ -1,5 +1,6 @@
 <script>
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION, CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_UID, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_SCENARIOS_UID, CURRENT_INDICATOR_OPTIONS } from '$stores/state.js';
+  import { PATH_IMPACT } from '$config';
   import { buildURL } from '$utils/url.js';
   import tooltip from '$lib/utils/tooltip';
   import copy from 'copy-to-clipboard';
@@ -7,7 +8,7 @@
 
   $: isDisabled = $IS_EMPTY_SELECTION || !$IS_COMBINATION_AVAILABLE;
 
-  $: query = !isDisabled && buildURL('impacts', { indicator: $CURRENT_INDICATOR_UID, geography: $CURRENT_GEOGRAPHY_UID, scenarios: $CURRENT_SCENARIOS_UID, ...$CURRENT_INDICATOR_OPTION_VALUES });
+  $: query = !isDisabled && buildURL(PATH_IMPACT, { indicator: $CURRENT_INDICATOR_UID, geography: $CURRENT_GEOGRAPHY_UID, scenarios: $CURRENT_SCENARIOS_UID, ...$CURRENT_INDICATOR_OPTION_VALUES });
 
   function handleClick() {
     if (query) {

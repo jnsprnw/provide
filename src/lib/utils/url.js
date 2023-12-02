@@ -1,5 +1,6 @@
 import { browser } from '$app/environment';
 import { CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR_UID, CURRENT_SCENARIOS_UID } from '$stores/state.js';
+import { PATH_IMPACT } from '$config';
 import { autoType } from 'd3-dsv';
 import { parse, stringify } from 'qs';
 
@@ -67,13 +68,13 @@ export function urlToState(currentUrl) {
   if (browser) window.history.replaceState(window.history.state, null, url.href);
 }
 
-export function buildURL(type = 'impacts', { indicator, geography, scenarios, time, reference, spatial } = {}) {
+export function buildURL(type = PATH_IMPACT, { indicator, geography, scenarios, time, reference, spatial } = {}) {
   let obj;
-  if (type === 'impacts') {
+  if (type === PATH_IMPACT) {
     obj = {
       indicator,
       geography,
-      scenarios: scenarios.sort(),
+      scenarios: (scenarios ?? []).sort(),
       time,
       reference,
       spatial,
