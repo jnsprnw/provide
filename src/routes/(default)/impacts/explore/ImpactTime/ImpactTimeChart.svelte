@@ -1,5 +1,5 @@
 <script>
-  import { Html, LayerCake, Svg } from 'layercake';
+  import { LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
@@ -7,7 +7,7 @@
   import AxisY from '$lib/charts/axes/AxisY.svelte';
   import AreaLayer from '$lib/charts/layers/AreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
-  import { extent, groups, max, min, range } from 'd3-array';
+  import { extent, max, min } from 'd3-array';
   import { scaleBand, scaleSequential } from 'd3-scale';
   import ChartPopover from './ChartPopover.svelte';
   import { flatMap } from 'lodash-es';

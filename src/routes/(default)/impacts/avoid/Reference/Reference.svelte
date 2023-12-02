@@ -42,7 +42,6 @@
       }}
       warningSizeSmall={true}
       warningBackground={false}
-      isDebug={false}
     >
       <Text {data} />
       <ImpactLevel {data} />

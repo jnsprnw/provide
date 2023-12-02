@@ -128,17 +128,6 @@
 </div>
 
 <style lang="postcss">
-  .stories {
-    background-color: var(--color-surface-stronger);
-    width: 100%;
-    position: relative;
-  }
-
-  .background {
-    position: absolute;
-    inset: 0;
-  }
-
   .stories-wrapper {
     grid-column: 1 / -1;
     margin-bottom: var(--space-xl);

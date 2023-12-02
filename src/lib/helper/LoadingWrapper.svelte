@@ -11,7 +11,6 @@
   export let isFailed = false;
   export let warningSizeSmall = false;
   export let warningBackground = true;
-  export let isDebug = false;
 
   let currentProps;
   let currentAsyncProps; // Always holds previous props and only gets updated once all data is loaded

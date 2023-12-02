@@ -32,15 +32,6 @@
   export let label = false;
   export let labelId;
   export let labelField = 'label';
-  export let labelColor = ['coalesce', ['get', 'fillColor'], ['get', 'color']];
-  export let labelOpacity = 1;
-  export let labelHaloColor = [
-    'coalesce',
-    ['get', 'fillColor'],
-    $theme.color.surface.base,
-  ];
-  export let labelHaloOpacity = 1;
-  export let labelHaloWidth = 1;
 
   const { map, source } = getContext('mapbox');
 

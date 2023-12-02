@@ -35,11 +35,3 @@
     {/each}
   </div>
 </div>
-
-<style lang="postcss">
-  .section {
-    .topic {
-      grid-column: 1 / span 6;
-    }
-  }
-</style>
