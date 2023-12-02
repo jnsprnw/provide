@@ -1,4 +1,5 @@
 <script>
+  import { PATH_EXPLORE, PATH_IMPACT } from '$config';
   import Tagline from '$lib/helper/Tagline.svelte';
 </script>
 
@@ -30,7 +31,7 @@
     </figure>
     <a
       class="bg-theme-base text-white p-5 text-center rounded-sm block"
-      href="/explore/impacts">Explore</a
+      href={`/${PATH_EXPLORE}/${PATH_IMPACT}`}>Explore</a
     >
   </section>
   <section class="opacity-50 grid grid-rows-[1fr_auto_auto]">
