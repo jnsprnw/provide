@@ -1,12 +1,13 @@
 import { writable, derived, get } from 'svelte/store';
 import { getLocalStorage, setLocalStorage } from './utils.js';
 import { isString } from 'lodash-es';
+import { browser } from '$app/environment';
 import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT, PATH_AVOID } from '$config';
-import { CURRENT_PAGE } from '$stores/state';
 import { LIKELIHOODS, STUDY_LOCATIONS } from './meta.js';
+import { CURRENT_PAGE } from '$stores/state';
 
 function checkValidValue(list, value) {
-  if (list.length && list.findIndex(({ uid }) => uid === value) === -1) {
+  if (Array.isArray(list) && list.length && list.findIndex(({ uid }) => uid === value) === -1) {
     return false;
   }
   return true;
@@ -24,13 +25,15 @@ function checkValidLikelihood(list, value = get(SELECTED_LIKELIHOOD_LEVEL)) {
 
 export const SELECTED_LIKELIHOOD_LEVEL = writable(getLocalStorage(LOCALSTORE_LIKELIHOOD, 'likely'));
 SELECTED_LIKELIHOOD_LEVEL.subscribe((value) => {
-  if (checkValidLikelihood(get(LIKELIHOODS), value)) {
+  if (browser && checkValidLikelihood(get(LIKELIHOODS), value)) {
     setLocalStorage(LOCALSTORE_LIKELIHOOD, value);
   }
 });
-LIKELIHOODS.subscribe((list) => {
-  checkValidLikelihood(list);
-});
+if (browser) {
+  LIKELIHOODS.subscribe((list) => {
+    checkValidLikelihood(list);
+  });
+}
 
 export const SELECTED_LIKELIHOOD_LEVEL_LABEL = derived([SELECTED_LIKELIHOOD_LEVEL, LIKELIHOODS], ([$current, $all]) => {
   const level = $all.find(({ uid }) => uid === $current);
@@ -52,15 +55,17 @@ function checkValidStudyLocation(list, value = get(SELECTED_STUDY_LOCATION)) {
   return isValid;
 }
 
-export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'city-average')); // TODO: Change default to average
+export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'city-average'));
 SELECTED_STUDY_LOCATION.subscribe((value) => {
-  if (checkValidStudyLocation(get(STUDY_LOCATIONS), value)) {
+  if (browser && checkValidStudyLocation(get(STUDY_LOCATIONS), value)) {
     setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
   }
 });
-STUDY_LOCATIONS.subscribe((list) => {
-  checkValidStudyLocation(list);
-});
+if (browser) {
+  STUDY_LOCATIONS.subscribe((list) => {
+    checkValidStudyLocation(list);
+  });
+}
 
 export const LEVEL_OF_IMPACT_ARRAY = writable(
   getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, [], (v) => {
