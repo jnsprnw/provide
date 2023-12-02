@@ -2,8 +2,8 @@
   import { page } from '$app/stores';
   import { parseUrlQuery, urlToState } from '$lib/utils/url';
   //import { onMount } from 'svelte';
-  import ImpactTime from '$routes/(default)/explore/impacts/ImpactTime/ImpactTime.svelte';
-  import ImpactGeo from '$routes/(default)/explore/impacts/ImpactGeo/ImpactGeo.svelte';
+  import ImpactTime from '$routes/(default)/impacts/explore/ImpactTime/ImpactTime.svelte';
+  import ImpactGeo from '$routes/(default)/impacts/explore/ImpactGeo/ImpactGeo.svelte';
   import UnavoidableRisk from '$routes/(default)/explore/UnavoidableRisk/UnavoidableRisk.svelte';
   import { IS_STATIC } from '$stores/state';
   import Logo from '$lib/site/Logo.svelte';
