@@ -4,7 +4,7 @@
   //import { onMount } from 'svelte';
   import ImpactTime from '$routes/(default)/impacts/explore/ImpactTime/ImpactTime.svelte';
   import ImpactGeo from '$routes/(default)/impacts/explore/ImpactGeo/ImpactGeo.svelte';
-  import UnavoidableRisk from '$routes/(default)/explore/UnavoidableRisk/UnavoidableRisk.svelte';
+  import UnavoidableRisk from '$routes/(default)/impacts/UnavoidableRisk/UnavoidableRisk.svelte';
   import { IS_STATIC } from '$stores/state';
   import Logo from '$lib/site/Logo.svelte';
 
