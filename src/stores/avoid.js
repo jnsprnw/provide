@@ -5,6 +5,7 @@ import { browser } from '$app/environment';
 import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT, PATH_AVOID } from '$config';
 import { LIKELIHOODS, STUDY_LOCATIONS } from './meta.js';
 import { CURRENT_PAGE } from '$stores/state';
+import { formatValue } from '$lib/utils/formatting';
 
 function checkValidValue(list, value) {
   if (Array.isArray(list) && list.length && list.findIndex(({ uid }) => uid === value) === -1) {
@@ -38,7 +39,7 @@ if (browser) {
 export const SELECTED_LIKELIHOOD_LEVEL_LABEL = derived([SELECTED_LIKELIHOOD_LEVEL, LIKELIHOODS], ([$current, $all]) => {
   const level = $all.find(({ uid }) => uid === $current);
   if (level) {
-    return level.label ?? level.uid;
+    return formatValue(level.value, 'percent') ?? level.label ?? level.uid;
   } else {
     return $current;
   }
