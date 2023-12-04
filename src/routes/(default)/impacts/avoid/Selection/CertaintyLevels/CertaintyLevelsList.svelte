@@ -16,13 +16,12 @@
       value={uid}
       let:checked
     >
-      <dl
+      <span
         class:checked
-        class="block flex justify-between gap-x-4 items-center px-4 py-1 cursor-pointer hover:bg-surface-weaker focus:bg-surface-weaker"
+        class="block px-4 py-1 cursor-pointer hover:bg-surface-weaker focus:bg-surface-weaker"
       >
-        <dt>{label}</dt>
-        <dd class="text-xs text-text-weaker">{formatValue(value, 'percent')}</dd>
-      </dl>
+        {label}
+      </span>
     </RadioGroupOption>
   {/each}
 </RadioGroup>
