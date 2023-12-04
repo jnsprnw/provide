@@ -29,7 +29,7 @@
     { component: FallbackMessage, disabled: isValidSelection },
     {
       slug: 'threshold-levels',
-      title: 'Threshold levels',
+      title: 'Impact Level',
       description: 'Lorem ipsum dolor dolor dolor',
       component: ThresholdLevels,
       disabled: !isValidSelection,
