@@ -41,7 +41,6 @@
 
     const impactTime = scenarios.map((scenario, i) => {
       const scenarioData = data[scenario.uid];
-      console.log({ scenarioData, scenario });
       if (scenarioData.length !== scenario[MEAN_TEMPERATURE_UID].length) {
         console.warn(`Scenario data length does not match ${MEAN_TEMPERATURE_UID} length.`);
       }
