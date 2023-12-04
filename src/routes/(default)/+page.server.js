@@ -1,7 +1,7 @@
-import { PATH_EXPLORE, URL_PATH_INDICATOR, URL_PATH_GEOGRAPHY,URL_PATH_SCENARIOS  } from '$config';
+import { PATH_EXPLORE, URL_PATH_INDICATOR, URL_PATH_GEOGRAPHY, URL_PATH_SCENARIOS  } from '$config';
 import { loadFromStrapi, loadMetaData } from '$utils/apis.js';
+import { buildURL } from '$utils/url.js';
 import { get, find, compact, uniq } from 'lodash-es';
-import qs from 'qs';
 
 export const load = async ({ fetch }) => {
   const meta = await loadMetaData(fetch);
@@ -31,21 +31,12 @@ export const load = async ({ fetch }) => {
       ).slice(0, 3);
 
       if (geography && indicator && scenarios.length) {
-        const query = qs.stringify(
-          {
-            [URL_PATH_INDICATOR]: indicatorUID,
-            [URL_PATH_GEOGRAPHY]: geographyUID,
-            [URL_PATH_SCENARIOS]: scenarioList,
-          },
-          {
-            encodeValuesOnly: true,
-          }
-        );
+        const query = buildURL(Type, { [URL_PATH_INDICATOR]: indicatorUID, [URL_PATH_GEOGRAPHY]: geographyUID, [URL_PATH_SCENARIOS]: scenarioList });
         return {
           geography,
           indicator,
           scenarios,
-          url: `${PATH_EXPLORE}/${Type}?${query}`,
+          url: `${PATH_EXPLORE}/${Type}${query}`,
         };
       } else {
         return false;
