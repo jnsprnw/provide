@@ -61,7 +61,7 @@
         : undefined,
     },
     {
-      label: 'Avoidable risk i.e. what we can avoid through mitigation action',
+      label: 'Avoidable risk, i.e. what we can avoid through mitigation action',
       labelFallback: 'No avoidable risk in any year',
       min: lastYearUnavoidableValue,
       max: lastYearAvoidableValue,
