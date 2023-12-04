@@ -1,19 +1,15 @@
 <script>
   import {
     CURRENT_INDICATOR,
-    CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
-    CURRENT_SCENARIOS_UID,
     IS_COMBINATION_AVAILABLE_INDICATOR,
-    DOWNLOAD_URL_PARAMS,
-    GRAPH_URL_PARAMS,
     IS_EMPTY_INDICATOR,
   } from '$stores/state.js';
   import { STUDY_LOCATIONS } from '$stores/meta.js';
   import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL, SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
-  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE, UID_STUDY_LOCATION_AVERAGE, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_CERTAINTY_LEVEL } from '$config';
+  import { END_AVOIDING_IMPACTS, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_CERTAINTY_LEVEL } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
