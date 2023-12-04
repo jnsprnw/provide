@@ -18,15 +18,16 @@
   style={`top: ${y}px; height: ${fullHeight}px; left: ${hasNoRange ? 10 : left}px;`}
 >
   <div class="tick-label pl-2 leading-tight flex flex-col" bind:clientHeight={height}>
+      {#if latest}
+        <span class="text-xs {text} leading-none pb-1">
+          {#if displayRange && !hasNoRange}Between {formatValue(latest.range[0] * 100, 'percent-in-range')} and
+          {/if}{formatValue(latest.range[1], 'percent')} in <span class:font-bold={differentYears}>{latest.year}</span>
+        </span>
+      {/if}
     <span
       class="text-sm text-contour-weak leading-[1.1]"
       class:text-contour-weaker={!hasNoRange}>{label}</span
     >
-    {#if latest}
-      <span class="text-xs {text} leading-none pt-1">
-        {#if displayRange && !hasNoRange}Between {formatValue(latest.range[0] * 100, 'percent-in-range')} and
-        {/if}{formatValue(latest.range[1], 'percent')} in <span class:font-bold={differentYears}>{latest.year}</span>
-      </span>
-    {/if}
+
   </div>
 </div>
