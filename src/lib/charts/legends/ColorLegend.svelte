@@ -3,7 +3,7 @@
   export let textSize = 'text-sm';
 </script>
 
-<dl class="flex flex-wrap gap-x-4 ${$$restProps.class}">
+<dl class="flex flex-wrap gap-x-4 {$$restProps.class}">
   {#each items as { label, color, uid }}
     <!-- For some reason the updating of the color causes issues if no key block is added -->
     {#key uid}
