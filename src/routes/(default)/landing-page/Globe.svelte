@@ -2,7 +2,7 @@
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
-  import { END_IMPACT_GEO, END_GEO_SHAPE } from '$config';
+  import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO, URL_PATH_YEAR } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import DataSource from '$lib/MapboxMap/DataSource.svelte';
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
@@ -25,17 +25,17 @@
     fetchData(GEO_DATA, {
       endpoint: END_IMPACT_GEO,
       params: {
-        geography: currentStory.geography.uid,
-        indicator: currentStory.indicator.uid,
-        scenario: currentStory.scenarios[0].uid,
-        year: 2050,
+        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
+        [URL_PATH_INDICATOR]: currentStory.indicator.uid,
+        [URL_PATH_SCENARIO]: currentStory.scenarios[0].uid,
+        [URL_PATH_YEAR]: 2050,
       },
     });
 
     fetchData(GEO_SHAPE, {
       endpoint: END_GEO_SHAPE,
       params: {
-        geography: currentStory.geography.uid,
+        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
       },
     });
   }

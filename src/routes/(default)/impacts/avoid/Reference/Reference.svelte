@@ -2,7 +2,7 @@
   import { IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
-  import { END_AVOIDING_REFERENCE } from '$src/config.js';
+  import { END_AVOIDING_REFERENCE, URL_PATH_GEOGRAPHY,URL_PATH_INDICATOR  } from '$config';
   import { fetchData } from '$lib/api/api';
   import Text from './Text.svelte';
   import ImpactLevel from './ImpactLevel.svelte';
@@ -15,8 +15,8 @@
     fetchData(store, {
       endpoint: END_AVOIDING_REFERENCE,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
+        [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
+        [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });

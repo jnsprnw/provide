@@ -1,7 +1,7 @@
 <script>
   import { CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES } from '$stores/state.js';
   import { SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT } from '$stores/avoid.js';
-  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
+  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_CERTAINTY_LEVEL } from '$src/config.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -16,10 +16,10 @@
     fetchData(store, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
-        level_of_impact: $LEVEL_OF_IMPACT,
-        certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
+        [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
+        [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
+        [URL_PATH_LEVEL_OF_IMPACT]: $LEVEL_OF_IMPACT,
+        [URL_PATH_CERTAINTY_LEVEL]: $SELECTED_LIKELIHOOD_LEVEL,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });

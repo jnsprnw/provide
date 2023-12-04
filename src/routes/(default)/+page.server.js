@@ -1,4 +1,4 @@
-import { PATH_EXPLORE } from '$config';
+import { PATH_EXPLORE, URL_PATH_INDICATOR, URL_PATH_GEOGRAPHY,URL_PATH_SCENARIOS  } from '$config';
 import { loadFromStrapi, loadMetaData } from '$utils/apis.js';
 import { get, find, compact, uniq } from 'lodash-es';
 import qs from 'qs';
@@ -33,9 +33,9 @@ export const load = async ({ fetch }) => {
       if (geography && indicator && scenarios.length) {
         const query = qs.stringify(
           {
-            indicator: indicatorUID,
-            geography: geographyUID,
-            scenarios: scenarioList,
+            [URL_PATH_INDICATOR]: indicatorUID,
+            [URL_PATH_GEOGRAPHY]: geographyUID,
+            [URL_PATH_SCENARIOS]: scenarioList,
           },
           {
             encodeValuesOnly: true,

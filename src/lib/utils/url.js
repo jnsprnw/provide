@@ -1,17 +1,19 @@
 import { browser } from '$app/environment';
 import { CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR_UID, CURRENT_SCENARIOS_UID } from '$stores/state.js';
-import { PATH_IMPACT } from '$config';
+import { PATH_IMPACT, URL_PATH_INDICATOR, URL_PATH_GEOGRAPHY, URL_PATH_SCENARIOS, URL_PATH_TIME, URL_PATH_REFERENCE, URL_PATH_SPATIAL } from '$config';
 import { autoType } from 'd3-dsv';
 import { parse, stringify } from 'qs';
 
+const MODE_MERGE = 'merge';
+
 const urlToStateMapping = [
-  { key: 'indicator', store: CURRENT_INDICATOR_UID },
-  { key: 'geography', store: CURRENT_GEOGRAPHY_UID },
-  { key: 'scenarios', store: CURRENT_SCENARIOS_UID },
+  { key: URL_PATH_INDICATOR, store: CURRENT_INDICATOR_UID },
+  { key: URL_PATH_GEOGRAPHY, store: CURRENT_GEOGRAPHY_UID },
+  { key: URL_PATH_SCENARIOS, store: CURRENT_SCENARIOS_UID },
   {
-    key: ['time', 'reference', 'spatial'],
+    key: [URL_PATH_TIME, URL_PATH_REFERENCE, URL_PATH_SPATIAL],
     store: CURRENT_INDICATOR_OPTION_VALUES,
-    mode: 'merge',
+    mode: MODE_MERGE,
   },
 ];
 
@@ -37,7 +39,7 @@ function removeParamFromURL(param, key, url) {
 }
 
 function changeStoreToValue(store, value, mode) {
-  if (mode === 'merge') {
+  if (mode === MODE_MERGE) {
     store.update((d) => ({ ...d, ...value }));
   } else {
     store.set(value);
@@ -72,12 +74,12 @@ export function buildURL(type = PATH_IMPACT, { indicator, geography, scenarios, 
   let obj;
   if (type === PATH_IMPACT) {
     obj = {
-      indicator,
-      geography,
-      scenarios: (scenarios ?? []).sort(),
-      time,
-      reference,
-      spatial,
+      [URL_PATH_INDICATOR]: indicator,
+      [URL_PATH_GEOGRAPHY]: geography,
+      [URL_PATH_SCENARIOS]: (scenarios ?? []).sort(),
+      [URL_PATH_TIME]: time,
+      [URL_PATH_REFERENCE]: reference,
+      [URL_PATH_SPATIAL]: spatial,
     };
   }
   // TODO: Other type

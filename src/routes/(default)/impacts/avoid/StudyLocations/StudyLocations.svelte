@@ -13,7 +13,7 @@
   } from '$stores/state.js';
   import { STUDY_LOCATIONS } from '$stores/meta.js';
   import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL, SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
-  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE, UID_STUDY_LOCATION_AVERAGE } from '$src/config.js';
+  import { END_AVOIDING_IMPACTS, KEY_MODEL, KEY_SOURCE, UID_STUDY_LOCATION_AVERAGE, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_CERTAINTY_LEVEL } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -29,10 +29,10 @@
     fetchData(store, {
       endpoint: END_AVOIDING_IMPACTS,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
-        level_of_impact: $LEVEL_OF_IMPACT,
-        certainty_level: $SELECTED_LIKELIHOOD_LEVEL,
+        [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
+        [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
+        [URL_PATH_LEVEL_OF_IMPACT]: $LEVEL_OF_IMPACT,
+        [URL_PATH_CERTAINTY_LEVEL]: $SELECTED_LIKELIHOOD_LEVEL,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });

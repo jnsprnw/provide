@@ -10,7 +10,7 @@
     DOWNLOAD_URL_PARAMS,
     GRAPH_URL_PARAMS,
   } from '$stores/state.js';
-  import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
+  import { END_IMPACT_TIME, KEY_MODEL, KEY_SOURCE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIOS } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -27,9 +27,9 @@
     fetchData(IMPACT_TIME_DATA, {
       endpoint: END_IMPACT_TIME,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
-        indicator: $CURRENT_INDICATOR.uid,
-        scenarios: $CURRENT_SCENARIOS_UID,
+        [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
+        [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
+        [URL_PATH_SCENARIOS]: $CURRENT_SCENARIOS_UID,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });

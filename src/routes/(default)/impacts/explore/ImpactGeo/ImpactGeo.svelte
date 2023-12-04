@@ -11,7 +11,7 @@
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
   } from '$src/stores/state';
-  import { IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS, END_GEO_SHAPE, END_IMPACT_GEO, DEFAULT_IMPACT_GEO_YEAR } from '$src/config.js';
+  import { URL_PATH_SCENARIO, URL_PATH_YEAR, URL_PATH_INDICATOR, IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS, END_GEO_SHAPE, END_IMPACT_GEO, DEFAULT_IMPACT_GEO_YEAR, URL_PATH_GEOGRAPHY_TYPE, URL_PATH_GEOGRAPHY } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import { extractTimeframe } from '$utils/meta.js';
@@ -42,11 +42,11 @@
       $CURRENT_SCENARIOS_UID.map((scenario) => ({
         endpoint: END_IMPACT_GEO,
         params: {
-          geography: $CURRENT_GEOGRAPHY.uid,
-          'geography-type': $CURRENT_GEOGRAPHY.geographyType,
-          indicator: $CURRENT_INDICATOR.uid,
-          scenario,
-          year,
+          [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
+          [URL_PATH_GEOGRAPHY_TYPE]: $CURRENT_GEOGRAPHY.geographyType,
+          [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
+          [URL_PATH_SCENARIO]: scenario,
+          [URL_PATH_YEAR]: year,
           ...$CURRENT_INDICATOR_OPTION_VALUES,
         },
       }))
@@ -55,7 +55,7 @@
     fetchData(GEO_SHAPE_DATA, {
       endpoint: END_GEO_SHAPE,
       params: {
-        geography: $CURRENT_GEOGRAPHY.uid,
+        [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
       },
     });
   }

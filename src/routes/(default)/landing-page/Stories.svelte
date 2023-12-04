@@ -1,6 +1,6 @@
 <script>
   import { get } from 'lodash-es';
-  import { END_IMPACT_TIME, KEY_MODEL } from '$src/config';
+  import { END_IMPACT_TIME, KEY_MODEL, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO } from '$src/config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
@@ -76,9 +76,9 @@
     currentStory.scenarios.map((scenario) => ({
       endpoint: END_IMPACT_TIME,
       params: {
-        geography: currentStory.geography.uid,
-        indicator: currentStory.indicator.uid,
-        scenario: scenario.uid,
+        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
+        [URL_PATH_INDICATOR]: currentStory.indicator.uid,
+        [URL_PATH_SCENARIO]: scenario.uid,
       },
     }))
   );

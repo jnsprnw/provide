@@ -58,6 +58,20 @@ export const LOCALSTORE_STUDY_LOCATION = 'study_location';
 export const LOCALSTORE_LEVEL_OF_IMACT = 'level_of_impact';
 export const LOCALSTORE_PARAMETERS = 'parameters';
 
+export const URL_PATH_INDICATOR = 'indicator';
+export const URL_PATH_GEOGRAPHY = 'geography';
+export const URL_PATH_SCENARIOS = 'scenarios';
+export const URL_PATH_TIME = 'time';
+export const URL_PATH_REFERENCE = 'reference';
+export const URL_PATH_FREQUENCY = 'frequency';
+export const URL_PATH_SPATIAL = 'spatial';
+export const URL_PATH_INDICATOR_VALUE = 'indicator_value';
+export const URL_PATH_LEVEL_OF_IMPACT = 'level_of_impact';
+export const URL_PATH_CERTAINTY_LEVEL = 'certainty_level';
+export const URL_PATH_GEOGRAPHY_TYPE = 'geography-type'; // Impact Geo endpoint
+export const URL_PATH_SCENARIO = 'scenario';
+export const URL_PATH_YEAR = 'year';
+
 export const UID_STUDY_LOCATION_AVERAGE = 'city-average';
 
 export const MEAN_TEMPERATURE_UID = 'gmt';
