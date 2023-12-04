@@ -35,18 +35,18 @@
       ['Cooling rate after peak', 'coolingRateAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')} / decade`],
       ['2050 emissions', 'emissions2050', (value) => `${formatValue(value, 'integer')} GtCO₂`],
       ['2100 emissions', 'emissions2100', (value) => `${formatValue(value, 'integer')} GtCO₂`],
-      ['Timing of NZ CO₂', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
+      ['Timing of NZ CO₂', 'timingNZCO2', (value) => value],
       ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
-      ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
-      ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
-      ['Likelihood PW < 3°C', 'likelihood3', (value) => formatValue(value, 'percent'), (v) => v + v * Math.random()],
+      ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent')],
+      ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent')],
+      ['Likelihood PW < 3°C', 'likelihood3', (value) => formatValue(value, 'percent')],
     ],
     2300: [
       ['Peak GMT', 'gmtPeak', ([value, year]) => `${formatValue(value, 'degrees-celsius')} in ${year}`, ([value]) => value],
       ['2100 GMT', 'gmt2100', (value) => formatValue(value, 'degrees-celsius')],
       ['2300 GMT', 'gmt2300', (value) => formatValue(value, 'degrees-celsius')],
       ['Cooling after peak', 'coolingAfterPeak', (value) => `${formatValue(value, 'degrees-celsius')}`],
-      ['Timing of NZ CO2', 'timingNZCO2', (value) => value, (v) => v + v * Math.random()],
+      ['Timing of NZ CO2', 'timingNZCO2', (value) => value],
       ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
     ],
   };
@@ -73,8 +73,6 @@
       get,
     };
   });
-
-  $: console.log(tableColumns.map(({ get }) => get));
 
   $: scenarios = scenariosListed.map((scenario, i) => {
     const { uid, label, description, isPrimary } = scenario;
