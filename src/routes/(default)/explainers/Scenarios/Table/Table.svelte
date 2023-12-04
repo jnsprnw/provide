@@ -1,5 +1,6 @@
 <script>
-  import { KEY_CHARACTERISTICS } from '$config';
+  import { KEY_CHARACTERISTICS, MAX_NUMBER_SELECTABLE_SCENARIOS } from '$config';
+  import tooltip from '$lib/utils/tooltip';
   import chroma from 'chroma-js';
   import { extent, max } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
@@ -99,6 +100,7 @@
       })
     );
     return {
+      disabled: selectedScenarios.length >= MAX_NUMBER_SELECTABLE_SCENARIOS && !isSelected,
       i,
       uid,
       label,
@@ -172,8 +174,10 @@
       role="rowgroup"
       class="grid max-w-full relative"
     >
-      {#each sortedScenarios as { i, uid, label, values, borderColorLeft, description, isPrimary }, index}
+      {#each sortedScenarios as { i, uid, label, values, borderColorLeft, description, isPrimary, disabled }, index}
         <button
+          {disabled}
+          aria-disabled="{disabled}"
           role="row"
           aria-rowindex={i}
           class:border-b={index !== scenariosListed.length - 1}
@@ -186,11 +190,14 @@
             style="grid-template-columns: {titleWidth}px {maxWidth};"
           >
             <div
+              aria-disabled="{disabled}"
               style="border-left-color: {borderColorLeft}"
-              class="py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_auto_1fr_1rem] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
+              class=" aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_auto_1fr_1rem] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
               role="gridcell"
             >
               <input
+                {disabled}
+                aria-disabled="{disabled}"
                 tabindex="-1"
                 id={uid}
                 type="checkbox"
@@ -199,8 +206,11 @@
                 bind:group={selectedScenarios}
               />
               <span
-                class="text-sm font-bold inline-block text-gray-800 overflow-hidden text-ellipsis"
-                title={label}>{label}</span
+                class="text-sm font-bold inline-block overflow-hidden text-ellipsis transition-colors"
+                class:text-text-base={!disabled}
+                class:text-contour-weakest={disabled}
+                use:tooltip={{ content: disabled ? `You can not select more than ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.` : undefined }}
+                >{label}</span
               >
               <Info {description} />
 

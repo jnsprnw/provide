@@ -14,7 +14,7 @@
 {#if amountUnAvailable}
   <div class="flex flex-col gap-y-5 text-xs">
     <span>
-      <strong>{amountUnAvailable}</strong> of your {selectedScenarios.length} selected scenarios {amountUnAvailable == 1 ? 'is' : 'are'} not available for your current indicator (<strong
+        <strong>{amountUnAvailable}</strong> of your {selectedScenarios.length} selected scenarios {amountUnAvailable == 1 ? 'is' : 'are'} <strong>not</strong> available for your current indicator (<strong
         >{$CURRENT_INDICATOR?.label}</strong
       >) and geography (<strong>{$CURRENT_GEOGRAPHY?.label}</strong>) selection in the explorer.
     </span>
