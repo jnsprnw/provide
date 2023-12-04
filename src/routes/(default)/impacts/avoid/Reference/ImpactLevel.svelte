@@ -1,7 +1,6 @@
 <script>
   import { LEVEL_OF_IMPACT_ARRAY } from '$stores/avoid.js';
   import { CURRENT_INDICATOR } from '$stores/state.js';
-  import { formatValue } from '$lib/utils/formatting';
   import { scaleLinear } from 'd3-scale';
   import { createSlider, melt } from '@melt-ui/svelte';
 

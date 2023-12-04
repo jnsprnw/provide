@@ -2,10 +2,10 @@
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import { LIKELIHOODS } from '$stores/meta.js';
-  import { SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
+  import { SELECTED_LIKELIHOOD_LEVEL_LABEL, SELECTED_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
   import CertaintyLevelsList from './CertaintyLevelsList.svelte';
 
-  $: buttonLabel = $LIKELIHOODS.find(({ uid }) => uid === $SELECTED_LIKELIHOOD_LEVEL)?.label;
+  $: buttonLabel = $SELECTED_LIKELIHOOD_LEVEL_LABEL;
 </script>
 
 <section>
