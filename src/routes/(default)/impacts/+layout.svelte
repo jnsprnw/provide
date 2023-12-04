@@ -6,7 +6,7 @@
   import PageIntro from '$lib/site/PageIntro.svelte';
   import ShareLink from './ShareLink/ShareLink.svelte';
 
-  import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, PATH_AVOID, PATH_IMPACT, PATH_EXPLORE } from '$config';
+  import { GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, PATH_AVOID, PATH_IMPACT, PATH_EXPLORE, PATH_DOCUMENTATION } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state.js';
 
   $: urlToState($page.url);
@@ -47,7 +47,7 @@
       <h1 class="text-3xl font-bold">{currentTitle}</h1>
       <p class="text-lg mt-3.5 max-w-xl mb-8">{currentIntro}</p>
       <div class="flex justify-between items-center">
-        <a href="#" class="text-sm font-bold text-theme-base hover:underline">Learn more about X</a>
+        <a href={`/${PATH_DOCUMENTATION}`} class="text-sm font-bold text-theme-base hover:underline">Learn more about the methodology</a>
         <ShareLink />
       </div>
     </div>
