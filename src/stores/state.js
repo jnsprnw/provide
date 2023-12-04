@@ -1,5 +1,5 @@
 import { formatReadableList } from '$lib/utils.js';
-import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS, PATH_AVOID } from '$src/config.js';
+import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS, PATH_AVOID, URL_PATH_TIME, URL_PATH_REFERENCE, URL_PATH_FREQUENCY, URL_PATH_SPATIAL, URL_PATH_INDICATOR_VALUE } from '$config';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce, without, isEqual, isString } from 'lodash-es';
@@ -195,7 +195,6 @@ export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$se
 export const CURRENT_INDICATOR_UID = writable(getLocalStorage(LOCALSTORE_INDICATOR, undefined));
 
 export const IS_EMPTY_INDICATOR = derived(CURRENT_INDICATOR_UID, ($uid) => {
-  // console.log('IS_EMPTY_INDICATOR', $uid, !Boolean($uid));
   return !Boolean($uid);
 });
 
@@ -206,7 +205,6 @@ export const IS_COMBINATION_AVAILABLE_INDICATOR = derived([CURRENT_INDICATOR_UID
     return false; // TODO: Check what to do here.
   }
   const isValidIndicator = $validIndicators.map(({ uid }) => uid).includes($uid);
-  // console.log('IS_COMBINATION_AVAILABLE_INDICATOR', { $uid, isValidIndicator, $validIndicators });
   if (isValidIndicator) {
     // Only save to localstorage if valid indicator
     setLocalStorage(LOCALSTORE_INDICATOR, $uid);
@@ -233,6 +231,7 @@ function getAllLocalStorageForParameters() {
 }
 
 // Key value store of currently selected parameters
+// The initial lookup in the localstorage might get too many parameters as we can only filter out irrelevant parameters when we know the indicator
 export const CURRENT_INDICATOR_OPTION_VALUES = writable(getAllLocalStorageForParameters());
 CURRENT_INDICATOR_OPTION_VALUES.subscribe((obj) => {
   // This loops over the parameter object …
@@ -253,6 +252,9 @@ export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATO
     const parameter = $parameters.find(({ uid }) => uid === key);
     let options = [];
     // If this parameter is present in the meta endpoint
+    if (![URL_PATH_TIME, URL_PATH_REFERENCE, URL_PATH_FREQUENCY, URL_PATH_SPATIAL, URL_PATH_INDICATOR_VALUE].includes(key)) {
+      console.warn(`Unknown indicator parameter ${key}. This might cause problems.`);
+    }
     if (parameter && parameter.hasOwnProperty('options') && Array.isArray(parameter.options)) {
       // Not all options are available for each indicator. So we need to filter out some options.
       options = parameter.options.filter(({ uid }) => optionsAvailableForIndicator.includes(uid))
@@ -285,7 +287,7 @@ export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATO
           // If the old value is included in the list, we add it
           previousValidValues.push([key, value]);
         }
-        // We don’t need to do anything if it is not includes, since this is handle by the default values further down
+        // We don’t need to do anything if it is not includes, since this is handled by the default values further down
       } else {
         // We want to keep the old values that are not present in the current indicator, because the user might switch back and wants to keep the selected value
         const possibleParameter = $parameters.find(({ uid }) => uid === key);
@@ -337,7 +339,13 @@ export const CURRENT_SCENARIOS_UID = (() => {
       let value = DEFAULT_SCENARIOS_UID;
       if (Boolean(v) && isString(value) && value.trim() !== '') {
         try {
-          value = JSON.parse(v);
+          const json = JSON.parse(v);
+          if (Array.isArray(json)) {
+            if (json.length > MAX_NUMBER_SELECTABLE_SCENARIOS) {
+              console.warn('Too many scenarios selected.')
+            }
+            value = json.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS)
+          }
         } catch (e) {
           console.log('Error loading current scenarios from localstore:', e);
         }
@@ -382,7 +390,12 @@ export const CURRENT_SCENARIOS_UID = (() => {
   };
 })();
 CURRENT_SCENARIOS_UID.subscribe((value) => {
-  setLocalStorage(LOCALSTORE_SCENARIOS, JSON.stringify(value));
+  const scenarios = value.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS);
+  if (value.length > MAX_NUMBER_SELECTABLE_SCENARIOS) {
+    console.warn(`Too many scenarios selected. Reset to ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.`)
+    CURRENT_SCENARIOS_UID.set(scenarios);
+  }
+  setLocalStorage(LOCALSTORE_SCENARIOS, JSON.stringify(scenarios));
 });
 
 if (browser) {
@@ -390,16 +403,13 @@ if (browser) {
   // Because of this, we can not subscribe to it.
   // More information here: https://kit.svelte.dev/docs/state-management#avoid-shared-state-on-the-server
   CURRENT_INDICATOR.subscribe((indicator) => {
-    // console.log('SELECTABLE_SCENARIOS', { indicator });
     const selectableScenarios = indicator?.availableScenarios ?? [];
     if (selectableScenarios.length) {
       // The list of available scenarios is empty at the first loading of the page. This should not result in filtering the list.
-      // console.log('SELECTABLE_SCENARIOS', { selectableScenarios });
       const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
       const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
-      // console.log({ validScenarios, currentScenarios });
       if (!isEqual(validScenarios, currentScenarios)) {
-        console.log(`INVALID SCENARIO FOUND.`);
+        console.warn(`Invalid scenario selected. Will reset.`);
         CURRENT_SCENARIOS_UID.set(validScenarios);
       }
     }
@@ -417,7 +427,6 @@ export const CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS_UID, DICTIONARY_SCEN
 export const DICTIONARY_CURRENT_SCENARIOS = derived([CURRENT_SCENARIOS], ([$currentScenarios]) => keyBy($currentScenarios, 'uid'));
 
 export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SCENARIOS, $CURRENT_INDICATOR]) => {
-  // console.log('AVAILABLE_SCENARIOS', { $SCENARIOS });
   return $SCENARIOS.map((scenario) => {
     return {
       ...scenario,
@@ -427,7 +436,6 @@ export const AVAILABLE_SCENARIOS = derived([SCENARIOS, CURRENT_INDICATOR], ([$SC
 });
 
 export const SELECTABLE_SCENARIOS = derived([AVAILABLE_SCENARIOS], ([$scenarios]) => {
-  // console.log('SELECTABLE_SCENARIOS', { $scenarios });
   return $scenarios.filter(({ disabled }) => !disabled);
 });
 
