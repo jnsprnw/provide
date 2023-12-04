@@ -45,7 +45,7 @@
   {#if currentTitle && currentIntro}
     <div class="flex flex-col gap-y-1">
       <h1 class="text-3xl font-bold">{currentTitle}</h1>
-      <p class="mt-3.5 max-w-xl mb-8">{currentIntro}</p>
+      <p class="text-lg mt-3.5 max-w-xl mb-8">{currentIntro}</p>
       <div class="flex justify-between items-center">
         <a href="#" class="text-sm font-bold text-theme-base hover:underline">Learn more about X</a>
         <ShareLink />
