@@ -39,6 +39,8 @@
   $: impossibleScenarios = scenarios.filter(({ year }) => year === null);
 
   $: ({ budget, gmt, isAvoidable, isPossible } = datum);
+
+  $: isBoth = isAvoidable && isPossible;
 </script>
 
 <!--
@@ -58,16 +60,15 @@ budget: <strong>{budget}</strong>
 isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
 </pre>
 -->
-<div class="flex gap-y-12 flex-col">
+<div class="flex gap-y-12 flex-col mb-4">
   <section class="flex gap-y-4 flex-col">
     <p class="text-lg leading-relaxed max-w-4xl">
       {#if isAvoidable}
-        It is
+        There is {isPossible ? 'at least' : 'less than'} a <Interactive>{certainty_level}</Interactive> chance
       {:else}
-        Due to current climate change, it is already
+        Due to unavoidable risk even in the scenario with the highest amount of emissions reductions there is a more than <Interactive>{certainty_level}</Interactive> chance
       {/if}
-      <Important>{isPossible ? '' : 'not'}</Important>
-      <Interactive>{certainty_level}</Interactive> that
+      that
       {#if isWholeUrbanArea}
         the <Interactive>urban area</Interactive> of <Interactive>{geography}</Interactive>
       {:else}
@@ -81,24 +82,23 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
       {#if !isCountable}
         <Interactive>{labelWithinSentence}</Interactive>
       {/if}
+      {#if isCountable}
       {direction ? 'over' : 'under'}
+      {:else}
+      {direction ? 'above' : 'below'}
+      {/if}
       <Interactive>{level_of_impact}</Interactive>
       {#if isCountable}
-        <Interactive>{labelWithinSentence}</Interactive>
+        <Interactive>{labelWithinSentence}</Interactive>{#if !isBoth}.{/if}
       {:else if unit.uid !== 'degrees-celsius'}
-        {unit.labelLong}
+        {unit.labelLong}{#if !isBoth}.{/if}
+      {:else}
+        °C{#if !isBoth}.{/if}
       {/if}
-      {#if isAvoidable && isPossible}
-        unless global warming is kept below <Important>{gmt}°C</Important>. This implies a median remaining global carbon budget of
-        <Important>{budget} Gt CO₂eq.</Important> until 2100.
+      {#if isBoth}
+        unless global warming is kept below <Important>{`${gmt}°C`}</Important>.
       {/if}
     </p>
-
-    {#if !isAvoidable && isPossible}
-      <p class="text-lg leading-relaxed max-w-4xl">Try changing the impact level or check out the ”Unavoidable impacts graph“ below to see which levels of impact can still be avoided.</p>
-    {:else if isAvoidable && !isPossible}
-      <p class="text-lg leading-relaxed max-w-4xl">Try changing the impact level or check out the ”Unavoidable impacts graph“ below in order to see which levels of impact are likely to occur.</p>
-    {/if}
   </section>
   <section class="flex gap-y-6 flex-col">
     <div>
@@ -106,7 +106,7 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
         class="text-lg"
         class:text-contour-weaker={!possibleScenarios.length}
       >
-        These levels will <Interactive weak={!possibleScenarios.length}>{certainty_level}</Interactive> be reached
+        This impact level will be <Important weak={!possibleScenarios.length}>reached</Important>
       </p>
       {#if possibleScenarios.length}
         <ul class="mt-1">
@@ -126,13 +126,12 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
         class:text-contour-weaker={!impossibleScenarios.length}
         class="text-lg"
       >
-        It is <Important weak={!impossibleScenarios.length}>not</Important>
-        <Interactive weak={!impossibleScenarios.length}>{certainty_level}</Interactive> that they will be reached
+        This impact level would be <Important weak={!impossibleScenarios.length}>avoided</Important>
       </p>
       {#if impossibleScenarios.length}
         <ul class="mt-1">
           {#each impossibleScenarios as { label, color }, i}
-            {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' or' : ','}
+            {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' nor' : ','}
             <li class="text-lg flex items-center my-1 ml-2 gap-x-2">
               <i aria-hidden="true">—</i><span>under the <strong style="color: {color};">{label}</strong> scenario{end}</span>
             </li>
@@ -143,4 +142,9 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
       {/if}
     </div>
   </section>
+  {#if isAvoidable && !isPossible}
+    <section>
+        <p class="text-lg leading-relaxed max-w-4xl">Try changing the impact level or check out the ”<a href="#unavoidable-risk" class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a>“ below in order to see which levels of impact are likely to occur.</p>
+    </section>
+  {/if}
 </div>
