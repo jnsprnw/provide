@@ -361,13 +361,16 @@ export const CURRENT_SCENARIOS_UID = (() => {
     set,
     toggle: (id, timeframe) =>
       update((selectedUids) => {
-        const scenarios = getStore(DICTIONARY_SCENARIOS);
+        if (selectedUids.length === 0) return [id]; // If there was no scenarios previously selected
+
         const availableScenarios = getStore(SELECTABLE_SCENARIOS);
         const availableScenariosUids = availableScenarios.map((d) => d.uid);
         // Make sure we only keep the scenarios that are actually available. Otherwise we might
         // prevent the selection of a new scenario if the three selected are not available
         const availableSelected = selectedUids.filter((uid) => availableScenariosUids.includes(uid));
+        if (availableSelected.length === 0) return [id]; // If there was no available scenarios previously selected
         // Find current timeframe to see if the timeframe changed
+        const scenarios = getStore(DICTIONARY_SCENARIOS);
         const currentTimeframe = extractTimeframe(scenarios[availableSelected[0]]);
         const timeframeChanged = currentTimeframe !== timeframe;
         // If timeframe changed we want to remove all the old scenarios
