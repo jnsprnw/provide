@@ -42,12 +42,11 @@
 </script>
 
 <div>
-  <table>
+  <table class="w-full">
     <thead>
       <tr class="text-text-weaker text-sm text-left">
-        <th class="font-normal pl-2 py-2"> Study location </th>
+        <th class="font-normal pl-2 py-2">Study location</th>
         <th class="font-normal"> <span class="mx-4">GMT</span> </th>
-        <th class="font-normal"> <span class="mx-4">CO₂ budget</span> </th>
         <th
           class="font-normal"
           colspan={SCENARIOS_IN_AVOIDING_IMPACTS.length}
@@ -57,7 +56,7 @@
       </tr>
     </thead>
     <tbody>
-      {#each list as { label, gmt, budget, scenarios, isSelected, isAverage, order }}
+      {#each list as { label, gmt, scenarios, isSelected, isAverage, order }}
         <tr
           class:bg-surface-weaker={isSelected}
           class="border-b border-contour-weakest text-sm"
@@ -79,12 +78,6 @@
             <span
               class="mx-4"
               class:font-bold={isSelected}>{formatValue(gmt, 'degrees-celsius')}</span
-            >
-          </td>
-          <td>
-            <span
-              class="mx-4"
-              class:font-bold={isSelected}>{budget ?? '—'}</span
             >
           </td>
           {#each Object.values(scenarios) as { full, half, isAvoidable, isPossible, year, label: labelScenario }}
