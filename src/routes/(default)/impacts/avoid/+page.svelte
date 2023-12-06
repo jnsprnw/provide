@@ -30,7 +30,7 @@
     {
       slug: 'threshold-levels',
       title: 'Impact Level',
-      description: 'Lorem ipsum dolor dolor dolor',
+      description: 'When will the impact level be exceeded?',
       component: ThresholdLevels,
       disabled: !isValidSelection,
       props: {
@@ -40,7 +40,7 @@
     {
       slug: 'locations',
       title: 'Locations',
-      description: 'Lorem ipsum dolor dolor dolor',
+      description: 'When will the impact level be exceeded across different locations?',
       component: StudyLocations,
       disabled: !isValidSelection,
       props: {
