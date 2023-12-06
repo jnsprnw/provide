@@ -131,7 +131,7 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
       {#if impossibleScenarios.length}
         <ul class="mt-1">
           {#each impossibleScenarios as { label, color }, i}
-            {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' nor' : ','}
+            {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' and' : ','}
             <li class="text-lg flex items-center my-1 ml-2 gap-x-2">
               <i aria-hidden="true">—</i><span>under the <strong style="color: {color};">{label}</strong> scenario{end}</span>
             </li>
