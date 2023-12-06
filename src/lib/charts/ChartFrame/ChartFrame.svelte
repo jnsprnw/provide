@@ -1,7 +1,6 @@
 <script>
   import Template from '$lib/helper/Template.svelte';
   import InfoButton from './InfoButton.svelte';
-  import { IS_EMBEDED } from '$stores/state.js';
   import DataDownloadMenu from './DataDownloadMenu.svelte';
   import DownloadGraphMenu from './DownloadGraphMenu.svelte';
   import Tagline from '$lib/helper/Tagline.svelte';
@@ -19,6 +18,7 @@
   export let templateProps;
   export let chartInfo = [];
   export let isLoading;
+  export let hasDownload = true;
 </script>
 
 <figure>
@@ -39,7 +39,7 @@
   >
     <slot />
   </div>
-  {#if !$IS_STATIC}
+  {#if !$IS_STATIC && hasDownload}
     <figcaption class="flex justify-end items-center gap-4 mt-2 mb-2">
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu

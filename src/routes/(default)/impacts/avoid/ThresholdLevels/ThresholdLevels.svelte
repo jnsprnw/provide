@@ -51,6 +51,7 @@
     description={asyncProps.description}
     chartUid={END_AVOIDING_IMPACTS}
     templateProps={props}
+    hasDownload={false}
   >
     <Text data={asyncProps.thresholdLevelsData} />
   </ChartFrame>

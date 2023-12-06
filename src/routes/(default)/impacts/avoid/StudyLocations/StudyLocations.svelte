@@ -77,6 +77,7 @@
     description={asyncProps.description}
     chartUid={END_AVOIDING_IMPACTS}
     templateProps={props}
+    hasDownload={false}
   >
     <div class="grid gap-x-2 grid-cols-[auto_1fr] items-start">
       <Map studyLocations={asyncProps.studyLocations} />
