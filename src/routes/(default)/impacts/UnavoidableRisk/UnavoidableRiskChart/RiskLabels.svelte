@@ -42,6 +42,8 @@
   $: latestAvoidable = scenariosRange.findLast(({ hasAvoidable }) => hasAvoidable);
   $: latestUnavoidable = scenariosRange.findLast(({ hasUnavoidable }) => hasUnavoidable);
 
+  $: noScenariosAtAll = lastYearUnavoidableValue === 0 && lastYearAvoidableValue === 0;
+
   $: ticks = [
     {
       label: 'Unavoidable risk, even in a highest ambition scenario',
@@ -122,42 +124,48 @@
 
 <div class="ml-2 w-full relative">
   <!-- Unavoidable risk -->
-  <Bar
-    color={unavoidableTick.bar}
-    y2={unavoidableTick.y2 + sameYearGap}
-    totalHeight={unavoidableTick.height}
-    hasNoRange={unavoidableTick.hasNoRange}
-  />
-  <Label
-    fullHeight={avoidableTick.max < 0.5 && !unavoidableTick.hasNoRange ? fullHeight - avoidableHeight - 20 : fullHeight}
-    hasNoRange={unavoidableTick.hasNoRange && avoidableTick.max > 0.8}
-    {differentYears}
-    latest={unavoidableTick.latest}
-    label={unavoidableTick.label}
-    text={unavoidableTick.text}
-    alignment={positions.alignment[0]}
-    y={0}
-    left={positions.left[0]}
-    displayRange={false}
-  />
+  {#if !unavoidableTick.hasNoRange || noScenariosAtAll}
+    {#if !noScenariosAtAll}
+    <Bar
+        color={unavoidableTick.bar}
+        y2={unavoidableTick.y2 + sameYearGap}
+        totalHeight={unavoidableTick.height}
+        hasNoRange={unavoidableTick.hasNoRange}
+    />
+    {/if}
+    <Label
+        fullHeight={avoidableTick.max < 0.5 && !unavoidableTick.hasNoRange ? fullHeight - avoidableHeight - 20 : fullHeight}
+        hasNoRange={unavoidableTick.hasNoRange && avoidableTick.max > 0.8}
+        {differentYears}
+        latest={noScenariosAtAll ? undefined : unavoidableTick.latest}
+        label={noScenariosAtAll ? 'The risk of this event happening remains zero in all scenarios' : unavoidableTick.label}
+        text={unavoidableTick.text}
+        alignment={positions.alignment[0]}
+        y={0}
+        left={positions.left[0]}
+        displayRange={false}
+    />
+  {/if}
   <!-- Avoidable risk -->
-  <Bar
-    color={avoidableTick.bar}
-    y2={avoidableTick.y2}
-    totalHeight={avoidableTick.height - sameYearGap}
-    hasNoRange={avoidableTick.hasNoRange}
-    left={differentYears ? 10 : 0}
-  />
-  <Label
-    bind:height={avoidableHeight}
-    fullHeight={avoidableTick.height}
-    hasNoRange={avoidableTick.hasNoRange}
-    {differentYears}
-    latest={avoidableTick.latest}
-    label={avoidableTick.label}
-    text={avoidableTick.text}
-    alignment={positions.alignment[1]}
-    y={avoidableTick.y2}
-    left={differentYears ? 10 : 0}
-  />
+  {#if !avoidableTick.hasNoRange}
+    <Bar
+        color={avoidableTick.bar}
+        y2={avoidableTick.y2}
+        totalHeight={avoidableTick.height - sameYearGap}
+        hasNoRange={avoidableTick.hasNoRange}
+        left={differentYears ? 10 : 0}
+    />
+    <Label
+        bind:height={avoidableHeight}
+        fullHeight={avoidableTick.height}
+        hasNoRange={avoidableTick.hasNoRange}
+        {differentYears}
+        latest={avoidableTick.latest}
+        label={avoidableTick.label}
+        text={avoidableTick.text}
+        alignment={positions.alignment[1]}
+        y={avoidableTick.y2}
+        left={differentYears ? 10 : 0}
+    />
+  {/if}
 </div>
