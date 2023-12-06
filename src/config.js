@@ -4,6 +4,7 @@ export const TITLE_PROJECT = 'PROVIDE';
 export const ANCHOR_DOCS_SCENARIOS = 'scenarios';
 export const ANCHOR_DOCS_MODELS = 'models';
 export const ANCHOR_DOCS_DATA_PROCESSING = 'data-processing';
+export const ANCHOR_EXPLAINER_SCENARIOS = 'scenarios';
 
 // NOTE: You also need to change the corresponding folder name!
 export const PATH_DOCUMENTATION = 'documentation';

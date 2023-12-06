@@ -4,13 +4,12 @@
     CURRENT_SCENARIOS,
     CURRENT_SCENARIOS_UID,
     IS_EMPTY_INDICATOR,
-    SELECTABLE_SCENARIOS,
     AVAILABLE_TIMEFRAMES,
     IS_COMBINATION_AVAILABLE_SCENARIO,
     IS_COMBINATION_AVAILABLE_INDICATOR,
     IS_EMPTY_GEOGRAPHY,
   } from '$stores/state.js';
-  import { ANCHOR_DOCS_SCENARIOS, PATH_DOCUMENTATION } from '$config';
+  import { PATH_EXPLAINERS, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import ScenarioDetails from './ScenarioDetails.svelte';
@@ -82,9 +81,12 @@
     >
       <a
         slot="header-link"
-        class="text-sm text-theme-base font-bold flex gap-1.5 items-center"
-        href={`/${PATH_DOCUMENTATION}#${ANCHOR_DOCS_SCENARIOS}`}
-        ><span class="flex align-center justify-center text-xs w-4 h-4 rounded-full bg-theme-base text-surface-base">?</span>Which scenario should I select?</a
+        class="text-sm text-theme-base font-bold flex items-center rounded-full bg-theme-base text-white px-6 py-3 gap-2 hover:bg-theme-stronger transition-colors"
+        href={`/${PATH_EXPLAINERS}#${ANCHOR_EXPLAINER_SCENARIOS}`}
+        >
+        <span>Which scenario should I select?</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
+        </a
       >
       <div
         slot="items"

@@ -6,13 +6,14 @@
   import Scenarios from './Scenarios/Scenarios.svelte';
   import ScenariosIntro from './Scenarios/ScenariosIntro.svelte';
   import PageIntro from '$lib/site/PageIntro.svelte';
+  import { ANCHOR_EXPLAINER_SCENARIOS } from '$config';
   export let data;
 
   $: ({ scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets } = data);
 
   $: sections = [
     {
-      slug: 'scenarios',
+      slug: ANCHOR_EXPLAINER_SCENARIOS,
       title: 'Scenarios',
       component: ScenariosIntro,
       sections: [{ component: Scenarios, scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets }],
