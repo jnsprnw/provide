@@ -102,13 +102,12 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
   </section>
   <section class="flex gap-y-6 flex-col">
     <div>
+        {#if possibleScenarios.length}
       <p
         class="text-lg"
-        class:text-contour-weaker={!possibleScenarios.length}
       >
-        This impact level will be <Important weak={!possibleScenarios.length}>reached</Important>
+        This impact level will be <Important>reached</Important>
       </p>
-      {#if possibleScenarios.length}
         <ul class="mt-1">
           {#each possibleScenarios as { label, year, color }, i}
             {@const end = i === possibleScenarios.length - 1 ? '.' : i === possibleScenarios.length - 2 ? ' and' : ','}
@@ -117,18 +116,15 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
             </li>
           {/each}
         </ul>
-      {:else}
-        <p class="mt-1 text-lg text-contour-weaker">under no scenario.</p>
       {/if}
     </div>
     <div>
+        {#if impossibleScenarios.length}
       <p
-        class:text-contour-weaker={!impossibleScenarios.length}
         class="text-lg"
       >
-        This impact level would be <Important weak={!impossibleScenarios.length}>avoided</Important>
+        This impact level would be <Important>avoided</Important>
       </p>
-      {#if impossibleScenarios.length}
         <ul class="mt-1">
           {#each impossibleScenarios as { label, color }, i}
             {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' and' : ','}
@@ -137,8 +133,6 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
             </li>
           {/each}
         </ul>
-      {:else}
-        <p class="mt-1 text-lg text-contour-weaker">under any scenario.</p>
       {/if}
     </div>
   </section>
