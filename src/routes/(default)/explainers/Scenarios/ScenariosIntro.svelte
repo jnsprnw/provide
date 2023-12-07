@@ -14,7 +14,6 @@
 </h2>
 <div class="html-content">
   <p>
-    This text describes how to read the chart and what the individual elements mean. It is a static text that stays the same, no matter what the selected. This text describes how to read the chart and
-    what the individual elements mean. It is a static text that stays the same, no matter what the selected parameters are.
+    A core idea of the PROVIDE scenario design is that global surface temperature (GMT) trajectories are the defining features for assessing climate impacts, rather than emission or concentration pathways. The PROVIDE scenarios are designed to explore a range of different near-term, peak warming and overshoot outcomes and some are extended until 2300 to allow for a systematic assessment of long-term outcomes. Please see the set of scenarios below. By clicking on the research question of comparison, you can see how and why they are grouped in certain ways.
   </p>
 </div>
