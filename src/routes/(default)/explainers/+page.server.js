@@ -12,11 +12,17 @@ function filterUniqueObjects(value, index, array) {
 
 function processScenarioPresets(list) {
   return list.map((preset) => {
-    const { Description, Scenarios, Timeframe, Title } = preset.attributes;
+    const { Description, scenarios, Timeframe, Title } = preset.attributes;
+
+    const scenarioList = scenarios?.data ?? [];
+    if (scenarioList.length === 0) {
+      console.warn(`No scenarios for preset ${Title}.`);
+    }
+
     return {
       [KEY_SCENARIOPRESET_UID]: kebabCase(Title),
       description: Description ?? '',
-      scenarios: (Scenarios?.data ?? []).map(({ attributes }) => attributes.UID).filter(filterUniqueObjects),
+      scenarios: (scenarioList).map(({ attributes }) => attributes.UID).filter(filterUniqueObjects),
       timeframe: parseInt(Timeframe.slice(1)), // Note: this needs to be the same variable type as the selectable timeframe uids.
       title: Title,
     };
@@ -51,6 +57,7 @@ export const load = async ({ fetch, parent }) => {
 
   // Scenario Presets
   const scenarioPresetsRaw = await loadFromStrapi('scenario-presets', fetch);
+  console.log({ scenarioPresetsRaw })
   const scenarioPresets = processScenarioPresets(scenarioPresetsRaw);
 
   // Selectable timeframes
