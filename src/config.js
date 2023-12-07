@@ -7,7 +7,7 @@ export const ANCHOR_DOCS_DATA_PROCESSING = 'data-processing';
 export const ANCHOR_EXPLAINER_SCENARIOS = 'scenarios';
 
 // NOTE: You also need to change the corresponding folder name!
-export const PATH_DOCUMENTATION = 'documentation';
+export const PATH_DOCUMENTATION = 'methodology';
 export const PATH_EXPLAINERS = 'explainers';
 export const PATH_CONTACT = 'contact';
 export const PATH_ABOUT = 'about';

@@ -4,7 +4,7 @@
   import SectionIntro from './SectionIntro.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
-  import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING } from '$config';
+  import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING, LABEL_DOCUMENTATION } from '$config';
   import PageIntro from '$lib/site/PageIntro.svelte';
   import { SCENARIOS } from '$stores/meta';
   import ScenarioSelector from './ScenarioSelector.svelte';
@@ -48,7 +48,7 @@
 
 <PageIntro>
   <div class="flex flex-col gap-y-3.5">
-    <h1 class="text-4xl font-bold">Documentation</h1>
+    <h1 class="text-4xl font-bold">{ LABEL_DOCUMENTATION }</h1>
     <p class="max-w-xl">How do you avoid important climate impact thresholds in your city? Understand the risks and make your city more resilient to the impacts of climate change.</p>
   </div>
 </PageIntro>
