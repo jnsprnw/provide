@@ -7,13 +7,14 @@
   import AxisY from '$lib/charts/axes/AxisY.svelte';
   import AreaLayer from '$lib/charts/layers/AreaLayer.svelte';
   import BoxLayer from '$lib/charts/layers/BoxLayer.svelte';
-  import { extent, max, min } from 'd3-array';
-  import { scaleBand, scaleSequential } from 'd3-scale';
+  import { extent } from 'd3-array';
+  import { scaleBand } from 'd3-scale';
   import ChartPopover from './ChartPopover.svelte';
   import { flatMap } from 'lodash-es';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import StrokeLegend from './StrokeLegend.svelte';
 
+  export let steps;
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
   export let ticksYHighlighted = [0];
@@ -27,12 +28,11 @@
   const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
   $: isMultiLine = data.length > 1;
 
-  const formatGmt = (d) => formatValue(d, 'degrees-celsius');
   $: formatTickY = (d) => formatValue(d, unit);
   $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
 
   $: flatData = data.reduce((memo, scenario) => {
-    scenario.values.forEach(({ year, gmt, wlvl, ...d }, i) => {
+    scenario.values.forEach(({ year, gmt, wlvl, ...d }) => {
       // Get global mean temperature of scenario in this year
       ['min', 'max', 'value'].forEach((key) => {
         memo.push({
@@ -47,26 +47,23 @@
     return memo;
   }, []);
 
-  // Calculate warming level extent to create color scale
-  $: minWlvl = min(data, (scenario) => min(scenario.values, (d) => d.wlvl));
-  $: maxWlvl = max(data, (scenario) => max(scenario.values, (d) => d.wlvl));
-  $: colorScales = data.map((scenario) => scaleSequential(scenario.colorInterpolator).domain([minWlvl, 3]));
+  $: colorScales = data.map((scenario) => scenario.colorInterpolator);
 
-  // Data for the mean line
+  // Data for the mean line (with coloring according to the GMT)
   $: lineData = data.reduce((memo, scenario, i) => {
     // Groups scenario values by warming level but makes sure they overlap
     // by one value and each change in warming level resuts in a new segment
     const gmtSegments = scenario.values.reduce((memo, d) => {
       const prevSegment = memo[memo.length - 1];
-      const prevWlvl = prevSegment?.wlvl;
-      if (prevWlvl !== d.wlvl || !prevSegment) memo.push({ wlvl: d.wlvl, values: [d] });
+      const prevWlvl = prevSegment?.step; // We use the step to better identify the coloring
+      if (prevWlvl !== d.step || !prevSegment) memo.push({ step: d.step, wlvl: d.wlvl, values: [d] });
       if (prevSegment) prevSegment.values.push(d);
       return memo;
     }, []);
 
-    gmtSegments.forEach(({ wlvl, values }) => {
-      const color = colorScales[i](wlvl);
-      memo.push({ color, values: values.map((d) => ({ ...d, color })) });
+    gmtSegments.forEach(({ values, step }) => {
+      const color = colorScales[i](step); // The step is used in the color scale
+      memo.push({ color, step, values: values.map((d) => ({ ...d, color })) });
     });
     return memo;
   }, []);
@@ -80,7 +77,7 @@
     return {
       ...scenario,
       uid: scenario.uid,
-      color: colorScales[i](entry.wlvl),
+      color: colorScales[i](entry.step),
       ...entry,
     };
   });
@@ -89,7 +86,7 @@
   $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values) : flatData).map((d) => ({
     ...d,
     formattedValue: formatTickY(d.value),
-    formattedGmt: formatGmt(d.gmt),
+    formattedGmt: d.gmt,
   }));
 
   $: yDomain = extent(flatData, (d) => d.value);
@@ -99,7 +96,7 @@
 
 <div class="flex items-center" class:justify-between={isMultiLine} class:justify-end={!isMultiLine}>
   {#if isMultiLine}<ColorLegend items={data} />{/if}
-  <StrokeLegend {colorScales} />
+  <StrokeLegend {colorScales} scale={steps} />
 </div>
 
 <div class="aspect-[2] flex animate-defer-visibility">
@@ -108,10 +105,10 @@
       <Svg>
         <AxisX ticks={xTicks} />
         <AxisY padding={mainChartPadding} ticks={yTicks} xTick={-3} formatTick={formatTickY} ticksHighlighted={ticksYHighlighted} />
-        <MultipleLineLayer strokeWidth={4} animate={false} />
         {#if !isMultiLine}
           <AreaLayer data={areaData.values} color={areaData.color} />
         {/if}
+        <MultipleLineLayer strokeWidth={4} animate={false} />
         <ChartPopover data={popoverData} />
       </Svg>
     </LayerCake>

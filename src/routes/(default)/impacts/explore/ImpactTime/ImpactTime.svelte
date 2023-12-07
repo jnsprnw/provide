@@ -14,10 +14,13 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
+  import { formatValue } from '$lib/utils/formatting';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import ImpactTimeChart from './ImpactTimeChart.svelte';
   import { MEAN_TEMPERATURE_UID } from '$config';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
+  import { scaleBand, scaleLinear, scaleThreshold } from 'd3-scale';
+  import { range } from 'd3-array';
 
   let IMPACT_TIME_DATA = writable([]);
 
@@ -34,13 +37,19 @@
       },
     });
 
+  // This is used for the coloring of the line according to the GMT
+  const colorMarkers = [-Infinity, 1.5, 2, 2.5, Infinity];
+  const colorSteps = scaleThreshold()
+    .domain(colorMarkers)
+    .range(range(0, 1, 1 / colorMarkers.length));
+
   $: process = ({ impactTimeData }, { scenarios, urlParams }) => {
+    // Scenarios are coming from TEMPLATE_PROPS
     const MODEL = KEY_MODEL;
     const SOURCE = KEY_SOURCE;
     const { yearStart, yearStep, data, description, title, [MODEL]: model, [SOURCE]: source, parameters } = impactTimeData.data;
-
-    const impactTime = scenarios.map((scenario, i) => {
-      const scenarioData = data[scenario.uid];
+    const impactTime = scenarios.map((scenario) => {
+      const scenarioData = data[scenario.uid]; // Data is coming from the impact time endpoint
       if (scenarioData.length !== scenario[MEAN_TEMPERATURE_UID].length) {
         console.warn(`Scenario data length does not match ${MEAN_TEMPERATURE_UID} length.`);
       }
@@ -55,14 +64,21 @@
         description,
         title,
         values: scenarioData.map((values, i) => {
-          const gmt = scenario[MEAN_TEMPERATURE_UID][i]?.value ?? 0;
-          const wlvl = Math.round(gmt / 0.5) * 0.5;
+          const year = yearStart + yearStep * i;
+          let gmt = scenario[MEAN_TEMPERATURE_UID].find((d) => d.year === year)?.value; // We match try to find the gmt value based on the year
+          if (typeof Boolean(gmt) === 'undefined') {
+            console.warn(`Could not find matching GMT value for ${year} in ${scenario.uid}.`)
+          }
+          gmt = formatValue(gmt, 'degrees-celsius'); // Use the same formatting
+          const wlvl = parseFloat(gmt); // Use the same formatting
+          const step = colorSteps(wlvl); // The step is calculated to better work with the colors
           // This values are not always in the correct order of min, average (?), max.
           // https://stackoverflow.com/a/7000895/2314684
           const [min, value, max] = values.sort((a, b) => a - b);
           return {
             gmt,
             wlvl,
+            step,
             min,
             value,
             max,
@@ -143,6 +159,7 @@
       <ImpactTimeChart
         data={asyncProps.impactTime}
         unit={props.indicator.unit.uid}
+        steps={colorSteps}
       />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
