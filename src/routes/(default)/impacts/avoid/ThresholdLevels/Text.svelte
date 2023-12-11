@@ -4,7 +4,6 @@
   import { SELECTED_STUDY_LOCATION, LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL_LABEL } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
   import { SCENARIOS_IN_AVOIDING_IMPACTS, UID_STUDY_LOCATION_AVERAGE } from '$config';
-  import { formatValue } from '$lib/utils/formatting';
   import Interactive from './Interactive.svelte';
   import Important from './Important.svelte';
   export let data;
@@ -17,16 +16,14 @@
 
   $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
 
-  // $: studyLocation = $SELECTED_STUDY_LOCATION;
   $: isWholeUrbanArea = $SELECTED_STUDY_LOCATION === UID_STUDY_LOCATION_AVERAGE;
-
-  // $: console.log({ data, unit });
 
   $: datum = data.data.study_locations[$SELECTED_STUDY_LOCATION];
 
   $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
     const scenario = datum.scenarios[uid];
     const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
+    console.log({ scenario });
     return {
       uid,
       ...scenario,
@@ -35,31 +32,14 @@
     };
   });
 
-  $: possibleScenarios = scenarios.filter(({ year }) => year !== null);
-  $: impossibleScenarios = scenarios.filter(({ year }) => year === null);
+  $: unavoidableScenarios = scenarios.filter(({ isAvoidable }) => !isAvoidable);
+  $: avoidableScenarios = scenarios.filter(({ isAvoidable }) => isAvoidable);
 
-  $: ({ budget, gmt, isAvoidable, isPossible } = datum);
+  $: ({ gmt, isAvoidable, isPossible } = datum);
 
   $: isBoth = isAvoidable && isPossible;
 </script>
 
-<!--
-<pre class="text-xs font-mono bg-gray-100 rounded p-1">
-geography: <strong>{geography}</strong> // Fixed at the moment
-certainty_level: <strong>{certainty_level}</strong>
-level_of_impact: <strong>{level_of_impact}</strong>
-labelWithinSentence: <strong>{labelWithinSentence}</strong>
-unit: <strong>{unit}</strong>
-isCountable: <strong>{isCountable}</strong>
-direction: <strong>{direction}</strong>
-studyLocation: <strong>{studyLocation}</strong>
-isAvoidable: <strong>{isAvoidable}</strong>
-gmt: <strong>{gmt}</strong>
-isPossible: <strong>{isPossible}</strong>
-budget: <strong>{budget}</strong>
-isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
-</pre>
--->
 <div class="flex gap-y-12 flex-col mb-4">
   <section class="flex gap-y-4 flex-col">
     <p class="text-lg leading-relaxed max-w-4xl">
@@ -83,9 +63,9 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
         <Interactive>{labelWithinSentence}</Interactive>
       {/if}
       {#if isCountable}
-      {direction ? 'over' : 'under'}
+        {direction ? 'over' : 'under'}
       {:else}
-      {direction ? 'above' : 'below'}
+        {direction ? 'above' : 'below'}
       {/if}
       <Interactive>{level_of_impact}</Interactive>
       {#if isCountable}
@@ -102,15 +82,13 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
   </section>
   <section class="flex gap-y-6 flex-col">
     <div>
-        {#if possibleScenarios.length}
-      <p
-        class="text-lg"
-      >
-        This impact level will be <Important>reached</Important>
-      </p>
+      {#if unavoidableScenarios.length}
+        <p class="text-lg">
+          This impact level will be <Important>reached</Important>
+        </p>
         <ul class="mt-1">
-          {#each possibleScenarios as { label, year, color }, i}
-            {@const end = i === possibleScenarios.length - 1 ? '.' : i === possibleScenarios.length - 2 ? ' and' : ','}
+          {#each unavoidableScenarios as { label, year, color }, i}
+            {@const end = i === unavoidableScenarios.length - 1 ? '.' : i === unavoidableScenarios.length - 2 ? ' and' : ','}
             <li class="text-lg flex items-center my-1 ml-2 gap-x-2">
               <i aria-hidden="true">—</i><span>in <strong>{year}</strong> under the <strong style="color: {color};">{label}</strong> scenario{end}</span>
             </li>
@@ -119,15 +97,13 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
       {/if}
     </div>
     <div>
-        {#if impossibleScenarios.length}
-      <p
-        class="text-lg"
-      >
-        This impact level would be <Important>avoided</Important>
-      </p>
+      {#if avoidableScenarios.length}
+        <p class="text-lg">
+          This impact level would be <Important>avoided</Important>
+        </p>
         <ul class="mt-1">
-          {#each impossibleScenarios as { label, color }, i}
-            {@const end = i === impossibleScenarios.length - 1 ? '.' : i === impossibleScenarios.length - 2 ? ' and' : ','}
+          {#each avoidableScenarios as { label, color }, i}
+            {@const end = i === avoidableScenarios.length - 1 ? '.' : i === avoidableScenarios.length - 2 ? ' and' : ','}
             <li class="text-lg flex items-center my-1 ml-2 gap-x-2">
               <i aria-hidden="true">—</i><span>under the <strong style="color: {color};">{label}</strong> scenario{end}</span>
             </li>
@@ -138,7 +114,12 @@ isWholeUrbanArea: <strong>{isWholeUrbanArea}</strong>
   </section>
   {#if isAvoidable && !isPossible}
     <section>
-        <p class="text-lg leading-relaxed max-w-4xl">Try changing the impact level or check out the ”<a href="#unavoidable-risk" class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a>“ below in order to see which levels of impact are likely to occur.</p>
+      <p class="text-lg leading-relaxed max-w-4xl">
+        Try changing the impact level or check out the ”<a
+          href="#unavoidable-risk"
+          class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a
+        >“ below in order to see which levels of impact are likely to occur.
+      </p>
     </section>
   {/if}
 </div>
