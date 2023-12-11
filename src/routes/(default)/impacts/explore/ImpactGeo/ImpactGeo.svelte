@@ -11,7 +11,18 @@
     IS_COMBINATION_AVAILABLE,
     CURRENT_SCENARIOS,
   } from '$src/stores/state';
-  import { URL_PATH_SCENARIO, URL_PATH_YEAR, URL_PATH_INDICATOR, IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS, END_GEO_SHAPE, END_IMPACT_GEO, DEFAULT_IMPACT_GEO_YEAR, URL_PATH_GEOGRAPHY_TYPE, URL_PATH_GEOGRAPHY } from '$config';
+  import {
+    URL_PATH_SCENARIO,
+    URL_PATH_YEAR,
+    URL_PATH_INDICATOR,
+    IMPACT_GEO_YEARS,
+    IMPACT_GEO_DISPLAY_OPTIONS,
+    END_GEO_SHAPE,
+    END_IMPACT_GEO,
+    DEFAULT_IMPACT_GEO_YEAR,
+    URL_PATH_GEOGRAPHY_TYPE,
+    URL_PATH_GEOGRAPHY,
+  } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
   import { extractTimeframe } from '$utils/meta.js';

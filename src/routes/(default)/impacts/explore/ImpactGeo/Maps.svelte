@@ -63,13 +63,12 @@
   });
 </script>
 
-<div
-  class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}
->
-  <div
-    class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm"
-  >
-    <Legend unit={indicator.unit} scale={colorScale} />
+<div class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}>
+  <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
+    <Legend
+      unit={indicator.unit}
+      scale={colorScale}
+    />
   </div>
   {#key geoData.length}
     {#each geoData as d, i}
@@ -103,17 +102,25 @@
               lineOpacity={0.07}
               lineColor={$theme.color.contour.base}
             />
-            <FilterLayer layer="settlement-minor-label" geo={geoShape} />
-            <FilterLayer layer="settlement-major-label" geo={geoShape} />
+            <FilterLayer
+              layer="settlement-minor-label"
+              geo={geoShape}
+            />
+            <FilterLayer
+              layer="settlement-major-label"
+              geo={geoShape}
+            />
           </DataSource>
           <DataSource data={d.data}>
-            <PolygonLayer fill={true} line={false} before="mask" />
+            <PolygonLayer
+              fill={true}
+              line={false}
+              before="mask"
+            />
           </DataSource>
         </MapProvider>
         {#if d.label}
-          <div
-            class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold"
-          >
+          <div class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold">
             {d.label}
           </div>
         {/if}
