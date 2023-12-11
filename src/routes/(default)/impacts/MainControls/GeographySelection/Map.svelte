@@ -1,5 +1,5 @@
 <script>
-  import { geoPath, geoEqualEarth, geoArea, geoCentroid } from 'd3-geo';
+  import { geoPath, geoEqualEarth, geoCentroid } from 'd3-geo';
   import { UID_WORLD } from '$src/config.js';
   import { rewind } from '$lib/utils/geo';
   import { geoGraticule } from 'd3-geo';
@@ -20,10 +20,7 @@
 
   const graticuleGenerator = geoGraticule();
 
-  $: projection = geoEqualEarth()
-    .rotate([0, 0])
-    .precision(0.1)
-    .fitSize([width, height], graticuleGenerator.outline());
+  $: projection = geoEqualEarth().rotate([0, 0]).precision(0.1).fitSize([width, height], graticuleGenerator.outline());
 
   $: graticuleLines = graticuleGenerator.lines().map(project);
   $: graticuleOutline = project(graticuleGenerator.outline());
@@ -77,7 +74,10 @@
   >
     <g>
       {#each graticuleLines as line}
-        <path d={line} class="stroke-contour-weakest fill-none stroke-[0.5]" />
+        <path
+          d={line}
+          class="stroke-contour-weakest fill-none stroke-[0.5]"
+        />
       {/each}
     </g>
     <g role="list">
