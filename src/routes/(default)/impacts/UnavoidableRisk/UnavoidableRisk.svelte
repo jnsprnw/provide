@@ -53,7 +53,7 @@
   $: process = ({ data }, { selectedScenarios, urlParams, allScenarios }) => {
     // This creates the list of thresholds
     const thresholds = data.thresholds.map((value) => ({
-      label: `${formatValue(value, $CURRENT_INDICATOR_UNIT_UID)} (${value})`,
+      label: `${value > 0 ? '+' : value < 0 ? '−' : ''}${formatValue(value, $CURRENT_INDICATOR_UNIT_UID)}`,
       value,
     }));
 
