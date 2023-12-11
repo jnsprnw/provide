@@ -9,8 +9,8 @@ export const GEOGRAPHY_TYPES = derived(page, ($page) =>
     ($page.data?.meta?.geographyTypes ?? []).map((t) => ({ ...t, disabled: !(t.isAvailable && t.availableIndicators.length) })),
     [
       (t) => t.disabled, // This sorts the available types first
-      (t) => t.availableIndicators.length,
       (t) => t.order,
+      (t) => 9999 - t.availableIndicators.length, // Highest number first
       (t) => t.label,
     ]
   )
