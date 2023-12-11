@@ -1,5 +1,4 @@
 <script>
-  import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
   import { createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
   import { KEY_SCENARIOPRESET_UID as PRESET_ID } from '$config';
@@ -38,48 +37,61 @@
           scenarios: preset.scenarios,
         });
       }
+    } else if (typeof $currentPreset === 'undefined') {
+      dispatch('selection', {
+        scenarios: [],
+      });
     }
   }
   // Width of the content
   let widthContent = 0;
+
+  function click(value) {
+    if ($currentPreset === value) {
+      currentPreset.set(undefined);
+    } else {
+      currentPreset.set(value);
+    }
+  }
 </script>
 
 {#if scenarioPresetsForCurrentTimeframe.length}
   <div>
     <Tagline class="mb-2">Scenarios: learn about scenarios and what they can be used for.</Tagline>
-    <RadioGroup bind:value={$currentPreset}>
-      <SideScrollIndicator
-        widthOfContent={widthContent}
-        distanceLeft={0}
-        distanceRight={0}
+    <SideScrollIndicator
+      widthOfContent={widthContent}
+      distanceLeft={0}
+      distanceRight={0}
+    >
+      <div
+        class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]"
+        style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);"
+        bind:clientWidth={widthContent}
       >
-        <div
-          class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]"
-          style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);"
-          bind:clientWidth={widthContent}
-        >
-          {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
-            <RadioGroupOption
-              {value}
-              let:checked
-              class=" grid  h-full gap-y-1 "
+        {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
+          {@const checked = value === $currentPreset}
+          <button
+            {value}
+            aria-pressed={checked}
+            class="grid h-full px-2.5 min-w-[250px] gap-y-1 text-left rounded-sm aria-pressed:bg-theme-weakest hover:bg-surface-weaker/50 focus:outline-none focus:bg-surface-weaker"
+            style="grid-template-rows: subgrid; grid-row: span 2;"
+            on:click={() => click(value)}
+          >
+            <div
+              class="grid py-2"
               style="grid-template-rows: subgrid; grid-row: span 2;"
             >
-              <div
-                aria-selected={checked}
-                class="grid min-w-[250px] aria-selected:bg-theme-weakest hover:bg-surface-weaker/50 px-2.5 py-2 rounded-sm"
-                style="grid-template-rows: subgrid; grid-row: span 2;"
+              <span
+                class="text-sm text-theme-base font-bold text-theme"
+                class:text-theme-stronger={checked}
               >
-                <span
-                  class="text-sm text-theme-base font-bold text-theme"
-                  class:text-theme-stronger={checked}>{title}</span
-                >
-                <span class="text-xs">{description}</span>
-              </div>
-            </RadioGroupOption>
-          {/each}
-        </div>
-      </SideScrollIndicator>
-    </RadioGroup>
+                {title}
+              </span>
+              <span class="text-xs">{description}</span>
+            </div>
+          </button>
+        {/each}
+      </div>
+    </SideScrollIndicator>
   </div>
 {/if}
