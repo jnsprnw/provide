@@ -1,14 +1,7 @@
 <script>
-  import {
-    CURRENT_INDICATOR,
-    CURRENT_GEOGRAPHY,
-    TEMPLATE_PROPS,
-    CURRENT_INDICATOR_OPTION_VALUES,
-    IS_COMBINATION_AVAILABLE_INDICATOR,
-    IS_EMPTY_INDICATOR,
-  } from '$stores/state.js';
+  import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY, TEMPLATE_PROPS, CURRENT_INDICATOR_OPTION_VALUES, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import { STUDY_LOCATIONS } from '$stores/meta.js';
-  import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL, SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
+  import { LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL_LABEL, SELECTED_LIKELIHOOD_LEVEL, SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
   import { END_AVOIDING_IMPACTS, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_CERTAINTY_LEVEL } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { fetchData } from '$lib/api/api';
@@ -33,7 +26,7 @@
       },
     });
 
-  $: process = ({ thresholdLevelsData }, { scenarios, urlParams }) => {
+  $: process = ({ thresholdLevelsData }) => {
     const studyLocations = $STUDY_LOCATIONS.map(({ uid, label, order, isAverage }) => {
       const datum = thresholdLevelsData.data.study_locations[uid];
       const { gmt, budget, lat, lng } = datum;
@@ -55,7 +48,7 @@
     return {
       studyLocations,
       title: 'How does this vary across the urban environment?',
-      description: 'lorem ipsum description',
+      description: `For the average over the urban area as well as 6 locations indicated on the map, the table provides the Global Mean Temperature (GMT) levels at which the selected level of impact (${$LEVEL_OF_IMPACT}) would be reached with the selected probability (${$SELECTED_LIKELIHOOD_LEVEL_LABEL}), as well as the years at which this would happen in the three considered emissions scenarios.`,
     };
   };
 </script>
