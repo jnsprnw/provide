@@ -94,30 +94,76 @@
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];
 </script>
 
-<div class="flex items-center" class:justify-between={isMultiLine} class:justify-end={!isMultiLine}>
+<div
+  class="flex items-center"
+  class:justify-between={isMultiLine}
+  class:justify-end={!isMultiLine}
+>
   {#if isMultiLine}<ColorLegend items={data} />{/if}
-  <StrokeLegend {colorScales} scale={steps} />
+  <StrokeLegend
+    {colorScales}
+    scale={steps}
+  />
 </div>
 
 <div class="aspect-[2] flex animate-defer-visibility">
-  <div class:w-full={!isMultiLine} class="h-full {mainChartWidth}">
-    <LayerCake padding={mainChartPadding} x={xKey} y={yKey} {yDomain} data={lineData} {flatData} let:data>
+  <div
+    class:w-full={!isMultiLine}
+    class="h-full {mainChartWidth}"
+  >
+    <LayerCake
+      padding={mainChartPadding}
+      x={xKey}
+      y={yKey}
+      {yDomain}
+      data={lineData}
+      {flatData}
+      let:data
+    >
       <Svg>
         <AxisX ticks={xTicks} />
-        <AxisY padding={mainChartPadding} ticks={yTicks} xTick={-3} formatTick={formatTickY} ticksHighlighted={ticksYHighlighted} />
+        <AxisY
+          padding={mainChartPadding}
+          ticks={yTicks}
+          xTick={-3}
+          formatTick={formatTickY}
+          ticksHighlighted={ticksYHighlighted}
+        />
         {#if !isMultiLine}
-          <AreaLayer data={areaData.values} color={areaData.color} />
+          <AreaLayer
+            data={areaData.values}
+            color={areaData.color}
+          />
         {/if}
-        <MultipleLineLayer strokeWidth={4} animate={false} />
+        <MultipleLineLayer
+          strokeWidth={4}
+          animate={false}
+        />
         <ChartPopover data={popoverData} />
       </Svg>
     </LayerCake>
   </div>
   {#if isMultiLine}
     <div class="h-full {sideChartWidth}">
-      <LayerCake padding={sideChartPadding} x="uid" y={yKey} z="color" {yDomain} data={endBoundsData} xScale={scaleBand()}>
+      <LayerCake
+        padding={sideChartPadding}
+        x="uid"
+        y={yKey}
+        z="color"
+        {yDomain}
+        data={endBoundsData}
+        xScale={scaleBand()}
+      >
         <Svg>
-          <AxisY padding={sideChartPadding} ticks={yTicks} {yDomain} xTick={-3} formatTick={formatTickY} ticksHighlighted={ticksYHighlighted} showTickLabels={false} />
+          <AxisY
+            padding={sideChartPadding}
+            ticks={yTicks}
+            {yDomain}
+            xTick={-3}
+            formatTick={formatTickY}
+            ticksHighlighted={ticksYHighlighted}
+            showTickLabels={false}
+          />
           <BoxLayer formatValue={formatValueY} />
         </Svg>
       </LayerCake>
