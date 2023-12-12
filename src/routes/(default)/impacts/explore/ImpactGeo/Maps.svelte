@@ -1,5 +1,6 @@
 <script>
   import mask from '@turf/mask';
+  import intersect from '@turf/intersect';
   import syncMaps from '@mapbox/mapbox-gl-sync-move';
   import Legend from './Legend.svelte';
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
@@ -10,6 +11,7 @@
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
+  import { featureCollection } from '@turf/helpers';
 
   export let geoData;
   export let geoShape;
@@ -24,7 +26,33 @@
     syncMaps(newMaps);
   }
 
-  $: masked = mask(geoShape);
+  function createMaske(geoData, geoShape) {
+    // We need to build our own masking of the data and the shapefile of the geo shape provided by the API
+    return geoData.map((datum) => {
+      // Loop through the different data layer
+      const features = datum.data.features.map((feature) => {
+        // The feature collection consists of multiple features. They all need to be masked individually
+        // We calculate the intersection of the feature (data layer) and the geo shape
+        const intersection = intersect(feature, geoShape);
+        return {
+          ...intersection,
+          properties: {
+            // because the properties are lost by the intersection, we add them again
+            ...feature.properties,
+          },
+        };
+      });
+      // We rebuild the geo data object
+      return {
+        ...datum,
+        data: featureCollection(features), // The individual features are combined to a feature collection again
+      };
+    });
+  }
+
+  $: maskedGeoData = createMaske(geoData, geoShape);
+
+  $: invertedGeoShape = mask(geoShape);
   let interactive = false;
   $: aspectRatio = {
     '1': 'aspect-[1.3]',
@@ -70,14 +98,14 @@
       scale={colorScale}
     />
   </div>
-  {#key geoData.length}
-    {#each geoData as d, i}
+  {#key maskedGeoData.length}
+    {#each maskedGeoData as d, i}
       <div
-        class:rounded-l={geoData.length === 1 || i === 0}
-        class:rounded-r={geoData.length === 1 || i === geoData.length - 1}
-        class:border-r-0={geoData.length > 1 && i !== geoData.length - 1}
+        class:rounded-l={maskedGeoData.length === 1 || i === 0}
+        class:rounded-r={maskedGeoData.length === 1 || i === maskedGeoData.length - 1}
+        class:border-r-0={maskedGeoData.length > 1 && i !== maskedGeoData.length - 1}
         class="relative border border-contour-weakest overflow-hidden"
-        style={`width: ${100 / geoData.length}%`}
+        style={`width: ${100 / maskedGeoData.length}%`}
       >
         <MapProvider
           bind:map={maps[i]}
@@ -86,15 +114,15 @@
           {paint}
           hideLogo={i > 0}
         >
-          <DataSource data={masked}>
-            <PolygonLayer
+          <DataSource data={invertedGeoShape}>
+            <!--<PolygonLayer
               before="ocean-fill"
               fillColor={'#fafafa'}
               fill={true}
               fillId="mask"
               lineWidth={0.5}
               lineColor={$theme.color.contour.base}
-            />
+            />-->
             <PolygonLayer
               before="ocean-fill"
               lineWidth={3}
