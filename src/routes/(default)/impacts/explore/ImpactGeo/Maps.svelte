@@ -12,6 +12,8 @@
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
   import { featureCollection } from '@turf/helpers';
+  import isValid from '@turf/boolean-valid';
+  import { rewind } from '$lib/utils/geo';
 
   export let geoData;
   export let geoShape;
@@ -27,13 +29,23 @@
   }
 
   function createMaske(geoData, geoShape) {
+    console.log(geoData, geoShape);
     // We need to build our own masking of the data and the shapefile of the geo shape provided by the API
     return geoData.map((datum) => {
       // Loop through the different data layer
-      const features = datum.data.features.map((feature) => {
+      const features = rewind(datum.data.features).map((feature) => {
         // The feature collection consists of multiple features. They all need to be masked individually
         // We calculate the intersection of the feature (data layer) and the geo shape
-        const intersection = intersect(feature, geoShape);
+        let intersection = feature;
+        try {
+          intersection = intersect(feature, geoShape);
+        } catch (error) {
+          // console.error(error);
+          console.warn(`Invalid geography`);
+          console.log({ feature });
+          intersection = feature;
+        }
+        // const intersection = intersect(feature, geoShape);
         return {
           ...intersection,
           properties: {
@@ -50,9 +62,20 @@
     });
   }
 
-  $: maskedGeoData = createMaske(geoData, geoShape);
+  function invertShape(geoShape) {
+    try {
+      return mask(geoShape);
+    } catch (error) {
+      console.warn(`Invalid geoShape`);
+      console.log({ geoShape });
+      return undefined;
+    }
+  }
 
-  $: invertedGeoShape = mask(geoShape);
+  $: maskedGeoData = createMaske(geoData, geoShape);
+  $: console.log({ maskedGeoData });
+  $: console.log({ geoShape }, isValid(geoShape));
+  $: invertedGeoShape = invertShape(geoShape);
   let interactive = false;
   $: aspectRatio = {
     '1': 'aspect-[1.3]',
@@ -114,8 +137,9 @@
           {paint}
           hideLogo={i > 0}
         >
-          <DataSource data={invertedGeoShape}>
-            <!--<PolygonLayer
+          {#if invertedGeoShape}
+            <DataSource data={invertedGeoShape}>
+              <!--<PolygonLayer
               before="ocean-fill"
               fillColor={'#fafafa'}
               fill={true}
@@ -123,27 +147,27 @@
               lineWidth={0.5}
               lineColor={$theme.color.contour.base}
             />-->
-            <PolygonLayer
-              before="ocean-fill"
-              lineWidth={3}
-              lineOffset={1.5}
-              lineOpacity={0.07}
-              lineColor={$theme.color.contour.base}
-            />
-            <FilterLayer
-              layer="settlement-minor-label"
-              geo={geoShape}
-            />
-            <FilterLayer
-              layer="settlement-major-label"
-              geo={geoShape}
-            />
-          </DataSource>
+              <PolygonLayer
+                before="ocean-fill"
+                lineWidth={3}
+                lineOffset={1.5}
+                lineOpacity={0.07}
+                lineColor={$theme.color.contour.base}
+              />
+              <FilterLayer
+                layer="settlement-minor-label"
+                geo={geoShape}
+              />
+              <FilterLayer
+                layer="settlement-major-label"
+                geo={geoShape}
+              />
+            </DataSource>
+          {/if}
           <DataSource data={d.data}>
             <PolygonLayer
               fill={true}
               line={false}
-              before="mask"
             />
           </DataSource>
         </MapProvider>

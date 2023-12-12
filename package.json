@@ -17,6 +17,7 @@
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.27.4",
     "@thoughtbot/tailwindcss-aria-attributes": "^0.2.0",
+    "@turf/boolean-valid": "^6.5.0",
     "@turf/intersect": "^6.5.0",
     "autoprefixer": "^10.4.16",
     "copy-to-clipboard": "^3.3.3",
