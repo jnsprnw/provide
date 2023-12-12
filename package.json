@@ -17,6 +17,7 @@
     "@sveltejs/adapter-static": "^2.0.3",
     "@sveltejs/kit": "^1.27.4",
     "@thoughtbot/tailwindcss-aria-attributes": "^0.2.0",
+    "@turf/intersect": "^6.5.0",
     "autoprefixer": "^10.4.16",
     "copy-to-clipboard": "^3.3.3",
     "install": "^0.13.0",
@@ -44,6 +45,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@mapbox/geojson-rewind": "^0.5.2",
     "@mapbox/mapbox-gl-sync-move": "^0.3.1",
     "@popperjs/core": "^2.11.6",
     "@rgossiaux/svelte-headlessui": "^2.0.0",
