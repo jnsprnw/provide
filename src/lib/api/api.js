@@ -22,7 +22,7 @@ export const loadFromAPI = async function (url) {
     const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
     if (res.status != 200) {
       console.warn(`Request failed with status code: ${res.status}`);
-      return null;
+      return { status: STATUS_FAILED, message: `Request failed with status code: ${res.status}` };
     }
     const data = await res.json();
     if (data.message) {
