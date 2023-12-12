@@ -8,6 +8,8 @@
   import Important from './Important.svelte';
   export let data;
 
+  const VALUE_NEVER = 'never';
+
   $: certainty_level = $SELECTED_LIKELIHOOD_LEVEL_LABEL;
   $: level_of_impact = $LEVEL_OF_IMPACT;
 
@@ -23,7 +25,9 @@
   $: scenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid, i) => {
     const scenario = datum.scenarios[uid];
     const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
-    console.log({ scenario });
+    if (scenario.year !== VALUE_NEVER && !Number.isInteger(scenario.year)) {
+      console.warn(`Invalid value for scenario ${uid}: ${scenario.year}`);
+    }
     return {
       uid,
       ...scenario,
@@ -32,8 +36,8 @@
     };
   });
 
-  $: unavoidableScenarios = scenarios.filter(({ isAvoidable }) => !isAvoidable);
-  $: avoidableScenarios = scenarios.filter(({ isAvoidable }) => isAvoidable);
+  $: unavoidableScenarios = scenarios.filter(({ year }) => Number.isInteger(year));
+  $: avoidableScenarios = scenarios.filter(({ year }) => year === VALUE_NEVER);
 
   $: ({ gmt, isAvoidable, isPossible } = datum);
 
