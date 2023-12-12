@@ -121,7 +121,10 @@
       let:data
     >
       <Svg>
-        <AxisX ticks={xTicks} />
+        <AxisX
+          ticks={xTicks}
+          snapTicks={true}
+        />
         <AxisY
           padding={mainChartPadding}
           ticks={yTicks}
