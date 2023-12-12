@@ -28,20 +28,12 @@ export const getColorScale = (data) => {
     // Color for the side that extends fully
     const maxColor = leansPositive ? DIVERGING_RANGE[2] : DIVERGING_RANGE[0];
     // Color for the side that gets cut somwhere
-    const fullMinColor = leansPositive
-      ? DIVERGING_RANGE[0]
-      : DIVERGING_RANGE[2];
+    const fullMinColor = leansPositive ? DIVERGING_RANGE[0] : DIVERGING_RANGE[2];
     // Find color at the correct ratio
-    const minRange = scaleLinear()
-      .domain([0, minExtent])
-      .range([DIVERGING_RANGE[1], fullMinColor])(extentRatio * minExtent);
+    const minRange = scaleLinear().domain([0, minExtent]).range([DIVERGING_RANGE[1], fullMinColor])(extentRatio * minExtent);
 
-    range = leansPositive
-      ? [minRange, DIVERGING_RANGE[1], maxColor]
-      : [maxColor, DIVERGING_RANGE[1], minRange];
-    domain = leansPositive
-      ? [minExtent, 0, maxExtent]
-      : [maxExtent, 0, minExtent];
+    range = leansPositive ? [minRange, DIVERGING_RANGE[1], maxColor] : [maxColor, DIVERGING_RANGE[1], minRange];
+    domain = leansPositive ? [minExtent, 0, maxExtent] : [maxExtent, 0, minExtent];
   }
 
   return scaleLinear().interpolate(interpolateLab).domain(domain).range(range);
@@ -51,18 +43,11 @@ export const calculateDifference = (data) => {
   const [grid1, grid2] = data;
   return {
     ...grid1.data,
-    data: grid1.data.data.map((row, lngIndex) =>
-      row.map((value, latIndex) =>
-        value === null ? null : grid2.data.data[lngIndex][latIndex] - value
-      )
-    ),
+    data: grid1.data.data.map((row, lngIndex) => row.map((value, latIndex) => (value === null ? null : grid2.data.data[lngIndex][latIndex] - value))),
   };
 };
 
-export const coordinatesToRectGrid = (
-  data,
-  { colorScale, resolution, origin }
-) => {
+export const coordinatesToRectGrid = (data, { colorScale, resolution, origin }) => {
   const features = data?.reduce((acc, cells, latIndex) => {
     cells.forEach((value, lngIndex) => {
       if (value === null) return;
@@ -87,10 +72,7 @@ export const coordinatesToRectGrid = (
   return featureCollection(features);
 };
 
-export const coordinatesToContours = (
-  values,
-  { thresholds, origin, resolution, colorScale }
-) => {
+export const coordinatesToContours = (values, { thresholds, origin, resolution, colorScale }) => {
   const width = values[0].length;
   const height = values.length;
   const flatValues = values.flat();
@@ -129,17 +111,10 @@ export const coordinatesToContours = (
 // From https://observablehq.com/@fil/rewind
 // a simple duck test for projections and GeoJSON
 export function rewind(duck, simple) {
-  return duck?.stream
-    ? geoRewindProjection(duck, simple)
-    : duck?.type
-    ? geoRewindFeature(duck, simple)
-    : Array.isArray(duck)
-    ? Array.from(duck, (d) => rewind(d, simple))
-    : duck;
+  return duck?.stream ? geoRewindProjection(duck, simple) : duck?.type ? geoRewindFeature(duck, simple) : Array.isArray(duck) ? Array.from(duck, (d) => rewind(d, simple)) : duck;
 }
 
-export const geoRewindFeature = (feature, simple) =>
-  geoProjectSimple(feature, geoRewindStream(simple));
+export const geoRewindFeature = (feature, simple) => geoProjectSimple(feature, geoRewindStream(simple));
 
 const geoRewindProjection = (projection, simple) => {
   const { stream: normalize } = geoRewindStream(simple);
@@ -170,19 +145,12 @@ function geoRewindStream(simple = true) {
         if (
           i
             ? // a hole must contain the first point of the polygon
-              !geoContains(
-                { type: 'Polygon', coordinates: [ring] },
-                polygon[0][0]
-              )
+              !geoContains({ type: 'Polygon', coordinates: [ring] }, polygon[0][0])
             : polygon[1]
             ? // the outer ring must contain the first point of its first hole (if any)
-              !geoContains(
-                { type: 'Polygon', coordinates: [ring] },
-                polygon[1][0]
-              )
+              !geoContains({ type: 'Polygon', coordinates: [ring] }, polygon[1][0])
             : // a single ring polygon must be smaller than a hemisphere (optional)
-              simple &&
-              geoArea({ type: 'Polygon', coordinates: [ring] }) > 2 * Math.PI
+              simple && geoArea({ type: 'Polygon', coordinates: [ring] }) > 2 * Math.PI
         ) {
           ring.reverse();
         }
@@ -232,13 +200,7 @@ function projectGeometryCollection(o, stream) {
 }
 
 function projectGeometry(o, stream) {
-  return !o
-    ? null
-    : o.type === 'GeometryCollection'
-    ? projectGeometryCollection(o, stream)
-    : o.type === 'Polygon' || o.type === 'MultiPolygon'
-    ? projectPolygons(o, stream)
-    : o;
+  return !o ? null : o.type === 'GeometryCollection' ? projectGeometryCollection(o, stream) : o.type === 'Polygon' || o.type === 'MultiPolygon' ? projectPolygons(o, stream) : o;
 }
 
 function projectPolygons(o, stream) {
