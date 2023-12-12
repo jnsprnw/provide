@@ -26,7 +26,7 @@
     const scenario = datum.scenarios[uid];
     const label = $SCENARIOS.find(({ uid: id }) => uid === id)?.label ?? uid;
     if (scenario.year !== VALUE_NEVER && !Number.isInteger(scenario.year)) {
-      console.warn(`Invalid value for scenario ${uid}: ${scenario.year}`);
+      console.warn(`Invalid year for scenario ${uid}: ${scenario.year}`);
     }
     return {
       uid,
@@ -94,7 +94,9 @@
           {#each unavoidableScenarios as { label, year, color }, i}
             {@const end = i === unavoidableScenarios.length - 1 ? '.' : i === unavoidableScenarios.length - 2 ? ' and' : ','}
             <li class="text-lg flex items-center my-1 ml-2 gap-x-2">
-              <i aria-hidden="true">—</i><span>in <strong>{year}</strong> under the <strong style="color: {color};">{label}</strong> scenario{end}</span>
+              <i aria-hidden="true">—</i><span
+                >{#if year == 2020}before <strong>2030</strong>{:else}in <strong>{year}</strong>{/if} under the <strong style="color: {color};">{label}</strong> scenario{end}</span
+              >
             </li>
           {/each}
         </ul>

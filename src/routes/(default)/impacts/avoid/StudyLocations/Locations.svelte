@@ -27,17 +27,17 @@
     };
   });
 
-  function generateTooltipText(isAvoidable, isPossible, year, scenario, likelihood) {
-    if (isPossible && isAvoidable) {
-      return `For this location, there is a ${likelihood} chance that the selected level of impact will be reached in ${year} in the scenario ${scenario}.`;
-    }
-    if (!isPossible && isAvoidable) {
+  function generateTooltipText(year, scenario, likelihood) {
+    if (Number.isInteger(year)) {
+      if (year == 2020) {
+        return `For this location, there is already at least a ${likelihood} chance of getting the selected level of impact in today’s climate.`;
+      } else {
+        return `For this location, there is a ${likelihood} chance that the selected level of impact will be reached in ${year} in the scenario ${scenario}.`;
+      }
+    } else if (year === 'never') {
       return `For this location, the probability that the selected level of impact will be reached stays below ${likelihood} up to 2100 in the scenario ${scenario}.`;
     }
-    if (isPossible && !isAvoidable) {
-      return `For this location, there is already at least a ${likelihood} chance of getting the selected level of impact in today’s climate.`;
-    }
-    console.warn(`This combination of isPossible (${isPossible}) and isAvoidable (${isAvoidable}) should not occur. (Year: ${year}, scenario: ${scenario})`);
+    console.warn(`The value of year is invalid. (Year: ${year}, scenario: ${scenario})`);
   }
 </script>
 
@@ -80,17 +80,17 @@
               class:font-bold={isSelected}>{formatValue(gmt, 'degrees-celsius')}</span
             >
           </td>
-          {#each Object.values(scenarios) as { full, half, isAvoidable, isPossible, year, label: labelScenario }}
+          {#each Object.values(scenarios) as { full, half, year, label: labelScenario }}
             {@const value = year ?? 'never'}
-            {@const label = value === '2020' ? 'already' : value}
+            {@const label = value == '2020' ? 'already' : value}
             <td>
               <div
                 class="rounded-full bg-current mx-2 px-2"
                 style="color: {label === 'never' ? half : full};"
               >
                 <span
-                  class="text-white text-center block text-sm min-w-[43px]"
-                  use:tooltip={{ content: generateTooltipText(isAvoidable, isPossible, year, labelScenario, $SELECTED_LIKELIHOOD_LEVEL_LABEL) }}>{label}</span
+                  class="text-white text-center block text-sm min-w-[45px]"
+                  use:tooltip={{ content: generateTooltipText(year, labelScenario, $SELECTED_LIKELIHOOD_LEVEL_LABEL) }}>{label}</span
                 >
               </div>
             </td>
