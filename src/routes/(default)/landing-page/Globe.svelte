@@ -64,14 +64,14 @@
   });
 </script>
 
-<figure
-  class="h-[70vh] grid grid-cols-5 overflow-hidden bg-theme-stronger relative"
->
+<figure class="h-[70vh] grid grid-cols-5 overflow-hidden bg-theme-stronger relative">
   <div class="col-span-3 row-start-1 col-start-1 h-[130%] bg-theme-strongest">
     <LoadingWrapper
       asyncProps={{ shape: $GEO_SHAPE, grid: $GEO_DATA }}
       {process}
       let:asyncProps
+      warningBackground={false}
+      warningInverted={true}
     >
       <MapProvider
         interactive={false}
@@ -98,24 +98,23 @@
           />
         </DataSource>
         <DataSource data={asyncProps.data}>
-          <PolygonLayer fill={true} line={false} before="mask" />
+          <PolygonLayer
+            fill={true}
+            line={false}
+            before="mask"
+          />
         </DataSource>
       </MapProvider>
     </LoadingWrapper>
   </div>
-  <div
-    class="col-span-3 row-start-1 col-start-1 z-10 h-1/2 self-end bg-gradient-to-t from-theme-stronger/60"
-  />
+  <div class="col-span-3 row-start-1 col-start-1 z-10 h-1/2 self-end bg-gradient-to-t from-theme-stronger/60" />
   <figcaption class="pl-8 col-span-2 self-center col-start-4">
     <p class="text-3xl text-surface-base font-bold max-w-md leading-snug mb-12">
-      How will {currentStory.indicator.label} in {currentStory.geography
-        .emoji}&nbsp;{currentStory.geography.label} develop under a {currentStory
-        .scenarios[0].label} scenario?
+      How will {currentStory.indicator.label} in {currentStory.geography.emoji}&nbsp;{currentStory.geography.label} develop under a {currentStory.scenarios[0].label} scenario?
     </p>
     <a
       href={currentStory.url}
-      class="bg-surface-base text-lg border text-theme-base rounded px-5 py-3"
-      >Find out more</a
+      class="bg-surface-base text-lg border text-theme-base rounded px-5 py-3">Find out more</a
     >
   </figcaption>
 </figure>

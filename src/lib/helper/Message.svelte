@@ -2,6 +2,7 @@
   export let warningBackground = true;
   export let warningSizeSmall = false;
   export let warningSign = false;
+  export let warningInverted = false;
   export let headline;
 </script>
 
@@ -15,6 +16,7 @@
   <span
     class="text-lg font-bold leading-tight"
     class:text-base={warningSizeSmall}
+    class:text-white={warningInverted}
     >{#if warningSign}⚠️
     {/if}{headline}</span
   >
@@ -22,6 +24,7 @@
     class="flex-col text-sm"
     class:flex={!warningSizeSmall}
     class:text-xs={warningSizeSmall}
+    class:text-white={warningInverted}
   >
     <slot />
   </div>
