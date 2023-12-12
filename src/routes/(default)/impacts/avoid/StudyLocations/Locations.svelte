@@ -81,14 +81,16 @@
             >
           </td>
           {#each Object.values(scenarios) as { full, half, isAvoidable, isPossible, year, label: labelScenario }}
+            {@const value = year ?? 'never'}
+            {@const label = value === '2020' ? 'already' : value}
             <td>
               <div
                 class="rounded-full bg-current mx-2 px-2"
-                style="color: {isAvoidable ? full : half};"
+                style="color: {label === 'never' ? half : full};"
               >
                 <span
-                  class="text-white text-center block text-sm"
-                  use:tooltip={{ content: generateTooltipText(isAvoidable, isPossible, year, labelScenario, $SELECTED_LIKELIHOOD_LEVEL_LABEL) }}>{year ?? 'N/A'}</span
+                  class="text-white text-center block text-sm min-w-[43px]"
+                  use:tooltip={{ content: generateTooltipText(isAvoidable, isPossible, year, labelScenario, $SELECTED_LIKELIHOOD_LEVEL_LABEL) }}>{label}</span
                 >
               </div>
             </td>
@@ -103,9 +105,9 @@
       items={scenarios}
       textSize="text-xs"
     />
-    <div class="flex justify-end">
-      <div class="rounded-full mx-2 px-2 bg-contour-weakest/50 text-contour-weaker text-xs">Unavoidable</div>
-      <div class="rounded-full mx-2 px-2 bg-contour-weaker/70 text-white text-xs">Avoidable</div>
-    </div>
+    <!--<div class="flex justify-end">
+      <div class="rounded-full mx-2 px-2 bg-contour-weakest/50 text-contour-weaker text-xs">never</div>
+      <div class="rounded-full mx-2 px-2 bg-contour-weaker/70 text-white text-xs">year</div>
+    </div>-->
   </div>
 </div>
