@@ -1,8 +1,8 @@
 <script>
   import { geoPath, geoEqualEarth, geoCentroid } from 'd3-geo';
   import { UID_WORLD } from '$src/config.js';
-  // import { rewind } from '$lib/utils/geo';
-  import rewind from '@mapbox/geojson-rewind';
+  import { rewind } from '$lib/utils/geo';
+  // import rewind from '@mapbox/geojson-rewind';
   import { geoGraticule } from 'd3-geo';
   import { point } from '@turf/helpers';
   import { every } from 'lodash-es';
