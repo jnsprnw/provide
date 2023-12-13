@@ -48,19 +48,30 @@
 
 <PageIntro>
   <div class="flex flex-col gap-y-3.5">
-    <h1 class="text-4xl font-bold">{ LABEL_DOCUMENTATION }</h1>
-    <p class="max-w-xl">How do you avoid important climate impact thresholds in your city? Understand the risks and make your city more resilient to the impacts of climate change.</p>
+    <h1 class="text-4xl font-bold">{LABEL_DOCUMENTATION}</h1>
+    <p class="max-w-xl">How do you avoid important climate impact levels in your city? Understand the risks and make your city more resilient to the impacts of climate change.</p>
   </div>
 </PageIntro>
 
 <ScrollContent>
-  <NestedNav slot="navigation" {sections} />
+  <NestedNav
+    slot="navigation"
+    {sections}
+  />
   {#each sections as section}
-    <section class="mb-8">
-      <svelte:component this={section.component} {...section} />
-      {#each section.sections as part}
-        <svelte:component this={part.component} {...part} />
-      {/each}
-    </section>
+    {#if section.content}
+      <section class="mb-8">
+        <svelte:component
+          this={section.component}
+          {...section}
+        />
+        {#each section.sections as part}
+          <svelte:component
+            this={part.component}
+            {...part}
+          />
+        {/each}
+      </section>
+    {/if}
   {/each}
 </ScrollContent>
