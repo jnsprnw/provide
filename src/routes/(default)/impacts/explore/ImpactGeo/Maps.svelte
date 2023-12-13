@@ -12,7 +12,6 @@
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
   import { featureCollection } from '@turf/helpers';
-  import isValid from '@turf/boolean-valid';
   import { rewind } from '$lib/utils/geo';
 
   export let geoData;
@@ -29,7 +28,7 @@
   }
 
   function createMaske(geoData, geoShape) {
-    console.log(geoData, geoShape);
+    // console.log(geoData, geoShape);
     // We need to build our own masking of the data and the shapefile of the geo shape provided by the API
     return geoData.map((datum) => {
       // Loop through the different data layer
@@ -67,14 +66,14 @@
       return mask(geoShape);
     } catch (error) {
       console.warn(`Invalid geoShape`);
-      console.log({ geoShape });
+      // console.log({ geoShape });
       return undefined;
     }
   }
 
   $: maskedGeoData = createMaske(geoData, geoShape);
-  $: console.log({ maskedGeoData });
-  $: console.log({ geoShape }, isValid(geoShape));
+  // $: console.log({ maskedGeoData });
+  // $: console.log({ geoShape }, isValid(geoShape));
   $: invertedGeoShape = invertShape(geoShape);
   let interactive = false;
   $: aspectRatio = {
@@ -112,6 +111,8 @@
       ],
     };
   });
+
+  // $: console.log(bbox(geoShape));
 </script>
 
 <div class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}>

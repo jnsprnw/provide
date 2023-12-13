@@ -143,7 +143,7 @@
       scenarios: scenarios.map((d) => d.uid),
     };
 
-    const geoShape = shape.data.data.features.find((feature) => feature.properties.uid === urlParams.geography);
+    const geoShape = shape.data.data.features.find((feature) => feature.properties.uid === urlParams.geography) ?? shape.data.data.features[0];
     // console.log(urlParams, data);
 
     return {
