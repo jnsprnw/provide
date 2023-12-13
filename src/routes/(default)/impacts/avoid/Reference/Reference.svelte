@@ -2,15 +2,18 @@
   import { IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
-  import { END_AVOIDING_REFERENCE, URL_PATH_GEOGRAPHY,URL_PATH_INDICATOR  } from '$config';
+  import { END_AVOIDING_REFERENCE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$config';
   import { fetchData } from '$lib/api/api';
   import Text from './Text.svelte';
   import ImpactLevel from './ImpactLevel.svelte';
   import Message from '$lib/helper/Message.svelte';
+  import { mean } from 'd3-array';
+  import { round, floor, ceil } from 'lodash-es';
 
   export let store;
 
-  $: !$IS_EMPTY_GEOGRAPHY && !$IS_EMPTY_INDICATOR &&
+  $: !$IS_EMPTY_GEOGRAPHY &&
+    !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
     fetchData(store, {
       endpoint: END_AVOIDING_REFERENCE,
@@ -21,9 +24,40 @@
       },
     });
 
+  function getDecimalsOfNumber(n) {
+    const parts = String(n - Math.floor(n)).split('.');
+    if (parts.length === 2) {
+      return parts[1].length;
+    }
+    return 0;
+  }
+
+  function floorNumber(v, offset, step, decimals) {
+    return floor(Math.floor((v + offset) / step) * step, decimals);
+  }
+  function ceilNumber(v, offset, step, decimals) {
+    return ceil(Math.floor((v + offset) / step) * step, decimals);
+  }
+
   $: process = ({ data }, { scenarios, urlParams }) => {
+    const step = data.data.impact_levels.step;
+    // console.log({ step });
+    const decimals = getDecimalsOfNumber(step);
+    const [min, max] = data.data.impact_levels.range_of_interest;
+    const [totalMin, totalMax] = data.data.impact_levels.total;
+    const offset = Math.min(0, totalMin) * -1;
+    const defaultValue = round(Math.round(mean([min + offset, max + offset]) / step) * step, decimals);
+    // console.log({ decimals, min, totalMin, offset });
     return {
-      data: data.data,
+      data: {
+        step,
+        min: floorNumber(min, offset, step, decimals),
+        max: ceilNumber(max, offset, step, decimals),
+        totalMin: floorNumber(totalMin, offset, step, decimals),
+        totalMax: ceilNumber(totalMax, offset, step, decimals),
+        defaultValue,
+        offset,
+      },
     };
   };
 </script>
@@ -50,11 +84,11 @@
     </LoadingWrapper>
   {:else if $IS_EMPTY_GEOGRAPHY}
     <Message
-    warningBackground={false}
-    warningSizeSmall={true}
-    headline="No geography selected"
+      warningBackground={false}
+      warningSizeSmall={true}
+      headline="No geography selected"
     >
-    <span>Select a geography from the dropdown at the top of this page.</span>
+      <span>Select a geography from the dropdown at the top of this page.</span>
     </Message>
   {:else if $IS_EMPTY_INDICATOR}
     <Message

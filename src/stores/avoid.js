@@ -27,6 +27,7 @@ function checkValidLikelihood(list, value = get(SELECTED_LIKELIHOOD_LEVEL)) {
 export const SELECTED_LIKELIHOOD_LEVEL = writable(getLocalStorage(LOCALSTORE_LIKELIHOOD, 'likely'));
 SELECTED_LIKELIHOOD_LEVEL.subscribe((value) => {
   if (browser && checkValidLikelihood(get(LIKELIHOODS), value)) {
+    console.log('LOCALSTORE_LIKELIHOOD', value);
     setLocalStorage(LOCALSTORE_LIKELIHOOD, value);
   }
 });
@@ -59,6 +60,7 @@ function checkValidStudyLocation(list, value = get(SELECTED_STUDY_LOCATION)) {
 export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'city-average'));
 SELECTED_STUDY_LOCATION.subscribe((value) => {
   if (browser && checkValidStudyLocation(get(STUDY_LOCATIONS), value)) {
+    console.log('LOCALSTORE_STUDY_LOCATION', value);
     setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
   }
 });
@@ -85,14 +87,15 @@ export const LEVEL_OF_IMPACT_ARRAY = writable(
   })
 );
 LEVEL_OF_IMPACT_ARRAY.subscribe((value) => {
+  console.log('LOCALSTORE_LEVEL_OF_IMACT', value);
   setLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, JSON.stringify(value));
 });
 
-export const LEVEL_OF_IMPACT = derived(LEVEL_OF_IMPACT_ARRAY, ($arr) => $arr[0]);
+export const LEVEL_OF_IMPACT = writable(0);
 
 export const IS_EMPTY_LEVEL_OF_IMPACT = derived(LEVEL_OF_IMPACT, ($value) => typeof $value === 'undefined');
 export const IS_EMPTY_LIKELIHOOD_LEVEL = derived(SELECTED_LIKELIHOOD_LEVEL, ($value) => !Boolean($value));
 
 export const IS_INVALID_AVOID_PARAMETERS = derived([CURRENT_PAGE, IS_EMPTY_LEVEL_OF_IMPACT, IS_EMPTY_LIKELIHOOD_LEVEL], ([$page, $impact, $likelihood]) => {
   return $page === PATH_AVOID && ($impact || $likelihood);
-})
+});
