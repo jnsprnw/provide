@@ -29,6 +29,11 @@
         [URL_PATH_INDICATOR]: currentStory.indicator.uid,
         [URL_PATH_SCENARIO]: currentStory.scenarios[0].uid,
         [URL_PATH_YEAR]: 2050,
+        'geography-type': 'admin0',
+        time: 'annual',
+        reference: 'present-day',
+        spatial: 'area',
+        frequency: 0.1,
       },
     });
 
