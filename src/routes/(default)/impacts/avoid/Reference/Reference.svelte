@@ -41,6 +41,7 @@
 
   $: process = ({ data }, { scenarios, urlParams }) => {
     const step = data.data.impact_levels.step;
+    const average_value = data.data.average_value;
     // console.log({ step });
     const decimals = getDecimalsOfNumber(step);
     const [min, max] = data.data.impact_levels.range_of_interest;
@@ -57,6 +58,7 @@
         totalMax: ceilNumber(totalMax, offset, step, decimals),
         defaultValue,
         offset,
+        average_value,
       },
     };
   };
