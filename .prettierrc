@@ -8,6 +8,6 @@
   "printWidth": 200,
   "plugins": ["prettier-plugin-svelte"],
   "pluginSearchDirs": ["."],
-  "singleAttributePerLine": true,
+  "singleAttributePerLine": false,
   "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }
