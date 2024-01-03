@@ -13,15 +13,13 @@
 </script>
 
 <nav class="border-b border-contour-weakest py-7">
-  <div
-    class="mx-auto max-w-7xl px-6 flex justify-between gap-y-4 flex-col md:flex-row"
-  >
-    <NavLink href="/"><Logo /></NavLink>
+  <div class="mx-auto max-w-7xl px-6 flex justify-between gap-y-4 flex-col md:flex-row">
+    <NavLink href="/" class="hover:text-theme-base transition-colors"><Logo /></NavLink>
     <ul class="flex flex-wrap gap-x-3 md:gap-x-4 lg:gap-x-5">
       {#each items as { label, href }}
         <NavLink
-          activeClass="text-theme-base font-bold"
-          class="text-contour-weak text-sm md:text-base"
+          activeClass="text-theme-base font-bold underline decoration-contour-weakest underline-offset-4"
+          class="text-contour-weak hover:text-theme-base text-sm md:text-base transition-colors"
           {href}>{label}</NavLink
         >
       {/each}
