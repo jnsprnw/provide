@@ -42,13 +42,13 @@
   // Final sections take into account whether a child section is active and whether
   // the section is open or not
   $: processedSections = navSections.map((section) => {
-    const isActive =
-      section.isActive || !!section.sections.find((s) => s.isActive);
+    const isActive = section.isActive || !!section.sections.find((s) => s.isActive);
     const isOpen = openSections[section.index];
     return {
       ...section,
       isActive,
       isOpen,
+      sections: section.sections.map((s) => (!s.slug || !s.title ? false : s)).filter(Boolean),
     };
   });
 
@@ -63,31 +63,17 @@
     {#each processedSections as { title, slug, isActive, index, isOpen, sections, content }}
       {#if content || sections[0]?.content}
         <li class="py-2 border-b border-contour-weakest pr-1 last:border-b-0">
-          <div
-            aria-expanded={String(isActive)}
-            class:text-theme-base={isActive}
-            class="flex justify-between items-center"
-          >
+          <div aria-expanded={String(isActive)} class:text-theme-base={isActive} class="flex justify-between items-center">
             <a class="font-bold text-lg" href={`#${slug}`}>{title}</a>
             {#if sections.length}
-              <button
-                as="button"
-                class="p-1"
-                class:rotate-180={isOpen}
-                on:click={() => toggleSection(index)}>▾</button
-              >
+              <button as="button" class="p-1" class:rotate-180={isOpen} on:click={() => toggleSection(index)}>▾</button>
             {/if}
           </div>
           {#if sections.length}
             <ul class:h-0={!isOpen} class="overflow-hidden">
               {#each sections as { slug, title, isActive }}
                 <li class="mt-1">
-                  <a
-                    aria-current={isActive ? 'step' : 'false'}
-                    class="inline-block text-md text-contour-weak py-1 leading-5 hover:text-theme-stronger"
-                    class:text-theme-stronger={isActive}
-                    href={`#${slug}`}
-                  >
+                  <a aria-current={isActive ? 'step' : 'false'} class="inline-block text-md text-contour-weak py-1 leading-5 hover:text-theme-base" class:text-theme-base={isActive} href={`#${slug}`}>
                     {title}
                   </a>
                 </li>
