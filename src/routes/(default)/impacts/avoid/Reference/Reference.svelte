@@ -26,10 +26,7 @@
 
   function getDecimalsOfNumber(n) {
     const parts = String(n).split('.');
-    if (parts.length === 2) {
-      return parts[1].length;
-    }
-    return 0;
+    return parts.length === 2 ? parts[1].length : 0;
   }
 
   function floorNumber(v, offset, step, decimals) {
