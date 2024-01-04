@@ -25,7 +25,7 @@
     });
 
   function getDecimalsOfNumber(n) {
-    const parts = String(n - Math.floor(n)).split('.');
+    const parts = String(n).split('.');
     if (parts.length === 2) {
       return parts[1].length;
     }
@@ -42,13 +42,11 @@
   $: process = ({ data }, { scenarios, urlParams }) => {
     const step = data.data.impact_levels.step;
     const average_value = data.data.average_value;
-    // console.log({ step });
     const decimals = getDecimalsOfNumber(step);
     const [min, max] = data.data.impact_levels.range_of_interest;
     const [totalMin, totalMax] = data.data.impact_levels.total;
     const offset = Math.min(0, totalMin) * -1;
     const defaultValue = round(Math.round(mean([min + offset, max + offset]) / step) * step, decimals);
-    // console.log({ decimals, min, totalMin, offset });
     return {
       data: {
         step,
@@ -59,6 +57,7 @@
         defaultValue,
         offset,
         average_value,
+        decimals,
       },
     };
   };
@@ -85,27 +84,15 @@
       <LoadingPlaceholder slot="placeholder" />
     </LoadingWrapper>
   {:else if $IS_EMPTY_GEOGRAPHY}
-    <Message
-      warningBackground={false}
-      warningSizeSmall={true}
-      headline="No geography selected"
-    >
+    <Message warningBackground={false} warningSizeSmall={true} headline="No geography selected">
       <span>Select a geography from the dropdown at the top of this page.</span>
     </Message>
   {:else if $IS_EMPTY_INDICATOR}
-    <Message
-      warningBackground={false}
-      warningSizeSmall={true}
-      headline="No indicator selected"
-    >
+    <Message warningBackground={false} warningSizeSmall={true} headline="No indicator selected">
       <span>Select an indicator from the dropdown at the top of this page.</span>
     </Message>
   {:else}
-    <Message
-      warningBackground={false}
-      warningSizeSmall={true}
-      headline="Combination not available"
-    >
+    <Message warningBackground={false} warningSizeSmall={true} headline="Combination not available">
       <span>Select an indicator from the dropdown at the top of this page.</span>
     </Message>
   {/if}
