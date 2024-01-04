@@ -38,6 +38,26 @@
         },
       },
     ]);
+
+  $: findSharedId($CURRENT_GEOGRAPHY, selectableGeographies);
+
+  function checkIds(geography, id) {
+    if (typeof id === 'undefined') {
+      return false;
+    }
+    return geography.uid === id || geography.sharedId === id;
+  }
+
+  function findSharedId(currentGeography, selectableGeographies) {
+    if (currentGeography && selectableGeographies.length) {
+      const { uid, sharedId } = currentGeography;
+      const newGeography = selectableGeographies.find((geography) => checkIds(geography, uid) || checkIds(geography, sharedId));
+      console.log({ newGeography });
+      if (newGeography && newGeography?.uid) {
+        CURRENT_GEOGRAPHY_UID.set(newGeography.uid);
+      }
+    }
+  }
 </script>
 
 <PopoverSelect
@@ -48,38 +68,12 @@
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
   placeholder={$IS_EMPTY_GEOGRAPHY ? 'Select a geography' : undefined}
 >
-  <Content
-    filters={geographyTypes}
-    filterKey="geographyType"
-    filterLabel="Pick a location"
-    currentUid={$CURRENT_GEOGRAPHY_UID}
-    items={selectableGeographies}
-    bind:currentFilterUid
-  >
-    <div
-      slot="items"
-      let:items
-      let:currentFilterUid
-      class="grid grid-cols-1 md:grid-cols-[1.5fr_3fr] lg:grid-cols-[1fr_3fr]"
-    >
-      <Geographies
-        {items}
-        bind:hoveredItem
-        geographyType={geographyTypes.find(({ uid }) => uid === currentFilterUid)}
-        bind:currentUid={$CURRENT_GEOGRAPHY_UID}
-      />
+  <Content filters={geographyTypes} filterKey="geographyType" filterLabel="Pick a location" currentUid={$CURRENT_GEOGRAPHY_UID} items={selectableGeographies} bind:currentFilterUid>
+    <div slot="items" let:items let:currentFilterUid class="max-w-full grid grid-cols-1 md:grid-cols-[1.5fr_3fr] lg:grid-cols-[1.5fr_3fr]">
+      <Geographies {items} bind:hoveredItem geographyType={geographyTypes.find(({ uid }) => uid === currentFilterUid)} bind:currentUid={$CURRENT_GEOGRAPHY_UID} />
       <div class="px-3 hidden md:block">
-        <LoadingWrapper
-          let:asyncProps={{ geoShape }}
-          asyncProps={{ geoShape: $GEO_SHAPE_DATA }}
-          let:isLoading
-        >
-          <Map
-            hovered={hoveredItem}
-            baseLayer={geoShape[0].data.data}
-            dataLayer={geoShape[1].data.data}
-            selected={$CURRENT_GEOGRAPHY_UID}
-          />
+        <LoadingWrapper let:asyncProps={{ geoShape }} asyncProps={{ geoShape: $GEO_SHAPE_DATA }} let:isLoading>
+          <Map hovered={hoveredItem} baseLayer={geoShape[0].data.data} dataLayer={geoShape[1].data.data} selected={$CURRENT_GEOGRAPHY_UID} />
         </LoadingWrapper>
       </div>
     </div>
