@@ -26,11 +26,10 @@
     {
       href: `/${PATH_EXPLORE}/${PATH_AVOID}`,
       label: 'Avoiding future impacts',
-      description: 'Set an impact threshold and explore scenarios',
+      description: 'Set an impact level and explore scenarios',
       disabled: !isAvoidingImpactsAvailable,
       tooltip: !isAvoidingImpactsAvailable ? 'This module is only available for specific geographies' : undefined,
-      intro:
-        'Explore which scenarios minimise the risk from certain impacts. Understand the likelihood of exceeding the impact levels you would like to avoid.',
+      intro: 'Explore which scenarios minimise the risk from certain impacts. Understand the likelihood of exceeding the impact levels you would like to avoid.',
     },
   ];
 
