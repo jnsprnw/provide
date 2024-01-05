@@ -1,5 +1,5 @@
 <script>
-  import { formatValue } from '$lib/utils/formatting';
+  import { formatValue, formatRange } from '$lib/utils/formatting';
   import { getContext } from 'svelte';
   const { width, height, yScale } = getContext('LayerCake');
 
@@ -7,8 +7,6 @@
   export let ticksHighlighted = [0];
   export let showTickLines = true;
   export let showTickLabels = true;
-
-  export let formatTick = (d) => formatValue(d, 'default');
 
   export let axisLabel = undefined;
   export let padding = {};
@@ -26,16 +24,14 @@
   $: labelTextAnchor = textAnchor || orientation === 1 ? 'end' : 'start';
 
   $: tickVals = Array.isArray(ticks) ? ticks : $yScale.ticks(ticks);
+  $: tickLabels = formatRange(tickVals, 'default');
 </script>
 
 {#if axisLabel || showLabel}
-  <text
-    transform={`translate(0, ${-padding?.top ?? 0 + 9})`}
-    class="text-xs fill-contour-weak">{axisLabel}</text
-  >
+  <text transform={`translate(0, ${-padding?.top ?? 0 + 9})`} class="text-xs fill-contour-weak">{axisLabel}</text>
 {/if}
 <g transform={`translate(${xPos}, ${yPos})`}>
-  {#each tickVals as tick}
+  {#each tickVals as tick, i}
     <g transform="translate(0, {$yScale(tick)})">
       {#if showTickLines !== false}
         <line
@@ -54,7 +50,7 @@
           text-anchor: {labelTextAnchor};
         "
         >
-          {formatTick(tick)}
+          {tickLabels.values[i]}
         </text>
       {/if}
     </g>
