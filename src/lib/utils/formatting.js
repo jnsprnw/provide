@@ -46,7 +46,10 @@ const suffixes = {
   degree: ' °',
 };
 
-export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined } = {}) => {
+export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined, decimals } = {}) => {
+  if (typeof decimals !== 'undefined' && typeof customFormatter === 'undefined') {
+    customFormatter = getFormatter(indicatorId, decimals);
+  }
   const formatter = customFormatter || indicatorFormats[indicatorId] || indicatorFormats['default'];
   const str = formatter(value);
   const suffix = addSuffix && suffixes[indicatorId];
@@ -80,4 +83,21 @@ export function formatRange(range, unit, minDecimals = 0) {
     decimals,
     values,
   };
+}
+
+export function findDecimalsForDistinctValues(values, unit, minDecimals = 0) {
+  // This function formats a values of values with all resulting strings to be unique
+  const decimalsMax = 4;
+  let decimals = minDecimals;
+  let formatter = getFormatter(unit, decimals);
+  let strings = values.map((d) => formatValue(d, unit, { formatter }));
+  while (
+    strings.some((value, index) => strings.indexOf(value) !== index) && // Check if strings have any dublicates
+    decimals < decimalsMax
+  ) {
+    decimals += 1;
+    formatter = getFormatter(unit, decimals);
+    strings = values.map((d) => formatValue(d, unit, { formatter })); // Reformat values with one more decimal
+  }
+  return decimals;
 }

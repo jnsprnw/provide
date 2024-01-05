@@ -1,6 +1,6 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
-  import { formatValue } from '$lib/utils/formatting';
+  import { formatValue, findDecimalsForDistinctValues } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
   import AxisX from '$lib/charts/axes/AxisX.svelte';
@@ -28,9 +28,6 @@
   const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
   $: isMultiLine = data.length > 1;
 
-  $: formatTickY = (d) => formatValue(d, unit);
-  $: formatValueY = (d) => formatValue(d, unit, { addSuffix: false });
-
   $: flatData = data.reduce((memo, scenario) => {
     scenario.values.forEach(({ year, gmt, wlvl, ...d }) => {
       // Get global mean temperature of scenario in this year
@@ -46,6 +43,9 @@
     });
     return memo;
   }, []);
+
+  $: requiredDecimalsForTooltips = findDecimalsForDistinctValues(flatData.map(({ value }) => value));
+  $: formatTooltipValueY = (d) => formatValue(d, unit, { decimals: requiredDecimalsForTooltips });
 
   $: colorScales = data.map((scenario) => scenario.colorInterpolator);
 
@@ -82,10 +82,13 @@
     };
   });
 
+  $: requiredDecimalsForBoxplots = findDecimalsForDistinctValues(endBoundsData.map(({ value, min, max }) => [min, max, value]).flat());
+  $: formatBoxplotValueY = (d) => formatValue(d, unit, { addSuffix: false, decimals: requiredDecimalsForBoxplots });
+
   // Data for generating popovers
   $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values) : flatData).map((d) => ({
     ...d,
-    formattedValue: formatTickY(d.value),
+    formattedValue: formatTooltipValueY(d.value),
     formattedGmt: d.gmt,
   }));
 
@@ -94,80 +97,31 @@
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];
 </script>
 
-<div
-  class="flex items-center"
-  class:justify-between={isMultiLine}
-  class:justify-end={!isMultiLine}
->
+<div class="flex items-center" class:justify-between={isMultiLine} class:justify-end={!isMultiLine}>
   {#if isMultiLine}<ColorLegend items={data} />{/if}
-  <StrokeLegend
-    {colorScales}
-    scale={steps}
-  />
+  <StrokeLegend {colorScales} scale={steps} />
 </div>
 
 <div class="aspect-[2] flex animate-defer-visibility">
-  <div
-    class:w-full={!isMultiLine}
-    class="h-full {mainChartWidth}"
-  >
-    <LayerCake
-      padding={mainChartPadding}
-      x={xKey}
-      y={yKey}
-      {yDomain}
-      data={lineData}
-      {flatData}
-      let:data
-    >
+  <div class:w-full={!isMultiLine} class="h-full {mainChartWidth}">
+    <LayerCake padding={mainChartPadding} x={xKey} y={yKey} {yDomain} data={lineData} {flatData} let:data>
       <Svg>
-        <AxisX
-          ticks={xTicks}
-          snapTicks={true}
-        />
-        <AxisY
-          padding={mainChartPadding}
-          ticks={yTicks}
-          xTick={-3}
-          formatTick={formatTickY}
-          ticksHighlighted={ticksYHighlighted}
-        />
+        <AxisX ticks={xTicks} snapTicks={true} />
+        <AxisY padding={mainChartPadding} ticks={yTicks} xTick={-3} ticksHighlighted={ticksYHighlighted} />
         {#if !isMultiLine}
-          <AreaLayer
-            data={areaData.values}
-            color={areaData.color}
-          />
+          <AreaLayer data={areaData.values} color={areaData.color} />
         {/if}
-        <MultipleLineLayer
-          strokeWidth={4}
-          animate={false}
-        />
+        <MultipleLineLayer strokeWidth={4} animate={false} />
         <ChartPopover data={popoverData} />
       </Svg>
     </LayerCake>
   </div>
   {#if isMultiLine}
     <div class="h-full {sideChartWidth}">
-      <LayerCake
-        padding={sideChartPadding}
-        x="uid"
-        y={yKey}
-        z="color"
-        {yDomain}
-        data={endBoundsData}
-        xScale={scaleBand()}
-      >
+      <LayerCake padding={sideChartPadding} x="uid" y={yKey} z="color" {yDomain} data={endBoundsData} xScale={scaleBand()}>
         <Svg>
-          <AxisY
-            padding={sideChartPadding}
-            ticks={yTicks}
-            {yDomain}
-            xTick={-3}
-            formatTick={formatTickY}
-            ticksHighlighted={ticksYHighlighted}
-            showTickLabels={false}
-          />
-          <BoxLayer formatValue={formatValueY} />
+          <AxisY padding={sideChartPadding} ticks={yTicks} {yDomain} xTick={-3} ticksHighlighted={ticksYHighlighted} showTickLabels={false} />
+          <BoxLayer formatValue={formatBoxplotValueY} />
         </Svg>
       </LayerCake>
     </div>
