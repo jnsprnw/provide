@@ -14,12 +14,14 @@ export const PATH_ABOUT = 'about';
 export const PATH_EXPLORE = 'impacts';
 export const PATH_AVOID = 'avoid';
 export const PATH_IMPACT = 'explore';
+export const PATH_GLOSSARY = 'glossary';
 
 export const LABEL_DOCUMENTATION = 'Methodology';
 export const LABEL_EXPLAINERS = 'Explainers';
 export const LABEL_CONTACT = 'Contact';
 export const LABEL_ABOUT = 'About';
 export const LABEL_EXPLORE = 'Explore';
+export const LABEL_GLOSSARY = 'Glossary';
 
 // TODO: Should be handled through env variables
 export const IS_STAGING_VERSION = true;
