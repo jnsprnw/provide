@@ -1,29 +1,28 @@
 <script>
+  import SectionHeadline from '$lib/helper/ContentPages/SectionHeadline.svelte';
+  import TermSection from './TermSection.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
-  import Scenarios from './Scenarios/Scenarios.svelte';
-  import ScenariosIntro from './Scenarios/ScenariosIntro.svelte';
   import PageIntro from '$lib/site/PageIntro.svelte';
-  import { ANCHOR_EXPLAINER_SCENARIOS, LABEL_EXPLAINERS } from '$config';
+  import { LABEL_GLOSSARY } from '$config';
   export let data;
 
-  $: ({ scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets, content } = data);
+  $: ({ content } = data);
 
   $: sections = [
-    {
-      slug: ANCHOR_EXPLAINER_SCENARIOS,
-      title: 'Scenarios',
-      component: ScenariosIntro,
-      content: true,
-      sections: [{ component: Scenarios, scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets }],
-    },
+    ...content.map(({ title, slug, sections }) => ({
+      slug,
+      title,
+      component: SectionHeadline,
+      sections: sections.map((s) => ({ ...s, component: TermSection })),
+    })),
   ];
 </script>
 
 <PageIntro>
   <div class="flex flex-col gap-y-3.5">
-    <h1 class="text-4xl font-bold">{LABEL_EXPLAINERS}</h1>
-    <p class="max-w-xl">Learn more about key concepts in the Climate risk dashboard.</p>
+    <h1 class="text-4xl font-bold">{LABEL_GLOSSARY}</h1>
+    <p class="max-w-xl">Lorem ipsum dolor</p>
   </div>
 </PageIntro>
 
