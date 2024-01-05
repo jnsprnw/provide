@@ -10,7 +10,6 @@
 
   export let axisLabel = undefined;
   export let padding = {};
-  export let showLabel = false;
   export let x = undefined; // Base x position of the axis, usually full width or 0
   export let y = 0; // Base y position of the axis, usually 0
   export let labelX = 10; // Defines the distance between zero position of the chart and the x center of the label
@@ -27,8 +26,8 @@
   $: tickLabels = formatRange(tickVals, 'default');
 </script>
 
-{#if axisLabel || showLabel}
-  <text transform={`translate(0, ${-padding?.top ?? 0 + 9})`} class="text-xs fill-contour-weak">{axisLabel}</text>
+{#if axisLabel}
+  <text transform={`translate(${-(padding?.left ?? 0) / 2}, ${-(padding?.top ?? 0) / 2})`} dominant-baseline="middle" class="text-xs fill-contour-weaker">↑ {axisLabel}</text>
 {/if}
 <g transform={`translate(${xPos}, ${yPos})`}>
   {#each tickVals as tick, i}
@@ -42,14 +41,7 @@
         />
       {/if}
       {#if showTickLabels}
-        <text
-          x={labelX * -orientation}
-          class="fill-contour-weak text-xs"
-          dominant-baseline="middle"
-          style="
-          text-anchor: {labelTextAnchor};
-        "
-        >
+        <text x={labelX * -orientation} class="fill-contour-weak text-xs" dominant-baseline="middle" style="text-anchor: {labelTextAnchor};">
           {tickLabels.values[i]}
         </text>
       {/if}
