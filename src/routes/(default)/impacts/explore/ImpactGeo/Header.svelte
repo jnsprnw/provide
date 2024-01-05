@@ -6,12 +6,7 @@
   import ChartMetaList from '$lib/helper/chart-description/ChartMetaList.svelte';
   import SpatialResolutionList from '$lib/helper/chart-description/SpatialResolutionList.svelte';
 
-  import {
-    IMPACT_GEO_YEARS,
-    IMPACT_GEO_DISPLAY_OPTIONS,
-    KEY_MODEL,
-    KEY_SOURCE,
-  } from '$src/config.js';
+  import { IMPACT_GEO_YEARS, IMPACT_GEO_DISPLAY_OPTIONS, KEY_MODEL, KEY_SOURCE } from '$src/config.js';
   import { CURRENT_IMPACT_GEO_YEAR_UID } from '$stores/impact.js';
 
   export let currentGeography;
@@ -35,7 +30,7 @@
         <p>
           This map shows the differences in change of
           {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
+          {currentIndicator.unit.labelLong ?? currentIndicator.unit.label}) in
           {currentGeography.label} in
           {currentYear} compared to the reference period
           {currentOptions.reference.label} between
@@ -45,7 +40,7 @@
         <p>
           These maps show the changes in
           {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
+          {currentIndicator.unit.labelLong ?? currentIndicator.unit.label}) in
           {currentGeography.label} in
           {currentYear} compared to the reference period
           {currentOptions.reference.label}, according to the
@@ -55,7 +50,7 @@
         <p>
           This map shows the change in
           {currentIndicator.label} (expressed in
-          {currentIndicator.unit.labelLong}) in
+          {currentIndicator.unit.labelLong ?? currentIndicator.unit.label}) in
           {currentGeography.label} in
           {currentYear}
           compared to the reference period
@@ -72,18 +67,11 @@
     <div class="controls">
       {#if currentScenarios.length === 2}
         <div class="control">
-          <SegmentedControl
-            options={IMPACT_GEO_DISPLAY_OPTIONS}
-            bind:value={displayOption}
-          />
+          <SegmentedControl options={IMPACT_GEO_DISPLAY_OPTIONS} bind:value={displayOption} />
         </div>
       {/if}
       <div class="control">
-        <Select
-          options={IMPACT_GEO_YEARS}
-          bind:value={$CURRENT_IMPACT_GEO_YEAR_UID}
-          label="Year"
-        />
+        <Select options={IMPACT_GEO_YEARS} bind:value={$CURRENT_IMPACT_GEO_YEAR_UID} label="Year" />
       </div>
     </div>
   </div>
@@ -91,7 +79,6 @@
 
 <style lang="postcss">
   .header {
-    //margin-bottom: var(--space-s);
     align-items: end;
   }
 
