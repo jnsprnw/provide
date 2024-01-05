@@ -1,5 +1,5 @@
 <script>
-  import { formatValue, formatRange } from '$lib/utils/formatting';
+  import { formatRange } from '$lib/utils/formatting';
   import { getContext } from 'svelte';
   const { width, height, yScale } = getContext('LayerCake');
 
