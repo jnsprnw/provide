@@ -1,7 +1,6 @@
 <script>
   import {
     CURRENT_INDICATOR,
-    CURRENT_INDICATOR_UID,
     CURRENT_GEOGRAPHY,
     TEMPLATE_PROPS,
     CURRENT_INDICATOR_OPTION_VALUES,
@@ -19,7 +18,7 @@
   import ImpactTimeChart from './ImpactTimeChart.svelte';
   import { MEAN_TEMPERATURE_UID } from '$config';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
-  import { scaleBand, scaleLinear, scaleThreshold } from 'd3-scale';
+  import { scaleThreshold } from 'd3-scale';
   import { range } from 'd3-array';
 
   let IMPACT_TIME_DATA = writable([]);
@@ -67,7 +66,7 @@
           const year = yearStart + yearStep * i;
           let gmt = scenario[MEAN_TEMPERATURE_UID].find((d) => d.year === year)?.value; // We match try to find the gmt value based on the year
           if (typeof Boolean(gmt) === 'undefined') {
-            console.warn(`Could not find matching GMT value for ${year} in ${scenario.uid}.`)
+            console.warn(`Could not find matching GMT value for ${year} in ${scenario.uid}.`);
           }
           gmt = formatValue(gmt, 'degrees-celsius'); // Use the same formatting
           const wlvl = parseFloat(gmt); // Use the same formatting
@@ -156,11 +155,7 @@
       chartInfo={asyncProps.chartInfo}
       templateProps={props}
     >
-      <ImpactTimeChart
-        data={asyncProps.impactTime}
-        unit={props.indicator.unit.uid}
-        steps={colorSteps}
-      />
+      <ImpactTimeChart data={asyncProps.impactTime} unit={props.indicator.unit.uid} steps={colorSteps} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
