@@ -155,7 +155,7 @@
       chartInfo={asyncProps.chartInfo}
       templateProps={props}
     >
-      <ImpactTimeChart data={asyncProps.impactTime} unit={props.indicator.unit.uid} steps={colorSteps} />
+      <ImpactTimeChart data={asyncProps.impactTime} unit={props.indicator.unit} indicatorLabel={props.indicator.label} steps={colorSteps} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
