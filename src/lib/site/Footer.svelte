@@ -29,7 +29,7 @@
   <div class="border-contour-weakest border-t py-3">
     <div class="text-sm mx-auto max-w-7xl px-6 flex justify-between">
       <span class="text-contour-weak"><a href="https://climateanalytics.org/">Climate Analytics</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
-      <span class="text-contour-weaker text-xs">Version {__APP_VERSION__}. Build {new Date().toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+      <span class="text-contour-weaker text-xs">Version {__APP_VERSION__}. Build {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
     </div>
   </div>
 </footer>
