@@ -117,7 +117,7 @@
               <span class="text-base mb-4">We cover data for all 190 countries in the world. Ranging from China to Lesotho. Lorem ipsum dolor something.</span>
               <a href={currentStory.url} class="">
                 <span class="text-base text-surface-base max-w-md leading-snug">
-                  Explore, for example, how {currentStory.indicator.label} in {currentStory.geography.label} will develop under a {currentStory.scenarios[0].label} scenario.
+                  Explore, for example, how {currentStory.indicator.labelWithinSentence} in {currentStory.geography.label} will develop under a {currentStory.scenarios[0].label} scenario.
                 </span>
               </a>
             </TabPanel>
