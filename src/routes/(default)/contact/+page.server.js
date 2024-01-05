@@ -1,7 +1,7 @@
 import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { parse } from 'marked';
-import { LABEL_CONTACT } from '$config'
+import { LABEL_CONTACT } from '$config';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('contact', fetch);
@@ -14,3 +14,6 @@ export const load = async ({ fetch }) => {
     title,
   };
 };
+
+export const prerender = true;
+export const csr = false;

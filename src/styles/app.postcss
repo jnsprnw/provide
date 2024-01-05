@@ -44,11 +44,15 @@ html {
     @apply hover:decoration-theme-stronger;
 
     &.btn {
+      @apply transition-colors;
+      @apply no-underline;
       @apply border-b-0;
-      @apply p-2;
+      @apply py-2;
+      @apply px-3;
       @apply bg-surface-weakest;
       @apply my-1;
       @apply inline-block;
+      @apply hover:bg-theme-weakest;
     }
   }
 
@@ -72,7 +76,7 @@ html {
     @apply font-bold;
     @apply text-2xl;
     @apply mb-2;
-    @apply mt-6;
+    @apply mt-10;
   }
 
   h2 {
