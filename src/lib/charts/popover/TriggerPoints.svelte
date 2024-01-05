@@ -15,7 +15,11 @@
 </script>
 
 <g transform={`translate(${x}, ${y})`}>
-  <circle r={12} class="fill-transparent" use:popover={{ content, IS_ACTIVE }} />
+  <g use:popover={{ content, IS_ACTIVE }}>
+    <circle r={12} class="fill-transparent" />
+    <circle r={1.4} class="fill-transparent stroke-1 stroke-surface-base" />
+    <circle r={1.4} fill={data.color} class="opacity-60" />
+  </g>
 
   {#if $IS_ACTIVE}
     <circle fill={data.color} class="pointer-events-none stroke-2 stroke-surface-base" r={5} />
