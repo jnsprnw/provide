@@ -17,9 +17,12 @@
   export let steps;
   export let data = [];
   export let unit = DEFAULT_FORMAT_UID;
+  export let indicatorLabel;
   export let ticksYHighlighted = [0];
   export let xTicks = 4;
   export let yTicks = 4;
+
+  $: unitUID = unit?.uid ?? DEFAULT_FORMAT_UID;
 
   let xKey = 'year';
   let yKey = 'value';
@@ -45,7 +48,7 @@
   }, []);
 
   $: requiredDecimalsForTooltips = findDecimalsForDistinctValues(flatData.map(({ value }) => value));
-  $: formatTooltipValueY = (d) => formatValue(d, unit, { decimals: requiredDecimalsForTooltips });
+  $: formatTooltipValueY = (d) => formatValue(d, unitUID, { decimals: requiredDecimalsForTooltips });
 
   $: colorScales = data.map((scenario) => scenario.colorInterpolator);
 
@@ -83,7 +86,7 @@
   });
 
   $: requiredDecimalsForBoxplots = findDecimalsForDistinctValues(endBoundsData.map(({ value, min, max }) => [min, max, value]).flat());
-  $: formatBoxplotValueY = (d) => formatValue(d, unit, { addSuffix: false, decimals: requiredDecimalsForBoxplots });
+  $: formatBoxplotValueY = (d) => formatValue(d, unitUID, { addSuffix: false, decimals: requiredDecimalsForBoxplots });
 
   // Data for generating popovers
   $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values) : flatData).map((d) => ({
@@ -97,7 +100,7 @@
   $: sideChartWidth = ['', 'w-2/12', 'w-3/12'][data.length - 1];
 </script>
 
-<div class="flex items-center" class:justify-between={isMultiLine} class:justify-end={!isMultiLine}>
+<div class="flex items-center mb-5" class:justify-between={isMultiLine} class:justify-end={!isMultiLine}>
   {#if isMultiLine}<ColorLegend items={data} />{/if}
   <StrokeLegend {colorScales} scale={steps} />
 </div>
@@ -107,7 +110,13 @@
     <LayerCake padding={mainChartPadding} x={xKey} y={yKey} {yDomain} data={lineData} {flatData} let:data>
       <Svg>
         <AxisX ticks={xTicks} snapTicks={true} />
-        <AxisY padding={mainChartPadding} ticks={yTicks} xTick={-3} ticksHighlighted={ticksYHighlighted} />
+        <AxisY
+          padding={mainChartPadding}
+          axisLabel={indicatorLabel ? `${indicatorLabel}${unit?.label ? ` in ${unit.label}` : ''}` : undefined}
+          ticks={yTicks}
+          xTick={-3}
+          ticksHighlighted={ticksYHighlighted}
+        />
         {#if !isMultiLine}
           <AreaLayer data={areaData.values} color={areaData.color} />
         {/if}
