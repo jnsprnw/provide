@@ -24,10 +24,12 @@
 
 <HtmlHead />
 
-<ThemeProvider id="light">
-  <Header />
-  <main>
-    <slot />
-  </main>
-  <Footer />
+<ThemeProvider theme="light">
+  <div class="min-h-screen grid grid-rows-[auto_1fr_auto]">
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </div>
 </ThemeProvider>
