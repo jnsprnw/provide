@@ -1,5 +1,15 @@
 import { formatReadableList } from '$lib/utils.js';
-import { DEFAULT_FORMAT_UID, GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS, LOCALSTORE_PARAMETERS, PATH_AVOID, URL_PATH_TIME, URL_PATH_REFERENCE, URL_PATH_FREQUENCY, URL_PATH_SPATIAL, URL_PATH_INDICATOR_VALUE } from '$config';
+import {
+  DEFAULT_FORMAT_UID,
+  GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS,
+  LOCALSTORE_PARAMETERS,
+  PATH_AVOID,
+  URL_PATH_TIME,
+  URL_PATH_REFERENCE,
+  URL_PATH_FREQUENCY,
+  URL_PATH_SPATIAL,
+  URL_PATH_INDICATOR_VALUE,
+} from '$config';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
 import _, { every, get, keyBy, map, reduce, without, isEqual, isString } from 'lodash-es';
@@ -23,12 +33,12 @@ export const CURRENT_PAGE = writable('/');
 
 /*
  * GEOGRAPHY STATE
-*/
+ */
 
 /**
-* Derived store that uses the list of geography types defined in the meta store and the current page to determine the list of available types
-* @type {Readable<Object[]>}
-*/
+ * Derived store that uses the list of geography types defined in the meta store and the current page to determine the list of available types
+ * @type {Readable<Object[]>}
+ */
 export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE], ([$types, $currentPage]) => {
   return $types.map((t) => {
     // It could be disabled by the meta endpoint
@@ -51,18 +61,18 @@ export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE]
 });
 
 /**
-* Derived store that filters the disabled geography types
-* @type {Readable<Object[]>}
-*/
+ * Derived store that filters the disabled geography types
+ * @type {Readable<Object[]>}
+ */
 export const SELECTABLE_GEOGRAPHY_TYPES = derived(AVAILABLE_GEOGRAPHY_TYPES, ($types) => {
   return $types.filter(({ disabled }) => !disabled);
 });
 
 /**
-* Writable store that holds the uid of the currently selected geography.
-* Upon loading it checks the localstore. If fallbacks to a default value.
-* @type {Writable<number>}
-*/
+ * Writable store that holds the uid of the currently selected geography.
+ * Upon loading it checks the localstore. If fallbacks to a default value.
+ * @type {Writable<number>}
+ */
 export const CURRENT_GEOGRAPHY_UID = writable(getLocalStorage(LOCALSTORE_GEOGRAPHY, DEFAULT_GEOGRAPHY_UID));
 // Listen to the store to update the localstorage on change.
 CURRENT_GEOGRAPHY_UID.subscribe((value) => {
@@ -70,9 +80,9 @@ CURRENT_GEOGRAPHY_UID.subscribe((value) => {
 });
 
 /**
-* Derived store that filters the disabled geography types
-* @type {Readable<Object|undefined>}
-*/
+ * Derived store that filters the disabled geography types
+ * @type {Readable<Object|undefined>}
+ */
 export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOGRAPHY_TYPES, GEOGRAPHIES], ([$uid, $selectableGeographyTypes, $geographies], set) => {
   if (typeof $uid === 'undefined') {
     set(undefined);
@@ -107,17 +117,17 @@ export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOG
 });
 
 /**
-* Derived store that checks if a geography is selected
-* @type {Readable<Boolean>}
-*/
+ * Derived store that checks if a geography is selected
+ * @type {Readable<Boolean>}
+ */
 export const IS_EMPTY_GEOGRAPHY = derived(CURRENT_GEOGRAPHY, ($geography) => {
   return !Boolean($geography);
 });
 
 /**
-* Derived store that holds the current geography type
-* @type {Readable<Object|undefined>}
-*/
+ * Derived store that holds the current geography type
+ * @type {Readable<Object|undefined>}
+ */
 export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, SELECTABLE_GEOGRAPHY_TYPES], ([$currentGeography, $geographyTypes]) => {
   if (typeof $currentGeography === 'undefined') {
     // This can happen for example if the user
@@ -141,9 +151,9 @@ export const CURRENT_GEOGRAPHY_TYPE = derived([CURRENT_GEOGRAPHY, SELECTABLE_GEO
 });
 
 /**
-* Derived store that lists the available geographies
-* @type {Readable<Object[]>}
-*/
+ * Derived store that lists the available geographies
+ * @type {Readable<Object[]>}
+ */
 export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_TYPE], ([$geographies, $currentGeographyType]) => {
   const { uid } = $currentGeographyType;
   const geographies = $geographies[uid];
@@ -158,9 +168,9 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_T
  */
 
 /**
-* Derived store that holds a list of available indicators based on the geography type
-* @type {Readable<Object[]>}
-*/
+ * Derived store that holds a list of available indicators based on the geography type
+ * @type {Readable<Object[]>}
+ */
 export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
   // Geography types have specific indicators available
   const list = get($type, 'availableIndicators', []);
@@ -174,8 +184,8 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE]
     const missing = without(list, ...indicators.map(({ uid }) => uid));
     console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
-
-  return indicators;
+  console.log({ indicators });
+  return indicators.sort((a, b) => a.label.localeCompare(b.label));
 });
 
 export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$sectors, $indicators]) => {
@@ -187,7 +197,7 @@ export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$se
       indicators,
       amount: indicators.length,
       disabled: !indicators.length,
-      count: indicators.length
+      count: indicators.length,
     };
   });
 });
@@ -257,18 +267,18 @@ export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATO
     }
     if (parameter && parameter.hasOwnProperty('options') && Array.isArray(parameter.options)) {
       // Not all options are available for each indicator. So we need to filter out some options.
-      options = parameter.options.filter(({ uid }) => optionsAvailableForIndicator.includes(uid))
+      options = parameter.options.filter(({ uid }) => optionsAvailableForIndicator.includes(uid));
     } else {
       // If the indicator is not present in the meta endpoint, we can still use it by creating options manually
       console.warn(`Indicator has parameter ${key} that is not defined in meta configuration.`);
       // Both label and uid is the same here
-      options = optionsAvailableForIndicator.map(option => ({ label: option, uid: option }));
+      options = optionsAvailableForIndicator.map((option) => ({ label: option, uid: option }));
     }
     return {
       uid: key,
       label: parameter?.label ?? key, // Use the key if no label is present
-      options
-    }
+      options,
+    };
   });
 
   // This builds a list of default values for this indicator by taking the first value from the possible options
@@ -342,9 +352,9 @@ export const CURRENT_SCENARIOS_UID = (() => {
           const json = JSON.parse(v);
           if (Array.isArray(json)) {
             if (json.length > MAX_NUMBER_SELECTABLE_SCENARIOS) {
-              console.warn('Too many scenarios selected.')
+              console.warn('Too many scenarios selected.');
             }
-            value = json.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS)
+            value = json.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS);
           }
         } catch (e) {
           console.log('Error loading current scenarios from localstore:', e);
@@ -395,7 +405,7 @@ export const CURRENT_SCENARIOS_UID = (() => {
 CURRENT_SCENARIOS_UID.subscribe((value) => {
   const scenarios = value.sort().slice(0, MAX_NUMBER_SELECTABLE_SCENARIOS);
   if (value.length > MAX_NUMBER_SELECTABLE_SCENARIOS) {
-    console.warn(`Too many scenarios selected. Reset to ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.`)
+    console.warn(`Too many scenarios selected. Reset to ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.`);
     CURRENT_SCENARIOS_UID.set(scenarios);
   }
   setLocalStorage(LOCALSTORE_SCENARIOS, JSON.stringify(scenarios));
@@ -455,7 +465,8 @@ export const IS_EMPTY_SELECTION = derived([IS_EMPTY_GEOGRAPHY, IS_EMPTY_INDICATO
 
 export const IS_COMBINATION_AVAILABLE_SCENARIO = derived(
   [SELECTABLE_SCENARIOS_UID, CURRENT_SCENARIOS_UID],
-  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) => Array.isArray($CURRENT_SCENARIOS_UID) && $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
+  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) =>
+    Array.isArray($CURRENT_SCENARIOS_UID) && $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
 );
 
 export const IS_COMBINATION_AVAILABLE = derived(
