@@ -47,17 +47,17 @@
         store: THRESHOLD_LEVELS_DATA,
       },
     },
-    {
-      slug: 'unavoidable-risk',
-      title: '(Un)avoidable risk',
-      description: 'What can be avoided through emissions reductions?',
-      component: UnAvoidableRisk,
-      disabled: !isValidSelection,
-      props: {
-        store: UNAVOIDABLE_RISK_STORE,
-        currentScenarios: currentScenarios,
-      },
-    },
+    // {
+    //   slug: 'unavoidable-risk',
+    //   title: '(Un)avoidable risk',
+    //   description: 'What can be avoided through emissions reductions?',
+    //   component: UnAvoidableRisk,
+    //   disabled: !isValidSelection,
+    //   props: {
+    //     store: UNAVOIDABLE_RISK_STORE,
+    //     currentScenarios: currentScenarios,
+    //   },
+    // },
   ];
 </script>
 
@@ -65,16 +65,8 @@
   <title>Avoiding Impacts</title>
 </svelte:head>
 
-<ScrollContent
-  let:query
-  {sections}
-  isFullWidth={true}
-  hasActiveScetionBar={true}
->
-  <aside
-    slot="navigation"
-    class="flex flex-col gap-4 pb-24"
-  >
+<ScrollContent let:query {sections} isFullWidth={true} hasActiveScetionBar={true}>
+  <aside slot="navigation" class="flex flex-col gap-4 pb-24">
     <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col gap-y-6 pr-6 lg:pr-12">
       <Reference store={REFERENCE_STORE} />
       <SelectionCertaintyLevels />
@@ -84,16 +76,8 @@
   </aside>
   {#each sections as section}
     {#if !section.disabled}
-      <section
-        id={section.slug}
-        name={section.slug}
-        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none"
-      >
-        <svelte:component
-          this={section.component}
-          title={section.title}
-          {...section.props}
-        />
+      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
+        <svelte:component this={section.component} title={section.title} {...section.props} />
       </section>
     {/if}
   {/each}
