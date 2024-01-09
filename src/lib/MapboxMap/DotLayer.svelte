@@ -46,6 +46,7 @@
           'text-field': ['get', 'name'],
           'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
           'text-size': 12,
+          'text-allow-overlap': true,
         },
         paint: {
           'text-color': '#ffffff',
