@@ -44,7 +44,7 @@
           {currentGeography.label} in
           {currentYear} compared to the reference period
           {currentOptions.reference.label}, according to the
-          <ScenarioList scenarios={currentScenarios} /> .
+          <ScenarioList scenarios={currentScenarios} />.
         </p>
       {:else}
         <p>
