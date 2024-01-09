@@ -58,7 +58,7 @@
           <td class="py-2 flex items-center gap-x-2 pl-2 min-w-[180px]">
             {#if !isAverage}
               <div class="rounded-full bg bg-contour-base p-1 w-4 h-4 overflow-hidden text-center inline-flex items-center content-center justify-center" class:bg-theme-base={isSelected}>
-                <i class="not-italic leading-none pt-0.5 text-white text-xs font-normal">{order}</i>
+                <i class="not-italic leading-none pt-0.5 text-white text-[0.6rem] font-light">{order}</i>
               </div>{/if}
             <span class:font-bold={isSelected} class:text-theme-base={isSelected}>{label}</span>
           </td>
