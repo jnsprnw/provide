@@ -1,14 +1,29 @@
 <script>
-  import { LABEL_DOCUMENTATION, LABEL_EXPLAINERS, LABEL_CONTACT, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_EXPLAINERS, PATH_DOCUMENTATION, TITLE_SITE, TITLE_PROJECT } from '$config';
+  import {
+    LABEL_DOCUMENTATION,
+    LABEL_EXPLAINERS,
+    LABEL_CONTACT,
+    PATH_GLOSSARY,
+    LABEL_GLOSSARY,
+    LABEL_ABOUT,
+    PATH_ABOUT,
+    PATH_CONTACT,
+    PATH_EXPLAINERS,
+    PATH_DOCUMENTATION,
+    TITLE_SITE,
+    TITLE_PROJECT,
+  } from '$config';
   import Logo from './Logo.svelte';
 </script>
 
 <footer class="bg-surface-weaker">
-  <div class="mx-auto max-w-7xl py-10 px-6 flex justify-between">
-    <div class="flex gap-3 flex-col">
-      <div class="flex gap-3">
-        <Logo />
-      </div>
+  <div class="mx-auto max-w-7xl pt-10 px-6 flex gap-x-6 justify-between">
+    <div class="flex gap-3">
+      <Logo />
+    </div>
+  </div>
+  <div class="mx-auto max-w-7xl pt-4 pb-10 px-6 grid grid-cols-5 gap-x-12">
+    <div class="flex gap-3 flex-col col-span-2">
       <span class="text-sm max-w-prose text-contour-weak"
         >The development of the dashboard was led by <a
           href="https://climateanalytics.org/"
@@ -17,11 +32,16 @@
         <a href="https://www.provide-h2020.eu/" class="underline decoration-theme-base hover:text-theme-stronger hover:decoration-theme-stronger transition-colors">PROVIDE</a> consortium.</span
       >
     </div>
-    <nav>
+    <div class="flex gap-x-4 items-start col-span-2">
+      <img class="max-w-[100px]" alt="Logo of the European Union reading 'Funded by the European Union'" src="/img/eu-flag.svg" />
+      <p class="text-xs text-text-weaker">This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No. 101003687.</p>
+    </div>
+    <nav class="place-self-end">
       <ul>
-        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
-        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_EXPLAINERS}">{LABEL_EXPLAINERS}</a></li>
+        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
+        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
+        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_CONTACT}">{LABEL_CONTACT}</a></li>
       </ul>
     </nav>
