@@ -17,7 +17,7 @@
   import { min } from 'd3-array';
   import { formatValue } from '$lib/utils/formatting';
   import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
-  import { sortBy, reverse, find, uniqBy, without } from 'lodash-es';
+  import { sortBy, reverse, find, uniqBy, without, isObject, isString, has } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
@@ -161,11 +161,18 @@
       legendItems.push({ label: 'Other scenarios', uid: 'other' });
     }
 
+    let description;
+    if (isObject(data.description) && has(data.description, threshold)) {
+      description = data.description[threshold];
+    } else if (isString(data.description)) {
+      description = data.description;
+    }
+
     return {
       ...data,
       thresholds,
       title: data.title,
-      description: data.description,
+      description,
       data: processedScenarios,
       // The following two items would be included anyway, but we state them for clarity
       model: data[KEY_MODEL],
@@ -207,28 +214,14 @@
       chartInfo={asyncProps.chartInfo}
       {isLoading}
     >
-      <div
-        class="0"
-        slot="controls"
-      >
+      <div class="0" slot="controls">
         {#if asyncProps.thresholds.length > 1}
-          <Select
-            label="Impact level"
-            options={asyncProps.thresholds}
-            bind:value={threshold}
-          />
+          <Select label="Impact level" options={asyncProps.thresholds} bind:value={threshold} />
         {/if}
       </div>
-      <ColorLegend
-        items={asyncProps.legendItems}
-        class="my-4"
-      />
+      <ColorLegend items={asyncProps.legendItems} class="my-4" />
       <figure class="aspect-[2.5]">
-        <UnavoidableRiskChart
-          xDomain={asyncProps.xDomain}
-          data={asyncProps.data}
-          currentScenarios={currentSelectedScenarios}
-        />
+        <UnavoidableRiskChart xDomain={asyncProps.xDomain} data={asyncProps.data} currentScenarios={currentSelectedScenarios} />
         <figcaption class="mt-2">
           <span class="text-xs text-contour-weaker">To avoid overlapping scenarios, the vertical and horizontal placement of each dot may not be perfectly correct.</span>
         </figcaption>

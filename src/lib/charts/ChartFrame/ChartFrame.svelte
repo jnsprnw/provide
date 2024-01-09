@@ -27,31 +27,21 @@
     <h3 class="font-bold text-2xl mb-3">
       <Template template={title} data={templateProps} />
     </h3>
-    <p class="leading-relaxed mb-6">
-      <Template template={description} data={templateProps} />
-    </p>
+    {#if description}
+      <p class="leading-relaxed mb-6">
+        <Template template={description} data={templateProps} />
+      </p>
+    {/if}
     <slot name="controls" />
   </header>
-  <div
-    class:opacity-40={isLoading}
-    class:animate-pulse={isLoading}
-    class:grayscale-80={isLoading}
-  >
+  <div class:opacity-40={isLoading} class:animate-pulse={isLoading} class:grayscale-80={isLoading}>
     <slot />
   </div>
   {#if !$IS_STATIC && hasDownload}
     <figcaption class="flex justify-end items-center gap-4 mt-2 mb-2">
       <InfoButton label="About the data" items={chartInfo} />
-      <DownloadGraphMenu
-        embedUid={chartUid}
-        {...graphDownloadSettings}
-        graphParams={graphDownloadParams}
-      />
-      <DataDownloadMenu
-        endpoint={chartUid}
-        options={dataDownloadOptions}
-        params={dataDownloadParams}
-      />
+      <DownloadGraphMenu embedUid={chartUid} {...graphDownloadSettings} graphParams={graphDownloadParams} />
+      <DataDownloadMenu endpoint={chartUid} options={dataDownloadOptions} params={dataDownloadParams} />
     </figcaption>
   {:else}
     <InfoList items={chartInfo} />
