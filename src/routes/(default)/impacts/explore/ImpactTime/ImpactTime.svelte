@@ -68,7 +68,7 @@
           if (typeof Boolean(gmt) === 'undefined') {
             console.warn(`Could not find matching GMT value for ${year} in ${scenario.uid}.`);
           }
-          gmt = formatValue(gmt, 'degrees-celsius'); // Use the same formatting
+          gmt = formatValue(gmt, 'degrees-warming'); // Use the same formatting
           const wlvl = parseFloat(gmt); // Use the same formatting
           const step = colorSteps(wlvl); // The step is calculated to better work with the colors
           // This values are not always in the correct order of min, average (?), max.

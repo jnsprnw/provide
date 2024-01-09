@@ -8,6 +8,7 @@ export const FORMAT_EMISSION = '.0s';
 export const FORMAT_FLOAT = ',.1f';
 export const FORMAT_YEAR = '.0f';
 export const FORMAT_CELSIUS = '.1f';
+export const FORMAT_WARMING = '+.1f';
 export const FORMAT_PERCENT = '.0%';
 export const FORMAT_DEGREE = '.3~f';
 
@@ -34,6 +35,7 @@ const indicatorFormats = {
   'percent-in-range': f('.0f'),
   year: f(FORMAT_YEAR),
   'degrees-celsius': f(FORMAT_CELSIUS),
+  'degrees-warming': f(FORMAT_WARMING),
   'gigaton-co2eq-year': f(FORMAT_EMISSION),
   degree: f(FORMAT_DEGREE),
 
@@ -43,6 +45,7 @@ const indicatorFormats = {
 
 const suffixes = {
   'degrees-celsius': ' °C',
+  'degrees-warming': ' °C',
   degree: ' °',
 };
 
