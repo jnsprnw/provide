@@ -14,14 +14,8 @@
   $: bounds = bbox(collection);
 </script>
 
-<div class="relative border border-contour-weakest overflow-hidden aspect-square h-[370px]">
-  <MapProvider
-    style={import.meta.env.VITE_MAPBOX_STYLE_STUDY_LOCATIONS}
-    {bounds}
-    interactive={false}
-    hideLogo={true}
-    fitBoundsExtent={5}
-  >
+<div class="border border-contour-weakest overflow-hidden aspect-square w-full min-w-[200px] order-last lg:order-first">
+  <MapProvider style={import.meta.env.VITE_MAPBOX_STYLE_STUDY_LOCATIONS} {bounds} interactive={false} hideLogo={true} fitBoundsExtent={5}>
     <DataSource data={collection}>
       <DotLayer />
     </DataSource>
