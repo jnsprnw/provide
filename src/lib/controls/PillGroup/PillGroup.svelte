@@ -5,6 +5,7 @@
   export let options;
   export let size = 'md';
   export let disabledMessage = 'Option not available';
+  export let allowWrap = false;
 
   $: classes = {
     md: {
@@ -18,18 +19,9 @@
   }[size];
 </script>
 
-<RadioGroup
-  bind:value={currentUid}
-  on:change={(e) => (currentUid = e.detail)}
-  class="flex flex-wrap {classes.group}"
->
+<RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="flex {allowWrap ? 'flex-wrap' : ''} {classes.group}">
   {#each options as { uid, disabled, label, tooltip: individualDisabledMessage, count }}
-    <RadioGroupOption
-      value={uid}
-      let:checked
-      {disabled}
-      class="whitespace-nowrap overflow-hidden rounded-full"
-    >
+    <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
         class="w-full flex gap-x-3 py-2.5 px-5 leading-none overflow-hidden text-ellipsis items-center transition-colors {classes.button}"

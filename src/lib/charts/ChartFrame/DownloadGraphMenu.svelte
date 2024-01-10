@@ -64,21 +64,11 @@
       <span class="col-span-2 text-contour-weak text-sm">Format</span>
 
       <div class="col-span-5 col-start-3">
-        <PillGroup
-          size="sm"
-          options={formatOptions}
-          bind:currentUid={format}
-        />
+        <PillGroup size="sm" allowWrap={false} options={formatOptions} bind:currentUid={format} />
       </div>
     </div>
-    <button
-      on:click={downloadImage}
-      class="bg-surface-weaker w-full py-2 text-theme-base font-bold text-sm flex gap-3 items-center justify-center"
-      download
-      >{#if loading}<Spinner
-          size={15}
-          strokeWidth={2}
-        />{/if} Download graph</button
+    <button on:click={downloadImage} class="bg-surface-weaker w-full py-2 text-theme-base font-bold text-sm flex gap-3 items-center justify-center" download
+      >{#if loading}<Spinner size={15} strokeWidth={2} />{/if} Download graph</button
     >
   </div>
 </PopoverButton>
