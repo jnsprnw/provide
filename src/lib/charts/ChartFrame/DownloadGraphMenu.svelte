@@ -3,7 +3,7 @@
   import PopoverButton from '$lib/controls/PopoverButton/PopoverButton.svelte';
   import Spinner from '$lib/helper/Spinner.svelte';
   import { stringify } from 'qs';
-  import { snakeCase } from 'lodash-es';
+  import { snakeCase, delay } from 'lodash-es';
   import { browser } from '$app/environment';
 
   export let graphParams = {};
@@ -12,7 +12,12 @@
   export let embedUid;
   export let formats = ['png', 'pdf'];
 
-  let label = 'Download graph';
+  const STATUS_IDLE = 'STATUS_IDLE';
+  const STATUS_ERROR = 'STATUS_ERROR';
+  const STATUS_LOADING = 'STATUS_LOADING';
+
+  let status = STATUS_IDLE;
+  let label;
   let isDisabled = false;
 
   $: formatOptions = [
@@ -21,8 +26,6 @@
   ].map((d) => ({ ...d, disabled: !formats.includes(d.uid) }));
 
   let format = formats[0];
-
-  let loading = false;
 
   $: screenshotName = Object.values(graphParams)
     .map((str) => snakeCase(str))
@@ -90,7 +93,7 @@
   $: downloadImage = async () => {
     if (browser) {
       if (isDownloadAvailable) {
-        loading = true;
+        status = STATUS_LOADING;
         try {
           const response = await fetch(screenshotUrl);
           const blob = await response.blob();
@@ -101,32 +104,53 @@
           document.body.appendChild(a);
           a.click();
           a.remove();
-          loading = false;
+          status = STATUS_ERROR;
         } catch (error) {
           console.error(error);
-          loading = false;
-          label = 'Could not download graph';
-          isDisabled = true;
+          status = STATUS_ERROR;
         }
       }
     }
   };
+
+  $: switch (status) {
+    case STATUS_IDLE:
+      label = `Download graph as ${format} file`;
+      isDisabled = false;
+      break;
+    case STATUS_LOADING:
+      label = 'Generating graph file';
+      isDisabled = true;
+      break;
+    case STATUS_ERROR:
+      label = 'An error occured when generating file';
+      isDisabled = true;
+      delay(() => {
+        status = STATUS_IDLE;
+      }, 5000);
+      break;
+    default:
+      isDisabled = true;
+  }
 </script>
 
 {#if isDownloadAvailable}
   <PopoverButton label="Download graph">
     <div class="max-w-xs px-3 pb-3">
-      <div class="py-2.5 grid grid-cols-7 gap-2 items-center">
-        <span class="col-span-2 text-contour-weak text-sm">Format</span>
-
-        <div class="col-span-5 col-start-3">
+      <div class="py-2.5 flex gap-2 items-center">
+        <span class="text-contour-weak text-sm">Format</span>
+        <div>
           <PillGroup size="sm" allowWrap={false} options={formatOptions} bind:currentUid={format} />
         </div>
       </div>
-      <button disabled={isDisabled} on:click={downloadImage} class="bg-surface-weaker disabled:text-theme-weaker w-full py-2 text-theme-base font-bold text-sm flex gap-3 items-center justify-center"
-        >{#if loading}<Spinner size={15} strokeWidth={2} />{/if}
-        {label}</button
+      <button
+        disabled={isDisabled}
+        on:click={downloadImage}
+        class="bg-surface-weaker hover:bg-surface-weakest disabled:text-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
       >
+        {#if status === STATUS_LOADING}<Spinner size={15} strokeWidth={2} />{/if}
+        <span class="col-start-2 block min-w-[200px] font-bold">{label}</span>
+      </button>
     </div>
   </PopoverButton>
 {/if}
