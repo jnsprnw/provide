@@ -56,12 +56,17 @@
       return null;
     }
 
-    const screenshotQuery = stringify({
-      format,
-      width,
-      processingIntensity,
-      url: graphUrl.href,
-    });
+    const screenshotQuery = stringify(
+      {
+        format,
+        width,
+        processingIntensity,
+        url: graphUrl.href,
+      },
+      {
+        encodeValuesOnly: false,
+      }
+    );
 
     const host = import.meta.env.VITE_SCREENSHOT_URL;
 
@@ -71,7 +76,7 @@
     }
 
     try {
-      return new URL(`${host}?${screenshotQuery}`);
+      return new URL(`${host}/screengrab?${screenshotQuery}`);
     } catch (error) {
       console.error(error);
       return null;
