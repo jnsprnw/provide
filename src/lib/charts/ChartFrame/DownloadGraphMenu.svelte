@@ -136,8 +136,8 @@
 
 {#if isDownloadAvailable}
   <PopoverButton label="Download graph">
-    <div class="max-w-xs px-3 pb-3">
-      <div class="py-2.5 flex gap-2 items-center">
+    <div class="max-w-xs px-3 py-3 flex gap-y-4 flex-col">
+      <div class="flex gap-2 items-center">
         <span class="text-contour-weak text-sm">Format</span>
         <div>
           <PillGroup size="sm" allowWrap={false} options={formatOptions} bind:currentUid={format} />
@@ -146,7 +146,7 @@
       <button
         disabled={isDisabled}
         on:click={downloadImage}
-        class="bg-surface-weaker hover:bg-surface-weakest disabled:text-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
+        class="bg-theme-base text-white hover:bg-theme-stronger disabled:text-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
       >
         {#if status === STATUS_LOADING}<Spinner size={15} strokeWidth={2} />{/if}
         <span class="col-start-2 block min-w-[200px] font-bold">{label}</span>

@@ -31,7 +31,8 @@
         class:cursor-not-allowed={disabled}
         class:opacity-50={disabled}
         class:font-bold={checked}
-        class:hover:bg-surface-base={!disabled && !checked}
+        class:hover:bg-surface-base={size === 'md' && !disabled && !checked}
+        class:hover:bg-surface-weaker={size === 'sm' && !disabled && !checked}
         class:pr-4={count}
       >
         <span>{label}</span>
