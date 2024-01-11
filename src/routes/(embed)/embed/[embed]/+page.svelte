@@ -1,7 +1,6 @@
 <script>
   import { page } from '$app/stores';
   import { parseUrlQuery, urlToState } from '$lib/utils/url';
-  //import { onMount } from 'svelte';
   import ImpactTime from '$routes/(default)/impacts/explore/ImpactTime/ImpactTime.svelte';
   import ImpactGeo from '$routes/(default)/impacts/explore/ImpactGeo/ImpactGeo.svelte';
   import UnavoidableRisk from '$routes/(default)/impacts/UnavoidableRisk/UnavoidableRisk.svelte';
@@ -20,23 +19,34 @@
 
   $: $IS_STATIC = urlParams.static;
 
-  // onMount(async () => {
-  //   Component = (await import(`./dir/${embeds[$page.params.embed]}`)).default;
-  // });
+  function generateUrl() {
+    const url = import.meta.env.VITE_APP_URL;
+    if (url) {
+      try {
+        const host = new URL(url).hostname;
+        return {
+          url,
+          host,
+        };
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    }
+    return null;
+  }
+
+  const url = generateUrl();
 </script>
 
 <div class="embed p-6 pb-0">
-  <svelte:component
-    this={component}
-    {...urlParams}
-  />
+  <svelte:component this={component} {...urlParams} />
   <div class="flex justify-between text-sm text-contour-weak border-t border-contour-weak pt-3 pb-4">
     <Logo size="sm" />
-    <div>
-      Visit <a
-        class="text-theme-base"
-        href={import.meta.env.VITE_APP_URL}>{import.meta.env.VITE_APP_URL.replace(/http(s)?:\/\//, '')}</a
-      > for more information
-    </div>
+    {#if url}
+      <div>
+        Visit <a class="text-theme-base" href={url.url}>{url.host}</a> for more information
+      </div>
+    {/if}
   </div>
 </div>
