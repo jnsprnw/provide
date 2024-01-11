@@ -33,6 +33,7 @@
         return null;
       }
     }
+    console.warn(`APP URL was not set. Will not display link.`);
     return null;
   }
 
