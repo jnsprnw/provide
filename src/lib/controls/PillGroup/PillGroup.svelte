@@ -10,11 +10,11 @@
   $: classes = {
     md: {
       group: 'gap-1.5',
-      button: 'px-3 py-1.5 text-md',
+      button: 'py-2 px-4 text-md',
     },
     sm: {
       group: 'gap-1',
-      button: 'px-3 py-1 text-sm',
+      button: 'px-3 py-1.5 text-sm',
     },
   }[size];
 </script>
@@ -24,7 +24,7 @@
     <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
-        class="w-full flex gap-x-3 py-2.5 px-5 leading-none overflow-hidden text-ellipsis items-center transition-colors {classes.button}"
+        class="w-full flex gap-x-3 leading-none overflow-hidden text-ellipsis items-center transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
