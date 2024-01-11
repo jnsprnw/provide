@@ -47,5 +47,5 @@
     </div>
   </PopoverButton>
 {:else}
-  <a href={url} class="text-theme-base font-bold text-sm flex" download>Download data</a>
+  <a href={url} class="text-theme-base font-bold text-sm flex hover:text-theme-stronger" download>Download data</a>
 {/if}
