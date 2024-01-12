@@ -87,7 +87,6 @@ export const LEVEL_OF_IMPACT_ARRAY = writable(
   })
 );
 LEVEL_OF_IMPACT_ARRAY.subscribe((value) => {
-  console.log('LOCALSTORE_LEVEL_OF_IMACT', value);
   setLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, JSON.stringify(value));
 });
 

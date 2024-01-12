@@ -184,7 +184,6 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE]
     const missing = without(list, ...indicators.map(({ uid }) => uid));
     console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
-  console.log({ indicators });
   return indicators.sort((a, b) => a.label.localeCompare(b.label));
 });
 
