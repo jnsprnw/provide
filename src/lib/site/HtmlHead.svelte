@@ -1,5 +1,6 @@
 <script>
   import { page } from '$app/stores';
+  import { dev } from '$app/environment';
   import { generatePageTitle } from '$utils/meta.js';
   import { IS_STAGING_VERSION } from '$src/config.js';
   const url = 'https://climate-risk-dashboard.climateanalytics.org/';
@@ -14,9 +15,17 @@
   <link rel="canonical" href={url} />
   <meta name="author" content={author} />
   <meta name="description" content={description} />
-  <meta name="news_keywords" content={keywords} />
+  <meta name="keywords" content={keywords} />
 
-  {#if IS_STAGING_VERSION}<meta name="robots" content="none, noimageindex, noarchive" />{/if}
+  {#if IS_STAGING_VERSION}
+    <meta name="robots" content="none, noimageindex, noarchive" />
+  {:else}
+    <meta name="robots" content="noimageindex" />
+  {/if}
+
+  {#if !dev}
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="04f9b973-92eb-4fac-89e0-6d1885d5282b" data-blockingmode="auto" type="text/javascript"></script>
+  {/if}
 
   <meta name="robots" content="max-image-preview:large" />
   <meta name="twitter:card" content="summary_large_image" />
