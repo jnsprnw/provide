@@ -1,5 +1,5 @@
 <script>
-  import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY } from '$stores/state.js';
+  import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_LABEL } from '$stores/state.js';
   import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION, LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL_LABEL } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
@@ -16,7 +16,9 @@
   $: geography = $CURRENT_GEOGRAPHY.label;
   $: studyLocation = $STUDY_LOCATIONS.find(({ uid }) => uid === $SELECTED_STUDY_LOCATION)?.label;
 
-  $: ({ labelWithinSentence, isCountable, direction, unit } = $CURRENT_INDICATOR);
+  $: ({ isCountable, direction, unit } = $CURRENT_INDICATOR);
+
+  $: labelWithinSentence = $CURRENT_INDICATOR_LABEL;
 
   $: isWholeUrbanArea = $SELECTED_STUDY_LOCATION === UID_STUDY_LOCATION_AVERAGE;
 
@@ -121,10 +123,8 @@
   {#if isAvoidable && !isPossible}
     <section>
       <p class="text-lg leading-relaxed max-w-4xl">
-        Try changing the impact level or check out the ”<a
-          href="#unavoidable-risk"
-          class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a
-        >“ below in order to see which levels of impact are likely to occur.
+        Try changing the impact level or check out the ”<a href="#unavoidable-risk" class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a>“ below in order to see which levels
+        of impact are likely to occur.
       </p>
     </section>
   {/if}

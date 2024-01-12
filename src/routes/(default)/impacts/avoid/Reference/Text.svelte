@@ -1,9 +1,11 @@
 <script>
-  import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTIONS } from '$stores/state.js';
+  import { CURRENT_INDICATOR_LABEL, CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTIONS } from '$stores/state.js';
   import { formatValue } from '$lib/utils/formatting';
   export let data;
 
-  $: ({ labelWithinSentence, unit } = $CURRENT_INDICATOR);
+  $: ({ unit } = $CURRENT_INDICATOR);
+
+  $: labelWithinSentence = $CURRENT_INDICATOR_LABEL;
 
   $: ({ average_value, max } = data);
 

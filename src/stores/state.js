@@ -333,6 +333,20 @@ export const CURRENT_INDICATOR_OPTIONS = derived([CURRENT_INDICATOR_OPTION_VALUE
   );
 });
 
+export const CURRENT_INDICATOR_LABEL = derived([CURRENT_INDICATOR, CURRENT_INDICATOR_OPTIONS], ([$indicator, $options]) => {
+  // This function is used to replace the X for example in 'nights a year with minimum temperatures above X°C'
+  let label = get($indicator, ['labelWithinSentence']); // This is the regular label we use
+  // Check if the current options hold an indicator value and if the indicator has the indicator value option
+  if ($options.hasOwnProperty('indicator_value') && $indicator.parameters.indicator_value?.length) {
+    // Check if there is a X°C in the label
+    if (label.match(/X°C/)) {
+      // Replace the part with the label from the options
+      label = label.replace(/X°C/, $options.indicator_value.label);
+    }
+  }
+  return label;
+});
+
 // Utility for quicker access to list of indicator parameters
 export const CURRENT_INDICATOR_PARAMETERS_KEYS = derived(CURRENT_INDICATOR_PARAMETERS, ($options) => {
   return $options.map((indicator) => get(indicator, 'uid'));
