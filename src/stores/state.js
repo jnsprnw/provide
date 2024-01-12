@@ -51,7 +51,7 @@ export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE]
       disabledByMode = !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
     }
     // The tooltip is different if the type is disabled by the endpoint of specifically by this mode (avoid)
-    const tooltip = disabledByEndpoint ? 'Geography type is not available' : disabledByMode ? 'Geography type is not available in this modus' : undefined;
+    const tooltip = disabledByEndpoint ? 'Geography type is not available' : disabledByMode ? 'Switch to the Future impacts mode to see impact projections for this geography type' : undefined;
     return {
       ...t,
       disabled: disabledByEndpoint ? true : disabledByMode,
