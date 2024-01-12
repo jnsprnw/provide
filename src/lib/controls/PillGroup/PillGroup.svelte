@@ -35,7 +35,7 @@
         class:hover:bg-surface-weaker={size === 'sm' && !disabled && !checked}
         class:pr-4={count}
       >
-        <span class="truncate" title={label}>{label}</span>
+        <span class="truncate" title={size === 'sm' ? label : undefined}>{label}</span>
         {#if count}<small class="text-xs font-normal">{count}</small>{/if}
       </div>
     </RadioGroupOption>
