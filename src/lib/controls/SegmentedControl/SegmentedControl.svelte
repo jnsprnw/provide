@@ -21,20 +21,17 @@
     {/if}
     <fieldset role="radiogroup" class="flex" id={selectId}>
       {#each options as option}
-        <div
-          class:text-theme-base={option.uid === value}
-          class:font-bold={option.uid === value}
-          class="cursor-pointer border px-3 py-1 border-contour-weakest first:border-r-0 flex items-center first:rounded-l last:rounded-r"
+        {@const isActive = option.uid === value}
+        <label
+          class:text-theme-base={isActive}
+          class:font-bold={isActive}
+          class:hover:bg-surface-weaker={!isActive}
+          class:cursor-pointer={!isActive}
+          class="border px-3 py-1 border-contour-weakest first:border-r-0 flex items-center first:rounded-l last:rounded-r"
         >
-          <input
-            type="radio"
-            class="appearance-none"
-            id={option.uid}
-            value={option.uid}
-            bind:group={value}
-          />
-          <label class="cursor-pointer" for={option.uid}>{option.label}</label>
-        </div>
+          <input type="radio" class="appearance-none" id={option.uid} value={option.uid} bind:group={value} />
+          {option.label}
+        </label>
       {/each}
     </fieldset>
   </div>
