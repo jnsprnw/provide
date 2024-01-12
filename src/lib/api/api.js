@@ -104,6 +104,10 @@ const fetchMultiple = (store, configs) => {
 };
 
 const fetchSingle = (store, { endpoint, params }) => {
+  if (typeof store === 'undefined') {
+    console.warn('Store to save fetch result is undefined');
+    return false;
+  }
   // console.log(`Fetching single ${endpoint}`, get(store), { id });
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
