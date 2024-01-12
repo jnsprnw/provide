@@ -10,7 +10,6 @@
   import { writable } from 'svelte/store';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
-  let UNAVOIDABLE_RISK_STORE = writable({}); // For some very strange reason the store needs to be passed as a prop to the chart. It does not update when it is defined inside the component.
 
   $: sections = [
     {
@@ -33,9 +32,6 @@
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: !isValidSelection,
-      props: {
-        store: UNAVOIDABLE_RISK_STORE,
-      },
     },
     // {
     //   slug: 'unavoidable-risk',
@@ -59,31 +55,15 @@
   <title>Explore Impacts</title>
 </svelte:head>
 
-<ScrollContent
-  let:query
-  {sections}
-  isFullWidth={true}
-  hasActiveScetionBar={true}
->
-  <nav
-    slot="navigation"
-    class="flex flex-col gap-4"
-  >
+<ScrollContent let:query {sections} isFullWidth={true} hasActiveScetionBar={true}>
+  <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />
     <SimpleNav {sections} />
   </nav>
   {#each sections as section}
     {#if !section.disabled}
-      <section
-        id={section.slug}
-        name={section.slug}
-        class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none"
-      >
-        <svelte:component
-          this={section.component}
-          title={section.title}
-          {...section.props}
-        />
+      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
+        <svelte:component this={section.component} title={section.title} {...section.props} />
       </section>
     {/if}
   {/each}

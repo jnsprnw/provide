@@ -21,9 +21,9 @@
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
+  import { writable } from 'svelte/store';
 
-  // For some very strange reason the store needs to be passed as a prop. It does not update when it is defined inside this component.
-  export let store;
+  const STORE = writable({});
   let threshold; // This holds the selected threshold
 
   export let title;
@@ -41,7 +41,7 @@
   );
 
   $: $IS_COMBINATION_AVAILABLE &&
-    fetchData(store, {
+    fetchData(STORE, {
       endpoint: END_UN_AVOIDABLE_RISK,
       params: {
         [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
@@ -161,6 +161,7 @@
       legendItems.push({ label: 'Other scenarios', uid: 'other' });
     }
 
+    // In some cases, the API provides descriptions for each threshold
     let description;
     if (isObject(data.description) && has(data.description, threshold)) {
       description = data.description[threshold];
@@ -193,7 +194,7 @@
     let:isLoading
     let:asyncProps
     {process}
-    asyncProps={$store}
+    asyncProps={$STORE}
     props={{
       ...$TEMPLATE_PROPS,
       allScenarios: $SELECTABLE_SCENARIOS,
