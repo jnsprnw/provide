@@ -22,6 +22,7 @@
     DEFAULT_IMPACT_GEO_YEAR,
     URL_PATH_GEOGRAPHY_TYPE,
     URL_PATH_GEOGRAPHY,
+    URL_PATH_SCENARIOS,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -57,6 +58,7 @@
           [URL_PATH_GEOGRAPHY_TYPE]: $CURRENT_GEOGRAPHY.geographyType,
           [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
           [URL_PATH_SCENARIO]: scenario,
+          [URL_PATH_SCENARIOS]: $CURRENT_SCENARIOS_UID,
           [URL_PATH_YEAR]: year,
           ...$CURRENT_INDICATOR_OPTION_VALUES,
         },
@@ -187,18 +189,9 @@
       {isLoading}
     >
       <svelte:fragment slot="controls">
-        <Controls
-          scenarios={props.scenarios}
-          yearOptions={availableYears}
-          displayOptions={IMPACT_GEO_DISPLAY_OPTIONS}
-          bind:displayOption
-          bind:year
-        />
+        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:displayOption bind:year />
       </svelte:fragment>
-      <Maps
-        {...props}
-        {...asyncProps}
-      />
+      <Maps {...props} {...asyncProps} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
