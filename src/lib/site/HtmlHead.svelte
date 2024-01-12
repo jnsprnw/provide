@@ -7,7 +7,7 @@
   const keywords = 'climate impacts,climate change,climate modelling,climate scenarios,local impacts,temperature overshoot, adaptation, emissions pathways';
   const description = 'Explore future impacts from climate change as the world warms.';
   $: title = $page.data.title ?? generatePageTitle();
-  const isPublic = process.env.VITE_IS_PUBLIC_VERSION;
+  const isPublic = import.meta.env.VITE_IS_PUBLIC_VERSION;
 </script>
 
 <svelte:head>
