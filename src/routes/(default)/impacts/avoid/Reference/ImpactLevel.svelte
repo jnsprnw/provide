@@ -56,10 +56,7 @@
   <div class="font-bold text-text-weaker mb-2 flex justify-between">
     <span class="uppercase text-xs tracking-widest">Level of Impact</span>
     <span class="text-xs text-theme-base">
-      {fv($LEVEL_OF_IMPACT)}
-      {#if unit.uid !== 'degrees-celsius'}
-        {unit.label}
-      {/if}
+      {fv($LEVEL_OF_IMPACT)}&#8239;{unit.label}
     </span>
   </div>
 
@@ -76,9 +73,9 @@
         </span>
       </span>
       <div class="grid grid-cols-[1fr_2fr_1fr] text-xs text-contour-weaker">
-        <span>{fv(totalMin - offset)}</span>
+        <span>{fv(totalMin - offset)}&#8239;{unit.label}</span>
         <span class="text-theme-weaker font-normal text-center">Level of interest</span>
-        <span class="text-right">{fv(totalMax - offset)}</span>
+        <span class="text-right">{fv(totalMax - offset)}&#8239;{unit.label}</span>
       </div>
     {/if}
   </div>

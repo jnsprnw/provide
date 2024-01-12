@@ -13,8 +13,9 @@
 <div>
   <strong>What impacts are you trying to avoid?</strong>
   <p class="text-text-weaker text-sm mr-2">
-    Over the {reference.label} period, in {$CURRENT_GEOGRAPHY.label} the {labelWithinSentence} was on average <strong>{average_value}</strong>{#if parseInt(max.year) > 0}, and reached a maximum of
-      <strong>{formatValue(max.value, unit.uid)}</strong>
+    Over the {reference.label} period, in <strong>{$CURRENT_GEOGRAPHY.label}</strong> the {labelWithinSentence} was on average
+    <strong class="whitespace-nowrap">{formatValue(average_value)}&#8239;{unit.label}</strong>{#if parseInt(max.year) > 0}, and reached a maximum of
+      <strong class="whitespace-nowrap">{formatValue(max.value)}&#8239;{unit.label}</strong>
       in {max.year}
     {/if}.
   </p>
