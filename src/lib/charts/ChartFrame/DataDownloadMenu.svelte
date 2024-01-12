@@ -27,23 +27,22 @@
 
 {#if maxVersions > 1}
   <PopoverButton label="Download data">
-    <div class="max-w-xs px-3 pb-3">
-      {#each options as param}
-        <div class="py-2.5 grid grid-cols-7 gap-2 border-t items-center border-contour-weakest first:border-none">
-          <span class="col-span-2 text-contour-weak text-sm">{param.label}</span>
-
-          <div class="col-span-5 col-start-3">
-            {#if param.options.length > 1}
-              <PillGroup size="sm" allowWrap={false} options={param.options} bind:currentUid={$selectedParams[param.uid]} />
-            {:else}
-              <span class="text-sm">{param.options[0].label}</span>
-            {/if}
+    <div class="max-w-xs px-3 py-3 flex gap-y-4 flex-col">
+      <div class="flex gap-y-2 flex-col">
+        {#each options as param}
+          <div class="grid pt-2 grid-cols-7 gap-2 border-t items-start border-contour-weakest first:border-none">
+            <span class="leading-none col-span-2 text-contour-weak text-sm py-1.5">{param.label}</span>
+            <div class="col-span-5 col-start-3">
+              {#if param.options.length > 1}
+                <PillGroup size="sm" allowWrap={true} options={param.options} bind:currentUid={$selectedParams[param.uid]} />
+              {:else}
+                <span class="text-sm py-1.5 leading-none px-3 bg-theme-base text-surface-base font-bold rounded-full">{param.options[0].label}</span>
+              {/if}
+            </div>
           </div>
-        </div>
-      {/each}
-      <div class="bg-surface-weaker text-center py-3">
-        <a href={url} class="text-theme-base font-bold text-sm" download>Download data</a>
+        {/each}
       </div>
+      <a href={url} class="text-center bg-theme-base text-white hover:bg-theme-stronger disabled:text-theme-weaker w-full py-2 text-theme-base text-sm px-3" download>Download data</a>
     </div>
   </PopoverButton>
 {:else}

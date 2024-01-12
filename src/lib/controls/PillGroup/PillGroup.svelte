@@ -24,7 +24,7 @@
     <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
-        class="w-full flex gap-x-3 leading-none overflow-hidden text-ellipsis items-center transition-colors {classes.button}"
+        class="w-full flex gap-x-3 leading-none items-center transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
@@ -35,7 +35,7 @@
         class:hover:bg-surface-weaker={size === 'sm' && !disabled && !checked}
         class:pr-4={count}
       >
-        <span>{label}</span>
+        <span class="truncate" title={label}>{label}</span>
         {#if count}<small class="text-xs font-normal">{count}</small>{/if}
       </div>
     </RadioGroupOption>
