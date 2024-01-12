@@ -5,6 +5,7 @@
   import { stringify } from 'qs';
   import { snakeCase, delay } from 'lodash-es';
   import { browser } from '$app/environment';
+  import { saveAs } from 'file-saver';
 
   export let graphParams = {};
   export let width = 1000;
@@ -58,7 +59,6 @@
       console.warn(`Screenshot build URL is not defined. Graph download will not be available.`);
       return null;
     }
-
     const screenshotQuery = stringify(
       {
         format,
@@ -77,7 +77,6 @@
       console.warn(`Screenshot build URL variable not set. Graph download will not be available.`);
       return null;
     }
-
     try {
       return new URL(`${host}/screengrab?${screenshotQuery}`);
     } catch (error) {
@@ -96,15 +95,13 @@
         status = STATUS_LOADING;
         try {
           const response = await fetch(screenshotUrl);
-          const blob = await response.blob();
-          const blobUrl = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.download = screenshotName;
-          a.href = blobUrl;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          status = STATUS_ERROR;
+          if (response.status !== 200) {
+            status = STATUS_ERROR;
+          } else {
+            const blob = await response.blob();
+            saveAs(blob, screenshotName);
+            status = STATUS_IDLE;
+          }
         } catch (error) {
           console.error(error);
           status = STATUS_ERROR;
@@ -123,7 +120,7 @@
       isDisabled = true;
       break;
     case STATUS_ERROR:
-      label = 'An error occured when generating file';
+      label = 'Error occured while generating file';
       isDisabled = true;
       delay(() => {
         status = STATUS_IDLE;
@@ -146,7 +143,7 @@
       <button
         disabled={isDisabled}
         on:click={downloadImage}
-        class="bg-theme-base text-white hover:bg-theme-stronger disabled:text-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
+        class="transition-colors bg-theme-base text-white hover:enabled:bg-theme-stronger disabled:text-white disabled:bg-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
       >
         {#if status === STATUS_LOADING}<Spinner size={15} strokeWidth={2} />{/if}
         <span class="col-start-2 block min-w-[200px] font-bold">{label}</span>
