@@ -1,24 +1,19 @@
-import { writable } from 'svelte/store';
 import tippy from 'tippy.js';
-
-export const ACTIVE_POPOVER = writable(null);
+import { roundArrow } from 'tippy.js';
 
 export default function popover(node, params) {
   const instance = tippy(node, {
-    theme: 'light-border',
+    theme: 'dark',
     allowHTML: true,
     maxWidth: params.maxWidth || 350,
     interactive: params.interactive || false,
     placement: params.placement || 'top',
     duration: params.duration || 0,
-    arrow: false,
+    arrow: roundArrow,
     onShow() {
-      // await tick
-      ACTIVE_POPOVER.set(params.uid);
       params.IS_ACTIVE?.set(true);
     },
     onHide() {
-      ACTIVE_POPOVER.set(null);
       params.IS_ACTIVE?.set(false);
     },
     content() {

@@ -41,6 +41,7 @@
           wlvl,
           color: scenario.color,
           value: d[key],
+          scenario: scenario.label,
         });
       });
     });
@@ -59,14 +60,14 @@
     const gmtSegments = scenario.values.reduce((memo, d) => {
       const prevSegment = memo[memo.length - 1];
       const prevWlvl = prevSegment?.step; // We use the step to better identify the coloring
-      if (prevWlvl !== d.step || !prevSegment) memo.push({ step: d.step, wlvl: d.wlvl, values: [d] });
+      if (prevWlvl !== d.step || !prevSegment) memo.push({ step: d.step, wlvl: d.wlvl, values: [d], scenario: scenario.label });
       if (prevSegment) prevSegment.values.push(d);
       return memo;
     }, []);
 
-    gmtSegments.forEach(({ values, step }) => {
+    gmtSegments.forEach(({ values, step, scenario }) => {
       const color = colorScales[i](step); // The step is used in the color scale
-      memo.push({ color, step, values: values.map((d) => ({ ...d, color })) });
+      memo.push({ color, step, values: values.map((d) => ({ ...d, color })), scenario });
     });
     return memo;
   }, []);
@@ -89,10 +90,11 @@
   $: formatBoxplotValueY = (d) => formatValue(d, unitUID, { addSuffix: false, decimals: requiredDecimalsForBoxplots });
 
   // Data for generating popovers
-  $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values) : flatData).map((d) => ({
+  $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values.map((v) => ({ ...v, scenario: d.scenario }))) : flatData).map((d) => ({
     ...d,
-    formattedValue: formatTooltipValueY(d.value),
+    formattedValue: `${formatTooltipValueY(d.value)}${unit?.label ? ` ${unit.label}` : ''}`,
     formattedGmt: d.gmt,
+    label: indicatorLabel,
   }));
 
   $: yDomain = extent(flatData, (d) => d.value);

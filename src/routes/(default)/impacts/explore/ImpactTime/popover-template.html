@@ -1,8 +1,11 @@
-<div class="bg-surface-base p-3 shadow-md">
-  <div class="flex gap-2 items-end justify-between text-lg border-b border-contour-weakest py-1">
-    <span class="font-bold">{{formattedValue}}</span><span class="text-contour-weak text-md">{{year}}</span>
+<div class="flex flex-col items-start content-stretch justify-stretch gap-y-1 py-1">
+  <span>{{label}}</span>
+  <div class="w-full flex gap-2 items-end justify-between text-lg">
+      <span class="font-bold">{{formattedValue}}</span>
+      <span class="text-contour-weak text-md">in <time class="font-bold">{{year}}<time></span>
   </div>
-  <div class="flex gap-2 items-center py-1 text-contour-weak text-sm">
+  <span class="font-normal">under the <strong class="font-bold">{{scenario}}</strong> scenario</span>
+  <div class="w-full font-normal border-t border-contour-weakest flex justify-between gap-2 items-center pt-2 mt-1 text-contour-weak text-sm">
     <span class="leading-tight">Global warming</span>
     <span>{{formattedGmt}}</span>
   </div>
