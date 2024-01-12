@@ -23,7 +23,7 @@
       <Chevron class="pointer-events-none stroke-theme-base" />
     </PopoverButton>
 
-    <PopoverPanel use={[[popperContent, popperOptions]]} class="bg-surface-base shadow-xl z-10 px-4 py-2">
+    <PopoverPanel use={[[popperContent, popperOptions]]} class="bg-surface-base shadow-md z-10 px-4 py-2 rounded border-contour-weakest border">
       <dl class="text-sm grid grid-cols-[auto_auto] gap-y-1">
         {#each items as item}
           <dt class="text-contour-weak mr-2">{item.label}</dt>

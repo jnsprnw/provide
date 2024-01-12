@@ -55,10 +55,7 @@
       placeholder || isDisabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
     ].join(' ')}
   >
-    <span
-      class="flex items-center whitespace-nowrap overflow-hidden text-ellipsis"
-      class:font-bold={!placeholder && !disabled}
-    >
+    <span class="flex items-center whitespace-nowrap overflow-hidden text-ellipsis" class:font-bold={!placeholder && !disabled}>
       {#if disabled || warning || placeholder}
         <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{disabled ?? warning ?? placeholder}</span>
       {:else if category}
@@ -70,17 +67,10 @@
         <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{buttonLabel}</span>
       {/if}
     </span>
-    <ExpandIcon
-      class="min-w-[20px] grow-1 stroke-current"
-      isOpen={open}
-    />
+    <ExpandIcon class="min-w-[20px] grow-1 stroke-current" isOpen={open} />
   </PopoverButton>
 
-  <PopoverPanel
-    use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-surface-base rounded overflow-hidden border-theme-base/20 border shadow-xl z-50 relative`}
-    let:open
-  >
+  <PopoverPanel use={[[popperContent, popperOptions]]} class={`${panelClass} bg-surface-base rounded overflow-hidden border-contour-weakest border shadow-xl z-50 relative`} let:open>
     <slot />
   </PopoverPanel>
 </Popover>

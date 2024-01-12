@@ -20,20 +20,12 @@
 </script>
 
 <Popover class={`relative ${clazz}`}>
-  <PopoverButton
-    use={[popperRef]}
-    let:open
-    class={`flex items-center w-full text-sm text-theme-base hover:text-theme-stronger ${buttonClass}`}
-  >
+  <PopoverButton use={[popperRef]} let:open class={`flex items-center w-full text-sm text-theme-base hover:text-theme-stronger  ${buttonClass}`}>
     <span class="font-bold">{label}</span>
     <Chevron class="pointer-events-none stroke-theme-base" />
   </PopoverButton>
 
-  <PopoverPanel
-    use={[[popperContent, popperOptions]]}
-    class={`${panelClass} bg-surface-base shadow-xl z-50 relative`}
-    let:open
-  >
+  <PopoverPanel use={[[popperContent, popperOptions]]} class={`${panelClass} bg-surface-base shadow-md z-50 relative rounded border-contour-weakest border`} let:open>
     <slot />
   </PopoverPanel>
 </Popover>
