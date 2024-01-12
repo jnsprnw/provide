@@ -23,9 +23,6 @@ export const LABEL_ABOUT = 'About';
 export const LABEL_EXPLORE = 'Explore';
 export const LABEL_GLOSSARY = 'Glossary';
 
-// TODO: Should be handled through env variables
-export const IS_STAGING_VERSION = true;
-
 export const END_IMPACT_TIME = 'impact-time';
 export const END_IMPACT_TIME_ALL = 'impact-time-all';
 export const END_DISTRIBUTION = 'impact-time-distribution';
