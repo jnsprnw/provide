@@ -28,8 +28,9 @@
     align-self: center;
 
     path {
-      transition: transform var(--transition-duration-base) ease-out,
-        color var(--transition-duration-base) ease-out; // TODO: Not working in Firefox
+      transition:
+        transform var(--transition-duration-base) ease-out,
+        color var(--transition-duration-base) ease-out;
     }
 
     &.isOpen {
