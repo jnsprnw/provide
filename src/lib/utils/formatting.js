@@ -107,8 +107,10 @@ export function findDecimalsForDistinctValues(values, unit, minDecimals = 0) {
 }
 
 function getDecimals(value) {
-  if (value % 1 != 0) {
-    return value.toString().split('.')[1].length;
+  if (typeof value !== 'undefined') {
+    if (value % 1 != 0) {
+      return value.toString().split('.')[1].length;
+    }
   }
   return 0;
 }
