@@ -2,7 +2,6 @@
   import { geoPath, geoEqualEarth, geoCentroid } from 'd3-geo';
   import { UID_WORLD } from '$src/config.js';
   import { rewind } from '$lib/utils/geo';
-  // import rewind from '@mapbox/geojson-rewind';
   import { geoGraticule } from 'd3-geo';
   import { point } from '@turf/helpers';
   import { every } from 'lodash-es';
@@ -60,7 +59,7 @@
 </script>
 
 <figure class="w-full h-full" role="main" bind:clientHeight={height} bind:clientWidth={width}>
-  <svg {width} {height} class="vis" aria-describedby="map-description" role="group" fill="currentColor">
+  <svg {width} {height} class="vis" role="group" fill="currentColor">
     <g>
       {#each graticuleLines as line}
         <path d={line} class="stroke-contour-weakest fill-none stroke-[0.5]" />
@@ -94,6 +93,5 @@
       {/if}
     </g>
     <path d={graticuleOutline} class="stroke-contour-weak stroke-1 fill-none linejoin-round" />
-    <desc id="map-description">TODO</desc>
   </svg>
 </figure>
