@@ -439,7 +439,7 @@ if (browser) {
       const currentScenarios = getStore(CURRENT_SCENARIOS_UID) || [];
       const validScenarios = currentScenarios.filter((scenario) => selectableScenarios.includes(scenario));
       if (!isEqual(validScenarios, currentScenarios)) {
-        console.warn(`Invalid scenario selected. Will reset.`);
+        console.warn(`Unavailable scenario(s) selected. Will reset to list of available scenarios.`);
         CURRENT_SCENARIOS_UID.set(validScenarios);
       }
     }
