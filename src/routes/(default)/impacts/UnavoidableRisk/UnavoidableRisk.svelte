@@ -15,7 +15,7 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
-  import { formatValue } from '$lib/utils/formatting';
+  import { formatValue, findMostDecimals } from '$lib/utils/formatting';
   import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
   import { sortBy, reverse, find, uniqBy, without, isObject, isString, has } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
@@ -52,8 +52,9 @@
 
   $: process = ({ data }, { selectedScenarios, urlParams, allScenarios }) => {
     // This creates the list of thresholds
+    const decimals = findMostDecimals(data.thresholds.map((value) => value));
     const thresholds = data.thresholds.map((value) => ({
-      label: `${value > 0 ? '+' : value < 0 ? '−' : ''}${formatValue(value, $CURRENT_INDICATOR_UNIT_UID)}`,
+      label: `${value > 0 ? '+' : value < 0 ? '−' : ''}${formatValue(Math.abs(value), $CURRENT_INDICATOR_UNIT_UID, { decimals })}`,
       value,
     }));
 

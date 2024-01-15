@@ -1,5 +1,6 @@
 import { DEFAULT_FORMAT_UID } from '$src/config';
 import { formatDefaultLocale, formatLocale } from 'd3-format';
+import { maxBy } from 'lodash-es';
 
 export const NA_STRING = '—';
 export const FORMAT_CURRENCY = '$,.0f';
@@ -103,4 +104,15 @@ export function findDecimalsForDistinctValues(values, unit, minDecimals = 0) {
     strings = values.map((d) => formatValue(d, unit, { formatter })); // Reformat values with one more decimal
   }
   return decimals;
+}
+
+function getDecimals(value) {
+  if (value % 1 != 0) {
+    return value.toString().split('.')[1].length;
+  }
+  return 0;
+}
+
+export function findMostDecimals(values) {
+  return getDecimals(maxBy(values, (v) => getDecimals(v)));
 }
