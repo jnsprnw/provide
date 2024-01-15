@@ -11,10 +11,12 @@
 
   $: sections = [
     ...content.map(({ title, slug, sections }) => ({
-      slug,
-      title,
       component: SectionHeadline,
-      sections: sections.map((s) => ({ ...s, component: TermSection })),
+      props: {
+        slug,
+        title,
+      },
+      sections: sections.map((s) => ({ component: TermSection, props: s })),
     })),
   ];
 </script>
@@ -26,13 +28,13 @@
   </div>
 </PageIntro>
 
-<ScrollContent isFullWidth={true}>
+<ScrollContent {sections} isFullWidth={true}>
   <NestedNav slot="navigation" {sections} />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
-      <svelte:component this={section.component} {...section} />
+      <svelte:component this={section.component} {...section.props} />
       {#each section.sections as part}
-        <svelte:component this={part.component} {...part} />
+        <svelte:component this={part.component} {...part.props} />
       {/each}
     </section>
   {/each}

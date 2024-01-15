@@ -6,8 +6,6 @@
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
   import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING, LABEL_DOCUMENTATION } from '$config';
   import PageIntro from '$lib/site/PageIntro.svelte';
-  import { SCENARIOS } from '$stores/meta';
-  import ScenarioSelector from './ScenarioSelector.svelte';
 
   export let data;
 
@@ -15,8 +13,10 @@
 
   $: sections = [
     {
-      slug: ANCHOR_DOCS_SCENARIOS,
-      title: 'Scenarios',
+      props: {
+        slug: ANCHOR_DOCS_SCENARIOS,
+        title: 'Scenarios',
+      },
       component: SectionIntro,
       content: scenariosIntro,
       sections: [
@@ -26,19 +26,23 @@
         //   component: ScenarioSelector,
         //   scenarios: $SCENARIOS,
         // },
-        ...scenarios.map((s) => ({ ...s, component: ScenarioSection })),
+        ...scenarios.map((s) => ({ component: ScenarioSection, props: s })),
       ],
     },
     {
-      slug: ANCHOR_DOCS_MODELS,
-      title: 'Models',
+      props: {
+        slug: ANCHOR_DOCS_MODELS,
+        title: 'Models',
+      },
       component: SectionIntro,
       content: modelsIntro,
-      sections: models.map((m) => ({ ...m, component: ModelSection })),
+      sections: models.map((m) => ({ component: ModelSection, props: m })),
     },
     {
-      slug: ANCHOR_DOCS_DATA_PROCESSING,
-      title: 'Data processing',
+      props: {
+        slug: ANCHOR_DOCS_DATA_PROCESSING,
+        title: 'Data processing',
+      },
       component: SectionIntro,
       content: dataProcessingIntro,
       sections: dataProcessing,
@@ -53,14 +57,14 @@
   </div>
 </PageIntro>
 
-<ScrollContent>
+<ScrollContent {sections}>
   <NestedNav slot="navigation" {sections} />
   {#each sections as section}
     {#if section.content}
       <section class="mb-8">
-        <svelte:component this={section.component} {...section} />
+        <svelte:component this={section.component} {...section.props} />
         {#each section.sections as part}
-          <svelte:component this={part.component} {...part} />
+          <svelte:component this={part.component} {...part.props} />
         {/each}
       </section>
     {/if}

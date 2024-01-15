@@ -2,19 +2,12 @@ import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
-import { LABEL_DOCUMENTATION } from '$config'
+import { LABEL_DOCUMENTATION } from '$config';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('technical-documentation', fetch);
 
-  const {
-    Models,
-    Scenarios,
-    ModelsIntro,
-    ScenariosIntro,
-    DataProcessing,
-    DataProcessingIntro,
-  } = data.attributes;
+  const { Models, Scenarios, ModelsIntro, ScenariosIntro, DataProcessing, DataProcessingIntro } = data.attributes;
 
   const title = generatePageTitle(LABEL_DOCUMENTATION);
 
@@ -22,7 +15,7 @@ export const load = async ({ fetch }) => {
     title,
     content: {
       modelsIntro: parse(ModelsIntro || ''),
-      models: Models.map(({ UID, Title, Description, Link, Label }) => {
+      models: Models.map(({ UID, Title, Description, Link }) => {
         const title = Title.trim();
         const description = trimLinebreakAtEnd(Description);
         if (!title.length || !description.length) {
@@ -30,10 +23,9 @@ export const load = async ({ fetch }) => {
         }
         return {
           title,
-          slug: kebabCase(UID || Label || title),
+          slug: kebabCase(UID || title),
           content: parse(description),
           link: Link,
-          label: Label || title,
         };
       }).filter((d) => Boolean(d)),
       scenariosIntro: parse(ScenariosIntro || ''),

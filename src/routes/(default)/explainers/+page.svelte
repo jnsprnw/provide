@@ -11,11 +11,13 @@
 
   $: sections = [
     {
-      slug: ANCHOR_EXPLAINER_SCENARIOS,
-      title: 'Scenarios',
+      props: {
+        slug: ANCHOR_EXPLAINER_SCENARIOS,
+        title: 'Scenarios',
+      },
       component: ScenariosIntro,
       content: true,
-      sections: [{ component: Scenarios, scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets }],
+      sections: [{ component: Scenarios, props: { scenarios, selectableTimeframes, defaultTimeframe, scenarioPresets } }],
     },
   ];
 </script>
@@ -31,9 +33,9 @@
   <NestedNav slot="navigation" {sections} />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
-      <svelte:component this={section.component} {...section} />
+      <svelte:component this={section.component} {...section.props} />
       {#each section.sections as part}
-        <svelte:component this={part.component} {...part} />
+        <svelte:component this={part.component} {...part.props} />
       {/each}
     </section>
   {/each}

@@ -17,12 +17,16 @@
   // Add indexes to sections and subsections to see if section is active
   $: navSections = sections.reduce(
     (acc, section, i) => {
+      const children = section?.sections ?? [];
       acc.sections.push({
-        ...section,
+        title: section.props?.title ?? section.title,
+        slug: section.props?.slug ?? section.slug,
         index: acc.counter,
         isActive: $index === acc.counter++,
-        sections: (section?.sections ?? []).map((s) => ({
-          ...s,
+        hasContent: Boolean(section.content) || children.some(({ props }) => Boolean(props.content)),
+        sections: children.map((s) => ({
+          title: s.props?.title,
+          slug: s.props?.slug,
           index: acc.counter,
           isActive: $index === acc.counter++,
         })),
@@ -60,8 +64,8 @@
 
 <nav class="md:flex-col gap-10 hidden md:flex">
   <ul data-index={$index}>
-    {#each processedSections as { title, slug, isActive, index, isOpen, sections, content }}
-      {#if content || sections[0]?.content}
+    {#each processedSections as { title, slug, isActive, index, isOpen, sections, hasContent }}
+      {#if hasContent}
         <li class="py-2 border-b border-contour-weakest pr-1 last:border-b-0">
           <div aria-expanded={String(isActive)} class:text-theme-base={isActive} class="flex justify-between items-center">
             <a class="font-bold text-lg" href={`#${slug}`}>{title}</a>
