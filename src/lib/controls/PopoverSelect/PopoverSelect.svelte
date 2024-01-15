@@ -49,22 +49,22 @@
     aria-label={disabled ?? warning ?? placeholder ?? `${category ? `${category}:` : ''}${buttonLabel}`}
     disabled={isDisabled}
     class={[
-      'flex w-full rounded bg-surface-base justify-between overflow-hidden transition-colors hover:border-theme-base/40 aria-expanded:border-theme-base/60 aria-invalid:border-rose-300 text-theme-base aria-invalid:text-rose-400 aria-disabled:cursor-not-allowed',
+      'flex w-full rounded bg-surface-base justify-between truncate transition-colors hover:border-theme-base/40 aria-expanded:border-theme-base/60 aria-invalid:border-rose-300 text-theme-base aria-invalid:text-rose-400 aria-disabled:cursor-not-allowed',
       classes.button,
       buttonClass,
       placeholder || isDisabled ? 'text-theme-weaker' : '', // TODO: Define global warning classes
     ].join(' ')}
   >
-    <span class="flex items-center whitespace-nowrap overflow-hidden text-ellipsis" class:font-bold={!placeholder && !disabled}>
+    <span class="flex items-center truncate" class:font-bold={!placeholder && !disabled}>
       {#if disabled || warning || placeholder}
-        <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{disabled ?? warning ?? placeholder}</span>
+        <span class="leading-tight truncate">{disabled ?? warning ?? placeholder}</span>
       {:else if category}
         <div class="flex items-end gap-x-2">
-          <span class="text-theme-weaker text-sm leading-none pb-0.5 font-normal">{category}</span>
-          <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{buttonLabel}</span>
+          <span class="text-theme-weaker text-sm leading-tight pb-0.5 font-normal">{category}</span>
+          <span class="leading-tight truncate">{buttonLabel}</span>
         </div>
       {:else}
-        <span class="leading-none whitespace-nowrap overflow-hidden text-ellipsis">{buttonLabel}</span>
+        <span class="leading-tight truncate">{buttonLabel}</span>
       {/if}
     </span>
     <ExpandIcon class="min-w-[20px] grow-1 stroke-current" isOpen={open} />
