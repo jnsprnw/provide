@@ -90,7 +90,7 @@
     <div>
       {#if unavoidableScenarios.length}
         <p class="text-lg">
-          This impact level will be <Important>reached</Important>
+          This impact level will be <Important>exceeded</Important>
         </p>
         <ul class="mt-1">
           {#each unavoidableScenarios as { label, year, color }, i}
