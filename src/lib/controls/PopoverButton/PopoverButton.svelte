@@ -20,7 +20,7 @@
 </script>
 
 <Popover class={`relative ${clazz}`}>
-  <PopoverButton use={[popperRef]} let:open class={`flex items-center w-full text-sm text-theme-base hover:text-theme-stronger  ${buttonClass}`}>
+  <PopoverButton use={[popperRef]} let:open class={`flex items-center w-full text-sm text-theme-base hover:text-theme-stronger ${buttonClass}`}>
     <span class="font-bold">{label}</span>
     <Chevron class="pointer-events-none stroke-theme-base" />
   </PopoverButton>
