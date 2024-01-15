@@ -1,6 +1,6 @@
 <script>
   import Geographies from './Geographies.svelte';
-  import { AVAILABLE_GEOGRAPHY_TYPES, IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
+  import { CURRENT_GEOGRAPHY_LABEL, AVAILABLE_GEOGRAPHY_TYPES, IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY_UID, CURRENT_GEOGRAPHY, CURRENT_GEOGRAPHY_TYPE } from '$stores/state.js';
   import { END_GEO_SHAPE } from '$src/config.js';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -11,9 +11,6 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
 
   let GEO_SHAPE_DATA = writable({});
-
-  // If the currently selected geography is available, the label is displayed. Otherwise an error message.
-  $: buttonLabel = $CURRENT_GEOGRAPHY?.label;
 
   $: geographyTypes = $AVAILABLE_GEOGRAPHY_TYPES;
 
@@ -39,7 +36,7 @@
       },
     ]);
 
-  $: findSharedId($CURRENT_GEOGRAPHY, selectableGeographies);
+  $: findSharedId(selectableGeographies);
 
   function checkIds(geography, id) {
     if (typeof id === 'undefined') {
@@ -48,13 +45,20 @@
     return geography.uid === id || geography.sharedId === id;
   }
 
-  function findSharedId(currentGeography, selectableGeographies) {
+  function findSharedId(selectableGeographies) {
+    const currentGeography = $CURRENT_GEOGRAPHY;
     if (currentGeography && selectableGeographies.length) {
       const { uid, sharedId } = currentGeography;
-      const newGeography = selectableGeographies.find((geography) => checkIds(geography, uid) || checkIds(geography, sharedId));
-      console.log({ newGeography });
-      if (newGeography && newGeography?.uid) {
-        CURRENT_GEOGRAPHY_UID.set(newGeography.uid);
+      const possibleMatches = selectableGeographies.filter((geography) => checkIds(geography, uid) || checkIds(geography, sharedId));
+      if (possibleMatches.length) {
+        // Sort matches by the shortest uid. This should be the country and not some region.
+        const bestMatch = possibleMatches.sort((a, b) => a.uid.length - b.uid.length)[0];
+
+        if (bestMatch?.uid) {
+          CURRENT_GEOGRAPHY_UID.set(bestMatch.uid);
+        }
+      } else {
+        CURRENT_GEOGRAPHY_UID.set(undefined);
       }
     }
   }
@@ -63,7 +67,7 @@
 <PopoverSelect
   label="Geography"
   category={$CURRENT_GEOGRAPHY_TYPE?.labelSingular}
-  {buttonLabel}
+  buttonLabel={$CURRENT_GEOGRAPHY_LABEL}
   panelClass="w-screen-p max-w-4xl"
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
   placeholder={$IS_EMPTY_GEOGRAPHY ? 'Select a geography' : undefined}

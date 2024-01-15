@@ -116,6 +116,10 @@ export const CURRENT_GEOGRAPHY = derived([CURRENT_GEOGRAPHY_UID, SELECTABLE_GEOG
   }
 });
 
+export const CURRENT_GEOGRAPHY_LABEL = derived(CURRENT_GEOGRAPHY, ($geography) => {
+  return $geography?.label;
+});
+
 /**
  * Derived store that checks if a geography is selected
  * @type {Readable<Boolean>}
