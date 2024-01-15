@@ -120,12 +120,12 @@
       {/if}
     </div>
   </section>
-  {#if isAvoidable && !isPossible}
+  <!--{#if isAvoidable && !isPossible}
     <section>
       <p class="text-lg leading-relaxed max-w-4xl">
         Try changing the impact level or check out the ”<a href="#unavoidable-risk" class="font-bold text-theme-base hover:underline">Unavoidable impacts graph</a>“ below in order to see which levels
         of impact are likely to occur.
       </p>
     </section>
-  {/if}
+  {/if}-->
 </div>
