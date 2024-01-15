@@ -5,7 +5,7 @@
   import { stringify } from 'qs';
   import { snakeCase, delay } from 'lodash-es';
   import { browser } from '$app/environment';
-  import { saveAs } from 'file-saver';
+  import saveAs from 'file-saver';
 
   export let graphParams = {};
   export let width = 1000;
