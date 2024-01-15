@@ -341,7 +341,7 @@ export const CURRENT_INDICATOR_LABEL = derived([CURRENT_INDICATOR, CURRENT_INDIC
   // This function is used to replace the X for example in 'nights a year with minimum temperatures above X°C'
   let label = get($indicator, ['labelWithinSentence']); // This is the regular label we use
   // Check if the current options hold an indicator value and if the indicator has the indicator value option
-  if ($options.hasOwnProperty('indicator_value') && $indicator.parameters.indicator_value?.length) {
+  if ($options.hasOwnProperty('indicator_value') && $indicator?.parameters.indicator_value?.length) {
     // Check if there is a X°C in the label
     if (label.match(/X°C/)) {
       // Replace the part with the label from the options
