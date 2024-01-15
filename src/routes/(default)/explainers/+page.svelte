@@ -27,7 +27,7 @@
   </div>
 </PageIntro>
 
-<ScrollContent isFullWidth={true}>
+<ScrollContent isFullWidth={true} {sections}>
   <NestedNav slot="navigation" {sections} />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
