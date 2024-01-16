@@ -1,24 +1,26 @@
 <script>
   import { CURRENT_INDICATOR_LABEL, CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTIONS } from '$stores/state.js';
+  import { IS_STUDY_LOCATION_WHOLE_URBAN_AREA, SELECTED_STUDY_LOCATION_LABEL } from '$stores/avoid.js';
   import { formatValue } from '$lib/utils/formatting';
   export let data;
 
   $: ({ unit } = $CURRENT_INDICATOR);
-
   $: labelWithinSentence = $CURRENT_INDICATOR_LABEL;
-
-  $: ({ average_value, max } = data);
-
+  $: ({ average_value, countable } = data);
   $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
+  $: isWholeUrbanArea = $IS_STUDY_LOCATION_WHOLE_URBAN_AREA;
+  $: period = reference.label;
+  $: value = formatValue(average_value);
+  $: location = `${isWholeUrbanArea ? '<strong>urban area</strong> of ' : '<strong>' + $SELECTED_STUDY_LOCATION_LABEL + '</strong> in '} <strong>${$CURRENT_GEOGRAPHY.label}</strong>`;
 </script>
 
 <div>
   <strong>What impacts are you trying to avoid?</strong>
   <p class="text-text-weaker text-sm mr-2">
-    Over the {reference.label} period, in <strong>{$CURRENT_GEOGRAPHY.label}</strong> the {labelWithinSentence} was on average
-    <strong class="whitespace-nowrap">{formatValue(average_value)}&#8239;{unit.label}</strong>{#if parseInt(max.year) > 0}, and reached a maximum of
-      <strong class="whitespace-nowrap">{formatValue(max.value)}&#8239;{unit.label}</strong>
-      in {max.year}
-    {/if}.
+    {#if countable}
+      Over the {period} period, the {@html location} experienced on average <strong>{@html value}</strong> <strong>{labelWithinSentence}</strong>.
+    {:else}
+      Over the {period} period, the {@html location} experienced <strong>{labelWithinSentence}</strong> of <strong>{value}&#8239;{unit.label}</strong>.
+    {/if}
   </p>
 </div>

@@ -74,6 +74,7 @@ export const URL_PATH_CERTAINTY_LEVEL = 'certainty_level';
 export const URL_PATH_GEOGRAPHY_TYPE = 'geography-type'; // Impact Geo endpoint
 export const URL_PATH_SCENARIO = 'scenario';
 export const URL_PATH_YEAR = 'year';
+export const URL_PATH_STUDY_LOCATION = 'study-location';
 
 export const UID_STUDY_LOCATION_AVERAGE = 'city-average';
 

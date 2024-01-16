@@ -1,8 +1,9 @@
 <script>
-  import { IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
+  import { CURRENT_INDICATOR_OPTION_VALUES, IS_EMPTY_GEOGRAPHY, CURRENT_GEOGRAPHY, CURRENT_INDICATOR, TEMPLATE_PROPS, IS_COMBINATION_AVAILABLE_INDICATOR, IS_EMPTY_INDICATOR } from '$stores/state.js';
+  import { SELECTED_STUDY_LOCATION } from '$stores/avoid.js';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
-  import { END_AVOIDING_REFERENCE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$config';
+  import { END_AVOIDING_REFERENCE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_STUDY_LOCATION } from '$config';
   import { fetchData } from '$lib/api/api';
   import Text from './Text.svelte';
   import ImpactLevel from './ImpactLevel.svelte';
@@ -21,6 +22,7 @@
         [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
         [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
         ...$CURRENT_INDICATOR_OPTION_VALUES,
+        [URL_PATH_STUDY_LOCATION]: $SELECTED_STUDY_LOCATION,
       },
     });
 
@@ -37,6 +39,7 @@
   }
 
   $: process = ({ data }, { scenarios, urlParams }) => {
+    const countable = data.data.countable;
     const step = data.data.impact_levels.step;
     const average_value = data.data.average_value;
     const decimals = getDecimalsOfNumber(step);
@@ -55,6 +58,7 @@
         offset,
         average_value,
         decimals,
+        countable,
       },
     };
   };

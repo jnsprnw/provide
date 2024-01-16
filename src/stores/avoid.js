@@ -2,7 +2,7 @@ import { writable, derived, get } from 'svelte/store';
 import { getLocalStorage, setLocalStorage } from './utils.js';
 import { isString } from 'lodash-es';
 import { browser } from '$app/environment';
-import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT, PATH_AVOID } from '$config';
+import { LOCALSTORE_LIKELIHOOD, LOCALSTORE_STUDY_LOCATION, LOCALSTORE_LEVEL_OF_IMACT, PATH_AVOID, UID_STUDY_LOCATION_AVERAGE } from '$config';
 import { LIKELIHOODS, STUDY_LOCATIONS } from './meta.js';
 import { CURRENT_PAGE } from '$stores/state';
 import { formatValue } from '$lib/utils/formatting';
@@ -69,6 +69,14 @@ if (browser) {
     checkValidStudyLocation(list);
   });
 }
+
+export const IS_STUDY_LOCATION_WHOLE_URBAN_AREA = derived(SELECTED_STUDY_LOCATION, ($location) => {
+  return $location === UID_STUDY_LOCATION_AVERAGE;
+});
+
+export const SELECTED_STUDY_LOCATION_LABEL = derived([SELECTED_STUDY_LOCATION, STUDY_LOCATIONS], ([$location, $locations]) => {
+  return $locations.find(({ uid }) => uid === $location)?.label ?? $location;
+});
 
 export const LEVEL_OF_IMPACT_ARRAY = writable(
   getLocalStorage(LOCALSTORE_LEVEL_OF_IMACT, [], (v) => {
