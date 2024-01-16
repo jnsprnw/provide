@@ -45,7 +45,7 @@
     2300: [
       ['Peak GMT', 'gmtPeak', ([value, year]) => `${value}°C in ${year}`, ([value]) => value],
       ['2100 GMT', 'gmt2100', (value) => `${value}°C`],
-        ['2300 GMT', 'gmt2300', (value) => `${value}°C`],
+      ['2300 GMT', 'gmt2300', (value) => `${value}°C`],
       ['Cooling after peak', 'coolingAfterPeak', (value) => `${value}°C`],
       ['Timing of NZ CO2', 'timingNZCO2', (value) => value],
       ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
@@ -90,7 +90,7 @@
         label,
         value,
         bg,
-        useBlackFont
+        useBlackFont,
       };
     });
     const order = Object.fromEntries(
@@ -129,88 +129,45 @@
   let widthColumns = 0;
 </script>
 
-<SideScrollIndicator
-  widthOfContent={widthColumns}
-  distanceLeft={titleWidth}
-  distanceRight={0}
->
-  <div
-    role="treegrid"
-    aria-rowcount={scenariosListed.length}
-  >
-    <div
-      role="rowgroup"
-      class="grid max-w-full"
-    >
-      <div
-        role="row"
-        class="grid justify-start max-w-full grid-flow-col"
-        style="grid-template-columns: {titleWidth}px {maxWidth};"
-      >
-        <div
-          role="gridcell"
-          class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3"
-        >
-          <button
-            on:click={$sorting === 'i' ? sortingDirection.update((v) => v * -1) : sorting.set('i')}
-            class:font-bold={$sorting === 'i'}>Scenario</button
-          >
+<SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0}>
+  <div role="treegrid" aria-rowcount={scenariosListed.length}>
+    <div role="rowgroup" class="grid max-w-full">
+      <div role="row" class="grid justify-start max-w-full grid-flow-col" style="grid-template-columns: {titleWidth}px {maxWidth};">
+        <div role="gridcell" class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3">
+          <button on:click={$sorting === 'i' ? sortingDirection.update((v) => v * -1) : sorting.set('i')} class:font-bold={$sorting === 'i'}>Scenario</button>
         </div>
         {#each tableColumns as { label, key }}
           {@const isActive = $sorting === key}
-          <div
-            role="gridcell"
-            class="text-xs px-1 border-b-contour-weakest border-b flex items-end justify-center text-center leading-tight py-3"
-          >
-            <button
-              on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)}
-              class:font-bold={isActive}>{label}</button
-            >
+          <div role="gridcell" class="text-xs px-1 border-b-contour-weakest border-b flex items-end justify-center text-center leading-tight py-3">
+            <button on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)} class:font-bold={isActive}>{label}</button>
           </div>
         {/each}
       </div>
     </div>
-    <div
-      role="rowgroup"
-      class="grid max-w-full relative"
-    >
+    <div role="rowgroup" class="grid max-w-full relative">
       {#each sortedScenarios as { i, uid, label, values, borderColorLeft, description, isPrimary, disabled }, index}
         <button
           {disabled}
-          aria-disabled="{disabled}"
+          aria-disabled={disabled}
           role="row"
           aria-rowindex={i}
           class:border-b={index !== scenariosListed.length - 1}
           class="max-w-full border-b-contour-weakest text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker"
           bind:clientWidth={widthColumns}
         >
-          <label
-            for={uid}
-            class="grid justify-start max-w-full grid-flow-col"
-            style="grid-template-columns: {titleWidth}px {maxWidth};"
-          >
+          <label for={uid} class="grid justify-start max-w-full grid-flow-col" style="grid-template-columns: {titleWidth}px {maxWidth};">
             <div
-              aria-disabled="{disabled}"
+              aria-disabled={disabled}
               style="border-left-color: {borderColorLeft}"
               class=" aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_auto_1fr_1rem] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
               role="gridcell"
             >
-              <input
-                {disabled}
-                aria-disabled="{disabled}"
-                tabindex="-1"
-                id={uid}
-                type="checkbox"
-                name="scenarios"
-                value={uid}
-                bind:group={selectedScenarios}
-              />
+              <input {disabled} aria-disabled={disabled} tabindex="-1" id={uid} type="checkbox" name="scenarios" value={uid} bind:group={selectedScenarios} />
               <span
                 class="text-sm font-bold inline-block overflow-hidden text-ellipsis transition-colors"
                 class:text-text-base={!disabled}
                 class:text-contour-weakest={disabled}
-                use:tooltip={{ content: disabled ? `You can not select more than ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.` : undefined }}
-                >{label}</span
+                use:tooltip={{ content: disabled ? `You can not select more than ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.` : undefined }}>{label}</span
               >
               <Info {description} />
 
