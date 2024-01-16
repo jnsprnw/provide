@@ -12,7 +12,7 @@
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
   import { featureCollection } from '@turf/helpers';
-  import { rewind } from '$lib/utils/geo';
+  import { rewind } from '$lib/utils/geo-rewind.js';
 
   export let geoData;
   export let geoShape;
