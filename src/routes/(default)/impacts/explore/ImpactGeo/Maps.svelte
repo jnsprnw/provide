@@ -17,7 +17,7 @@
   export let geoData;
   export let geoShape;
   export let colorScale;
-  export let indicator;
+  export let unit;
 
   let maps = [];
   const theme = getContext('theme');
@@ -117,10 +117,7 @@
 
 <div class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}>
   <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
-    <Legend
-      unit={indicator.unit}
-      scale={colorScale}
-    />
+    <Legend {unit} scale={colorScale} />
   </div>
   {#key maskedGeoData.length}
     {#each maskedGeoData as d, i}
@@ -131,13 +128,7 @@
         class="relative border border-contour-weakest overflow-hidden"
         style={`width: ${100 / maskedGeoData.length}%`}
       >
-        <MapProvider
-          bind:map={maps[i]}
-          bounds={bbox(geoShape)}
-          {interactive}
-          {paint}
-          hideLogo={i > 0}
-        >
+        <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0}>
           {#if invertedGeoShape}
             <DataSource data={invertedGeoShape}>
               <!--<PolygonLayer
@@ -148,28 +139,13 @@
               lineWidth={0.5}
               lineColor={$theme.color.contour.base}
             />-->
-              <PolygonLayer
-                before="ocean-fill"
-                lineWidth={3}
-                lineOffset={1.5}
-                lineOpacity={0.07}
-                lineColor={$theme.color.contour.base}
-              />
-              <FilterLayer
-                layer="settlement-minor-label"
-                geo={geoShape}
-              />
-              <FilterLayer
-                layer="settlement-major-label"
-                geo={geoShape}
-              />
+              <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
+              <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+              <FilterLayer layer="settlement-major-label" geo={geoShape} />
             </DataSource>
           {/if}
           <DataSource data={d.data}>
-            <PolygonLayer
-              fill={true}
-              line={false}
-            />
+            <PolygonLayer fill={true} line={false} />
           </DataSource>
         </MapProvider>
         {#if d.label}

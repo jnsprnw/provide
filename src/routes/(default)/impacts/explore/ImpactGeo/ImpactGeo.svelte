@@ -191,7 +191,7 @@
       <svelte:fragment slot="controls">
         <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:displayOption bind:year />
       </svelte:fragment>
-      <Maps {...props} {...asyncProps} />
+      <Maps unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
