@@ -1,9 +1,8 @@
 import { generatePageTitle } from '$utils/meta.js';
+import { LABEL_FUTURE_IMPACTS } from '$config';
 
 export const load = async () => {
-  const title = generatePageTitle('Explore impacts');
-
   return {
-    title,
+    title: generatePageTitle(LABEL_FUTURE_IMPACTS),
   };
 };

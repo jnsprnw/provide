@@ -1,12 +1,13 @@
 <script>
   import { page } from '$app/stores';
+  import { checkCurrentLink } from '$utils/url.js';
 
   export let href = undefined;
   export let loc = 'page';
   export let disabled = false;
   export let activeClass = '';
 
-  $: isActive = $page.url.pathname === href || $page.url.pathname.startsWith(href);
+  $: isActive = checkCurrentLink(href, $page);
   $: ariaLabel = isActive ? loc : null;
 
   $: isDisabled = href ? disabled : true;
