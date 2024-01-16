@@ -7,7 +7,6 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
-  import { writable } from 'svelte/store';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
@@ -18,6 +17,9 @@
       description: 'How will this climate impact change?',
       component: ImpactTime,
       disabled: !isValidSelection,
+      props: {
+        tagline: 'Timing',
+      },
     },
     {
       slug: 'impact-geo',
@@ -25,6 +27,9 @@
       description: 'Where will impacts hit the hardest?',
       component: ImpactGeo,
       disabled: !isValidSelection,
+      props: {
+        tagline: 'Location',
+      },
     },
     {
       slug: 'unavoidable-risk',
@@ -32,21 +37,10 @@
       description: 'What can be avoided through emissions reductions?',
       component: UnAvoidableRisk,
       disabled: !isValidSelection,
+      props: {
+        tagline: '(Un)avoidable risk',
+      },
     },
-    // {
-    //   slug: 'unavoidable-risk',
-    //   title: 'Benefits of mitigation',
-    //   description: 'How could we benefit from accelerated emissions reductions?',
-    //   component: UnAvoidableRisk,
-    //   disabled: !$IS_COMBINATION_AVAILABLE,
-    // },
-    // {
-    //   slug: 'unavoidable-risk',
-    //   title: 'What can we reverse?',
-    //   description: 'How much damage could be reversed once it is done?',
-    //   component: UnAvoidableRisk,
-    //   disabled: !$IS_COMBINATION_AVAILABLE,
-    // },
     { component: FallbackMessage, disabled: isValidSelection },
   ];
 </script>
@@ -59,7 +53,7 @@
   {#each sections as section}
     {#if !section.disabled}
       <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
-        <svelte:component this={section.component} title={section.title} {...section.props} />
+        <svelte:component this={section.component} {...section.props} />
       </section>
     {/if}
   {/each}

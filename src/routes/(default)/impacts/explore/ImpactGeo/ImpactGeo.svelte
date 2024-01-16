@@ -35,7 +35,7 @@
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
 
-  export let title;
+  export let tagline;
   export let year = DEFAULT_IMPACT_GEO_YEAR;
   export let displayOption = 'side-by-side';
 
@@ -174,7 +174,7 @@
   >
     <ChartFrame
       title={asyncProps.title}
-      tagline={title}
+      {tagline}
       description={asyncProps.description}
       dataDownloadOptions={asyncProps.dataDownloadOptions}
       dataDownloadParams={asyncProps.dataDownloadParams}

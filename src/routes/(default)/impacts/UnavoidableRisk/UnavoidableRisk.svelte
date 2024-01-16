@@ -26,7 +26,7 @@
   const STORE = writable({});
   let threshold; // This holds the selected threshold
 
-  export let title;
+  export let tagline;
 
   /** @type {Array} A list of currently selected scenarios.
   This is nesecssary because of the two modes: The user can select scenarios in Future Impacts.
@@ -205,7 +205,7 @@
     }}
   >
     <ChartFrame
-      tagline={title}
+      {tagline}
       title={asyncProps.title}
       description={asyncProps.description}
       templateProps={props}

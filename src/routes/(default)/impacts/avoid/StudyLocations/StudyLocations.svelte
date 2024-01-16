@@ -11,7 +11,7 @@
   import Map from './Map.svelte';
 
   export let store;
-  export let title;
+  export let tagline;
 
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
@@ -64,7 +64,7 @@
     ...$TEMPLATE_PROPS,
   }}
 >
-  <ChartFrame title={asyncProps.title} tagline={title} description={asyncProps.description} chartUid={END_AVOIDING_IMPACTS} templateProps={props} hasDownload={false}>
+  <ChartFrame title={asyncProps.title} {tagline} description={asyncProps.description} chartUid={END_AVOIDING_IMPACTS} templateProps={props} hasDownload={false}>
     <div class="grid gap-x-2 gap-y-6 grid-rows-[auto_auto] lg:grid-cols-[2fr_3fr] items-start">
       <Map studyLocations={asyncProps.studyLocations} />
       <Locations studyLocations={asyncProps.studyLocations} />

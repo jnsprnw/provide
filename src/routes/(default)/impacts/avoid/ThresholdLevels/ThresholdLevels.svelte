@@ -9,7 +9,7 @@
   import Text from './Text.svelte';
 
   export let store;
-  export let title;
+  export let tagline;
 
   $: !$IS_EMPTY_INDICATOR &&
     $IS_COMBINATION_AVAILABLE_INDICATOR &&
@@ -45,14 +45,7 @@
     ...$TEMPLATE_PROPS,
   }}
 >
-  <ChartFrame
-    title={asyncProps.title}
-    tagline={title}
-    description={asyncProps.description}
-    chartUid={END_AVOIDING_IMPACTS}
-    templateProps={props}
-    hasDownload={false}
-  >
+  <ChartFrame title={asyncProps.title} {tagline} description={asyncProps.description} chartUid={END_AVOIDING_IMPACTS} templateProps={props} hasDownload={false}>
     <Text data={asyncProps.thresholdLevelsData} />
   </ChartFrame>
   <LoadingPlaceholder slot="placeholder" />

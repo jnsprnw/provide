@@ -33,6 +33,7 @@
       disabled: !isValidSelection,
       props: {
         store: THRESHOLD_LEVELS_DATA,
+        tagline: 'Impact Level',
       },
     },
     {
@@ -43,6 +44,7 @@
       disabled: !isValidSelection,
       props: {
         store: THRESHOLD_LEVELS_DATA,
+        tagline: 'Locations',
       },
     },
     // {
@@ -70,7 +72,7 @@
   {#each sections as section}
     {#if !section.disabled}
       <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
-        <svelte:component this={section.component} title={section.title} {...section.props} />
+        <svelte:component this={section.component} {...section.props} />
       </section>
     {/if}
   {/each}
