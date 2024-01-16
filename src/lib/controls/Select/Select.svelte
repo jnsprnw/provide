@@ -10,18 +10,18 @@
   export let options = [];
   export let value;
   export let label;
-  export let uid;
+  export let uid = undefined;
   export let backgroundColor = 'bg-transparent';
   export let labelColor = 'text-theme-base';
   export let disabled = false;
 
   const dispatch = createEventDispatcher();
 
-  function handleChange() {
-    dispatch('change', { key: uid, value });
-  }
-
   $: selectId = uid || `select-${instance}`;
+
+  function handleChange() {
+    dispatch('change', { key: selectId, value });
+  }
 
   $: isIndicatorValue = uid === KEY_PARAMETER_INDICATOR_VALUE;
 
@@ -29,16 +29,14 @@
 </script>
 
 {#if !$IS_STATIC}
-  <div class="flex gap-2 items-center font-normal transition-colors border border-transparent"
-      class:rounded={isIndicatorValue}
-      class:bg-surface-base={isIndicatorValue}
-      class:px-3={isIndicatorValue}
-      class:border-theme-weakest={isIndicatorValue}>
-    <label
-      class="text-text-weaker text-sm"
-      class:text-theme-weaker={disabled}
-      for={selectId}>{label}</label
-    >
+  <div
+    class="flex gap-2 items-center font-normal transition-colors border border-transparent"
+    class:rounded={isIndicatorValue}
+    class:bg-surface-base={isIndicatorValue}
+    class:px-3={isIndicatorValue}
+    class:border-theme-weakest={isIndicatorValue}
+  >
+    <label class="text-text-weaker text-sm" class:text-theme-weaker={disabled} for={selectId}>{label}</label>
     <div class={`rounded overflow-hidden flex gap-x-1 border-0`}>
       <select
         class={`py-1.5 px-2 pr-4 text-right text-sm font-bold appearance-none aria-disabled:cursor-not-allowed ${backgroundColor} ${labelColor}`}

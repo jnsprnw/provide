@@ -22,15 +22,10 @@
   export let fill = false;
   export let fillId = null;
   export let fillColor = ['coalesce', ['get', 'fillColor'], ['get', 'color']];
-  export let fillOpacity = [
-    'coalesce',
-    ['get', 'fillOpacity'],
-    ['get', 'opacity'],
-    1,
-  ];
+  export let fillOpacity = ['coalesce', ['get', 'fillOpacity'], ['get', 'opacity'], 1];
 
   export let label = false;
-  export let labelId;
+  export let labelId = undefined;
   export let labelField = 'label';
 
   const { map, source } = getContext('mapbox');

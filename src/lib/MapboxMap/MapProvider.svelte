@@ -14,7 +14,7 @@
   export let bearing = 0;
   export { _map as map };
 
-  export let style;
+  export let style = undefined;
   export let projection = 'mercator';
   export let interactive = true;
   export let bounds;
@@ -108,12 +108,7 @@
   }
 </script>
 
-<div
-  class:hide-logo={hideLogo}
-  class="map w-full h-full hide-logo {projection} {clazz}"
-  bind:clientWidth
-  bind:this={node}
->
+<div class:hide-logo={hideLogo} class="map w-full h-full hide-logo {projection} {clazz}" bind:clientWidth bind:this={node}>
   {#if $ready}
     <slot />
   {/if}
