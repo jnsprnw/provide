@@ -58,10 +58,6 @@
   ];
 </script>
 
-<svelte:head>
-  <title>Avoiding Impacts</title>
-</svelte:head>
-
 <ScrollContent let:query {sections} isFullWidth={true} hasActiveScetionBar={true}>
   <aside slot="navigation" class="flex flex-col gap-4 pb-24">
     <div class="mr-2 mb-2 border-b border-contour-weakest pb-6 flex flex-col gap-y-6 pr-6 lg:pr-12">

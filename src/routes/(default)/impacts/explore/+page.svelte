@@ -51,10 +51,6 @@
   ];
 </script>
 
-<svelte:head>
-  <title>Explore Impacts</title>
-</svelte:head>
-
 <ScrollContent let:query {sections} isFullWidth={true} hasActiveScetionBar={true}>
   <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />
