@@ -3,14 +3,16 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
+  import ContentPageIntro from '$lib/helper/ContentPages/ContentPageIntro.svelte';
   export let data;
 
   $: sections = data.content;
 </script>
 
+<ContentPageIntro title={LABEL_ABOUT} intro="Lorem ipsum" />
+
 <ScrollContent {sections}>
   <NestedNav slot="navigation" {sections} />
-  <h1 class="text-5xl font-bold mb-12">{LABEL_ABOUT}</h1>
   {#each sections as section}
     <section class="mb-8">
       <SectionDefault {...section} />

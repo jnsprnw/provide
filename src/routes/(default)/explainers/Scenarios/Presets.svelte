@@ -4,6 +4,7 @@
   import { KEY_SCENARIOPRESET_UID as PRESET_ID } from '$config';
   import Tagline from '$lib/helper/Tagline.svelte';
   import SideScrollIndicator from '$lib/helper/SideScrollIndicator.svelte';
+  import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
 
   const dispatch = createEventDispatcher();
 
@@ -57,17 +58,9 @@
 
 {#if scenarioPresetsForCurrentTimeframe.length}
   <div>
-    <Tagline class="mb-2">Scenarios: learn about scenarios and what they can be used for.</Tagline>
-    <SideScrollIndicator
-      widthOfContent={widthContent}
-      distanceLeft={0}
-      distanceRight={0}
-    >
-      <div
-        class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]"
-        style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);"
-        bind:clientWidth={widthContent}
-      >
+    <SubsectionHeadline title="Scenarios" subtitle="Click on a research question and see the preselected scenarios that can answer it." slug="presets" />
+    <SideScrollIndicator widthOfContent={widthContent} distanceLeft={0} distanceRight={0}>
+      <div class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]" style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);" bind:clientWidth={widthContent}>
         {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
           {@const checked = value === $currentPreset}
           <button
@@ -77,14 +70,8 @@
             style="grid-template-rows: subgrid; grid-row: span 2;"
             on:click={() => click(value)}
           >
-            <div
-              class="grid py-2"
-              style="grid-template-rows: subgrid; grid-row: span 2;"
-            >
-              <span
-                class="text-sm text-theme-base font-bold text-theme"
-                class:text-theme-stronger={checked}
-              >
+            <div class="grid py-2" style="grid-template-rows: subgrid; grid-row: span 2;">
+              <span class="text-sm text-theme-base font-bold text-theme" class:text-theme-stronger={checked}>
                 {title}
               </span>
               <span class="text-xs">{description}</span>

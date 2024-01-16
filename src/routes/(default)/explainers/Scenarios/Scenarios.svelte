@@ -4,13 +4,12 @@
   import Warning from './Warning.svelte';
   import Chart from './Chart.svelte';
   import Table from './Table/Table.svelte';
-  import Tagline from '$lib/helper/Tagline.svelte';
+  import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
   import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
   import { writable } from 'svelte/store';
   import { extractTimeframe } from '$utils/meta.js';
   import THEME from '$styles/theme-store.js';
   import { MAX_NUMBER_SELECTABLE_SCENARIOS, MEAN_TEMPERATURE_UID, EMISSIONS_UID, PATH_DOCUMENTATION } from '$config';
-  import _ from 'lodash-es';
   import DefinitionItem from '$lib/helper/chart-description/DefinitionItem.svelte';
   import { getContext } from 'svelte';
   const { query } = getContext('scrollContent');
@@ -43,7 +42,7 @@
 
 <div class="flex flex-col gap-y-10 mt-10 pt-10 {query}">
   <div>
-    <Tagline class="mb-2">Pick a timeframe</Tagline>
+    <SubsectionHeadline title="Pick a timeframe" subtitle="2100 for the majority of climate impacts, 2300 for longer term impacts (glaciers and oceans)." slug="timeframe" />
     <PillGroup bind:currentUid={selectedTimeframe} options={selectableTimeframes} />
   </div>
 

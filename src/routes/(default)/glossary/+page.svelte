@@ -1,9 +1,7 @@
 <script>
   import SectionHeadline from '$lib/helper/ContentPages/SectionHeadline.svelte';
   import TermSection from './TermSection.svelte';
-  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
-  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
-  import PageIntro from '$lib/site/PageIntro.svelte';
+  import ContentPageLayout from '$lib/helper/ContentPages/ContentPageLayout.svelte';
   import { LABEL_GLOSSARY } from '$config';
   export let data;
 
@@ -21,21 +19,4 @@
   ];
 </script>
 
-<PageIntro>
-  <div class="flex flex-col gap-y-3.5">
-    <h1 class="text-4xl font-bold">{LABEL_GLOSSARY}</h1>
-    <p class="max-w-xl">Lorem ipsum dolor</p>
-  </div>
-</PageIntro>
-
-<ScrollContent {sections} isFullWidth={true}>
-  <NestedNav slot="navigation" {sections} />
-  {#each sections as section}
-    <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
-      <svelte:component this={section.component} {...section.props} />
-      {#each section.sections as part}
-        <svelte:component this={part.component} {...part.props} />
-      {/each}
-    </section>
-  {/each}
-</ScrollContent>
+<ContentPageLayout {sections} title={LABEL_GLOSSARY} intro="Lorem ipsum" />

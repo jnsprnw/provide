@@ -2,10 +2,8 @@
   import ModelSection from './ModelSection.svelte';
   import ScenarioSection from './BaseSection.svelte';
   import SectionIntro from './SectionIntro.svelte';
-  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
-  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
+  import ContentPageLayout from '$lib/helper/ContentPages/ContentPageLayout.svelte';
   import { ANCHOR_DOCS_SCENARIOS, ANCHOR_DOCS_MODELS, ANCHOR_DOCS_DATA_PROCESSING, LABEL_DOCUMENTATION } from '$config';
-  import PageIntro from '$lib/site/PageIntro.svelte';
 
   export let data;
 
@@ -50,23 +48,4 @@
   ];
 </script>
 
-<PageIntro>
-  <div class="flex flex-col gap-y-3.5">
-    <h1 class="text-4xl font-bold">{LABEL_DOCUMENTATION}</h1>
-    <p class="max-w-xl">Learn more about the methodology and the models used to create the data visualised on this dashboard.</p>
-  </div>
-</PageIntro>
-
-<ScrollContent {sections}>
-  <NestedNav slot="navigation" {sections} />
-  {#each sections as section}
-    {#if section.content}
-      <section class="mb-8">
-        <svelte:component this={section.component} {...section.props} />
-        {#each section.sections as part}
-          <svelte:component this={part.component} {...part.props} />
-        {/each}
-      </section>
-    {/if}
-  {/each}
-</ScrollContent>
+<ContentPageLayout {sections} title={LABEL_DOCUMENTATION} intro="Learn more about the methodology and the models used to create the data visualised on this dashboard." />
