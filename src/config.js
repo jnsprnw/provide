@@ -124,13 +124,16 @@ export const IMPACT_GEO_YEARS = [
   },
 ];
 
+export const IMPACT_GEO_KEY_DIFFERENCE = 'difference';
+export const IMPACT_GEO_KEY_SIDE_BY_SIDE = 'side-by-side';
+
 export const IMPACT_GEO_DISPLAY_OPTIONS = [
   {
     label: 'Difference',
-    uid: 'difference',
+    uid: IMPACT_GEO_KEY_DIFFERENCE,
   },
   {
     label: 'Side by side',
-    uid: 'side-by-side',
+    uid: IMPACT_GEO_KEY_SIDE_BY_SIDE,
   },
 ];

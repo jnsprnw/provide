@@ -23,6 +23,8 @@
     URL_PATH_GEOGRAPHY_TYPE,
     URL_PATH_GEOGRAPHY,
     URL_PATH_SCENARIOS,
+    IMPACT_GEO_KEY_DIFFERENCE,
+    IMPACT_GEO_KEY_SIDE_BY_SIDE,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -37,7 +39,7 @@
 
   export let tagline;
   export let year = DEFAULT_IMPACT_GEO_YEAR;
-  export let displayOption = 'side-by-side';
+  export let displayOption = IMPACT_GEO_KEY_SIDE_BY_SIDE;
 
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
@@ -74,7 +76,7 @@
   }
 
   $: process = ({ data, shape }, { scenarios, urlParams }) => {
-    const showDifference = data.length === 2 && displayOption === 'difference';
+    const showDifference = data.length === 2 && displayOption === IMPACT_GEO_KEY_DIFFERENCE;
     const isMultipMap = data.length > 1 && !showDifference;
 
     // The data that is actually being rendered
