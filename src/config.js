@@ -37,7 +37,9 @@ export const END_AVOIDING_REFERENCE = 'avoiding-reference';
 
 export const STATUS_LOADING = 'loading';
 export const STATUS_SUCCESS = 'success';
+export const STATUS_PROCESSING = 'processing';
 export const STATUS_FAILED = 'failed';
+export const STATUS_IDLE = 'idle';
 
 export const UID_WORLD = 'world'; // TODO: There is no world so far
 export const KEY_MODEL = 'model';

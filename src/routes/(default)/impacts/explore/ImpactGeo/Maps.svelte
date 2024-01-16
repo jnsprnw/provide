@@ -1,6 +1,5 @@
 <script>
   import mask from '@turf/mask';
-  import intersect from '@turf/intersect';
   import syncMaps from '@mapbox/mapbox-gl-sync-move';
   import Legend from './Legend.svelte';
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
@@ -11,13 +10,44 @@
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
-  import { featureCollection } from '@turf/helpers';
-  import { rewind } from '$lib/utils/geo-rewind.js';
+  import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
+  import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED } from '$config';
+  import Spinner from '$lib/helper/Spinner.svelte';
+  import { reduce } from 'lodash-es';
 
   export let geoData;
   export let geoShape;
   export let colorScale;
   export let unit;
+
+  let status = STATUS_IDLE;
+
+  let mapMasker;
+
+  async function initGeoMasker() {
+    if (mapMasker) {
+      return true;
+    }
+    if (browser) {
+      // prevent the script from being executed server-side
+      if (window.Worker) {
+        const MyWorker = await import('$lib/workers/geomask.js?worker');
+        mapMasker = new MyWorker.default();
+
+        mapMasker.onmessage = function (e) {
+          maskedGeoData = e.data;
+          status = STATUS_IDLE;
+        };
+        return true;
+      }
+    }
+    return false;
+  }
+
+  onMount(async () => {
+    initGeoMasker();
+  });
 
   let maps = [];
   const theme = getContext('theme');
@@ -27,38 +57,44 @@
     syncMaps(newMaps);
   }
 
-  function createMaske(geoData, geoShape) {
-    // console.log(geoData, geoShape);
+  async function createMaske(geoData, geoShape) {
+    status = STATUS_PROCESSING;
+    const hasWorker = await initGeoMasker();
+    if (hasWorker) {
+      // console.log({ geoData, geoShape });
+      const plainGeoData = geoData.map(({ data, label }) => ({ features: data.features, label }));
+      mapMasker.postMessage({ geoData: plainGeoData, geoShape });
+    } else {
+      status = STATUS_FAILED;
+    }
     // We need to build our own masking of the data and the shapefile of the geo shape provided by the API
-    return geoData.map((datum) => {
-      // Loop through the different data layer
-      const features = rewind(datum.data.features).map((feature) => {
-        // The feature collection consists of multiple features. They all need to be masked individually
-        // We calculate the intersection of the feature (data layer) and the geo shape
-        let intersection = feature;
-        try {
-          intersection = intersect(feature, geoShape);
-        } catch (error) {
-          // console.error(error);
-          console.warn(`Invalid geography`);
-          console.log({ feature });
-          intersection = feature;
-        }
-        // const intersection = intersect(feature, geoShape);
-        return {
-          ...intersection,
-          properties: {
-            // because the properties are lost by the intersection, we add them again
-            ...feature.properties,
-          },
-        };
-      });
-      // We rebuild the geo data object
-      return {
-        ...datum,
-        data: featureCollection(features), // The individual features are combined to a feature collection again
-      };
-    });
+    // maskedGeoData = geoData.map((datum) => {
+    //   // Loop through the different data layer
+    //   const features = rewind(datum.data.features).map((feature) => {
+    //     // The feature collection consists of multiple features. They all need to be masked individually
+    //     // We calculate the intersection of the feature (data layer) and the geo shape
+    //     let intersection = feature;
+    //     try {
+    //       intersection = intersect(feature, geoShape);
+    //     } catch (error) {
+    //       // console.error(error);
+    //       console.warn(`Invalid geography`);
+    //       intersection = feature;
+    //     }
+    //     return {
+    //       ...intersection,
+    //       properties: {
+    //         // because the properties are lost by the intersection, we add them again
+    //         ...feature.properties,
+    //       },
+    //     };
+    //   });
+    //   // We rebuild the geo data object
+    //   return {
+    //     label: datum.label,
+    //     data: featureCollection(features), // The individual features are combined to a feature collection again
+    //   };
+    // });
   }
 
   function invertShape(geoShape) {
@@ -71,8 +107,9 @@
     }
   }
 
-  $: maskedGeoData = createMaske(geoData, geoShape);
-  // $: console.log({ maskedGeoData });
+  $: createMaske(geoData, geoShape);
+
+  let maskedGeoData = [];
   // $: console.log({ geoShape }, isValid(geoShape));
   $: invertedGeoShape = invertShape(geoShape);
   let interactive = false;
@@ -85,72 +122,85 @@
   $: domainMedian = median(colorScale.domain());
   $: mediumColor = colorScale(domainMedian);
 
-  $: paint = [
-    'settlement-minor-label',
-    'settlement-major-label',
-    'settlement-subdivision-label',
-    'airport-label',
-    'water-point-label',
-    'water-line-label',
-    'natural-point-label',
-    'natural-line-label',
-    'waterway-label',
-    'road-label-simple',
-  ].map((uid) => {
-    return {
-      uid,
-      properties: [
-        {
-          uid: 'text-halo-color',
-          value: mediumColor,
-        },
-        {
-          uid: 'text-color',
-          value: '#ffffff',
-        },
-      ],
-    };
-  });
+  $: paint = [];
 
-  // $: console.log(bbox(geoShape));
+  // $: paint = [
+  //   'settlement-minor-label',
+  //   'settlement-major-label',
+  //   'settlement-subdivision-label',
+  //   'airport-label',
+  //   'water-point-label',
+  //   'water-line-label',
+  //   'natural-point-label',
+  //   'natural-line-label',
+  //   'waterway-label',
+  //   'road-label-simple',
+  // ].map((uid) => {
+  //   return {
+  //     uid,
+  //     properties: [
+  //       {
+  //         uid: 'text-halo-color',
+  //         value: mediumColor,
+  //       },
+  //       {
+  //         uid: 'text-color',
+  //         value: '#ffffff',
+  //       },
+  //     ],
+  //   };
+  // });
+  //
+  let label;
+
+  $: size = reduce(geoShape.geometry.coordinates, (sum, n) => sum + reduce(n, (s, m) => s + m.length, 0), 0);
+
+  $: switch (status) {
+    case STATUS_PROCESSING:
+      label = `Processing data with ${size} coordinates. Please wait.`;
+      break;
+    case STATUS_FAILED:
+      label = 'Error occured while processing the data.';
+      break;
+  }
 </script>
 
-<div class={`${aspectRatio} flex cols-${geoData.length} animate-defer-visibility relative`}>
+<div class={`${aspectRatio} flex cols-${geoData.length} gap-x-[1px] animate-defer-visibility relative rounded border border-contour-weakest`}>
   <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
     <Legend {unit} scale={colorScale} />
   </div>
+  {#if status !== STATUS_IDLE}
+    <div class="rounded flex items-center justify-center absolute top-0 left-0 w-full h-full py-2 px-2 bg-surface-base z-10">
+      <div class="flex justify-center flex-col gap-y-4">
+        {#if status === STATUS_PROCESSING}<Spinner size={15} strokeWidth={2} />{/if}
+        <span class="text-xs text-contour-weak">{label}</span>
+      </div>
+    </div>
+  {/if}
   {#key maskedGeoData.length}
-    {#each maskedGeoData as d, i}
+    {#each maskedGeoData as { data, label }, i}
       <div
         class:rounded-l={maskedGeoData.length === 1 || i === 0}
         class:rounded-r={maskedGeoData.length === 1 || i === maskedGeoData.length - 1}
-        class:border-r-0={maskedGeoData.length > 1 && i !== maskedGeoData.length - 1}
-        class="relative border border-contour-weakest overflow-hidden"
-        style={`width: ${100 / maskedGeoData.length}%`}
+        class:border-r-1={maskedGeoData.length > 1 && i !== maskedGeoData.length - 1}
+        class="w-full border-contour-weakest overflow-hidden relative"
       >
         <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0}>
           {#if invertedGeoShape}
             <DataSource data={invertedGeoShape}>
-              <!--<PolygonLayer
-              before="ocean-fill"
-              fillColor={'#fafafa'}
-              fill={true}
-              fillId="mask"
-              lineWidth={0.5}
-              lineColor={$theme.color.contour.base}
-            />-->
+              <!--<PolygonLayer before="ocean-fill" fillColor={'#fafafa'} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />-->
               <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
-              <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+              <!--<FilterLayer layer="settlement-minor-label" geo={geoShape} />-->
               <FilterLayer layer="settlement-major-label" geo={geoShape} />
             </DataSource>
           {/if}
-          <DataSource data={d.data}>
+          <DataSource {data}>
             <PolygonLayer fill={true} line={false} />
           </DataSource>
         </MapProvider>
-        {#if d.label}
+        {#if label}
           <div class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold">
-            {d.label}
+            {label}
           </div>
         {/if}
       </div>
