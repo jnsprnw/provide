@@ -27,7 +27,6 @@ function checkValidLikelihood(list, value = get(SELECTED_LIKELIHOOD_LEVEL)) {
 export const SELECTED_LIKELIHOOD_LEVEL = writable(getLocalStorage(LOCALSTORE_LIKELIHOOD, 'likely'));
 SELECTED_LIKELIHOOD_LEVEL.subscribe((value) => {
   if (browser && checkValidLikelihood(get(LIKELIHOODS), value)) {
-    console.log('LOCALSTORE_LIKELIHOOD', value);
     setLocalStorage(LOCALSTORE_LIKELIHOOD, value);
   }
 });
@@ -60,7 +59,6 @@ function checkValidStudyLocation(list, value = get(SELECTED_STUDY_LOCATION)) {
 export const SELECTED_STUDY_LOCATION = writable(getLocalStorage(LOCALSTORE_STUDY_LOCATION, 'city-average'));
 SELECTED_STUDY_LOCATION.subscribe((value) => {
   if (browser && checkValidStudyLocation(get(STUDY_LOCATIONS), value)) {
-    console.log('LOCALSTORE_STUDY_LOCATION', value);
     setLocalStorage(LOCALSTORE_STUDY_LOCATION, value);
   }
 });
