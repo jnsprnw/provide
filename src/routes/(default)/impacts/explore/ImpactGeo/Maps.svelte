@@ -24,6 +24,8 @@
   let status = STATUS_IDLE;
 
   let mapMasker;
+  let max = 0;
+  let current = 0;
 
   async function initGeoMasker() {
     if (mapMasker) {
@@ -36,8 +38,15 @@
         mapMasker = new MyWorker.default();
 
         mapMasker.onmessage = function (e) {
-          maskedGeoData = e.data;
-          status = STATUS_IDLE;
+          const { data, max: m, current: c } = e.data;
+          if (data?.length) {
+            maskedGeoData = data;
+            status = STATUS_IDLE;
+          }
+          if (c && m) {
+            current = c;
+            max = m;
+          }
         };
         return true;
       }
@@ -174,6 +183,7 @@
       <div class="flex justify-center flex-col gap-y-4">
         {#if status === STATUS_PROCESSING}<Spinner size={15} strokeWidth={2} />{/if}
         <span class="text-xs text-contour-weak">{label}</span>
+        {#if status === STATUS_PROCESSING}<progress {max} value={current}>{(100 / max) * current}%</progress>{/if}
       </div>
     </div>
   {/if}
