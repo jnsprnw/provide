@@ -26,29 +26,82 @@
 
   // The columns are described in arrays with the following function:
   // Label
+  // Tooltip
   // Access key in the scenario characteristics
   // Formatting function. In some cases it is in degrees or a value in a year. The fallback is a simple return of the value
   // The output of the function is used for the coloring. The fallback is a simple return of the value
   const COLUMNS = {
     2100: [
-      ['Peak GMT', 'gmtPeak', ([value, year]) => `${value}°C in ${year}`, ([value]) => value],
-      ['2100 GMT', 'gmt2100', (value) => `${value}°C`],
-      ['Cooling rate after peak', 'coolingRateAfterPeak', (value) => `${value}°C / decade`],
-      ['2050 emissions', 'emissions2050', (value) => `${value} GtCO₂eq/yr`],
-      ['2100 emissions', 'emissions2100', (value) => `${value} GtCO₂eq/yr`],
-      ['Timing of NZ CO₂', 'timingNZCO2', (value) => value],
-      ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
-      ['Likelihood PW < 1.5°C', 'likelihood15', (value) => formatValue(value, 'percent')],
-      ['Likelihood PW < 2°C', 'likelihood2', (value) => formatValue(value, 'percent')],
-      ['Likelihood PW < 3°C', 'likelihood3', (value) => formatValue(value, 'percent')],
+      [
+        'Peak <abbr title="global mean temperature">GMT</abbr>',
+        'The highest global mean temperature level reached before 2100, and the year in which it is reached.',
+        'gmtPeak',
+        ([value, year]) => `${value}°C in ${year}`,
+        ([value]) => value,
+      ],
+      ['2100 <abbr title="global mean temperature">GMT</abbr>', 'Global mean temperature in the year 2100.', 'gmt2100', (value) => `${value}°C`],
+      [
+        'Cooling rate after peak',
+        'Rate of decrease in global mean temperature after it reaches its highest point of the century, in °C per decade.',
+        'coolingRateAfterPeak',
+        (value) => `${value}°C / decade`,
+      ],
+      ['2050 emissions', 'Amount of greenhouse gas emissions emitted in the year 2050, expressed in gigatonnes of CO2 equivalent.', 'emissions2050', (value) => `${value} GtCO₂eq/yr`],
+      ['2100 emissions', 'Amount of greenhouse gas emissions emitted in the year 2100, expressed in gigatonnes of CO2 equivalent.', 'emissions2100', (value) => `${value} GtCO₂eq/yr`],
+      [
+        'Timing of <abbr title="net zero">NZ</abbr> CO₂',
+        'Year at which CO2 emissions have been reduced to a level where remaining emissions are offset by the removal of CO2 out of the atmosphere elsewhere.',
+        'timingNZCO2',
+        (value) => value,
+      ],
+      [
+        'Timing of <abbr title="net zero">NZ</abbr> <abbr title="greenhouse gas emissions">GHG</abbr>',
+        'Year at which greenhouse gas emissions (expressed in CO2 equivalent) have been reduced to a level where the remaining emissions are offset by the removal of emissions out of the atmosphere elsewhere.',
+        'timingNZGHG',
+        (value) => value,
+      ],
+      [
+        'Likelihood <abbr title="peak warming">PW</abbr> < 1.5°C',
+        'The likelihood of peak global mean temperature in the 21st century staying below 1.5°C.',
+        'likelihood15',
+        (value) => formatValue(value, 'percent'),
+      ],
+      [
+        'Likelihood <abbr title="peak warming">PW</abbr> < 2°C',
+        'The likelihood of peak global mean temperature in the 21st century staying below 2°C.',
+        'likelihood2',
+        (value) => formatValue(value, 'percent'),
+      ],
+      [
+        'Likelihood <abbr title="peak warming">PW</abbr> < 3°C',
+        'The likelihood of peak global mean temperature in the 21st century staying below 3°C.',
+        'likelihood3',
+        (value) => formatValue(value, 'percent'),
+      ],
     ],
     2300: [
-      ['Peak GMT', 'gmtPeak', ([value, year]) => `${value}°C in ${year}`, ([value]) => value],
-      ['2100 GMT', 'gmt2100', (value) => `${value}°C`],
-      ['2300 GMT', 'gmt2300', (value) => `${value}°C`],
-      ['Cooling after peak', 'coolingAfterPeak', (value) => `${value}°C`],
-      ['Timing of NZ CO2', 'timingNZCO2', (value) => value],
-      ['Timing of NZ GHG', 'timingNZGHG', (value) => value],
+      [
+        'Peak <abbr title="global mean temperature">GMT</abbr>',
+        'The highest global mean temperature level reached before 2100, and the year in which it is reached.',
+        'gmtPeak',
+        ([value, year]) => `${value}°C in ${year}`,
+        ([value]) => value,
+      ],
+      ['2100 <abbr title="global mean temperature">GMT</abbr>', 'Global mean temperature in the year 2100.', 'gmt2100', (value) => `${value}°C`],
+      ['2300 <abbr title="global mean temperature">GMT</abbr>', 'Global mean temperature in the year 2300.', 'gmt2300', (value) => `${value}°C`],
+      ['Cooling after peak', 'Amount of decrease in global mean temperature up to 2300 after it reaches its highest point, in °C per decade.', 'coolingAfterPeak', (value) => `${value}°C`],
+      [
+        'Timing of NZ CO2',
+        'Year at which CO2 emissions have been reduced to a level where remaining emissions are offset by the removal of CO2 out of the atmosphere elsewhere.',
+        'timingNZCO2',
+        (value) => value,
+      ],
+      [
+        'Timing of NZ GHG',
+        'Year at which greenhouse gas emissions (expressed in CO2 equivalent) have been reduced to a level where the remaining emissions are offset by the removal of emissions out of the atmosphere elsewhere.',
+        'timingNZGHG',
+        (value) => value,
+      ],
     ],
   };
 
@@ -59,7 +112,7 @@
     }[selectedTimeframe] ?? 250;
 
   // Get the values for each key and create color scales for each.
-  $: tableColumns = (COLUMNS[selectedTimeframe] ?? []).map(([label, key, formatting = (d) => d, get = (d) => d]) => {
+  $: tableColumns = (COLUMNS[selectedTimeframe] ?? []).map(([label, tooltip, key, formatting = (d) => d, get = (d) => d]) => {
     const values = scenariosListed.map((s) => get(s[KEY_CHARACTERISTICS][key]));
     const domain = extent(values);
     const scale = chroma
@@ -68,6 +121,7 @@
       .mode('lch');
     return {
       key,
+      tooltip,
       scale,
       label,
       formatting,
@@ -121,7 +175,7 @@
   $: maxWidth = tableColumns
     .map((_, i) => {
       const length = Math.max(9 * max(scenarios.map(({ values }) => values[i]?.label?.length ?? 0)), 80);
-      return `${length}px`;
+      return `minmax(${length}px,auto)`;
     })
     .join(' ');
 
@@ -136,10 +190,14 @@
         <div role="gridcell" class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3">
           <button on:click={$sorting === 'i' ? sortingDirection.update((v) => v * -1) : sorting.set('i')} class:font-bold={$sorting === 'i'}>Scenario</button>
         </div>
-        {#each tableColumns as { label, key }}
+        {#each tableColumns as { label, key, tooltip }}
           {@const isActive = $sorting === key}
-          <div role="gridcell" class="text-xs px-1 border-b-contour-weakest border-b flex items-end justify-center text-center leading-tight py-3">
-            <button on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)} class:font-bold={isActive}>{label}</button>
+          <div role="gridcell" class="text-xs px-1 border-b-contour-weakest border-b grid grid-cols-[16px_1fr_16px] gap-x-2 items-end justify-center text-center leading-tight py-3">
+            <span
+              >{#if isActive}{#if $sortingDirection > 0}↑{:else}↓{/if}{/if}</span
+            >
+            <button class="whitespace-nowrap" on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)} class:font-bold={isActive}>{@html label}</button>
+            <Info description={tooltip} />
           </div>
         {/each}
       </div>
@@ -159,7 +217,7 @@
             <div
               aria-disabled={disabled}
               style="border-left-color: {borderColorLeft}"
-              class=" aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_auto_1fr_1rem] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
+              class="aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_auto_1fr_1rem] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
               role="gridcell"
             >
               <input {disabled} aria-disabled={disabled} tabindex="-1" id={uid} type="checkbox" name="scenarios" value={uid} bind:group={selectedScenarios} />
