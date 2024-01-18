@@ -1,9 +1,9 @@
 <script>
-  import InteractiveListItem from '$lib/controls/InteractiveListItem.svelte';
-  import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
+  import { RadioGroup } from '@rgossiaux/svelte-headlessui';
+  import GeographyGroup from './GeographyGroup.svelte';
   import Fuse from 'fuse.js';
 
-  import { sortBy } from 'lodash-es';
+  import { sortBy, groupBy } from 'lodash-es';
 
   export let items = [];
   export let currentUid;
@@ -12,7 +12,7 @@
 
   const options = {
     includeScore: true,
-    keys: ['label', 'uid'],
+    keys: ['label', 'uid', 'group'],
     includeMatches: true,
   };
 
@@ -27,8 +27,10 @@
     ['item.label']
   );
 
+  $: hasSearchTerm = String(term).trim().length;
+
   // Search with default options
-  $: results = (term === '' ? defaultResults : fuse.search(term)).map(({ item, matches }) => {
+  $: results = (!hasSearchTerm ? defaultResults : fuse.search(term)).map(({ item, matches }) => {
     let label = item.label;
     // Highlighting matching substrings
     if (matches) {
@@ -67,6 +69,13 @@
     };
   });
 
+  $: groupedItems = !hasSearchTerm ? groupResults(results) : undefined;
+
+  function groupResults(results) {
+    const groups = groupBy(results, 'group');
+    return sortBy(Object.entries(groups), '0');
+  }
+
   function onSearchInput() {
     box.scrollTo({ top: 0 });
   }
@@ -82,11 +91,14 @@
     <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
       {#key results.length}
         {#if results.length}
-          {#each results as { icon, uid, label, emoji }}
-            <RadioGroupOption value={uid} let:checked class="focus:bg-surface-weaker focus:outline-none">
-              <InteractiveListItem icon={icon ?? emoji} {label} {uid} selected={checked} bind:hovered={hoveredItem} />
-            </RadioGroupOption>
-          {/each}
+          {#if hasSearchTerm}
+            <GeographyGroup group={results} bind:hoveredItem />
+          {:else}
+            {#each groupedItems as [key, group]}
+              <span class="mx-5 mb-1 block text-xs text-text-weaker uppercase tracking-wide border-b border-b-contour-weakest mt-4">{key}</span>
+              <GeographyGroup {group} bind:hoveredItem />
+            {/each}
+          {/if}
         {:else}
           <span class="text-xs py-1 px-5 block text-text-weaker" role="status">Could not find any geographies for this type.</span>
         {/if}
