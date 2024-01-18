@@ -66,23 +66,31 @@
       matches,
     };
   });
+
+  function onSearchInput() {
+    box.scrollTo({ top: 0 });
+  }
+
+  let box;
 </script>
 
 <div class="md:border-r border-contour-weakest pb-0 flex flex-col items-stretch" style="min-width: 0;">
   <div class="px-5 grow flex items-stretch my-4">
-    <input type="search" class="px-2 py-2 leading-8 border w-full" bind:value={term} placeholder={`Search for ${geographyTypeLabel}…`} />
+    <input type="search" class="px-2 py-2 leading-8 border w-full" on:input={onSearchInput} bind:value={term} placeholder={`Search for ${geographyTypeLabel}…`} />
   </div>
-  <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="h-96 w-full overflow-y-scroll overflow-x-hidden">
-    {#key results.length}
-      {#if results.length}
-        {#each results as { icon, uid, label, emoji }}
-          <RadioGroupOption value={uid} let:checked class="focus:bg-surface-weaker focus:outline-none">
-            <InteractiveListItem icon={icon ?? emoji} {label} {uid} selected={checked} bind:hovered={hoveredItem} />
-          </RadioGroupOption>
-        {/each}
-      {:else}
-        <span class="text-xs py-1 px-5 block text-text-weaker" role="status">Could not find any geographies for this type.</span>
-      {/if}
-    {/key}
-  </RadioGroup>
+  <div bind:this={box} class="h-96 w-full overflow-y-scroll overflow-x-hidden">
+    <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
+      {#key results.length}
+        {#if results.length}
+          {#each results as { icon, uid, label, emoji }}
+            <RadioGroupOption value={uid} let:checked class="focus:bg-surface-weaker focus:outline-none">
+              <InteractiveListItem icon={icon ?? emoji} {label} {uid} selected={checked} bind:hovered={hoveredItem} />
+            </RadioGroupOption>
+          {/each}
+        {:else}
+          <span class="text-xs py-1 px-5 block text-text-weaker" role="status">Could not find any geographies for this type.</span>
+        {/if}
+      {/key}
+    </RadioGroup>
+  </div>
 </div>
