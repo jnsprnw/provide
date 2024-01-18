@@ -16,21 +16,13 @@
 </script>
 
 <div class="relative">
-  <div
-    class="w-full overflow-x-scroll scrollbar-hide"
-    bind:clientWidth={widthOfWrapper}
-    bind:this={table}
-    on:scroll={() => (sleft = table.scrollLeft)}
-  >
+  <div class="w-full overflow-x-scroll scrollbar-hide" bind:clientWidth={widthOfWrapper} bind:this={table} on:scroll={() => (sleft = table.scrollLeft)}>
     <slot />
   </div>
-  <i
-    class="block absolute top-0 h-full bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
-    class:opacity-100={sleft > padding}
-    style="left: {distanceLeft}px;"
+  <i class="block absolute top-0 h-full border-l border-l-contour-base/10 bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity" class:opacity-100={sleft > padding} style="left: {distanceLeft}px;"
   ></i>
   <i
-    class="block absolute top-0 h-full bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
+    class="block absolute top-0 h-full border-r border-r-contour-base/10 bg-contour-base/10 w-2 z-10 opacity-0 transition-opacity"
     class:opacity-100={sleft < widthOfContent - widthOfWrapper - padding}
     style="right: {distanceRight}px;"
   ></i>
