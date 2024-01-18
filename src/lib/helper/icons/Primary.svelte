@@ -6,7 +6,7 @@
 
 <svg
   xmlns="http://www.w3.org/2000/svg"
-  class="w-3.5 h-3.5 text-contour-weaker transition-colors"
+  class="w-3.5 h-3.5 text-contour-weaker transition-colors mt-[1.5px]"
   viewBox="0 0 16 16"
   stroke-width="2"
   class:text-theme-base={isSelected}
@@ -17,11 +17,7 @@
   stroke-linejoin="round"
   use:tooltip={{ content: 'Primary scenario' }}
 >
-  <path
-    stroke="none"
-    d="M0 0h16v16H0z"
-    fill="none"
-  ></path>
+  <path stroke="none" d="M0 0h16v16H0z" fill="none"></path>
   <path
     fill-rule="evenodd"
     clip-rule="evenodd"
