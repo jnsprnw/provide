@@ -10,53 +10,94 @@
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
   import InteractivityOverlay from './InteractivityOverlay.svelte';
   import { median } from 'd3-array';
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
-  import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED } from '$config';
+  import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED, WORKER_MESSAGE_START, STATUS_FINISHED } from '$config';
   import Spinner from '$lib/helper/Spinner.svelte';
   import { reduce } from 'lodash-es';
+  import { formatValue } from '$formatting';
 
   export let geoData;
   export let geoShape;
   export let colorScale;
   export let unit;
 
-  let status = STATUS_IDLE;
+  let workerStatus = STATUS_IDLE;
+  let workerMessage;
 
-  let mapMasker;
-  let max = 0;
-  let current = 0;
+  let maskWorker;
+  let workerStepsTotal = 0;
+  let workerStepsCurrent = 0;
 
   async function initGeoMasker() {
-    if (mapMasker) {
-      return true;
-    }
+    // This function initiates the web worker
     if (browser) {
-      // prevent the script from being executed server-side
+      // Check if we are in a browser
       if (window.Worker) {
-        const MyWorker = await import('$lib/workers/geomask.js?worker');
-        mapMasker = new MyWorker.default();
+        // Check if the browser supports web worker
+        // We reset some values we use to visualise the progress
+        workerStatus = STATUS_IDLE;
+        workerStepsCurrent = 0;
+        workerStepsTotal = 0;
+        maskedGeoData = [];
+        workerMessage = undefined;
 
-        mapMasker.onmessage = function (e) {
-          const { data, max: m, current: c } = e.data;
-          if (data?.length) {
-            maskedGeoData = data;
-            status = STATUS_IDLE;
-          }
-          if (c && m) {
-            current = c;
-            max = m;
-          }
-        };
-        return true;
+        const MyWorker = await import('$workers/geomask.js?worker');
+        maskWorker = new MyWorker.default();
+
+        if (!maskWorker) {
+          workerStatus = STATUS_FAILED;
+          workerMessage = 'Could not initiate web worker.';
+        } else {
+          maskWorker.onmessage = function (e) {
+            const { data, stepsTotal, stepsCurrent, status, message } = e.data;
+            if (status) {
+              workerStatus = status;
+            }
+            if (message) {
+              workerMessage = message;
+            }
+            // This checks what the status of the message is
+            switch (status) {
+              case STATUS_FINISHED:
+                // Save the result returned from the web worker
+                maskedGeoData = data;
+                break;
+              case STATUS_PROCESSING:
+                // Save the current step number and total number of steps
+                workerStepsCurrent = stepsCurrent;
+                workerStepsTotal = stepsTotal;
+                break;
+            }
+          };
+        }
       }
     }
-    return false;
   }
 
-  onMount(async () => {
+  onMount(() => {
+    // Initiate the web worker when the component in mounted
     initGeoMasker();
   });
+
+  onDestroy(() => {
+    // Terminate any web worker task that might be running when the component is destroyed.
+    terminateWorker();
+  });
+
+  async function stopWorker() {
+    // This seams to be the least hacky way of stopping a worker.
+    // It would be nice to just cancel the function instead of terminating and reinitiating the worker.
+    terminateWorker();
+    await initGeoMasker();
+  }
+
+  function terminateWorker() {
+    // Check if there is a worker present. This is sometimes nessecary when parts of the website reload.
+    if (maskWorker) {
+      maskWorker.terminate();
+    }
+  }
 
   let maps = [];
   const theme = getContext('theme');
@@ -67,14 +108,20 @@
   }
 
   async function createMaske(geoData, geoShape) {
-    status = STATUS_PROCESSING;
-    const hasWorker = await initGeoMasker();
-    if (hasWorker) {
+    if (maskWorker) {
+      // If there is a worker currently running
+      if (workerStatus === STATUS_PROCESSING) {
+        // Stop the currently runnning worker
+        await stopWorker();
+      }
       // We need to rebuild the geoData to only include the needed and plain data that can be stringified in the web worker message
       const plainGeoData = geoData.map(({ data, label }) => ({ features: data.features, label }));
-      mapMasker.postMessage({ geoData: plainGeoData, geoShape });
+      workerStatus = STATUS_PROCESSING;
+      workerMessage = undefined;
+      maskWorker.postMessage({ geoData: plainGeoData, geoShape, message: WORKER_MESSAGE_START });
     } else {
-      status = STATUS_FAILED;
+      workerStatus = STATUS_FAILED;
+      workerMessage = 'No web worker found. Could not process data.';
     }
   }
 
@@ -88,7 +135,12 @@
     }
   }
 
-  $: createMaske(geoData, geoShape);
+  // We need a Boolean value for the next step
+  $: hasWorker = Boolean(maskWorker);
+  // This is used to trigger the creation of the mask.
+  // It is depended on the hasWorker Boolean. This is because when the page loads and geoData and geoShape is available, but the worker is not ready
+  // We use the Boolean value because we do not want to trigger this step, when a new worker is created, but only if the worker becomes available
+  $: hasWorker && createMaske(geoData, geoShape);
 
   let maskedGeoData = [];
   // $: console.log({ geoShape }, isValid(geoShape));
@@ -136,12 +188,12 @@
 
   $: size = reduce(geoShape.geometry.coordinates, (sum, n) => sum + reduce(n, (s, m) => s + m.length, 0), 0);
 
-  $: switch (status) {
+  $: switch (workerStatus) {
     case STATUS_PROCESSING:
-      label = `Processing data with ${size} coordinates. Please wait.`;
+      label = workerMessage ?? `Processing data with ${formatValue(size, 'integer')} coordinates. Please wait.`;
       break;
     case STATUS_FAILED:
-      label = 'Error occured while processing the data.';
+      label = workerMessage ?? 'Error occured while processing the data.';
       break;
   }
 </script>
@@ -150,12 +202,12 @@
   <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
     <Legend {unit} scale={colorScale} />
   </div>
-  {#if status !== STATUS_IDLE}
+  {#if ![STATUS_FINISHED, STATUS_IDLE].includes(workerStatus)}
     <div class="rounded flex items-center justify-center absolute top-0 left-0 w-full h-full py-2 px-2 bg-surface-base z-10">
       <div class="flex justify-center flex-col gap-y-4">
-        {#if status === STATUS_PROCESSING}<Spinner size={15} strokeWidth={2} />{/if}
+        {#if workerStatus === STATUS_PROCESSING}<Spinner size={15} strokeWidth={2} />{/if}
         <span class="text-xs text-contour-weak">{label}</span>
-        {#if status === STATUS_PROCESSING}<progress {max} value={current}>{(100 / max) * current}%</progress>{/if}
+        {#if workerStatus === STATUS_PROCESSING}<progress max={workerStepsTotal} value={workerStepsCurrent}>{(100 / workerStepsTotal) * workerStepsCurrent}%</progress>{/if}
       </div>
     </div>
   {/if}

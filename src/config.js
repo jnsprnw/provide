@@ -40,6 +40,7 @@ export const STATUS_SUCCESS = 'success';
 export const STATUS_PROCESSING = 'processing';
 export const STATUS_FAILED = 'failed';
 export const STATUS_IDLE = 'idle';
+export const STATUS_FINISHED = 'finished';
 
 export const UID_WORLD = 'world'; // TODO: There is no world so far
 export const KEY_MODEL = 'model';
@@ -139,3 +140,5 @@ export const IMPACT_GEO_DISPLAY_OPTIONS = [
     uid: IMPACT_GEO_KEY_SIDE_BY_SIDE,
   },
 ];
+
+export const WORKER_MESSAGE_START = 'worker_start';

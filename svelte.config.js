@@ -17,6 +17,8 @@ const config = {
       $stores: 'src/stores',
       $helper: 'src/lib/helper',
       $routes: 'src/routes',
+      $workers: 'src/lib/workers',
+      $formatting: 'src/lib/utils/formatting.js',
     },
     adapter: adapter(),
   },
