@@ -70,40 +70,12 @@
     status = STATUS_PROCESSING;
     const hasWorker = await initGeoMasker();
     if (hasWorker) {
-      // console.log({ geoData, geoShape });
+      // We need to rebuild the geoData to only include the needed and plain data that can be stringified in the web worker message
       const plainGeoData = geoData.map(({ data, label }) => ({ features: data.features, label }));
       mapMasker.postMessage({ geoData: plainGeoData, geoShape });
     } else {
       status = STATUS_FAILED;
     }
-    // We need to build our own masking of the data and the shapefile of the geo shape provided by the API
-    // maskedGeoData = geoData.map((datum) => {
-    //   // Loop through the different data layer
-    //   const features = rewind(datum.data.features).map((feature) => {
-    //     // The feature collection consists of multiple features. They all need to be masked individually
-    //     // We calculate the intersection of the feature (data layer) and the geo shape
-    //     let intersection = feature;
-    //     try {
-    //       intersection = intersect(feature, geoShape);
-    //     } catch (error) {
-    //       // console.error(error);
-    //       console.warn(`Invalid geography`);
-    //       intersection = feature;
-    //     }
-    //     return {
-    //       ...intersection,
-    //       properties: {
-    //         // because the properties are lost by the intersection, we add them again
-    //         ...feature.properties,
-    //       },
-    //     };
-    //   });
-    //   // We rebuild the geo data object
-    //   return {
-    //     label: datum.label,
-    //     data: featureCollection(features), // The individual features are combined to a feature collection again
-    //   };
-    // });
   }
 
   function invertShape(geoShape) {
