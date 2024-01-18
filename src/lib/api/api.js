@@ -56,7 +56,7 @@ const fetchMultiple = (store, configs) => {
     isObject ? {} : []
   );
 
-  console.log(urls);
+  // console.log(urls);
 
   // Create array or object containing either cached data or empty objects
   const initialData = reduce(
