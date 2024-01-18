@@ -36,7 +36,7 @@
   import { getColorScale, coordinatesToRectGrid, calculateDifference, coordinatesToContours } from '$utils/geo.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
-  import simplify from '@turf/simplify';
+  // import simplify from '@turf/simplify';
 
   export let tagline;
   export let year = DEFAULT_IMPACT_GEO_YEAR;
@@ -153,12 +153,12 @@
     const geoShape = shape.data.data.features.find((feature) => feature.properties.uid === urlParams.geography) ?? shape.data.data.features[0];
     // console.log(urlParams, data);
     //
-    console.log({ geoShape });
+    // console.log({ geoShape });
 
     return {
       showDifference,
       geoData,
-      geoShape: simplify(geoShape, { tolerance: 0.05, highQuality: true }), // shape.data.data.features[0],
+      geoShape: geoShape, // shape.data.data.features[0],
       title: data[0].data.title,
       description: data[0].data.description,
       colorScale,
