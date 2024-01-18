@@ -2,7 +2,6 @@
   import { createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
   import { KEY_SCENARIOPRESET_UID as PRESET_ID } from '$config';
-  import Tagline from '$lib/helper/Tagline.svelte';
   import SideScrollIndicator from '$lib/helper/SideScrollIndicator.svelte';
   import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
 
