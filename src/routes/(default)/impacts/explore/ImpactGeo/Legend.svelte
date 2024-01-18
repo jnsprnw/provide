@@ -1,7 +1,7 @@
 <script>
-  import { formatValue, formatRange } from '$lib/utils/formatting';
+  import { formatRange } from '$lib/utils/formatting';
 
-  import { rgb, hsl } from 'd3-color';
+  import { hsl } from 'd3-color';
   import { scaleLinear } from 'd3-scale';
   import { getContext } from 'svelte';
 
@@ -19,9 +19,7 @@
   // Find the range to position x ticks and the gradient values
   // If scale is not sequential, the middle point is calculated depending on the
   // ratio between the range above and below zero
-  $: xRange = isSequential
-    ? [0, width]
-    : [0, Math.abs((domain[0] / domainDelta) * width), width];
+  $: xRange = isSequential ? [0, width] : [0, Math.abs((domain[0] / domainDelta) * width), width];
   $: colorScale = scaleLinear().domain(xRange).range(range);
   $: xScale = scaleLinear().domain(domain).range(xRange);
   $: tick = isSequential ? [domain[0] + domainDelta / 2] : [0];
@@ -47,36 +45,21 @@
     }
   })();
 
-  $: [min, middle, max] = formatRange(
-    [domain[0], tick, domain[domain.length - 1]],
-    unit.uid
-  ).values;
+  $: [min, middle, max] = formatRange([domain[0], tick, domain[domain.length - 1]], unit.uid).values;
 </script>
 
 <div class="flex items-center">
-  <span class="text-xs text-contour-weak leading-3 text-end"
-    >Below<br /><span class="text-contour-base font-bold">{min}</span></span
-  >
-  <div
-    class="w-40 h-[20px] mx-2"
-    bind:clientWidth={width}
-    bind:clientHeight={height}
-  >
+  <span class="text-xs text-contour-weak leading-3 text-end">Below<br /><span class="text-contour-base font-bold">{min}</span></span>
+  <div class="w-40 h-[20px] mx-2" bind:clientWidth={width} bind:clientHeight={height}>
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
       <span
         style={`left: ${xScale(tick)}px;`}
-        style:color={getContrastColor(
-          colorAtTick,
-          $theme.color.surface.base,
-          $theme.color.contour.base
-        )}
+        style:color={getContrastColor(colorAtTick, $theme.color.surface.base, $theme.color.contour.base)}
         class="absolute text-xs text-surface-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
         >{middle}
       </span>
     </div>
   </div>
-  <span class="text-xs text-contour-weak leading-3"
-    >Above<br /><span class="text-contour-base font-bold">{max}</span></span
-  >
+  <span class="text-xs text-contour-weak leading-3">Above<br /><span class="text-contour-base font-bold">{max}</span></span>
 </div>
