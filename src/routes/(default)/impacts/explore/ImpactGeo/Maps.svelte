@@ -13,6 +13,7 @@
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
   import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED, WORKER_MESSAGE_START, STATUS_FINISHED } from '$config';
+  import { CURRENT_GEOGRAPHY } from '$stores/state';
   import Spinner from '$lib/helper/Spinner.svelte';
   import { reduce } from 'lodash-es';
   import { formatValue } from '$formatting';
@@ -155,7 +156,7 @@
   $: domainMedian = median(colorScale.domain());
   $: mediumColor = colorScale(domainMedian);
 
-  $: paint = [];
+  const paint = [];
 
   // $: paint = [
   //   'settlement-minor-label',
@@ -178,12 +179,12 @@
   //       },
   //       {
   //         uid: 'text-color',
-  //         value: '#ffffff',
+  //         value: '#000000',
   //       },
   //     ],
   //   };
   // });
-  //
+
   let label;
 
   $: size = reduce(geoShape.geometry.coordinates, (sum, n) => sum + reduce(n, (s, m) => s + m.length, 0), 0);
@@ -220,17 +221,23 @@
         class="w-full border-contour-weakest overflow-hidden relative"
       >
         <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0}>
-          {#if invertedGeoShape}
+          {#if invertedGeoShape && $CURRENT_GEOGRAPHY.geographyType !== 'cities'}
             <DataSource data={invertedGeoShape}>
               <!--<PolygonLayer before="ocean-fill" fillColor={'#fafafa'} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />-->
               <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
-              <!--<FilterLayer layer="settlement-minor-label" geo={geoShape} />-->
-              <FilterLayer layer="settlement-major-label" geo={geoShape} />
+              <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+              <FilterLayer layer="admin-1-boundary" geo={geoShape} />
+
+              <!--<FilterLayer layer="settlement-major-label" geo={geoShape} />-->
             </DataSource>
-          {/if}
+          {/if}-->
+
           <DataSource {data}>
             <PolygonLayer fill={true} line={false} />
           </DataSource>
+          <!--<DataSource data={geoShape}>
+            <PolygonLayer fill={false} line={true} lineOpacity={0.2} />
+          </DataSource>-->
         </MapProvider>
         {#if label}
           <div class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold">

@@ -6,11 +6,11 @@
   import { getContext } from 'svelte';
   import { onDestroy } from 'svelte';
 
-  const beforeFallback = 'settlement-major-label';
+  const beforeFallback = 'ocean-stroke';
   const theme = getContext('theme');
 
   export let zoomRange = [0, 20];
-  export let before = 'settlement-major-label';
+  export let before = 'ocean-stroke';
 
   export let line = true;
   export let lineId = null;
