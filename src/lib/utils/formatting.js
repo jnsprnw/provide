@@ -9,7 +9,7 @@ export const FORMAT_EMISSION = '.0s';
 export const FORMAT_FLOAT = ',.1f';
 export const FORMAT_YEAR = '.0f';
 export const FORMAT_CELSIUS = '.1f';
-export const FORMAT_WARMING = '+.1f';
+export const FORMAT_WARMING = '+.2f';
 export const FORMAT_PERCENT = '.0%';
 export const FORMAT_DEGREE = '.3~f';
 
@@ -89,9 +89,9 @@ export function formatRange(range, unit, minDecimals = 0) {
   };
 }
 
-export function findDecimalsForDistinctValues(values, unit, minDecimals = 0) {
+export function findDecimalsForDistinctValues(values, unit, minDecimals = 0, maxDecimals = 4) {
   // This function formats a values of values with all resulting strings to be unique
-  const decimalsMax = 4;
+  const decimalsMax = maxDecimals;
   let decimals = minDecimals;
   let formatter = getFormatter(unit, decimals);
   let strings = values.map((d) => formatValue(d, unit, { formatter }));

@@ -48,7 +48,12 @@
     return memo;
   }, []);
 
-  $: requiredDecimalsForTooltips = findDecimalsForDistinctValues(flatData.map(({ value }) => value));
+  $: requiredDecimalsForTooltips = findDecimalsForDistinctValues(
+    flatData.map(({ value }) => value),
+    unitUID,
+    0,
+    2
+  );
   $: formatTooltipValueY = (d) => formatValue(d, unitUID, { decimals: requiredDecimalsForTooltips });
 
   $: colorScales = data.map((scenario) => scenario.colorInterpolator);
