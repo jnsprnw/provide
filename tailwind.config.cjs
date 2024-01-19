@@ -5,7 +5,7 @@ module.exports = {
   content: ['./src/**/*.{html,js,svelte}'],
   theme: {
     fontFamily: {
-      sans: ['Lato', 'sans-serif'],
+      sans: ['Lato', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Noto Sans', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji'],
       mono: ['ui-monospace', 'Cascadia Code', 'Source Code Pro', 'Menlo', 'Consolas', 'DejaVu Sans Mono', 'monospace'],
     },
     extend: {
