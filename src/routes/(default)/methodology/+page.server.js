@@ -2,10 +2,19 @@ import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
+import { stringify } from 'qs';
 import { LABEL_DOCUMENTATION } from '$config';
 
 export const load = async ({ fetch }) => {
   const data = await loadFromStrapi('technical-documentation', fetch);
+
+  const methodology = await loadFromStrapi(
+    'methodology',
+    fetch,
+    stringify({
+      populate: ['DataType', 'DataType.Model', 'DataType.Model.Processing'],
+    })
+  );
 
   const { Models, Scenarios, ModelsIntro, ScenariosIntro, DataProcessing, DataProcessingIntro } = data.attributes;
 
@@ -13,6 +22,23 @@ export const load = async ({ fetch }) => {
 
   return {
     title,
+    methodology: methodology.attributes.DataType.map(({ Label, Model }) => {
+      return {
+        title: Label.trim(),
+        slug: kebabCase(Label),
+        models: Model.map(({ Label, Description, Simulation, Processing }) => {
+          return {
+            title: Label.trim(),
+            slug: kebabCase(Label),
+            description: parse(Description ?? ''),
+            simulation: parse(Simulation ?? ''),
+            processing: Processing.map(({ Description }) => ({
+              description: parse(Description ?? ''),
+            })),
+          };
+        }),
+      };
+    }),
     content: {
       modelsIntro: parse(ModelsIntro || ''),
       models: Models.map(({ UID, Title, Description, Link }) => {
