@@ -1,5 +1,6 @@
 <script>
   import { KEY_CHARACTERISTICS, MAX_NUMBER_SELECTABLE_SCENARIOS } from '$config';
+  import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
   import tooltip from '$lib/utils/tooltip';
   import chroma from 'chroma-js';
   import { extent, max } from 'd3-array';
@@ -199,75 +200,79 @@
   $: subGridColumns = `grid-column: span ${tableColumns.length + 1};`;
 </script>
 
-<SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0}>
-  <div role="treegrid" class="grid" aria-rowcount={scenariosListed.length} style="grid-template-columns: {titleWidth}px {maxWidth};">
-    <div role="rowgroup" class="grid max-w-full justify-start grid-cols-subgrid" style={subGridColumns}>
-      <div role="row" class="grid grid-cols-subgrid" style={subGridColumns}>
-        <div role="gridcell" class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3">
-          <button on:click={$sorting === SCENARIO_NUMBER ? sortingDirection.update((v) => v * -1) : sorting.set(SCENARIO_NUMBER)} class:font-bold={$sorting === SCENARIO_NUMBER}>Scenario</button>
-        </div>
-        {#each tableColumns as { label, key, tooltip }}
-          {@const isActive = $sorting === key}
-          <button
-            role="gridcell"
-            on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)}
-            class:text-theme-base={isActive}
-            class="hover:text-theme-base text-xs pl-1 pr-2 border-b-contour-weakest border-b grid grid-cols-[16px_1fr_16px] gap-x-2 items-end justify-center text-center py-3"
-          >
-            <i aria-hidden role="presentation" class="not-italic"
-              >{#if isActive}{#if $sortingDirection > 0}↓{:else}↑{/if}{/if}</i
+<div>
+  <SubsectionHeadline title="Scenario list" subtitle="Compare and select up to three scenarios to display them in the scenario explorer." />
+
+  <SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0}>
+    <div role="treegrid" class="grid" aria-rowcount={scenariosListed.length} style="grid-template-columns: {titleWidth}px {maxWidth};">
+      <div role="rowgroup" class="grid max-w-full justify-start grid-cols-subgrid" style={subGridColumns}>
+        <div role="row" class="grid grid-cols-subgrid" style={subGridColumns}>
+          <div role="gridcell" class="sticky left-0 bg-white px-4 text-xs border-b-contour-weakest border-b flex items-end py-3">
+            <button on:click={$sorting === SCENARIO_NUMBER ? sortingDirection.update((v) => v * -1) : sorting.set(SCENARIO_NUMBER)} class:font-bold={$sorting === SCENARIO_NUMBER}>Scenario</button>
+          </div>
+          {#each tableColumns as { label, key, tooltip }}
+            {@const isActive = $sorting === key}
+            <button
+              role="gridcell"
+              on:click={isActive ? sortingDirection.update((v) => v * -1) : sorting.set(key)}
+              class:text-theme-base={isActive}
+              class="hover:text-theme-base text-xs pl-1 pr-2 border-b-contour-weakest border-b grid grid-cols-[16px_1fr_16px] gap-x-2 items-end justify-center text-center py-3"
             >
-            <span class="whitespace-nowrap font-bold leading-tight text-current">{@html label}</span>
-            <Info description={tooltip} />
+              <i aria-hidden role="presentation" class="not-italic"
+                >{#if isActive}{#if $sortingDirection > 0}↓{:else}↑{/if}{/if}</i
+              >
+              <span class="whitespace-nowrap font-bold leading-tight text-current">{@html label}</span>
+              <Info description={tooltip} />
+            </button>
+          {/each}
+        </div>
+      </div>
+      <div role="rowgroup" class="grid max-w-full relative grid-cols-subgrid" style={subGridColumns}>
+        {#each sortedScenarios as { i, uid, label, values, borderColorLeft, description, isPrimary, disabled }, index}
+          <button
+            {disabled}
+            aria-disabled={disabled}
+            role="row"
+            aria-rowindex={i}
+            class="max-w-full grid grid-cols-subgrid text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker"
+            style={subGridColumns}
+            bind:clientWidth={widthColumns}
+          >
+            <label for={uid} class="grid justify-start max-w-full grid-flow-col grid-cols-subgrid" style={subGridColumns}>
+              <div
+                aria-disabled={disabled}
+                style="border-left-color: {borderColorLeft}"
+                class:border-b={index !== scenariosListed.length - 1}
+                class="border-b-contour-weakest aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_1fr_14px_14px] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
+                role="gridcell"
+              >
+                <input {disabled} aria-disabled={disabled} tabindex="-1" id={uid} type="checkbox" name="scenarios" value={uid} bind:group={selectedScenarios} />
+                <span
+                  class="text-sm font-bold inline-block overflow-hidden text-ellipsis transition-colors"
+                  class:text-text-base={!disabled}
+                  class:text-contour-weakest={disabled}
+                  use:tooltip={{ content: disabled ? `You can not select more than ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.` : undefined }}>{label}</span
+                >
+                <div class="flex items-center justify-center">
+                  {#if isPrimary}
+                    <Primary />
+                  {/if}
+                </div>
+                <Info {description} />
+              </div>
+              {#each values as { label, bg, useBlackFont, value }}
+                <span
+                  role="gridcell"
+                  class:border-b={index !== scenariosListed.length - 1}
+                  class="py-3 flex items-center justify-end px-3 text-xs whitespace-nowrap border-b-white"
+                  data-value={value}
+                  style="background-color: {bg}; color: {useBlackFont ? '#000' : '#fff'};">{@html value === null ? '—' : label}</span
+                >
+              {/each}
+            </label>
           </button>
         {/each}
       </div>
     </div>
-    <div role="rowgroup" class="grid max-w-full relative grid-cols-subgrid" style={subGridColumns}>
-      {#each sortedScenarios as { i, uid, label, values, borderColorLeft, description, isPrimary, disabled }, index}
-        <button
-          {disabled}
-          aria-disabled={disabled}
-          role="row"
-          aria-rowindex={i}
-          class="max-w-full grid grid-cols-subgrid text-white focus:bg-surface-weaker focus:text-surface-weaker hover:bg-surface-weaker hover:text-surface-weaker"
-          style={subGridColumns}
-          bind:clientWidth={widthColumns}
-        >
-          <label for={uid} class="grid justify-start max-w-full grid-flow-col grid-cols-subgrid" style={subGridColumns}>
-            <div
-              aria-disabled={disabled}
-              style="border-left-color: {borderColorLeft}"
-              class:border-b={index !== scenariosListed.length - 1}
-              class="border-b-contour-weakest aria-disabled:cursor-not-allowed py-2 border-l-4 border-current px-3 text-left sticky left-0 bg-current grid grid-cols-[14px_1fr_14px_14px] items-center gap-x-1.5 whitespace-nowrap overflow-hidden text-ellipsis"
-              role="gridcell"
-            >
-              <input {disabled} aria-disabled={disabled} tabindex="-1" id={uid} type="checkbox" name="scenarios" value={uid} bind:group={selectedScenarios} />
-              <span
-                class="text-sm font-bold inline-block overflow-hidden text-ellipsis transition-colors"
-                class:text-text-base={!disabled}
-                class:text-contour-weakest={disabled}
-                use:tooltip={{ content: disabled ? `You can not select more than ${MAX_NUMBER_SELECTABLE_SCENARIOS} scenarios.` : undefined }}>{label}</span
-              >
-              <div class="flex items-center justify-center">
-                {#if isPrimary}
-                  <Primary />
-                {/if}
-              </div>
-              <Info {description} />
-            </div>
-            {#each values as { label, bg, useBlackFont, value }}
-              <span
-                role="gridcell"
-                class:border-b={index !== scenariosListed.length - 1}
-                class="py-3 flex items-center justify-end px-3 text-xs whitespace-nowrap border-b-white"
-                data-value={value}
-                style="background-color: {bg}; color: {useBlackFont ? '#000' : '#fff'};">{@html value === null ? '—' : label}</span
-              >
-            {/each}
-          </label>
-        </button>
-      {/each}
-    </div>
-  </div>
-</SideScrollIndicator>
+  </SideScrollIndicator>
+</div>

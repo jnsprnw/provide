@@ -57,7 +57,7 @@
 
 {#if scenarioPresetsForCurrentTimeframe.length}
   <div>
-    <SubsectionHeadline title="Scenarios" subtitle="Click on a research question and see the preselected scenarios that can answer it." slug="presets" />
+    <SubsectionHeadline title="Presets" subtitle="Click on a research question and see the preselected scenarios that can answer it." />
     <SideScrollIndicator widthOfContent={widthContent} distanceLeft={0} distanceRight={0}>
       <div class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]" style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);" bind:clientWidth={widthContent}>
         {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}
