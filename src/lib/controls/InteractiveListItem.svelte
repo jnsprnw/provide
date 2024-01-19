@@ -18,6 +18,6 @@
   on:blur={() => (hovered = null)}
   title={label}
 >
-  {#if icon}<i class="not-italic" aria-hidden role="presentation">{icon}</i>{/if}
+  {#if icon}<i class="not-italic font-emoji font-normal" aria-hidden role="presentation">{icon}</i>{/if}
   <span class:font-bold={selected} class="truncate">{@html label}</span>
 </span>
