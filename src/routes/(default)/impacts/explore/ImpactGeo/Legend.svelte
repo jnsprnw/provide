@@ -37,11 +37,13 @@
     if (canvas) {
       const ctx = canvas.getContext('2d');
       await ctx.clearRect(0, 0, width, height);
-
-      for (let x = domain[0]; x < width; x++) {
+      for (let x = 0; x < width; x++) {
         ctx.fillStyle = colorScale(x);
         ctx.fillRect(x, 0, 1, height);
       }
+
+      ctx.fillStyle = getContrastColor(colorScale(width / 2), $theme.color.surface.base, $theme.color.contour.base);
+      ctx.fillRect(width / 2, 0, 1, 3);
     }
   })();
 
@@ -54,9 +56,9 @@
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
       <span
-        style={`left: ${xScale(tick)}px;`}
+        style={`left: ${xScale(tick)}px; top: calc(50% + 1px);`}
         style:color={getContrastColor(colorAtTick, $theme.color.surface.base, $theme.color.contour.base)}
-        class="absolute text-xs text-surface-base font-bold top-1/2 -translate-x-1/2 -translate-y-1/2"
+        class="absolute text-xs text-surface-base font-bold -translate-x-1/2 -translate-y-1/2"
         >{middle}
       </span>
     </div>
