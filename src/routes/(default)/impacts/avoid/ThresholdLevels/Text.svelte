@@ -18,7 +18,7 @@
 
   $: ({ isCountable, direction, unit } = $CURRENT_INDICATOR);
 
-  $: labelWithinSentence = $CURRENT_INDICATOR_LABEL;
+  $: ({ labelWithinSentence } = $CURRENT_INDICATOR_LABEL);
 
   $: isWholeUrbanArea = $IS_STUDY_LOCATION_WHOLE_URBAN_AREA;
 

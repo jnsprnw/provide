@@ -5,7 +5,7 @@
   export let data;
 
   $: ({ unit } = $CURRENT_INDICATOR);
-  $: labelWithinSentence = $CURRENT_INDICATOR_LABEL;
+  $: ({ labelWithinSentence } = $CURRENT_INDICATOR_LABEL);
   $: ({ average_value, countable } = data);
   $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
   $: isWholeUrbanArea = $IS_STUDY_LOCATION_WHOLE_URBAN_AREA;

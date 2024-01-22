@@ -100,7 +100,7 @@
     ...d,
     formattedValue: `${formatTooltipValueY(d.value)}${formatUnit(unit)}`,
     formattedGmt: d.gmt,
-    label: indicatorLabel,
+    label: indicatorLabel.label,
   }));
 
   $: yDomain = extent(flatData, (d) => d.value);
@@ -120,7 +120,7 @@
         <AxisX ticks={xTicks} snapTicks={true} />
         <AxisY
           padding={mainChartPadding}
-          axisLabel={indicatorLabel ? `${indicatorLabel}${unit?.label ? ` in ${unit.label}` : ''}` : undefined}
+          axisLabel={indicatorLabel ? `${indicatorLabel.label}${unit?.label ? ` in ${unit.label}` : ''}` : undefined}
           ticks={yTicks}
           xTick={-3}
           ticksHighlighted={ticksYHighlighted}
