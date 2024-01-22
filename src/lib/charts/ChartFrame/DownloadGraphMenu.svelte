@@ -145,7 +145,7 @@
         on:click={downloadImage}
         class="transition-colors bg-theme-base text-white hover:enabled:bg-theme-stronger disabled:text-white disabled:bg-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
       >
-        {#if status === STATUS_LOADING}<Spinner size={15} strokeWidth={2} />{/if}
+        {#if status === STATUS_LOADING}<Spinner color="stroke-white" size={15} strokeWidth={2} />{/if}
         <span class="col-start-2 block min-w-[200px] font-bold">{label}</span>
       </button>
     </div>
