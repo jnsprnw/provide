@@ -6,6 +6,7 @@
   import { KEY_LABEL, KEY_LABEL_LONG, KEY_PARAMETER_INDICATOR_VALUE } from '$src/config.js';
   import { createEventDispatcher } from 'svelte';
   import Chevron from '$lib/helper/icons/Chevron.svelte';
+  import Info from '$lib/helper/icons/Info.svelte';
   import { IS_STATIC } from '$stores/state';
   export let options = [];
   export let value;
@@ -14,6 +15,7 @@
   export let backgroundColor = 'bg-transparent';
   export let labelColor = 'text-theme-base';
   export let disabled = false;
+  export let description = undefined;
 
   const dispatch = createEventDispatcher();
 
@@ -37,6 +39,9 @@
     class:border-theme-weakest={isIndicatorValue}
   >
     <label class="text-text-weaker text-sm" class:text-theme-weaker={disabled} for={selectId}>{label}</label>
+    {#if description?.length}
+      <Info {description} />
+    {/if}
     <div class={`rounded overflow-hidden flex gap-x-1 border-0`}>
       <select
         class={`py-1.5 px-2 pr-4 text-right text-sm font-bold appearance-none aria-disabled:cursor-not-allowed ${backgroundColor} ${labelColor}`}
