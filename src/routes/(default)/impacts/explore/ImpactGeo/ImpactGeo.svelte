@@ -42,6 +42,8 @@
   export let year = DEFAULT_IMPACT_GEO_YEAR;
   export let displayOption = IMPACT_GEO_KEY_SIDE_BY_SIDE;
 
+  let isProcessing = false;
+
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
 
@@ -77,6 +79,7 @@
   }
 
   $: process = ({ data, shape }, { scenarios, urlParams }) => {
+    isProcessing = true;
     const showDifference = data.length === 2 && displayOption === IMPACT_GEO_KEY_DIFFERENCE;
     const isMultipMap = data.length > 1 && !showDifference;
 
@@ -200,11 +203,12 @@
       templateProps={{ ...props, showDifference: asyncProps.showDifference }}
       chartInfo={asyncProps.chartInfo}
       {isLoading}
+      {isProcessing}
     >
       <svelte:fragment slot="controls">
         <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:displayOption bind:year />
       </svelte:fragment>
-      <Maps unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} />
+      <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>

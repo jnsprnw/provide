@@ -22,6 +22,7 @@
   export let geoShape;
   export let colorScale;
   export let unit;
+  export let isProcessing;
 
   let workerStatus = STATUS_IDLE;
   let workerMessage;
@@ -63,11 +64,13 @@
               case STATUS_FINISHED:
                 // Save the result returned from the web worker
                 maskedGeoData = data;
+                isProcessing = false;
                 break;
               case STATUS_PROCESSING:
                 // Save the current step number and total number of steps
                 workerStepsCurrent = stepsCurrent;
                 workerStepsTotal = stepsTotal;
+                isProcessing = true;
                 break;
             }
           };
@@ -110,6 +113,7 @@
 
   async function createMaske(geoData, geoShape) {
     if (maskWorker) {
+      isProcessing = true;
       // If there is a worker currently running
       if (workerStatus === STATUS_PROCESSING) {
         // Stop the currently runnning worker
