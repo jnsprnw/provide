@@ -17,7 +17,7 @@ export const loadFromStrapi = function (path, fetch, populate = 'populate=*') {
     if (typeof ENV_CONTENT_LOCALE === 'undefined') {
       console.warn(`Content version variable in undefined. Fallback version is used.`);
     }
-    const url = `${ENV_URL_CONTENT}/api/${path}?${populate}&locale=${localCode}`;
+    const url = `${ENV_URL_CONTENT}/api/${path}?${populate}&locale=${localCode}&pagination[limit]=9999`;
     console.log({ url });
     try {
       const res = await fetch(url);
