@@ -13,6 +13,7 @@
   import { flatMap } from 'lodash-es';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import StrokeLegend from './StrokeLegend.svelte';
+  import { formatUnit } from '$lib/utils/formatting';
 
   export let steps;
   export let data = [];
@@ -97,7 +98,7 @@
   // Data for generating popovers
   $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values.map((v) => ({ ...v, scenario: d.scenario }))) : flatData).map((d) => ({
     ...d,
-    formattedValue: `${formatTooltipValueY(d.value)}${unit?.label ? ` ${unit.label}` : ''}`,
+    formattedValue: `${formatTooltipValueY(d.value)}${formatUnit(unit)}`,
     formattedGmt: d.gmt,
     label: indicatorLabel,
   }));

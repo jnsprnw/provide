@@ -16,6 +16,9 @@ export const FORMAT_DEGREE = '.3~f';
 export const FORMAT_PERCENT_DECIMALS = (d = 0) => f(`.${d}%`);
 export const FORMAT_DEFAULT_DECIMALS = (d = 1) => f(`.${d}f`);
 
+export const KEY_DEGREES_CELSIUS = 'degrees-celsius';
+export const KEY_DEGREES_WARMING = 'degrees-warming';
+
 // the basic formatting function sued
 const f = formatLocale({
   ...formatDefaultLocale,
@@ -35,8 +38,8 @@ const indicatorFormats = {
   percent: f(FORMAT_PERCENT),
   'percent-in-range': f('.0f'),
   year: f(FORMAT_YEAR),
-  'degrees-celsius': f(FORMAT_CELSIUS),
-  'degrees-warming': f(FORMAT_WARMING),
+  [KEY_DEGREES_CELSIUS]: f(FORMAT_CELSIUS),
+  [KEY_DEGREES_WARMING]: f(FORMAT_WARMING),
   'gigaton-co2eq-year': f(FORMAT_EMISSION),
   degree: f(FORMAT_DEGREE),
 
@@ -45,8 +48,8 @@ const indicatorFormats = {
 };
 
 const suffixes = {
-  'degrees-celsius': ' °C',
-  'degrees-warming': ' °C',
+  [KEY_DEGREES_CELSIUS]: ' °C',
+  [KEY_DEGREES_WARMING]: ' °C',
   degree: ' °',
 };
 
@@ -117,4 +120,15 @@ function getDecimals(value) {
 
 export function findMostDecimals(values) {
   return getDecimals(maxBy(values, (v) => getDecimals(v)));
+}
+
+export function formatUnit(unit) {
+  if (unit?.label && unit?.uid !== KEY_DEGREES_CELSIUS && unit?.uid !== KEY_DEGREES_WARMING) {
+    if (unit.uid === 'no unit') {
+      return ` (${unit.label})`;
+    } else {
+      return ` ${unit.label}`;
+    }
+  }
+  return '';
 }
