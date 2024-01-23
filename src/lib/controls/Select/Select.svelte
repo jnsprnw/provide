@@ -32,13 +32,13 @@
 
 {#if !$IS_STATIC}
   <div
-    class="flex gap-2 items-center font-normal transition-colors border border-transparent"
-    class:rounded={isIndicatorValue}
+    class="flex gap-2 rounded items-center font-normal transition-colors border-theme-base/10 px-3"
+    class:border={isIndicatorValue}
     class:bg-surface-base={isIndicatorValue}
-    class:px-3={isIndicatorValue}
-    class:border-theme-weakest={isIndicatorValue}
+    class:hover:bg-surface-base={!isIndicatorValue}
+    class:hover:border-theme-weakest={isIndicatorValue}
   >
-    <label class="text-text-weaker text-sm" class:text-theme-weaker={disabled} for={selectId}>{label}</label>
+    <label class="text-text-weaker text-sm" class:font-bold={isIndicatorValue} class:text-theme-weaker={disabled} for={selectId}>{label}</label>
     {#if description?.length}
       <Info {description} />
     {/if}
