@@ -281,6 +281,7 @@ export const CURRENT_INDICATOR_PARAMETERS = derived([CURRENT_INDICATOR, INDICATO
       uid: key,
       label: parameter?.label ?? key, // Use the key if no label is present
       options,
+      description: parameter.description,
     };
   });
 

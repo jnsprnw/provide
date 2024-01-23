@@ -13,7 +13,7 @@
 
   // Some indicators have a special parameter that determines their specific value
   // This parameter should be listed first
-  $: parametersSorted = sortBy(parameters, ({ uid }) => uid !== KEY_PARAMETER_INDICATOR_VALUE)
+  $: parametersSorted = sortBy(parameters, ({ uid }) => uid !== KEY_PARAMETER_INDICATOR_VALUE);
 
   $: handleChange = ({ detail: { key, value } }) =>
     ($CURRENT_INDICATOR_OPTION_VALUES = {
@@ -24,11 +24,6 @@
 
 <div class="flex gap-4" id="indicator-parameters">
   {#each parametersSorted as parameter}
-    <Select
-      disabled={!$IS_COMBINATION_AVAILABLE_INDICATOR}
-      {...parameter}
-      labelColor="text-theme-base"
-      on:change={handleChange}
-    />
+    <Select disabled={!$IS_COMBINATION_AVAILABLE_INDICATOR} {...parameter} labelColor="text-theme-base" on:change={handleChange} />
   {/each}
 </div>
