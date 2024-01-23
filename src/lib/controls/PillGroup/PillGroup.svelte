@@ -1,5 +1,6 @@
 <script>
   import { RadioGroup, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
+  import Info from '$lib/helper/icons/Info.svelte';
   import tooltip from '$lib/utils/tooltip';
   export let currentUid;
   export let options;
@@ -20,7 +21,7 @@
 </script>
 
 <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="flex {allowWrap ? 'flex-wrap' : ''} {classes.group}">
-  {#each options as { uid, disabled, label, tooltip: individualDisabledMessage, count }}
+  {#each options as { uid, disabled, label, tooltip: individualDisabledMessage, count, description }}
     <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
@@ -37,6 +38,9 @@
       >
         <span class="truncate" title={size === 'sm' ? label : undefined}>{label}</span>
         {#if count}<small class="text-xs font-normal">{count}</small>{/if}
+        {#if description}
+          <Info isInverted={checked} {description} />
+        {/if}
       </div>
     </RadioGroupOption>
   {/each}

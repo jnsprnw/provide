@@ -1,17 +1,11 @@
 <script>
   import tooltip from '$lib/utils/tooltip';
   export let description;
+  export let isInverted = false;
+  $: color = ['text-contour-weaker/70 hover:text-theme-stronger', 'text-white/70 hover:text-white'][isInverted ? 1 : 0];
 </script>
 
-<svg
-  use:tooltip={{ content: description }}
-  class="text-contour-weaker/70 hover:text-theme-stronger transition-colors w-4 h-4"
-  xmlns="http://www.w3.org/2000/svg"
-  fill="none"
-  viewBox="0 0 24 24"
-  stroke-width="1.5"
-  stroke="currentColor"
->
+<svg use:tooltip={{ content: description }} class="{color} transition-colors w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
   <path
     stroke-linecap="round"
     stroke-linejoin="round"
