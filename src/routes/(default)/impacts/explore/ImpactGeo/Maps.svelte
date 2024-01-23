@@ -15,6 +15,7 @@
   import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED, WORKER_MESSAGE_START, STATUS_FINISHED } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state';
   import Spinner from '$lib/helper/Spinner.svelte';
+  import Progress from '$lib/helper/Progress.svelte';
   import { reduce } from 'lodash-es';
   import { formatValue } from '$formatting';
 
@@ -209,10 +210,11 @@
   </div>
   {#if ![STATUS_FINISHED, STATUS_IDLE].includes(workerStatus)}
     <div class="rounded flex items-center justify-center absolute top-0 left-0 w-full h-full py-2 px-2 bg-surface-base z-10">
-      <div class="flex justify-center flex-col gap-y-4">
-        {#if workerStatus === STATUS_PROCESSING}<Spinner size={15} strokeWidth={2} />{/if}
-        <span class="text-xs text-contour-weak">{label}</span>
-        {#if workerStatus === STATUS_PROCESSING}<progress max={workerStepsTotal} value={workerStepsCurrent}>{(100 / workerStepsTotal) * workerStepsCurrent}%</progress>{/if}
+      <div class="grid grid-rows-[auto_4px] justify-center items-center gap-y-4 justify-items-center">
+        <span class="text-xs text-contour-weak row-start-1">{label}</span>
+        <div class="row-start-2 flex items-center w-full justify-center">
+          {#if workerStatus === STATUS_PROCESSING}<Progress current={(100 / workerStepsTotal) * workerStepsCurrent} />{/if}
+        </div>
       </div>
     </div>
   {/if}
