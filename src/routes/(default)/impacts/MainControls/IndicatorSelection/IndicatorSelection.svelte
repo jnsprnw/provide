@@ -32,5 +32,6 @@
     bind:currentFilterUid
     items={$AVAILABLE_INDICATORS}
     itemsLabel="Indicators"
+    allowWrap={true}
   />
 </PopoverSelect>

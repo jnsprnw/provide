@@ -10,8 +10,8 @@
 
   $: classes = {
     md: {
-      group: 'gap-1.5',
-      button: 'py-2 px-4 text-md',
+      group: 'gap-x-1 gap-y-1.5',
+      button: 'py-1.5 px-3 text-md',
     },
     sm: {
       group: 'gap-1',
@@ -22,7 +22,7 @@
 
 <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="flex {allowWrap ? 'flex-wrap' : ''} {classes.group}">
   {#each options as { uid, disabled, label, tooltip: individualDisabledMessage, count, description }}
-    <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full">
+    <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full cursor-pointer">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
         class="w-full flex gap-x-3 leading-none items-center transition-colors {classes.button}"

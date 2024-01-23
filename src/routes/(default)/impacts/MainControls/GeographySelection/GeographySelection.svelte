@@ -72,7 +72,7 @@
   buttonClass="border-theme-base/20 border aria-expanded:border-theme-base/60"
   placeholder={$IS_EMPTY_GEOGRAPHY ? 'Select a geography' : undefined}
 >
-  <Content filters={geographyTypes} filterKey="geographyType" filterLabel="Pick a location" currentUid={$CURRENT_GEOGRAPHY_UID} items={selectableGeographies} bind:currentFilterUid>
+  <Content filters={geographyTypes} filterKey="geographyType" filterLabel="Pick a location" currentUid={$CURRENT_GEOGRAPHY_UID} items={selectableGeographies} bind:currentFilterUid allowWrap={true}>
     <div slot="items" let:items let:currentFilterUid class="max-w-full grid grid-cols-1 md:grid-cols-[1.5fr_3fr] lg:grid-cols-[1.5fr_3fr]">
       <Geographies {items} bind:hoveredItem geographyType={geographyTypes.find(({ uid }) => uid === currentFilterUid)} bind:currentUid={$CURRENT_GEOGRAPHY_UID} />
       <div class="px-3 hidden md:block">

@@ -13,6 +13,7 @@
   export let currentUid; // Either string or array of strings
   export let currentFilterUid;
   export let disabledMessage = undefined;
+  export let allowWrap = false;
 
   let hoveredItem = null;
 
@@ -48,47 +49,24 @@
   <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
-      <PillGroup
-        bind:currentUid={currentFilterUid}
-        options={filters}
-        {disabledMessage}
-      />
+      <PillGroup bind:currentUid={currentFilterUid} options={filters} {disabledMessage} {allowWrap} />
     </div>
     <slot name="header-link" />
   </div>
 {/if}
-<slot
-  name="items"
-  items={availableItems}
-  {currentFilterUid}
->
+<slot name="items" items={availableItems} {currentFilterUid}>
   <div class="grid grid-cols-1 md:grid-cols-[1fr_3fr] min-h-[20rem]">
     <div class="md:border-r border-contour-weakest">
       {#if itemsLabel}<Tagline class="mt-4 mb-2 px-5">{itemsLabel}</Tagline>{/if}
-      <RadioGroup
-        bind:value={currentUid}
-        on:change={(e) => (currentUid = e.detail)}
-      >
+      <RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)}>
         {#if availableItems.length}
           {#each availableItems as { icon, uid, label }}
-            <RadioGroupOption
-              value={uid}
-              let:checked
-            >
-              <InteractiveListItem
-                {icon}
-                {uid}
-                {label}
-                bind:hovered={hoveredItem}
-                selected={checked}
-              />
+            <RadioGroupOption value={uid} let:checked>
+              <InteractiveListItem {icon} {uid} {label} bind:hovered={hoveredItem} selected={checked} />
             </RadioGroupOption>
           {/each}
         {:else}
-          <span
-            class="text-xs py-1 px-5 block text-text-weaker"
-            role="status">No indicators are available for this sector and geography.</span
-          >
+          <span class="text-xs py-1 px-5 block text-text-weaker" role="status">No indicators are available for this sector and geography.</span>
         {/if}
       </RadioGroup>
     </div>
