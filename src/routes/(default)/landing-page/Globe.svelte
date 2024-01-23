@@ -6,6 +6,7 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import DataSource from '$lib/MapboxMap/DataSource.svelte';
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
+  import Tabs from './Tabs.svelte';
   import { getContext, onDestroy } from 'svelte';
   import { coordinatesToRectGrid, getColorScale } from '$lib/utils/geo';
   import mask from '@turf/mask';
@@ -96,35 +97,11 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 my-20">
       <header class="col-start-1 col-span-4 text-white">
         <h1 class="text-6xl font-semibold">A database for global-to-local climate impacts</h1>
-        <p class="text-xl">Explore data across scales and sectors. All based on the latest science</p>
+        <p class="text-xl">Explore data across scales and sectors. All based on the latest science.</p>
       </header>
       <div class="col-span-3 self-center col-start-4 p-4 bg-white/10 border-white/40 border rounded-sm">
-        <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Sectors</span>
-        <TabGroup>
-          <TabList class="grid grid-cols-3 gap-x-8 mb-4 text-white">
-            <Tab class="flex flex-col items-start border-b-2 border-b-white">
-              <strong class="text-xl">Climate</strong>
-            </Tab>
-            <Tab class="flex flex-col items-start">
-              <strong class="text-xl">Ocean habitability</strong>
-            </Tab>
-            <Tab class="flex flex-col items-start">
-              <strong class="text-xl">Urban heat stress</strong>
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel class="flex flex-col text-white">
-              <span class="text-base mb-4">We cover data for all 190 countries in the world. Ranging from China to Lesotho. Lorem ipsum dolor something.</span>
-              <a href={currentStory.url} class="">
-                <span class="text-base text-surface-base max-w-md leading-snug">
-                  Explore, for example, how {currentStory.indicator.labelWithinSentence} in {currentStory.geography.label} will develop under a {currentStory.scenarios[0].label} scenario.
-                </span>
-              </a>
-            </TabPanel>
-            <TabPanel>Content 2</TabPanel>
-            <TabPanel>Content 3</TabPanel>
-          </TabPanels>
-        </TabGroup>
+        <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Learn about</span>
+        <Tabs />
       </div>
     </div>
   </div>
