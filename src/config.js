@@ -85,6 +85,8 @@ export const MEAN_TEMPERATURE_UID = 'gmt';
 export const EMISSIONS_UID = 'emissions';
 export const UNAVOIDABLE_UID = 'unavoidable';
 
+export const UID_NO_UNIT = 'no unit';
+
 export const SCENARIO_DATA_KEYS = [EMISSIONS_UID, MEAN_TEMPERATURE_UID];
 
 export const DEFAULT_INDICATOR_UID = MEAN_TEMPERATURE_UID; // TODO: Not used.

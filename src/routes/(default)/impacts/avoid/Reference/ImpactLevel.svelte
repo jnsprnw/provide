@@ -1,6 +1,7 @@
 <script>
   import { LEVEL_OF_IMPACT } from '$stores/avoid.js';
   import { CURRENT_INDICATOR } from '$stores/state.js';
+  import { formatUnit, formatValue } from '$lib/utils/formatting';
   import { scaleLinear } from 'd3-scale';
   import { createSlider, melt } from '@melt-ui/svelte';
   import { writable } from 'svelte/store';
@@ -56,7 +57,7 @@
   <div class="font-bold text-text-weaker mb-2 flex justify-between">
     <span class="uppercase text-xs tracking-widest">Level of Impact</span>
     <span class="text-xs text-theme-base">
-      {fv($LEVEL_OF_IMPACT)}&#8239;{unit.label}
+      {formatValue($LEVEL_OF_IMPACT, unit.uid, { decimals })}{@html formatUnit(unit)}
     </span>
   </div>
 
@@ -73,9 +74,9 @@
         </span>
       </span>
       <div class="grid grid-cols-[1fr_2fr_1fr] text-xs text-contour-weaker">
-        <span>{fv(totalMin - offset)}&#8239;{unit.label}</span>
+        <span>{formatValue(totalMin - offset, unit.uid, { decimals })}{@html formatUnit(unit)}</span>
         <span class="text-theme-weaker font-normal text-center">Level of interest</span>
-        <span class="text-right">{fv(totalMax - offset)}&#8239;{unit.label}</span>
+        <span class="text-right">{formatValue(totalMax - offset, unit.uid, { decimals })}{@html formatUnit(unit)}</span>
       </div>
     {/if}
   </div>

@@ -1,4 +1,4 @@
-import { DEFAULT_FORMAT_UID } from '$src/config';
+import { DEFAULT_FORMAT_UID, UID_NO_UNIT } from '$src/config';
 import { formatDefaultLocale, formatLocale } from 'd3-format';
 import { maxBy } from 'lodash-es';
 
@@ -53,7 +53,10 @@ const suffixes = {
   degree: ' °',
 };
 
-export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined, decimals } = {}) => {
+export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined, decimals, matchDecimals = false } = {}) => {
+  if (matchDecimals) {
+    decimals = getDecimals(value);
+  }
   if (typeof decimals !== 'undefined' && typeof customFormatter === 'undefined') {
     customFormatter = getFormatter(indicatorId, decimals);
   }
@@ -122,12 +125,14 @@ export function findMostDecimals(values) {
   return getDecimals(maxBy(values, (v) => getDecimals(v)));
 }
 
-export function formatUnit(unit) {
-  if (unit?.label && unit?.uid !== KEY_DEGREES_CELSIUS && unit?.uid !== KEY_DEGREES_WARMING) {
-    if (unit.uid === 'no unit') {
-      return ` (${unit.label})`;
-    } else {
-      return ` ${unit.label}`;
+export function formatUnit(unit, { inSentence = false, isLabelLong = false } = {}) {
+  if (unit?.label && ((unit?.uid !== KEY_DEGREES_CELSIUS && unit?.uid !== KEY_DEGREES_WARMING) || inSentence)) {
+    if (unit.uid !== UID_NO_UNIT) {
+      const label = isLabelLong || inSentence ? unit.labelLong ?? unit.label : unit.label;
+      if (inSentence) {
+        return ` in ${label}`;
+      }
+      return `&#8239;${label}`;
     }
   }
   return '';

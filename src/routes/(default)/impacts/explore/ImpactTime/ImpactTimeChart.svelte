@@ -1,6 +1,6 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
-  import { formatValue, findDecimalsForDistinctValues } from '$lib/utils/formatting';
+  import { formatValue, findDecimalsForDistinctValues, formatUnit } from '$lib/utils/formatting';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
   import AxisX from '$lib/charts/axes/AxisX.svelte';
@@ -13,7 +13,6 @@
   import { flatMap } from 'lodash-es';
   import ColorLegend from '$lib/charts/legends/ColorLegend.svelte';
   import StrokeLegend from './StrokeLegend.svelte';
-  import { formatUnit } from '$lib/utils/formatting';
 
   export let steps;
   export let data = [];
@@ -120,7 +119,7 @@
         <AxisX ticks={xTicks} snapTicks={true} />
         <AxisY
           padding={mainChartPadding}
-          axisLabel={indicatorLabel ? `${indicatorLabel.label}${unit?.label ? ` in ${unit.label}` : ''}` : undefined}
+          axisLabel={indicatorLabel ? `${indicatorLabel.label}${formatUnit(unit, { inSentence: true })}` : undefined}
           ticks={yTicks}
           xTick={-3}
           ticksHighlighted={ticksYHighlighted}

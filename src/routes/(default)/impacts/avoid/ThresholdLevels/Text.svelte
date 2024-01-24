@@ -1,11 +1,12 @@
 <script>
   import { CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_LABEL } from '$stores/state.js';
-  import { STUDY_LOCATIONS, SCENARIOS } from '$stores/meta.js';
+  import { SCENARIOS } from '$stores/meta.js';
   import { SELECTED_STUDY_LOCATION, LEVEL_OF_IMPACT, SELECTED_LIKELIHOOD_LEVEL_LABEL, IS_STUDY_LOCATION_WHOLE_URBAN_AREA, SELECTED_STUDY_LOCATION_LABEL } from '$stores/avoid.js';
   import THEME from '$styles/theme-store.js';
-  import { SCENARIOS_IN_AVOIDING_IMPACTS, UID_STUDY_LOCATION_AVERAGE } from '$config';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$config';
   import Interactive from './Interactive.svelte';
   import Important from './Important.svelte';
+  import { formatValue, formatUnit } from '$lib/utils/formatting';
   export let data;
 
   const VALUE_NEVER = 'never';
@@ -77,13 +78,10 @@
       {:else}
         {direction ? 'above' : 'below'}
       {/if}
-      <Interactive>{level_of_impact}</Interactive>
       {#if isCountable}
-        <Interactive>{labelWithinSentence}</Interactive>{#if isBoth},{:else}.{/if}
-      {:else if unit.uid !== 'degrees-celsius'}
-        {unit.labelLong}{#if isBoth},{:else}.{/if}
+        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}</Interactive>&nbsp;<Interactive>{labelWithinSentence}</Interactive>{#if isBoth},{:else}.{/if}
       {:else}
-        °C{#if isBoth},{:else}.{/if}
+        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}{@html formatUnit(unit, { isLabelLong: true })}</Interactive>{#if isBoth},{:else}.{/if}
       {/if}
       {#if isBoth}
         one should pursue global emission pathways in line with limiting average global warming to <Important>{`${gmt}°C`}</Important>.

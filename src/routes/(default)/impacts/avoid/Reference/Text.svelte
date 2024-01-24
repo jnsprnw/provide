@@ -1,7 +1,7 @@
 <script>
   import { CURRENT_INDICATOR_LABEL, CURRENT_INDICATOR, CURRENT_GEOGRAPHY, CURRENT_INDICATOR_OPTIONS } from '$stores/state.js';
   import { IS_STUDY_LOCATION_WHOLE_URBAN_AREA, SELECTED_STUDY_LOCATION_LABEL } from '$stores/avoid.js';
-  import { formatValue } from '$lib/utils/formatting';
+  import { formatValue, formatUnit } from '$lib/utils/formatting';
   export let data;
 
   $: ({ unit } = $CURRENT_INDICATOR);
@@ -10,7 +10,7 @@
   $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
   $: isWholeUrbanArea = $IS_STUDY_LOCATION_WHOLE_URBAN_AREA;
   $: period = reference.label;
-  $: value = formatValue(average_value);
+  $: value = formatValue(average_value, unit.uid);
   $: location = `${isWholeUrbanArea ? '<strong>urban area</strong> of ' : '<strong>' + $SELECTED_STUDY_LOCATION_LABEL + '</strong> in '} <strong>${$CURRENT_GEOGRAPHY.label}</strong>`;
 </script>
 
@@ -20,7 +20,7 @@
     {#if countable}
       Over the {period} period, the {@html location} experienced on average <strong>{@html value}</strong> <strong>{labelWithinSentence}</strong>.
     {:else}
-      Over the {period} period, the {@html location} experienced <strong>{labelWithinSentence}</strong> of <strong>{value}&#8239;{unit.label}</strong>.
+      Over the {period} period, the {@html location} experienced <strong>{labelWithinSentence}</strong> of <strong>{value}{@html formatUnit(unit)}</strong>.
     {/if}
   </p>
 </div>
