@@ -25,7 +25,7 @@
         isActive: $index === acc.counter++,
         hasContent: Boolean(section.content) || children.some(({ props }) => Boolean(props.content)),
         sections: children.map((s) => ({
-          title: s.props?.title,
+          title: s.props?.titleShort ?? s.props?.title,
           slug: s.props?.slug,
           index: acc.counter,
           isActive: $index === acc.counter++,
