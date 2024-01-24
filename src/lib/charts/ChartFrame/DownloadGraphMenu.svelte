@@ -71,7 +71,7 @@
       }
     );
 
-    const host = import.meta.env.VITE_SCREENSHOT_URL;
+    const host = import.meta.env.VITE_SCREENSHOT_URL; // 'http://127.0.0.1:8889/api/puppeteer'
 
     if (!host) {
       console.warn(`Screenshot build URL variable not set. Graph download will not be available.`);
