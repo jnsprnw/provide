@@ -7,7 +7,7 @@
   export let data;
 
   $: sections = [
-    ...data.methodology.map(({ title, slug, models }) => {
+    ...data.methodology.map(({ title, slug, models, simulation, processing }) => {
       return {
         props: {
           slug,
@@ -15,10 +15,20 @@
         },
         component: SectionHeadline,
         content: true,
-        sections: models.map((model) => ({
-          props: model,
-          component: Model,
-        })),
+        sections: [
+          ...models.map((model) => ({
+            props: model,
+            component: Model,
+          })),
+          ...simulation.map((model) => ({
+            props: model,
+            component: Model,
+          })),
+          ...processing.map((model) => ({
+            props: model,
+            component: Model,
+          })),
+        ],
       };
     }),
   ];

@@ -1,4 +1,4 @@
-import { loadFromStrapi, trimLinebreakAtEnd } from '$utils/apis.js';
+import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { kebabCase } from 'lodash-es';
 import { parse } from 'marked';
@@ -6,82 +6,44 @@ import { stringify } from 'qs';
 import { LABEL_DOCUMENTATION } from '$config';
 
 export const load = async ({ fetch }) => {
-  const data = await loadFromStrapi('technical-documentation', fetch);
-
   const methodology = await loadFromStrapi(
     'methodology',
     fetch,
     stringify({
-      populate: ['DataType', 'DataType.Model', 'DataType.Model.Processing'],
+      populate: ['DataType', 'DataType.Model', 'DataType.Simulation', 'DataType.Processing'],
     })
   );
-
-  const { Models, Scenarios, ModelsIntro, ScenariosIntro, DataProcessing, DataProcessingIntro } = data.attributes;
 
   const title = generatePageTitle(LABEL_DOCUMENTATION);
 
   return {
     title,
-    methodology: methodology.attributes.DataType.map(({ Label, Model }) => {
+    methodology: methodology.attributes.DataType.map(({ Label, Model, Simulation, Processing }) => {
       return {
         title: Label.trim(),
         slug: kebabCase(Label),
-        models: Model.map(({ Label, Description, Simulation, Processing }) => {
+        models: Model.map(({ Label, Description }) => {
           return {
             title: Label.trim(),
             slug: kebabCase(Label),
             description: parse(Description ?? ''),
-            simulation: parse(Simulation ?? ''),
-            processing: Processing.map(({ Description }) => ({
-              description: parse(Description ?? ''),
-            })),
+          };
+        }),
+        simulation: Simulation.map(({ Label, Description }) => {
+          return {
+            title: Label.trim(),
+            slug: kebabCase(Label),
+            description: parse(Description ?? ''),
+          };
+        }),
+        processing: Processing.map(({ Label, Description }) => {
+          return {
+            title: Label.trim(),
+            slug: kebabCase(Label),
+            description: parse(Description ?? ''),
           };
         }),
       };
     }),
-    content: {
-      modelsIntro: parse(ModelsIntro || ''),
-      models: Models.map(({ UID, Title, Description, Link }) => {
-        const title = Title.trim();
-        const description = trimLinebreakAtEnd(Description);
-        if (!title.length || !description.length) {
-          return false;
-        }
-        return {
-          title,
-          slug: kebabCase(UID || title),
-          content: parse(description),
-          link: Link,
-        };
-      }).filter((d) => Boolean(d)),
-      scenariosIntro: parse(ScenariosIntro || ''),
-      scenarios: Scenarios.map(({ UID, Title, Description, Label }) => {
-        const title = Title.trim();
-        const description = Description.trim();
-        if (!title.length || !description.length) {
-          return false;
-        }
-        return {
-          title,
-          slug: kebabCase(UID || Label || title),
-          content: parse(description),
-          label: Label || title,
-        };
-      }).filter((d) => Boolean(d)),
-      dataProcessingIntro: parse(DataProcessingIntro || ''),
-      dataProcessing: DataProcessing.map(({ Title, Description, Label }) => {
-        const title = Title.trim();
-        const description = Description.trim();
-        if (!title.length || !description.length) {
-          return false;
-        }
-        return {
-          title,
-          slug: kebabCase(Label || title),
-          content: parse(description),
-          label: Label || title,
-        };
-      }).filter((d) => Boolean(d)),
-    },
   };
 };
