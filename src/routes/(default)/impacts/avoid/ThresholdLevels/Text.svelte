@@ -79,12 +79,12 @@
         {direction ? 'above' : 'below'}
       {/if}
       {#if isCountable}
-        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}</Interactive>&nbsp;<Interactive>{labelWithinSentence}</Interactive>{#if isBoth},{:else}.{/if}
+        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}</Interactive>&nbsp;<Interactive>{labelWithinSentence}</Interactive>{#if !isBoth}.{/if}
       {:else}
-        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}{@html formatUnit(unit, { isLabelLong: true })}</Interactive>{#if isBoth},{:else}.{/if}
+        <Interactive>{formatValue(level_of_impact, unit.uid, { matchDecimals: true })}{@html formatUnit(unit, { isLabelLong: true })}</Interactive>{#if !isBoth}.{/if}
       {/if}
       {#if isBoth}
-        one should pursue global emission pathways in line with limiting average global warming to <Important>{`${gmt}°C`}</Important>.
+        below <Interactive>{certainty_level}</Interactive>, one should pursue global emission pathways in line with limiting average global warming to <Important>{`${gmt}°C`}</Important>.
       {/if}
     </p>
   </section>
