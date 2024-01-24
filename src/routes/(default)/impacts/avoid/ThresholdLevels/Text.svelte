@@ -50,7 +50,11 @@
   <section class="flex gap-y-4 flex-col">
     <p class="text-lg leading-relaxed max-w-4xl">
       {#if isAvoidable}
-        There is {isPossible ? 'at least' : 'less than'} a <Interactive>{certainty_level}</Interactive> chance
+        {#if isPossible}
+          To keep the chance
+        {:else}
+          There is less than a <Interactive>{certainty_level}</Interactive> chance
+        {/if}
       {:else}
         Due to unavoidable risk even in the scenario with the highest amount of emissions reductions there is a more than <Interactive>{certainty_level}</Interactive> chance
       {/if}
@@ -75,14 +79,14 @@
       {/if}
       <Interactive>{level_of_impact}</Interactive>
       {#if isCountable}
-        <Interactive>{labelWithinSentence}</Interactive>{#if !isBoth}.{/if}
+        <Interactive>{labelWithinSentence}</Interactive>{#if isBoth},{:else}.{/if}
       {:else if unit.uid !== 'degrees-celsius'}
-        {unit.labelLong}{#if !isBoth}.{/if}
+        {unit.labelLong}{#if isBoth},{:else}.{/if}
       {:else}
-        °C{#if !isBoth}.{/if}
+        °C{#if isBoth},{:else}.{/if}
       {/if}
       {#if isBoth}
-        unless global warming is kept below <Important>{`${gmt}°C`}</Important>.
+        one should pursue global emission pathways in line with limiting average global warming to <Important>{`${gmt}°C`}</Important>.
       {/if}
     </p>
   </section>
