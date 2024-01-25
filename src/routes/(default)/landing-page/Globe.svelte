@@ -59,7 +59,7 @@
 
   const interval = setInterval(() => {
     currentIndex = currentIndex === stories.length - 1 ? 0 : currentIndex + 1;
-  }, 5000);
+  }, 10000);
 
   onDestroy(() => {
     clearInterval(interval);
@@ -100,7 +100,7 @@
       </header>
       <div class="col-span-3 self-center col-start-4 p-4 bg-white/10 border-white/40 border rounded-sm">
         <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Learn about</span>
-        <Tabs {currentIndex} on:select={manualSelect} />
+        <Tabs on:select={manualSelect} {currentStory} />
       </div>
     </div>
   </div>
