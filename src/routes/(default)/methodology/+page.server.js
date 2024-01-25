@@ -18,14 +18,13 @@ export const load = async ({ fetch }) => {
 
   return {
     title,
-    methodology: methodology.attributes.DataType.map(({ Label, TitleShort, Model, Simulation, Processing }) => {
+    methodology: methodology.attributes.DataType.map(({ Label, Model, Simulation, Processing }) => {
       return {
         title: Label.trim(),
         slug: kebabCase(Label),
         models: Model.map(({ Label, Description }) => {
           return {
             title: Label.trim(),
-            titleShort: (TitleShort ?? Label).trim(),
             slug: kebabCase(Label),
             description: parse(Description ?? ''),
           };
@@ -33,7 +32,6 @@ export const load = async ({ fetch }) => {
         simulation: Simulation.map(({ Label, Description }) => {
           return {
             title: Label.trim(),
-            titleShort: (TitleShort ?? Label).trim(),
             slug: kebabCase(Label),
             description: parse(Description ?? ''),
           };
@@ -41,7 +39,6 @@ export const load = async ({ fetch }) => {
         processing: Processing.map(({ Label, Description }) => {
           return {
             title: Label.trim(),
-            titleShort: (TitleShort ?? Label).trim(),
             slug: kebabCase(Label),
             description: parse(Description ?? ''),
           };

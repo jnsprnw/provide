@@ -16,22 +16,47 @@
         component: SectionHeadline,
         content: true,
         sections: [
-          ...models.map((model) => ({
-            props: model,
+          {
             component: Model,
-          })),
-          ...simulation.map((model) => ({
-            props: model,
+            props: {
+              slug: `${slug}-models`,
+              title: models.length > 1 ? 'Models' : 'Model',
+              content: models,
+            },
+          },
+          {
             component: Model,
-          })),
-          ...processing.map((model) => ({
-            props: model,
+            props: {
+              slug: `${slug}-simulation`,
+              title: simulation.length > 1 ? 'Model simulations' : 'Model simulation',
+              content: simulation,
+            },
+          },
+          {
             component: Model,
-          })),
+            props: {
+              slug: `${slug}-processing`,
+              title: 'Data processing',
+              content: processing,
+            },
+          },
+          // ...models.map((model) => ({
+          //   props: model,
+          //   component: Model,
+          // })),
+          // ...simulation.map((model) => ({
+          //   props: model,
+          //   component: Model,
+          // })),
+          // ...processing.map((model) => ({
+          //   props: model,
+          //   component: Model,
+          // })),
         ],
       };
     }),
   ];
+  $: console.log({ sections });
 </script>
 
 <ContentPageLayout {sections} title={LABEL_DOCUMENTATION} intro="Learn more about the methodology and the models used to create the data visualised on this dashboard." />
