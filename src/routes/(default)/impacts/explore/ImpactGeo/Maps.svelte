@@ -236,7 +236,7 @@
 
               <!--<FilterLayer layer="settlement-major-label" geo={geoShape} />-->
             </DataSource>
-          {/if}-->
+          {/if}
 
           <DataSource {data}>
             <PolygonLayer fill={true} line={false} />
