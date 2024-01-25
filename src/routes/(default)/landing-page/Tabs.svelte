@@ -2,33 +2,49 @@
   import { createTabs, melt } from '@melt-ui/svelte';
   import { cubicInOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
+  import { createEventDispatcher } from 'svelte';
+  const dispatch = createEventDispatcher();
+
+  const ID_PREFIX = 'tab-';
+
+  export let currentIndex = 1;
+
+  $: {
+    value.set(`${ID_PREFIX}${currentIndex + 1}`);
+  }
 
   const {
     elements: { root, list, content, trigger },
     states: { value },
   } = createTabs({
-    defaultValue: 'tab-1',
+    defaultValue: `${ID_PREFIX}1`,
   });
 
   let className = '';
   export { className as class };
 
   const triggers = [
-    { id: 'tab-1', title: 'Terrestrial Climate' },
-    { id: 'tab-2', title: 'Marine Climate' },
-    { id: 'tab-3', title: 'Urban Climate' },
+    { id: `${ID_PREFIX}1`, title: 'Terrestrial Climate' },
+    { id: `${ID_PREFIX}2`, title: 'Marine Climate' },
+    { id: `${ID_PREFIX}3`, title: 'Urban Climate' },
   ];
 
   const [send, receive] = crossfade({
     duration: 250,
     easing: cubicInOut,
   });
+
+  function selectTab(id) {
+    dispatch('select', {
+      id: parseInt(id.replace(ID_PREFIX, '')) - 1,
+    });
+  }
 </script>
 
 <div use:melt={$root} class="flex w-full flex-col overflow-hidden {className}">
   <div use:melt={$list} class="flex shrink-0 overflow-x-auto text-white flex-row justify-between">
     {#each triggers as triggerItem}
-      <button use:melt={$trigger(triggerItem.id)} class="trigger relative py-2 text-xl">
+      <button use:melt={$trigger(triggerItem.id)} on:click={() => selectTab(triggerItem.id)} class="trigger relative py-2 text-xl">
         {triggerItem.title}
         {#if $value === triggerItem.id}
           <div in:send={{ key: 'trigger' }} out:receive={{ key: 'trigger' }} class="absolute bottom-1 left-1/2 h-0.5 w-12 -translate-x-1/2 rounded-full bg-white/50" />

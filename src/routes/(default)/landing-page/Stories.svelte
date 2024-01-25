@@ -5,7 +5,6 @@
   import { fetchData } from '$lib/api/api';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import { getContext } from 'svelte';
-  //import LineTimeSeries from '$lib/charts/LineTimeSeries.svelte';
   import ScenarioList from '$lib/helper/chart-description/ScenarioList.svelte';
 
   export let stories;
@@ -36,7 +35,7 @@
     currentStoryID = index;
   }
 
-  function handClick(index) {
+  function handleClick(index) {
     clearInterval(intervalID);
     changeStory(index);
   }
@@ -44,13 +43,7 @@
   $: process = ({ data }, { currentStory }) => {
     const impactTime = data.map((datum, i) => {
       const MODEL_KEY = KEY_MODEL;
-      const {
-        yearStart,
-        yearStep,
-        data,
-        [MODEL_KEY]: model,
-        parameters,
-      } = datum.data;
+      const { yearStart, yearStep, data, [MODEL_KEY]: model, parameters } = datum.data;
       const indicatorData = data[currentStory.indicator.uid];
 
       return {
@@ -85,13 +78,7 @@
 </script>
 
 <div class="bg-surface-weaker">
-  <LoadingWrapper
-    let:asyncProps={{ data }}
-    let:props={{ currentStory }}
-    asyncProps={{ data: $IMPACT_TIME_DATA }}
-    props={{ currentStory }}
-    {process}
-  >
+  <LoadingWrapper let:asyncProps={{ data }} let:props={{ currentStory }} asyncProps={{ data: $IMPACT_TIME_DATA }} props={{ currentStory }} {process}>
     <!-- <LineTimeSeries showcase={true} {data} unit={currentStory.indicator.unit} /> -->
   </LoadingWrapper>
   <div class="wrapper grid">
@@ -104,8 +91,7 @@
                 How will
                 <em>{currentStory.indicator.label}</em> in
                 <em
-                  >{#if currentStory.geography.emoji}{currentStory.geography
-                      .emoji}&nbsp;{/if}{currentStory.geography.label}</em
+                  >{#if currentStory.geography.emoji}{currentStory.geography.emoji}&nbsp;{/if}{currentStory.geography.label}</em
                 >
                 develop under the
                 <ScenarioList scenarios={currentStory.scenarios} />?
@@ -117,11 +103,9 @@
       </ul>
     </div>
     <div class="stories-nav">
+      Tets
       {#each stories as datum, i}
-        <button
-          on:click={() => handClick(i)}
-          class:active={currentStoryID === i}>{i}</button
-        >
+        <button on:click={() => handleClick(i)} class:active={currentStoryID === i}>{i}</button>
       {/each}
     </div>
   </div>
@@ -194,7 +178,8 @@
       text-indent: -999em;
       cursor: pointer;
       overflow: hidden;
-      transition: transform var(--transition-duration-base) ease-out,
+      transition:
+        transform var(--transition-duration-base) ease-out,
         background-color var(--transition-duration-base) ease-out;
 
       &:hover,

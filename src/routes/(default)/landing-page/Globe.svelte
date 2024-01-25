@@ -12,8 +12,6 @@
   import mask from '@turf/mask';
   import centroid from '@turf/centroid';
 
-  import { Tab, TabGroup, TabList, TabPanel, TabPanels } from '@rgossiaux/svelte-headlessui';
-
   export let stories;
 
   const theme = getContext('theme');
@@ -32,11 +30,6 @@
         [URL_PATH_INDICATOR]: currentStory.indicator.uid,
         [URL_PATH_SCENARIO]: currentStory.scenarios[0].uid,
         [URL_PATH_YEAR]: 2050,
-        'geography-type': 'admin0',
-        time: 'annual',
-        reference: 'present-day',
-        spatial: 'area',
-        frequency: 0.1,
       },
     });
 
@@ -67,9 +60,15 @@
   const interval = setInterval(() => {
     currentIndex = currentIndex === stories.length - 1 ? 0 : currentIndex + 1;
   }, 5000);
+
   onDestroy(() => {
     clearInterval(interval);
   });
+
+  function manualSelect({ detail }) {
+    currentIndex = detail.id;
+    clearInterval(interval);
+  }
 </script>
 
 <header class="h-[70vh] max-h-[700px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
@@ -97,11 +96,11 @@
     <div class="max-w-7xl mx-auto px-6 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 my-20">
       <header class="col-start-1 col-span-4 text-white">
         <h1 class="text-6xl font-semibold">A database for global-to-local climate impacts</h1>
-        <p class="text-xl">Explore data across scales and sectors. All based on the latest science.</p>
+        <p class="text-xl">Explore data across scales and sectors.</p>
       </header>
       <div class="col-span-3 self-center col-start-4 p-4 bg-white/10 border-white/40 border rounded-sm">
         <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Learn about</span>
-        <Tabs />
+        <Tabs {currentIndex} on:select={manualSelect} />
       </div>
     </div>
   </div>
