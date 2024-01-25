@@ -40,18 +40,6 @@
               content: processing,
             },
           },
-          // ...models.map((model) => ({
-          //   props: model,
-          //   component: Model,
-          // })),
-          // ...simulation.map((model) => ({
-          //   props: model,
-          //   component: Model,
-          // })),
-          // ...processing.map((model) => ({
-          //   props: model,
-          //   component: Model,
-          // })),
         ],
       };
     }),
