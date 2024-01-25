@@ -9,7 +9,7 @@
   $: sections = data.content;
 </script>
 
-<ContentPageIntro title={LABEL_ABOUT} intro="Lorem ipsum" />
+<ContentPageIntro title={LABEL_ABOUT} />
 
 <ScrollContent {sections}>
   <NestedNav slot="navigation" {sections} />

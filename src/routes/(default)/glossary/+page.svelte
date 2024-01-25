@@ -19,4 +19,4 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title={LABEL_GLOSSARY} intro="Lorem ipsum" />
+<ContentPageLayout {sections} title={LABEL_GLOSSARY} />
