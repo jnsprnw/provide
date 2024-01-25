@@ -109,8 +109,6 @@
       };
     });
 
-    console.log({ geoData });
-
     const { model, source, resolution } = data[0].data;
     const formattedResolution = formatValue(resolution, 'degree', {
       addSuffix: false,

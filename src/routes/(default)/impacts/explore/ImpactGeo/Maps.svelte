@@ -14,7 +14,6 @@
   import { browser } from '$app/environment';
   import { STATUS_IDLE, STATUS_PROCESSING, STATUS_FAILED, WORKER_MESSAGE_START, STATUS_FINISHED } from '$config';
   import { CURRENT_GEOGRAPHY } from '$stores/state';
-  import Spinner from '$lib/helper/Spinner.svelte';
   import Progress from '$lib/helper/Progress.svelte';
   import { reduce } from 'lodash-es';
   import { formatValue } from '$formatting';
