@@ -6,11 +6,13 @@
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import DataSource from '$lib/MapboxMap/DataSource.svelte';
   import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
+  import MaMaskedData from './MaskedData.svelte';
   import Tabs from './Tabs.svelte';
   import { getContext, onDestroy } from 'svelte';
   import { coordinatesToRectGrid, getColorScale } from '$lib/utils/geo';
   import mask from '@turf/mask';
   import centroid from '@turf/centroid';
+  import { mapValues } from 'lodash-es';
 
   export let stories;
 
@@ -19,41 +21,69 @@
   let currentIndex = 0;
   $: currentStory = stories[currentIndex];
 
+  const zoomLevels = {
+    admin0: 2.6,
+    eez: 3,
+    cities: 10,
+  };
+
+  $: currentZoomLevel = zoomLevels[currentStory.geographyType] ?? 2.6;
+
   let GEO_DATA = writable({});
   let GEO_SHAPE = writable({});
 
   $: {
-    fetchData(GEO_DATA, {
-      endpoint: END_IMPACT_GEO,
-      params: {
-        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
-        [URL_PATH_INDICATOR]: currentStory.indicator.uid,
-        [URL_PATH_SCENARIO]: currentStory.scenarios[0].uid,
-        [URL_PATH_YEAR]: 2050,
-      },
-    });
-
-    fetchData(GEO_SHAPE, {
-      endpoint: END_GEO_SHAPE,
-      params: {
-        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
-      },
-    });
+    // We request data for all available stories
+    fetchData(
+      GEO_DATA,
+      stories.map(({ geography, indicator, scenarios }) => ({
+        endpoint: END_IMPACT_GEO,
+        params: {
+          [URL_PATH_GEOGRAPHY]: geography.uid,
+          [URL_PATH_INDICATOR]: indicator.uid,
+          [URL_PATH_SCENARIO]: scenarios[0].uid,
+          ...mapValues(indicator.parameters, (options) => options[0]),
+        },
+      }))
+    );
+    // We request shape files for all available stories
+    fetchData(
+      GEO_SHAPE,
+      stories.map(({ geography }) => ({
+        endpoint: END_GEO_SHAPE,
+        params: {
+          [URL_PATH_GEOGRAPHY]: geography.uid,
+        },
+      }))
+    );
   }
 
-  $: process = ({ grid, shape }) => {
-    const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
-    const colorScale = getColorScale([gridData]);
-    const geoData = coordinatesToRectGrid(gridData, {
-      origin,
-      resolution,
-      colorScale,
-    });
-
+  $: process = ({ grids, shapes }) => {
+    if (shapes.length !== grids.length) {
+      return [];
+    }
     return {
-      mask: mask(shape.data.data),
-      center: centroid(shape.data.data).geometry.coordinates,
-      data: geoData,
+      data: grids.map((grid, i) => {
+        const shape = shapes[i]; // Grids and shapes are in the same order
+
+        const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
+        const colorScale = getColorScale([gridData]);
+        const geoData = coordinatesToRectGrid(gridData, {
+          origin,
+          resolution,
+          colorScale,
+        });
+
+        const geoShape = shape.data.data.features[0];
+        console.log({ geoShape });
+
+        return {
+          mask: mask(shape.data.data),
+          geoShape: geoShape,
+          center: centroid(shape.data.data).geometry.coordinates,
+          geoData: geoData,
+        };
+      }),
     };
   };
 
@@ -66,8 +96,9 @@
   });
 
   function manualSelect({ detail }) {
-    currentIndex = detail.id;
-    clearInterval(interval);
+    // The stories are numbered while the tabs use the geography type
+    currentIndex = stories.findIndex(({ geographyType }) => geographyType === detail.id);
+    clearInterval(interval); // Stop the interval
   }
 </script>
 
@@ -75,28 +106,28 @@
   <figure
     aria-hidden
     role="presentation"
-    class="col-start-1 col-span-3 absolute top-[-50%] left-[-30%] w-[130%] h-[200%] z-10 to-transparent from-theme-base"
+    class="col-start-1 col-span-6 absolute top-[-50%] left-[-30%] w-[130%] h-[200%] z-10 to-transparent from-theme-base"
     style="background-image: radial-gradient(closest-side, var(--tw-gradient-from) 60%, var(--tw-gradient-to));"
   >
-    <LoadingWrapper asyncProps={{ shape: $GEO_SHAPE, grid: $GEO_DATA }} {process} let:asyncProps warningBackground={false} warningInverted={true}>
-      <MapProvider interactive={false} projection="globe" style="mapbox://styles/climateanalytics/clqz980h0018301qwablpef7n" center={asyncProps.center} zoomRange={[2.6, 2.6]}>
-        <DataSource data={asyncProps.mask}>
+    <LoadingWrapper asyncProps={{ shapes: $GEO_SHAPE, grids: $GEO_DATA }} {process} let:asyncProps warningBackground={false} warningInverted={true}>
+      <MapProvider interactive={false} projection="globe" style="mapbox://styles/climateanalytics/clqz980h0018301qwablpef7n" center={asyncProps.data[currentIndex].center} zoom={currentZoomLevel}>
+        <!--<DataSource data={asyncProps.mask}>
           <PolygonLayer before="ocean-fill" fillColor={$theme.color.theme.stronger} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />
           <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.theme.stronger} />
-        </DataSource>
-        <DataSource data={asyncProps.data}>
-          <PolygonLayer fill={true} line={false} before="mask" />
-        </DataSource>
+        </DataSource>-->
+        {#each asyncProps.data as { geoShape, geoData }}
+          <MaMaskedData {geoShape} {geoData} />
+        {/each}
       </MapProvider>
     </LoadingWrapper>
   </figure>
 
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-20 h-1/2 self-end bg-gradient-to-t from-theme-stronger/90" aria-hidden role="presentation" />
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 my-20">
+    <div class="max-w-5xl mx-auto px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 my-20">
       <header class="col-start-1 col-span-4 text-white">
-        <h1 class="text-6xl font-semibold">A database for global-to-local climate impacts</h1>
-        <p class="text-xl">Explore data across scales and sectors.</p>
+        <h1 class="text-5xl font-bold mb-4 leading-tight">A database for global-to-local climate impacts</h1>
+        <p class="text-2xl">Explore data across scales and sectors</p>
       </header>
       <div class="col-span-3 self-center col-start-4 p-4 bg-white/10 border-white/40 border rounded-sm">
         <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Learn about</span>

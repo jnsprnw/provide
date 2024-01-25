@@ -17,7 +17,7 @@
   export let style = undefined;
   export let projection = 'mercator';
   export let interactive = true;
-  export let bounds;
+  export let bounds = undefined;
   export let center = undefined;
   export let fitBoundsOptions = undefined;
   export let fitBoundsExtent = 20;
@@ -83,15 +83,15 @@
     $map.fitBounds(bounds, fitBoundsOptions || { padding: clientWidth / fitBoundsExtent });
   }
 
-  $: if ($ready && center) {
-    $map.flyTo({ center, speed: 0.25, curve: 1.2 });
+  $: if ($ready && center && zoom) {
+    $map.flyTo({ center, zoom });
   }
 
   $: {
     if ($mapReady && $stylesReady) {
       setTimeout(() => {
         $ready = true;
-      }, 1000);
+      }, 500);
     }
   }
 
