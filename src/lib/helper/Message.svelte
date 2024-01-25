@@ -13,19 +13,11 @@
   class:py-8={warningSizeSmall}
   role="alert"
 >
-  <span
-    class="text-lg font-bold leading-tight"
-    class:text-base={warningSizeSmall}
-    class:text-white={warningInverted}
-    >{#if warningSign}⚠️
+  <span class="text-lg font-bold leading-tight" class:text-base={warningSizeSmall} class:text-white={warningInverted}
+    >{#if warningSign}<i class="not-italic font-emoji font-normal" aria-hidden role="presentation">⚠️</i>️
     {/if}{headline}</span
   >
-  <div
-    class="flex-col text-sm"
-    class:flex={!warningSizeSmall}
-    class:text-xs={warningSizeSmall}
-    class:text-white={warningInverted}
-  >
+  <div class="flex-col text-sm" class:flex={!warningSizeSmall} class:text-xs={warningSizeSmall} class:text-white={warningInverted}>
     <slot />
   </div>
 </div>
