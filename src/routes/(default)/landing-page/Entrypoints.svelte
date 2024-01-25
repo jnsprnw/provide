@@ -5,12 +5,9 @@
 
 <header class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-12 grid md:grid-cols-2">
   <div>
-    <span class="block font-bold text-3xl mb-3">Explore risks of climate overshoots across scales</span>
-    <p class="leading-normal text-xl mb-5">The PROVIDE Climate risk dashboard allows you to explore future impacts and (un)avoidable risks from climate change from cities to the global scale.</p>
-    <p class="leading-normal text-xl">
-      It allows you to explore future impacts and (un)avoidable risks from climate change under scenarios of global warming. Alternatively, start local and explore what action is needed on climate to
-      avoid a specific climate impact threshold.
-    </p>
+    <span class="block font-bold text-3xl mb-3">Explore risks of climate overshoots</span>
+    <p class="leading-normal text-xl mb-5">The PROVIDE Climate risk dashboard allows you to explore future climate change impacts and (un)avoidable risks from cities to the global scale.</p>
+    <p class="leading-normal text-xl">Alternatively, start local and explore what action is needed on climate to avoid climate impacts in your city.</p>
   </div>
 </header>
 <div class="grid md:grid-cols-2 gap-y-6 gap-x-24 max-w-7xl mx-auto">
@@ -20,19 +17,24 @@
     audience={['Climate scientists (terrestrial, marine and urban)', 'Experts working on climate risks', 'Climate litigation experts', 'Science communicators', 'National policy makers']}
   >
     <div slot="intro">
-      <p class="mb-5">
-        This mode allows you to explore different climate futures and how they will affect the environment and people.: Choose your geography type from cities, countries and marine environments, and
+      <p class="mb-5">This mode allows you to explore different climate futures and how they will affect the environment and people.</p>
+      <p>
+        Choose your geography type from cities, countries and marine environments, and then an impact driver/indicator to explore how future climate impacts will develop under various emission
+        scenarios.
       </p>
-      <p>then the impact drivers/indicator to explore how future climate impacts will develop under various emission scenarios.</p>
     </div>
     <img slot="image" src="/img/impacts.png" alt="One scenario and many resulting impacts" />
   </Entrypoint>
-  <Entrypoint path={PATH_AVOID} title="Avoid future impacts" audience={['Urban planners, policy makers and climate adaptation experts', 'Science communicators', 'Experts working on climate risks']}>
+  <Entrypoint
+    path={PATH_AVOID}
+    title="Avoiding future impacts"
+    audience={['Urban planners, policy makers and climate adaptation experts', 'Science communicators', 'Experts working on climate risks']}
+  >
     <div slot="intro">
-      <p class="mb-5">In this mode, you can explore how we can avoid undesirable levels of climate impacts in urban areas.</p>
+      <p class="mb-5">In this mode, you can explore how we can avoid reaching undesirable climate impact levels in urban areas.</p>
       <p>
-        You can choose a city and an urban heat indicator. Then, choose the level of impact, for example, a number of heatwave days per year, and explore when your chosen amount would be reached. You
-        can then explore under which scenario, and what climate action pathway, might help your city avoid this climate impact level.
+        You can choose a city and an urban heat indicator, then a level of impact, for example, a number of days in a heatwave, and see when your selected impact level would be reached. You can then
+        explore under which scenario, and which climate action pathway might help your city avoid this impact level.
       </p>
     </div>
     <img slot="image" src="/img/emission-scenarios.png" alt="One scenario and many resulting impacts" />
