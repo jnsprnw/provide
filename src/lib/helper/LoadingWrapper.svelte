@@ -46,24 +46,17 @@
       ? { ...asyncProps, ...process(asyncProps, props) } // Make sure all props are part of the passed props, but allow for overwriting them
       : asyncProps;
   }
+
+  $: console.log({ currentAsyncProps });
 </script>
 
 {#if isFailed}
   <slot name="failed">
-    <Message
-      {warningBackground}
-      {warningSizeSmall}
-      {warningInverted}
-      warningSign={true}
-      headline="Data could not be loaded for this graph"
-    >
+    <Message {warningBackground} {warningSizeSmall} {warningInverted} warningSign={true} headline="Data could not be loaded for this graph">
       <span>This is probably because the data is not available for this selection.</span>
       <span>Try another combination of geography, indicator and scenarios.</span>
       {#if flatData.length}
-        <div
-          class="mt-4 font-mono text-xs text-text-weaker flex flex-col"
-          class:text-white={warningInverted}
-        >
+        <div class="mt-4 font-mono text-xs text-text-weaker flex flex-col" class:text-white={warningInverted}>
           {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message }}<span>{message}</span>{/each}
         </div>
       {/if}
@@ -75,10 +68,5 @@
   {#if isLoading}
     <slot name="loading" />
   {/if}
-  <slot
-    {isLoading}
-    {isEmpty}
-    asyncProps={currentAsyncProps}
-    props={currentProps}
-  />
+  <slot {isLoading} {isEmpty} asyncProps={currentAsyncProps} props={currentProps} />
 {/if}
