@@ -31,6 +31,8 @@ export const IS_STATIC = writable(false);
 
 export const CURRENT_PAGE = writable('/');
 
+export const IS_AVOID_PAGE = derived(CURRENT_PAGE, ($currentPage) => $currentPage === PATH_AVOID);
+
 /*
  * GEOGRAPHY STATE
  */
@@ -39,14 +41,14 @@ export const CURRENT_PAGE = writable('/');
  * Derived store that uses the list of geography types defined in the meta store and the current page to determine the list of available types
  * @type {Readable<Object[]>}
  */
-export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, CURRENT_PAGE], ([$types, $currentPage]) => {
+export const AVAILABLE_GEOGRAPHY_TYPES = derived([GEOGRAPHY_TYPES, IS_AVOID_PAGE], ([$types, $isAvoidPage]) => {
   return $types.map((t) => {
     // It could be disabled by the meta endpoint
     const disabledByEndpoint = t.disabled;
     // By default no type is disabled
     let disabledByMode = false;
     // Check specifically for the avoid mode
-    if ($currentPage === PATH_AVOID) {
+    if ($isAvoidPage) {
       // Check if the type is present in the list of allowed types
       disabledByMode = !GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS.includes(t.uid);
     }
@@ -484,15 +486,19 @@ export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCE
   return extractTimeframesFromScenarios($available ?? [], $selectable ?? []);
 });
 
-/* UTILITY N STUFF */
-export const IS_EMPTY_SCENARIO = derived(CURRENT_SCENARIOS_UID, ($scenarios) => !Array.isArray($scenarios) || !$scenarios.length);
+/* UTILITIES */
+export const IS_EMPTY_SCENARIO = derived([CURRENT_SCENARIOS_UID, IS_AVOID_PAGE], ([$scenarios, $isAvoidPage]) => {
+  if ($isAvoidPage) return false; // The Avoid page does not need any selected scenarios
+  return !Array.isArray($scenarios) || !$scenarios.length;
+});
 
 export const IS_EMPTY_SELECTION = derived([IS_EMPTY_GEOGRAPHY, IS_EMPTY_INDICATOR, IS_EMPTY_SCENARIO], ([$geography, $indicator, $scenario]) => $geography || $indicator || $scenario);
 
 export const IS_COMBINATION_AVAILABLE_SCENARIO = derived(
-  [SELECTABLE_SCENARIOS_UID, CURRENT_SCENARIOS_UID],
-  ([$SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) =>
-    Array.isArray($CURRENT_SCENARIOS_UID) && $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario))
+  [IS_AVOID_PAGE, SELECTABLE_SCENARIOS_UID, CURRENT_SCENARIOS_UID],
+  ([$isAvoidPage, $SELECTABLE_SCENARIOS, $CURRENT_SCENARIOS_UID]) =>
+    $isAvoidPage || // The Avoid page does not need any selected scenarios
+    (Array.isArray($CURRENT_SCENARIOS_UID) && $CURRENT_SCENARIOS_UID.length && every($CURRENT_SCENARIOS_UID, (scenario) => $SELECTABLE_SCENARIOS.includes(scenario)))
 );
 
 export const IS_COMBINATION_AVAILABLE = derived(
