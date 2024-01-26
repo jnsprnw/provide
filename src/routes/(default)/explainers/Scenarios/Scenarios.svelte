@@ -9,7 +9,7 @@
   import { writable } from 'svelte/store';
   import { extractTimeframe } from '$utils/meta.js';
   import THEME from '$styles/theme-store.js';
-  import { MAX_NUMBER_SELECTABLE_SCENARIOS, MEAN_TEMPERATURE_UID, EMISSIONS_UID, PATH_DOCUMENTATION } from '$config';
+  import { LABEL_SCENARIOS_TIMELINES, LABEL_SCENARIOS_TIMEFRAMES, MAX_NUMBER_SELECTABLE_SCENARIOS, MEAN_TEMPERATURE_UID, EMISSIONS_UID, PATH_DOCUMENTATION } from '$config';
   import DefinitionItem from '$lib/helper/chart-description/DefinitionItem.svelte';
   import { getContext } from 'svelte';
   const { query } = getContext('scrollContent');
@@ -42,7 +42,7 @@
 
 <div class="flex flex-col gap-y-10 mt-10 pt-10 {query}">
   <div>
-    <SubsectionHeadline title="Timeframes" subtitle="2100 for the majority of climate impacts, 2300 for longer term impacts (glaciers and oceans)." slug="timeframe" />
+    <SubsectionHeadline title={LABEL_SCENARIOS_TIMEFRAMES} subtitle="2100 for the majority of climate impacts, 2300 for longer term impacts (glaciers and oceans)." />
     <PillGroup bind:currentUid={selectedTimeframe} options={selectableTimeframes} />
   </div>
 
@@ -54,7 +54,7 @@
     <CrossLink selectedScenarios={$selectedScenarios} />
   </footer>
   <div>
-    <SubsectionHeadline title="Scenario timelines" subtitle="Select a scenario to see progress over time." />
+    <SubsectionHeadline title={LABEL_SCENARIOS_TIMELINES} subtitle="Select a scenario to see progress over time." />
     <div class="grid gap-x-6 grid-cols-2">
       <Chart scenarios={scenariosListed} variable={MEAN_TEMPERATURE_UID} title="Global mean temperature in °C" yDomain={[1, null]}>
         <p class="mt-1 mb-2 text-contour-weaker">

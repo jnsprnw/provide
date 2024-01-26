@@ -1,7 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { writable } from 'svelte/store';
-  import { KEY_SCENARIOPRESET_UID as PRESET_ID } from '$config';
+  import { KEY_SCENARIOPRESET_UID as PRESET_ID, LABEL_SCENARIOS_PRESETS } from '$config';
   import SideScrollIndicator from '$lib/helper/SideScrollIndicator.svelte';
   import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
 
@@ -57,7 +57,7 @@
 
 {#if scenarioPresetsForCurrentTimeframe.length}
   <div>
-    <SubsectionHeadline title="Scenario presets" subtitle="Click on a research question and see the preselected scenarios that can answer it." />
+    <SubsectionHeadline title={LABEL_SCENARIOS_PRESETS} subtitle="Click on a research question and see the preselected scenarios that can answer it." />
     <SideScrollIndicator widthOfContent={widthContent} distanceLeft={0} distanceRight={0}>
       <div class="grid gap-x-2.5 min-w-min grid-rows-[auto_1fr]" style="grid-template-columns: repeat({scenarioPresetsForCurrentTimeframe.length * 2}, 1fr);" bind:clientWidth={widthContent}>
         {#each scenarioPresetsForCurrentTimeframe as { uid: value, description, title }}

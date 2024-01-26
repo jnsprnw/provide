@@ -1,5 +1,5 @@
 <script>
-  import { KEY_CHARACTERISTICS, MAX_NUMBER_SELECTABLE_SCENARIOS } from '$config';
+  import { KEY_CHARACTERISTICS, MAX_NUMBER_SELECTABLE_SCENARIOS, LABEL_SCENARIOS_LIST } from '$config';
   import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
   import tooltip from '$lib/utils/tooltip';
   import chroma from 'chroma-js';
@@ -201,7 +201,7 @@
 </script>
 
 <div>
-  <SubsectionHeadline title="Scenario list" subtitle="Compare and select up to three scenarios to display them in the scenario explorer." />
+  <SubsectionHeadline title={LABEL_SCENARIOS_LIST} subtitle="Compare and select up to three scenarios to display them in the scenario explorer." />
 
   <SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0}>
     <div role="treegrid" class="grid" aria-rowcount={scenariosListed.length} style="grid-template-columns: {titleWidth}px {maxWidth};">

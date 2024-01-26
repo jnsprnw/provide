@@ -26,6 +26,12 @@ export const LABEL_GLOSSARY = 'Glossary';
 export const LABEL_FUTURE_IMPACTS = 'Future impacts';
 export const LABEL_AVOID_IMPACTS = 'Avoiding future impacts';
 
+export const LABEL_SCENARIOS_INTRO = 'Scenarios';
+export const LABEL_SCENARIOS_TIMEFRAMES = 'Timeframes';
+export const LABEL_SCENARIOS_PRESETS = 'Scenario presets';
+export const LABEL_SCENARIOS_LIST = 'Scenario list';
+export const LABEL_SCENARIOS_TIMELINES = 'Scenario timelines';
+
 export const END_IMPACT_TIME = 'impact-time';
 export const END_IMPACT_TIME_ALL = 'impact-time-all';
 export const END_DISTRIBUTION = 'impact-time-distribution';
