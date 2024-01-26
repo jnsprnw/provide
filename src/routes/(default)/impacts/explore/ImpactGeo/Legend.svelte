@@ -49,7 +49,6 @@
 
   $: [min, middle, max] = formatRange([domain[0], tick, domain[domain.length - 1]], unit.uid).values;
 
-  $: console.log((100 / width) * tickX);
   let tickTranslateClass;
   let tickOffsetX;
   $: if ((100 / width) * tickX > 75) {
