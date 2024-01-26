@@ -23,7 +23,7 @@
     <meta name="robots" content="none, noimageindex, noarchive" />
   {/if}
 
-  {#if !dev}
+  {#if !dev && isPublic}
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="04f9b973-92eb-4fac-89e0-6d1885d5282b" data-blockingmode="auto" type="text/javascript"></script>
   {/if}
 
