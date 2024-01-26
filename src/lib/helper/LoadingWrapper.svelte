@@ -46,8 +46,6 @@
       ? { ...asyncProps, ...process(asyncProps, props) } // Make sure all props are part of the passed props, but allow for overwriting them
       : asyncProps;
   }
-
-  $: console.log({ currentAsyncProps });
 </script>
 
 {#if isFailed}
