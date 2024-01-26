@@ -23,7 +23,7 @@
   $: colorScale = scaleLinear().domain(xRange).range(range);
   $: xScale = scaleLinear().domain(domain).range(xRange);
   $: tick = isSequential ? [domain[0] + domainDelta / 2] : [0];
-  $: tickX = xScale(tickX);
+  $: tickX = xScale(tick);
   $: colorAtTick = colorScale(tickX);
 
   function getContrastColor(background, color1, color2) {
@@ -43,11 +43,25 @@
       }
 
       ctx.fillStyle = getContrastColor(colorScale(width / 2), $theme.color.surface.base, $theme.color.contour.base);
-      ctx.fillRect(width / 2, 0, 1, 3);
+      ctx.fillRect(tickX, 0, 1, 3);
     }
   })();
 
   $: [min, middle, max] = formatRange([domain[0], tick, domain[domain.length - 1]], unit.uid).values;
+
+  $: console.log((100 / width) * tickX);
+  let tickTranslateClass;
+  let tickOffsetX;
+  $: if ((100 / width) * tickX > 75) {
+    tickTranslateClass = '-translate-x-full';
+    tickOffsetX = 3;
+  } else if ((100 / width) * tickX < 25) {
+    tickTranslateClass = 'translate-x-full';
+    tickOffsetX = -3;
+  } else {
+    tickTranslateClass = '-translate-x-1/2';
+    tickOffsetX = 0;
+  }
 </script>
 
 <div class="flex items-center">
@@ -56,9 +70,9 @@
     <canvas bind:this={canvas} {width} {height} />
     <div class="ticks">
       <span
-        style={`left: ${xScale(tick)}px; top: calc(50% + 1px);`}
+        style={`left: ${tickX + tickOffsetX}px; top: calc(50% + 1px);`}
         style:color={getContrastColor(colorAtTick, $theme.color.surface.base, $theme.color.contour.base)}
-        class="absolute text-xs text-surface-base font-bold -translate-x-1/2 -translate-y-1/2"
+        class="absolute text-xs text-surface-base font-bold {tickTranslateClass} -translate-y-1/2"
         >{middle}
       </span>
     </div>
