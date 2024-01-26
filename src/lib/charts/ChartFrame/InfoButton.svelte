@@ -4,7 +4,7 @@
   import Chevron from '$lib/helper/icons/Chevron.svelte';
 
   export let label;
-  export let items;
+  export let items = [];
   export let panelPlacement = 'bottom-end';
 
   const [popperRef, popperContent] = createPopperActions();
