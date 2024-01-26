@@ -16,7 +16,7 @@
   import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
   import { formatValue, findMostDecimals } from '$lib/utils/formatting';
-  import { END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
+  import { URL_PATH_SCENARIOS, END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
   import { sortBy, reverse, find, uniqBy, without, isObject, isString, has } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -46,6 +46,7 @@
       params: {
         [URL_PATH_GEOGRAPHY]: $CURRENT_GEOGRAPHY.uid,
         [URL_PATH_INDICATOR]: $CURRENT_INDICATOR.uid,
+        [URL_PATH_SCENARIOS]: currentSelectedScenarios.map(({ uid }) => uid),
         ...$CURRENT_INDICATOR_OPTION_VALUES,
       },
     });
