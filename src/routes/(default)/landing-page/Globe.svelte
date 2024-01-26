@@ -4,12 +4,10 @@
   import { writable } from 'svelte/store';
   import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO, URL_PATH_YEAR } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
-  import DataSource from '$lib/MapboxMap/DataSource.svelte';
-  import PolygonLayer from '$lib/MapboxMap/PolygonLayer.svelte';
   import MaMaskedData from './MaskedData.svelte';
   import Tabs from './Tabs.svelte';
   import { getContext, onDestroy } from 'svelte';
-  import { coordinatesToRectGrid, getColorScale } from '$lib/utils/geo';
+  import { coordinatesToRectGrid, getColorScale, coordinatesToContours } from '$lib/utils/geo';
   import mask from '@turf/mask';
   import centroid from '@turf/centroid';
   import { mapValues } from 'lodash-es';
@@ -68,14 +66,18 @@
 
         const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
         const colorScale = getColorScale([gridData]);
-        const geoData = coordinatesToRectGrid(gridData, {
-          origin,
-          resolution,
-          colorScale,
-        });
+        const cellCount = gridData.length * gridData[0].length;
+
+        const geoData =
+          cellCount > 10000
+            ? coordinatesToContours(gridData, { resolution, origin, colorScale })
+            : coordinatesToRectGrid(gridData, {
+                origin,
+                resolution,
+                colorScale,
+              });
 
         const geoShape = shape.data.data.features[0];
-        console.log({ geoShape });
 
         return {
           mask: mask(shape.data.data),
