@@ -15,7 +15,7 @@
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
       <svelte:component this={section.component} {...section.props} />
-      {#each section.sections as part}
+      {#each section.sections ?? [] as part}
         <svelte:component this={part.component} {...part.props} />
       {/each}
     </section>

@@ -1,21 +1,10 @@
 <script>
   import { LABEL_ABOUT } from '$config';
-  import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
-  import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
-  import ContentPageIntro from '$lib/helper/ContentPages/ContentPageIntro.svelte';
+  import ContentPageLayout from '$lib/helper/ContentPages/ContentPageLayout.svelte';
   export let data;
 
-  $: sections = data.content;
+  $: sections = data.content.map((s) => ({ component: SectionDefault, props: s, content: true }));
 </script>
 
-<ContentPageIntro title={LABEL_ABOUT} />
-
-<ScrollContent {sections}>
-  <NestedNav slot="navigation" {sections} />
-  {#each sections as section}
-    <section class="mb-8">
-      <SectionDefault {...section} />
-    </section>
-  {/each}
-</ScrollContent>
+<ContentPageLayout {sections} title={LABEL_ABOUT} />
