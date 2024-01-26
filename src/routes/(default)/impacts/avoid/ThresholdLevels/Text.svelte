@@ -92,11 +92,7 @@
     <div>
       {#if unavoidableScenarios.length}
         <p class="text-lg">
-          {#if isBoth}
-            There is at least a <Interactive>{certainty_level}</Interactive> chance that this impact level will be <Important>exceeded</Important>
-          {:else}
-            This impact level will be <Important>exceeded</Important>
-          {/if}
+          This impact level will be <Important>exceeded</Important>
         </p>
         <ul class="mt-1">
           {#each unavoidableScenarios as { label, year, color }, i}
@@ -113,11 +109,7 @@
     <div>
       {#if avoidableScenarios.length}
         <p class="text-lg">
-          {#if isBoth}
-            The chance that this impact level is <Important>exceeded</Important> remains lower than <Interactive>{certainty_level}</Interactive>
-          {:else}
-            This impact level would be <Important>avoided</Important>
-          {/if}
+          This impact level would be <Important>avoided</Important>
         </p>
         <ul class="mt-1">
           {#each avoidableScenarios as { label, color }, i}
