@@ -8,7 +8,7 @@ import { contours } from 'd3-contour';
 import { POSITIVE_RANGE, NEGATIVE_RANGE, DIVERGING_RANGE } from '$config';
 import { rewind } from './geo-rewind.js';
 
-export const getColorScale = (data) => {
+export const getColorScale = (data, isSimple = false) => {
   let range;
   const flatData = data.flat(3);
   let domain = extent(flatData);
@@ -16,7 +16,12 @@ export const getColorScale = (data) => {
   // Include 0 values to prevent dividing by zero when creating a diverging scale
   const isSequential = (min >= 0 && max >= 0) || (min <= 0 && max <= 0);
   if (isSequential) {
-    range = min >= 0 ? POSITIVE_RANGE : NEGATIVE_RANGE;
+    if (isSimple)
+      // This is used for the landing page
+      range = min >= 0 ? ['#E9974A', '#ffffff'] : ['#E9974A', '#ffffff'];
+    else {
+      range = min >= 0 ? POSITIVE_RANGE : NEGATIVE_RANGE;
+    }
   } else {
     // Is positive extent bigger than negative? Every calculation later on depends on this
     const leansPositive = Math.abs(min) <= max;

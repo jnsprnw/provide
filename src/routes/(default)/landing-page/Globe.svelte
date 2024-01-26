@@ -21,8 +21,8 @@
 
   const zoomLevels = {
     admin0: 2.6,
-    eez: 3,
-    cities: 10,
+    eez: 4,
+    cities: 9,
   };
 
   $: currentZoomLevel = zoomLevels[currentStory.geographyType] ?? 2.6;
@@ -65,7 +65,7 @@
         const shape = shapes[i]; // Grids and shapes are in the same order
 
         const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
-        const colorScale = getColorScale([gridData]);
+        const colorScale = getColorScale([gridData], true);
         const cellCount = gridData.length * gridData[0].length;
 
         const geoData =
@@ -104,7 +104,7 @@
   }
 </script>
 
-<header class="h-[70vh] max-h-[700px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
+<header class="h-[75vh] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
   <figure
     aria-hidden
     role="presentation"
@@ -126,13 +126,12 @@
 
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-20 h-1/2 self-end bg-gradient-to-t from-theme-stronger/90" aria-hidden role="presentation" />
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex">
-    <div class="max-w-5xl mx-auto px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 my-20">
+    <div class="max-w-6xl mx-auto px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-12 mt-24">
       <header class="col-start-1 col-span-4 text-white">
-        <h1 class="text-5xl font-bold mb-4 leading-tight">A database for global-to-local climate impacts</h1>
-        <p class="text-2xl">Explore data across scales and sectors</p>
+        <h1 class="text-6xl font-bold mb-4 leading-none">A database for global-to-local climate impacts</h1>
+        <p class="text-xl">Explore data across scales and sectors</p>
       </header>
-      <div class="col-span-3 self-center col-start-4 p-4 bg-white/10 border-white/40 border rounded-sm">
-        <span class="font-bold text-xs uppercase text-sky-100 tracking-wider mb-2 block">Learn about</span>
+      <div class="col-span-3 self-start col-start-4 py-2 px-6">
         <Tabs on:select={manualSelect} {currentStory} />
       </div>
     </div>

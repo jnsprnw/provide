@@ -72,7 +72,7 @@
 {#if maskedGeoData.length}
   {#each maskedGeoData as { data }}
     <DataSource {data}>
-      <PolygonLayer fill={true} line={false} />
+      <PolygonLayer fill={true} line={false} before="admin-0-boundary-disputed" />
     </DataSource>
   {/each}
 {/if}
