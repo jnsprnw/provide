@@ -8,7 +8,7 @@
     IS_COMBINATION_AVAILABLE,
     IS_EMPTY_SELECTION,
     IS_EMPTY_SCENARIO,
-    IS_EMPTY_GEOGRAPHY
+    IS_EMPTY_GEOGRAPHY,
   } from '$stores/state';
   import { IS_INVALID_AVOID_PARAMETERS } from '$stores/avoid.js';
 
@@ -24,9 +24,9 @@
 
 {#if $IS_EMPTY_SELECTION}
   {#if $IS_EMPTY_GEOGRAPHY}
-  <Message headline="No geography selected">
-    <span>Select a geography from the dropdown at the top of this page.</span>
-  </Message>
+    <Message headline="No geography selected">
+      <span>Select a geography from the dropdown at the top of this page.</span>
+    </Message>
   {:else if $IS_EMPTY_INDICATOR}
     <Message headline="No indicator selected">
       <span>Select an indicator from the dropdown at the top of this page.</span>
@@ -36,6 +36,10 @@
       <span>Select one or more scenarios from the dropdown at the left hand side of this page.</span>
     </Message>
   {/if}
+{:else if !$IS_COMBINATION_AVAILABLE_INDICATOR}
+  <Message headline="Select a valid indicator first">
+    <span>Select an valid indicator from the dropdown at the top of this page.</span>
+  </Message>
 {:else if !$IS_COMBINATION_AVAILABLE}
   <Message headline="There is no data for your current selection">
     {#if unavailableItems.length}
