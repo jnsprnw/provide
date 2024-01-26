@@ -10,14 +10,14 @@
   export let tagline;
   export let title;
   export let description;
-  export let dataDownloadParams;
-  export let dataDownloadOptions;
-  export let graphDownloadParams;
-  export let graphDownloadSettings;
+  export let dataDownloadParams = undefined;
+  export let dataDownloadOptions = [];
+  export let graphDownloadParams = undefined;
+  export let graphDownloadSettings = {};
   export let chartUid;
   export let templateProps;
   export let chartInfo = [];
-  export let isLoading;
+  export let isLoading = false;
   export let hasDownload = true;
   export let isProcessing = false;
 </script>
@@ -38,7 +38,7 @@
   <div class:opacity-40={isLoading} class:animate-pulse={isLoading} class:grayscale-80={isLoading}>
     <slot />
   </div>
-  {#if !$IS_STATIC && hasDownload}
+  {#if !$IS_STATIC && hasDownload && (chartInfo?.length || Object.keys(dataDownloadParams ?? {}).length || Object.keys(graphDownloadParams ?? {}).length)}
     <figcaption class="flex justify-end items-center gap-4 mt-2 mb-2">
       <InfoButton label="About the data" items={chartInfo} />
       <DownloadGraphMenu embedUid={chartUid} {...graphDownloadSettings} graphParams={graphDownloadParams} />
