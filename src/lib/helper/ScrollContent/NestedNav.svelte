@@ -16,7 +16,7 @@
 
   // Add indexes to sections and subsections to see if section is active
   $: navSections = sections.reduce(
-    (acc, section, i) => {
+    (acc, section) => {
       const children = section?.sections ?? [];
       acc.sections.push({
         title: section.props?.title ?? section.title,
