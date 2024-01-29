@@ -19,7 +19,7 @@
   aria-disabled={String(isDisabled)}
   class:text-theme-weaker={isDisabled}
   class:pointer-events-none={isDisabled}
-  class="bg-surface-weaker col-start-2 hover:bg-surface-weakest transition-color flex gap-x-3 justify-center items-center text-theme-base px-6 py-5 text-center rounded-sm inline"
+  class="bg-surface-weaker md:col-start-2 hover:bg-surface-weakest transition-color flex gap-x-3 justify-center items-center text-theme-base px-6 py-5 text-center rounded-sm inline"
   href={isDisabled ? undefined : `${$page.url.origin}/${PATH_EXPLORE}/${PATH_IMPACT}${query}`}
 >
   {#if noScenarioSelected}

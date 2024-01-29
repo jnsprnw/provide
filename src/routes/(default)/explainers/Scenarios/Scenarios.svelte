@@ -49,13 +49,13 @@
   <Presets {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} on:selection={handlePreset} {scenarioPresets} />
 
   <Table {scenariosListed} {selectedTimeframe} bind:selectedScenarios={$selectedScenarios} />
-  <footer class="grid gap-x-6 grid-cols-2">
+  <footer class="grid gap-x-6 gap-y-6 grid-cols-1 md:grid-cols-2">
     <Warning selectedScenarios={$selectedScenarios} />
     <CrossLink selectedScenarios={$selectedScenarios} />
   </footer>
   <div>
     <SubsectionHeadline title={LABEL_SCENARIOS_TIMELINES} subtitle="Select a scenario to see progress over time." />
-    <div class="grid gap-x-6 grid-cols-2">
+    <div class="grid gap-x-6 gap-y-6 lg:grid-cols-2">
       <Chart scenarios={scenariosListed} variable={MEAN_TEMPERATURE_UID} title="Global mean temperature in °C" yDomain={[1, null]}>
         <p class="mt-1 mb-2 text-contour-weaker">
           The lines in the graph represent best estimates. Learn more about uncertainties <a class="underline decoration-theme-weakest hover:decoration-theme-weaker" href="/{PATH_DOCUMENTATION}"
