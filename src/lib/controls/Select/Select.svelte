@@ -38,7 +38,7 @@
     class:hover:bg-surface-base={!isIndicatorValue}
     class:hover:border-theme-weakest={isIndicatorValue}
   >
-    <label class="text-text-weaker text-sm" class:font-bold={isIndicatorValue} class:text-theme-weaker={disabled} for={selectId}>{label}</label>
+    <label class="text-text-weaker text-sm leading-tight" class:font-bold={isIndicatorValue} class:text-theme-weaker={disabled} for={selectId}>{label}</label>
     {#if description?.length}
       <Info {description} />
     {/if}

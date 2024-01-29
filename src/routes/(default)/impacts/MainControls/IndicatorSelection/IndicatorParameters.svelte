@@ -22,7 +22,7 @@
     });
 </script>
 
-<div class="flex gap-4" id="indicator-parameters">
+<div class="flex gap-4 flex-wrap" id="indicator-parameters">
   {#each parametersSorted as parameter}
     <Select disabled={!$IS_COMBINATION_AVAILABLE_INDICATOR} {...parameter} labelColor="text-theme-base" on:change={handleChange} />
   {/each}

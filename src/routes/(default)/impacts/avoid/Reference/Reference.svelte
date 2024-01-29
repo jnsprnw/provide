@@ -64,7 +64,7 @@
   };
 </script>
 
-<div class="flex flex-col gap-y-6 min-h-[240px]">
+<div class="flex flex-col gap-y-6 md:min-h-[240px]">
   {#if !$IS_EMPTY_GEOGRAPHY && !$IS_EMPTY_INDICATOR && $IS_COMBINATION_AVAILABLE_INDICATOR}
     <LoadingWrapper
       {process}
