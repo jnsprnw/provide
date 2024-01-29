@@ -73,7 +73,7 @@
     {#if detailsItem}
       <div class="p-4 hidden md:block">
         <h3 class="font-bold mb-2">{detailsItem.label}</h3>
-        <p class="text-contour-weak">{detailsItem.description || ''}</p>
+        <p class="text-contour-weak">{@html detailsItem.description || ''}</p>
       </div>
     {/if}
   </div>
