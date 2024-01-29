@@ -22,8 +22,8 @@
       <Logo />
     </div>
   </div>
-  <div class="mx-auto max-w-7xl pt-4 pb-10 px-6 grid grid-cols-5 gap-x-12">
-    <div class="flex gap-3 flex-col col-span-2">
+  <div class="mx-auto max-w-7xl pt-4 pb-10 px-6 grid grid-cols-1 sm:grid-cols-5 gap-y-12 gap-x-12">
+    <div class="flex gap-3 flex-col sm:col-span-2">
       <span class="text-sm max-w-prose text-contour-weak"
         >The development of the dashboard was led by <a
           href="https://climateanalytics.org/"
@@ -32,12 +32,12 @@
         <a href="https://www.provide-h2020.eu/" class="underline decoration-theme-base hover:text-theme-stronger hover:decoration-theme-stronger transition-colors">PROVIDE</a> consortium.</span
       >
     </div>
-    <div class="flex gap-x-4 items-start col-span-2">
+    <div class="flex gap-x-4 items-start sm:col-span-3 lg:col-span-2">
       <img class="max-w-[100px]" alt="Logo of the European Union reading 'Funded by the European Union'" src="/img/eu-flag.svg" />
       <p class="text-xs text-text-weaker">This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement No. 101003687.</p>
     </div>
-    <nav class="place-self-end">
-      <ul>
+    <nav class="place-self-end w-full sm:col-span-5 lg:col-span-1">
+      <ul class="flex flex-wrap justify-between sm:justify-start gap-x-4 flex-row lg:flex-col">
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_EXPLAINERS}">{LABEL_EXPLAINERS}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
