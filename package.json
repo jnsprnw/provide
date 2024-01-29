@@ -1,6 +1,6 @@
 {
   "name": "provide-website",
-  "version": "0.2.21",
+  "version": "0.2.31",
   "scripts": {
     "dev": "vite dev --mode staging",
     "build": "vite build",
