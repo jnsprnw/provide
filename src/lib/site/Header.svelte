@@ -28,7 +28,7 @@
 </script>
 
 <nav class="border-b border-contour-weakest py-7">
-  <div class="mx-auto max-w-7xl px-6 flex justify-between gap-y-4 flex-col md:flex-row">
+  <div class="mx-auto max-w-7xl px-6 flex justify-between gap-y-4 flex-col lg:flex-row">
     <NavLink href="/" class="hover:text-theme-base transition-colors"><Logo /></NavLink>
     <ul class="flex flex-wrap gap-x-3 md:gap-x-4 lg:gap-x-5">
       {#each items as { label, href }}
