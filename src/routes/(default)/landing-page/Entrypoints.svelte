@@ -3,14 +3,16 @@
   import Entrypoint from './Entrypoint.svelte';
 </script>
 
-<header class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-12 grid md:grid-cols-2">
+<header class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
   <div>
     <span class="block font-bold text-3xl mb-3">Explore risks of climate overshoots</span>
-    <p class="leading-normal text-xl mb-5">The PROVIDE Climate risk dashboard allows you to explore future climate change impacts and (un)avoidable risks from cities to the global scale.</p>
-    <p class="leading-normal text-xl">Alternatively, start local and explore what action is needed on climate to avoid climate impacts in your city.</p>
+    <p class="leading-normal text-base sm:text-lg mb-5">
+      The PROVIDE Climate risk dashboard allows you to explore future climate change impacts and (un)avoidable risks from cities to the global scale.
+    </p>
+    <p class="leading-normal text-base sm:text-lg">Alternatively, start local and explore what action is needed on climate to avoid climate impacts in your city.</p>
   </div>
 </header>
-<div class="grid md:grid-cols-2 gap-y-6 gap-x-24 max-w-7xl mx-auto">
+<div class="grid md:grid-cols-2 gap-y-6 gap-x-4 lg:gap-x-24 max-w-7xl mx-auto">
   <Entrypoint
     path={PATH_IMPACT}
     title="Explore future impacts"
@@ -40,10 +42,10 @@
     <img slot="image" src="/img/emission-scenarios.png" alt="One scenario and many resulting impacts" />
   </Entrypoint>
 </div>
-<div class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-12 grid md:grid-cols-2">
+<div class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
   <div>
     <span class="block font-bold text-3xl mb-3">The PROVIDE project</span>
-    <p class="leading-normal text-xl">
+    <p class="leading-normal text-base sm:text-lg">
       The PROVIDE project is a Horizon Europe funded consortium of scientists and policy experts, working to develop new, faster ways to project climate impacts, and ultimately, provide information on
       how we can avoid them. The project, aside from developing new scientific methods, aims to provide more clarity on how climate impacts might develop after peak temperatures, in so-called
       ‘overshoot scenarios’, and if they can be reversed.

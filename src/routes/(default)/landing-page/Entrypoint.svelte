@@ -5,10 +5,10 @@
   export let audience = [];
 </script>
 
-<a href={`/${PATH_EXPLORE}/${path}`} class="hover:bg-surface-weakest hover:text-theme-base transition-colors grid grid-rows-[1fr_auto_auto] bg-surface-weaker p-12">
+<a href={`/${PATH_EXPLORE}/${path}`} class="hover:bg-surface-weakest hover:text-theme-base transition-colors grid grid-rows-[1fr_auto_auto] bg-surface-weaker p-4 sm:p-10 md:p-12">
   <div class="flex flex-col gap-y-2 my-4">
     <span class="uppercase text-center font-bold text-xl tracking-wide text-current">{title}</span>
-    <div class="block text-center text-xl leading-normal text-black">
+    <div class="block text-center text-base sm:text-lg md:leading-normal text-black">
       <slot name="intro" />
     </div>
   </div>
@@ -28,7 +28,7 @@
       {/each}
     </ul>
   {/if}
-  <figure class=" px-8 py-16">
+  <figure class="p-0 md:px-8 py-6 sm:px-6 sm:py-12 md:py-16">
     <slot name="image" />
   </figure>
   <footer class="text-xs mt-4 text-black">

@@ -44,8 +44,8 @@
 <div use:melt={$root} class="flex w-full flex-col overflow-hidden {className}">
   <div use:melt={$list} class="flex shrink-0 overflow-x-auto text-white flex-row justify-between">
     {#each triggers as triggerItem}
-      <button use:melt={$trigger(triggerItem.id)} on:click={() => selectTab(triggerItem.id)} class="trigger relative py-2 text-lg font-bold">
-        {triggerItem.title}
+      <button use:melt={$trigger(triggerItem.id)} on:click={() => selectTab(triggerItem.id)} class="trigger relative py-2 text-lg leading-tight font-bold">
+        <span class="drop-shadow-lg">{triggerItem.title}</span>
         {#if $value === triggerItem.id}
           <div in:send={{ key: 'trigger' }} out:receive={{ key: 'trigger' }} class="absolute bottom-1 left-1/2 h-[1px] w-12 -translate-x-1/2 rounded-full bg-white/70" />
         {/if}
@@ -53,7 +53,9 @@
     {/each}
   </div>
   <div use:melt={$content('admin0')} class="grow pt-5 text-white text-xl">
-    <p class="mb-5 leading-tight text-base">Learn more about how climate change will impact temperatures, soil moisture and fire weather. We cover data for most countries in the world.</p>
+    <p class="mb-5 leading-tight text-base drop-shadow-lg">
+      Learn more about how climate change will impact temperatures, soil moisture and fire weather. We cover data for most countries in the world.
+    </p>
     <Link href={currentStory.url}>
       <span
         >Explore, for example, how the <Em>{currentStory.indicator.labelWithinSentence}</Em> in <Em>{currentStory.geography.label}</Em> will change over time in a <Em
