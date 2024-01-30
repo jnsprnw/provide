@@ -49,7 +49,12 @@
   <div class="border-contour-weakest border-t py-3">
     <div class="text-sm mx-auto max-w-7xl px-6 flex justify-between">
       <span class="text-contour-weak"><a href="https://climateanalytics.org/">Climate Analytics</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
-      <span class="text-contour-weaker text-xs">Version {__APP_VERSION__}. Build {new Date().toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+      <span class="text-contour-weaker text-xs"
+        >Version {__APP_VERSION__}. Build
+        <time title={new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(new Date())} datetime={new Date().toISOString()}
+          >{new Date().toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</time
+        ></span
+      >
     </div>
   </div>
 </footer>
