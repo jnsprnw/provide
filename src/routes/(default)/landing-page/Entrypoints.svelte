@@ -20,10 +20,7 @@
   >
     <div slot="intro">
       <p class="mb-5">This mode allows you to explore different climate futures and how they will affect the environment and people.</p>
-      <p>
-        Choose your geography type from cities, countries and marine environments, and then an impact driver/indicator to explore how future climate impacts will develop under various emission
-        scenarios.
-      </p>
+      <p>Choose your geography type and choose an indicator to explore how future climate impacts will develop under various emission scenarios.</p>
     </div>
     <img slot="image" src="/img/impacts.png" alt="One scenario and many resulting impacts" />
   </Entrypoint>
@@ -33,10 +30,10 @@
     audience={['Urban planners, policy makers and climate adaptation experts', 'Science communicators', 'Experts working on climate risks']}
   >
     <div slot="intro">
-      <p class="mb-5">In this mode, you can explore how we can avoid reaching undesirable climate impact levels in urban areas.</p>
+      <p class="mb-5">In this mode you can explore how we can avoid reaching undesirable climate impact levels in urban areas.</p>
       <p>
-        You can choose a city and an urban heat indicator, then a level of impact, for example, a number of days in a heatwave, and see when your selected impact level would be reached. You can then
-        explore under which scenario, and which climate action pathway might help your city avoid this impact level.
+        You can choose a city, an urban heat indicator and the level of impact, and see when your selected level of impact will be exceeded. You can then explore which climate action pathway might
+        help your city avoid this impact level.
       </p>
     </div>
     <img slot="image" src="/img/emission-scenarios.png" alt="One scenario and many resulting impacts" />
