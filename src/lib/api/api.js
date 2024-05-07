@@ -2,14 +2,13 @@ import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
 import qs from 'qs';
 import { forEach, reduce } from 'lodash-es';
 import { browser } from '$app/environment';
-// import { get } from 'svelte/store';
 
 /*
  * These functions are intended to dynamically load data from the client upon user interaction
  * They will not do anything when called on the server, other than returning an emty "loading" response
  */
 
-const cache = {};
+const cache = {}; // Initializes an object to serve as a cache for storing fetch responses.
 
 /*
  * Loads data from Climate Analytics API
@@ -20,18 +19,28 @@ export const loadFromAPI = async function (url) {
   if (!browser) return new Promise((res) => res);
   try {
     const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
-    if (res.status != 200) {
-      console.warn(`Request failed with status code: ${res.status}`);
-      return { status: STATUS_FAILED, message: `Request failed with status code: ${res.status}` };
-    }
+    console.log({ url });
     const data = await res.json();
-    if (data.message) {
-      console.warn(`Request failed with message: ${data.message}`);
-      return { status: STATUS_FAILED, message: data.message };
+
+    // Error handling based on the response status or the presence of a message in the data.
+    if (res.status != 200 || data.message) {
+      console.warn(`Request failed with status code: ${res.status}`);
+      // Returning an object with detailed information about the failure
+      return {
+        status: STATUS_FAILED,
+        message: data.message ?? `Request failed with status code: ${res.status}`,
+        isExpected: data.isExpected ?? false,
+      };
     }
+    // If successful, returning an object with status and the parsed JSON data.
     return { status: STATUS_SUCCESS, data };
   } catch (e) {
-    return { status: STATUS_SUCCESS, message: e };
+    // Catching and handling any errors that occur during the fetch request.
+    return {
+      status: STATUS_SUCCESS,
+      message: e.toString(),
+      isExpected: false,
+    };
   }
 };
 
@@ -90,7 +99,7 @@ const fetchMultiple = (store, configs) => {
   forEach(initialData, (d, keyOrIndex) => {
     if (typeof d.loading?.then !== 'function') return;
     d.loading.then((res) => {
-      cache[d.url] = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
+      cache[d.url] = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message, isExpected: res.isExpected };
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -130,7 +139,7 @@ const fetchSingle = (store, { endpoint, params }) => {
       // console.log(`Loading finished for ${id}.`);
       // console.log({ endpoint, data }, { id });
       // console.log({ res, endpoint });
-      const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
+      const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message, isExpected: res.isExpected };
       // console.log(`Setting the cache for ${url}`);
       cache[url] = currentData;
       // console.log(cache[url]);
