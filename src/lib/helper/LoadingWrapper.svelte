@@ -63,7 +63,7 @@
         <span>Try another combination of geography, indicator and scenarios.</span>
         {#if flatData.length}
           <div class="mt-4 font-mono text-xs text-text-weaker flex flex-col" class:text-white={warningInverted}>
-            {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message, isExpected }}<span>{message} {isExpected}</span>{/each}
+            {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message, isExpected }}<span>{message}</span>{/each}
           </div>
         {/if}
       {/if}
