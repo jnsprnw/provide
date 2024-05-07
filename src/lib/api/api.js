@@ -10,6 +10,21 @@ import { browser } from '$app/environment';
 
 const cache = {}; // Initializes an object to serve as a cache for storing fetch responses.
 
+function buildStatusError(message, isExpected) {
+  return {
+    status: STATUS_FAILED,
+    message,
+    isExpected,
+  };
+}
+
+function buildStatusSuccess(data) {
+  return {
+    status: STATUS_SUCCESS,
+    data,
+  };
+}
+
 /*
  * Loads data from Climate Analytics API
  */
@@ -19,28 +34,19 @@ export const loadFromAPI = async function (url) {
   if (!browser) return new Promise((res) => res);
   try {
     const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
-    console.log({ url });
     const data = await res.json();
 
     // Error handling based on the response status or the presence of a message in the data.
     if (res.status != 200 || data.message) {
       console.warn(`Request failed with status code: ${res.status}`);
       // Returning an object with detailed information about the failure
-      return {
-        status: STATUS_FAILED,
-        message: data.message ?? `Request failed with status code: ${res.status}`,
-        isExpected: data.isExpected ?? false,
-      };
+      return buildStatusError(data.message ?? `Request failed with status code: ${res.status}`, data.isExpected ?? false);
     }
     // If successful, returning an object with status and the parsed JSON data.
-    return { status: STATUS_SUCCESS, data };
+    return buildStatusSuccess(data);
   } catch (e) {
     // Catching and handling any errors that occur during the fetch request.
-    return {
-      status: STATUS_SUCCESS,
-      message: e.toString(),
-      isExpected: false,
-    };
+    return buildStatusError(e.toString(), false);
   }
 };
 
@@ -99,7 +105,7 @@ const fetchMultiple = (store, configs) => {
   forEach(initialData, (d, keyOrIndex) => {
     if (typeof d.loading?.then !== 'function') return;
     d.loading.then((res) => {
-      cache[d.url] = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message, isExpected: res.isExpected };
+      cache[d.url] = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -132,7 +138,7 @@ const fetchSingle = (store, { endpoint, params }) => {
     cache[url] = loadingData;
     store.set(loadingData);
     loadFromAPI(url).then((res) => {
-      const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message, isExpected: res.isExpected };
+      const currentData = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
       cache[url] = currentData;
       store.update((d) => {
         if (d !== loadingData) return d;
