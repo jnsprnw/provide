@@ -127,33 +127,17 @@ const fetchSingle = (store, { endpoint, params }) => {
 
   if (cached) {
     store.set(cached);
-    // console.log('in cache', get(store));
   } else {
-    // console.log('not in cache');
     const loadingData = { status: STATUS_LOADING, data: null };
     cache[url] = loadingData;
     store.set(loadingData);
-    // console.log('starting to load', get(store));
     loadFromAPI(url).then((res) => {
-      // console.log({ data });
-      // console.log(`Loading finished for ${id}.`);
-      // console.log({ endpoint, data }, { id });
-      // console.log({ res, endpoint });
       const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message, isExpected: res.isExpected };
-      // console.log(`Setting the cache for ${url}`);
       cache[url] = currentData;
-      // console.log(cache[url]);
-      // store.set(cache[url]);
-      // console.log('store', get(store), { id });
       store.update((d) => {
-        // console.log({ d }, currentData, currentData === cache[url]);
         if (d !== loadingData) return d;
-        // console.log(`Is loading state`);
         return currentData;
       });
-      // store.set(currentData);
-      // store.set('test');
-      // console.log('store', get(store), { id });
     });
   }
 };
