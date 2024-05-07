@@ -18,6 +18,7 @@
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "@thoughtbot/tailwindcss-aria-attributes": "^0.2.0",
     "@turf/intersect": "^6.5.0",
+    "@types/lodash-es": "^4.17.12",
     "autoprefixer": "^10.4.17",
     "copy-to-clipboard": "^3.3.3",
     "file-saver": "^2.0.5",
