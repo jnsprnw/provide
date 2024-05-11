@@ -14,9 +14,9 @@
   <NestedNav slot="navigation" {sections} />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
-      <svelte:component this={section.component} {...section.props} />
+      <svelte:component this={section.component} title={section.title} {...section.props} />
       {#each section.sections ?? [] as part}
-        <svelte:component this={part.component} {...part.props} />
+        <svelte:component this={part.component} title={part.title} {...part.props} />
       {/each}
     </section>
   {/each}

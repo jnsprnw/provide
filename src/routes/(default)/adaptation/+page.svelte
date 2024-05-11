@@ -10,10 +10,8 @@
     LABEL_ADAPTATION_STUDIES,
   } from '$config';
   import AdaptationPlanning from './sections/AdaptationPlanning.svelte';
-  import AssessmentTool from './sections/AssessmentTool.svelte';
-  import LongTerm from './sections/LongTerm.svelte';
-  import AdaptationPathways from './sections/AdaptationPathways.svelte';
-  import ComplementaryResources from './sections/ComplementaryResources.svelte';
+  import Publications from './sections/Publications.svelte';
+
   import FurtherStudies from './sections/FurtherStudies.svelte';
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
   import { kebabCase } from 'lodash-es';
@@ -35,8 +33,9 @@
     },
     {
       title: data.selfAssessmentTitle,
-      component: AssessmentTool,
+      component: SectionDefault,
       props: {
+        title: data.selfAssessmentTitle,
         content: data.selfAssessmentText,
         subtitle: data.selfAssessmentSubtitle,
       },
@@ -51,8 +50,11 @@
       },
     },
     {
-      title: LABEL_ADAPTATION_RESOURCES,
-      component: ComplementaryResources,
+      title: data.publicationsTitle,
+      component: Publications,
+      props: {
+        publications: data.publications,
+      },
     },
     {
       title: LABEL_ADAPTATION_STUDIES,

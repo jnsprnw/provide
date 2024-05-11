@@ -30,7 +30,8 @@
         <slot name="navigation" />
       </div>
     </div>
-    <div class="md:pt-8 overflow-hidden">
+    <!-- <div class="md:pt-8 overflow-hidden"> -->
+    <div class="md:pt-8">
       <Scroller bind:count bind:index={$index} bind:offset bind:progress query={`.${query}`} threshold={0.1}>
         <div slot="foreground" class:mx-auto={!isFullWidth} class:max-w-2xl={!isFullWidth}>
           <slot {query} />
