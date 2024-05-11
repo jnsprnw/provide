@@ -15,6 +15,7 @@ export const PATH_EXPLORE = 'impacts';
 export const PATH_AVOID = 'avoid';
 export const PATH_IMPACT = 'explore';
 export const PATH_GLOSSARY = 'glossary';
+export const PATH_ADAPTATION = 'adaptation';
 
 // These will also be used for page titles
 export const LABEL_DOCUMENTATION = 'Methodology';
@@ -25,12 +26,20 @@ export const LABEL_EXPLORE = 'Explore';
 export const LABEL_GLOSSARY = 'Glossary';
 export const LABEL_FUTURE_IMPACTS = 'Future impacts';
 export const LABEL_AVOID_IMPACTS = 'Avoiding future impacts';
+export const LABEL_ADAPTATION = 'Adaptation';
 
 export const LABEL_SCENARIOS_INTRO = 'Scenarios';
 export const LABEL_SCENARIOS_TIMEFRAMES = 'Timeframes';
 export const LABEL_SCENARIOS_PRESETS = 'Scenario presets';
 export const LABEL_SCENARIOS_LIST = 'Scenario list';
 export const LABEL_SCENARIOS_TIMELINES = 'Scenario timelines';
+
+export const LABEL_ADAPTATION_PLANNING = 'Using the climate risk dashboard for adaptation planning';
+export const LABEL_ADAPTATION_ASSESSMENT = 'Overshoot Proofing self-assessment tool';
+export const LABEL_ADAPTATION_LONG_TERM = 'Integrating limits on long-term adaptation planning';
+export const LABEL_ADAPTATION_PATHWAYS = 'Adaptation Pathways ';
+export const LABEL_ADAPTATION_RESOURCES = 'Complimentary resources';
+export const LABEL_ADAPTATION_STUDIES = 'Further studies';
 
 export const END_IMPACT_TIME = 'impact-time';
 export const END_IMPACT_TIME_ALL = 'impact-time-all';

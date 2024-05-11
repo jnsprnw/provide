@@ -1,0 +1,23 @@
+export const LABEL_CURRENT_CONTEXT = 'Current context';
+export const LABEL_FUTURE_HEAT_STRESS = `Future heat stress in {{city.name}}`;
+export const LABEL_FUTURE_HAZARDS = `Future hazards`;
+export const LABEL_FUTURE_IMPACTS = `Future impacts`;
+export const LABEL_LINKING_HEAT_STRESS = `Linking future local heat stress with global mitigation`;
+export const LABEL_SMART_ADAPTATION = `Adaptation to heat stress in {{city.name}} via climate-smart urban development`;
+export const LABEL_VARIATION = `Variations of heat stress across the urban area`;
+export const LABEL_ZOOMING_IN = `Zooming in: Detailed hotspot assessment`;
+export const LABEL_URBAN_ADAPTATION = `Adaptation to heat stress in the urban area of {{city.name}}`;
+export const LABEL_NEIGHBOURHOODS = `Adaptation to heat stress in the neighbourhoods of {{city.name}}`;
+export const LABEL_FURTHER_STUDIES = `Further studies`;
+
+export const ANCHOR_CURRENT_CONTEXT = 'current-context';
+export const ANCHOR_FUTURE_HEAT_STRESS = `future-heatstress`;
+export const ANCHOR_FUTURE_HAZARDS = `future-hazards`;
+export const ANCHOR_FUTURE_IMPACTS = `impacts`;
+export const ANCHOR_LINKING_HEAT_STRESS = `linking-heatstress`;
+export const ANCHOR_SMART_ADAPTATION = `smart-adaptation`;
+export const ANCHOR_VARIATION = `variation`;
+export const ANCHOR_ZOOMING_IN = `zooming-in`;
+export const ANCHOR_URBAN_ADAPTATION = `urban-adaptation`;
+export const ANCHOR_NEIGHBOURHOODS = `neighbourhoods`;
+export const ANCHOR_FURTHER_STUDIES = `further-studies`;
