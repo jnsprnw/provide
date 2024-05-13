@@ -5,8 +5,7 @@ export const load = async ({ fetch }) => {
   const { attributes } = await loadFromStrapi('adaptation', fetch);
   const caseStudies = await loadFromStrapi('case-studies', fetch);
 
-  const publications = (attributes.Publications.data || []).map((d) => ({ ...d.attributes, type: 'publication' }));
-  const deliverables = (attributes.Deliverables.data || []).map((d) => ({ ...d.attributes, type: 'deliverable' }));
+  const publications = (attributes.Publications.data || []).map((d) => ({ ...d.attributes }));
 
   return {
     caseStudies: caseStudies.map((study) => ({ city: study.attributes.CityName, uid: study.attributes.CityUid, description: study.attributes.Abstract })),
@@ -22,9 +21,10 @@ export const load = async ({ fetch }) => {
     integrationText: parse(attributes.IntegrationText ?? ''),
 
     publicationsTitle: attributes.PublicationsTitle,
-    publications: [...publications, ...deliverables],
+    publications,
 
     outroText: parse(attributes.OutroText ?? ''),
     outroTitle: attributes.OutroTitle,
+    attributes,
   };
 };

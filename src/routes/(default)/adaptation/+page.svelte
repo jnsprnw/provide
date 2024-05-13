@@ -10,9 +10,7 @@
   import HtmlContent from '$src/lib/helper/HtmlContent.svelte';
 
   export let data;
-
   $: console.log(data);
-
   $: sections = [
     {
       title: data.introTitle,
