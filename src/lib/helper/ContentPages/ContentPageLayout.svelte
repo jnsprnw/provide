@@ -12,6 +12,7 @@
 
 <ScrollContent isFullWidth={true} {sections}>
   <NestedNav slot="navigation" {sections} />
+  <slot name="before" />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
       <svelte:component this={section.component} title={section.title} {...section.props} />
@@ -20,4 +21,5 @@
       {/each}
     </section>
   {/each}
+  <slot />
 </ScrollContent>

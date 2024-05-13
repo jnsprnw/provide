@@ -1,20 +1,13 @@
 <script>
   import ContentPageLayout from '$src/lib/helper/ContentPages/ContentPageLayout.svelte';
-  import {
-    LABEL_ADAPTATION,
-    LABEL_ADAPTATION_PLANNING,
-    LABEL_ADAPTATION_ASSESSMENT,
-    LABEL_ADAPTATION_LONG_TERM,
-    LABEL_ADAPTATION_PATHWAYS,
-    LABEL_ADAPTATION_RESOURCES,
-    LABEL_ADAPTATION_STUDIES,
-  } from '$config';
+  import { LABEL_ADAPTATION, PATH_EXPLORE } from '$config';
   import AdaptationPlanning from './sections/AdaptationPlanning.svelte';
   import Publications from './sections/Publications.svelte';
 
-  import FurtherStudies from './sections/FurtherStudies.svelte';
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
   import { kebabCase } from 'lodash-es';
+  import Replicate from '$lib/helper/icons/Replicate.svelte';
+  import HtmlContent from '$src/lib/helper/HtmlContent.svelte';
 
   export let data;
 
@@ -56,11 +49,15 @@
         publications: data.publications,
       },
     },
-    {
-      title: LABEL_ADAPTATION_STUDIES,
-      component: FurtherStudies,
-    },
   ].map((section) => ({ ...section, slug: kebabCase(section.title), content: true }));
 </script>
 
-<ContentPageLayout {sections} title={LABEL_ADAPTATION} intro="Learn how to use climate data for overshoot risk informed adaptation." />
+<ContentPageLayout {sections} title={LABEL_ADAPTATION} intro="Learn how to use climate data for overshoot risk informed adaptation.">
+  <div class="bg-surface-weakest flex p-10 gap-10 mb-10">
+    <Replicate class="w-[13%] min-w-[70px]" />
+    <div>
+      <h2 class="text-2xl font-bold mb-3">{data.outroTitle}</h2>
+      <HtmlContent class="text-lg text-text-weaker" content={data.outroText} />
+    </div>
+  </div>
+</ContentPageLayout>

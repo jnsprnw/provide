@@ -8,7 +8,7 @@
 <div class="flex flex-col gap-y-10 mt-10 pt-10">
   <div>
     <SubsectionHeadline {title} />
-    <div class="grid grid-cols-4 gap-6">
+    <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
       {#each publications as publication}
         <a
           class="p-3 bg-surface-weakest h-64 border-l-4 shadow-md"
