@@ -1,6 +1,6 @@
 <script>
   import ContentPageLayout from '$src/lib/helper/ContentPages/ContentPageLayout.svelte';
-  import { LABEL_ADAPTATION, PATH_EXPLORE } from '$config';
+  import { LABEL_ADAPTATION, PATH_ADAPTATION } from '$config';
   import AdaptationPlanning from './sections/AdaptationPlanning.svelte';
   import Publications from './sections/Publications.svelte';
 
@@ -8,9 +8,10 @@
   import { kebabCase } from 'lodash-es';
   import Replicate from '$lib/helper/icons/Replicate.svelte';
   import HtmlContent from '$src/lib/helper/HtmlContent.svelte';
+  import CaseStudyNavigation from './sections/CaseStudyNavigation.svelte';
 
   export let data;
-  $: console.log(data);
+
   $: sections = [
     {
       title: data.introTitle,
@@ -48,9 +49,15 @@
       },
     },
   ].map((section) => ({ ...section, slug: kebabCase(section.title), content: true }));
+
+  $: subNavigation = [
+    { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true, isActive: true },
+    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}` })),
+  ];
 </script>
 
-<ContentPageLayout {sections} title={LABEL_ADAPTATION} intro="Learn how to use climate data for overshoot risk informed adaptation.">
+<ContentPageLayout {sections} title={LABEL_ADAPTATION} {subNavigation} intro="Learn how to use climate data for overshoot risk informed adaptation.">
+  <CaseStudyNavigation caseStudies={data.caseStudies} slot="before" />
   <div class="bg-surface-weakest flex p-10 gap-10 mb-10">
     <Replicate class="w-[13%] min-w-[70px]" />
     <div>

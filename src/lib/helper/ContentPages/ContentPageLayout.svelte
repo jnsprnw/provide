@@ -3,16 +3,16 @@
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import NestedNav from '$lib/helper/ScrollContent/NestedNav.svelte';
 
+  export let subNavigation;
   export let sections;
   export let title;
   export let intro;
 </script>
 
-<ContentPageIntro {title} {intro} />
+<ContentPageIntro {title} {intro} {subNavigation} />
 
 <ScrollContent isFullWidth={true} {sections}>
   <NestedNav slot="navigation" {sections} />
-  <slot name="before" />
   {#each sections as section}
     <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
       <svelte:component this={section.component} title={section.title} {...section.props} />

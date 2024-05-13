@@ -1,5 +1,6 @@
 <script>
   import { page } from '$app/stores';
+  import { PATH_ADAPTATION } from '$src/config.js';
   import ContentPageLayout from '$src/lib/helper/ContentPages/ContentPageLayout.svelte';
   import {
     LABEL_CURRENT_CONTEXT,
@@ -27,8 +28,6 @@
   } from './config.js';
   export let data;
 
-  $: console.log(data);
-
   $: city = data.city;
 
   $: sections = [
@@ -54,6 +53,11 @@
 
     { props: { name: LABEL_FURTHER_STUDIES, slug: ANCHOR_FURTHER_STUDIES } },
   ];
+
+  $: subNavigation = [
+    { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true },
+    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}`, isActive: city.uid === d.uid })),
+  ];
 </script>
 
-<ContentPageLayout {sections} title="Extreme heat in {city.name}" intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />
+<ContentPageLayout {sections} title="Extreme heat in {city.name}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />

@@ -3,31 +3,13 @@ import { loadFromStrapi } from '$utils/apis.js';
 
 export const load = async ({ fetch, parent, params }) => {
   const data = await loadFromStrapi('case-studies', fetch);
+  const caseStudies = data.map((study) => ({ city: study.attributes.CityName, uid: study.attributes.CityUid, description: study.attributes.Abstract }));
 
-  const cities = [
-    {
-      uid: 'lisbon',
-      name: 'Lisbon',
-    },
-    {
-      uid: 'islamabad',
-      name: 'islamabad',
-    },
-    {
-      uid: 'nassau',
-      name: 'Nassau',
-    },
-    {
-      uid: 'berlin',
-      name: 'Berlin',
-    },
-  ];
-
-  const city = cities.find((d) => d.uid === params.city);
+  const city = caseStudies.find((d) => d.uid === params.city);
   if (!city)
     error(404, {
       message: 'City not available',
     });
 
-  return { cities, city, data };
+  return { city, caseStudies };
 };
