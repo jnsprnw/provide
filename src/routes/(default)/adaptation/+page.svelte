@@ -8,7 +8,6 @@
   import { kebabCase } from 'lodash-es';
   import Replicate from '$lib/helper/icons/Replicate.svelte';
   import HtmlContent from '$src/lib/helper/HtmlContent.svelte';
-  import CaseStudyNavigation from './sections/CaseStudyNavigation.svelte';
 
   export let data;
 
@@ -57,7 +56,6 @@
 </script>
 
 <ContentPageLayout {sections} title={LABEL_ADAPTATION} {subNavigation} intro="Learn how to use climate data for overshoot risk informed adaptation.">
-  <CaseStudyNavigation caseStudies={data.caseStudies} slot="before" />
   <div class="bg-surface-weakest flex p-10 gap-10 mb-10">
     <Replicate class="w-[13%] min-w-[70px]" />
     <div>
