@@ -9,7 +9,7 @@
     IS_COMBINATION_AVAILABLE_INDICATOR,
     IS_EMPTY_GEOGRAPHY,
   } from '$stores/state.js';
-  import { PATH_EXPLAINERS, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
+  import { PATH_GLOSSARY, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import ScenarioDetails from './ScenarioDetails.svelte';
@@ -82,36 +82,32 @@
       <a
         slot="header-link"
         class="text-sm text-theme-base font-bold flex items-center rounded-full bg-theme-base text-white px-6 py-3 gap-2 hover:bg-theme-stronger transition-colors"
-        href={`/${PATH_EXPLAINERS}#${ANCHOR_EXPLAINER_SCENARIOS}`}
-        >
+        href={`/${PATH_GLOSSARY}#${ANCHOR_EXPLAINER_SCENARIOS}`}
+      >
         <span>Which scenario should I select?</span>
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-narrow-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg>
-        </a
-      >
-      <div
-        slot="items"
-        class="grid grid-cols-1 md:grid-cols-[auto_1fr]"
-        let:items
-        let:currentFilterUid
-      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-arrow-narrow-right"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg
+        >
+      </a>
+      <div slot="items" class="grid grid-cols-1 md:grid-cols-[auto_1fr]" let:items let:currentFilterUid>
         {#key currentFilterUid}
           <fieldset class="flex flex-col min-w-min md:border-r border-contour-weakest py-2">
-            <ScenarioList
-              highlightedScenarioUid={renderedScenario?.uid}
-              bind:hoveredScenarioUid
-              scenarios={items}
-              {currentFilterUid}
-            />
+            <ScenarioList highlightedScenarioUid={renderedScenario?.uid} bind:hoveredScenarioUid scenarios={items} {currentFilterUid} />
           </fieldset>
         {/key}
 
         <div class="p-6 hidden md:block">
           {#if renderedScenario}
-            <ScenarioDetails
-              scenario={renderedScenario}
-              scenarios={chartScenarios}
-              {currentFilterUid}
-            />
+            <ScenarioDetails scenario={renderedScenario} scenarios={chartScenarios} {currentFilterUid} />
           {:else}
             <div class="p-4 flex items-center rounded text-contour-weak justify-center min-h-[60vh]">Hover over a scenario to view details</div>
           {/if}

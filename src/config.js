@@ -8,7 +8,6 @@ export const ANCHOR_EXPLAINER_SCENARIOS = 'scenarios';
 
 // NOTE: You also need to change the corresponding folder name!
 export const PATH_DOCUMENTATION = 'methodology';
-export const PATH_EXPLAINERS = 'explainers';
 export const PATH_CONTACT = 'contact';
 export const PATH_ABOUT = 'about';
 export const PATH_EXPLORE = 'impacts';
@@ -19,7 +18,6 @@ export const PATH_ADAPTATION = 'adaptation';
 
 // These will also be used for page titles
 export const LABEL_DOCUMENTATION = 'Methodology';
-export const LABEL_EXPLAINERS = 'Explainers';
 export const LABEL_CONTACT = 'Contact';
 export const LABEL_ABOUT = 'About';
 export const LABEL_EXPLORE = 'Explore';

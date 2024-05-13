@@ -1,18 +1,5 @@
 <script>
-  import {
-    LABEL_DOCUMENTATION,
-    LABEL_EXPLAINERS,
-    LABEL_CONTACT,
-    PATH_GLOSSARY,
-    LABEL_GLOSSARY,
-    LABEL_ABOUT,
-    PATH_ABOUT,
-    PATH_CONTACT,
-    PATH_EXPLAINERS,
-    PATH_DOCUMENTATION,
-    TITLE_SITE,
-    TITLE_PROJECT,
-  } from '$config';
+  import { LABEL_DOCUMENTATION, LABEL_CONTACT, PATH_GLOSSARY, LABEL_GLOSSARY, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_DOCUMENTATION } from '$config';
   import Logo from './Logo.svelte';
 </script>
 
@@ -38,7 +25,6 @@
     </div>
     <nav class="place-self-end w-full sm:col-span-5 lg:col-span-1">
       <ul class="flex flex-wrap justify-between sm:justify-start gap-x-4 flex-row lg:flex-col">
-        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_EXPLAINERS}">{LABEL_EXPLAINERS}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
