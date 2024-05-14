@@ -28,7 +28,7 @@
   } from './config.js';
   export let data;
 
-  $: city = data.city;
+  $: caseStudy = data.caseStudy;
 
   $: sections = [
     {
@@ -54,10 +54,12 @@
     { props: { name: LABEL_FURTHER_STUDIES, slug: ANCHOR_FURTHER_STUDIES } },
   ];
 
+  $: console.log(data.caseStudiesDynamic);
+
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true },
-    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}`, isActive: city.uid === d.uid })),
+    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}`, isActive: caseStudy.uid === d.uid })),
   ];
 </script>
 
-<ContentPageLayout {sections} title="Extreme heat in {city.name}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />
+<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />

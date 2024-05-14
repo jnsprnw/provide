@@ -8,7 +8,7 @@
     {#if subNavigation}
       <nav>
         {#each subNavigation as { href, separator, label, isActive }}
-          <a class="px-5 py-3 text-theme-base font-bold rounded-full" class:bg-theme-base={isActive} class:text-surface-weaker={isActive} {href}>{label}</a>
+          <a class="px-5 py-3 font-bold rounded-full" class:bg-theme-base={isActive} class:text-theme-base={!isActive} class:text-surface-weaker={isActive} {href}>{label}</a>
           {#if separator}
             <span aria-hidden="true" class="border-theme-weakest border-r mx-3" />
           {/if}
