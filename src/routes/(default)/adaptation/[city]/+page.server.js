@@ -35,7 +35,6 @@ export const load = async ({ fetch, parent, params }) => {
             description: c.Description,
             indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
             studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
-            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
           };
         case 'future-impacts':
           return {
@@ -43,20 +42,17 @@ export const load = async ({ fetch, parent, params }) => {
             explorerUrl: c.ExplorerUrl,
             impactGeoDescription: c.ImpactGeoDescription,
             impactTimeDescription: c.ImpactTimeDescription,
-            impactGeoSnapshot: c.ImpactGeoSnapshot.map((snpsht) => ({
-              indicator: snpsht.Indicator,
+            impactGeoSnapshots: c.ImpactGeoSnapshot.map((snpsht) => ({
+              indicator: meta.indicators.find((d) => d.uid === snpsht.Indicator),
               year: snpsht.Year,
-              image: snpsht.Image.data.attributes,
+              image: snpsht.Image.data?.attributes,
             })),
-            impactTimeSnapshot: c.ImpactTimeSnapshot.map((snpsht) => ({
-              indicator: snpsht.Indicator,
-              image: snpsht.Image.data.attributes,
+            impactTimeSnapshots: c.ImpactTimeSnapshot.map((snpsht) => ({
+              indicator: meta.indicators.find((d) => d.uid === snpsht.Indicator),
+              image: snpsht.Image.data?.attributes,
             })),
-            indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
-            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
-            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
           };
-        case 'future-impacts':
+        case 'image-slider':
           return {
             type,
             explorerUrl: c.ExplorerUrl,
@@ -66,8 +62,8 @@ export const load = async ({ fetch, parent, params }) => {
             imagePairs: c.ImageSliderPair.map((img) => ({
               attributeValue: img.AttributeValue,
               groupName: img.GroupName,
-              image1: img.Image1.data.attributes,
-              image2: img.Image2.data.attributes,
+              image1: img.Image1.data?.attributes,
+              image2: img.Image2.data?.attributes,
             })),
           };
         default:
@@ -86,5 +82,5 @@ export const load = async ({ fetch, parent, params }) => {
     description: study.attributes.Description,
   }));
 
-  return { caseStudy, caseStudies };
+  return { caseStudy, caseStudies, caseStudyRaw };
 };
