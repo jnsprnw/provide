@@ -2,14 +2,9 @@ import { error } from '@sveltejs/kit';
 import { loadFromStrapi } from '$utils/apis.js';
 
 export const load = async ({ fetch, parent, params }) => {
-  const data = await loadFromStrapi(
-    'case-studies',
-    fetch,
-    [`populate[0]=CurrentContext`, `populate[1]=FutureHeatstress.ImpactTimeSnapshot.Snapshot`, `populate[2]=FutureHeatstress.ImpactGeoSnapshot.Image`].join('&')
-  );
-  //const caseStudiesDynamic = await loadFromStrapi('case-study-dynamics', fetch, [`populate[MainContent][populate]=*`].join('&'));
+  const { meta } = await parent();
 
-  const caseStudiesDynamic = await loadFromStrapi(
+  const caseStudiesRaw = await loadFromStrapi(
     'case-study-dynamics',
     fetch,
     [
@@ -22,22 +17,74 @@ export const load = async ({ fetch, parent, params }) => {
     ].join('&')
   );
 
-  const caseStudies = data.map((study) => ({
-    id: study.id,
-    city: study.attributes.CityName,
-    uid: study.attributes.CityUid,
-    description: study.attributes.Abstract,
-    ...study.attributes,
-    //content: study.attributes.MainContent.map((component) => ({ ...component, type: component.__component.split('.')[1] })),
-  }));
-
-  const caseStudy = caseStudies[0]; //.find((d) => d.uid === params.city);
-  if (!caseStudy)
+  const caseStudyRaw = caseStudiesRaw.find((d) => d.attributes.CityUid === params.city)?.attributes;
+  if (!caseStudyRaw)
     error(404, {
       message: 'City not available',
     });
 
-  //const fullCaseStudy = await loadFromStrapi(`case-studies/${caseStudy.id}`, fetch, 'populate[MainContent][populate]=*');
+  const caseStudy = {
+    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid),
+    mainContent: caseStudyRaw.MainContent.map((c) => {
+      const type = c.__component.split('.')[1];
+      switch (type) {
+        case 'avoiding-impacts':
+          return {
+            type,
+            explorerUrl: c.ExplorerUrl,
+            description: c.Description,
+            indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
+            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
+            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
+          };
+        case 'future-impacts':
+          return {
+            type,
+            explorerUrl: c.ExplorerUrl,
+            impactGeoDescription: c.ImpactGeoDescription,
+            impactTimeDescription: c.ImpactTimeDescription,
+            impactGeoSnapshot: c.ImpactGeoSnapshot.map((snpsht) => ({
+              indicator: snpsht.Indicator,
+              year: snpsht.Year,
+              image: snpsht.Image.data.attributes,
+            })),
+            impactTimeSnapshot: c.ImpactTimeSnapshot.map((snpsht) => ({
+              indicator: snpsht.Indicator,
+              image: snpsht.Image.data.attributes,
+            })),
+            indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
+            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
+            studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
+          };
+        case 'future-impacts':
+          return {
+            type,
+            explorerUrl: c.ExplorerUrl,
+            description: c.Description,
+            attribueLabel: c.AttribueLabel,
+            groupingLabel: c.GroupingLabel,
+            imagePairs: c.ImageSliderPair.map((img) => ({
+              attributeValue: img.AttributeValue,
+              groupName: img.GroupName,
+              image1: img.Image1.data.attributes,
+              image2: img.Image2.data.attributes,
+            })),
+          };
+        default:
+          return {
+            type,
+            title: c.Title,
+            text: c.Text,
+          };
+      }
+    }),
+  };
 
-  return { caseStudy, caseStudies, caseStudiesDynamic };
+  const caseStudies = caseStudiesRaw.map((study) => ({
+    id: study.id,
+    city: meta.cities.find((c) => c.uid === study.attributes.CityUid),
+    description: study.attributes.Description,
+  }));
+
+  return { caseStudy, caseStudies };
 };

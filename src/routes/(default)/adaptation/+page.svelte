@@ -51,7 +51,7 @@
 
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true, isActive: true },
-    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}` })),
+    ...data.caseStudies.map((d) => ({ label: d.city.label, href: `/${PATH_ADAPTATION}/${d.city.uid}` })),
   ];
 </script>
 

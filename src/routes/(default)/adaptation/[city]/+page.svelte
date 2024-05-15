@@ -54,12 +54,12 @@
     { props: { name: LABEL_FURTHER_STUDIES, slug: ANCHOR_FURTHER_STUDIES } },
   ];
 
-  $: console.log(data.caseStudiesDynamic);
+  $: console.log(data);
 
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true },
-    ...data.caseStudies.map((d) => ({ ...d, label: d.city, href: `/${PATH_ADAPTATION}/${d.uid}`, isActive: caseStudy.uid === d.uid })),
+    ...data.caseStudies.map((d) => ({ label: d.city.label, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid })),
   ];
 </script>
 
-<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />
+<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />
