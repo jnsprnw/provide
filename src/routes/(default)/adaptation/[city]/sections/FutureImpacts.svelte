@@ -16,16 +16,11 @@
 
   $: timeSelection = _.find(impactTimeSnapshots, (d) => d.indicator.uid === $indicator);
   $: geoSelection = _.find(impactGeoSnapshots, (d) => d.indicator.uid === $indicator && d.year === $year);
-  $: console.log(timeSelection, geoSelection);
 </script>
 
 <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
 <figure class="mb-12">
-  <img
-    class="mb-2"
-    src={timeSelection.image ? `${import.meta.env.VITE_HEROKU_URL}${timeSelection.image.url}` : 'https://placehold.co/1700x800/dddddd/dddddd'}
-    alt={timeSelection?.image.alternativeText}
-  />
+  <img class="mb-2" src={timeSelection.image ? `${import.meta.env.VITE_HEROKU_URL}${timeSelection.image.url}` : '/img/impact-time_indicator-1.png'} alt={timeSelection.image?.alternativeText} />
   <div class="flex gap-6 justify-between align-middle">
     <figcaption class="text-sm text-text-weaker max-w-[50em]">{impactTimeDescription}</figcaption>
     <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
@@ -34,11 +29,7 @@
 
 <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />
 <figure>
-  <img
-    class="mb-2"
-    src={geoSelection.image ? `${import.meta.env.VITE_HEROKU_URL}${geoSelection.image.url}` : 'https://placehold.co/1700x800/dddddd/dddddd'}
-    alt={timeSelection?.image.alternativeText}
-  />
+  <img class="mb-2" src={geoSelection.image ? `${import.meta.env.VITE_HEROKU_URL}${geoSelection.image.url}` : '/img/impact-geo_indicator-1_year-1.png'} alt={timeSelection.image?.alternativeText} />
   <div class="flex gap-6 justify-between align-middle">
     <figcaption class="text-sm text-text-weaker max-w-[50em]">{impactGeoDescription}</figcaption>
     <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
