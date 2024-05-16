@@ -18,27 +18,21 @@
     .map((d) => d.attribute)
     .filter((d) => d.value || d.label);
 
-  $: currentGroup = writable(groupingValues[0].value);
-  $: currentAttribute = writable(groupingValues[0].value);
+  $: currentGroup = writable(groupingValues[0].uid);
+  $: currentAttribute = writable(attributeValues[0]?.uid);
 
-  // $: indicators = _.uniqBy(impactTimeSnapshots, 'indicator').map((d) => d.indicator);
-  // $: indicator = writable(indicators[0].uid);
-
-  // $: years = _.uniqBy(impactGeoSnapshots, 'year').map((d) => ({ uid: d.year, label: d.year }));
-  // $: year = writable(years[0].uid);
-
-  $: imagePair = imagePairs.length && imagePairs[0];
-
-  $: console.log(groupingValues, attributeValues);
+  $: imagePair = imagePairs.find((d) => d.group.uid === $currentGroup && d.attribute.uid === $currentAttribute) || imagePairs[0];
 </script>
 
-{#if showGroupingUi}
-  <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentGroup} />
-{/if}
+<div class="flex flex-wrap gap-10">
+  {#if showGroupingUi}
+    <PillGroup class="mb-6" label={groupingLabel} size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentGroup} />
+  {/if}
 
-{#if attributeValues.length}
-  <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentAttribute} />
-{/if}
+  {#if attributeValues.length}
+    <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
+  {/if}
+</div>
 
 <div class="flex flex-col gap-2">
   {#if imagePair.image1 && imagePair.image2}

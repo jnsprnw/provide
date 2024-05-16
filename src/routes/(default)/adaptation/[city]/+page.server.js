@@ -63,8 +63,8 @@ export const load = async ({ fetch, parent, params }) => {
             groupingLabel: c.GroupingLabel,
             showGroupingUi: c.ShowGroupingUi,
             imagePairs: c.ImageSliderPair.map((img) => ({
-              attribute: { value: img.AttributeValue, label: img.AttributeLabel },
-              group: { value: img.GroupValue, label: img.GroupLabel },
+              attribute: { uid: img.AttributeValue, label: img.AttributeLabel },
+              group: { uid: img.GroupValue, label: img.GroupLabel },
               image1: img.Image1.data?.attributes,
               image2: img.Image2.data?.attributes,
             })),
