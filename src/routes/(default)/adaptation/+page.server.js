@@ -9,7 +9,7 @@ export const load = async ({ fetch, parent }) => {
   const publications = (attributes.Publications.data || []).map((d) => ({ ...d.attributes }));
 
   return {
-    caseStudies: caseStudies.map((study) => ({ city: meta.cities.find((d) => d.uid === study.attributes.CityUid), description: study.attributes.Description })),
+    caseStudies: caseStudies.map((study) => ({ city: meta.cities.find((d) => d.uid === study.attributes.CityUid), abstract: study.attributes.Abstract })),
     description: attributes.Description,
     introText: parse(attributes.IntroText ?? ''),
     introTitle: attributes.IntroTitle,

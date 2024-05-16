@@ -23,4 +23,4 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro="The potential and limits of adaptation via tree planting in the YYY and ZZZ neighbourhoods." />
+<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro={caseStudy.abstract} />

@@ -14,7 +14,7 @@
           class="p-3 bg-surface-weakest h-64 border-l-4 shadow-md"
           class:border-theme-weakest={publication.type === 'publication'}
           class:border-theme-base={publication.type === 'deliverable'}
-          href="{import.meta.env.VITE_HEROKU_URL}{publication.url}"><strong class=" font-bold">{publication.name}</strong></a
+          href={publication.url}><strong class=" font-bold">{publication.name}</strong></a
         >
       {/each}
     </div>
