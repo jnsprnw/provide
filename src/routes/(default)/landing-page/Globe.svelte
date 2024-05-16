@@ -104,7 +104,7 @@
   }
 </script>
 
-<header class="h-[80vh] sm:h-[75vh] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
+<header class="h-[70vh] sm:h-[75vh] min-h-[400px] md:min-h-[600px] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
   <figure
     aria-hidden
     role="presentation"
@@ -125,8 +125,8 @@
   </figure>
 
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-20 h-1/2 self-end bg-gradient-to-t from-theme-stronger/90" aria-hidden role="presentation" />
-  <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex">
-    <div class="max-w-6xl mx-auto px-3 sn:px-8 md:px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-24 md:gap-y-12 mt-8 mb-12 sm:mt-16 md:mt-24">
+  <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex items-center">
+    <div class="max-w-6xl mx-auto px-3 sn:px-8 md:px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-24 md:gap-y-12">
       <header class="col-start-1 col-span-6 sm:col-span-5 md:col-span-5 lg:col-span-4 text-white">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-none drop-shadow-lg">A database for global-to-local climate impacts</h1>
         <p class="text-xl drop-shadow-md">Explore data across scales and sectors</p>

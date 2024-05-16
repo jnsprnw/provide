@@ -2,14 +2,28 @@ import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
 import qs from 'qs';
 import { forEach, reduce } from 'lodash-es';
 import { browser } from '$app/environment';
-// import { get } from 'svelte/store';
 
 /*
  * These functions are intended to dynamically load data from the client upon user interaction
  * They will not do anything when called on the server, other than returning an emty "loading" response
  */
 
-const cache = {};
+const cache = {}; // Initializes an object to serve as a cache for storing fetch responses.
+
+function buildStatusError(message, isExpected) {
+  return {
+    status: STATUS_FAILED,
+    message,
+    isExpected,
+  };
+}
+
+function buildStatusSuccess(data) {
+  return {
+    status: STATUS_SUCCESS,
+    data,
+  };
+}
 
 /*
  * Loads data from Climate Analytics API
@@ -20,18 +34,19 @@ export const loadFromAPI = async function (url) {
   if (!browser) return new Promise((res) => res);
   try {
     const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
-    if (res.status != 200) {
-      console.warn(`Request failed with status code: ${res.status}`);
-      return { status: STATUS_FAILED, message: `Request failed with status code: ${res.status}` };
-    }
     const data = await res.json();
-    if (data.message) {
-      console.warn(`Request failed with message: ${data.message}`);
-      return { status: STATUS_FAILED, message: data.message };
+
+    // Error handling based on the response status or the presence of a message in the data.
+    if (res.status != 200 || data.message) {
+      console.warn(`Request failed with status code: ${res.status}`);
+      // Returning an object with detailed information about the failure
+      return buildStatusError(data.message ?? `Request failed with status code: ${res.status}`, data.isExpected ?? false);
     }
-    return { status: STATUS_SUCCESS, data };
+    // If successful, returning an object with status and the parsed JSON data.
+    return buildStatusSuccess(data);
   } catch (e) {
-    return { status: STATUS_SUCCESS, message: e };
+    // Catching and handling any errors that occur during the fetch request.
+    return buildStatusError(e.toString(), false);
   }
 };
 
@@ -90,7 +105,7 @@ const fetchMultiple = (store, configs) => {
   forEach(initialData, (d, keyOrIndex) => {
     if (typeof d.loading?.then !== 'function') return;
     d.loading.then((res) => {
-      cache[d.url] = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
+      cache[d.url] = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
 
       store.update((old) => {
         // Simple check to make sure no newer data has been requested in the meantime
@@ -118,33 +133,17 @@ const fetchSingle = (store, { endpoint, params }) => {
 
   if (cached) {
     store.set(cached);
-    // console.log('in cache', get(store));
   } else {
-    // console.log('not in cache');
     const loadingData = { status: STATUS_LOADING, data: null };
     cache[url] = loadingData;
     store.set(loadingData);
-    // console.log('starting to load', get(store));
     loadFromAPI(url).then((res) => {
-      // console.log({ data });
-      // console.log(`Loading finished for ${id}.`);
-      // console.log({ endpoint, data }, { id });
-      // console.log({ res, endpoint });
-      const currentData = res.data ? { status: STATUS_SUCCESS, data: res.data } : { status: STATUS_FAILED, message: res.message };
-      // console.log(`Setting the cache for ${url}`);
+      const currentData = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
       cache[url] = currentData;
-      // console.log(cache[url]);
-      // store.set(cache[url]);
-      // console.log('store', get(store), { id });
       store.update((d) => {
-        // console.log({ d }, currentData, currentData === cache[url]);
         if (d !== loadingData) return d;
-        // console.log(`Is loading state`);
         return currentData;
       });
-      // store.set(currentData);
-      // store.set('test');
-      // console.log('store', get(store), { id });
     });
   }
 };
