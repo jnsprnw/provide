@@ -30,6 +30,7 @@
 
   $: loadedData = filter(flatData, (d) => d.status === STATUS_SUCCESS);
   $: isFailed = !!filter(flatData, (d) => d.status === STATUS_FAILED).length;
+  $: isExpectedFail = isFailed && !!filter(flatData, (d) => d.isExpected).length;
 
   // Set isEmpty to false only after initial data was loaded. Afterwards it is always false
   $: if (currentAsyncProps) isEmpty = false;
@@ -50,13 +51,21 @@
 
 {#if isFailed}
   <slot name="failed">
-    <Message {warningBackground} {warningSizeSmall} {warningInverted} warningSign={true} headline="Data could not be loaded for this graph">
-      <span>This is probably because the data is not available for this selection.</span>
-      <span>Try another combination of geography, indicator and scenarios.</span>
-      {#if flatData.length}
-        <div class="mt-4 font-mono text-xs text-text-weaker flex flex-col" class:text-white={warningInverted}>
-          {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message }}<span>{message}</span>{/each}
-        </div>
+    <Message {warningBackground} {warningSizeSmall} {warningInverted} warningSign={!isExpectedFail} headline="Data could not be loaded for this graph">
+      {#if isExpectedFail}
+        {#if flatData.length}
+          <div class="mt-4 flex flex-col">
+            {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message }}<span>{message}</span>{/each}
+          </div>
+        {/if}
+      {:else}
+        <span>This is probably because the data is not available for this selection.</span>
+        <span>Try another combination of geography, indicator and scenarios.</span>
+        {#if flatData.length}
+          <div class="mt-4 font-mono text-xs text-text-weaker flex flex-col" class:text-white={warningInverted}>
+            {#each flatData.filter(({ message }) => typeof message !== 'undefined') as { message, isExpected }}<span>{message}</span>{/each}
+          </div>
+        {/if}
       {/if}
     </Message>
   </slot>

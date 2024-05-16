@@ -71,7 +71,7 @@
       }
     );
 
-    const host = import.meta.env.VITE_SCREENSHOT_URL; // 'http://127.0.0.1:8889/api/puppeteer'
+    const host = import.meta.env.VITE_SCREENSHOT_URL; // 'http://127.0.0.1:8888/api/puppeteer'
 
     if (!host) {
       console.warn(`Screenshot build URL variable not set. Graph download will not be available.`);
@@ -141,6 +141,8 @@
         </div>
       </div>
       <button
+        data-screenshot={screenshotUrl}
+        data-graph={graphUrl}
         disabled={isDisabled}
         on:click={downloadImage}
         class="transition-colors bg-theme-base text-white hover:enabled:bg-theme-stronger disabled:text-white disabled:bg-theme-weaker w-full py-2 text-theme-base text-sm px-3 grid grid-cols-[15px_auto_15px] gap-x-3 items-center"
