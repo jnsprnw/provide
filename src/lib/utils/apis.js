@@ -84,10 +84,10 @@ export const loadMetaData = function (svelteFetch = fetch) {
           descriptionIndicators.find((d) => d.attributes.UID === indicator.uid),
           ['attributes', 'Description']
         );
-        if (typeof description === 'undefined') {
-          console.warn(`Indicator description for ${indicator.uid} could not be found.`);
-          console.warn(`These descriptions are available: ${availableIndicators.join(', ')}`);
-        }
+        // if (typeof description === 'undefined') {
+        //   console.warn(`Indicator description for ${indicator.uid} could not be found.`);
+        //   console.warn(`These descriptions are available: ${availableIndicators.join(', ')}`);
+        // }
 
         return {
           ...indicator,
@@ -118,7 +118,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
         const timelineData = Object.fromEntries(
           SCENARIO_DATA_KEYS.map((key) => {
             if (!scenario.hasOwnProperty(key)) {
-              console.warn(`${key} is missing in scenario meta data.`);
+              // console.warn(`${key} is missing in scenario meta data.`);
               return [key, null];
             }
             const { data, yearStart, yearStep } = scenario[key];
@@ -141,7 +141,7 @@ export const loadMetaData = function (svelteFetch = fetch) {
               });
               return [key, seriesData];
             } else {
-              console.warn(`${scenario.uid} has no data for ${key} in scenario meta data.`);
+              // console.warn(`${scenario.uid} has no data for ${key} in scenario meta data.`);
               return [key, null];
             }
           })
