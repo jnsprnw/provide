@@ -1,5 +1,6 @@
 import { error } from '@sveltejs/kit';
 import { loadFromStrapi } from '$utils/apis.js';
+import { parse } from 'marked';
 
 export const load = async ({ fetch, parent, params }) => {
   const { meta } = await parent();
@@ -70,7 +71,7 @@ export const load = async ({ fetch, parent, params }) => {
           return {
             type,
             title: c.Title,
-            text: c.Text,
+            text: parse(c.Text),
           };
       }
     }),
