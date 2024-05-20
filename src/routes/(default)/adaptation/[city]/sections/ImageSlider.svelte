@@ -73,7 +73,7 @@
   {/if}
 
   {#if showThumbnails}
-    <div class="flex gap-2">
+    <div class="flex gap-2 items-start">
       {#each thumbnails as thumbnail}
         {#if allowImageSelection}
           <button
@@ -88,7 +88,7 @@
               <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
                 <img class:opacity-40={thumbnail === imagePair} src={thumbnail.image1.url} alt={thumbnail.image1.alternativeText} />
               </span>
-              <figcaption class="text-text-weaker text-sm mt-1" class:font-bold={thumbnail.description}>
+              <figcaption class="text-sm text-theme-base leading-tight" class:font-bold={thumbnail.description}>
                 {thumbnail.group.label}
                 {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
               </figcaption>

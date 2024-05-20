@@ -6,7 +6,7 @@ export const load = async ({ fetch, parent }) => {
   const { attributes } = await loadFromStrapi('adaptation', fetch);
   const caseStudies = await loadFromStrapi('case-study-dynamics', fetch);
 
-  const publications = (attributes.Publications.data || []).map((d) => ({ ...d.attributes }));
+  const publications = (attributes.Publications || []).map((d) => ({ name: d.Name, date: new Date(d.PublicationDate), type: d.Type, url: d.Url }));
 
   return {
     caseStudies: caseStudies.map((study) => ({ city: meta.cities.find((d) => d.uid === study.attributes.CityUid), abstract: study.attributes.Abstract })),

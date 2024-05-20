@@ -49,6 +49,8 @@
     },
   ].map((section) => ({ ...section, slug: kebabCase(section.title), content: true }));
 
+  $: console.log(data.publications);
+
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true, isActive: true },
     ...data.caseStudies.map((d) => ({ label: d.city.label, href: `/${PATH_ADAPTATION}/${d.city.uid}` })),

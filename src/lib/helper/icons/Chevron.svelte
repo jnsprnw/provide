@@ -8,17 +8,17 @@
   xmlns="http://www.w3.org/2000/svg"
   class={clazz}
   class:isOpen
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
+  width="16"
+  height="16"
+  viewBox="0 0 16 16"
   stroke-width="2"
   stroke="currentColor"
   fill="none"
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  <path d="M9 11l3 3l3 -3" transform={`rotate(${isOpen ? 180 : 0})`} />
+  <!-- <path stroke="none" d="M0 0h24v24H0z" fill="none" /> -->
+  <path d="M5 8l3 3l3 -3" transform={`rotate(${isOpen ? 180 : 0})`} />
 </svg>
 
 <style lang="postcss">
