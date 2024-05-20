@@ -17,13 +17,14 @@
   export let lineLength = undefined; // If positive, line extends to bottom, if negative extends to top. Default is -height
   export let orientation = 1; // 1 for left hand axis extending to right, -1 if other way around
   export let textAnchor = 'start';
+  export let unit = 'default';
 
   $: xPos = x ?? orientation === 1 ? 0 : $width;
   $: yPos = y;
   $: labelTextAnchor = textAnchor || orientation === 1 ? 'end' : 'start';
 
   $: tickVals = Array.isArray(ticks) ? ticks : $yScale.ticks(ticks);
-  $: tickLabels = formatRange(tickVals, 'default');
+  $: tickLabels = formatRange(tickVals, unit);
 </script>
 
 {#if axisLabel}

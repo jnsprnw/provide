@@ -123,6 +123,7 @@
           ticks={yTicks}
           xTick={-3}
           ticksHighlighted={ticksYHighlighted}
+          unit={unitUID}
         />
         {#if !isMultiLine}
           <AreaLayer data={areaData.values} color={areaData.color} />
