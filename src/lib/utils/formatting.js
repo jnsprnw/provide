@@ -1,6 +1,6 @@
 import { DEFAULT_FORMAT_UID, UID_NO_UNIT, KEY_LABEL, KEY_LABEL_LONG } from '$src/config';
 import { formatDefaultLocale, formatLocale } from 'd3-format';
-import { maxBy } from 'lodash-es';
+import { maxBy, uniq } from 'lodash-es';
 
 export const NA_STRING = '—';
 export const FORMAT_CURRENCY = '$,.0f';
@@ -97,17 +97,20 @@ export function formatRange(range, unit, minDecimals = 0) {
 
 export function findDecimalsForDistinctValues(values, unit, minDecimals = 0, maxDecimals = 4) {
   // This function formats a values of values with all resulting strings to be unique
+  // First, it filters out all non-numeric values and NaNs. We also don’t want zeros as they would always result in zero. Then, it finds the unique values.
+  // The unique list of values help us to only consider numbers that are different from each other before formatting.
+  const validValues = uniq(values.filter((v) => typeof v === 'number' && !isNaN(v) && v !== 0));
   const decimalsMax = maxDecimals;
   let decimals = minDecimals;
   let formatter = getFormatter(unit, decimals);
-  let strings = values.map((d) => formatValue(d, unit, { formatter }));
+  let strings = validValues.map((d) => formatValue(d, unit, { formatter }));
   while (
     strings.some((value, index) => strings.indexOf(value) !== index) && // Check if strings have any dublicates
     decimals < decimalsMax
   ) {
     decimals += 1;
     formatter = getFormatter(unit, decimals);
-    strings = values.map((d) => formatValue(d, unit, { formatter })); // Reformat values with one more decimal
+    strings = validValues.map((d) => formatValue(d, unit, { formatter })); // Reformat values with one more decimal
   }
   return decimals;
 }
