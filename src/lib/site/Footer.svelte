@@ -1,7 +1,8 @@
 <script>
   import { LABEL_DOCUMENTATION, LABEL_CONTACT, PATH_GLOSSARY, LABEL_GLOSSARY, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_DOCUMENTATION } from '$config';
-  import { version, buildTime } from '$app/environment';
+  import { version } from '$app/environment';
   import Logo from './Logo.svelte';
+  export let buildDate;
 </script>
 
 <footer class="bg-surface-weaker">
@@ -38,8 +39,8 @@
       <span class="text-contour-weak"><a href="https://climateanalytics.org/">Climate Analytics</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
       <span class="text-contour-weaker text-xs"
         >Version {version}. Build
-        <time title={new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(buildTime)} datetime={buildTime.toISOString()}
-          >{buildTime.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</time
+        <time title={new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(buildDate)} datetime={buildDate.toISOString()}
+          >{buildDate.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</time
         ></span
       >
     </div>

@@ -23,7 +23,6 @@ const config = {
     adapter: adapter(),
     version: {
       name: process.env.npm_package_version,
-      buildTime: new Date(),
     },
   },
   preprocess: sequence([

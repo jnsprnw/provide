@@ -8,6 +8,7 @@
   import _ from 'lodash-es';
   import { CURRENT_PAGE } from '$stores/state';
   import { page } from '$app/stores';
+  export let data;
 
   page.subscribe((v) => {
     if (v.hasOwnProperty('url') && 'pathname' in v.url) {
@@ -30,6 +31,6 @@
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer buildDate={data.buildDate} />
   </div>
 </ThemeProvider>
