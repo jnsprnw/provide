@@ -1,5 +1,6 @@
 <script>
   import { LABEL_DOCUMENTATION, LABEL_CONTACT, PATH_GLOSSARY, LABEL_GLOSSARY, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_DOCUMENTATION } from '$config';
+  import { version } from '$app/environment';
   import Logo from './Logo.svelte';
 </script>
 
@@ -36,7 +37,7 @@
     <div class="text-sm mx-auto max-w-7xl px-6 flex justify-between">
       <span class="text-contour-weak"><a href="https://climateanalytics.org/">Climate Analytics</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
       <span class="text-contour-weaker text-xs"
-        >Version {__APP_VERSION__}. Build
+        >Version {version}. Build
         <time title={new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(new Date())} datetime={new Date().toISOString()}
           >{new Date().toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' })}</time
         ></span
