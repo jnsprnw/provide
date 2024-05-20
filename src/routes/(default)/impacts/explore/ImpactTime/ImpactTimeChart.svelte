@@ -97,7 +97,7 @@
   // Data for generating popovers
   $: popoverData = (isMultiLine ? flatMap(lineData, (d) => d.values.map((v) => ({ ...v, scenario: d.scenario }))) : flatData).map((d) => ({
     ...d,
-    formattedValue: `${formatTooltipValueY(d.value)}${formatUnit(unit)}`,
+    formattedValue: `${formatTooltipValueY(d.value)}`,
     formattedGmt: d.gmt,
     label: indicatorLabel.label,
   }));
