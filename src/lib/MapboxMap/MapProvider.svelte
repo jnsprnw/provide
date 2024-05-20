@@ -8,7 +8,7 @@
   let clazz = '';
   let _map;
   export { clazz as class };
-  export let zoomRange = [1, 12];
+  export let zoomRange = [1, 14];
   export let zoom = zoomRange[0];
   export let pitch = 0;
   export let bearing = 0;

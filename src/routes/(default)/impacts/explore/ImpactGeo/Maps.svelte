@@ -23,6 +23,7 @@
   export let colorScale;
   export let unit;
   export let isProcessing;
+  export let showSatellite;
 
   let workerStatus = STATUS_IDLE;
   let workerMessage;
@@ -225,25 +226,31 @@
         class:border-r-1={maskedGeoData.length > 1 && i !== maskedGeoData.length - 1}
         class="w-full border-contour-weakest overflow-hidden relative"
       >
-        <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0}>
-          {#if invertedGeoShape && $CURRENT_GEOGRAPHY.geographyType !== 'cities'}
-            <DataSource data={invertedGeoShape}>
-              <!--<PolygonLayer before="ocean-fill" fillColor={'#fafafa'} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />-->
-              <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
-              <FilterLayer layer="settlement-minor-label" geo={geoShape} />
-              <FilterLayer layer="admin-1-boundary" geo={geoShape} />
+        {#key showSatellite}
+          <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0} style={showSatellite && import.meta.env.VITE_MAPBOX_STYLE_SATELLITE}>
+            {#if invertedGeoShape && $CURRENT_GEOGRAPHY.geographyType !== 'cities'}
+              <DataSource data={invertedGeoShape}>
+                <!--<PolygonLayer before="ocean-fill" fillColor={'#fafafa'} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />-->
+                <PolygonLayer before={showSatellite ? 'tunnel-path' : 'ocean-fill'} lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
+                <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+                <FilterLayer layer="admin-1-boundary" geo={geoShape} />
 
-              <!--<FilterLayer layer="settlement-major-label" geo={geoShape} />-->
+                <!--<FilterLayer layer="settlement-major-label" geo={geoShape} />-->
+              </DataSource>
+            {/if}
+
+            <DataSource {data}>
+              {#if showSatellite}
+                <PolygonLayer before="tunnel-path" fill={true} line={false} fillOpacity={0.2} />
+              {:else}
+                <PolygonLayer fill={true} line={false} />
+              {/if}
             </DataSource>
-          {/if}
-
-          <DataSource {data}>
-            <PolygonLayer fill={true} line={false} />
-          </DataSource>
-          <!--<DataSource data={geoShape}>
+            <!--<DataSource data={geoShape}>
             <PolygonLayer fill={false} line={true} lineOpacity={0.2} />
           </DataSource>-->
-        </MapProvider>
+          </MapProvider>
+        {/key}
         {#if label}
           <div class="absolute top-3 left-1/2 -translate-x-1/2 bg-surface-base/70 px-2 rounded-full text-sm text-contour-base whitespace-nowrap font-bold">
             {label}

@@ -112,7 +112,7 @@
     style="background-image: radial-gradient(closest-side, var(--tw-gradient-from) 60%, var(--tw-gradient-to));"
   >
     <LoadingWrapper asyncProps={{ shapes: $GEO_SHAPE, grids: $GEO_DATA }} {process} let:asyncProps warningBackground={false} warningInverted={true}>
-      <MapProvider interactive={false} projection="globe" style="mapbox://styles/climateanalytics/clqz980h0018301qwablpef7n" center={asyncProps.data[currentIndex].center} zoom={currentZoomLevel}>
+      <MapProvider interactive={false} projection="globe" style={import.meta.env.VITE_MAPBOX_STYLE_GLOBE} center={asyncProps.data[currentIndex].center} zoom={currentZoomLevel}>
         <!--<DataSource data={asyncProps.mask}>
           <PolygonLayer before="ocean-fill" fillColor={$theme.color.theme.stronger} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />
           <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.theme.stronger} />

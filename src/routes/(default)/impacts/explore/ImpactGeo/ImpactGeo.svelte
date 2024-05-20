@@ -41,6 +41,7 @@
   export let tagline;
   export let year = DEFAULT_IMPACT_GEO_YEAR;
   export let displayOption = IMPACT_GEO_KEY_SIDE_BY_SIDE;
+  export let showSatellite = false;
 
   let isProcessing = false;
 
@@ -204,9 +205,9 @@
       {isProcessing}
     >
       <svelte:fragment slot="controls">
-        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:displayOption bind:year />
+        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:showSatellite bind:displayOption bind:year />
       </svelte:fragment>
-      <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} />
+      <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>

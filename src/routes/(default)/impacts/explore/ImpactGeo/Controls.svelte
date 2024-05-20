@@ -1,12 +1,14 @@
 <script>
   import Select from '$lib/controls/Select/Select.svelte';
   import SegmentedControl from '$lib/controls/SegmentedControl/SegmentedControl.svelte';
+  import Switch from '$lib/controls/Switch/Switch.svelte';
 
   export let displayOption;
   export let displayOptions;
   export let yearOptions;
   export let scenarios;
   export let year;
+  export let showSatellite;
 </script>
 
 <div class="flex gap-6">
@@ -14,4 +16,5 @@
     <SegmentedControl options={displayOptions} bind:value={displayOption} />
   {/if}
   <Select options={yearOptions} bind:value={year} label="Year" />
+  <Switch bind:value={showSatellite} label="Show satellite" />
 </div>
