@@ -61,12 +61,14 @@ export const load = async ({ fetch, parent, params }) => {
             description: c.Description,
             attribueLabel: c.AttributeLabel,
             groupingLabel: c.GroupingLabel,
-            showGroupingUi: c.ShowGroupingUi,
+            allowImageSelection: c.AllowImageSelection,
+            showThumbnails: c.ShowThumbnails,
             imagePairs: c.ImageSliderPair.map((img) => ({
-              attribute: { uid: img.AttributeValue, label: img.AttributeLabel },
-              group: { uid: img.GroupValue, label: img.GroupLabel },
               image1: img.Image1.data?.attributes,
               image2: img.Image2.data?.attributes,
+              description: img.Description?.trim(),
+              attribute: { uid: img.AttributeValue?.trim(), label: img.AttributeValue?.trim() },
+              group: { uid: img.GroupValue?.trim(), label: img.GroupValue?.trim() },
             })),
           };
         default:

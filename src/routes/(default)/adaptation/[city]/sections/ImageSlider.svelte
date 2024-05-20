@@ -7,7 +7,8 @@
   export let description;
   export let attribueLabel;
   export let groupingLabel;
-  export let showGroupingUi;
+  export let showThumbnails;
+  export let allowImageSelection;
   export let imagePairs;
 
   // Unique group/attribute values to create the UI
@@ -18,14 +19,18 @@
     .map((d) => d.attribute)
     .filter((d) => d.value || d.label);
 
-  $: currentGroup = writable(groupingValues[0].uid);
+  $: currentGroup = writable(groupingValues[0]?.uid);
   $: currentAttribute = writable(attributeValues[0]?.uid);
 
-  $: imagePair = imagePairs.find((d) => d.group.uid === $currentGroup && d.attribute.uid === $currentAttribute) || imagePairs[0];
+  $: console.log($currentGroup, $currentAttribute);
+
+  $: imagePair = allowImageSelection ? imagePairs.find((d) => d.group.uid === $currentGroup && d.attribute.uid === $currentAttribute) : imagePairs[0];
+  // If no image selection is allowed, we don't want to include the large image in the thumbnails
+  $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
 </script>
 
 <div class="flex flex-wrap gap-10">
-  {#if showGroupingUi}
+  {#if allowImageSelection}
     <PillGroup class="mb-6" label={groupingLabel} size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentGroup} />
   {/if}
 
@@ -34,33 +39,75 @@
   {/if}
 </div>
 
-<div class="flex flex-col gap-2">
+<div class="flex flex-col">
+  {#if !imagePair}
+    <div>No image with the selected properties was found</div>
+  {/if}
   {#if imagePair.image1 && imagePair.image2}
-    <CompareImage
-      imageLeftSrc={imagePair.image1.url}
-      imageLeftAlt="left"
-      imageRightSrc={imagePair.image2.url}
-      imageRightAlt="right"
-      --handle-size="2.5rem"
-      --handle-background-color="rgba(0, 0, 0, 0.6)"
-      --handle-border-width="0.125rem"
-      --slider-color="#ffffff"
-      --slider-width="0.125rem"
-    >
-      <svelte:fragment slot="slider-label">
-        Set the visibility of one image over the other. 0 is full visibility of the second image and 100 is full visibility of the first image. Any amount in-between is a left/right cutoff at the
-        percentage of the slider.
-      </svelte:fragment>
-    </CompareImage>
+    <figure class="mb-2 flex flex-col gap-1">
+      <CompareImage
+        imageLeftSrc={imagePair.image1.url}
+        imageLeftAlt="left"
+        imageRightSrc={imagePair.image2.url}
+        imageRightAlt="right"
+        --handle-size="3rem"
+        --handle-background-color="rgba(0, 0, 0, 0.6)"
+        --handle-border-width="0.125rem"
+        --slider-color="#ffffff"
+        --slider-width="0.125rem"
+      >
+        <svelte:fragment slot="slider-label">
+          Set the visibility of one image over the other. 0 is full visibility of the second image and 100 is full visibility of the first image. Any amount in-between is a left/right cutoff at the
+          percentage of the slider.
+        </svelte:fragment>
+      </CompareImage>
+      {#if imagePair.description}
+        <figcaption class="flex justify-between align-middle mb-4" class:justify-end={imagePair.description}>
+          <p class="text-sm text-text-weaker max-w-[40em]">{imagePair.description}</p>
+          {#if explorerUrl}
+            <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
+          {/if}
+        </figcaption>
+      {/if}
+    </figure>
   {/if}
 
-  {#if !showGroupingUi}
+  {#if showThumbnails}
     <div class="flex gap-2">
-      {#each imagePairs.slice(1) as imagePair}
-        <figure style:width="{100 / (imagePairs.length - 1)}%">
-          <img src={imagePair.image1.url} />
-          <figcaption class="text-text-weaker text-sm">{imagePair.group.label}</figcaption>
-        </figure>
+      {#each thumbnails as thumbnail}
+        {#if allowImageSelection}
+          <button
+            style:width="{100 / thumbnails.length}%"
+            class="text-left"
+            on:click={() => {
+              $currentGroup = thumbnail.group.uid;
+              $currentAttribute = thumbnail.attribute.uid;
+            }}
+          >
+            <figure>
+              <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
+                <img class:opacity-40={thumbnail === imagePair} src={thumbnail.image1.url} alt={thumbnail.image1.alternativeText} />
+              </span>
+              <figcaption class="text-text-weaker text-sm mt-1" class:font-bold={thumbnail.description}>
+                {thumbnail.group.label}
+                {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
+              </figcaption>
+            </figure>
+          </button>
+        {:else}
+          <figure style:width="{100 / thumbnails.length}%">
+            <img src={thumbnail.image1.url} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
+            <figcaption class="text-text-weaker text-sm mt-2">
+              <h4 class:font-bold={thumbnail.description} class="mb-1">
+                {thumbnail.group.label}
+                {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
+              </h4>
+              {#if thumbnail.description}
+                <p>{thumbnail.description}</p>
+              {/if}
+            </figcaption>
+          </figure>
+        {/if}
       {/each}
     </div>
   {/if}

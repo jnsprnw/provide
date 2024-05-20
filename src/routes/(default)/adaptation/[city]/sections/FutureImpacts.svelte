@@ -30,8 +30,8 @@
 <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />
 <figure>
   <img class="mb-2" src={geoSelection.image ? geoSelection.image.url : '/img/impact-geo_indicator-1_year-1.png'} alt={timeSelection.image?.alternativeText} />
-  <div class="flex gap-6 justify-between align-middle">
-    <figcaption class="text-sm text-text-weaker max-w-[50em]">{impactGeoDescription}</figcaption>
+  <figcaption class="flex gap-6 justify-between align-middle">
+    <div class="text-sm text-text-weaker max-w-[50em]">{impactGeoDescription}</div>
     <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
-  </div>
+  </figcaption>
 </figure>
