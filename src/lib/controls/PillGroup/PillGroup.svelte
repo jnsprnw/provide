@@ -2,14 +2,12 @@
   import { RadioGroup, RadioGroupLabel, RadioGroupOption } from '@rgossiaux/svelte-headlessui';
   import Info from '$lib/helper/icons/Info.svelte';
   import tooltip from '$lib/utils/tooltip';
-  let clazz;
   export let currentUid;
   export let options;
   export let size = 'md';
   export let disabledMessage = 'Option not available';
   export let allowWrap = false;
-  export let label;
-  export { clazz as class };
+  export let label = undefined;
 
   $: classes = {
     md: {
@@ -27,7 +25,7 @@
   }[size];
 </script>
 
-<RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="flex {allowWrap ? 'flex-wrap' : ''} {classes.wrapper} {clazz}">
+<RadioGroup bind:value={currentUid} on:change={(e) => (currentUid = e.detail)} class="flex {allowWrap ? 'flex-wrap' : ''} {classes.wrapper} {$$props.class}">
   {#if label}
     <RadioGroupLabel class="text-text-weaker font-bold self-center {classes.label}">{label}</RadioGroupLabel>
   {/if}

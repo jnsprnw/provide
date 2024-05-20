@@ -25,8 +25,6 @@
 
   {#if !dev && isPublic}
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="04f9b973-92eb-4fac-89e0-6d1885d5282b" data-blockingmode="auto" type="text/javascript"></script>
-    <!-- Google Tag Manager -->
-    <!-- Google Tag Manager -->
     <script>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -39,7 +37,6 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', 'GTM-5KMVXNF5');
     </script>
-    <!-- End Google Tag Manager -->
   {/if}
 
   <meta name="twitter:card" content="summary_large_image" />
@@ -66,6 +63,6 @@
 
 {#if !dev && isPublic}
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5KMVXNF5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe title="Google Tag Manager" src="https://www.googletagmanager.com/ns.html?id=GTM-5KMVXNF5" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
 {/if}

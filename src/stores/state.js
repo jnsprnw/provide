@@ -177,25 +177,41 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_T
  * Derived store that holds a list of available indicators based on the geography type
  * @type {Readable<Object[]>}
  */
-export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
+export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE, CURRENT_GEOGRAPHY_UID, SECTORS], ([$indicators, $type, $geography, $sectors]) => {
   // Geography types have specific indicators available
-  const list = get($type, 'availableIndicators', []);
-  // Filter the list of indicators if they are included for the current geography
-  const indicators = $indicators.filter(({ uid }) => list.includes(uid));
+  const listOfAvailableIndicatorsForThisGeographyType = get($type, 'availableIndicators', []);
+  // Filter the list of indicators if they are included for the current geography type
+  let indicators = $indicators.filter(({ uid }) => listOfAvailableIndicatorsForThisGeographyType.includes(uid));
+  // Filter the list of indicators if they are available for the current geography
+  indicators = indicators.filter(
+    ({ availableGeographies }) => !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.includes($geography))
+  );
+  // Filter the list of indicators if they are available for the current sector
+  indicators = indicators.filter(({ sector: sectorID }) => {
+    const { availableGeographies } = $sectors.find(({ uid }) => uid === sectorID) ?? {};
+    return !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.map((d) => d.toLowerCase()).includes($geography)); // TODO: Temporally convert to lowercase to mimic uids
+  });
 
-  // The list of indicators should match the list of available indicators
-  if (indicators.length !== list.length) {
-    // If this is not the case, some indicators that are present in the list of the geography type are not actually available
-    // There is nothing wrong about this per se. But it can still be an mistake that the lists are outdated.
-    const missing = without(list, ...indicators.map(({ uid }) => uid));
-    console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
-  }
   return indicators.sort((a, b) => a.label.localeCompare(b.label));
 });
 
-export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS], ([$sectors, $indicators]) => {
-  return $sectors.map(({ uid, label }) => {
-    const indicators = $indicators.filter(({ sector: sectorUID }) => sectorUID === uid);
+export const SELECTABLE_SECTORS = derived([SECTORS, AVAILABLE_INDICATORS, CURRENT_GEOGRAPHY_UID], ([$sectors, $indicators, $geography]) => {
+  return $sectors.map(({ uid, label, availableGeographies }) => {
+    // Initialize indicators array to hold filtered indicator objects later
+    let indicators = [];
+
+    // Check if 'availableGeographies' is not an array, is empty, or does not include the current geography ('$geography')
+    if (!Array.isArray(availableGeographies) || !availableGeographies.length || !availableGeographies.includes($geography)) {
+      // If any of the conditions above are true, keep the 'indicators' array empty
+      indicators = [];
+    } else {
+      // If 'availableGeographies' is a valid array, is not empty, and includes the current geography
+      // Filter the '$indicators' array to find indicators that have a sector matching the given 'uid'
+      indicators = $indicators.filter(({ sector: sectorUID }) => sectorUID === uid);
+    }
+
+    // NOTE: This only filters the list of selectable sectors. The indicator is still selectable.
+
     return {
       label,
       uid,

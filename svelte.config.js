@@ -21,6 +21,9 @@ const config = {
       $formatting: 'src/lib/utils/formatting.js',
     },
     adapter: adapter(),
+    version: {
+      name: process.env.npm_package_version,
+    },
   },
   preprocess: sequence([
     preprocess({

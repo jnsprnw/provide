@@ -52,7 +52,7 @@ export const INDICATORS = derived(page, ($page) => {
       uid: indicator.unit,
       label: indicator.unit,
     };
-    const availableGeographies = uniq([...sector.availableGeographies, ...indicator.availableGeographies]);
+    const availableGeographies = uniq([...sector.availableGeographies, ...indicator.availableGeographies]).map((d) => d.toLowerCase()); // TODO: Temporally convert to lowercase to mimic uids
     const availableScenarios = without(uniq([...sector.availableScenarios, ...indicator.availableScenarios]), ...(indicator.excludedScenarios ?? []));
 
     return {
