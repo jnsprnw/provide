@@ -177,19 +177,14 @@ export const AVAILABLE_GEOGOGRAPHIES = derived([GEOGRAPHIES, CURRENT_GEOGRAPHY_T
  * Derived store that holds a list of available indicators based on the geography type
  * @type {Readable<Object[]>}
  */
-export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE], ([$indicators, $type]) => {
+export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE, CURRENT_GEOGRAPHY_UID], ([$indicators, $type, $geography]) => {
   // Geography types have specific indicators available
-  const list = get($type, 'availableIndicators', []);
-  // Filter the list of indicators if they are included for the current geography
-  const indicators = $indicators.filter(({ uid }) => list.includes(uid));
+  const listOfAvailableIndicatorsForThisGeographyType = get($type, 'availableIndicators', []);
+  // Filter the list of indicators if they are included for the current geography type
+  let indicators = $indicators.filter(({ uid }) => listOfAvailableIndicatorsForThisGeographyType.includes(uid));
+  // Filter the list of indicators if they are available for the current geography
+  indicators = indicators.filter(({ availableGeographies }) => availableGeographies.length && availableGeographies.includes($geography));
 
-  // The list of indicators should match the list of available indicators
-  if (indicators.length !== list.length) {
-    // If this is not the case, some indicators that are present in the list of the geography type are not actually available
-    // There is nothing wrong about this per se. But it can still be an mistake that the lists are outdated.
-    // const missing = without(list, ...indicators.map(({ uid }) => uid));
-    // console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
-  }
   return indicators.sort((a, b) => a.label.localeCompare(b.label));
 });
 
