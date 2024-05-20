@@ -187,8 +187,8 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE]
   if (indicators.length !== list.length) {
     // If this is not the case, some indicators that are present in the list of the geography type are not actually available
     // There is nothing wrong about this per se. But it can still be an mistake that the lists are outdated.
-    const missing = without(list, ...indicators.map(({ uid }) => uid));
-    console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
+    // const missing = without(list, ...indicators.map(({ uid }) => uid));
+    // console.warn(`Amount of potentially available indicators does not match listed amount of indicators. Missing indicators: ${missing.join(', ')}`);
   }
   return indicators.sort((a, b) => a.label.localeCompare(b.label));
 });
