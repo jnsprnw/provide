@@ -183,13 +183,14 @@ export const AVAILABLE_INDICATORS = derived([INDICATORS, CURRENT_GEOGRAPHY_TYPE,
   // Filter the list of indicators if they are included for the current geography type
   let indicators = $indicators.filter(({ uid }) => listOfAvailableIndicatorsForThisGeographyType.includes(uid));
   // Filter the list of indicators if they are available for the current geography
+  let geography = ($geography ?? '').toLowerCase(); // TODO: Temporally convert to lowercase to mimic uids
   indicators = indicators.filter(
-    ({ availableGeographies }) => !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.includes($geography))
+    ({ availableGeographies }) => !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.includes(geography))
   );
   // Filter the list of indicators if they are available for the current sector
   indicators = indicators.filter(({ sector: sectorID }) => {
     const { availableGeographies } = $sectors.find(({ uid }) => uid === sectorID) ?? {};
-    return !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.map((d) => d.toLowerCase()).includes($geography)); // TODO: Temporally convert to lowercase to mimic uids
+    return !Boolean(availableGeographies) || (Array.isArray(availableGeographies) && availableGeographies.length && availableGeographies.map((d) => d.toLowerCase()).includes(geography)); // TODO: Temporally convert to lowercase to mimic uids
   });
 
   return indicators.sort((a, b) => a.label.localeCompare(b.label));
