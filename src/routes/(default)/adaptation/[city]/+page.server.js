@@ -25,7 +25,7 @@ export const load = async ({ fetch, parent, params }) => {
     });
 
   const caseStudy = {
-    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid),
+    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid) || { uid: 'nassau', label: 'Nassau' },
     abstract: caseStudyRaw.Abstract,
     mainContent: caseStudyRaw.MainContent.map((c) => {
       const type = c.__component.split('.')[1];
@@ -84,7 +84,7 @@ export const load = async ({ fetch, parent, params }) => {
 
   const caseStudies = caseStudiesRaw.map((study) => ({
     id: study.id,
-    city: meta.cities.find((c) => c.uid === study.attributes.CityUid),
+    city: meta.cities.find((c) => c.uid === study.attributes.CityUid) || { uid: 'nassau', label: 'Nassau' },
     abstract: study.attributes.Abstract,
   }));
 

@@ -37,7 +37,7 @@
   {/if}
 </div>
 
-<div class="flex flex-col">
+<div class="flex flex-col max-w-3xl">
   {#if !imagePair}
     <div>No image with the selected properties was found</div>
   {/if}
