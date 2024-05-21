@@ -1,6 +1,7 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
   import { formatValue, findDecimalsForDistinctValues, formatUnit } from '$lib/utils/formatting';
+  import { getMarginLeft } from '$lib/utils.js';
   import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import MultipleLineLayer from '$lib/charts/layers/MultipleLineLayer.svelte';
   import AxisX from '$lib/charts/axes/AxisX.svelte';
@@ -27,7 +28,7 @@
   let xKey = 'year';
   let yKey = 'value';
 
-  const mainChartPadding = { top: 20, right: 0, bottom: 30, left: 40 };
+  const mainChartPadding = { top: 20, right: 0, bottom: 30 }; // Left padding is based on the domain of the y-axis
   const sideChartPadding = { ...mainChartPadding, right: 0, left: 20 };
   $: isMultiLine = data.length > 1;
 
@@ -114,7 +115,7 @@
 
 <div class="aspect-[2] flex animate-defer-visibility">
   <div class:w-full={!isMultiLine} class="h-full {mainChartWidth}">
-    <LayerCake padding={mainChartPadding} x={xKey} y={yKey} {yDomain} data={lineData} {flatData} let:data>
+    <LayerCake padding={{ ...mainChartPadding, left: getMarginLeft(yDomain[1], unitUID) }} x={xKey} y={yKey} {yDomain} data={lineData} {flatData} let:data>
       <Svg>
         <AxisX ticks={xTicks} snapTicks={true} />
         <AxisY

@@ -1,5 +1,6 @@
 import _, { uniq } from 'lodash-es';
 import { extractTimeframe } from '$utils/meta.js';
+import { formatValue } from '$utils/formatting';
 
 export const formatReadableList = function (arr, key) {
   const segments = formatObjArr(arr, key);
@@ -49,4 +50,9 @@ export function extractTimeframesFromScenarios(available, selectable) {
     .sort()
     .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))
     .value();
+}
+
+export function getMarginLeft(valueMax, unit, minMargin = 40) {
+  const str = String(formatValue(valueMax, unit));
+  return Math.max(str.length * 8, minMargin);
 }
