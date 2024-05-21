@@ -1,9 +1,7 @@
 <script>
   import LinkArrow from '$lib/helper/icons/LinkArrow.svelte';
-  import { PATH_EXPLORE, PATH_ADAPTATION } from '$config';
-  export let path;
+  import { PATH_ADAPTATION } from '$config';
   export let title;
-  export let audience = [];
   export let caseStudies = [];
 </script>
 
@@ -15,7 +13,7 @@
     </div>
   </div>
   <div>
-    <a class="inline-flex items-center gap-x-4 hover:bg-surface-weakest py-3 px-2 text-theme-base transition-colors" href={`/${PATH_EXPLORE}`}>
+    <a class="inline-flex items-center gap-x-4 hover:bg-surface-weakest py-3 px-2 text-theme-base transition-colors" href={`/${PATH_ADAPTATION}`}>
       <div>
         <h4 class="font-bold text-theme-base text-base sm:text-lg md:leading-normal">See the case study overview</h4>
         <span class="text-text-weaker text-sm">Learn how to use climate data for overshoot risk informed adaptation.</span>
