@@ -52,7 +52,7 @@
   </nav>
   {#each sections as section}
     {#if !section.disabled}
-      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} border-b pb-14 border-contour-weaker last:border-none">
+      <section id={section.slug} name={section.slug} class="scroll-mt-4 mb-16 {query} pb-14 border-contour-weakest border-b last:border-none">
         <svelte:component this={section.component} {...section.props} />
       </section>
     {/if}

@@ -25,7 +25,7 @@ export const load = async ({ fetch, parent, params }) => {
     });
 
   const caseStudy = {
-    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid),
+    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid) || { uid: 'nassau', label: 'Nassau' },
     abstract: caseStudyRaw.Abstract,
     mainContent: caseStudyRaw.MainContent.map((c) => {
       const type = c.__component.split('.')[1];
@@ -35,7 +35,8 @@ export const load = async ({ fetch, parent, params }) => {
             type,
             explorerUrl: c.ExplorerUrl,
             description: c.Description,
-            indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
+            geography: meta.cities.find((d) => d.uid === c.Geography),
+            indicator: meta.indicators.find((d) => d.uid === c.Indicator),
             studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
           };
         case 'future-impacts':
@@ -83,7 +84,7 @@ export const load = async ({ fetch, parent, params }) => {
 
   const caseStudies = caseStudiesRaw.map((study) => ({
     id: study.id,
-    city: meta.cities.find((c) => c.uid === study.attributes.CityUid),
+    city: meta.cities.find((c) => c.uid === study.attributes.CityUid) || { uid: 'nassau', label: 'Nassau' },
     abstract: study.attributes.Abstract,
   }));
 

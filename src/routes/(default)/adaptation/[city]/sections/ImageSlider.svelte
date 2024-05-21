@@ -22,8 +22,6 @@
   $: currentGroup = writable(groupingValues[0]?.uid);
   $: currentAttribute = writable(attributeValues[0]?.uid);
 
-  $: console.log($currentGroup, $currentAttribute);
-
   $: imagePair = allowImageSelection ? imagePairs.find((d) => d.group.uid === $currentGroup && d.attribute.uid === $currentAttribute) : imagePairs[0];
   // If no image selection is allowed, we don't want to include the large image in the thumbnails
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
@@ -39,7 +37,7 @@
   {/if}
 </div>
 
-<div class="flex flex-col">
+<div class="flex flex-col max-w-3xl">
   {#if !imagePair}
     <div>No image with the selected properties was found</div>
   {/if}
@@ -73,7 +71,7 @@
   {/if}
 
   {#if showThumbnails}
-    <div class="flex gap-2">
+    <div class="flex gap-2 items-start">
       {#each thumbnails as thumbnail}
         {#if allowImageSelection}
           <button
@@ -88,7 +86,7 @@
               <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
                 <img class:opacity-40={thumbnail === imagePair} src={thumbnail.image1.url} alt={thumbnail.image1.alternativeText} />
               </span>
-              <figcaption class="text-text-weaker text-sm mt-1" class:font-bold={thumbnail.description}>
+              <figcaption class="text-sm text-theme-base leading-tight" class:font-bold={thumbnail.description}>
                 {thumbnail.group.label}
                 {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
               </figcaption>

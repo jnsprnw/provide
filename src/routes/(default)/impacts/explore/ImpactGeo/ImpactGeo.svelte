@@ -33,6 +33,7 @@
 
   import Controls from './Controls.svelte';
   import Maps from './Maps.svelte';
+  import LinkSection from './LinkSection.svelte';
   import { getColorScale, coordinatesToRectGrid, calculateDifference, coordinatesToContours } from '$utils/geo.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
@@ -209,6 +210,7 @@
       </svelte:fragment>
       <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>
+    <LinkSection geography={$CURRENT_GEOGRAPHY} />
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
 {/if}
