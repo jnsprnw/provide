@@ -11,11 +11,11 @@
 
   const components = { 'image-slider': ImageSlider, 'avoiding-impacts': AvoidingImpacts, 'future-impacts': FutureImpacts, section: SectionDefault };
 
+  $: console.log(data.meta, caseStudy.mainContent);
+
   $: sections = caseStudy.mainContent.map((section) => {
     return { component: components[section.type], title: section.title, props: { ...section, content: section.text } };
   });
-
-  $: console.log(data);
 
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true },

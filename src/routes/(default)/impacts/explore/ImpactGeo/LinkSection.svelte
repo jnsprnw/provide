@@ -14,7 +14,7 @@
 <div class="grid lg:grid-cols-2 grid-cols-1 gap-3 items-stretch mt-16">
   {#if caseStudyGeography}
     <div class="bg-theme-weakest rounded p-6 lg:p-8 flex flex-col gap-4">
-      <UrbanStudy class="w-[7%] min-w-[60px]" color="fill-theme-base" />
+      <UrbanStudy class="h-14 w-14" color="fill-theme-base" />
       <div class="self-center">
         <h4 class="text-lg font-bold mb-1">Case study</h4>
         <p class="mb-4">Read our urban case studies to learn how this data was used to prioritise between locations and measures for heat adaptation.</p>
@@ -27,8 +27,8 @@
     </div>
   {/if}
 
-  <div class="bg-surface-weaker rounded p-6 lg:p-8 flex flex-col gap-6">
-    <Study class="w-[7%] min-w-[50px]" />
+  <div class="bg-surface-weaker rounded p-6 lg:p-8 flex flex-col gap-4">
+    <Study class="h-14 w-14" />
     <div class="self-center">
       <h4 class="text-lg font-bold mb-1">Using the data</h4>
       <p class="mb-4">Learn more about using these impact visualisations within adaptation planning and policy</p>

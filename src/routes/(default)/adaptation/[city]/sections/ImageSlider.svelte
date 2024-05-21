@@ -22,8 +22,6 @@
   $: currentGroup = writable(groupingValues[0]?.uid);
   $: currentAttribute = writable(attributeValues[0]?.uid);
 
-  $: console.log($currentGroup, $currentAttribute);
-
   $: imagePair = allowImageSelection ? imagePairs.find((d) => d.group.uid === $currentGroup && d.attribute.uid === $currentAttribute) : imagePairs[0];
   // If no image selection is allowed, we don't want to include the large image in the thumbnails
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;

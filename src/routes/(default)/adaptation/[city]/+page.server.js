@@ -35,7 +35,8 @@ export const load = async ({ fetch, parent, params }) => {
             type,
             explorerUrl: c.ExplorerUrl,
             description: c.Description,
-            indicator: meta.indicators.find((d) => d.uid === c.IndicatorUid),
+            geography: meta.cities.find((d) => d.uid === c.Geography),
+            indicator: meta.indicators.find((d) => d.uid === c.Indicator),
             studyLocation: meta.studyLocations.find((d) => d.uid === c.StudyLocation),
           };
         case 'future-impacts':
