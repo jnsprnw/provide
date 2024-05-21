@@ -1,6 +1,8 @@
 <script>
   import { PATH_IMPACT, PATH_AVOID } from '$config';
-  import Entrypoint from './Entrypoint.svelte';
+  import EntrypointExplore from './EntrypointExplore.svelte';
+  import EntrypointAdaptation from './EntrypointAdaptation.svelte';
+  export let caseStudies;
 
   const videos = [
     {
@@ -25,8 +27,8 @@
     <p class="leading-normal text-base sm:text-lg">Alternatively, start local and explore what action is needed on climate to avoid climate impacts in your city.</p>
   </div>
 </header>
-<div class="grid md:grid-cols-2 gap-y-6 gap-x-4 lg:gap-x-24 max-w-7xl mx-auto">
-  <Entrypoint
+<div class="grid md:grid-cols-2 gap-y-6 gap-x-4 lg:gap-x-24 lg:gap-y-24 max-w-7xl mx-auto">
+  <EntrypointExplore
     path={PATH_IMPACT}
     title="Explore future impacts"
     audience={['Climate scientists (terrestrial, marine and urban)', 'Experts working on climate risks', 'Climate litigation experts', 'Science communicators', 'National policy makers']}
@@ -36,8 +38,8 @@
       <p>Choose your geography type and choose an indicator to explore how future climate impacts will develop under various emission scenarios.</p>
     </div>
     <img slot="image" src="/img/impacts.png" alt="One scenario and many resulting impacts" />
-  </Entrypoint>
-  <Entrypoint
+  </EntrypointExplore>
+  <EntrypointExplore
     path={PATH_AVOID}
     title="Avoiding future impacts"
     audience={['Urban planners, policy makers and climate adaptation experts', 'Science communicators', 'Experts working on climate risks']}
@@ -50,7 +52,13 @@
       </p>
     </div>
     <img slot="image" src="/img/emission-scenarios.png" alt="One scenario and many resulting impacts" />
-  </Entrypoint>
+  </EntrypointExplore>
+  <EntrypointAdaptation class="md:col-span-2" path={PATH_AVOID} title="Adaptation: Case studies" {caseStudies}>
+    <div slot="intro">
+      <p class="mb-5">In this module, we guide you through some case studies.</p>
+      <p>With our models, we can explore how we can adapt to reaching undesirable climate impact levels in urban areas.</p>
+    </div>
+  </EntrypointAdaptation>
 </div>
 <div class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
   <div>

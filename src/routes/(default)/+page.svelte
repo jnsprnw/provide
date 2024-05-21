@@ -4,11 +4,11 @@
 
   export let data;
 
-  $: ({ stories } = data);
+  $: ({ stories, caseStudies } = data);
 </script>
 
 <Globe {stories} />
 
 <div class="mx-auto max-w-7xl px-6">
-  <Entrypoints />
+  <Entrypoints {caseStudies} />
 </div>
