@@ -13,8 +13,8 @@ export const FORMAT_WARMING = '+.2f';
 export const FORMAT_PERCENT = '.0%';
 export const FORMAT_DEGREE = '.3~f';
 
-export const FORMAT_PERCENT_DECIMALS = (d = 0) => f(`.${d}%`);
-export const FORMAT_DEFAULT_DECIMALS = (d = 1) => f(`.${d}f`);
+export const FORMAT_PERCENT_DECIMALS = (d = 0) => f(`,.${d}%`);
+export const FORMAT_DEFAULT_DECIMALS = (d = 1) => f(`,.${d}f`);
 
 export const KEY_DEGREES_CELSIUS = 'degrees-celsius';
 export const KEY_DEGREES_WARMING = 'degrees-warming';

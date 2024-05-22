@@ -12,6 +12,7 @@
   import { PATH_GLOSSARY, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
+  import LinkArrow from '$lib/helper/icons/LinkArrow.svelte';
   import ScenarioDetails from './ScenarioDetails.svelte';
   import ScenarioList from './ScenarioList.svelte';
   import { derived } from 'svelte/store';
@@ -85,18 +86,7 @@
         href={`/${PATH_GLOSSARY}#${ANCHOR_EXPLAINER_SCENARIOS}`}
       >
         <span>Which scenario should I select?</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="icon icon-tabler icon-tabler-arrow-narrow-right"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 12l14 0" /><path d="M15 16l4 -4" /><path d="M15 8l4 4" /></svg
-        >
+        <LinkArrow />
       </a>
       <div slot="items" class="grid grid-cols-1 md:grid-cols-[auto_1fr]" let:items let:currentFilterUid>
         {#key currentFilterUid}

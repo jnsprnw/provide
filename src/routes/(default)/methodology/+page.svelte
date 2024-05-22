@@ -44,7 +44,6 @@
       };
     }),
   ];
-  $: console.log({ sections });
 </script>
 
 <ContentPageLayout {sections} title={LABEL_DOCUMENTATION} intro="Learn more about the methodology and the models used to create the data visualised on this dashboard." />

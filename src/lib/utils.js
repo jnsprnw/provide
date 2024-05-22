@@ -1,5 +1,6 @@
 import _, { kebabCase, uniq } from 'lodash-es';
 import { extractTimeframe } from '$utils/meta.js';
+import { formatValue } from '$utils/formatting';
 
 export const formatReadableList = function (arr, key) {
   const segments = formatObjArr(arr, key);
@@ -64,4 +65,9 @@ export function slugify(name) {
       .replace(/\W+/g, '-')
       .replace(/^\W|\W$/g, '')
   );
+}
+
+export function getMarginLeft(valueMax, unit, minMargin = 40) {
+  const str = String(formatValue(valueMax, unit));
+  return Math.max(str.length * 8, minMargin);
 }

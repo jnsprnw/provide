@@ -44,6 +44,7 @@
       {#if showTickLabels}
         <text x={labelX * -orientation} class="fill-contour-weak text-xs" dominant-baseline="middle" style="text-anchor: {labelTextAnchor};">
           {tickLabels.values[i]}
+          <title>{tickLabels.values[i]}</title>
         </text>
       {/if}
     </g>
