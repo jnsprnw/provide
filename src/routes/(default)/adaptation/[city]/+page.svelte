@@ -9,6 +9,9 @@
 
   $: caseStudy = data.caseStudy;
 
+  //$: console.log(data.caseStudy.mainContent.find((d) => d.type === 'avoiding-impacts')?.data);
+  // $: console.log(data.meta);
+
   const components = { 'image-slider': ImageSlider, 'avoiding-impacts': AvoidingImpacts, 'future-impacts': FutureImpacts, section: SectionDefault };
 
   $: sections = caseStudy.mainContent.map((section) => {
