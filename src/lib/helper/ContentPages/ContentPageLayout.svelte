@@ -7,19 +7,24 @@
   export let sections;
   export let title;
   export let intro;
+  export let dynamicNavigation = false;
+
+  let contentRef;
 </script>
 
 <ContentPageIntro {title} {intro} {subNavigation} />
 
 <ScrollContent isFullWidth={true} {sections}>
-  <NestedNav slot="navigation" {sections} />
-  {#each sections as section}
-    <section class="pb-12 mb-12 border-b border-contour-weakest last:border-0 last:mb-0">
-      <svelte:component this={section.component} title={section.title} {...section.props} />
-      {#each section.sections ?? [] as part}
-        <svelte:component this={part.component} title={part.title} {...part.props} />
-      {/each}
-    </section>
-  {/each}
+  <NestedNav contentRef={dynamicNavigation && contentRef} slot="navigation" {sections} />
+  <div bind:this={contentRef}>
+    {#each sections as section}
+      <section class="mt-12 pt-4 border-contour-weakest first:border-0 first:mt-0" class:border-t={section.title} class:pt-12={section.title}>
+        <svelte:component this={section.component} title={section.title} {...section.props} />
+        {#each section.sections ?? [] as part}
+          <svelte:component this={part.component} title={part.title} {...part.props} />
+        {/each}
+      </section>
+    {/each}
+  </div>
   <slot />
 </ScrollContent>

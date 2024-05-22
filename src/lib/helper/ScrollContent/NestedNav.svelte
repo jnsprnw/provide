@@ -1,7 +1,9 @@
 <script>
+  import { slugify } from '$src/lib/utils';
   import { getContext } from 'svelte';
   export let sections = [];
-  const { index } = getContext('scrollContent');
+  export let contentRef;
+  const { index, query } = getContext('scrollContent');
 
   // Holds key/values for all open sections
   let openSections = {};
@@ -14,8 +16,72 @@
     preventReset = false;
   }
 
+  // Takes a flat array of h2/h3 titles and turns them into a hierarchy
+  const createHierarchy = (flatItems) => {
+    if (!flatItems.length) return [];
+    let startLevel = Infinity;
+
+    // Set start level in case it doesn't start at 1
+    flatItems.forEach((item) => {
+      if (item.level < startLevel) {
+        startLevel = item.level;
+      }
+    });
+    const createLevel = (items, level) => {
+      if (level > 3) return [];
+      const levelIndexes = [];
+      for (let i = 0; i < items.length; i += 1) {
+        if (items[i].level === level) {
+          levelIndexes.push(i);
+        }
+      }
+
+      // If no subindexes are found
+      if (!levelIndexes.length) {
+        return level === startLevel ? createLevel(items, level + 1) : items;
+      }
+
+      // If there are subindexes, create
+      return levelIndexes.map((startIndex, i) => {
+        const endIndex = i < levelIndexes.length ? levelIndexes[i + 1] : items.length;
+        const subItems = items.slice(startIndex + 1, endIndex);
+        const item = {
+          ...items[startIndex],
+        };
+        if (subItems.length) {
+          item.sections = createLevel(subItems, level + 1);
+        }
+        return item;
+      });
+    };
+
+    return createLevel(flatItems, startLevel);
+  };
+
+  // If containerRef is given, query all h2/h3 titles from the given container and turn them
+  // into objects for further processing
+  $: dynamicNavSections = (() => {
+    if (!contentRef) return;
+    const headings = contentRef?.querySelectorAll('h2, h3');
+    const flatToc = [...headings].map((el, i) => {
+      const slug = el.getAttribute('id') || slugify(el.innerText);
+      el.setAttribute('id', slug);
+
+      return {
+        props: {
+          title: el.innerText,
+          slug,
+        },
+        level: parseFloat(el.tagName[1]),
+        content: true,
+      };
+    });
+
+    return createHierarchy(flatToc);
+  })();
+
   // Add indexes to sections and subsections to see if section is active
-  $: navSections = sections.reduce(
+  $: navSections = (dynamicNavSections || sections).reduce(
     (acc, section) => {
       const children = section?.sections ?? [];
       acc.sections.push({
@@ -28,7 +94,9 @@
           title: s.props?.titleShort ?? s.props?.title,
           slug: s.props?.slug,
           index: acc.counter,
-          isActive: $index === acc.counter++,
+          // Highlighting subsections doesn't work when creating the toc dynamically so we
+          // only set isActive and increase counter on main sections
+          isActive: !dynamicNavSections && $index === acc.counter++,
         })),
       });
       return acc;

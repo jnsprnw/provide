@@ -1,4 +1,4 @@
-import _, { uniq } from 'lodash-es';
+import _, { kebabCase, uniq } from 'lodash-es';
 import { extractTimeframe } from '$utils/meta.js';
 
 export const formatReadableList = function (arr, key) {
@@ -49,4 +49,19 @@ export function extractTimeframesFromScenarios(available, selectable) {
     .sort()
     .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))
     .value();
+}
+
+export function slugify(name) {
+  return kebabCase(
+    name
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/ô|ö|ò|ó/g, 'o')
+      .replace(/è|é|ë/g, 'e')
+      .replace(/ü/g, 'u')
+      .replace(/ï|ì|í/g, 'i')
+      .replace(/\W+/g, '-')
+      .replace(/^\W|\W$/g, '')
+  );
 }

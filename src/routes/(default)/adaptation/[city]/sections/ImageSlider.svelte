@@ -3,6 +3,7 @@
   import CompareImage from 'svelte-compare-image/CompareImage.svelte';
   import _ from 'lodash-es';
   import { writable } from 'svelte/store';
+  import { getContext } from 'svelte';
   export let explorerUrl;
   export let description;
   export let attribueLabel;

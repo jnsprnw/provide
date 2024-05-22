@@ -41,15 +41,13 @@
       },
     },
     {
-      title: data.publicationsTitle,
       component: Publications,
       props: {
+        title: data.publicationsTitle,
         publications: data.publications,
       },
     },
   ].map((section) => ({ ...section, slug: kebabCase(section.title), content: true }));
-
-  $: console.log(data.publications);
 
   $: subNavigation = [
     { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true, isActive: true },
@@ -57,7 +55,7 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title={LABEL_ADAPTATION} {subNavigation} intro="Learn how to use climate data for overshoot risk informed adaptation.">
+<ContentPageLayout {sections} dynamicNavigation={true} title={LABEL_ADAPTATION} {subNavigation} intro="Learn how to use climate data for overshoot risk informed adaptation.">
   <div class="bg-surface-weakest flex p-10 gap-10 mb-10">
     <Replicate class="w-[13%] min-w-[70px]" />
     <div>

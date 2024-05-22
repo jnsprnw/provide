@@ -11,8 +11,6 @@
 
   const components = { 'image-slider': ImageSlider, 'avoiding-impacts': AvoidingImpacts, 'future-impacts': FutureImpacts, section: SectionDefault };
 
-  $: console.log(data.meta, caseStudy.mainContent);
-
   $: sections = caseStudy.mainContent.map((section) => {
     return { component: components[section.type], title: section.title, props: { ...section, content: section.text } };
   });
@@ -23,4 +21,4 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro={caseStudy.abstract} />
+<ContentPageLayout {sections} dynamicNavigation={true} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro={caseStudy.abstract} />
