@@ -45,20 +45,20 @@ export const load = async ({ fetch, parent, params }) => {
 
     const refData = await Promise.all(refRequests);
 
-    // For each indicator load a number of sample impact levels and likelyhood
+    // For each indicator load a number of sample impact levels and likelihood
     const dataRequests = refData.reduce((acc, { impact_levels, indicator }) => {
       const impactSteps = scaleLinear().domain(impact_levels.range_of_interest).ticks(5);
 
       impactSteps.forEach((impactLevel) => {
-        meta.likelihoods.forEach((likelyhood) => {
+        meta.likelihoods.forEach((likelihood) => {
           const query = qs.stringify({
             [URL_PATH_GEOGRAPHY]: caseStudyRaw.CityUid,
             [URL_PATH_INDICATOR]: indicator.uid,
             [URL_PATH_LEVEL_OF_IMPACT]: impactLevel,
-            [URL_PATH_CERTAINTY_LEVEL]: likelyhood.uid,
+            [URL_PATH_CERTAINTY_LEVEL]: likelihood.uid,
           });
 
-          acc.push(loadFromAPI(`${import.meta.env.VITE_DATA_API_URL}/${END_AVOIDING_IMPACTS}?${query}`, undefined, { indicator, impactLevel, likelyhood }));
+          acc.push(loadFromAPI(`${import.meta.env.VITE_DATA_API_URL}/${END_AVOIDING_IMPACTS}?${query}`, undefined, { indicator, impactLevel, likelihood }));
         });
       });
       return acc;
@@ -67,7 +67,7 @@ export const load = async ({ fetch, parent, params }) => {
     const data = await Promise.all(dataRequests);
 
     // Process loaded data so we have an array of study location/indicator combinations each
-    // containing an array of scenario/impact level/likelyhood combination
+    // containing an array of scenario/impact level/likelihood combination
     const processedData = refData.reduce((acc, { indicator }) => {
       const indicatorData = data.filter((d) => d.indicator.uid === indicator.uid);
 

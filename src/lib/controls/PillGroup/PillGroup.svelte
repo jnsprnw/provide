@@ -33,7 +33,7 @@
     <RadioGroupOption value={uid} let:checked {disabled} class="whitespace-nowrap overflow-hidden rounded-full cursor-pointer {classes.group}">
       <div
         use:tooltip={{ content: disabled ? individualDisabledMessage ?? disabledMessage : undefined }}
-        class="w-full flex gap-x-2 leading-none items-center transition-colors {classes.button}"
+        class="w-full flex gap-x-2 leading-tight items-center transition-colors {classes.button}"
         class:bg-theme-base={checked}
         class:text-surface-base={checked}
         class:text-theme-base={!checked}
