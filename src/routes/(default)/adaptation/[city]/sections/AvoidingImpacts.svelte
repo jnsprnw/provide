@@ -12,8 +12,6 @@
 
   const theme = getContext('theme');
 
-  $: console.log($theme);
-
   const colorKeyMapping = {
     never: 'weaker',
     always: 'strong',

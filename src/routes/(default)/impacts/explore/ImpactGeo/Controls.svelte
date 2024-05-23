@@ -9,6 +9,7 @@
   export let scenarios;
   export let year;
   export let showSatellite;
+  export let showSatelliteOption;
 </script>
 
 <div class="flex gap-6">
@@ -16,5 +17,7 @@
     <SegmentedControl options={displayOptions} bind:value={displayOption} />
   {/if}
   <Select options={yearOptions} bind:value={year} label="Year" />
-  <Switch bind:value={showSatellite} label="Show satellite" />
+  {#if showSatelliteOption}
+    <Switch bind:value={showSatellite} label="Show satellite" />
+  {/if}
 </div>

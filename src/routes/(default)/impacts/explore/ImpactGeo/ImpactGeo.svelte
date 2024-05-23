@@ -25,6 +25,7 @@
     URL_PATH_SCENARIOS,
     IMPACT_GEO_KEY_DIFFERENCE,
     IMPACT_GEO_KEY_SIDE_BY_SIDE,
+    GEOGRAPHY_TYPE_CITY,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -43,6 +44,7 @@
   export let year = DEFAULT_IMPACT_GEO_YEAR;
   export let displayOption = IMPACT_GEO_KEY_SIDE_BY_SIDE;
   export let showSatellite = false;
+  export let showSatelliteOption = true;
 
   let isProcessing = false;
 
@@ -80,10 +82,17 @@
     });
   }
 
-  $: process = ({ data, shape }, { scenarios, urlParams }) => {
+  $: process = ({ data, shape }, { scenarios, urlParams, geography }) => {
     isProcessing = true;
     const showDifference = data.length === 2 && displayOption === IMPACT_GEO_KEY_DIFFERENCE;
     const isMultipMap = data.length > 1 && !showDifference;
+
+    if (geography.geographyType !== GEOGRAPHY_TYPE_CITY) {
+      showSatelliteOption = false;
+      showSatellite = false;
+    } else {
+      showSatelliteOption = true;
+    }
 
     // The data that is actually being rendered
     const renderedData = showDifference
@@ -206,7 +215,7 @@
       {isProcessing}
     >
       <svelte:fragment slot="controls">
-        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} bind:showSatellite bind:displayOption bind:year />
+        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} {showSatelliteOption} bind:showSatellite bind:displayOption bind:year />
       </svelte:fragment>
       <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>
