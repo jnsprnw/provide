@@ -79,4 +79,15 @@ module.exports = {
       );
     }),
   ],
+  safelist: [
+    'text-category-strong-0',
+    'text-category-strong-1',
+    'text-category-strong-2',
+    'text-category-stronger-0',
+    'text-category-stronger-1',
+    'text-category-stronger-2',
+    'text-category-strongest-0',
+    'text-category-strongest-1',
+    'text-category-strongest-2',
+  ],
 };
