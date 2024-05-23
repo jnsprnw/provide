@@ -17,7 +17,6 @@ export const load = async ({ fetch, parent }) => {
     introText: parse(attributes.IntroText ?? ''),
     introTitle: attributes.IntroTitle,
 
-    selfAssessmentSubtitle: attributes.SelfAssessmentSubtitle,
     selfAssessmentText: parse(attributes.SelfAssessmentText ?? ''),
     selfAssessmentTitle: attributes.SelfAssessmentTitle,
 

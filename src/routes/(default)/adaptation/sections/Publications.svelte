@@ -9,7 +9,7 @@
   const formatTime = timeFormat('%B %Y');
 </script>
 
-<div class="flex flex-col gap-y-10 pt-5 pb-20 mb-5 border-b border-contour-weakest">
+<div class="flex flex-col gap-y-10 pt-5 pb-10 mb-5">
   <SectionHeadline {title} />
   <div class="grid lg:grid-cols-4 sm:grid-cols-2 gap-6">
     {#each publications as publication}

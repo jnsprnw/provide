@@ -3,7 +3,6 @@ import { loadFromAPI, loadFromStrapi } from '$utils/apis.js';
 import qs from 'qs';
 import { parse } from 'marked';
 import { END_AVOIDING_IMPACTS, END_AVOIDING_REFERENCE, URL_PATH_CERTAINTY_LEVEL, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_LEVEL_OF_IMPACT } from '$src/config.js';
-import { bin } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { each } from 'lodash-es';
 
@@ -22,6 +21,8 @@ export const load = async ({ fetch, parent, params }) => {
       `populate[MainContent][on][section.section][populate]=*`,
     ].join('&')
   );
+
+  const caseStudyOutro = (await loadFromStrapi('case-study-outro', fetch)).attributes;
 
   const caseStudyRaw = caseStudiesRaw.find((d) => d.attributes.CityUid === params.city)?.attributes;
   if (!caseStudyRaw) error(404, { message: 'No case study available for this city' });
@@ -160,5 +161,5 @@ export const load = async ({ fetch, parent, params }) => {
     abstract: study.attributes.Abstract,
   }));
 
-  return { caseStudy, caseStudies, caseStudyRaw };
+  return { caseStudy, caseStudies, caseStudyOutro: { title: caseStudyOutro?.Title, text: caseStudyOutro?.Text } };
 };
