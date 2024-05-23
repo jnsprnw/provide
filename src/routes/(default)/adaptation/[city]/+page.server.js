@@ -2,7 +2,7 @@ import { error } from '@sveltejs/kit';
 import { loadFromAPI, loadFromStrapi } from '$utils/apis.js';
 import qs from 'qs';
 import { parse } from 'marked';
-import { END_AVOIDING_IMPACTS, END_AVOIDING_REFERENCE, URL_PATH_CERTAINTY_LEVEL, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_LEVEL_OF_IMPACT, URL_PATH_STUDY_LOCATION } from '$src/config.js';
+import { END_AVOIDING_IMPACTS, END_AVOIDING_REFERENCE, URL_PATH_CERTAINTY_LEVEL, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_LEVEL_OF_IMPACT } from '$src/config.js';
 import { bin } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
 import { each } from 'lodash-es';
@@ -24,16 +24,16 @@ export const load = async ({ fetch, parent, params }) => {
   );
 
   const caseStudyRaw = caseStudiesRaw.find((d) => d.attributes.CityUid === params.city)?.attributes;
-  if (!caseStudyRaw)
-    error(404, {
-      message: 'City not available',
-    });
+  if (!caseStudyRaw) error(404, { message: 'No case study available for this city' });
+
+  const city = meta.cities.find((c) => c.uid === caseStudyRaw.CityUid);
+  if (!city) error(404, { message: 'City not found in data' });
 
   const loadAvoidingImpactsData = async ({ Indicators, StudyLocations }) => {
     // Load all avoiding impacts reference data
-    const refRequests = Indicators.map((indicatorRaw) => {
-      const indicator = meta.indicators.find((d) => d.uid === indicatorRaw.Uid);
-      console.log(indicatorRaw);
+    const refRequests = Indicators.map(({ Uid: indicatorUid }) => {
+      const indicator = meta.indicators.find((d) => d.uid === indicatorUid);
+      if (!indicator) error(404, { message: `Indicator ${indicatorUid} not found in metadata` });
 
       const query = qs.stringify({
         [URL_PATH_GEOGRAPHY]: caseStudyRaw.CityUid,
@@ -73,6 +73,7 @@ export const load = async ({ fetch, parent, params }) => {
 
       StudyLocations.forEach(({ Uid: studyLocationUid }) => {
         const studyLocation = meta.studyLocations.find((d) => d.uid === studyLocationUid);
+        if (!studyLocation) error(404, { message: `Study location ${studyLocationUid} not found in metadata` });
         const table = [];
         indicatorData.forEach((indicatorData) => {
           each(indicatorData.study_locations[studyLocationUid].scenarios, ({ year }, scenario) => {
@@ -95,7 +96,7 @@ export const load = async ({ fetch, parent, params }) => {
   };
 
   const caseStudy = {
-    city: meta.cities.find(({ uid }) => uid === caseStudyRaw.CityUid) || { uid: 'nassau', label: 'Nassau' },
+    city,
     abstract: caseStudyRaw.Abstract,
     mainContent: await Promise.all(
       caseStudyRaw.MainContent.map(async (c) => {
@@ -155,7 +156,7 @@ export const load = async ({ fetch, parent, params }) => {
 
   const caseStudies = caseStudiesRaw.map((study) => ({
     id: study.id,
-    city: meta.cities.find((c) => c.uid === study.attributes.CityUid) || { uid: 'nassau', label: 'Nassau' },
+    city: meta.cities.find((c) => c.uid === study.attributes.CityUid),
     abstract: study.attributes.Abstract,
   }));
 

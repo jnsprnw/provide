@@ -29,7 +29,7 @@
 </script>
 
 <div class="flex flex-wrap gap-10">
-  {#if allowImageSelection}
+  {#if allowImageSelection && groupingValues.length}
     <PillGroup class="mb-6" label={groupingLabel} size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentGroup} />
   {/if}
 
