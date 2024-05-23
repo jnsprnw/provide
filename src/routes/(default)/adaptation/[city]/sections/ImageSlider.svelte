@@ -3,9 +3,8 @@
   import CompareImage from 'svelte-compare-image/CompareImage.svelte';
   import _ from 'lodash-es';
   import { writable } from 'svelte/store';
-  import { getContext } from 'svelte';
+  import ExplorerLink from './ExplorerLink.svelte';
   export let explorerUrl;
-  export let description;
   export let attribueLabel;
   export let groupingLabel;
   export let showThumbnails;
@@ -34,7 +33,7 @@
   {/if}
 
   {#if attributeValues.length}
-    <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
+    <PillGroup class="mb-6" label={attribueLabel} size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
   {/if}
 </div>
 
@@ -64,7 +63,7 @@
         <figcaption class="flex justify-between align-middle mb-4" class:justify-end={imagePair.description}>
           <p class="text-sm text-text-weaker max-w-[40em]">{imagePair.description}</p>
           {#if explorerUrl}
-            <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
+            <ExplorerLink href={explorerUrl} />
           {/if}
         </figcaption>
       {/if}

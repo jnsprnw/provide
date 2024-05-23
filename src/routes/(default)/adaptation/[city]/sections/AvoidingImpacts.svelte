@@ -4,6 +4,7 @@
   import { writable } from 'svelte/store';
   import { getContext } from 'svelte';
   import { formatValue } from '$utils/formatting';
+  import ExplorerLink from './ExplorerLink.svelte';
 
   export let explorerUrl;
   export let description;
@@ -43,7 +44,6 @@
         })
       );
   });
-  $: console.log(byScenario, likelihoods);
 </script>
 
 {#if indicators.length > 1}
@@ -54,7 +54,12 @@
 {/if}
 
 <table class="w-full mb-10 max-w-[45em]">
-  <caption class="caption-bottom text-text-weaker text-sm mt-3 text-left">{description}</caption>
+  <caption class="caption-bottom text-text-weaker text-sm mt-3 text-left">
+    <div class="flex gap-4 justify-between">
+      <p class="max-w-[40em]">{description}</p>
+      <ExplorerLink href={explorerUrl} />
+    </div>
+  </caption>
   <thead>
     <th class="text-xs text-text-weaker font-normal text-right px-2 max-w-12">Impact&nbsp;→<br />Probability&nbsp;↓</th>
     {#each byScenario[0][0] as col}

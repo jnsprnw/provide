@@ -1,5 +1,6 @@
 <script>
   import PillGroup from '$src/lib/controls/PillGroup/PillGroup.svelte';
+  import ExplorerLink from './ExplorerLink.svelte';
   import _ from 'lodash-es';
   import { writable } from 'svelte/store';
   export let explorerUrl;
@@ -24,7 +25,7 @@
     <img class="mb-2" src={timeSelection.image ? timeSelection.image.url : '/img/impact-time_indicator-1.png'} alt={timeSelection.image?.alternativeText} />
     <div class="flex gap-6 justify-between align-middle">
       <figcaption class="text-sm text-text-weaker max-w-[40em]">{impactTimeDescription}</figcaption>
-      <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
+      <ExplorerLink href={explorerUrl} />
     </div>
   </figure>
 
@@ -33,7 +34,7 @@
     <img class="mb-2" src={geoSelection.image ? geoSelection.image.url : '/img/impact-geo_indicator-1_year-1.png'} alt={timeSelection.image?.alternativeText} />
     <figcaption class="flex gap-6 justify-between align-middle">
       <div class="text-sm text-text-weaker max-w-[40em]">{impactGeoDescription}</div>
-      <a href={explorerUrl} class="text-sm font-bold text-theme-base self-center">View in explorer →</a>
+      <ExplorerLink href={explorerUrl} />
     </figcaption>
   </figure>
 </div>
