@@ -12,18 +12,23 @@
 
   const components = { 'image-slider': ImageSlider, 'avoiding-impacts': AvoidingImpacts, 'future-impacts': FutureImpacts, section: SectionDefault };
 
-  $: console.log(data);
-
   $: sections = caseStudy.mainContent.map((section) => {
     return { component: components[section.type], title: section.title, props: { ...section, content: section.text } };
   });
 
-  $: subNavigation = [
-    { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true },
-    ...data.caseStudies.map((d) => ({ label: d.city.label, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid })),
-  ];
+  $: subNavigation = [...data.caseStudies.map((d) => ({ label: d.city.label, abstract: d.abstract, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid }))];
 </script>
 
-<ContentPageLayout {sections} dynamicNavigation={true} title="Extreme heat in {caseStudy.city.label}" {subNavigation} intro={caseStudy.abstract}>
+<ContentPageLayout
+  {sections}
+  isCaseStudy={false}
+  tag="Case study"
+  subNavigationLabel="Case studies"
+  dynamicNavigation={true}
+  title="Extreme heat in {caseStudy.city.label}"
+  {subNavigation}
+  backLink={{ href: `/${PATH_ADAPTATION}`, label: 'Adaptation overview' }}
+  intro={caseStudy.abstract}
+>
   <Outro {...data.caseStudyOutro} />
 </ContentPageLayout>

@@ -1,13 +1,10 @@
 <script>
   import ContentPageLayout from '$src/lib/helper/ContentPages/ContentPageLayout.svelte';
   import { LABEL_ADAPTATION, PATH_ADAPTATION } from '$config';
-  import AdaptationPlanning from './sections/AdaptationPlanning.svelte';
   import Publications from './sections/Publications.svelte';
 
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
   import { kebabCase } from 'lodash-es';
-  import Replicate from '$lib/helper/icons/Replicate.svelte';
-  import HtmlContent from '$src/lib/helper/HtmlContent.svelte';
   import Outro from './sections/Outro.svelte';
 
   export let data;
@@ -15,12 +12,11 @@
   $: sections = [
     {
       title: data.introTitle,
-      component: AdaptationPlanning,
+      component: SectionDefault,
       content: true,
       props: {
         title: data.introTitle,
         content: data.introText,
-        caseStudies: data.caseStudies,
       },
     },
     {
@@ -49,12 +45,16 @@
     },
   ].map((section) => ({ ...section, slug: kebabCase(section.title), content: true }));
 
-  $: subNavigation = [
-    { label: 'Overview', href: `/${PATH_ADAPTATION}`, separator: true, isActive: true },
-    ...data.caseStudies.map((d) => ({ label: d.city.label, href: `/${PATH_ADAPTATION}/${d.city.uid}` })),
-  ];
+  $: subNavigation = [...data.caseStudies.map((d) => ({ label: d.city.label, abstract: d.abstract, href: `/${PATH_ADAPTATION}/${d.city.uid}` }))];
 </script>
 
-<ContentPageLayout {sections} dynamicNavigation={true} title={LABEL_ADAPTATION} {subNavigation} intro="Learn how to use climate data for overshoot risk informed adaptation.">
+<ContentPageLayout
+  {sections}
+  dynamicNavigation={true}
+  title={LABEL_ADAPTATION}
+  {subNavigation}
+  subNavigationLabel="Case studies"
+  intro="Learn how to use climate data for overshoot risk informed adaptation."
+>
   <Outro title={data.outroTitle} text={data.outroText} />
 </ContentPageLayout>

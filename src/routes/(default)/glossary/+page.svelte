@@ -41,4 +41,4 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title={LABEL_GLOSSARY} />
+<ContentPageLayout {sections} title={LABEL_GLOSSARY} intro="Terms and other important tings" />

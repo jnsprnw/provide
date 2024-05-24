@@ -8,11 +8,15 @@
   export let title;
   export let intro;
   export let dynamicNavigation = false;
+  export let isCaseStudy;
+  export let tag;
+  export let subNavigationLabel;
+  export let backLink;
 
   let contentRef;
 </script>
 
-<ContentPageIntro {title} {intro} {subNavigation} />
+<ContentPageIntro {tag} {subNavigationLabel} {backLink} {title} {intro} {subNavigation} {isCaseStudy} />
 
 <ScrollContent isFullWidth={true} {sections}>
   <NestedNav contentRef={dynamicNavigation && contentRef} slot="navigation" {sections} />

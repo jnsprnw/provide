@@ -71,11 +71,10 @@
   {/if}
 
   {#if showThumbnails}
-    <div class="flex gap-2 items-start">
+    <div class="grid grid-cols-4 gap-2 items-start flex-wrap">
       {#each thumbnails as thumbnail}
         {#if allowImageSelection}
           <button
-            style:width="{100 / thumbnails.length}%"
             class="text-left"
             on:click={() => {
               $currentGroup = thumbnail.group.uid;
@@ -93,7 +92,7 @@
             </figure>
           </button>
         {:else}
-          <figure style:width="{100 / thumbnails.length}%">
+          <figure>
             <img src={thumbnail.image1.url} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
             <figcaption class="text-text-weaker text-sm mt-2">
               <h4 class:font-bold={thumbnail.description} class="mb-1">
