@@ -29,6 +29,7 @@
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
 
   let widthContent;
+  $: console.log(imagePair, thumbnails);
 </script>
 
 <div class="flex flex-wrap gap-10">
