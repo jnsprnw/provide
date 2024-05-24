@@ -17,6 +17,8 @@
   });
 
   $: subNavigation = [...data.caseStudies.map((d) => ({ label: d.city.label, abstract: d.abstract, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid }))];
+
+  $: console.log(caseStudy);
 </script>
 
 <ContentPageLayout

@@ -71,3 +71,11 @@ export function getMarginLeft(valueMax, unit, minMargin = 40) {
   const str = String(formatValue(valueMax, unit));
   return Math.max(str.length * 8, minMargin);
 }
+
+// Returns the largest availalbe image url based on the specified size
+// Valid sizes are the ones provided by strapi/cloudinary (large, medium, small, thumbnail)
+export const getStrapiImageAtSize = (image, size = 'large') => {
+  const formats = ['large', 'medium', 'small', 'thumbnail'];
+  const availableFormat = formats.slice(formats.indexOf(size)).find((format) => image.formats[format]);
+  return availableFormat ? image.formats[availableFormat] : image;
+};
