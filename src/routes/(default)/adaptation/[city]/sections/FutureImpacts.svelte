@@ -24,10 +24,10 @@
   <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
   <figure class="mb-10">
     <img class="mb-2" src={getStrapiImageAtSize(timeSelection.image).url} alt={timeSelection.image?.alternativeText} />
-    <div class="flex gap-6 justify-between align-middle">
-      <figcaption class="text-sm text-text-weaker max-w-[40em]">{impactTimeDescription}</figcaption>
+    <figcaption class="flex gap-6 justify-between align-middle">
+      <div class="text-sm text-text-weaker max-w-[40em]">{impactTimeDescription}</div>
       <ExplorerLink href={explorerUrl} />
-    </div>
+    </figcaption>
   </figure>
 
   <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />

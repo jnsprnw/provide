@@ -1,6 +1,7 @@
 <script>
   import PillGroup from '$src/lib/controls/PillGroup/PillGroup.svelte';
   import CompareImage from 'svelte-compare-image/CompareImage.svelte';
+  import SideScrollIndicator from '$lib/helper/SideScrollIndicator.svelte';
   import _ from 'lodash-es';
   import { writable } from 'svelte/store';
   import ExplorerLink from './ExplorerLink.svelte';
@@ -27,7 +28,7 @@
   // If no image selection is allowed, we don't want to include the large image in the thumbnails
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
 
-  $: console.log(imagePair);
+  let widthContent;
 </script>
 
 <div class="flex flex-wrap gap-10">
@@ -74,41 +75,43 @@
   {/if}
 
   {#if showThumbnails}
-    <div class="grid grid-cols-4 gap-2 items-start flex-wrap">
-      {#each thumbnails as thumbnail}
-        {#if allowImageSelection}
-          <button
-            class="text-left"
-            on:click={() => {
-              $currentGroup = thumbnail.group.uid;
-              $currentAttribute = thumbnail.attribute.uid;
-            }}
-          >
+    <SideScrollIndicator widthOfContent={widthContent} distanceLeft={0} distanceRight={0}>
+      <div class="grid gap-x-2.5 min-w-min" style="grid-template-columns: repeat({thumbnails.length}, 28%);" bind:clientWidth={widthContent}>
+        {#each thumbnails as thumbnail}
+          {#if allowImageSelection}
+            <button
+              class="text-left"
+              on:click={() => {
+                $currentGroup = thumbnail.group.uid;
+                $currentAttribute = thumbnail.attribute.uid;
+              }}
+            >
+              <figure>
+                <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
+                  <img class:opacity-40={thumbnail === imagePair} src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} />
+                </span>
+                <figcaption class="text-sm text-theme-base leading-tight" class:font-bold={thumbnail.description}>
+                  {thumbnail.group.label}
+                  {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
+                </figcaption>
+              </figure>
+            </button>
+          {:else}
             <figure>
-              <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
-                <img class:opacity-40={thumbnail === imagePair} src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} />
-              </span>
-              <figcaption class="text-sm text-theme-base leading-tight" class:font-bold={thumbnail.description}>
-                {thumbnail.group.label}
-                {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
+              <img src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
+              <figcaption class="text-text-weaker text-sm mt-2">
+                <h4 class:font-bold={thumbnail.description} class="mb-1">
+                  {thumbnail.group.label}
+                  {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
+                </h4>
+                {#if thumbnail.description}
+                  <p>{thumbnail.description}</p>
+                {/if}
               </figcaption>
             </figure>
-          </button>
-        {:else}
-          <figure>
-            <img src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
-            <figcaption class="text-text-weaker text-sm mt-2">
-              <h4 class:font-bold={thumbnail.description} class="mb-1">
-                {thumbnail.group.label}
-                {#if thumbnail.attribute.uid}– {thumbnail.attribute.label}{/if}
-              </h4>
-              {#if thumbnail.description}
-                <p>{thumbnail.description}</p>
-              {/if}
-            </figcaption>
-          </figure>
-        {/if}
-      {/each}
-    </div>
+          {/if}
+        {/each}
+      </div>
+    </SideScrollIndicator>
   {/if}
 </div>
