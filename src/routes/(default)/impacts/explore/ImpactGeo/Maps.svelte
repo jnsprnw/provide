@@ -202,6 +202,8 @@
       label = workerMessage ?? 'Error occured while processing the data.';
       break;
   }
+
+  $: displayedGeoData = showSatellite ? geoData : maskedGeoData;
 </script>
 
 <div class={`${aspectRatio} flex cols-${geoData.length} gap-x-[1px] animate-defer-visibility relative rounded border border-contour-weakest`}>
@@ -219,7 +221,7 @@
     </div>
   {/if}
   {#key maskedGeoData.length}
-    {#each maskedGeoData as { data, label }, i}
+    {#each displayedGeoData as { data, label }, i}
       <div
         class:rounded-l={maskedGeoData.length === 1 || i === 0}
         class:rounded-r={maskedGeoData.length === 1 || i === maskedGeoData.length - 1}
@@ -230,25 +232,30 @@
           <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0} style={showSatellite && import.meta.env.VITE_MAPBOX_STYLE_SATELLITE}>
             {#if invertedGeoShape && $CURRENT_GEOGRAPHY.geographyType !== 'cities'}
               <DataSource data={invertedGeoShape}>
-                <!--<PolygonLayer before="ocean-fill" fillColor={'#fafafa'} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />-->
-                <PolygonLayer before={showSatellite ? 'tunnel-path' : 'ocean-fill'} lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.contour.base} />
+                <PolygonLayer before={showSatellite ? 'tunnel-path' : 'ocean-fill'} lineWidth={3} lineOffset={1.5} lineOpacity={0.1} lineColor={$theme.color.contour.base} />
                 <FilterLayer layer="settlement-minor-label" geo={geoShape} />
                 <FilterLayer layer="admin-1-boundary" geo={geoShape} />
-
-                <!--<FilterLayer layer="settlement-major-label" geo={geoShape} />-->
+              </DataSource>
+            {/if}
+            {#if invertedGeoShape && showSatellite}
+              <DataSource data={invertedGeoShape}>
+                <PolygonLayer before="waterway-label" fill={true} line={false} fillOpacity={0.35} fillColor={$theme.color.contour.base} />
+                <FilterLayer layer="settlement-minor-label" geo={geoShape} />
+                <FilterLayer layer="admin-1-boundary" geo={geoShape} />
+              </DataSource>
+              <DataSource data={geoShape}>
+                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={4} lineOpacity={0.8} lineId="line-halo" />
+                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.contour.base} lineWidth={1.5} lineOpacity={1} />
               </DataSource>
             {/if}
 
             <DataSource {data}>
               {#if showSatellite}
-                <PolygonLayer before="tunnel-path" fill={true} line={false} fillOpacity={0.2} />
+                <PolygonLayer before="tunnel-path" fill={true} line={false} fillOpacity={0.25} />
               {:else}
                 <PolygonLayer fill={true} line={false} />
               {/if}
             </DataSource>
-            <!--<DataSource data={geoShape}>
-            <PolygonLayer fill={false} line={true} lineOpacity={0.2} />
-          </DataSource>-->
           </MapProvider>
         {/key}
         {#if label}

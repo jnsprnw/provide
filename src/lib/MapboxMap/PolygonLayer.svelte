@@ -18,6 +18,7 @@
   export let lineWidth = 1;
   export let lineOpacity = ['coalesce', ['get', 'lineOpacity'], 1];
   export let lineOffset = 0;
+  export let lineDasharray;
 
   export let fill = false;
   export let fillId = null;
@@ -77,6 +78,7 @@
           'line-width': lineWidth,
           'line-opacity': lineOpacity,
           'line-offset': lineOffset,
+          ...(lineDasharray ? { 'line-dasharray': lineDasharray } : {}),
         },
       },
       getBeforeId(before)
