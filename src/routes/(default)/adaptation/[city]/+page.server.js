@@ -99,6 +99,7 @@ export const load = async ({ fetch, parent, params }) => {
   const caseStudy = {
     city,
     abstract: caseStudyRaw.Abstract,
+    authors: caseStudyRaw.Authors,
     mainContent: await Promise.all(
       caseStudyRaw.MainContent.map(async (c) => {
         const type = c.__component.split('.')[1];
@@ -161,5 +162,5 @@ export const load = async ({ fetch, parent, params }) => {
     abstract: study.attributes.Abstract,
   }));
 
-  return { caseStudy, caseStudies, caseStudyOutro: { title: caseStudyOutro?.Title, text: caseStudyOutro?.Text } };
+  return { caseStudy, caseStudies, caseStudyOutro: { title: caseStudyOutro?.Title, text: caseStudyOutro?.Text }, author: caseStudy.authors, description: caseStudy.abstract };
 };

@@ -3,11 +3,13 @@
   import { dev } from '$app/environment';
   import { generatePageTitle } from '$utils/meta.js';
   const url = 'https://climate-risk-dashboard.climateanalytics.org/';
-  const author = 'PROVIDE consortium under direction of Climate Analytics with Jonas Parnow and Flavio Gortana';
-  const keywords = 'climate impacts,climate change,climate modelling,climate scenarios,local impacts,temperature overshoot, adaptation, emissions pathways';
-  const description = 'Explore future impacts from climate change as the world warms.';
+  $: author = $page.data.author ?? 'PROVIDE consortium under direction of Climate Analytics with Jonas Parnow and Flavio Gortana';
+  $: keywords = $page.data.keywords ?? 'climate impacts,climate change,climate modelling,climate scenarios,local impacts,temperature overshoot, adaptation, emissions pathways';
+  $: description = $page.data.description ?? 'Explore future impacts from climate change as the world warms.';
   $: title = $page.data.title ?? generatePageTitle();
   const isPublic = import.meta.env.VITE_IS_PUBLIC_VERSION;
+
+  $: console.log($page.data);
 </script>
 
 <svelte:head>

@@ -17,8 +17,6 @@
   });
 
   $: subNavigation = [...data.caseStudies.map((d) => ({ label: d.city.label, abstract: d.abstract, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid }))];
-
-  $: console.log(caseStudy);
 </script>
 
 <ContentPageLayout
@@ -32,5 +30,11 @@
   backLink={{ href: `/${PATH_ADAPTATION}`, label: 'Adaptation overview' }}
   intro={caseStudy.abstract}
 >
+  {#if caseStudy.authors}
+    <section class="html-content mt-16 pt-10 flex items-baseline gap-4 border-t border-contour-weakest">
+      <h4>Contributors</h4>
+      <p class="text-text-weaker">{caseStudy.authors}</p>
+    </section>
+  {/if}
   <Outro {...data.caseStudyOutro} />
 </ContentPageLayout>
