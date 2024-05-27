@@ -6,7 +6,7 @@
 </script>
 
 <div class="bg-surface-weaker">
-  <div class:pb-14={!subNavigation} class:pt-20={!backLink} class=" mx-auto px-2 sm:px-6 flex flex-col pt-20 {isCompact ? 'max-w-4xl' : 'max-w-7xl'}">
+  <div class:pb-14={!subNavigation} class:gap-y-16={!subNavigation} class:pt-20={!backLink} class=" mx-auto px-2 sm:px-6 flex flex-col pt-20 {isCompact ? 'max-w-4xl' : 'max-w-7xl'}">
     {#if backLink}<a href={backLink.href} class="text-theme-base font-bol text-sm pt-3 mb-16 flex gap-1.5 font-bold"><span class="font-normal">←</span> {backLink.label}</a>{/if}
     <slot />
     {#if subNavigation}
