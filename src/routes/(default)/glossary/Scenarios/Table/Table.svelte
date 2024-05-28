@@ -20,11 +20,6 @@
     return chroma.contrast(color, 'black') > chroma.contrast(color, 'white');
   }
 
-  function parseTailwindColor(rgbaStr) {
-    const parts = rgbaStr.replace('rgba(', '').replace(')', '').split(',');
-    return chroma([parts[0], parts[1], parts[2], parseInt(parts[3]) / 100]).hex();
-  }
-
   // The columns are described in arrays with the following function:
   // Label
   // Tooltip
