@@ -29,7 +29,7 @@
     </ul>
   {/if}
   {#if $$slots.image}
-    <figure class="p-0 md:px-8 py-6 sm:px-6 sm:py-12 md:py-16">
+    <figure class="p-0 md:p-0 py-6 sm:px-6 sm:pt-4 md:pt-8 pb-4">
       <slot name="image" />
     </figure>
   {/if}

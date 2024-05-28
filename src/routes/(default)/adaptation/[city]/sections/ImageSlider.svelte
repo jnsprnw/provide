@@ -7,7 +7,7 @@
   import ExplorerLink from './ExplorerLink.svelte';
   import { getStrapiImageAtSize } from '$lib/utils';
   export let explorerUrl;
-  export let attribueLabel;
+  export let attributeLabel;
   export let groupingLabel;
   export let showThumbnails;
   export let allowImageSelection;
@@ -37,15 +37,19 @@
   {/if}
 
   {#if attributeValues.length}
-    <PillGroup class="mb-6" label={attribueLabel} size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
+    <PillGroup class="mb-6" label={attributeLabel} size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
   {/if}
 </div>
 
 <div class="flex flex-col max-w-3xl">
   {#if !imagePair}
-    <div>No image with the selected properties was found</div>
-  {/if}
-  {#if imagePair.image1 && imagePair.image2}
+    <div class="bg-surface-weaker text-text-weaker flex items-center justify-center p-4 mb-4 aspect-video">
+      No image was found with {groupingLabel}: {$currentGroup}
+      {#if attributeLabel}
+        and {attributeLabel}: {$currentAttribute}
+      {/if}
+    </div>
+  {:else if imagePair.image1 && imagePair.image2}
     <figure class="mb-2 flex flex-col gap-1">
       <CompareImage
         imageLeftSrc={getStrapiImageAtSize(imagePair.image1).url}

@@ -74,7 +74,7 @@
           {/each}
         </tr>
       {/each}
-      <tr class="font-bold text-sm mt-1"><td colspan="100" class="text-center pt-1" class:pb-10={i < byScenario.length - 1}>{scenarioData[0][0].scenario.label}</td></tr>
+      <tr class="font-bold text-sm mt-1"><td /><td colspan="100" class="text-center pt-1" class:pb-10={i < byScenario.length - 1}>{scenarioData[0][0].scenario.label}</td></tr>
     </tbody>
   {/each}
 </table>

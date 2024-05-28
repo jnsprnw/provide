@@ -133,7 +133,7 @@ export const load = async ({ fetch, parent, params }) => {
               type,
               explorerUrl: c.ExplorerUrl,
               description: c.Description,
-              attribueLabel: c.AttributeLabel,
+              attributeLabel: c.AttributeLabel,
               groupingLabel: c.GroupingLabel,
               allowImageSelection: c.AllowImageSelection,
               showThumbnails: c.ShowThumbnails,
