@@ -8,8 +8,6 @@
   $: description = $page.data.description ?? 'Explore future impacts from climate change as the world warms.';
   $: title = $page.data.title ?? generatePageTitle();
   const isPublic = import.meta.env.VITE_IS_PUBLIC_VERSION;
-
-  $: console.log($page.data);
 </script>
 
 <svelte:head>

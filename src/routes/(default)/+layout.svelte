@@ -10,8 +10,6 @@
   import { page } from '$app/stores';
   export let data;
 
-  $: console.log(data);
-
   page.subscribe((v) => {
     if (v.hasOwnProperty('url') && 'pathname' in v.url) {
       const path = v.url.pathname.split('/');
