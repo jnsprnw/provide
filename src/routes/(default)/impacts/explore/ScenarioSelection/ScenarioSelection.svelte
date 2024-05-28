@@ -67,7 +67,7 @@
     warning={!$IS_EMPTY_INDICATOR && hasScenarioSelected && !$IS_COMBINATION_AVAILABLE_SCENARIO ? `Unavailable scenario${multipleScenariosSelected ? 's' : ''} selected` : undefined}
     placeholder={!hasScenarioSelected ? 'Select one or more scenarios' : undefined}
     size="md"
-    panelPlacement={'right-start'}
+    panelPlacement={windowWidth > 1200 ? 'right-start' : 'bottom-start'}
     class=""
     disabled={$DISABLED}
   >
@@ -82,7 +82,7 @@
     >
       <a
         slot="header-link"
-        class="text-sm text-theme-base font-bold flex items-center rounded-full bg-theme-base text-white px-6 py-3 gap-2 hover:bg-theme-stronger transition-colors"
+        class="text-sm leading-tight text-theme-base font-bold flex items-center rounded-sm bg-theme-base text-white px-3 sm:px-4 md:px-6 py-1 sm:py-2 md:py-3 gap-2 hover:bg-theme-stronger transition-colors"
         href={`/${PATH_GLOSSARY}#${ANCHOR_EXPLAINER_SCENARIOS}`}
       >
         <span>Which scenario should I select?</span>
