@@ -11,35 +11,37 @@
   $: caseStudyGeography = isCity && $GEOGRAPHIES[GEOGRAPHY_TYPE_CITY].find((d) => d.uid === geography.adaptationCaseStudy);
 </script>
 
-<div class="grid lg:grid-cols-2 grid-cols-1 gap-3 items-stretch mt-16">
-  {#if caseStudyGeography}
-    <div class="bg-theme-weakest rounded p-6 lg:p-8 flex flex-col gap-4">
-      <UrbanStudy class="h-14 w-14" color="fill-theme-base" />
-      <div class="self-center">
-        <h4 class="text-lg font-bold mb-1">Case study</h4>
-        <p class="mb-4">Read our urban case studies to learn how this data was used to prioritise between locations and measures for heat adaptation.</p>
-        <p class="text-text-weaker text-sm">
-          Recommended case study {#if !hasOwnCaseStudy}
-            for {geography.label}{/if}<br />
-          <a class="text-theme-base font-bold text-lg" href="/adaptation/{caseStudyGeography.uid}">→ {caseStudyGeography.label}</a> <br />
-        </p>
-      </div>
-    </div>
-  {/if}
-
-  <div class="bg-surface-weaker rounded p-6 lg:p-8 flex flex-col gap-4">
+<div class="grid grid-cols-1 md:grid-cols-[66%,33%] gap-3 items-stretch mt-16">
+  <div class="bg-surface-weaker rounded px-5 py-6 lg:px-7 lg:py-8 flex flex-col gap-4">
     <Study class="h-14 w-14" />
-    <div class="self-center">
+    <div class="grow">
       <h4 class="text-lg font-bold mb-1">Using the data</h4>
-      <p class="mb-4">Learn more about using these impact visualisations within adaptation planning and policy</p>
-      <ul class="text-text-weaker flex flex-col gap-1.5">
+      <p class="mb-4">Learn more about using our information in adaptation planning and policymaking.</p>
+      <ul class="text-text-weaker flex flex-col gap-4">
         <li>
-          <a class="text-theme-base" href="/adaptation#overshoot-proofing-self-assessment-tool">→ Policy self assessment tool</a> <br />
+          <a class="text-theme-base font-bold" href="/adaptation#overshoot-proofing-self-assessment-tool">Overshoot policy self assessment tool <span class="font-normal text-sm">→</span></a>
+          <p class="text-sm text-text-weaker">Use our quick guide to assess how you're factoring in changes in warming into your adaptation planning</p>
         </li>
         <li>
-          <a class="text-theme-base" href="/{PATH_KEY_CONCEPTS}#scenarios">→ About adaptation pathways</a>
+          <a class="text-theme-base font-bold" href="/{PATH_KEY_CONCEPTS}#scenarios">About adaptation pathways <span class="font-normal text-sm">→</span></a>
+          <p class="text-sm text-text-weaker">Learn about an approach used to develop robust and dynamic adaptation plans, allowing uncertain risk levels to inform long-term decisions</p>
         </li>
       </ul>
     </div>
   </div>
+  {#if caseStudyGeography}
+    <div class="bg-theme-weakest rounded px-5 py-6 lg:px-7 lg:py-8 flex flex-col gap-4">
+      <UrbanStudy class="h-12 w-12" color="fill-theme-base" />
+      <div class="self-stretch grow flex flex-col gap-6 justify-between">
+        <div class="">
+          <h4 class="text-lg font-bold mb-1">Case study</h4>
+          <p class="mb-2">Learn how this data was used to assess future climate risks, and inform local studies on heat adaptation measures.</p>
+        </div>
+        <p class="text-md font-bold">
+          See <a class="text-theme-base underline underline-offset-4" href="/adaptation/{caseStudyGeography.uid}"> {caseStudyGeography.label} <span class="font-normal text-sm">→</span></a> case study<br
+          />
+        </p>
+      </div>
+    </div>
+  {/if}
 </div>
