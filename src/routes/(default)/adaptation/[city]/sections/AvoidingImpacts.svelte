@@ -5,6 +5,7 @@
   import { getContext } from 'svelte';
   import { formatValue } from '$utils/formatting';
   import ExplorerLink from './ExplorerLink.svelte';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS } from '$src/config';
 
   export let explorerUrl;
   export let description;
@@ -36,7 +37,7 @@
 
           return {
             ...impactLevel,
-            bgColor: $theme.color.category[colorKey][i],
+            bgColor: $theme.color.category[colorKey][SCENARIOS_IN_AVOIDING_IMPACTS.indexOf(scenario.uid)],
             textColor: colorKey === 'weaker' ? $theme.color.contour.base : $theme.color.surface.base,
           };
         })
