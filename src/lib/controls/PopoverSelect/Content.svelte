@@ -46,7 +46,7 @@
 </script>
 
 {#if filters}
-  <div class="p-4 bg-surface-weaker border-contour-weakest flex items-center justify-between">
+  <div class="p-4 bg-surface-weaker border-contour-weakest flex-wrap gap-x-6 gap-y-3 flex items-center justify-between">
     <div>
       <Tagline class="mb-2">{filterLabel}</Tagline>
       <PillGroup bind:currentUid={currentFilterUid} options={filters} {disabledMessage} {allowWrap} />
