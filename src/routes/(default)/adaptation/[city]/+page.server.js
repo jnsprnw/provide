@@ -110,6 +110,7 @@ export const load = async ({ fetch, parent, params }) => {
               explorerUrl: c.ExplorerUrl,
               description: c.Description,
               indicators: c.Indicators,
+              title: c.Title,
               data: await loadAvoidingImpactsData(c),
             };
           case 'future-impacts':

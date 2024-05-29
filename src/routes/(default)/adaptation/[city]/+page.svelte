@@ -10,10 +10,15 @@
 
   $: caseStudy = data.caseStudy;
 
-  const components = { 'image-slider': ImageSlider, 'avoiding-impacts': AvoidingImpacts, 'future-impacts': FutureImpacts, section: SectionDefault };
+  const components = {
+    'image-slider': { component: ImageSlider },
+    'avoiding-impacts': { component: AvoidingImpacts, omitBorder: true },
+    'future-impacts': { component: FutureImpacts },
+    section: { component: SectionDefault },
+  };
 
   $: sections = caseStudy.mainContent.map((section) => {
-    return { component: components[section.type], title: section.title, props: { ...section, content: section.text } };
+    return { ...components[section.type], title: section.title, props: { ...section, content: section.text } };
   });
 
   $: subNavigation = [...data.caseStudies.map((d) => ({ label: d.city.label, abstract: d.abstract, href: `/${PATH_ADAPTATION}/${d.city.uid}`, isActive: caseStudy.city.uid === d.city.uid }))];

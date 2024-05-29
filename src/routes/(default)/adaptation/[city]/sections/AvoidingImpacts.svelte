@@ -10,6 +10,7 @@
   export let explorerUrl;
   export let description;
   export let data;
+  export let title;
 
   const theme = getContext('theme');
 
@@ -45,6 +46,9 @@
   });
 </script>
 
+{#if title}
+  <h4 class="text-xl font-bold mb-7">{title}</h4>
+{/if}
 {#if indicators.length > 1}
   <PillGroup class="mb-3" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
 {/if}
