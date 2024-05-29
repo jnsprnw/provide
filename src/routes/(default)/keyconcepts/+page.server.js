@@ -2,7 +2,7 @@ import { loadFromStrapi } from '$utils/apis.js';
 import { generatePageTitle } from '$utils/meta.js';
 import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
-import { LABEL_GLOSSARY, KEY_SCENARIOPRESET_UID } from '$config';
+import { LABEL_KEY_CONCEPTS, KEY_SCENARIOPRESET_UID } from '$config';
 import _ from 'lodash-es';
 import { extractTimeframe } from '$utils/meta.js';
 
@@ -88,7 +88,7 @@ const loadGlossary = async ({ fetch }) => {
 export const load = async (params) => {
   const [glossary, explainers] = await Promise.all([loadGlossary(params), loadExplainer(params)]);
 
-  const title = generatePageTitle(LABEL_GLOSSARY);
+  const title = generatePageTitle(LABEL_KEY_CONCEPTS);
 
   return {
     entries: [],

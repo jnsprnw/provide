@@ -1,5 +1,5 @@
 <script>
-  import { LABEL_DOCUMENTATION, LABEL_CONTACT, PATH_GLOSSARY, LABEL_GLOSSARY, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_DOCUMENTATION } from '$config';
+  import { LABEL_DOCUMENTATION, LABEL_CONTACT, PATH_KEY_CONCEPTS, LABEL_KEY_CONCEPTS, LABEL_ABOUT, PATH_ABOUT, PATH_CONTACT, PATH_DOCUMENTATION } from '$config';
   import { version } from '$app/environment';
   import Logo from './Logo.svelte';
   export let buildDate;
@@ -28,7 +28,7 @@
     <nav class="place-self-end w-full sm:col-span-5 lg:col-span-1">
       <ul class="flex flex-wrap justify-between sm:justify-start gap-x-4 flex-row lg:flex-col">
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_DOCUMENTATION}">{LABEL_DOCUMENTATION}</a></li>
-        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_GLOSSARY}">{LABEL_GLOSSARY}</a></li>
+        <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_KEY_CONCEPTS}">{LABEL_KEY_CONCEPTS}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_ABOUT}">{LABEL_ABOUT}</a></li>
         <li><a class="text-sm text-theme-base hover:text-theme-stronger transition-colors" href="/{PATH_CONTACT}">{LABEL_CONTACT}</a></li>
       </ul>

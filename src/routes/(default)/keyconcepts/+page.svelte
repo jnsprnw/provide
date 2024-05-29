@@ -4,7 +4,7 @@
   import ContentPageLayout from '$lib/helper/ContentPages/ContentPageLayout.svelte';
   import Scenarios from './Scenarios/Scenarios.svelte';
   import ScenariosIntro from './Scenarios/ScenariosIntro.svelte';
-  import { LABEL_GLOSSARY, ANCHOR_EXPLAINER_SCENARIOS, LABEL_SCENARIOS_INTRO, LABEL_SCENARIOS_TIMEFRAMES, LABEL_SCENARIOS_PRESETS, LABEL_SCENARIOS_LIST, LABEL_SCENARIOS_TIMELINES } from '$config';
+  import { LABEL_KEY_CONCEPTS, ANCHOR_EXPLAINER_SCENARIOS, LABEL_SCENARIOS_INTRO, LABEL_SCENARIOS_TIMEFRAMES, LABEL_SCENARIOS_PRESETS, LABEL_SCENARIOS_LIST, LABEL_SCENARIOS_TIMELINES } from '$config';
   import { kebabCase } from 'lodash-es';
 
   export let data;
@@ -41,4 +41,4 @@
   ];
 </script>
 
-<ContentPageLayout {sections} title={LABEL_GLOSSARY} intro="Terms and other important tings" />
+<ContentPageLayout {sections} title={LABEL_KEY_CONCEPTS} intro="Learn more about key concepts used in the Climate risk dashboard, including different emissions scenarios and indicator definitions." />

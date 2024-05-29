@@ -13,7 +13,7 @@ export const PATH_ABOUT = 'about';
 export const PATH_EXPLORE = 'impacts';
 export const PATH_AVOID = 'avoid';
 export const PATH_IMPACT = 'explore';
-export const PATH_GLOSSARY = 'glossary';
+export const PATH_KEY_CONCEPTS = 'keyconcepts';
 export const PATH_ADAPTATION = 'adaptation';
 
 // These will also be used for page titles
@@ -21,7 +21,7 @@ export const LABEL_DOCUMENTATION = 'Methodology';
 export const LABEL_CONTACT = 'Contact';
 export const LABEL_ABOUT = 'About';
 export const LABEL_EXPLORE = 'Explore';
-export const LABEL_GLOSSARY = 'Glossary';
+export const LABEL_KEY_CONCEPTS = 'Key Concepts';
 export const LABEL_FUTURE_IMPACTS = 'Future impacts';
 export const LABEL_AVOID_IMPACTS = 'Avoiding future impacts';
 export const LABEL_ADAPTATION = 'Adaptation';

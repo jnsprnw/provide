@@ -9,7 +9,7 @@
     IS_COMBINATION_AVAILABLE_INDICATOR,
     IS_EMPTY_GEOGRAPHY,
   } from '$stores/state.js';
-  import { PATH_GLOSSARY, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
+  import { PATH_KEY_CONCEPTS, ANCHOR_EXPLAINER_SCENARIOS } from '$config';
   import PopoverSelect from '$lib/controls/PopoverSelect/PopoverSelect.svelte';
   import Content from '$lib/controls/PopoverSelect/Content.svelte';
   import LinkArrow from '$lib/helper/icons/LinkArrow.svelte';
@@ -83,7 +83,7 @@
       <a
         slot="header-link"
         class="text-sm text-theme-base font-bold flex items-center rounded-full bg-theme-base text-white px-6 py-3 gap-2 hover:bg-theme-stronger transition-colors"
-        href={`/${PATH_GLOSSARY}#${ANCHOR_EXPLAINER_SCENARIOS}`}
+        href={`/${PATH_KEY_CONCEPTS}#${ANCHOR_EXPLAINER_SCENARIOS}`}
       >
         <span>Which scenario should I select?</span>
         <LinkArrow />

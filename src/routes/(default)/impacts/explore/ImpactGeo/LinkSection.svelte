@@ -1,7 +1,7 @@
 <script>
   import Study from '$lib/helper/icons/Study.svelte';
   import UrbanStudy from '$lib/helper/icons/UrbanStudy.svelte';
-  import { GEOGRAPHY_TYPE_CITY } from '$config';
+  import { GEOGRAPHY_TYPE_CITY, PATH_KEY_CONCEPTS } from '$config';
   import { GEOGRAPHIES } from '$stores/meta.js';
 
   export let geography;
@@ -37,7 +37,7 @@
           <a class="text-theme-base" href="/adaptation#overshoot-proofing-self-assessment-tool">→ Policy self assessment tool</a> <br />
         </li>
         <li>
-          <a class="text-theme-base" href="/glossary#scenarios">→ About adaptation pathways</a>
+          <a class="text-theme-base" href="/{PATH_KEY_CONCEPTS}#scenarios">→ About adaptation pathways</a>
         </li>
       </ul>
     </div>
