@@ -10,6 +10,7 @@ export const load = async ({ fetch }) => {
   const meta = await loadMetaData(fetch);
   const storiesRaw = await loadFromStrapi('stories', fetch);
   const caseStudies = await loadFromStrapi('case-study-dynamics', fetch);
+  const videos = await loadFromStrapi('videos', fetch);
 
   const stories = orderBy(
     compact(
@@ -47,6 +48,7 @@ export const load = async ({ fetch }) => {
 
   return {
     stories,
+    videos: (videos ?? []).map(({ attributes }) => ({ video: attributes.video, title: attributes.title })),
     caseStudies: caseStudies.map((study) => ({
       city: meta.cities.find((d) => d.uid === study.attributes.CityUid) || { uid: 'nassau', label: 'Nassau' },
       abstract: study.attributes.Abstract,

@@ -4,18 +4,7 @@
   import EntrypointAdaptation from './EntrypointAdaptation.svelte';
   export let caseStudies;
 
-  const videos = [
-    {
-      title: 'Explore future impacts',
-      description: 'This mode allows you to explore different climate futures and how they will affect the environment and people.',
-      video: 'https://www.youtube.com/embed/7nRBR3TyTCg?si=JAaLnTkBgpGelQPS',
-    },
-    {
-      title: 'Avoiding future impacts',
-      description: 'In this mode you can explore how we can avoid reaching undesirable climate impact levels in urban areas.',
-      video: 'https://www.youtube.com/embed/7nRBR3TyTCg?si=JAaLnTkBgpGelQPS',
-    },
-  ];
+  export let videos = [];
 </script>
 
 <header class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
@@ -70,22 +59,24 @@
     </p>
   </div>
 </div>
-<div class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
-  <div>
-    <span class="block font-bold text-3xl mb-3">Watch videos to learn more about the project</span>
-    <p class="leading-normal text-base sm:text-lg">Here are some videos that explain the PROVIDE project and the Climate Risk Dashboard in more detail.</p>
+{#if videos.length}
+  <div class="py-20 justify-center flex-col max-w-7xl mx-auto gap-x-4 lg:gap-x-24 grid lg:grid-cols-2">
+    <div>
+      <span class="block font-bold text-3xl mb-3">Want to learn more about the Climate risk dashboard?</span>
+      <p class="leading-normal text-base sm:text-lg">Watch the tutorial or interviews with the tool’s developers to learn how to use the tool and the scientific concepts behind the tool.</p>
+    </div>
+    <div class="grid gap-8 col-span-2 mt-4 md:grid-cols-2">
+      {#each videos as { title, video }}
+        <iframe
+          class="w-full aspect-video"
+          src={`https://www.youtube.com/embed/${video}?modestbranding=1&rel=0`}
+          {title}
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      {/each}
+    </div>
   </div>
-  <div class="grid gap-x-2 col-span-2 my-2" style="grid-template-columns: repeat({videos.length}, minmax(0, 1fr));">
-    {#each videos as { title, video }}
-      <iframe
-        class="w-full aspect-video"
-        src={video}
-        {title}
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen
-      ></iframe>
-    {/each}
-  </div>
-</div>
+{/if}
