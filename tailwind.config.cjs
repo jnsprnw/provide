@@ -17,6 +17,9 @@ module.exports = {
         lg: '0 3px 15px -3px rgb(0 0 0 / 0.1), 0 1px 6px -4px rgb(0 0 0 / 0.1);',
         xl: '0 5px 23px -3px rgb(0 0 0 / 0.15), 0 2px 10px -4px rgb(0 0 0 / 0.1);',
       },
+      dropShadow: {
+        ladingpage: ['0 1px 1px rgba(20, 70, 100, 0.5)', '0 4px 3px rgba(20, 70, 100, 0.2)'],
+      },
       borderWidth: {
         3: '3px',
       },
