@@ -32,11 +32,11 @@
 </script>
 
 <div class="flex flex-wrap gap-10">
-  {#if allowImageSelection && groupingValues.length}
+  {#if allowImageSelection && groupingValues.length > 1}
     <PillGroup class="mb-6" label={groupingLabel} size="sm" allowWrap={false} options={groupingValues} bind:currentUid={$currentGroup} />
   {/if}
 
-  {#if attributeValues.length}
+  {#if attributeValues.length > 1}
     <PillGroup class="mb-6" label={attributeLabel} size="sm" allowWrap={false} options={attributeValues} bind:currentUid={$currentAttribute} />
   {/if}
 </div>

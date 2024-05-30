@@ -96,6 +96,8 @@ export const load = async ({ fetch, parent, params }) => {
     return processedData;
   };
 
+  console.log(meta.indicators.map((d) => d.uid));
+
   const caseStudy = {
     city,
     abstract: caseStudyRaw.Abstract,
@@ -119,15 +121,23 @@ export const load = async ({ fetch, parent, params }) => {
               explorerUrl: c.ExplorerUrl,
               impactGeoDescription: c.ImpactGeoDescription,
               impactTimeDescription: c.ImpactTimeDescription,
-              impactGeoSnapshots: c.ImpactGeoSnapshot.map((snpsht) => ({
-                indicator: meta.indicators.find((d) => d.uid === snpsht.Indicator),
-                year: snpsht.Year,
-                image: snpsht.Image.data?.attributes,
-              })),
-              impactTimeSnapshots: c.ImpactTimeSnapshot.map((snpsht) => ({
-                indicator: meta.indicators.find((d) => d.uid === snpsht.Indicator),
-                image: snpsht.Image.data?.attributes,
-              })),
+              impactGeoSnapshots: c.ImpactGeoSnapshot.map((snpsht) => {
+                const indicator = meta.indicators.find((d) => d.uid === snpsht.Indicator);
+                if (!indicator) error(404, { message: `No indicator found for ${snpsht.Indicator} in geo snapshots future-impacts component` });
+                return {
+                  indicator,
+                  year: snpsht.Year,
+                  image: snpsht.Image.data?.attributes,
+                };
+              }),
+              impactTimeSnapshots: c.ImpactTimeSnapshot.map((snpsht) => {
+                const indicator = meta.indicators.find((d) => d.uid === snpsht.Indicator);
+                if (!indicator) error(404, { message: `No indicator found for ${snpsht.Indicator} in time snapshots future-impacts component` });
+                return {
+                  indicator,
+                  image: snpsht.Image.data?.attributes,
+                };
+              }),
             };
           case 'image-slider':
             return {

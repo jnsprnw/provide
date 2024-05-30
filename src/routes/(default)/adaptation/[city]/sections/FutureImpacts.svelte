@@ -21,7 +21,9 @@
 </script>
 
 <div class="max-w-3xl">
-  <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
+  {#if indicators.length > 1}
+    <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
+  {/if}
   <figure class="mb-10">
     <img class="mb-2" src={getStrapiImageAtSize(timeSelection.image).url} alt={timeSelection.image?.alternativeText} />
     <figcaption class="flex gap-6 justify-between align-middle">
@@ -30,7 +32,9 @@
     </figcaption>
   </figure>
 
-  <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />
+  {#if years.length > 1}
+    <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />
+  {/if}
   <figure>
     <img class="mb-2" src={getStrapiImageAtSize(geoSelection.image).url} alt={timeSelection.image?.alternativeText} />
     <figcaption class="flex gap-6 justify-between align-middle">
