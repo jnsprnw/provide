@@ -2,19 +2,17 @@
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
-  import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO, URL_PATH_YEAR } from '$config';
+  import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import MaMaskedData from './MaskedData.svelte';
   import Tabs from './Tabs.svelte';
-  import { getContext, onDestroy } from 'svelte';
+  import { onDestroy } from 'svelte';
   import { coordinatesToRectGrid, getColorScale, coordinatesToContours } from '$lib/utils/geo';
   import mask from '@turf/mask';
   import centroid from '@turf/centroid';
   import { mapValues } from 'lodash-es';
 
   export let stories;
-
-  const theme = getContext('theme');
 
   let currentIndex = 0;
   $: currentStory = stories[currentIndex];
@@ -99,7 +97,7 @@
 
   function manualSelect({ detail }) {
     // The stories are numbered while the tabs use the geography type
-    currentIndex = stories.findIndex(({ geographyType }) => geographyType === detail.id);
+    currentIndex = stories.findIndex(({ id }) => id === detail.id);
     clearInterval(interval); // Stop the interval
   }
 </script>
@@ -126,12 +124,12 @@
 
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-20 h-1/2 self-end bg-gradient-to-t from-theme-stronger/90" aria-hidden role="presentation" />
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex items-center">
-    <div class="max-w-6xl mx-auto px-3 sn:px-8 md:px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-24 md:gap-y-12">
+    <div class="max-w-6xl mx-auto px-3 sn:px-8 md:px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-24 md:gap-y-36">
       <header class="col-start-1 col-span-6 sm:col-span-5 md:col-span-5 lg:col-span-4 text-white">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-none drop-shadow-lg">A database for global-to-local climate impacts</h1>
         <p class="text-xl drop-shadow-md">Explore data across scales and sectors</p>
       </header>
-      <div class="col-span-6 md:col-span-4 sm:col-span-4 lg:col-span-3 self-start sm:col-start-3 md:col-start-3 lg:col-start-4 py-2 px-0 md:px-6">
+      <div class="col-span-6 md:col-span-4 sm:col-span-4 lg:col-span-4 self-start sm:col-start-3 md:col-start-3 lg:col-start-3 py-2 px-0 md:px-6">
         <Tabs on:select={manualSelect} {currentStory} />
       </div>
     </div>
