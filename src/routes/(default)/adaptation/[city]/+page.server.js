@@ -98,7 +98,7 @@ export const load = async ({ fetch, parent, params }) => {
 
   const caseStudy = {
     city,
-    title: caseStudiesRaw.Title,
+    title: caseStudyRaw.Title,
     abstract: caseStudyRaw.Abstract,
     authors: caseStudyRaw.Authors,
     mainContent: await Promise.all(
