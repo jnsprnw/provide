@@ -96,10 +96,9 @@ export const load = async ({ fetch, parent, params }) => {
     return processedData;
   };
 
-  console.log(meta.indicators.map((d) => d.uid));
-
   const caseStudy = {
     city,
+    title: caseStudiesRaw.Title,
     abstract: caseStudyRaw.Abstract,
     authors: caseStudyRaw.Authors,
     mainContent: await Promise.all(
@@ -169,6 +168,7 @@ export const load = async ({ fetch, parent, params }) => {
 
   const caseStudies = caseStudiesRaw.map((study) => ({
     id: study.id,
+    title: study.attributes.Title,
     city: meta.cities.find((c) => c.uid === study.attributes.CityUid),
     abstract: study.attributes.Abstract,
   }));

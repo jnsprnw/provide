@@ -30,7 +30,7 @@
   tag="Case study"
   subNavigationLabel="Case studies"
   dynamicNavigation={true}
-  title="Extreme heat in {caseStudy.city.label}"
+  title={caseStudy.title}
   {subNavigation}
   backLink={{ href: `/${PATH_ADAPTATION}`, label: 'Adaptation overview' }}
   intro={caseStudy.abstract}
