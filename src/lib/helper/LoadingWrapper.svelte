@@ -51,7 +51,7 @@
 
 {#if isFailed}
   <slot name="failed">
-    <Message {warningBackground} {warningSizeSmall} {warningInverted} warningSign={!isExpectedFail} headline="Data could not be loaded for this graph">
+    <Message {warningBackground} {warningSizeSmall} {warningInverted} warningSign={!isExpectedFail} headline={isExpectedFail ? 'Graph not available' : 'Data could not be loaded for this graph'}>
       {#if isExpectedFail}
         {#if flatData.length}
           <div class="mt-4 flex flex-col">
