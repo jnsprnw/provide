@@ -26,7 +26,9 @@
               {#each subNavigation as { href, abstract, label, isActive }}
                 <a {href} class="max-w-60 min-w-48 hover:bg-surface-weakest px-3 py-2.5 rounded-sm" class:bg-surface-weakest={isActive}
                   ><h4 class="font-bold text-theme-base mb-2">{label}</h4>
+                  {#if abstract}
                   <p class="text-text-weake text-sm" class:text-text-weaker={!isActive}>{abstract}</p></a
+                  {/if}
                 >
               {/each}
             </nav>
