@@ -159,7 +159,7 @@ export const load = async ({ fetch, parent, params }) => {
             return {
               type,
               title: c.Title,
-              text: parse(c.Text),
+              text: parse(c.Text ?? ''),
             };
         }
       })

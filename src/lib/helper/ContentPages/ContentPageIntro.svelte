@@ -16,7 +16,7 @@
       <p class="uppercase text-xs tracking-widest font-bold pt-3 text-theme-base">{tag}</p>
     {/if}
     {#if title}
-      <h1 class="text-5xl font-bold">{title}</h1>
+      <h1 class="text-5xl font-bold max-w-2xl">{title}</h1>
     {/if}
     {#if intro}<span class="max-w-xl text-lg">{intro}</span>{/if}
   </div>
