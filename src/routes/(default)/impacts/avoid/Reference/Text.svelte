@@ -9,7 +9,7 @@
   $: ({ average_value, countable } = data);
   $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
   $: isWholeUrbanArea = $IS_STUDY_LOCATION_WHOLE_URBAN_AREA;
-  $: period = reference.label;
+  $: period = reference.labelAvoid ?? reference.label;
   $: value = formatValue(average_value, unit.uid);
   $: location = `${isWholeUrbanArea ? '<strong>urban area</strong> of ' : '<strong>' + $SELECTED_STUDY_LOCATION_LABEL + '</strong> in '} <strong>${$CURRENT_GEOGRAPHY.label}</strong>`;
 </script>
