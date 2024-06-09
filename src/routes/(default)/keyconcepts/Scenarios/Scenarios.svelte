@@ -7,7 +7,7 @@
   import SubsectionHeadline from '$lib/helper/ContentPages/SubsectionHeadline.svelte';
   import PillGroup from '$lib/controls/PillGroup/PillGroup.svelte';
   import { writable } from 'svelte/store';
-  import { extractTimeframe } from '$utils/meta.js';
+  import { extractEndYear } from '$utils/meta.js';
   import THEME from '$styles/theme-store.js';
   import { LABEL_SCENARIOS_TIMELINES, LABEL_SCENARIOS_TIMEFRAMES, MAX_NUMBER_SELECTABLE_SCENARIOS, MEAN_TEMPERATURE_UID, EMISSIONS_UID, PATH_DOCUMENTATION } from '$config';
   import DefinitionItem from '$lib/helper/chart-description/DefinitionItem.svelte';
@@ -21,7 +21,7 @@
 
   $: selectedTimeframe = defaultTimeframe;
   $: scenariosListed = scenarios
-    .filter((s) => extractTimeframe(s) === selectedTimeframe)
+    .filter((s) => extractEndYear(s) === selectedTimeframe)
     .map((scenario) => {
       const scenarioSelectedIndex = $selectedScenarios.indexOf(scenario.uid);
       const isSelected = $selectedScenarios.includes(scenario.uid) && scenarioSelectedIndex < MAX_NUMBER_SELECTABLE_SCENARIOS;

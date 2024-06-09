@@ -6,6 +6,7 @@
     CURRENT_INDICATOR,
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
+    CURRENT_INDICATOR_OPTIONS,
     TEMPLATE_PROPS,
     DOWNLOAD_URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
@@ -26,10 +27,12 @@
     IMPACT_GEO_KEY_DIFFERENCE,
     IMPACT_GEO_KEY_SIDE_BY_SIDE,
     GEOGRAPHY_TYPE_CITY,
+    KEY_SCENARIO_STARTYEAR,
+    DEFAULT_STARTYEAR,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
-  import { extractTimeframe } from '$utils/meta.js';
+  import { extractEndYear } from '$utils/meta.js';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
 
   import Controls from './Controls.svelte';
@@ -53,9 +56,23 @@
 
   $: {
     // Reset year if the currently selected one is not available
-    year = extractTimeframe($CURRENT_SCENARIOS[0]) >= year ? year : DEFAULT_IMPACT_GEO_YEAR;
+    year = extractEndYear($CURRENT_SCENARIOS[0]) >= year ? year : DEFAULT_IMPACT_GEO_YEAR;
   }
-  $: availableYears = IMPACT_GEO_YEARS.filter((year) => year.uid <= extractTimeframe($CURRENT_SCENARIOS[0]));
+
+  $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
+
+  $: availableYears = IMPACT_GEO_YEARS.filter(
+    ({ uid: year }) => year <= extractEndYear($CURRENT_SCENARIOS[0]) && year >= ($CURRENT_SCENARIOS[0]?.[KEY_SCENARIO_STARTYEAR] ?? DEFAULT_STARTYEAR)
+  ).filter(({ uid }) => {
+    if (reference.uid !== 'absolute') {
+      return true;
+    }
+
+    if (reference.uid === 'absolute' && uid === 2020) {
+      return false;
+    }
+    return true;
+  });
 
   $: if ($IS_COMBINATION_AVAILABLE) {
     fetchData(

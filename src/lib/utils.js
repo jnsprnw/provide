@@ -1,5 +1,5 @@
 import _, { kebabCase, uniq } from 'lodash-es';
-import { extractTimeframe } from '$utils/meta.js';
+import { extractEndYear } from '$utils/meta.js';
 import { formatValue } from '$utils/formatting';
 
 export const formatReadableList = function (arr, key) {
@@ -40,12 +40,12 @@ export const formatList = function (_arr = []) {
   };
 };
 
-export function extractTimeframesFromScenarios(available, selectable) {
+export function extractEndYearFromScenarios(available, selectable) {
   // console.log({ available, selectable });
   const valid = uniq(selectable.map((s) => s.endYear));
 
   return _(available)
-    .map((s) => extractTimeframe(s))
+    .map((s) => extractEndYear(s))
     .uniq()
     .sort()
     .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))

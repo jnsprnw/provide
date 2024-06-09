@@ -4,7 +4,7 @@ import { groupBy, kebabCase } from 'lodash-es';
 import { parse } from 'marked';
 import { LABEL_KEY_CONCEPTS, KEY_SCENARIOPRESET_UID } from '$config';
 import _ from 'lodash-es';
-import { extractTimeframe } from '$utils/meta.js';
+import { extractEndYear } from '$utils/meta.js';
 
 function filterUniqueObjects(value, index, array) {
   return array.indexOf(value) === index;
@@ -38,7 +38,7 @@ const loadExplainer = async ({ fetch, parent }) => {
 
   // Selectable timeframes
   const selectableTimeframes = _(meta.scenarios)
-    .map(extractTimeframe)
+    .map(extractEndYear)
     .uniq()
     .sort()
     .map((uid) => ({ uid: parseInt(uid), label: uid })) // The uid should already be a int, but let’s make sure. Note: This needs to be the same type as the scenario presets’ timeframe

@@ -16,8 +16,8 @@ import _, { every, get, keyBy, map, reduce, without, isEqual, isString } from 'l
 import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { getLocalStorage, setLocalStorage, getAllLocalStorage } from './utils.js';
-import { extractTimeframesFromScenarios } from '$lib/utils.js';
-import { extractTimeframe } from '$utils/meta.js';
+import { extractEndYearFromScenarios } from '$lib/utils.js';
+import { extractEndYear } from '$utils/meta.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { GEOGRAPHY_TYPES, INDICATORS, SECTORS, DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
@@ -426,7 +426,7 @@ export const CURRENT_SCENARIOS_UID = (() => {
         if (availableSelected.length === 0) return [id]; // If there was no available scenarios previously selected
         // Find current timeframe to see if the timeframe changed
         const scenarios = getStore(DICTIONARY_SCENARIOS);
-        const currentTimeframe = extractTimeframe(scenarios[availableSelected[0]]);
+        const currentTimeframe = extractEndYear(scenarios[availableSelected[0]]);
         const timeframeChanged = currentTimeframe !== timeframe;
         // If timeframe changed we want to remove all the old scenarios
         if (timeframeChanged) return [id];
@@ -500,7 +500,7 @@ export const SELECTABLE_SCENARIOS = derived([AVAILABLE_SCENARIOS], ([$scenarios]
 export const SELECTABLE_SCENARIOS_UID = derived(SELECTABLE_SCENARIOS, ($scenarios) => $scenarios.map(({ uid }) => uid));
 
 export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCENARIOS], ([$available, $selectable]) => {
-  return extractTimeframesFromScenarios($available ?? [], $selectable ?? []);
+  return extractEndYearFromScenarios($available ?? [], $selectable ?? []);
 });
 
 /* UTILITIES */

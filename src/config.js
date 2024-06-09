@@ -62,7 +62,9 @@ export const KEY_LABEL = 'label';
 export const KEY_LABEL_LONG = 'labelLong';
 
 export const KEY_PARAMETER_INDICATOR_VALUE = 'indicator_value';
-export const KEY_SCENARIO_TIMEFRAME = 'endYear';
+export const KEY_SCENARIO_ENDYEAR = 'endYear';
+export const KEY_SCENARIO_STARTYEAR = 'startYear';
+export const DEFAULT_STARTYEAR = 2030;
 
 export const KEY_SCENARIOPRESET_UID = 'uid';
 
@@ -121,6 +123,10 @@ export const MAX_NUMBER_SELECTABLE_SCENARIOS = 3;
 // TODO: Not sure if this is the best place for these options since they are not global
 export const DEFAULT_IMPACT_GEO_YEAR = 2030;
 export const IMPACT_GEO_YEARS = [
+  {
+    uid: 2020,
+    label: '2020',
+  },
   {
     uid: 2030,
     label: '2030',

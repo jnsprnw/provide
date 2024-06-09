@@ -16,7 +16,7 @@
   import Select from '$lib/controls/Select/Select.svelte';
   import { min } from 'd3-array';
   import { formatValue, findMostDecimals } from '$lib/utils/formatting';
-  import { URL_PATH_SCENARIOS, END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_TIMEFRAME, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
+  import { URL_PATH_SCENARIOS, END_UN_AVOIDABLE_RISK, UNAVOIDABLE_UID, KEY_MODEL, KEY_SOURCE, KEY_SCENARIO_ENDYEAR, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR } from '$src/config.js';
   import { sortBy, reverse, find, uniqBy, without, isObject, isString, has } from 'lodash-es';
   import { fetchData } from '$lib/api/api';
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
@@ -37,7 +37,7 @@
   // This checks if the passed list of scenarios is valid. If yes, it uses it, otherwise it falls back to the list in the state.
   $: currentSelectedScenarios = (Array.isArray(currentScenarios) && currentScenarios.length ? currentScenarios : $CURRENT_SCENARIOS).map(
     // We just need a small set of attributes
-    ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe }) => ({ uid, label, color, [KEY_SCENARIO_TIMEFRAME]: timeframe })
+    ({ uid, label, color, [KEY_SCENARIO_ENDYEAR]: timeframe }) => ({ uid, label, color, [KEY_SCENARIO_ENDYEAR]: timeframe })
   );
 
   $: $IS_COMBINATION_AVAILABLE &&
@@ -73,7 +73,7 @@
     threshold = data.thresholds[thresholdIndex] ?? 0;
 
     // The timeframe is determined by the first selected scenario, because the selected scenarios must have the same timeframe
-    const timeframe = selectedScenarios[0][KEY_SCENARIO_TIMEFRAME];
+    const timeframe = selectedScenarios[0][KEY_SCENARIO_ENDYEAR];
 
     // We filter out unused years
     const validYears = data.years.filter((y) => y <= timeframe);
@@ -82,7 +82,7 @@
     // For this, we merge the selected and all scenarios together
     // This is because the selected scenarios have the assigned colors included
     // That’s why we spread them first in the new array
-    const mergedScenarios = uniqBy([...selectedScenarios, ...allScenarios], 'uid').filter((s) => s[KEY_SCENARIO_TIMEFRAME] === timeframe);
+    const mergedScenarios = uniqBy([...selectedScenarios, ...allScenarios], 'uid').filter((s) => s[KEY_SCENARIO_ENDYEAR] === timeframe);
 
     let processedScenarios = Object.entries(data.data)
       .map(([uid, scenarioData]) => {

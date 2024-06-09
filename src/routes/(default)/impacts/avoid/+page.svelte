@@ -7,7 +7,7 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION, SELECTABLE_SCENARIOS } from '$stores/state';
   import { IS_EMPTY_LEVEL_OF_IMPACT, IS_EMPTY_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
-  import { SCENARIOS_IN_AVOIDING_IMPACTS, KEY_SCENARIO_TIMEFRAME } from '$config';
+  import { SCENARIOS_IN_AVOIDING_IMPACTS, KEY_SCENARIO_ENDYEAR } from '$config';
   import THEME from '$styles/theme-store.js';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
   import SelectionCertaintyLevels from './Selection/CertaintyLevels/CertaintyLevels.svelte';
@@ -21,7 +21,7 @@
 
   $: currentScenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid) => $SELECTABLE_SCENARIOS.find((scenario) => scenario.uid === uid))
     .filter(Boolean)
-    .map(({ uid, label, [KEY_SCENARIO_TIMEFRAME]: timeframe }, i) => ({ uid, label, [KEY_SCENARIO_TIMEFRAME]: timeframe, color: $THEME.color.category.base[i] }));
+    .map(({ uid, label, [KEY_SCENARIO_ENDYEAR]: timeframe }, i) => ({ uid, label, [KEY_SCENARIO_ENDYEAR]: timeframe, color: $THEME.color.category.base[i] }));
 
   $: sections = [
     { component: FallbackMessage, disabled: isValidSelection },
