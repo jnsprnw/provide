@@ -15,10 +15,9 @@
   const unit = 'percent';
   const xKey = 'year';
   const yKey = 'value';
-  const padding = { top: 5, right: 0, bottom: 20, left: 40 };
+  const padding = { top: 5, right: 0, bottom: 20, left: 42 };
   const yDomain = [0, 1];
 
-  $: formatTickY = (d) => formatValue(d, unit);
   $: formatTickX = (d) => (typeof d === 'string' ? d : formatValue(d, 'year'));
 
   $: flatData = data.reduce((memo, group) => {
@@ -28,40 +27,17 @@
 
 <div class="h-full flex">
   <div class="h-full w-8/12">
-    <LayerCake
-      {data}
-      x={xKey}
-      y={yKey}
-      {xDomain}
-      {padding}
-      {yDomain}
-      xScale={scaleBand().paddingOuter(0.2).paddingInner(0.15)}
-      {flatData}
-    >
+    <LayerCake {data} x={xKey} y={yKey} {xDomain} {padding} {yDomain} xScale={scaleBand().paddingOuter(0.2).paddingInner(0.15)} {flatData}>
       <Svg>
-        <AxisX
-          showTickLines={false}
-          {padding}
-          formatTick={formatTickX}
-        />
-        <AxisY
-          formatTick={formatTickY}
-          ticksHighlighted={yDomain}
-        />
+        <AxisX showTickLines={false} {padding} formatTick={formatTickX} />
+        <AxisY ticksHighlighted={yDomain} {unit} />
         <RiskRanges />
         <RiskLevels {currentScenarios} />
       </Svg>
     </LayerCake>
   </div>
   <div class="h-full w-4/12">
-    <LayerCake
-      {padding}
-      {data}
-      x={xKey}
-      y={yKey}
-      yDomain={[0, 1]}
-      {flatData}
-    >
+    <LayerCake {padding} {data} x={xKey} y={yKey} yDomain={[0, 1]} {flatData}>
       <Html>
         <RiskLabels />
       </Html>
