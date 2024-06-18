@@ -124,12 +124,12 @@
 
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-20 h-1/2 self-end bg-gradient-to-t from-theme-stronger/90" aria-hidden role="presentation" />
   <div class="col-span-5 row-start-1 row-span-6 col-start-1 z-30 flex">
-    <div class="max-w-6xl mx-auto mt-[10vh] xs:mt-[5vh] md:mt-[7vh] lg:mt-[10vh] px-3 sn:px-8 md:px-12 grid grid-cols-6 grid-rows-[auto_1fr] gap-y-24 md:gap-y-36">
-      <header class="col-start-1 col-span-6 sm:col-span-5 md:col-span-5 lg:col-span-4 text-white">
+    <div class="w-full max-w-6xl mx-auto mt-[10vh] xs:mt-[5vh] md:mt-[7vh] lg:mt-[10vh] px-3 sn:px-8 md:px-12 flex flex-col justify-between">
+      <header class="col-start-1 col-span-6 sm:col-span-5 md:col-span-5 lg:col-span-4 text-white max-w-3xl">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-none drop-shadow-ladingpage">A database for global-to-local climate impacts</h1>
         <p class="text-xl drop-shadow-ladingpage">Explore data across scales and sectors</p>
       </header>
-      <div class="col-span-6 md:col-span-5 sm:col-span-5 lg:col-span-4 self-start sm:col-start-2 md:col-start-2 lg:col-start-3 py-2 px-0 md:px-6">
+      <div class="col-span-6 md:col-span-5 sm:col-span-5 lg:col-span-4 sm:col-start-2 md:col-start-2 lg:col-start-3 py-4 px-0 md:px-6 self-end max-w-2xl">
         <Tabs on:select={manualSelect} {currentStory} />
       </div>
     </div>
