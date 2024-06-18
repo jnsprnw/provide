@@ -244,15 +244,15 @@
                 <FilterLayer layer="admin-1-boundary" geo={geoShape} />
               </DataSource>
               <DataSource data={geoShape}>
-                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={5} lineOpacity={0.6} lineJoin="round" lineId="line-halo" />
+                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={4.5} lineOpacity={0.6} lineJoin="round" lineId="line-halo" />
                 <PolygonLayer
                   before="waterway-label"
                   fill={false}
                   line={true}
                   lineColor={$theme.color.contour.base}
-                  lineWidth={1.9}
+                  lineWidth={1.2}
                   lineOpacity={0.85}
-                  lineDasharray={[1, 1, 2, 1]}
+                  lineDasharray={[1.5, 1.5, 4, 1.5]}
                   lineJoin="round"
                   lineOffset={-1}
                 />
