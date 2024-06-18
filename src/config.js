@@ -114,6 +114,22 @@ export const GEOGRAPHY_TYPES_IN_AVOIDING_IMPACTS = [GEOGRAPHY_TYPE_CITY]; // Whi
 export const SCENARIOS_IN_AVOIDING_IMPACTS = ['gs', 'sp', 'curpol']; // This order also corresponds to the colors set in the design token’s categories
 
 // Map colors...should come from tokens at some point
+export const COLOR_SCALES = {
+  default: {
+    POSITIVE_RANGE: ['#F9CEA6', '#C91C1C'],
+    NEGATIVE_RANGE: ['#437E8E', '#DACFBF'],
+    DIVERGING_RANGE: ['#437E8E', '#F4E4D6', '#C91C1C'],
+  },
+  glacier: {
+    POSITIVE_RANGE: ['#437E8E', '#DACFBF'],
+    NEGATIVE_RANGE: ['#F9CEA6', '#C91C1C'],
+    DIVERGING_RANGE: ['#C91C1C', '#F4E4D6', '#437E8E'],
+  },
+  simple: {
+    POSITIVE_RANGE: ['#E9974A', '#ffffff'],
+    NEGATIVE_RANGE: ['#E9974A', '#ffffff'],
+  },
+};
 export const POSITIVE_RANGE = ['#F9CEA6', '#C91C1C'];
 export const NEGATIVE_RANGE = ['#437E8E', '#DACFBF'];
 export const DIVERGING_RANGE = ['#437E8E', '#F4E4D6', '#C91C1C'];

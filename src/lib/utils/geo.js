@@ -5,10 +5,10 @@ import { geoProject } from 'd3-geo-projection';
 import { featureCollection, multiPolygon, polygon } from '@turf/helpers';
 import { geoIdentity } from 'd3-geo';
 import { contours } from 'd3-contour';
-import { POSITIVE_RANGE, NEGATIVE_RANGE, DIVERGING_RANGE } from '$config';
 import { rewind } from './geo-rewind.js';
+import { COLOR_SCALES } from '$src/config.js';
 
-export const getColorScale = (data, isSimple = false) => {
+export const getColorScale = (data, { NEGATIVE_RANGE, POSITIVE_RANGE, DIVERGING_RANGE } = COLOR_SCALES.default, prefix = 1) => {
   let range;
   const flatData = data.flat(3);
   let domain = extent(flatData);
@@ -16,13 +16,10 @@ export const getColorScale = (data, isSimple = false) => {
   // Include 0 values to prevent dividing by zero when creating a diverging scale
   const isSequential = (min >= 0 && max >= 0) || (min <= 0 && max <= 0);
   if (isSequential) {
-    if (isSimple)
-      // This is used for the landing page
-      range = min >= 0 ? ['#E9974A', '#ffffff'] : ['#E9974A', '#ffffff'];
-    else {
-      range = min >= 0 ? POSITIVE_RANGE : NEGATIVE_RANGE;
-    }
+    range = min >= 0 ? POSITIVE_RANGE : NEGATIVE_RANGE;
+    range = prefix === 1 ? range.slice().reverse() : range;
   } else {
+    const colors = prefix === 1 ? DIVERGING_RANGE.slice().reverse() : DIVERGING_RANGE;
     // Is positive extent bigger than negative? Every calculation later on depends on this
     const leansPositive = Math.abs(min) <= max;
     // Set min/max extents according to which side the scale leans
@@ -30,13 +27,13 @@ export const getColorScale = (data, isSimple = false) => {
     const minExtent = leansPositive ? min : max;
     const extentRatio = Math.abs(minExtent / maxExtent);
     // Color for the side that extends fully
-    const maxColor = leansPositive ? DIVERGING_RANGE[2] : DIVERGING_RANGE[0];
+    const maxColor = leansPositive ? colors[2] : colors[0];
     // Color for the side that gets cut somwhere
-    const fullMinColor = leansPositive ? DIVERGING_RANGE[0] : DIVERGING_RANGE[2];
+    const fullMinColor = leansPositive ? colors[0] : colors[2];
     // Find color at the correct ratio
-    const minRange = scaleLinear().domain([0, minExtent]).range([DIVERGING_RANGE[1], fullMinColor])(extentRatio * minExtent);
+    const minRange = scaleLinear().domain([0, minExtent]).range([colors[1], fullMinColor])(extentRatio * minExtent);
 
-    range = leansPositive ? [minRange, DIVERGING_RANGE[1], maxColor] : [maxColor, DIVERGING_RANGE[1], minRange];
+    range = leansPositive ? [minRange, colors[1], maxColor] : [maxColor, colors[1], minRange];
     domain = leansPositive ? [minExtent, 0, maxExtent] : [maxExtent, 0, minExtent];
   }
 

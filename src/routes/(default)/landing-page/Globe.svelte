@@ -2,7 +2,7 @@
   import MapProvider from '$lib/MapboxMap/MapProvider.svelte';
   import { fetchData } from '$lib/api/api';
   import { writable } from 'svelte/store';
-  import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO } from '$config';
+  import { END_IMPACT_GEO, END_GEO_SHAPE, URL_PATH_GEOGRAPHY, URL_PATH_INDICATOR, URL_PATH_SCENARIO, COLOR_SCALES } from '$config';
   import LoadingWrapper from '$lib/helper/LoadingWrapper.svelte';
   import MaMaskedData from './MaskedData.svelte';
   import Tabs from './Tabs.svelte';
@@ -63,7 +63,7 @@
         const shape = shapes[i]; // Grids and shapes are in the same order
 
         const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
-        const colorScale = getColorScale([gridData], true);
+        const colorScale = getColorScale([gridData], COLOR_SCALES.simple);
         const cellCount = gridData.length * gridData[0].length;
 
         const geoData =

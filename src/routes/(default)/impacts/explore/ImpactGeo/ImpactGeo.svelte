@@ -29,6 +29,7 @@
     GEOGRAPHY_TYPE_CITY,
     KEY_SCENARIO_STARTYEAR,
     DEFAULT_STARTYEAR,
+    COLOR_SCALES,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
@@ -99,7 +100,7 @@
     });
   }
 
-  $: process = ({ data, shape }, { scenarios, urlParams, geography }) => {
+  $: process = ({ data, shape }, { scenarios, indicator, urlParams, geography }) => {
     isProcessing = true;
     const showDifference = data.length === 2 && displayOption === IMPACT_GEO_KEY_DIFFERENCE;
     const isMultipMap = data.length > 1 && !showDifference;
@@ -119,7 +120,13 @@
           ...d.data,
         }));
 
-    const colorScale = getColorScale(renderedData.map((d) => d.data));
+    console.log(indicator);
+
+    const colorScale = getColorScale(
+      renderedData.map((d) => d.data),
+      COLOR_SCALES[indicator.colorScale],
+      indicator.direction
+    );
 
     const geoData = renderedData.map(({ data, coordinatesOrigin: origin, resolution, ...d }) => {
       const cellCount = data.length * data[0].length;
