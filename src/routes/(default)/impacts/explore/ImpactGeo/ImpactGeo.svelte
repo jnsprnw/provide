@@ -120,8 +120,6 @@
           ...d.data,
         }));
 
-    console.log(indicator);
-
     const colorScale = getColorScale(
       renderedData.map((d) => d.data),
       COLOR_SCALES[indicator.colorScale],
