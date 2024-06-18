@@ -7,6 +7,7 @@
 
   export let scale;
   export let unit;
+  export let hasUrbanBoundary;
   const theme = getContext('theme');
 
   let canvas;
@@ -63,18 +64,25 @@
   }
 </script>
 
-<div class="flex items-center">
-  <span class="text-xs text-contour-weak leading-3 text-end">Below<br /><span class="text-contour-base font-bold">{min}</span></span>
-  <div class="w-40 h-[20px] mx-2" bind:clientWidth={width} bind:clientHeight={height}>
-    <canvas bind:this={canvas} {width} {height} />
-    <div class="ticks">
-      <span
-        style={`left: ${tickX + tickOffsetX}px; top: calc(50% + 1px);`}
-        style:color={getContrastColor(colorAtTick, $theme.color.surface.base, $theme.color.contour.base)}
-        class="absolute text-xs text-surface-base font-bold {tickTranslateClass} -translate-y-1/2"
-        >{middle}
-      </span>
+<div class="flex flex-col gap-3">
+  <div class="flex items-center">
+    <span class="text-xs text-contour-weak leading-3 text-end">Below<br /><span class="text-contour-base font-bold">{min}</span></span>
+    <div class="w-40 h-[20px] mx-2" bind:clientWidth={width} bind:clientHeight={height}>
+      <canvas bind:this={canvas} {width} {height} />
+      <div class="ticks">
+        <span
+          style={`left: ${tickX + tickOffsetX}px; top: calc(50% + 1px);`}
+          style:color={getContrastColor(colorAtTick, $theme.color.surface.base, $theme.color.contour.base)}
+          class="absolute text-xs text-surface-base font-bold {tickTranslateClass} -translate-y-1/2"
+          >{middle}
+        </span>
+      </div>
     </div>
+    <span class="text-xs text-contour-weak leading-3">Above<br /><span class="text-contour-base font-bold">{max}</span></span>
   </div>
-  <span class="text-xs text-contour-weak leading-3">Above<br /><span class="text-contour-base font-bold">{max}</span></span>
+  {#if hasUrbanBoundary}
+    <span class="pl-1 flex items-center gap-1 text-xs"
+      ><svg width="18" height="2"><line x1="0" x2="18" y1="1" y2="1" stroke="black" stroke-width="1.75" stroke-dasharray="3, 1.5" /></svg>Urban boundary</span
+    >
+  {/if}
 </div>

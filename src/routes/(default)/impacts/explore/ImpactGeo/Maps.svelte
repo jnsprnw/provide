@@ -204,11 +204,12 @@
   }
 
   $: displayedGeoData = showSatellite ? geoData : maskedGeoData;
+  $: isUrban = $CURRENT_GEOGRAPHY.geographyType === 'cities';
 </script>
 
 <div class={`${aspectRatio} flex cols-${geoData.length} gap-x-[1px] animate-defer-visibility relative rounded border border-contour-weakest`}>
   <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
-    <Legend {unit} scale={colorScale} />
+    <Legend {unit} scale={colorScale} hasUrbanBoundary={showSatellite && isUrban} />
   </div>
   {#if ![STATUS_FINISHED, STATUS_IDLE].includes(workerStatus)}
     <div class="rounded flex items-center justify-center absolute top-0 left-0 w-full h-full py-2 px-2 bg-surface-base z-10">
@@ -230,7 +231,7 @@
       >
         {#key showSatellite}
           <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0} style={showSatellite && import.meta.env.VITE_MAPBOX_STYLE_SATELLITE}>
-            {#if invertedGeoShape && $CURRENT_GEOGRAPHY.geographyType !== 'cities'}
+            {#if invertedGeoShape && !isUrban}
               <DataSource data={invertedGeoShape}>
                 <PolygonLayer before={showSatellite ? 'tunnel-path' : 'ocean-fill'} lineWidth={3} lineOffset={1.5} lineOpacity={0.1} lineColor={$theme.color.contour.base} />
                 <FilterLayer layer="settlement-minor-label" geo={geoShape} />
@@ -239,13 +240,22 @@
             {/if}
             {#if invertedGeoShape && showSatellite}
               <DataSource data={invertedGeoShape}>
-                <PolygonLayer before="waterway-label" fill={true} line={false} fillOpacity={0.35} fillColor={$theme.color.contour.base} />
                 <FilterLayer layer="settlement-minor-label" geo={geoShape} />
                 <FilterLayer layer="admin-1-boundary" geo={geoShape} />
               </DataSource>
               <DataSource data={geoShape}>
-                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={4} lineOpacity={0.8} lineId="line-halo" />
-                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.contour.base} lineWidth={1.5} lineOpacity={1} />
+                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={5} lineOpacity={0.6} lineJoin="round" lineId="line-halo" />
+                <PolygonLayer
+                  before="waterway-label"
+                  fill={false}
+                  line={true}
+                  lineColor={$theme.color.contour.base}
+                  lineWidth={1.9}
+                  lineOpacity={0.85}
+                  lineDasharray={[1, 1, 2, 1]}
+                  lineJoin="round"
+                  lineOffset={-1}
+                />
               </DataSource>
             {/if}
 

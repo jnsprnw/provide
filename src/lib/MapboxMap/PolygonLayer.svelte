@@ -18,7 +18,9 @@
   export let lineWidth = 1;
   export let lineOpacity = ['coalesce', ['get', 'lineOpacity'], 1];
   export let lineOffset = 0;
+  export let lineJoin = 'miter';
   export let lineDasharray;
+  export let lineCap = 'butt';
 
   export let fill = false;
   export let fillId = null;
@@ -78,6 +80,8 @@
           'line-width': lineWidth,
           'line-opacity': lineOpacity,
           'line-offset': lineOffset,
+          'line-join': lineJoin,
+          'line-cap': lineCap,
           ...(lineDasharray ? { 'line-dasharray': lineDasharray } : {}),
         },
       },
