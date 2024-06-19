@@ -56,5 +56,5 @@
   subNavigationLabel="Case studies"
   intro="Learn how to use climate data for overshoot risk informed adaptation."
 >
-  <!-- <Outro title={data.outroTitle} text={data.outroText} /> -->
+  <Outro title={data.outroTitle} text={data.outroText} />
 </ContentPageLayout>

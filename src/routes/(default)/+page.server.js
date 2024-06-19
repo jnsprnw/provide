@@ -17,7 +17,7 @@ export const load = async ({ fetch }) => {
       storiesRaw.map(({ attributes }) => {
         const { Title: _title, Indicator: _indicatorUID, Type, GeographyType: _GeographyType, Geography: _geographyUID, Scenarios: scenarioUIDs } = attributes;
         let geographyUID = _geographyUID.trim();
-        let title = _title.trim();
+        let title = _title?.trim();
         let indicatorUID = _indicatorUID.trim();
         let geographyType = _GeographyType.trim();
         const geography = find(get(meta, [geographyType], []), {
