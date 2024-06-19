@@ -3,6 +3,7 @@
   import { cubicInOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
+  import { sortBy } from 'lodash-es';
   import { PATH_ADAPTATION } from '$config';
   import Em from './Em.svelte';
   import Link from './Link.svelte';
@@ -24,13 +25,6 @@
 
   let className = '';
   export { className as class };
-
-  const triggers = [
-    { id: `explore-admin0`, title: 'Terrestrial Climate' },
-    { id: `explore-eez`, title: 'Marine Climate' },
-    { id: `explore-cities`, title: 'Urban Climate' },
-    { id: `adaptation-cities`, title: 'Adaptation case studies' },
-  ];
 
   const [send, receive] = crossfade({
     duration: 250,
@@ -56,7 +50,7 @@
 
 <div use:melt={$root} class="flex w-full flex-col overflow-hidden {className}">
   <div use:melt={$list} class="flex shrink-0 gap-x-4 overflow-x-auto text-white flex-row items-center justify-between">
-    {#each stories as triggerItem}
+    {#each sortBy(stories, 'order') as triggerItem}
       {@const isAdaptation = triggerItem.id.startsWith('adaptation')}
       {@const isActive = $value === triggerItem.id}
       <button
