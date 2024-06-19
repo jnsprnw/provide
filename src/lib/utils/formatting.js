@@ -54,6 +54,7 @@ const suffixes = {
 };
 
 export const formatValue = (value, indicatorId = DEFAULT_FORMAT_UID, { addSuffix = true, formatter: customFormatter = undefined, decimals, matchDecimals = false } = {}) => {
+  value = parseFloat(value);
   if (matchDecimals) {
     decimals = getDecimals(value);
   }
@@ -118,7 +119,11 @@ export function findDecimalsForDistinctValues(values, unit, minDecimals = 0, max
 function getDecimals(value) {
   if (typeof value !== 'undefined') {
     if (value % 1 != 0) {
-      return value.toString().split('.')[1].length;
+      // We need to first parse the value to a float to remove any white spaces or percentage signs
+      // Next, we need a string so that we can split it by the decimal point
+      // Finally, we need to get the length of the second part of the split string
+      // If no decimal point is found, the length is 0
+      return parseFloat(value).toString().split('.')?.[1]?.length || 0;
     }
   }
   return 0;
