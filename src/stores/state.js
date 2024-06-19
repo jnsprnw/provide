@@ -504,17 +504,17 @@ export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCE
   return extractEndYearFromScenarios($available ?? [], $selectable ?? []);
 });
 
-export const AVAILABLE_IMPACT_GEO_YEARS = derived([CURRENT_INDICATOR, CURRENT_SCENARIOS], ([$indicator, $scenarios]) => {
+export const AVAILABLE_IMPACT_GEO_YEARS = derived([CURRENT_INDICATOR, CURRENT_SCENARIOS, CURRENT_INDICATOR_OPTIONS], ([$indicator, $scenarios, $options]) => {
   return get($indicator, 'selectableYears', [])
     .filter((year) => year <= extractEndYear($scenarios[0]) && year >= extractStartYear($scenarios[0]))
     .filter((year) => {
       // All years are available for non-absolute reference periods
-      if (reference.uid !== 'absolute') {
+      if ($options?.reference?.uid !== 'absolute') {
         return true;
       }
 
       // If the reference is absolute, the year 2020 is not available
-      if (reference.uid === 'absolute' && year === 2020) {
+      if ($options?.reference?.uid === 'absolute' && year === 2020) {
         return false;
       }
       // All other years are available for absolute reference periods
@@ -522,6 +522,8 @@ export const AVAILABLE_IMPACT_GEO_YEARS = derived([CURRENT_INDICATOR, CURRENT_SC
     });
 });
 
+// If the current year is not available, use the default year
+// If the default year is not available, use the first available year
 export const DEFAULT_AVAILABLE_IMPACT_GEO_YEAR = derived([AVAILABLE_IMPACT_GEO_YEARS], ([$years]) => ($years.includes(DEFAULT_IMPACT_GEO_YEAR) ? DEFAULT_IMPACT_GEO_YEAR : $years[0]));
 
 /* UTILITIES */

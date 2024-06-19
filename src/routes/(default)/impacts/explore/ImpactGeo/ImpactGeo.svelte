@@ -53,14 +53,9 @@
   let GEO_SHAPE_DATA = writable({});
 
   $: if (!$AVAILABLE_IMPACT_GEO_YEARS.includes(year) || typeof year === 'undefined') {
-    // Reset year if the currently selected one is not available
-    // If the current year is not available, use the default year
-    // If the default year is not available, use the first available year
-
+    // Reset year if the currently selected one is not available or undefined
     year = $DEFAULT_AVAILABLE_IMPACT_GEO_YEAR;
   }
-
-  $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
 
   $: if ($IS_COMBINATION_AVAILABLE) {
     fetchData(
