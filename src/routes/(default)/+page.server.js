@@ -15,7 +15,7 @@ export const load = async ({ fetch }) => {
   const stories = orderBy(
     compact(
       storiesRaw.map(({ attributes }) => {
-        const { Title: _title, Indicator: _indicatorUID, Type, GeographyType: _GeographyType, Geography: _geographyUID, Scenarios: scenarioUIDs } = attributes;
+        const { Title: _title, Order: order, Indicator: _indicatorUID, Type, GeographyType: _GeographyType, Geography: _geographyUID, Scenarios: scenarioUIDs } = attributes;
         let geographyUID = _geographyUID.trim();
         let title = _title?.trim();
         let indicatorUID = _indicatorUID.trim();
@@ -39,6 +39,7 @@ export const load = async ({ fetch }) => {
             geographyType,
             mode: Type,
             url: `${PATH_EXPLORE}/${Type}${query}`,
+            order,
           };
         } else {
           return false;
