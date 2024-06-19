@@ -53,9 +53,9 @@
 
   $: process = ({ data }, { selectedScenarios, urlParams, allScenarios }) => {
     // This creates the list of thresholds
-    const decimals = findMostDecimals(data.thresholds.map((value) => value));
+    //const decimals = findMostDecimals(data.thresholds.map((value) => value));
     const thresholds = data.thresholds.map((value) => ({
-      label: `${value > 0 ? '+' : value < 0 ? '−' : ''}${formatValue(Math.abs(value), $CURRENT_INDICATOR_UNIT_UID, { decimals })}`,
+      label: `${value > 0 ? '+' : value < 0 ? '−' : ''}${formatValue(Math.abs(value), $CURRENT_INDICATOR_UNIT_UID)}`,
       value,
     }));
 

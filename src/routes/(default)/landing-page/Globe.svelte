@@ -102,7 +102,7 @@
   }
 </script>
 
-<header class="h-[80vh] sm:h-[75vh] min-h-[400px] md:min-h-[600px] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
+<header class="h-[70vh] sm:h-[75vh] min-h-[400px] md:min-h-[600px] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
   <figure
     aria-hidden
     role="presentation"
