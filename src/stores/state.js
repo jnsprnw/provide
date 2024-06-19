@@ -9,6 +9,7 @@ import {
   URL_PATH_FREQUENCY,
   URL_PATH_SPATIAL,
   URL_PATH_INDICATOR_VALUE,
+  DEFAULT_IMPACT_GEO_YEAR,
 } from '$config';
 import THEME from '$styles/theme-store.js';
 import { interpolateLab, piecewise } from 'd3-interpolate';
@@ -17,7 +18,7 @@ import { derived, get as getStore, writable } from 'svelte/store';
 import { browser } from '$app/environment';
 import { getLocalStorage, setLocalStorage, getAllLocalStorage } from './utils.js';
 import { extractEndYearFromScenarios } from '$lib/utils.js';
-import { extractEndYear } from '$utils/meta.js';
+import { extractEndYear, extractStartYear } from '$utils/meta.js';
 
 import { DEFAULT_GEOGRAPHY_UID, DEFAULT_SCENARIOS_UID, MAX_NUMBER_SELECTABLE_SCENARIOS, LOCALSTORE_INDICATOR, LOCALSTORE_GEOGRAPHY, LOCALSTORE_SCENARIOS } from '../config.js';
 import { GEOGRAPHY_TYPES, INDICATORS, SECTORS, DICTIONARY_INDICATOR_PARAMETERS, DICTIONARY_INDICATORS, DICTIONARY_SCENARIOS, GEOGRAPHIES, INDICATOR_PARAMETERS, SCENARIOS } from './meta.js';
@@ -502,6 +503,26 @@ export const SELECTABLE_SCENARIOS_UID = derived(SELECTABLE_SCENARIOS, ($scenario
 export const AVAILABLE_TIMEFRAMES = derived([AVAILABLE_SCENARIOS, SELECTABLE_SCENARIOS], ([$available, $selectable]) => {
   return extractEndYearFromScenarios($available ?? [], $selectable ?? []);
 });
+
+export const AVAILABLE_IMPACT_GEO_YEARS = derived([CURRENT_INDICATOR, CURRENT_SCENARIOS], ([$indicator, $scenarios]) => {
+  return get($indicator, 'selectableYears', [])
+    .filter((year) => year <= extractEndYear($scenarios[0]) && year >= extractStartYear($scenarios[0]))
+    .filter((year) => {
+      // All years are available for non-absolute reference periods
+      if (reference.uid !== 'absolute') {
+        return true;
+      }
+
+      // If the reference is absolute, the year 2020 is not available
+      if (reference.uid === 'absolute' && year === 2020) {
+        return false;
+      }
+      // All other years are available for absolute reference periods
+      return true;
+    });
+});
+
+export const DEFAULT_AVAILABLE_IMPACT_GEO_YEAR = derived([AVAILABLE_IMPACT_GEO_YEARS], ([$years]) => ($years.includes(DEFAULT_IMPACT_GEO_YEAR) ? DEFAULT_IMPACT_GEO_YEAR : $years[0]));
 
 /* UTILITIES */
 export const IS_EMPTY_SCENARIO = derived([CURRENT_SCENARIOS_UID, IS_AVOID_PAGE], ([$scenarios, $isAvoidPage]) => {

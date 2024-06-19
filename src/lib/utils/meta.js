@@ -1,4 +1,5 @@
-import { TITLE_PROJECT, TITLE_SITE, KEY_CHARACTERISTICS, KEY_SCENARIO_ENDYEAR } from '$config';
+import { TITLE_PROJECT, TITLE_SITE, KEY_CHARACTERISTICS, KEY_SCENARIO_ENDYEAR, KEY_SCENARIO_STARTYEAR, DEFAULT_STARTYEAR } from '$config';
+import { get } from 'lodash-es';
 
 export function generatePageTitle(title_page) {
   return [title_page, TITLE_SITE, TITLE_PROJECT].filter(Boolean).join(' – ');
@@ -17,4 +18,8 @@ export function extractEndYear(scenario) {
   }
   console.warn(`Could not find endYear. Will use fallback`);
   return 0;
+}
+
+export function extractStartYear(scenario) {
+  return get(scenario, KEY_SCENARIO_STARTYEAR, DEFAULT_STARTYEAR);
 }
