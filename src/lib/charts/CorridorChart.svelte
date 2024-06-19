@@ -47,27 +47,10 @@
 </script>
 
 <div class="w-full h-full animate-defer-visibility overflow-hidden">
-  <LayerCake
-    {padding}
-    x={xKey}
-    y={yKey}
-    {yDomain}
-    data={chartData}
-    {flatData}
-  >
+  <LayerCake {padding} x={xKey} y={yKey} {yDomain} data={chartData} {flatData}>
     <Svg>
-      <AxisX
-        snapTicks={true}
-        showTickLines={false}
-        ticks={xTicks}
-      />
-      <AxisY
-        {padding}
-        ticks={yTicks}
-        xTick={-3}
-        formatTick={formatTickY}
-        ticksHighlighted={ticksYHighlighted}
-      />
+      <AxisX snapTicks={true} showTickLines={false} ticks={xTicks} />
+      <AxisY {padding} ticks={yTicks} ticksHighlighted={ticksYHighlighted} />
       <MultipleAreaLayer />
       <MultipleLineLayer strokeWidth={2.5} />
     </Svg>
