@@ -82,7 +82,7 @@
   </div>
   {#if hasUrbanBoundary}
     <span class="pl-1 flex items-center gap-1 text-xs"
-      ><svg width="18" height="2"><line x1="0" x2="18" y1="1" y2="1" stroke="black" stroke-width="1.2" stroke-dasharray="2.2, 3" /></svg>Urban boundary</span
+      ><svg width="18" height="2"><line x1="0" x2="18" y1="1" y2="1" stroke="black" stroke-width="1.2" stroke-dasharray="2.2, 3" /></svg>Urban area boundary</span
     >
   {/if}
 </div>
