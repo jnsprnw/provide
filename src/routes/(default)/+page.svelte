@@ -3,7 +3,6 @@
   import Globe from './landing-page/Globe.svelte';
 
   export let data;
-
   $: ({ stories, caseStudies, videos } = data);
 </script>
 

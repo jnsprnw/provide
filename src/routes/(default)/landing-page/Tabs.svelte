@@ -6,9 +6,9 @@
   import { PATH_ADAPTATION } from '$config';
   import Em from './Em.svelte';
   import Link from './Link.svelte';
-  import { startsWith } from 'lodash-es';
   const dispatch = createEventDispatcher();
 
+  export let stories;
   export let currentStory = {};
 
   $: {
@@ -56,7 +56,7 @@
 
 <div use:melt={$root} class="flex w-full flex-col overflow-hidden {className}">
   <div use:melt={$list} class="flex shrink-0 gap-x-4 overflow-x-auto text-white flex-row items-center justify-between">
-    {#each triggers as triggerItem}
+    {#each stories as triggerItem}
       {@const isAdaptation = triggerItem.id.startsWith('adaptation')}
       {@const isActive = $value === triggerItem.id}
       <button

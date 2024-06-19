@@ -102,7 +102,7 @@
   }
 </script>
 
-<header class="h-[70vh] sm:h-[75vh] min-h-[400px] md:min-h-[600px] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
+<header class="h-[80vh] sm:h-[75vh] min-h-[400px] md:min-h-[600px] max-h-[750px] grid grid-rows-6 gap-x-6 gap-y-6 grid-cols-5 overflow-hidden bg-theme-stronger relative">
   <figure
     aria-hidden
     role="presentation"
@@ -129,8 +129,8 @@
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 leading-none drop-shadow-ladingpage">A database for global-to-local climate impacts</h1>
         <p class="text-xl drop-shadow-ladingpage">Explore data across scales and sectors</p>
       </header>
-      <div class="col-span-6 md:col-span-5 sm:col-span-5 lg:col-span-4 sm:col-start-2 md:col-start-2 lg:col-start-3 py-4 px-0 md:px-6 self-end max-w-2xl">
-        <Tabs on:select={manualSelect} {currentStory} />
+      <div class="col-span-6 md:col-span-5 sm:col-span-5 lg:col-span-4 sm:col-start-2 md:col-start-2 lg:col-start-3 py-4 px-0 md:px-6 self-end max-w-3xl">
+        <Tabs on:select={manualSelect} {currentStory} {stories} />
       </div>
     </div>
   </div>
