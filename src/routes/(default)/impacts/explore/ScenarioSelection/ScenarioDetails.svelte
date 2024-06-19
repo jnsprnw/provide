@@ -22,22 +22,15 @@
 </script>
 
 <h3 class="text-lg mb-2 font-bold">{scenario.label}</h3>
-<p class="text-contour-weak mb-5 min-h-[100px]">
+<p class="text-contour-weak mb-5 min-h-[120px]">
   {scenario.description || 'Description missing'}
 </p>
 <dl class="flex gap-4 mb-5 justify-between">
   {#if scenario.source}
-    <DefinitionItem
-      term="Scenario origin:"
-      definition={scenario.source.label}
-      href={scenario.source.href}
-    />
+    <DefinitionItem term="Scenario origin:" definition={scenario.source.label} href={scenario.source.href} />
   {/if}
   {#if scenario.isPrimary}
-    <DefinitionItem
-      term="Scenario type:"
-      definition="Primary scenario"
-    />
+    <DefinitionItem term="Scenario type:" definition="Primary scenario" />
   {/if}
 </dl>
 
@@ -62,28 +55,16 @@
   <p class="text-sm mb-2 font-bold">Global mean temperature in °C</p>
   <figure>
     <div class="h-48 mb-2">
-      <LineChart
-        yDomain={chartDomain}
-        data={chartData}
-      />
+      <LineChart yDomain={chartDomain} data={chartData} unit="degrees-celsius" />
     </div>
     <figcaption class="text-xs text-contour-weak">
       <p class="mt-1 mb-2 text-contour-weaker">
-        The lines in the graph represent best estimates. Learn more about uncertainties <a
-          class="underline decoration-theme-weakest hover:decoration-theme-weaker"
-          href="/{PATH_DOCUMENTATION}">here</a
+        The lines in the graph represent best estimates. Learn more about uncertainties <a class="underline decoration-theme-weakest hover:decoration-theme-weaker" href="/{PATH_DOCUMENTATION}">here</a
         >.
       </p>
       <dl class="flex gap-4">
-        <DefinitionItem
-          term="Model"
-          definition="FaIR v1.6.4"
-        />
-        <DefinitionItem
-          term="Source"
-          definition="Lamboll et al., 2022"
-          href="https://essopenarchive.org/doi/full/10.1002/essoar.10511875.1"
-        />
+        <DefinitionItem term="Model" definition="FaIR v1.6.4" />
+        <DefinitionItem term="Source" definition="Lamboll et al., 2022" href="https://essopenarchive.org/doi/full/10.1002/essoar.10511875.1" />
       </dl>
     </figcaption>
   </figure>
