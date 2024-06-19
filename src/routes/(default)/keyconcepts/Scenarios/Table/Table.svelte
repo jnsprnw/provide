@@ -198,7 +198,7 @@
 <div>
   <SubsectionHeadline title={LABEL_SCENARIOS_LIST} subtitle="Compare and select up to three scenarios to display them in the scenario explorer." />
 
-  <SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0}>
+  <SideScrollIndicator widthOfContent={widthColumns} distanceLeft={titleWidth} distanceRight={0} showScrollbars={true}>
     <div role="treegrid" class="grid" aria-rowcount={scenariosListed.length} style="grid-template-columns: {titleWidth}px {maxWidth};">
       <div role="rowgroup" class="grid max-w-full justify-start grid-cols-subgrid" style={subGridColumns}>
         <div role="row" class="grid grid-cols-subgrid" style={subGridColumns}>

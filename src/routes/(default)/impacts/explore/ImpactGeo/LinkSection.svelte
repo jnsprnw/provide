@@ -38,8 +38,7 @@
           <p class="mb-2">Learn how this data was used to assess future climate risks, and inform local studies on heat adaptation measures.</p>
         </div>
         <p class="text-md font-bold">
-          See <a class="text-theme-base underline underline-offset-4" href="/adaptation/{caseStudyGeography.uid}"> {caseStudyGeography.label} <span class="font-normal text-sm">→</span></a> case study<br
-          />
+          See <a class="text-theme-base underline underline-offset-4" href="/adaptation/{caseStudyGeography.uid}"> {caseStudyGeography.label}</a> case study<br />
         </p>
       </div>
     </div>
