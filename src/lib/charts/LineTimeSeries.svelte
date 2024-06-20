@@ -17,9 +17,7 @@
   export let xTicks = 4;
   export let yTicks = 4;
 
-  const padding = showcase
-    ? { top: 0, right: 0, bottom: 0, left: 0 }
-    : { top: 20, right: 10, bottom: 30, left: 40 };
+  const padding = showcase ? { top: 0, right: 0, bottom: 0, left: 0 } : { top: 20, right: 10, bottom: 30, left: 40 };
 
   const flatten = (data) =>
     data.reduce((memo, group) => {
@@ -38,24 +36,11 @@
 </script>
 
 <div class="chart-container">
-  <LayerCake
-    {padding}
-    x={xKey}
-    y={yKey}
-    {yDomain}
-    data={sortedData}
-    flatData={flatten(data)}
-  >
+  <LayerCake {padding} x={xKey} y={yKey} {yDomain} data={sortedData} flatData={flatten(data)}>
     <Svg>
       <AxisX ticks={xTicks} />
-      <AxisY
-        {padding}
-        ticks={yTicks}
-        xTick={-3}
-        formatTick={formatTickY}
-        ticksHighlighted={ticksYHighlighted}
-      />
-      <MultipleLineLayer animate={false} />
+      <AxisY {padding} ticks={yTicks} xTick={-3} formatTick={formatTickY} ticksHighlighted={ticksYHighlighted} />
+      <MultipleLineLayer />
       {#if !isMultiLine}
         <MultipleAreaLayer color={data[0].color} />
       {/if}

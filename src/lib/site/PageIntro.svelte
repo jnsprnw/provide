@@ -2,9 +2,9 @@
   import SideScrollIndicator from '../helper/SideScrollIndicator.svelte';
 
   export let isCompact = false;
-  export let subNavigation;
-  export let subNavigationLabel;
-  export let backLink;
+  export let subNavigation = undefined;
+  export let subNavigationLabel = undefined;
+  export let backLink = undefined;
 
   let widthContent = 0;
   let widthLabel = 0;

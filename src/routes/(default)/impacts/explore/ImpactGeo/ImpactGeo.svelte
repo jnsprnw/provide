@@ -7,33 +7,30 @@
     CURRENT_INDICATOR_OPTION_VALUES,
     CURRENT_SCENARIOS_UID,
     CURRENT_INDICATOR_OPTIONS,
+    AVAILABLE_IMPACT_GEO_YEARS,
+    DEFAULT_AVAILABLE_IMPACT_GEO_YEAR,
     TEMPLATE_PROPS,
     DOWNLOAD_URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
-    CURRENT_SCENARIOS,
   } from '$src/stores/state';
   import {
     URL_PATH_SCENARIO,
     URL_PATH_YEAR,
     URL_PATH_INDICATOR,
-    IMPACT_GEO_YEARS,
     IMPACT_GEO_DISPLAY_OPTIONS,
     END_GEO_SHAPE,
     END_IMPACT_GEO,
-    DEFAULT_IMPACT_GEO_YEAR,
     URL_PATH_GEOGRAPHY_TYPE,
     URL_PATH_GEOGRAPHY,
     URL_PATH_SCENARIOS,
     IMPACT_GEO_KEY_DIFFERENCE,
     IMPACT_GEO_KEY_SIDE_BY_SIDE,
     GEOGRAPHY_TYPE_CITY,
-    KEY_SCENARIO_STARTYEAR,
-    DEFAULT_STARTYEAR,
     COLOR_SCALES,
   } from '$config';
   import { writable } from 'svelte/store';
   import { fetchData } from '$lib/api/api';
-  import { extractEndYear } from '$utils/meta.js';
+
   import ChartFrame from '$lib/charts/ChartFrame/ChartFrame.svelte';
 
   import Controls from './Controls.svelte';
@@ -45,7 +42,7 @@
   import { isObject, isString, has } from 'lodash-es';
 
   export let tagline;
-  export let year = DEFAULT_IMPACT_GEO_YEAR;
+  export let year = undefined;
   export let displayOption = IMPACT_GEO_KEY_SIDE_BY_SIDE;
   export let showSatellite = false;
   export let showSatelliteOption = true;
@@ -55,25 +52,10 @@
   let IMPACT_GEO_DATA = writable([]);
   let GEO_SHAPE_DATA = writable({});
 
-  $: {
-    // Reset year if the currently selected one is not available
-    year = extractEndYear($CURRENT_SCENARIOS[0]) >= year ? year : DEFAULT_IMPACT_GEO_YEAR;
+  $: if (!$AVAILABLE_IMPACT_GEO_YEARS.includes(year) || typeof year === 'undefined') {
+    // Reset year if the currently selected one is not available or undefined
+    year = $DEFAULT_AVAILABLE_IMPACT_GEO_YEAR;
   }
-
-  $: ({ reference } = $CURRENT_INDICATOR_OPTIONS);
-
-  $: availableYears = IMPACT_GEO_YEARS.filter(
-    ({ uid: year }) => year <= extractEndYear($CURRENT_SCENARIOS[0]) && year >= ($CURRENT_SCENARIOS[0]?.[KEY_SCENARIO_STARTYEAR] ?? DEFAULT_STARTYEAR)
-  ).filter(({ uid }) => {
-    if (reference.uid !== 'absolute') {
-      return true;
-    }
-
-    if (reference.uid === 'absolute' && uid === 2020) {
-      return false;
-    }
-    return true;
-  });
 
   $: if ($IS_COMBINATION_AVAILABLE) {
     fetchData(
@@ -237,7 +219,15 @@
       {isProcessing}
     >
       <svelte:fragment slot="controls">
-        <Controls scenarios={props.scenarios} yearOptions={availableYears} displayOptions={IMPACT_GEO_DISPLAY_OPTIONS} {showSatelliteOption} bind:showSatellite bind:displayOption bind:year />
+        <Controls
+          scenarios={props.scenarios}
+          yearOptions={$AVAILABLE_IMPACT_GEO_YEARS}
+          displayOptions={IMPACT_GEO_DISPLAY_OPTIONS}
+          {showSatelliteOption}
+          bind:showSatellite
+          bind:displayOption
+          bind:year
+        />
       </svelte:fragment>
       <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>

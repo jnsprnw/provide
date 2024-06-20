@@ -10,13 +10,15 @@
   export let year;
   export let showSatellite;
   export let showSatelliteOption;
+
+  $: yearOptionsList = yearOptions.map((year) => ({ uid: year, label: String(year) }));
 </script>
 
 <div class="flex gap-6">
   {#if scenarios.length === 2}
     <SegmentedControl options={displayOptions} bind:value={displayOption} />
   {/if}
-  <Select options={yearOptions} bind:value={year} label="Year" />
+  <Select options={yearOptionsList} bind:value={year} label="Year" />
   {#if showSatelliteOption}
     <Switch bind:value={showSatellite} label="Show satellite" />
   {/if}

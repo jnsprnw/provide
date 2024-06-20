@@ -1,4 +1,5 @@
 import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
 import { CURRENT_GEOGRAPHY_UID, CURRENT_INDICATOR_OPTION_VALUES, CURRENT_INDICATOR_UID, CURRENT_SCENARIOS_UID } from '$stores/state.js';
 import { SELECTED_LIKELIHOOD_LEVEL, LEVEL_OF_IMPACT_ARRAY } from '$stores/avoid.js';
 import {
@@ -92,7 +93,7 @@ export function urlToState(currentUrl) {
       changeStoreToValue(store, param, { isIndicatorArray });
     }
   });
-  if (browser) window.history.replaceState(window.history.state, null, url.href);
+  if (browser) goto(url.href, { replaceState: false, noScroll: true, keepFocus: true });
 }
 
 export function buildURL(url, params = {}) {
