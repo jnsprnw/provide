@@ -205,6 +205,8 @@
 
   $: displayedGeoData = showSatellite ? geoData : maskedGeoData;
   $: isUrban = $CURRENT_GEOGRAPHY.geographyType === 'cities';
+
+  $: bounds = isUrban && showSatellite ? bbox(displayedGeoData[0].data) : bbox(geoShape);
 </script>
 
 <div class={`${aspectRatio} flex cols-${geoData.length} gap-x-[1px] animate-defer-visibility relative rounded border border-contour-weakest`}>
@@ -230,7 +232,7 @@
         class="w-full border-contour-weakest overflow-hidden relative"
       >
         {#key showSatellite}
-          <MapProvider bind:map={maps[i]} bounds={bbox(geoShape)} {interactive} {paint} hideLogo={i > 0} style={showSatellite && import.meta.env.VITE_MAPBOX_STYLE_SATELLITE}>
+          <MapProvider bind:map={maps[i]} {bounds} {interactive} {paint} hideLogo={i > 0} style={showSatellite && import.meta.env.VITE_MAPBOX_STYLE_SATELLITE}>
             {#if invertedGeoShape && !isUrban}
               <DataSource data={invertedGeoShape}>
                 <PolygonLayer before={showSatellite ? 'tunnel-path' : 'ocean-fill'} lineWidth={3} lineOffset={1.5} lineOpacity={0.1} lineColor={$theme.color.contour.base} />
@@ -244,7 +246,7 @@
                 <FilterLayer layer="admin-1-boundary" geo={geoShape} />
               </DataSource>
               <DataSource data={geoShape}>
-                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={4.5} lineOpacity={0.6} lineJoin="round" lineId="line-halo" />
+                <PolygonLayer before="waterway-label" fill={false} line={true} lineColor={$theme.color.surface.base} lineWidth={4.5} lineOpacity={0.5} lineJoin="round" lineId="line-halo" />
                 <PolygonLayer
                   before="waterway-label"
                   fill={false}
@@ -252,9 +254,9 @@
                   lineColor={$theme.color.contour.base}
                   lineWidth={1.2}
                   lineOpacity={0.85}
-                  lineDasharray={[1.5, 1.5, 4, 1.5]}
+                  lineDasharray={[1.3, 1.5, 4, 1.5]}
                   lineJoin="round"
-                  lineOffset={-1}
+                  lineOffset={-1.5}
                 />
               </DataSource>
             {/if}
