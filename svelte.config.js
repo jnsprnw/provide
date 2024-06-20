@@ -24,6 +24,9 @@ const config = {
     version: {
       name: process.env.npm_package_version,
     },
+    prerender: {
+      handleMissingId: 'warn',
+    },
   },
   preprocess: sequence([
     preprocess({
