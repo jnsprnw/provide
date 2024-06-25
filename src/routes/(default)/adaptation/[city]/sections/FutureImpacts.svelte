@@ -25,7 +25,7 @@
     <PillGroup class="mb-6" label="Indicator" size="sm" allowWrap={false} options={indicators} bind:currentUid={$indicator} />
   {/if}
   <figure class="mb-10">
-    <img class="mb-2" src={timeSelection.image.url} alt={timeSelection.image?.alternativeText} />
+    <img class="mb-2" src={getStrapiImageAtSize(timeSelection.image).url} alt={timeSelection.image?.alternativeText} />
     <figcaption class="flex gap-6 justify-between align-middle">
       <div class="text-sm text-text-weaker max-w-[40em]">{impactTimeDescription}</div>
       <ExplorerLink href={explorerUrl} />
@@ -36,7 +36,7 @@
     <PillGroup class="mb-4" label="Year" size="sm" allowWrap={false} options={years} bind:currentUid={$year} />
   {/if}
   <figure>
-    <img class="mb-2" src={geoSelection.image.url} alt={timeSelection.image?.alternativeText} />
+    <img class="mb-2" src={getStrapiImageAtSize(geoSelection.image).url} alt={timeSelection.image?.alternativeText} />
     <figcaption class="flex gap-6 justify-between align-middle">
       <div class="text-sm text-text-weaker max-w-[40em]">{impactGeoDescription}</div>
       <ExplorerLink href={explorerUrl} />
