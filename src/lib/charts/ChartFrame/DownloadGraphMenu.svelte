@@ -42,7 +42,7 @@
         return null;
       }
       try {
-        return new URL(`${host}/embed/${embedUid}/?${graphQuery}`);
+        return new URL(`${host}/embed/${embedUid}?${graphQuery}`);
       } catch (error) {
         console.error(error);
         return null;
@@ -87,7 +87,7 @@
 
   $: screenshotUrl = buildScreenshotUrl(format, width, processingIntensity, graphUrl);
 
-  $: console.log({ graphUrl, screenshotUrl });
+  //$: console.log({ graphUrl, screenshotUrl });
 
   $: isDownloadAvailable = graphUrl && screenshotUrl && screenshotName;
 
