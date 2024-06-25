@@ -23,7 +23,7 @@
     const url = import.meta.env.VITE_APP_URL;
     if (url) {
       try {
-        const host = `${new URL(url).hostname}/`;
+        const host = new URL(url).hostname;
         return {
           url,
           host,
