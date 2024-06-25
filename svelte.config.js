@@ -4,6 +4,7 @@ import preprocess from 'svelte-preprocess';
 import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterStatic from '@sveltejs/adapter-static';
 const isStatic = process.env.VITE_BUILD_ENV === 'static';
+console.log('=======>', isStatic, process.env.VITE_BUILD_ENV);
 const adapter = isStatic ? adapterStatic : adapterNetlify;
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
