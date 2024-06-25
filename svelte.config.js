@@ -3,8 +3,9 @@ import sequence from 'svelte-sequential-preprocessor';
 import preprocess from 'svelte-preprocess';
 import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterStatic from '@sveltejs/adapter-static';
-const isStatic = process.env.VITE_BUILD_ENV === 'static';
+const isStatic = process.env.BUILD_ENV === 'static';
 const adapter = isStatic ? adapterStatic : adapterNetlify;
+console.log(`Using ${isStatic ? 'static' : 'netlify'} adapter.`);
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
   kit: {
