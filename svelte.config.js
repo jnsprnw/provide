@@ -27,6 +27,20 @@ const config = {
     },
     prerender: {
       handleMissingId: 'warn',
+      entries: [
+        '/',
+        '/about',
+        '/adaptation',
+        '/contact',
+        '/impacts/avoid',
+        '/impacts/explore',
+        '/issues',
+        '/keyconcepts',
+        '/methodology',
+        '/embed/impact-time',
+        '/embed/impact-geo',
+        '/embed/unavoidable-risk',
+      ],
     },
   },
   preprocess: sequence([

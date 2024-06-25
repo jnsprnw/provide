@@ -34,6 +34,9 @@ const urlToStateMapping = [
 ];
 
 export const parseUrlQuery = (url) => {
+  if (!browser) {
+    return {};
+  }
   const params = parse(url.search.replace(/^\?/, ''));
 
   // Filter out all values that are strings (not arrays) so we can pass them to autotype
@@ -70,6 +73,7 @@ function changeStoreToValue(store, value, { mode, isIndicatorArray }) {
 }
 
 export function urlToState(currentUrl) {
+  if (!browser) return false;
   const url = new URL(currentUrl);
   const params = parse(url.search.replace(/^\?/, ''));
   urlToStateMapping.forEach(({ store, key, isIndicatorArray = false }) => {
