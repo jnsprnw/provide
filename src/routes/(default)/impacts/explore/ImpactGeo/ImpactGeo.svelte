@@ -12,6 +12,7 @@
     TEMPLATE_PROPS,
     DOWNLOAD_URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
+    IS_STATIC
   } from '$src/stores/state';
   import {
     URL_PATH_SCENARIO,
@@ -35,7 +36,7 @@
 
   import Controls from './Controls.svelte';
   import Maps from './Maps.svelte';
-  //import LinkSection from './LinkSection.svelte';
+  import LinkSection from './LinkSection.svelte';
   import { getColorScale, coordinatesToRectGrid, calculateDifference, coordinatesToContours } from '$utils/geo.js';
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
@@ -231,7 +232,9 @@
       </svelte:fragment>
       <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>
-    <!-- <LinkSection geography={$CURRENT_GEOGRAPHY} /> -->
+    {#if !$IS_STATIC}
+    <LinkSection geography={$CURRENT_GEOGRAPHY} />
+    {/if}
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
 {/if}

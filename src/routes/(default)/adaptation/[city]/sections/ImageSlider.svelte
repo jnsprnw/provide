@@ -29,6 +29,7 @@
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
 
   let widthContent;
+  
 </script>
 
 <div class="flex flex-wrap gap-10">
@@ -52,9 +53,9 @@
   {:else if imagePair.image1 && imagePair.image2}
     <figure class="mb-2 flex flex-col gap-1">
       <CompareImage
-        imageLeftSrc={imagePair.image1.url}
+        imageLeftSrc={getStrapiImageAtSize(imagePair.image1).url}
         imageLeftAlt="left"
-        imageRightSrc={imagePair.image2.url}
+        imageRightSrc={getStrapiImageAtSize(imagePair.image2).url}
         imageRightAlt="right"
         --handle-size="3rem"
         --handle-background-color="rgba(0, 0, 0, 0.6)"
