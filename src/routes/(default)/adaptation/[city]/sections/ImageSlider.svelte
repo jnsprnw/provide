@@ -29,7 +29,6 @@
   $: thumbnails = !allowImageSelection ? imagePairs.slice(1) : imagePairs;
 
   let widthContent;
-  
 </script>
 
 <div class="flex flex-wrap gap-10">
@@ -53,9 +52,9 @@
   {:else if imagePair.image1 && imagePair.image2}
     <figure class="mb-2 flex flex-col gap-1">
       <CompareImage
-        imageLeftSrc={getStrapiImageAtSize(imagePair.image1).url}
+        imageLeftSrc={getStrapiImageAtSize(imagePair.image1)}
         imageLeftAlt="left"
-        imageRightSrc={getStrapiImageAtSize(imagePair.image2).url}
+        imageRightSrc={getStrapiImageAtSize(imagePair.image2)}
         imageRightAlt="right"
         --handle-size="3rem"
         --handle-background-color="rgba(0, 0, 0, 0.6)"
@@ -93,7 +92,7 @@
             >
               <figure>
                 <span class:border-theme-base={thumbnail === imagePair} class="rounded-sm overflow-hidden inline-block border border-contour-weakest">
-                  <img class:opacity-40={thumbnail === imagePair} src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} />
+                  <img class:opacity-40={thumbnail === imagePair} src={getStrapiImageAtSize(thumbnail.image1, 'small')} alt={thumbnail.image1.alternativeText} />
                 </span>
                 <figcaption class="text-sm text-theme-base leading-tight" class:font-bold={thumbnail.description}>
                   {thumbnail.group.label}
@@ -103,7 +102,7 @@
             </button>
           {:else}
             <figure>
-              <img src={getStrapiImageAtSize(thumbnail.image1, 'small').url} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
+              <img src={getStrapiImageAtSize(thumbnail.image1, 'small')} alt={thumbnail.image1.alternativeText} class:opacity-50={thumbnail === imagePair} />
               <figcaption class="text-text-weaker text-sm mt-2">
                 <h4 class:font-bold={thumbnail.description} class="mb-1">
                   {thumbnail.group.label}
