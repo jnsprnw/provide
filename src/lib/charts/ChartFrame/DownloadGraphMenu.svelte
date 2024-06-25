@@ -87,6 +87,8 @@
 
   $: screenshotUrl = buildScreenshotUrl(format, width, processingIntensity, graphUrl);
 
+  $: console.log({ graphUrl, screenshotUrl });
+
   $: isDownloadAvailable = graphUrl && screenshotUrl && screenshotName;
 
   $: downloadImage = async () => {
