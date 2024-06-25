@@ -128,7 +128,6 @@ const fetchSingle = (store, { endpoint, params }) => {
     encodeValuesOnly: true,
   });
   const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
-  // console.log({ url });
   const cached = cache[url];
 
   if (cached) {

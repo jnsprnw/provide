@@ -34,7 +34,6 @@ function createMask(geoData, geoShape) {
         intersection = intersect(feature, geoShape);
       } catch (error) {
         // console.error(error);
-        console.log({ feature, geoShape });
         console.warn(`Invalid geography. Could not calculate intersection.`);
         intersection = feature;
       }

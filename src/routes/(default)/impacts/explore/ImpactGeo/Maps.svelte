@@ -136,7 +136,6 @@
       return mask(geoShape);
     } catch (error) {
       console.warn(`Invalid geoShape`);
-      // console.log({ geoShape });
       return undefined;
     }
   }
@@ -149,7 +148,6 @@
   $: hasWorker && createMaske(geoData, geoShape);
 
   let maskedGeoData = [];
-  // $: console.log({ geoShape }, isValid(geoShape));
   $: invertedGeoShape = invertShape(geoShape);
   let interactive = false;
   $: aspectRatio = {

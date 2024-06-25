@@ -39,8 +39,6 @@
   $: currentTab = tabs.find(({ href }) => checkCurrentLink(href, $page));
   $: currentTitle = currentTab?.title;
   $: currentIntro = currentTab?.intro;
-
-  $: console.log(import.meta.env.VITE_MAPBOX_STYLE_SATELLITE, import.meta.env.VITE_MAPBOX_STYLE_GLOBE, import.meta.env.VITE_MAPBOX_STYLE_LIGHT, import.meta.env.VITE_MAPBOX_STYLE_STUDY_LOCATIONS);
 </script>
 
 <PageIntro>

@@ -8,7 +8,6 @@ _.templateSettings = {
 export default function renderTemplate(template, data) {
   try {
     return compile(template)(data);
-    //console.log(template, data, renderedTemplate);
   } catch (e) {
     console.error(e);
     return '';

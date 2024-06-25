@@ -41,7 +41,6 @@ export const formatList = function (_arr = []) {
 };
 
 export function extractEndYearFromScenarios(available, selectable) {
-  // console.log({ available, selectable });
   const valid = uniq(selectable.map((s) => s.endYear));
 
   return _(available)
