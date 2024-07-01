@@ -57,7 +57,7 @@ const loadExplainer = async ({ fetch, parent }) => {
 };
 
 const loadGlossary = async ({ fetch }) => {
-  const data = await loadFromStrapi('glossaries', fetch);
+  const data = await loadFromStrapi('glossaries', fetch, undefined, 'sort[0]=id');
   const entries = data.map((d) => {
     const { Title, Category, Link, UID, Description, Abbreviation } = d.attributes;
     return {
@@ -82,6 +82,7 @@ const loadGlossary = async ({ fetch }) => {
     entries: [],
     categories: [],
     content,
+    raw: entries,
   };
 };
 
