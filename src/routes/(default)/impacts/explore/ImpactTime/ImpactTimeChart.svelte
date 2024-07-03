@@ -92,7 +92,7 @@
     };
   });
 
-  $: requiredDecimalsForBoxplots = findDecimalsForDistinctValues(endBoundsData.map(({ value, min, max }) => [min, max, value]).flat());
+  $: requiredDecimalsForBoxplots = findDecimalsForDistinctValues(endBoundsData.map(({ value, min, max }) => [min, max, value]).flat(), unit.uid);
   $: formatBoxplotValueY = (d) => formatValue(d, unitUID, { addSuffix: false, decimals: requiredDecimalsForBoxplots });
 
   // Data for generating popovers
