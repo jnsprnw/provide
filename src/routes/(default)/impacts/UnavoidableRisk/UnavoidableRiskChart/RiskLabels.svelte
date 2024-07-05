@@ -3,8 +3,7 @@
   import { UNAVOIDABLE_UID } from '$src/config';
   import { extent, max } from 'd3-array';
   import { groupBy } from 'lodash-es';
-  import Bar from './Bar.svelte';
-  import Label from './Label.svelte';
+  import Labels from './Labels.svelte';
 
   const { data, yScale } = getContext('LayerCake');
   $: unavoidable = $data.find((d) => d.uid === UNAVOIDABLE_UID);
@@ -94,78 +93,15 @@
       label: hasNoRange ? tick.labelFallback : tick.label,
       min,
       max,
-      latest: hasNoRange ? { range: [0, 0], year: lastYear } : tick.latest
+      latest: hasNoRange ? { range: [0, 0], year: lastYear } : tick.latest,
     };
   });
 
   $: fullHeight = $yScale.range()[0];
 
   $: differentYears = ticks[0].latest?.year !== ticks[1].latest?.year && typeof ticks[0].latest?.year !== 'undefined' && typeof ticks[1].latest?.year !== 'undefined';
-
-  $: sameYearGap = differentYears ? 0 : 1; // This gets added and subtracted from the bar size to have a small gap if the years are the same.
-
-  $: ([unavoidableTick, avoidableTick] = ticks);
-
-  function calculatePositions(ticks) {
-    const [unavoidableTick, avoidableTick] = ticks;
-    const unavoidableLeft = avoidableTick.min < 0.2 && avoidableTick.max > 0.5 ? 10 : 0;
-    const unavoidableAlignment = unavoidableTick.hasNoRange && !avoidableTick.hasNoRange ? 'items-start' : 'items-end';
-    const avoidableAlignment = avoidableTick.max > 0.5 ? 'items-start' : 'items-end';
-    return {
-      left: [unavoidableLeft, 0],
-      alignment: [unavoidableAlignment, avoidableAlignment]
-    }
-  }
-
-  $: positions = calculatePositions(ticks)
-
-  let avoidableHeight;
 </script>
 
 <div class="ml-2 w-full relative">
-  <!-- Unavoidable risk -->
-  {#if !unavoidableTick.hasNoRange || noScenariosAtAll}
-    {#if !noScenariosAtAll}
-    <Bar
-        color={unavoidableTick.bar}
-        y2={unavoidableTick.y2 + sameYearGap}
-        totalHeight={unavoidableTick.height}
-        hasNoRange={unavoidableTick.hasNoRange}
-    />
-    {/if}
-    <Label
-        fullHeight={avoidableTick.max < 0.5 && !unavoidableTick.hasNoRange ? fullHeight - avoidableHeight - 20 : fullHeight}
-        hasNoRange={unavoidableTick.hasNoRange && avoidableTick.max > 0.8}
-        {differentYears}
-        latest={noScenariosAtAll ? undefined : unavoidableTick.latest}
-        label={noScenariosAtAll ? 'The risk of this event happening remains zero in all scenarios' : unavoidableTick.label}
-        text={unavoidableTick.text}
-        alignment={positions.alignment[0]}
-        y={0}
-        left={positions.left[0]}
-        displayRange={false}
-    />
-  {/if}
-  <!-- Avoidable risk -->
-  {#if !avoidableTick.hasNoRange}
-    <Bar
-        color={avoidableTick.bar}
-        y2={avoidableTick.y2}
-        totalHeight={avoidableTick.height - sameYearGap}
-        hasNoRange={avoidableTick.hasNoRange}
-        left={differentYears ? 10 : 0}
-    />
-    <Label
-        bind:height={avoidableHeight}
-        fullHeight={avoidableTick.height}
-        hasNoRange={avoidableTick.hasNoRange}
-        {differentYears}
-        latest={avoidableTick.latest}
-        label={avoidableTick.label}
-        text={avoidableTick.text}
-        alignment={positions.alignment[1]}
-        y={avoidableTick.y2}
-        left={differentYears ? 10 : 0}
-    />
-  {/if}
+  <Labels {fullHeight} {ticks} {differentYears} {noScenariosAtAll} />
 </div>
