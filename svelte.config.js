@@ -1,38 +1,53 @@
+import { preprocessMeltUI } from '@melt-ui/pp';
+import sequence from 'svelte-sequential-preprocessor';
+import preprocess from 'svelte-preprocess';
 import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterStatic from '@sveltejs/adapter-static';
-import sveltePreprocess from 'svelte-preprocess';
-import path from 'path';
-import { sequence } from './sequence.js';
-import importAssets from 'svelte-preprocess-import-assets';
-
-// sequence([sveltePreprocess(), importAssets()]),
-
 const isStatic = process.env.BUILD_ENV === 'static';
 const adapter = isStatic ? adapterStatic : adapterNetlify;
-
-/** @type {import('@sveltejs/kit').Config} */
+console.log(`Using ${isStatic ? 'static' : 'netlify'} adapter.`);
+/** @type {import('@sveltejs/kit').Config}*/
 const config = {
-  preprocess: sveltePreprocess(),
   kit: {
-    adapter: adapter(),
-    prerender: {
-      default: isStatic,
+    alias: {
+      $src: 'src',
+      $config: 'src/config.js',
+      $styles: 'src/styles',
+      $lib: 'src/lib',
+      $utils: 'src/lib/utils',
+      $stores: 'src/stores',
+      $helper: 'src/lib/helper',
+      $routes: 'src/routes',
+      $workers: 'src/lib/workers',
+      $formatting: 'src/lib/utils/formatting.js',
     },
-    vite: {
-      experimental: {
-        useVitePreprocess: true,
-      },
-
-      resolve: {
-        alias: {
-          $lib: path.resolve('./src/lib'),
-          $stores: path.resolve('./src/stores'),
-          $styles: path.resolve('./src/styles'),
-          $helper: path.resolve('./src/lib/helper'),
-        },
-      },
+    adapter: adapter(),
+    version: {
+      name: process.env.npm_package_version,
+    },
+    prerender: {
+      handleMissingId: 'warn',
+      entries: [
+        '/',
+        '/about',
+        '/adaptation',
+        '/contact',
+        '/impacts/avoid',
+        '/impacts/explore',
+        '/issues',
+        '/keyconcepts',
+        '/methodology',
+        '/embed/impact-time',
+        '/embed/impact-geo',
+        '/embed/unavoidable-risk',
+      ],
     },
   },
+  preprocess: sequence([
+    preprocess({
+      postcss: true,
+    }),
+    preprocessMeltUI(),
+  ]),
 };
-
 export default config;

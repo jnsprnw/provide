@@ -1,15 +1,10 @@
-import { get, set, compact, uniq } from 'lodash-es';
-import { loadFromAPI } from '$lib/../routes/api/utils.js';
-import qs from 'qs';
-import { browser } from '$app/env';
-import {
-  STATUS_LOADING,
-  STATUS_SUCCESS,
-  STATUS_FAILED,
-} from '$lib/../config.js';
+import _, { kebabCase, uniq } from 'lodash-es';
+import { extractEndYear } from '$utils/meta.js';
+import { formatValue } from '$utils/formatting';
 
-export const getUID = function (obj) {
-  return obj?.uid || null;
+export const formatReadableList = function (arr, key) {
+  const segments = formatObjArr(arr, key);
+  return segments.map((s) => (s.type === 'element' ? s.value[key] : s.value)).join('');
 };
 
 export const formatObjArr = function (arr, key) {
@@ -24,10 +19,7 @@ export const formatObjArr = function (arr, key) {
   return list.map((obj) => {
     return {
       ...obj,
-      value:
-        obj.type === 'literal'
-          ? obj.value
-          : arr.find((d) => d[key] === obj.value),
+      value: obj.type === 'literal' ? obj.value : arr.find((d) => d[key] === obj.value),
     };
   });
 };
@@ -48,42 +40,46 @@ export const formatList = function (_arr = []) {
   };
 };
 
-async function request(params, url) {
-  const query = qs.stringify(params, {
-    encodeValuesOnly: true,
-  });
-  // console.log("loading:", { params, url, query, url }, `${url}?${query}`);
-  return await loadFromAPI(`${url}?${query}`);
+export function extractEndYearFromScenarios(available, selectable) {
+  const valid = uniq(selectable.map((s) => s.endYear));
+
+  return _(available)
+    .map((s) => extractEndYear(s))
+    .uniq()
+    .sort()
+    .map((uid) => ({ uid: parseInt(uid), label: uid, disabled: !valid.includes(uid) }))
+    .value();
 }
 
-export function hasInObject(data, addr, param) {
-  return compact(
-    addr.map((a, i) => (get(data, a) ? false : { addr: a, param: param[i] }))
+export function slugify(name) {
+  return kebabCase(
+    name
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/ô|ö|ò|ó/g, 'o')
+      .replace(/è|é|ë/g, 'e')
+      .replace(/ü/g, 'u')
+      .replace(/ï|ì|í/g, 'i')
+      .replace(/\W+/g, '-')
+      .replace(/^\W|\W$/g, '')
   );
 }
 
-function updateDate(old, addr, newData) {
-  const obj = old;
-  set(obj, addr, newData);
-  return obj;
+export function getMarginLeft(valueMax, unit, minMargin = 40) {
+  const str = String(formatValue(valueMax, unit));
+  return Math.max(str.length * 8, minMargin);
 }
 
-export async function load(cache, endpoint, param, addr, url) {
-  if (!browser) {
-    cache.update((old) =>
-      updateDate(old, addr, { status: STATUS_LOADING, data: {} })
-    );
-    return;
-  }
+// Returns the largest availalbe image url based on the specified size
+// Valid sizes are the ones provided by strapi/cloudinary (large, medium, small, thumbnail)
+export const getStrapiImageAtSize = (image) => {
+  const { hash, url } = image;
+  const regex = /(https:\/\/res\.cloudinary\.com\/[^\/]+\/image\/upload)/;
 
-  cache.update((old) =>
-    updateDate(old, addr, { status: STATUS_LOADING, data: {} })
-  );
-  const newData = await request(param, url);
-  cache.update((old) =>
-    updateDate(old, addr, {
-      status: newData ? STATUS_SUCCESS : STATUS_FAILED,
-      data: newData,
-    })
-  );
-}
+  const match = url.match(regex);
+  const extractedUrl = match ? match[0] : '';
+  const newURL = extractedUrl + '/f_auto,q_auto/' + hash;
+
+  return newURL;
+};

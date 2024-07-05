@@ -2,11 +2,14 @@
   export let direction;
 </script>
 
-<dl class="chart-info-facts" class:chart-info-facts--horizontal={direction === 'horizontal'}>
+<dl
+  class="chart-info-facts"
+  class:chart-info-facts--horizontal={direction === 'horizontal'}
+>
   <slot />
 </dl>
 
-<style lang="scss">
+<style lang="postcss">
   .chart-info-facts {
     color: var(--color-text-weaker);
     font-size: var(--font-size-large-s);

@@ -1,8 +1,9 @@
 <script>
-  import { CURRENT_SCENARIOS } from '$lib/../stores/store';
+  import { CURRENT_SCENARIOS } from '$src/stores/state';
   import { formatObjArr } from '$lib/utils.js';
-  export let scenarios = $CURRENT_SCENARIOS;
   import ScenarioSingle from './ScenarioSingle.svelte';
+
+  export let scenarios = $CURRENT_SCENARIOS;
 
   $: scenarioList = formatObjArr(scenarios, 'label');
 </script>

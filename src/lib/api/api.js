@@ -1,178 +1,153 @@
-// This file holds the handle function, which all endpoints use to interact with the API.
-import { get as take } from 'svelte/store';
-import { load, hasInObject } from '$lib/utils.js';
-import { get, map } from 'lodash-es';
-import {
-  END_IMPACT_TIME,
-  END_DISTRIBUTION,
-  END_UN_AVOIDABLE_RISK,
-  END_IMPACT_GEO,
-  END_GEO_SHAPE,
-  END_IMPACT_TIME_ALL,
-} from '$lib/../config.js';
-import { IMPACT_TIME_CACHE } from '$lib/../stores/impact-time.js';
-import { IMPACT_TIME_DISTRIBUTION_CACHE } from '$lib/../stores/impact-time-distribution.js';
-import { IMPACT_GEO_CACHE } from '$lib/../stores/impact-geo.js';
-import { GEO_SHAPE_CACHE } from '$lib/../stores/geo-shape.js';
-import { UN_AVOIDABLE_RISK_CACHE } from '$lib/../stores/un-avoidable-risk.js';
-import {
-  CURRENT_GEOGRAPHY_UID,
-  CURRENT_SCENARIOS_UID,
-  CURRENT_INDICATOR_UID,
-  CURRENT_INDICATOR_OPTION_VALUES,
-  CURRENT_INDICATOR_PARAMETERS_KEYS,
-  CURRENT_IMPACT_GEO_YEAR_UID,
-} from '$lib/../stores/store.js';
-import { IMPACT_TIME_ALL_CACHE } from '$lib/../stores/impact-time-all';
+import { STATUS_FAILED, STATUS_LOADING, STATUS_SUCCESS } from '$src/config';
+import qs from 'qs';
+import { forEach, reduce } from 'lodash-es';
+import { browser } from '$app/environment';
 
-function returnDefault(callback) {
-  if (callback === 'get') {
-    return [];
-  } else if (callback === 'has') {
-    return [false];
-  } else {
-    return undefined;
-  }
+/*
+ * These functions are intended to dynamically load data from the client upon user interaction
+ * They will not do anything when called on the server, other than returning an emty "loading" response
+ */
+
+const cache = {}; // Initializes an object to serve as a cache for storing fetch responses.
+
+function buildStatusError(message, isExpected) {
+  return {
+    status: STATUS_FAILED,
+    message,
+    isExpected,
+  };
 }
 
-export function handle(
-  endpoint,
-  callback,
-  params = {},
-  trigger // This is used for the custom requests. Since the need to be reactive, we need the store to be used in the function call. We basically through it away and don‘t use it.
-) {
-  let addr;
-  let data;
-  let store;
-  let param;
-  let url;
-  let scenario;
+function buildStatusSuccess(data) {
+  return {
+    status: STATUS_SUCCESS,
+    data,
+  };
+}
 
-  const geography = params.geography || take(CURRENT_GEOGRAPHY_UID);
-  const indicator = params.indicator || take(CURRENT_INDICATOR_UID);
-  const scenarios = params.scenarios || take(CURRENT_SCENARIOS_UID);
-  const impactGeoYear =
-    params.impactGeoYear || take(CURRENT_IMPACT_GEO_YEAR_UID);
+/*
+ * Loads data from Climate Analytics API
+ */
+export const loadFromAPI = async function (url) {
+  // If this is executed on the server, we simply pretend to be loading so the rest
+  // of the loading process doesn't need to be altered
+  if (!browser) return new Promise((res) => res);
+  try {
+    const res = await fetch(url); // ${import.meta.env.VITE_DATA_API_URL}
+    const data = await res.json();
 
-  if (!geography || !indicator || scenarios.length === 0) {
-    return returnDefault(callback);
+    // Error handling based on the response status or the presence of a message in the data.
+    if (res.status != 200 || data.message) {
+      console.warn(`Request failed with status code: ${res.status}`);
+      // Returning an object with detailed information about the failure
+      return buildStatusError(data.message ?? `Request failed with status code: ${res.status}`, data.isExpected ?? false);
+    }
+    // If successful, returning an object with status and the parsed JSON data.
+    return buildStatusSuccess(data);
+  } catch (e) {
+    // Catching and handling any errors that occur during the fetch request.
+    return buildStatusError(e.toString(), false);
   }
+};
 
-  const options = take(CURRENT_INDICATOR_PARAMETERS_KEYS).reduce(
-    (result, key) => {
-      return {
-        ...result,
-        [key]:
-          get(params, ['options', key]) ||
-          get(take(CURRENT_INDICATOR_OPTION_VALUES), [key]),
-      };
+/*
+ * This function accepts an array or dictionary of config objects.
+ * For each config, data is either retreived from cache or loaded from the api
+ * Data is then stored on a svelte store.
+ */
+const fetchMultiple = (store, configs) => {
+  const isObject = configs.constructor === Object;
+  // Create object/array of url string used to retrieve data either from cache or api
+  const urls = reduce(
+    configs,
+    (acc, { endpoint, params }, keyOrIndex) => {
+      const query = qs.stringify(params, {
+        encodeValuesOnly: true,
+      });
+      const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
+      acc[keyOrIndex] = url;
+      return acc;
     },
-    {}
+    isObject ? {} : []
   );
 
-  const optionsValues = map(options, (value) => value);
+  // console.log(urls);
 
-  switch (endpoint) {
-    case END_IMPACT_TIME_ALL:
-      addr = scenarios.map((scenario) => {
-        return [geography, scenario];
+  // Create array or object containing either cached data or empty objects
+  const initialData = reduce(
+    configs,
+    (acc, config, keyOrIndex) => {
+      const url = urls[keyOrIndex];
+      const cached = cache[url];
+      if (cached) {
+        acc[keyOrIndex] = cached;
+      } else {
+        // Intial empty object holding promise as data
+        const loadingData = {
+          url,
+          status: STATUS_LOADING,
+          loading: loadFromAPI(url),
+          data: null,
+        };
+        cache[url] = loadingData;
+        acc[keyOrIndex] = loadingData;
+      }
+      return acc;
+    },
+    isObject ? {} : []
+  );
+
+  // Set initial data
+  store.set(initialData);
+
+  // Go through initial data and check if there is a pending promise
+  // If promise is present, update data on resolve
+  forEach(initialData, (d, keyOrIndex) => {
+    if (typeof d.loading?.then !== 'function') return;
+    d.loading.then((res) => {
+      cache[d.url] = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
+
+      store.update((old) => {
+        // Simple check to make sure no newer data has been requested in the meantime
+        if (old[keyOrIndex] !== d) return old;
+        const next = isObject ? { ...old } : [...old];
+        next[keyOrIndex] = cache[d.url];
+        return next;
       });
-      param = scenarios.map((scenario) => ({
-        geography,
-        scenario,
-      })); // We need this for the load function
-      data = take(IMPACT_TIME_ALL_CACHE);
-      store = IMPACT_TIME_ALL_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time`;
-      break;
-    case END_DISTRIBUTION:
-      scenario = scenarios[0];
-      addr = [[geography, scenario, indicator, ...optionsValues]];
-      param = [{ geography, indicator, scenarios: [scenario], ...options }]; // We need this for the load function
-      data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
-      store = IMPACT_TIME_DISTRIBUTION_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time-distribution`;
-      break;
-    case END_IMPACT_TIME:
-      addr = scenarios.map((scenario) => {
-        return [geography, scenario, indicator, ...optionsValues];
-      });
-      param = scenarios.map((scenario) => ({
-        geography,
-        indicators: [indicator],
-        scenario,
-        ...options,
-      })); // We need this for the load function
-      data = take(IMPACT_TIME_CACHE);
-      store = IMPACT_TIME_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time`;
-      break;
-    case END_DISTRIBUTION:
-      scenario = scenarios[0];
-      addr = [[geography, scenario, indicator, ...optionsValues]];
-      param = [{ geography, indicator, scenarios: [scenario], ...options }]; // We need this for the load function
-      data = take(IMPACT_TIME_DISTRIBUTION_CACHE);
-      store = IMPACT_TIME_DISTRIBUTION_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/impact-time-distribution`;
-      break;
-    case END_IMPACT_GEO:
-      addr = scenarios.map((scenario) => {
-        return [
-          geography,
-          scenario,
-          indicator,
-          ...optionsValues,
-          impactGeoYear,
-        ];
-      });
-      param = scenarios.map((scenario) => ({
-        geography,
-        indicator,
-        scenario,
-        ...options,
-        year: impactGeoYear,
-      }));
-      data = take(IMPACT_GEO_CACHE);
-      store = IMPACT_GEO_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/impact-geo`;
-      break;
-    case END_GEO_SHAPE:
-      addr = [[geography]];
-      param = [{ geography }];
-      data = take(GEO_SHAPE_CACHE);
-      store = GEO_SHAPE_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/geo-shape`;
-      break;
-    case END_UN_AVOIDABLE_RISK:
-      addr = [[geography, indicator, ...optionsValues]];
-      param = [{ geography, indicator, ...options }]; // We need this for the load function
-      data = take(UN_AVOIDABLE_RISK_CACHE);
-      store = UN_AVOIDABLE_RISK_CACHE;
-      url = `${import.meta.env.VITE_DATA_API_URL}/unavoidable-risk`;
-      break;
+    });
+  });
+};
+
+const fetchSingle = (store, { endpoint, params }) => {
+  if (typeof store === 'undefined') {
+    console.warn('Store to save fetch result is undefined');
+    return false;
   }
-  if (addr && data && store && url) {
-    let missing;
-    if (callback === 'get' || callback === 'has') {
-      missing = hasInObject(data, addr, param);
-    }
-    if (callback === 'get') {
-      // We always check if the data is available to trigger a load.
-      // We could probably make this faster by not letting check call handle again, but instead call the load function from here directly with the list of missing data points.
-      missing.forEach(({ addr, param }) => {
-        // We load each missing data point. In our case, a list of scenarios with other parameters
-        load(store, endpoint, param, addr, url);
+  // console.log(`Fetching single ${endpoint}`, get(store), { id });
+  const query = qs.stringify(params, {
+    encodeValuesOnly: true,
+  });
+  const url = `${import.meta.env.VITE_DATA_API_URL}/${endpoint}/?${query}`;
+  const cached = cache[url];
+
+  if (cached) {
+    store.set(cached);
+  } else {
+    const loadingData = { status: STATUS_LOADING, data: null };
+    cache[url] = loadingData;
+    store.set(loadingData);
+    loadFromAPI(url).then((res) => {
+      const currentData = res.data ? buildStatusSuccess(res.data) : buildStatusError(res.message, res.isExpected);
+      cache[url] = currentData;
+      store.update((d) => {
+        if (d !== loadingData) return d;
+        return currentData;
       });
-      // We could also just return the array and let the component extract the first (and only) value
-      return addr.map((a) => get(data, a));
-      // const values = addr.map(a => get(data, a));
-      // return values.length > 1 ? values : values[0];
-    } else if (callback === 'has') {
-      // We return a list of missing data points
-      return missing;
-    } else if (callback === 'addr') {
-      return addr;
-    }
+    });
   }
-  return returnDefault(callback);
-}
+};
+
+export const fetchData = (store, config = []) => {
+  if (config.endpoint && config.params) fetchSingle(store, config);
+  else fetchMultiple(store, config);
+};

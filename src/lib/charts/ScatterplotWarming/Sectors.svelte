@@ -104,9 +104,9 @@
   </g>
 {/each}
 
-<style lang="scss">
+<style lang="postcss">
   .sector {
-    stroke: var(--color-background-base);
+    stroke: var(--color-surface-base);
     stroke-width: 1;
     shape-rendering: crispEdges;
     transition: fill var(--transition-duration-base) ease-out;

@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
   import Dots from '../layers/Dots.svelte';
   import Sectors from './Sectors.svelte';
   import AxisX from '../axes/AxisX.svelte';
@@ -21,14 +21,7 @@
   $: formatTickX = (d) => formatValue(d, unitX);
   $: formatTickY = (d) => formatValue(d, unitY);
 
-  //$: console.log({ unitX, formatTickX }, formatTickX(0.5))
-
   $: sortedData = sortBy(data, ['highlight', 'isSelected']);
-  // This sorting is somewhat buggy.
-  // $: sortedData = data.slice(0).sort((a, b) =>
-  //   // First sort by `highlight`, then by `color`
-  //   a.highlight && !b.highlight ? 1 : a.color && !b.color ? 1 : -1
-  // );
   export let hoveredSector;
 </script>
 
@@ -44,7 +37,6 @@
   >
     <Svg>
       <AxisX
-        {padding}
         formatTick={formatTickX}
         ticks={[-0.5, 0, 1.2]}
         gridClass="chart-gridline--invert"
@@ -56,14 +48,20 @@
         gridClass="chart-gridline--invert"
       />
       <Sectors bind:hoveredSector />
-      <AxisXLabel {padding} label="Warming between 2050 and 2100" />
-      <AxisYLabel {padding} label="Warming in 2050" />
+      <AxisXLabel
+        {padding}
+        label="Warming between 2050 and 2100"
+      />
+      <AxisYLabel
+        {padding}
+        label="Warming in 2050"
+      />
       <Dots />
     </Svg>
   </LayerCake>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   .chart-container {
     width: 100%;
     height: 100%;

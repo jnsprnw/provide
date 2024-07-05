@@ -1,7 +1,7 @@
 <script>
   import { LayerCake, Svg, Canvas } from 'layercake';
   import { formatValue } from '$lib/utils/formatting';
-  import { DEFAULT_FORMAT_UID } from '$lib/../config.js';
+  import { DEFAULT_FORMAT_UID } from '$src/config.js';
 
   import LineLayer from '../layers/LineLayer.svelte';
   import AxisX from '../axes/AxisX.svelte';
@@ -58,15 +58,15 @@
       <ColorMatrix />
     </Canvas>
     <Svg>
-      <AxisX gridlines={false} ticks={5} />
-      <AxisY gridlines={false} ticks={4} formatTick={formatTickY} />
-      <LineLayer color={$theme.color.background.base} strokeWidth={5} />
+      <AxisX showTickLines={false} ticks={5} />
+      <AxisY showTickLines={false} ticks={4} formatTick={formatTickY} />
+      <LineLayer color={$theme.color.surface.base} strokeWidth={5} />
       <LineLayer color={$theme.color.category[0]} strokeWidth={3} />
     </Svg>
   </LayerCake>
 </div>
 
-<style lang="scss">
+<style lang="postcss">
   /*
     The wrapper div needs to have an explicit width and height in CSS.
     It can also be a flexbox child or CSS grid element.

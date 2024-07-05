@@ -1,0 +1,11 @@
+{
+  "name": "design-token-example",
+  "version": "1.0.0",
+  "author": "",
+  "scripts": {
+    "build": "node ./build-figma-tokens.js"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}

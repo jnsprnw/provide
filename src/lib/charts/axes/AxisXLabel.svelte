@@ -1,9 +1,9 @@
 <script>
-  import { getContext } from "svelte";
-  const { xRange, yRange } = getContext("LayerCake");
+  import { getContext } from 'svelte';
+  const { xRange, yRange } = getContext('LayerCake');
   export let label;
   export let padding;
-  
+
   $: [xMin, xMax] = $xRange;
   $: [_, yMax] = $yRange;
 
@@ -14,13 +14,12 @@
 <g class="axis x-axis x-axis-label">
   <text
     x={xMiddle}
-    y={y}
+    {y}
     text-anchor="middle"
     class="chart-label chart-label--bold"
-    dominant-baseline="haning"
-  >{ label }</text>
+    dominant-baseline="haning">{label}</text
+  >
 </g>
 
-<style lang="scss">
-
+<style lang="postcss">
 </style>
