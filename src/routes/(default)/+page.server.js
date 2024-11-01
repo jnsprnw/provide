@@ -49,6 +49,8 @@ export const load = async ({ fetch }) => {
     [(d) => STORIES_ORDER_GEOGRAPHY_TYPE.indexOf(d.geographyType), (d) => STORIES_ORDER_MODES.indexOf(d.mode)]
   );
 
+  console.log(meta);
+
   return {
     stories,
     videos: (videos ?? []).map(({ attributes }) => ({ video: attributes.video, title: attributes.title })),

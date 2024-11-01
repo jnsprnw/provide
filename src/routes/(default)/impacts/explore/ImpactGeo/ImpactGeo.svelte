@@ -12,7 +12,7 @@
     TEMPLATE_PROPS,
     DOWNLOAD_URL_PARAMS,
     IS_COMBINATION_AVAILABLE,
-    IS_STATIC
+    IS_STATIC,
   } from '$src/stores/state';
   import {
     URL_PATH_SCENARIO,
@@ -109,10 +109,12 @@
       indicator.direction
     );
 
+    console.log(data);
+
     const geoData = renderedData.map(({ data, coordinatesOrigin: origin, resolution, ...d }) => {
       const cellCount = data.length * data[0].length;
       const geoData =
-        cellCount > 10000
+        cellCount > 5000 || resolution < 0.5
           ? coordinatesToContours(data, { resolution, origin, colorScale })
           : coordinatesToRectGrid(data, {
               origin,
@@ -233,7 +235,7 @@
       <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
     </ChartFrame>
     {#if !$IS_STATIC}
-    <LinkSection geography={$CURRENT_GEOGRAPHY} />
+      <LinkSection geography={$CURRENT_GEOGRAPHY} />
     {/if}
     <LoadingPlaceholder slot="placeholder" />
   </LoadingWrapper>
