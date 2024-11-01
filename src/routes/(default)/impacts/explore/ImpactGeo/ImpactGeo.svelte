@@ -109,8 +109,6 @@
       indicator.direction
     );
 
-    console.log(data);
-
     const geoData = renderedData.map(({ data, coordinatesOrigin: origin, resolution, ...d }) => {
       const cellCount = data.length * data[0].length;
       const geoData =
