@@ -4,6 +4,8 @@
 
   export let data;
   $: ({ stories, caseStudies, videos } = data);
+
+  //$: console.log(stories);
 </script>
 
 <Globe {stories} />
