@@ -12,9 +12,13 @@
   import centroid from '@turf/centroid';
   import { mapValues } from 'lodash-es';
 
-  export let stories;
+  let _stories;
+  export { _stories as stories };
+
+  let stories = _stories;
 
   let currentIndex = 0;
+  let allData = [];
   $: currentStory = stories[currentIndex];
 
   const zoomLevels = {
@@ -23,73 +27,100 @@
     cities: 9,
   };
 
-  $: currentZoomLevel = zoomLevels[currentStory.geographyType] ?? 2.6;
-
   let GEO_DATA = writable({});
   let GEO_SHAPE = writable({});
 
+  // $: {
+  //   // We request data for all available stories
+  //   fetchData(
+  //     GEO_DATA,
+  //     stories.map(({ geography, indicator, scenarios }) => ({
+  //       endpoint: END_IMPACT_GEO,
+  //       params: {
+  //         [URL_PATH_GEOGRAPHY]: geography.uid,
+  //         [URL_PATH_INDICATOR]: indicator.uid,
+  //         [URL_PATH_SCENARIO]: scenarios[0].uid,
+  //         ...mapValues(indicator.parameters, (options) => options[0]),
+  //       },
+  //     }))
+  //   );
+  //   // We request shape files for all available stories
+  //   fetchData(
+  //     GEO_SHAPE,
+  //     stories.map(({ geography }) => ({
+  //       endpoint: END_GEO_SHAPE,
+  //       params: {
+  //         [URL_PATH_GEOGRAPHY]: geography.uid,
+  //       },
+  //     }))
+  //   );
+  // }
+
   $: {
     // We request data for all available stories
-    fetchData(
-      GEO_DATA,
-      stories.map(({ geography, indicator, scenarios }) => ({
-        endpoint: END_IMPACT_GEO,
-        params: {
-          [URL_PATH_GEOGRAPHY]: geography.uid,
-          [URL_PATH_INDICATOR]: indicator.uid,
-          [URL_PATH_SCENARIO]: scenarios[0].uid,
-          ...mapValues(indicator.parameters, (options) => options[0]),
-        },
-      }))
-    );
+
+    fetchData(GEO_DATA, {
+      endpoint: END_IMPACT_GEO,
+      params: {
+        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
+        [URL_PATH_INDICATOR]: currentStory.indicator.uid,
+        [URL_PATH_SCENARIO]: currentStory.scenarios[0].uid,
+        ...mapValues(currentStory.indicator.parameters, (options) => options[0]),
+      },
+    });
     // We request shape files for all available stories
-    fetchData(
-      GEO_SHAPE,
-      stories.map(({ geography }) => ({
-        endpoint: END_GEO_SHAPE,
-        params: {
-          [URL_PATH_GEOGRAPHY]: geography.uid,
-        },
-      }))
-    );
+    fetchData(GEO_SHAPE, {
+      endpoint: END_GEO_SHAPE,
+      params: {
+        [URL_PATH_GEOGRAPHY]: currentStory.geography.uid,
+      },
+    });
   }
 
-  $: process = ({ grids, shapes }) => {
-    if (shapes.length !== grids.length) {
+  $: process = ({ grid, shape }, { currentIndex, currentStory }) => {
+    if (shape.length !== grid.length) {
       return [];
     }
+
+    function processGrid(grid, shape) {
+      //const shape = shapes[i]; // Grids and shapes are in the same order
+
+      const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
+      const colorScale = getColorScale([gridData], COLOR_SCALES.simple);
+      const cellCount = gridData.length * gridData[0].length;
+
+      const geoData =
+        cellCount > 10000
+          ? coordinatesToContours(gridData, { resolution, origin, colorScale })
+          : coordinatesToRectGrid(gridData, {
+              origin,
+              resolution,
+              colorScale,
+            });
+
+      const geoShape = shape.data.data.features[0];
+
+      return {
+        mask: mask(shape.data.data),
+        geoShape: geoShape,
+        center: centroid(shape.data.data).geometry.coordinates,
+        geoData: geoData,
+      };
+    }
+
+    if (!allData[currentIndex]) allData[currentIndex] = processGrid(grid, shape);
+
     return {
-      data: grids.map((grid, i) => {
-        const shape = shapes[i]; // Grids and shapes are in the same order
-
-        const { coordinatesOrigin: origin, resolution, data: gridData } = grid.data;
-        const colorScale = getColorScale([gridData], COLOR_SCALES.simple);
-        const cellCount = gridData.length * gridData[0].length;
-
-        const geoData =
-          cellCount > 10000
-            ? coordinatesToContours(gridData, { resolution, origin, colorScale })
-            : coordinatesToRectGrid(gridData, {
-                origin,
-                resolution,
-                colorScale,
-              });
-
-        const geoShape = shape.data.data.features[0];
-
-        return {
-          mask: mask(shape.data.data),
-          geoShape: geoShape,
-          center: centroid(shape.data.data).geometry.coordinates,
-          geoData: geoData,
-        };
-      }),
+      data: allData,
+      currentIndex,
+      currentStory,
+      currentZoomLevel: zoomLevels[currentStory.geographyType] ?? 2.6,
     };
   };
 
   const interval = setInterval(() => {
     currentIndex = currentIndex === stories.length - 1 ? 0 : currentIndex + 1;
-  }, 10000);
+  }, 5000);
 
   onDestroy(() => {
     clearInterval(interval);
@@ -109,14 +140,12 @@
     class="col-start-1 col-span-6 absolute top-[-50%] left-[-30%] w-[130%] h-[200%] z-10 to-transparent from-theme-base"
     style="background-image: radial-gradient(closest-side, var(--tw-gradient-from) 60%, var(--tw-gradient-to));"
   >
-    <LoadingWrapper asyncProps={{ shapes: $GEO_SHAPE, grids: $GEO_DATA }} {process} let:asyncProps warningBackground={false} warningInverted={true}>
-      <MapProvider interactive={false} projection="globe" style={import.meta.env.VITE_MAPBOX_STYLE_GLOBE} center={asyncProps.data[currentIndex].center} zoom={currentZoomLevel}>
-        <!--<DataSource data={asyncProps.mask}>
-          <PolygonLayer before="ocean-fill" fillColor={$theme.color.theme.stronger} fill={true} fillId="mask" lineWidth={0.5} lineColor={$theme.color.contour.base} />
-          <PolygonLayer before="ocean-fill" lineWidth={3} lineOffset={1.5} lineOpacity={0.07} lineColor={$theme.color.theme.stronger} />
-        </DataSource>-->
-        {#each asyncProps.data as { geoShape, geoData }}
-          <MaMaskedData {geoShape} {geoData} />
+    <LoadingWrapper asyncProps={{ shape: $GEO_SHAPE, grid: $GEO_DATA }} props={{ currentIndex, currentStory }} {process} let:asyncProps warningBackground={false} warningInverted={true}>
+      <MapProvider interactive={false} projection="globe" style={import.meta.env.VITE_MAPBOX_STYLE_GLOBE} center={asyncProps.data[asyncProps.currentIndex].center} zoom={asyncProps.currentZoomLevel}>
+        {#each asyncProps.data as storyData}
+          {#if storyData}
+            <MaMaskedData geoShape={storyData.geoShape} geoData={storyData.geoData} />
+          {/if}
         {/each}
       </MapProvider>
     </LoadingWrapper>

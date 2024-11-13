@@ -1,4 +1,4 @@
-import { extent } from 'd3-array';
+import { extent, range } from 'd3-array';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
 import { geoProject } from 'd3-geo-projection';
@@ -7,6 +7,8 @@ import { geoIdentity } from 'd3-geo';
 import { contours } from 'd3-contour';
 import { rewind } from './geo-rewind.js';
 import { COLOR_SCALES } from '$src/config.js';
+import simplify from '@turf/simplify';
+import cleanCoords from '@turf/clean-coords';
 
 export const getColorScale = (data, { NEGATIVE_RANGE, POSITIVE_RANGE, DIVERGING_RANGE } = COLOR_SCALES.default, prefix = 1) => {
   let range;
@@ -77,16 +79,16 @@ export const coordinatesToContours = (values, { origin, resolution, colorScale }
   const width = values[0].length;
   const height = values.length;
   const flatValues = values.flat();
-  const generateContours = contours().size([width, height]).smooth(true);
+  const generateContours = contours().thresholds(10).size([width, height]).smooth(true);
 
   // This function generates contours based in the list of values
-  const rawContours = generateContours(flatValues).map(({ coordinates, value }) =>
+  const rawContours = generateContours(flatValues).map(({ coordinates, value }) => {
     // Each contour is transformed into a multipolygon
-    multiPolygon(coordinates, {
+    return multiPolygon(coordinates, {
       value,
       color: colorScale(value), // Getting the color from the previously generated color scale
-    })
-  );
+    });
+  });
 
   // This takes the array of polygons and transforms it into a feature collection
   const unprojectedContours = featureCollection(rawContours);
