@@ -7,8 +7,6 @@ import { geoIdentity } from 'd3-geo';
 import { contours } from 'd3-contour';
 import { rewind } from './geo-rewind.js';
 import { COLOR_SCALES } from '$src/config.js';
-import simplify from '@turf/simplify';
-import cleanCoords from '@turf/clean-coords';
 
 export const getColorScale = (data, { NEGATIVE_RANGE, POSITIVE_RANGE, DIVERGING_RANGE } = COLOR_SCALES.default, prefix = 1) => {
   let range;
