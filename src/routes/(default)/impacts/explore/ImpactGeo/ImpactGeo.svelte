@@ -111,7 +111,7 @@
     const geoData = renderedData.map(({ data, coordinatesOrigin: origin, resolution, ...d }) => {
       const cellCount = data.length * data[0].length;
       const geoData =
-        cellCount > 5000 || resolution < 0.5
+        cellCount > 10000 || resolution < 0.5
           ? coordinatesToContours(data, { resolution, origin, colorScale })
           : coordinatesToRectGrid(data, {
               origin,

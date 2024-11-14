@@ -2,7 +2,7 @@ import { extent, range } from 'd3-array';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
 import { geoProject } from 'd3-geo-projection';
-import { featureCollection, multiPolygon, polygon } from '@turf/helpers';
+import { feature, featureCollection, multiPolygon, polygon } from '@turf/helpers';
 import { geoIdentity } from 'd3-geo';
 import { contours } from 'd3-contour';
 import { rewind } from './geo-rewind.js';
@@ -53,7 +53,7 @@ export const coordinatesToRectGrid = (data, { colorScale, resolution, origin }) 
     cells.forEach((value, lngIndex) => {
       if (value === null) return;
       const lat = origin[1] + resolution * lngIndex - resolution / 2;
-      const lng = origin[0] + resolution * latIndex - resolution / 2;
+      const lng = wrapLongitude(origin[0] + resolution * latIndex - resolution / 2);
       const coordinates = [
         [
           [lng, lat],
@@ -72,6 +72,22 @@ export const coordinatesToRectGrid = (data, { colorScale, resolution, origin }) 
 
   return featureCollection(features);
 };
+
+const wrapLongitude = (lng) => {
+  return ((lng + 180) % 360) - 180;
+};
+
+// const wrapCoordinates = (d) => {
+//   if (Array.isArray(d)) {
+//     if (Number.isFinite(d[0])) {
+//       return [wrapLongitude(d[0]), d[1]];
+//     } else {
+//       return d.map(wrapCoordinates);
+//     }
+//   } else {
+//     return multiPolygon(wrapCoordinates(d.geometry.coordinates), d.properties);
+//   }
+// };
 
 export const coordinatesToContours = (values, { origin, resolution, colorScale }) => {
   const width = values[0].length;
