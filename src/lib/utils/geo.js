@@ -1,8 +1,8 @@
-import { extent, range } from 'd3-array';
+import { extent } from 'd3-array';
 import { interpolateLab } from 'd3-interpolate';
 import { scaleLinear } from 'd3-scale';
 import { geoProject } from 'd3-geo-projection';
-import { feature, featureCollection, multiPolygon, polygon } from '@turf/helpers';
+import { featureCollection, multiPolygon, polygon } from '@turf/helpers';
 import { geoIdentity } from 'd3-geo';
 import { contours } from 'd3-contour';
 import { rewind } from './geo-rewind.js';
