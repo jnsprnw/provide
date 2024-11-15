@@ -17,8 +17,10 @@
   import Progress from '$lib/helper/Progress.svelte';
   import { reduce } from 'lodash-es';
   import { formatValue } from '$formatting';
+  import DotLayer from '$src/lib/MapboxMap/DotLayer.svelte';
 
   export let geoData;
+  export let geoDetails;
   export let geoShape;
   export let colorScale;
   export let unit;
@@ -266,6 +268,11 @@
                 <PolygonLayer fill={true} line={false} />
               {/if}
             </DataSource>
+            {#if geoDetails}
+              <DataSource data={geoDetails}>
+                <DotLayer radius={['interpolate', ['linear'], ['zoom'], 4, 0.75, 16, 5]} stroke={false} opacity={['interpolate', ['linear'], ['zoom'], 2, 0.02, 12, 0.6]} />
+              </DataSource>
+            {/if}
           </MapProvider>
         {/key}
         {#if label}

@@ -8,6 +8,14 @@
   const { map, source } = getContext('mapbox');
 
   export let before = 'settlement-major-label';
+  export let radius = 10;
+  export let stroke = true;
+  export let strokeWidth = 1;
+  export let strokeOpacity = 1;
+  export let strokeColor = '#ffffff';
+  export let fill = true;
+  export let fillColor = '#000000';
+  export let opacity = 1;
 
   function getBeforeId(before) {
     const beforeLayer = $map.getLayer(before);
@@ -25,10 +33,12 @@
         layout: {},
         paint: {
           'circle-color': ['case', ['boolean', ['get', 'isSelected'], false], $THEME.color.theme.base, $THEME.color.contour.base],
-          'circle-radius': 10,
-          'circle-stroke-color': '#ffffff',
-          'circle-stroke-width': 1,
-          'circle-stroke-opacity': 1,
+          'circle-radius': radius,
+          'circle-stroke-color': strokeColor,
+          'circle-stroke-width': stroke ? strokeWidth : 0,
+          'circle-stroke-opacity': strokeOpacity,
+          'circle-color': fill ? fillColor : 'rgba(0, 0, 0, 0)',
+          'circle-opacity': opacity,
         },
       },
       getBeforeId(before)

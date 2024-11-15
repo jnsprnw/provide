@@ -40,6 +40,7 @@
   import LoadingPlaceholder from '$lib/helper/LoadingPlaceholder.svelte';
   import { formatValue } from '$lib/utils/formatting';
   import { isObject, isString, has } from 'lodash-es';
+  import { featureCollection, point } from '@turf/helpers';
 
   export let tagline;
   export let year = undefined;
@@ -124,6 +125,8 @@
       };
     });
 
+    const geoDetails = data[0]?.data.locations ? featureCollection(data[0].data.locations.map((d) => point(d, {}))) : null;
+
     const { model, source, resolution } = data[0].data;
     const formattedResolution = formatValue(resolution, 'degree', {
       addSuffix: false,
@@ -180,6 +183,7 @@
     return {
       showDifference,
       geoData,
+      geoDetails,
       geoShape: geoShape, // shape.data.data.features[0],
       title: data[0].data.title,
       description,
@@ -229,7 +233,15 @@
           bind:year
         />
       </svelte:fragment>
-      <Maps bind:isProcessing unit={props.indicator.unit} geoData={asyncProps.geoData} geoShape={asyncProps.geoShape} colorScale={asyncProps.colorScale} {showSatellite} />
+      <Maps
+        bind:isProcessing
+        unit={props.indicator.unit}
+        geoData={asyncProps.geoData}
+        geoDetails={asyncProps.geoDetails}
+        geoShape={asyncProps.geoShape}
+        colorScale={asyncProps.colorScale}
+        {showSatellite}
+      />
     </ChartFrame>
     {#if !$IS_STATIC}
       <LinkSection geography={$CURRENT_GEOGRAPHY} />
