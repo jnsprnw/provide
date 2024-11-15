@@ -18,6 +18,7 @@
   import { reduce } from 'lodash-es';
   import { formatValue } from '$formatting';
   import DotLayer from '$src/lib/MapboxMap/DotLayer.svelte';
+  import GlacierLegend from './GlacierLegend.svelte';
 
   export let geoData;
   export let geoDetails;
@@ -210,9 +211,17 @@
 </script>
 
 <div class={`${aspectRatio} flex cols-${geoData.length} gap-x-[1px] animate-defer-visibility relative rounded border border-contour-weakest`}>
-  <div class="flex items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
+  <div class="flex gap-3 items-center absolute bottom-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
     <Legend {unit} scale={colorScale} hasUrbanBoundary={showSatellite && isUrban} />
+    {#if geoDetails}
+      <GlacierLegend />
+    {/if}
   </div>
+  <!-- {#if geoDetails}
+    <div class="flex gap-3 items-center absolute top-2 right-2 py-2 px-2 bg-surface-base z-10 shadow-sm rounded-sm">
+      <GlacierLegend />
+    </div>
+  {/if} -->
   {#if ![STATUS_FINISHED, STATUS_IDLE].includes(workerStatus)}
     <div class="rounded flex items-center justify-center absolute top-0 left-0 w-full h-full py-2 px-2 bg-surface-base z-10">
       <div class="grid grid-rows-[auto_4px] justify-center items-center gap-y-4 justify-items-center">
