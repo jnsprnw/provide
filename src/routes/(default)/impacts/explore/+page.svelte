@@ -7,6 +7,7 @@
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
   import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
+  import QuizButton from '$src/lib/helper/QuizButton.svelte';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE;
 
@@ -49,6 +50,11 @@
   <nav slot="navigation" class="flex flex-col gap-4">
     <ScenarioSelection />
     <SimpleNav {sections} />
+
+    <div class="md:pr-6 lg:pr-10">
+      <hr class="pb-6 mt-4" />
+      <QuizButton />
+    </div>
   </nav>
   {#each sections as section}
     {#if !section.disabled}

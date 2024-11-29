@@ -6,6 +6,7 @@
   import SectionDefault from '$lib/helper/ContentPages/SectionDefault.svelte';
   import { kebabCase } from 'lodash-es';
   import Outro from './sections/Outro.svelte';
+  import QuizButton from '$src/lib/helper/QuizButton.svelte';
 
   export let data;
 
@@ -57,4 +58,8 @@
   intro="Learn how to use climate data for overshoot risk informed adaptation."
 >
   <Outro title={data.outroTitle} text={data.outroText} />
+  <span slot="after-nav">
+    <hr class="pb-6 mt-4" />
+    <QuizButton />
+  </span>
 </ContentPageLayout>

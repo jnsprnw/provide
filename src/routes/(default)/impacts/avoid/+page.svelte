@@ -1,27 +1,21 @@
 <script>
   import ThresholdLevels from './ThresholdLevels/ThresholdLevels.svelte';
   import StudyLocations from './StudyLocations/StudyLocations.svelte';
-  import UnAvoidableRisk from '../UnavoidableRisk/UnavoidableRisk.svelte';
   import Reference from './Reference/Reference.svelte';
   import ScrollContent from '$lib/helper/ScrollContent/ScrollContent.svelte';
   import SimpleNav from '$lib/helper/ScrollContent/SimpleNav.svelte';
-  import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION, SELECTABLE_SCENARIOS } from '$stores/state';
+  import { IS_COMBINATION_AVAILABLE, IS_EMPTY_SELECTION } from '$stores/state';
   import { IS_EMPTY_LEVEL_OF_IMPACT, IS_EMPTY_LIKELIHOOD_LEVEL } from '$stores/avoid.js';
-  import { SCENARIOS_IN_AVOIDING_IMPACTS, KEY_SCENARIO_ENDYEAR } from '$config';
-  import THEME from '$styles/theme-store.js';
   import FallbackMessage from '$lib/helper/FallbackMessage.svelte';
   import SelectionCertaintyLevels from './Selection/CertaintyLevels/CertaintyLevels.svelte';
   import SelectionStudyLocations from './Selection/StudyLocations/StudyLocations.svelte';
   import { writable } from 'svelte/store';
+  import QuizButton from '$src/lib/helper/QuizButton.svelte';
 
   $: isValidSelection = !$IS_EMPTY_SELECTION && $IS_COMBINATION_AVAILABLE && !$IS_EMPTY_LEVEL_OF_IMPACT && !$IS_EMPTY_LIKELIHOOD_LEVEL;
 
   let THRESHOLD_LEVELS_DATA = writable({});
   let REFERENCE_STORE = writable({});
-
-  $: currentScenarios = SCENARIOS_IN_AVOIDING_IMPACTS.map((uid) => $SELECTABLE_SCENARIOS.find((scenario) => scenario.uid === uid))
-    .filter(Boolean)
-    .map(({ uid, label, [KEY_SCENARIO_ENDYEAR]: timeframe }, i) => ({ uid, label, [KEY_SCENARIO_ENDYEAR]: timeframe, color: $THEME.color.category.base[i] }));
 
   $: sections = [
     { component: FallbackMessage, disabled: isValidSelection },
@@ -47,16 +41,6 @@
         tagline: 'Locations',
       },
     },
-    // {
-    //   slug: 'unavoidable-risk',
-    //   title: '(Un)avoidable risk',
-    //   description: 'What can be avoided through emissions reductions?',
-    //   component: UnAvoidableRisk,
-    //   disabled: !isValidSelection,
-    //   props: {
-    //     currentScenarios: currentScenarios,
-    //   },
-    // },
   ];
 </script>
 
@@ -68,6 +52,10 @@
       <SelectionStudyLocations />
     </div>
     <SimpleNav {sections} />
+    <div class="md:pr-6 lg:pr-10">
+      <hr class="pb-6 mt-4" />
+      <QuizButton />
+    </div>
   </aside>
   {#each sections as section}
     {#if !section.disabled}

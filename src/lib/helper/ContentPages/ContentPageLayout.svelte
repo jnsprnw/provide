@@ -19,7 +19,10 @@
 <ContentPageIntro {tag} {subNavigationLabel} {backLink} {title} {intro} {subNavigation} {isCaseStudy} />
 
 <ScrollContent isFullWidth={true} {sections}>
-  <NestedNav contentRef={dynamicNavigation && contentRef} slot="navigation" {sections} />
+  <div slot="navigation">
+    <NestedNav contentRef={dynamicNavigation && contentRef} {sections} />
+    <slot name="after-nav" />
+  </div>
   <div bind:this={contentRef}>
     {#each sections as section}
       <section class="mt-10 pt-10 border-contour-weakest first:border-0 first:mt-0 last:mb-12" class:border-t={section.title && !section.omitBorder} class:pt-12={section.title}>
