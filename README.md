@@ -1,64 +1,63 @@
-# PROVIDE Climate Risk Dashboard
+# PROVIDE project
 
-## Table of Contents
+The PROVIDE project is working to build an interactive web tool that displays the impacts of exceeding a 1.5°C temperature threshold on human activities and industries. Built for everyday users and adaptation practitioners alike, the PROVIDE Climate Services Dashboard uses high-resolution modelling on a variety of spatial scales, allowing climate impacts to be explored under different global warming scenarios. The goal of the project is to allow risk thresholds to be the starting point for adaptation planning.
 
-- [Links](#links)
-- [Project Overview](#project-overview)
-- [File Structure](#file-structure)
-- [Configuration](#configuration)
-- [Pages](#pages)
-- [Components](#components)
-- [Styling](#styling)
-- [Getting Started](#getting-started)
-- [Development](#development)
-- [Building](#building)
-- [Contributing](#contributing)
-- [License](#license)
+Find more information about the project on the Climate Analytics website:
+[https://climateanalytics.org/projects/provide](https://climateanalytics.org/projects/provide)
 
-## Project Overview
+## PROVIDE Climate Risk Dashboard
 
 The PROVIDE Climate Risk Dashboard is a web application that allows users to explore future impacts of climate change as the world warms. It provides visualizations and data on various climate scenarios, impacts, and adaptation strategies.
 
-## Links
+## Table of Contents
 
-Current **development** version 2.3 (on Provide Netlify):
-[https://phase-2-3--hilarious-treacle-096169.netlify.app/explore/impacts](https://phase-2-3--hilarious-treacle-096169.netlify.app/explore/impacts)
-
-Previous **development** version 2.0 (on Provide Netliy):
-[https://phase-2--hilarious-treacle-096169.netlify.app/](https://phase-2--hilarious-treacle-096169.netlify.app/)
-
-Previous **production** version (on Provide Netlify):
-[https://chimerical-baklava-ad903f.netlify.app](https://chimerical-baklava-ad903f.netlify.app)
+- [Application Structure](#application-structure)
+- [Technology stack of the website](#technology-stack-of-the-website)
+- [Content](#content)
+- [Data](#data)
+- [File Structure](#file-structure)
+- [Configuration](#configuration)
+  - [Environment variables](#environment-variables)
+- [Pages](#pages)
+- [Styling](#styling)
+  - [Design Tokens](#design-tokens)
+- [State](#state)
+- [Concepts](#concepts)
+- [Getting Started](#getting-started)
+- [Naming convention](#naming-convention)
 
 ## Application Structure
 
-The whole application for this website consists of these parts:
+The complete application for this website consists of the following components:
 
-1. The front facing website, which build with SvelteKit and Tailwind CSS and hosted in this repository.
-2. The backend API providing the data, which is build in Python and hosted by Climate Analytics.
-3. The content of the text pages, the description of scenarios and sectors and the stories are stored in Strapi.
-4. A script for screenshotting the graphs is also running on a separate server.
+1. **The Frontend of the Website**: Built with [SvelteKit](https://kit.svelte.dev/) and [Tailwind CSS](https://tailwindcss.com/), and hosted in this repository.
+2. **The Backend API**: Provides the necessary data and is built in [Python](https://www.python.org/). It is hosted by [Climate Analytics](https://climateanalytics.org/).
+3. **Content Management**: Text content for the pages, scenario and sector descriptions, and stories are managed in [Strapi](https://strapi.io/), and hosted in [this repository](https://github.com/jnsprnw/provide-cms). It is deployed on [Heroku](https://www.heroku.com/).
+4. **Screenshot Script**: A script (utilising [Puppeteer](https://pptr.dev/)) for capturing screenshots of the graphs runs on a separate server. It is hosted in [this repository](https://gitlab.com/climateanalytics/webtools/plotting-puppeteer).
+
+## Technology stack of the website
+
+The page is build in JavaScript/TypeScript with [Svelte](https://svelte.dev/) 4 using [SvelteKit](https://svelte.dev/docs/kit/introduction). The underlying engine is [Bun](https://bun.sh/). It uses [Tailwind CSS](https://tailwindcss.com/) for styling. The page is hosted on [Netlify](https://www.netlify.com/) while in development and on [Climate Analytics](https://climateanalytics.org/) in production. Maps are created using [Mapbox](https://www.mapbox.com/) and Charts are craeted using [D3](https://d3js.org/) and [Layercake](https://layercake.graphics/) for the charts.
 
 ### Content
 
-Most text content is stored in Strapi. The content is fetched via the Strapi API ([`loadFromStrapi`](src/lib/utils/apis.js)) and displayed on the website. The content is stored in the following collections:
+Most text content is stored in [Strapi](https://strapi.io/). The content is fetched via the Strapi API ([`loadFromStrapi`](src/lib/utils/apis.js)) and displayed on the website. The content is stored in the following collections:
 
-1. Case Studies
-2. FAQ
-3. Glossary
-4. Indicators
-5. Scenarios
-6. Sceanario Presets
-7. Stories
-8. Videos
-9. About page
-10. Adaptation page
-11. Case Study Outro
-12. Contact page
-13. Disclaimer
-14. Issue list
-15. Methodology
-16. Technical documentation
+1. Case Studies (used on the Adaptation page)
+2. Glossary (used on the Methodology page)
+3. Indicators (descriptions of the indicators coming from the API, linked via the indicator ID)
+4. Scenarios (descriptions of the scenarios coming from the API, linked via the scenario ID)
+5. Sceanario Presets (used in the scenario selection on the Key Concepts page)
+6. Stories (on the lading page)
+7. Videos (on the landing page)
+8. About page (used on the About page)
+9. Adaptation page (used on the Adaptation intro page)
+10. Case Study Outro (used on the Adaptation page)
+11. Contact page
+12. Disclaimer
+13. ~~Issue list~~ (no longer used)
+14. Methodology
+15. Technical documentation
 
 The content is either fetched as meta data ([`loadMetaData`](src/lib/utils/apis.js)) or as full content ([`loadFromStrapi`](src/lib/utils/apis.js)).
 
@@ -97,11 +96,11 @@ project-root/
 │ │ ├── (embed)/ # This is used for screenshots. This layout leaves out the header and footer and only displays the graph.
 │ ├── lib/
 │ │ ├── charts/ # All the components that are used for the charts
-│ │ ├── MapboxMap/ # Components for the map
+│ │ ├── MapboxMap/ # Components for the maps
 │ │ ├── helper/ # Smaller components that are used multiple times somewhere on the site
 │ │ ├── controls/ # Smaller components like select, radio buttons, and checkboxes
 │ │ ├── site/ # Components like the header, footer, and the sidebar
-│ │ └── utils/ # Smaller dunctions that are used multiple times
+│ │ └── utils/ # Smaller functions that are used multiple times
 │ │ └── workers/ # The masking of the maps is happening in a Web Worker
 │ │ └── api/ # Functions that are used to fetch data from the API and Strapi
 │ ├── stores/
@@ -113,10 +112,6 @@ project-root/
 ├── tailwind.config.cjs # Style configuration
 ├── package.json # Libraries used in this repository
 ```
-
-## Technical aspects
-
-The page is build in JavaScript/TypeScript with [Svelte](https://svelte.dev/) 4 using [SvelteKit](https://svelte.dev/docs/kit/introduction). The underlying engine is [Bun](https://bun.sh/). It uses [Tailwind CSS](https://tailwindcss.com/) for styling. The page is hosted on [Netlify](https://www.netlify.com/) while in development and on [Climate Analytics](https://climateanalytics.org/) in production. Maps are created using [Mapbox](https://www.mapbox.com/) and Charts are craeted using [D3](https://d3js.org/) and [Layercake](https://layercake.graphics/) for the charts.
 
 ## Configuration
 
@@ -130,9 +125,25 @@ The main configuration files include:
 Some configurations are:
 
 1. Aliases for easier imports (defined in [`svelte.config.js`](svelte.config.js)).
-2. Adapter configuration for Netlify or static builds (defined in [`svelte.config.js`](svelte.config.js))
+2. Adapter configuration for [Netlify](https://www.npmjs.com/package/@sveltejs/adapter-netlify) or [static](https://www.npmjs.com/package/@sveltejs/adapter-static) builds (defined in [`svelte.config.js`](svelte.config.js))
 3. [Prerendering](https://svelte.dev/docs/kit/page-options#prerender) configuration for specific routes.
 4. Custom Tailwind CSS extensions for colors, fonts, and other utilities (defined in [`tailwind.config.cjs`](tailwind.config.cjs))
+
+### Environment variables
+
+| Variable                          | Description                                    | Value                                                 |
+| --------------------------------- | ---------------------------------------------- | ----------------------------------------------------- |
+| VITE_HEROKU_URL                   | URL of Strapi                                  | `https://….herokuapp.com`                             |
+| VITE_DATA_API_URL                 | URL of the API                                 | `https://….climateanalytics.org/api`                  |
+| VITE_STRAPI_LOCALE                | We use this as version control for the content | `en-EU`                                               |
+| VITE_MAPBOX_ACCESS_TOKEN          | Access token for Mapbox                        | `pk.ey…`                                              |
+| VITE_MAPBOX_STYLE_LIGHT           | Style for the regular map                      | `mapbox://styles/…`                                   |
+| VITE_MAPBOX_STYLE_STUDY_LOCATIONS | Style for the study locations map              | `mapbox://styles/…`                                   |
+| VITE_SCREENSHOT_URL               | URL of the service running Puppeteer           | `https://….climateanalytics.org/api/…`                |
+| VITE_APP_URL                      | The location of the final dashboard            | `https://climate-risk-dashboard.climateanalytics.org` |
+| VITE_IS_PUBLIC_VERSION            | Allows robots to crawl the dashboard           | `true\|false`                                         |
+| VITE_MAPBOX_STYLE_SATELLITE       | Mapbox style for satellite images              | `mapbox://styles/…`                                   |
+| VITE_MAPBOX_STYLE_GLOBE           | Style of the globe                             | `mapbox://styles/…`                                   |
 
 ## Pages
 
@@ -164,27 +175,34 @@ Color values however come directly from Figma. This happens via the [Export/Impo
 
 The most important state management is done in [`src/stores/state.js`](src/stores/state.js). The store is used to determine the available geographies, indicators, scenarios and other parameters based on the user’s input.
 
+## Concepts
+
+1. Rountes located under `(default)` are the main pages of the website. Routes located under `(embed)` are used for screenshots. This layout leaves out the header and footer and only displays the graph. The url of these pages is used by the screenshot script to create the images.
+2. There are many dependencies between geographies (and geography regions), indicators, and scenarios. The state is used to determine the selectable geographies, indicators, scenarios and other parameters based on the user’s input.
+
 ## Getting Started
+
+The application is run via [Bun](https://bun.sh/). Install Bun globally on your machine.
 
 To run this project locally:
 
 1. Clone the repository
 2. Install dependencies:
-   ```
+   ```bash
    bun install
    ```
-3. Set up environment variables:
+3. Set up [environment variables](#environment-variables):
 
-   - Create a `.env` file with the required variables (see issue [#298](https://github.com/jnsprnw/provide/issues/298) for details)
+   - Create a `.env` file with the required variables
 
 4. Run the development server:
-   ```
+   ```bash
    bun run dev
    ```
 5. Open [http://localhost:5173/](http://localhost:5173/) in your browser.
 
 6. To build the project for production:
-   ```
+   ```bash
    bun run build
    ```
 
