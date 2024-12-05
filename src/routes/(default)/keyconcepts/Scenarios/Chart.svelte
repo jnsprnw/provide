@@ -8,7 +8,7 @@
 
   $: chartData = scenarios.map((scenario) => {
     const values = scenario[variable] ?? [];
-    const isHighlighted = false; // TODO: Maybe add hover effect
+    const isHighlighted = false;
     return {
       ...scenario,
       values: isHighlighted ? values : values.map(({ year, value }) => ({ year, value })),
@@ -20,10 +20,7 @@
   <p class="text-sm mb-2 font-bold">{title}</p>
   <figure>
     <div class="h-48 mb-2">
-      <LineChart
-        {yDomain}
-        data={chartData}
-      />
+      <LineChart {yDomain} data={chartData} />
     </div>
     <figcaption class="text-xs text-contour-weak">
       <slot />
