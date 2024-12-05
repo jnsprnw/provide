@@ -5,7 +5,7 @@ import adapterNetlify from '@sveltejs/adapter-netlify';
 import adapterStatic from '@sveltejs/adapter-static';
 const isStatic = process.env.BUILD_ENV === 'static';
 const adapter = isStatic ? adapterStatic : adapterNetlify;
-console.log(`Using ${isStatic ? 'static' : 'netlify'} adapter.`);
+
 /** @type {import('@sveltejs/kit').Config}*/
 const config = {
   kit: {
@@ -27,20 +27,7 @@ const config = {
     },
     prerender: {
       handleMissingId: 'warn',
-      entries: [
-        '/',
-        '/about',
-        '/adaptation',
-        '/contact',
-        '/impacts/avoid',
-        '/impacts/explore',
-        '/issues',
-        '/keyconcepts',
-        '/methodology',
-        '/embed/impact-time',
-        '/embed/impact-geo',
-        '/embed/unavoidable-risk',
-      ],
+      entries: ['/', '/about', '/adaptation', '/contact', '/impacts/avoid', '/impacts/explore', '/keyconcepts', '/methodology', '/embed/impact-time', '/embed/impact-geo', '/embed/unavoidable-risk'],
     },
   },
   preprocess: sequence([
