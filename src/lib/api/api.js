@@ -71,8 +71,6 @@ const fetchMultiple = (store, configs) => {
     isObject ? {} : []
   );
 
-  // console.log(urls);
-
   // Create array or object containing either cached data or empty objects
   const initialData = reduce(
     configs,
@@ -123,7 +121,6 @@ const fetchSingle = (store, { endpoint, params }) => {
     console.warn('Store to save fetch result is undefined');
     return false;
   }
-  // console.log(`Fetching single ${endpoint}`, get(store), { id });
   const query = qs.stringify(params, {
     encodeValuesOnly: true,
   });
