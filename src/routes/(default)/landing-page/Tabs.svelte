@@ -1,5 +1,5 @@
-<script>
-  import { createTabs, melt } from '@melt-ui/svelte';
+<script lang="ts">
+  import { createTabs, melt, type CreateTabsProps } from '@melt-ui/svelte';
   import { cubicInOut } from 'svelte/easing';
   import { crossfade } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
@@ -16,11 +16,18 @@
     value.set(currentStory.id);
   }
 
+  const tabChange: CreateTabsProps['onValueChange'] = ({ next }) => {
+    dispatch('select', {
+      id: next,
+    });
+    return next;
+  };
+
   const {
     elements: { root, list, content, trigger },
     states: { value },
   } = createTabs({
-    defaultValue: 'admin0',
+    onValueChange: tabChange,
   });
 
   let className = '';
@@ -30,12 +37,6 @@
     duration: 250,
     easing: cubicInOut,
   });
-
-  function selectTab(id) {
-    dispatch('select', {
-      id,
-    });
-  }
 
   const case_class = 'py-0 text-base rounded-full text-theme-base px-3 py-1';
 
@@ -55,7 +56,6 @@
       {@const isActive = $value === triggerItem.id}
       <button
         use:melt={$trigger(triggerItem.id)}
-        on:click={() => selectTab(triggerItem.id)}
         class="trigger transition-colors relative leading-tight font-bold {isActive
           ? isAdaptation
             ? case_active_class
