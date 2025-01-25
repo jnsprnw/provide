@@ -13,11 +13,11 @@
   </div>
   <div class="mx-auto max-w-7xl pt-4 pb-10 px-6 grid grid-cols-1 sm:grid-cols-5 gap-y-12 gap-x-12">
     <div class="flex gap-3 flex-col sm:col-span-2">
-      <span class="text-sm max-w-prose text-contour-weak"
-        >The development of the dashboard was led by <a
-          href="https://climateanalytics.org/"
-          class="underline decoration-theme-base hover:text-theme-stronger hover:decoration-theme-stronger transition-colors">Climate Analytics</a
-        >, with contributions from the
+      <span class="text-sm max-w-prose text-contour-weak">
+        The dashboard is maintained by the Integrated Climate Impacts group at the <a href="https://iiasa.ac.at/">International Institute for Applied System Analysis</a> (IIASA). The development of
+        the dashboard was led by
+        <a href="https://climateanalytics.org/" class="underline decoration-theme-base hover:text-theme-stronger hover:decoration-theme-stronger transition-colors">Climate Analytics</a>, with
+        contributions from the
         <a href="https://www.provide-h2020.eu/" class="underline decoration-theme-base hover:text-theme-stronger hover:decoration-theme-stronger transition-colors">PROVIDE</a> consortium.</span
       >
     </div>
@@ -36,7 +36,7 @@
   </div>
   <div class="border-contour-weakest border-t py-3">
     <div class="text-sm mx-auto max-w-7xl px-6 flex justify-between">
-      <span class="text-contour-weak"><a href="https://climateanalytics.org/">Climate Analytics</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
+      <span class="text-contour-weak"><a href="https://climateanalytics.org/">IIASA</a> <time datetime={new Date().getFullYear()}>{new Date().getFullYear()}</time></span>
       <span class="text-contour-weaker text-xs"
         >Version {version}. Build
         <time title={new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(buildDate)} datetime={buildDate.toISOString()}
